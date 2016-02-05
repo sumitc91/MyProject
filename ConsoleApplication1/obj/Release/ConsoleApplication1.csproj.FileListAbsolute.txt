@@ -1,0 +1,7 @@
+C:\code\svn\urNotice\ConsoleApplication1\bin\Release\ConsoleApplication1.exe.config
+C:\code\svn\urNotice\ConsoleApplication1\bin\Release\ConsoleApplication1.exe
+C:\code\svn\urNotice\ConsoleApplication1\bin\Release\ConsoleApplication1.pdb
+C:\code\svn\urNotice\ConsoleApplication1\bin\Release\HtmlAgilityPack.dll
+C:\code\svn\urNotice\ConsoleApplication1\obj\Release\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\code\svn\urNotice\ConsoleApplication1\obj\Release\ConsoleApplication1.exe
+C:\code\svn\urNotice\ConsoleApplication1\obj\Release\ConsoleApplication1.pdb
