@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="urnoticeAnalyticsModelStoreContainer" CdmEntityContainer="urnoticeAnalyticsEntities">
+    <EntitySetMapping Name="GoogleApiContacts">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.GoogleApiContact)">
+        <MappingFragment StoreEntitySet="GoogleApiContacts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="startIndex" ColumnName="startIndex" />
+          <ScalarProperty Name="itemPerPage" ColumnName="itemPerPage" />
+          <ScalarProperty Name="lastContactUpdated" ColumnName="lastContactUpdated" />
+          <ScalarProperty Name="entryListString" ColumnName="entryListString" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="isVirtualFriendListUpdated" ColumnName="isVirtualFriendListUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoogleApiCheckLastSynceds">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.GoogleApiCheckLastSynced)">
+        <MappingFragment StoreEntitySet="GoogleApiCheckLastSynceds">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="lastContactUpdated" ColumnName="lastContactUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VirtualFriendLists">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.VirtualFriendList)">
+        <MappingFragment StoreEntitySet="VirtualFriendLists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="id1" ColumnName="id1" />
+          <ScalarProperty Name="id2" ColumnName="id2" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="source" ColumnName="source" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="name1" ColumnName="name1" />
+          <ScalarProperty Name="name2" ColumnName="name2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
