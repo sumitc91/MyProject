@@ -1,0 +1,1060 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B55B0455-6617-4D61-9A33-B9619923C92A}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrbitPageWorkgraphy</RootNamespace>
+    <AssemblyName>OrbitPageWorkgraphy</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App\css\all.css" />
+    <Content Include="App\css\bannerscollection_zoominout.css" />
+    <Content Include="App\css\skins\generous\bottomNavBg.png" />
+    <Content Include="App\css\skins\generous\bottomNavLeft.png" />
+    <Content Include="App\css\skins\generous\bottomNavOFF.png" />
+    <Content Include="App\css\skins\generous\bottomNavON.png" />
+    <Content Include="App\css\skins\generous\bottomNavRight.png" />
+    <Content Include="App\css\skins\generous\bottomOverThumbBg.png" />
+    <Content Include="App\css\skins\generous\carouselLeftNavDisable.png" />
+    <Content Include="App\css\skins\generous\carouselLeftNavOFF.png" />
+    <Content Include="App\css\skins\generous\carouselLeftNavON.png" />
+    <Content Include="App\css\skins\generous\carouselRightNavDisable.png" />
+    <Content Include="App\css\skins\generous\carouselRightNavOFF.png" />
+    <Content Include="App\css\skins\generous\carouselRightNavON.png" />
+    <Content Include="App\css\skins\generous\leftNavOFF.png" />
+    <Content Include="App\css\skins\generous\leftNavON.png" />
+    <Content Include="App\css\skins\generous\listIcon.png" />
+    <Content Include="App\css\skins\generous\play_overOFF.png" />
+    <Content Include="App\css\skins\generous\play_overON.png" />
+    <Content Include="App\css\skins\generous\rightNavOFF.png" />
+    <Content Include="App\css\skins\generous\rightNavON.png" />
+    <Content Include="App\css\skins\generous\textBg_transparency.png" />
+    <Content Include="App\css\skins\generous\thumbActiveArrow.png" />
+    <Content Include="App\css\skins\generous\thumbsBg.png" />
+    <Content Include="App\css\skins\generous\videoShadow.png" />
+    <Content Include="App\css\skins\generous\videoShadow400.png" />
+    <Content Include="App\css\skins\hand.cur" />
+    <Content Include="App\css\skins\loader.gif" />
+    <Content Include="App\css\skins\majestic\border.png" />
+    <Content Include="App\css\skins\majestic\bottomNavBg.png" />
+    <Content Include="App\css\skins\majestic\bottomNavLeft.png" />
+    <Content Include="App\css\skins\majestic\bottomNavOFF.png" />
+    <Content Include="App\css\skins\majestic\bottomNavON.png" />
+    <Content Include="App\css\skins\majestic\bottomNavRight.png" />
+    <Content Include="App\css\skins\majestic\bottomOverThumbBg.png" />
+    <Content Include="App\css\skins\majestic\carouselLeftNavDisable.png" />
+    <Content Include="App\css\skins\majestic\carouselLeftNavOFF.png" />
+    <Content Include="App\css\skins\majestic\carouselLeftNavON.png" />
+    <Content Include="App\css\skins\majestic\carouselRightNavDisable.png" />
+    <Content Include="App\css\skins\majestic\carouselRightNavOFF.png" />
+    <Content Include="App\css\skins\majestic\carouselRightNavON.png" />
+    <Content Include="App\css\skins\majestic\leftNavOFF.png" />
+    <Content Include="App\css\skins\majestic\leftNavON.png" />
+    <Content Include="App\css\skins\majestic\listIcon.png" />
+    <Content Include="App\css\skins\majestic\play_overOFF.png" />
+    <Content Include="App\css\skins\majestic\play_overON.png" />
+    <Content Include="App\css\skins\majestic\rightNavOFF.png" />
+    <Content Include="App\css\skins\majestic\rightNavON.png" />
+    <Content Include="App\css\skins\majestic\textBg_transparency.png" />
+    <Content Include="App\css\skins\majestic\textBg_transparency40.png" />
+    <Content Include="App\css\skins\majestic\textBg_transparency70.png" />
+    <Content Include="App\css\skins\majestic\thumbActiveArrow.png" />
+    <Content Include="App\css\skins\majestic\videoShadow.png" />
+    <Content Include="App\css\skins\majestic\videoShadow400.png" />
+    <Content Include="App\css\skins\opportune\bottomNavBg.png" />
+    <Content Include="App\css\skins\opportune\bottomNavLeft.png" />
+    <Content Include="App\css\skins\opportune\bottomNavOFF.png" />
+    <Content Include="App\css\skins\opportune\bottomNavON.png" />
+    <Content Include="App\css\skins\opportune\bottomNavRight.png" />
+    <Content Include="App\css\skins\opportune\bottomOverThumbBg.png" />
+    <Content Include="App\css\skins\opportune\leftNavOFF.png" />
+    <Content Include="App\css\skins\opportune\leftNavON.png" />
+    <Content Include="App\css\skins\opportune\play_overOFF.png" />
+    <Content Include="App\css\skins\opportune\play_overON.png" />
+    <Content Include="App\css\skins\opportune\rightNavOFF.png" />
+    <Content Include="App\css\skins\opportune\rightNavON.png" />
+    <Content Include="App\css\skins\opportune\textBg_transparency.png" />
+    <Content Include="App\css\skins\opportune\textBg_transparency40.png" />
+    <Content Include="App\img\indexPageSlider\final_1.jpg" />
+    <Content Include="App\img\indexPageSlider\final_2.jpg" />
+    <Content Include="App\img\indexPageSlider\final_3.jpg" />
+    <Content Include="App\img\indexPageSlider\newSlider_0.png" />
+    <Content Include="App\img\indexPageSlider\slider_0_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_1.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_1_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_2.png" />
+    <Content Include="App\img\indexPageSlider\slider_2_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_3.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_3_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_4_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_5_low.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_final_1.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_final_3.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_final_low_1.jpg" />
+    <Content Include="App\img\indexPageSlider\slider_final_low_3.jpg" />
+    <Content Include="App\img\loading\load1.gif" />
+    <Content Include="App\img\loading\loading.gif" />
+    <Content Include="App\img\loading\loading100x100.gif" />
+    <Content Include="App\img\loading\loading123.gif" />
+    <Content Include="App\img\loading\loading70x70.gif" />
+    <Content Include="App\img\logo.jpg" />
+    <Content Include="App\img\logo2.jpg" />
+    <Content Include="App\img\logo3.jpg" />
+    <Content Include="App\img\logo4.jpg" />
+    <Content Include="App\img\logo5.jpg" />
+    <Content Include="App\img\logo6.jpg" />
+    <Content Include="App\img\logo_small.jpg" />
+    <Content Include="App\js\angular-animate.js" />
+    <Content Include="App\js\angular-cookies.js" />
+    <Content Include="App\js\angular-cookies.min.js" />
+    <Content Include="App\js\angular-resource.min.js" />
+    <Content Include="App\js\angular-route.js" />
+    <Content Include="App\js\angular.1.2.13.js" />
+    <Content Include="App\js\angular.js" />
+    <Content Include="App\js\angular.min.js" />
+    <Content Include="App\js\angular\angucomplete-alt.min.js" />
+    <Content Include="App\js\angular\ngSanitize\filter\linky.js" />
+    <Content Include="App\js\angular\ngSanitize\sanitize.js" />
+    <Content Include="App\js\angular\ui-bootstrap-custom-0.14.3.js" />
+    <Content Include="App\js\angular\ui-bootstrap-tpls-0.14.3.js" />
+    <Content Include="App\js\bannerscollection_zoominout.js" />
+    <Content Include="App\js\configureBlockUI.js" />
+    <Content Include="App\js\domReady.js" />
+    <Content Include="App\js\dragend.js" />
+    <Content Include="App\js\googleAnalytics.js" />
+    <Content Include="App\js\hammer.min.js" />
+    <Content Include="App\js\httpServices.js" />
+    <Content Include="App\js\i18n\i18n_en-us.js" />
+    <Content Include="App\js\i18n\i18n_hi_in.js" />
+    <Content Include="App\js\jquery-ui.min.js" />
+    <Content Include="App\js\jquery.blockUI.js" />
+    <Content Include="App\js\jquery.cookie.js" />
+    <Content Include="App\js\jquery.filedrop.js" />
+    <Content Include="App\js\jquery.min - Copy.js" />
+    <Content Include="App\js\jquery.min.js" />
+    <Content Include="App\js\jquery.panzoom.js" />
+    <Content Include="App\js\jquery.panzoom.min.js" />
+    <Content Include="App\js\jquery.signalR-1.0.1.js" />
+    <Content Include="App\js\jquery.signalR-1.0.1.min.js" />
+    <Content Include="App\js\jquery.signalR-2.1.1.js" />
+    <Content Include="App\js\jquery.signalR-2.1.1.min.js" />
+    <Content Include="App\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="App\js\m2ei18n.js" />
+    <Content Include="App\js\moment.min.js" />
+    <Content Include="App\js\ng-table.js" />
+    <Content Include="App\js\ngAutocomplete.js" />
+    <Content Include="App\js\raphael-min.js" />
+    <Content Include="App\js\require.min.js" />
+    <Content Include="App\js\restangular.min.js" />
+    <Content Include="App\js\singleRController.js" />
+    <Content Include="App\js\toastMessage.js" />
+    <Content Include="App\js\underscore-min.js" />
+    <Content Include="App\js\urNoticeScript.js" />
+    <Content Include="App\pages\beforeLogin\404\404.html" />
+    <Content Include="App\pages\beforeLogin\404\404.js" />
+    <Content Include="App\pages\beforeLogin\AboutUs\AboutUs.html" />
+    <Content Include="App\pages\beforeLogin\AboutUs\AboutUs.js" />
+    <Content Include="App\pages\beforeLogin\AddNewNotice\AddNewNotice.html" />
+    <Content Include="App\pages\beforeLogin\AddNewNotice\AddNewNotice.js" />
+    <Content Include="App\pages\beforeLogin\Blog\Blog.html" />
+    <Content Include="App\pages\beforeLogin\Blog\Blog.js" />
+    <Content Include="App\pages\beforeLogin\Career\Career.html" />
+    <Content Include="App\pages\beforeLogin\Career\Career.js" />
+    <Content Include="App\pages\beforeLogin\CompanyDetails\CompanyDetails.html" />
+    <Content Include="App\pages\beforeLogin\CompanyDetails\CompanyDetails.js" />
+    <Content Include="App\pages\beforeLogin\ContactUs\ContactUs.html" />
+    <Content Include="App\pages\beforeLogin\ContactUs\ContactUs.js" />
+    <Content Include="App\pages\beforeLogin\controller\beforeLoginApp.js" />
+    <Content Include="App\pages\beforeLogin\controller\common\AngularFileUploadController.js" />
+    <Content Include="App\pages\beforeLogin\controller\common\auth\AuthCreateAccountService.js" />
+    <Content Include="App\pages\beforeLogin\controller\common\CookieService.js" />
+    <Content Include="App\pages\beforeLogin\controller\common\SolrService.js" />
+    <Content Include="App\pages\beforeLogin\css\BeforeLoginStyle.css" />
+    <Content Include="App\pages\beforeLogin\EditPage\EditPage.html" />
+    <Content Include="App\pages\beforeLogin\EditPage\editPage.js" />
+    <Content Include="App\pages\beforeLogin\FAQ\FAQ.html" />
+    <Content Include="App\pages\beforeLogin\FAQ\FAQ.js" />
+    <Content Include="App\pages\beforeLogin\ForgetPassword\ForgetPassword.html" />
+    <Content Include="App\pages\beforeLogin\ForgetPassword\ForgetPassword.js" />
+    <Content Include="App\pages\beforeLogin\Index\Index.html" />
+    <Content Include="App\pages\beforeLogin\Index\index.js" />
+    <Content Include="App\pages\beforeLogin\Login\Login.html" />
+    <Content Include="App\pages\beforeLogin\Login\Login.js" />
+    <Content Include="App\pages\beforeLogin\PostStory\PostStory.html" />
+    <Content Include="App\pages\beforeLogin\PostStory\PostStory.js" />
+    <Content Include="App\pages\beforeLogin\Privacy\Privacy.html" />
+    <Content Include="App\pages\beforeLogin\Privacy\Privacy.js" />
+    <Content Include="App\pages\beforeLogin\ResetPassword\resetpassword.html" />
+    <Content Include="App\pages\beforeLogin\ResetPassword\resetPasswordTemplate.js" />
+    <Content Include="App\pages\beforeLogin\Search\Search.html" />
+    <Content Include="App\pages\beforeLogin\Search\Search.js" />
+    <Content Include="App\pages\beforeLogin\ShowMessage\showmessage.html" />
+    <Content Include="App\pages\beforeLogin\ShowMessage\showMessageTemplate.js" />
+    <Content Include="App\pages\beforeLogin\SignUpUser\SignUpUser.html" />
+    <Content Include="App\pages\beforeLogin\SignUpUser\SignUpUser.js" />
+    <Content Include="App\pages\beforeLogin\SingleBlog\SingleBlog.html" />
+    <Content Include="App\pages\beforeLogin\SingleBlog\SingleBlog.js" />
+    <Content Include="App\pages\beforeLogin\TnC\TnC.html" />
+    <Content Include="App\pages\beforeLogin\TnC\TnC.js" />
+    <Content Include="App\pages\beforeLogin\UserDetails\UserDetails.html" />
+    <Content Include="App\pages\beforeLogin\UserDetails\UserDetails.js" />
+    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.html" />
+    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
+    <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />
+    <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.js" />
+    <Content Include="App\pages\PreLoginDM.js" />
+    <Content Include="App\pages\PreLoginInit.js" />
+    <Content Include="App\Property\urNoticeProperties.js" />
+    <Content Include="App\template\css\animate.css" />
+    <Content Include="App\template\css\bootstrap-theme.css" />
+    <Content Include="App\template\css\bootstrap.min.css" />
+    <Content Include="App\template\css\font-awesome.min.css" />
+    <Content Include="App\template\css\fontello.css" />
+    <Content Include="App\template\css\normalize.css" />
+    <Content Include="App\template\css\owl.carousel.css" />
+    <Content Include="App\template\css\owl.theme.css" />
+    <Content Include="App\template\css\owl.transitions.css" />
+    <Content Include="App\template\flexslider.css" />
+    <Content Include="App\template\fonts\fontawesome-webfont.svg" />
+    <Content Include="App\template\fonts\fontello\fontello.svg" />
+    <Content Include="App\template\img\client-face1.png" />
+    <Content Include="App\template\img\client-face2.png" />
+    <Content Include="App\template\img\employee1.png" />
+    <Content Include="App\template\img\employee2.png" />
+    <Content Include="App\template\img\employee3.png" />
+    <Content Include="App\template\img\employee4.png" />
+    <Content Include="App\template\img\employee5.png" />
+    <Content Include="App\template\img\employee6.png" />
+    <Content Include="App\template\img\footer-logo.png" />
+    <Content Include="App\template\img\how-work1.png" />
+    <Content Include="App\template\img\how-work2.png" />
+    <Content Include="App\template\img\how-work3.png" />
+    <Content Include="App\template\img\job-add.png" />
+    <Content Include="App\template\img\job-logo1.png" />
+    <Content Include="App\template\img\job-logo2.png" />
+    <Content Include="App\template\img\job-logo3.png" />
+    <Content Include="App\template\img\job-logo4.png" />
+    <Content Include="App\template\img\job-logo5.png" />
+    <Content Include="App\template\img\logo.png" />
+    <Content Include="App\template\img\preloader.gif" />
+    <Content Include="App\template\img\slider-image-1.jpg" />
+    <Content Include="App\template\img\slider-image-2.jpg" />
+    <Content Include="App\template\img\slider-image-3.jpg" />
+    <Content Include="App\template\img\team-small-1.jpg" />
+    <Content Include="App\template\img\team-small-2.jpg" />
+    <Content Include="App\template\img\team-small-3.jpg" />
+    <Content Include="App\template\img\team-small-4.jpg" />
+    <Content Include="App\template\img\team-small-5.jpg" />
+    <Content Include="App\template\img\team-small-6.jpg" />
+    <Content Include="App\template\js\bootstrap.min.js" />
+    <Content Include="App\template\js\main.js" />
+    <Content Include="App\template\js\owl.carousel.min.js" />
+    <Content Include="App\template\js\plugins.js" />
+    <Content Include="App\template\js\vendor\jquery-1.10.2.min.js" />
+    <Content Include="App\template\js\vendor\modernizr-2.6.2.min.js" />
+    <Content Include="App\template\js\wow.js" />
+    <Content Include="App\template\responsive.css" />
+    <Content Include="App\template\style.css" />
+    <Content Include="App\third-Party\angular-file-upload-master\.gitignore" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\src\com\df\angularfileupload\CORSFilter.java" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\src\com\df\angularfileupload\FileUpload.java" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\src\META-INF\jdoconfig.xml" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\src\META-INF\persistence.xml" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\common.css" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\crossdomain.xml" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\donate.html" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\favicon.ico" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\img\tea.jpg" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\img\tea.png" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\index.html" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\angular-file-upload-html5-shim.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\angular-file-upload-shim.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\angular-file-upload.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\FileAPI.flash.swf" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\FileAPI.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\FileAPI.min.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\js\upload.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\WEB-INF\appengine-web.xml" />
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\WEB-INF\web.xml" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload-html5-shim.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload-html5-shim.min.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload-shim.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload-shim.min.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\angular-file-upload.min.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\FileAPI.flash.swf" />
+    <Content Include="App\third-Party\angular-file-upload-master\dist\FileAPI.min.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\Gruntfile.js" />
+    <Content Include="App\third-Party\angular-file-upload-master\nuget\NuGet.exe" />
+    <Content Include="App\third-Party\angular-input-stars-master\angular-input-stars.css" />
+    <Content Include="App\third-Party\angular-input-stars-master\angular-input-stars.js" />
+    <Content Include="App\third-Party\angular-input-stars-master\index.html" />
+    <Content Include="App\third-Party\angular-xeditable-0.1.8\css\xeditable.css" />
+    <Content Include="App\third-Party\angular-xeditable-0.1.8\js\xeditable.js" />
+    <Content Include="App\third-Party\angular-xeditable-0.1.8\js\xeditable.min.js" />
+    <Content Include="App\third-Party\fancybox\demo\1_b.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\1_s.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\2_b.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\2_s.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\3_b.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\3_s.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\4_b.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\4_s.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\5_b.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\5_s.jpg" />
+    <Content Include="App\third-Party\fancybox\demo\ajax.txt" />
+    <Content Include="App\third-Party\fancybox\demo\iframe.html" />
+    <Content Include="App\third-Party\fancybox\demo\index.html" />
+    <Content Include="App\third-Party\fancybox\lib\jquery-1.10.1.min.js" />
+    <Content Include="App\third-Party\fancybox\lib\jquery-1.9.0.min.js" />
+    <Content Include="App\third-Party\fancybox\lib\jquery.mousewheel-3.0.6.pack.js" />
+    <Content Include="App\third-Party\fancybox\source\blank.gif" />
+    <Content Include="App\third-Party\fancybox\source\fancybox_loading%402x.gif" />
+    <Content Include="App\third-Party\fancybox\source\fancybox_loading.gif" />
+    <Content Include="App\third-Party\fancybox\source\fancybox_overlay.png" />
+    <Content Include="App\third-Party\fancybox\source\fancybox_sprite%402x.png" />
+    <Content Include="App\third-Party\fancybox\source\fancybox_sprite.png" />
+    <Content Include="App\third-Party\fancybox\source\helpers\fancybox_buttons.png" />
+    <Content Include="App\third-Party\fancybox\source\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="App\third-Party\fancybox\source\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="App\third-Party\fancybox\source\helpers\jquery.fancybox-media.js" />
+    <Content Include="App\third-Party\fancybox\source\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="App\third-Party\fancybox\source\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="App\third-Party\fancybox\source\jquery.fancybox.css" />
+    <Content Include="App\third-Party\fancybox\source\jquery.fancybox.js" />
+    <Content Include="App\third-Party\fancybox\source\jquery.fancybox.pack.js" />
+    <Content Include="App\third-Party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="App\third-Party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="App\third-Party\highcharts\highcharts-3d.js" />
+    <Content Include="App\third-Party\highcharts\highcharts-3d.src.js" />
+    <Content Include="App\third-Party\highcharts\highcharts-all.js" />
+    <Content Include="App\third-Party\highcharts\highcharts-more.js" />
+    <Content Include="App\third-Party\highcharts\highcharts-more.src.js" />
+    <Content Include="App\third-Party\highcharts\highcharts.js" />
+    <Content Include="App\third-Party\highcharts\highcharts.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\canvas-tools.js" />
+    <Content Include="App\third-Party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\data.js" />
+    <Content Include="App\third-Party\highcharts\modules\data.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\drilldown.js" />
+    <Content Include="App\third-Party\highcharts\modules\drilldown.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\exporting.js" />
+    <Content Include="App\third-Party\highcharts\modules\exporting.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\funnel.js" />
+    <Content Include="App\third-Party\highcharts\modules\funnel.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\heatmap.js" />
+    <Content Include="App\third-Party\highcharts\modules\heatmap.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="App\third-Party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="App\third-Party\highcharts\modules\solid-gauge.js" />
+    <Content Include="App\third-Party\highcharts\modules\solid-gauge.src.js" />
+    <Content Include="App\third-Party\highcharts\themes\dark-blue.js" />
+    <Content Include="App\third-Party\highcharts\themes\dark-green.js" />
+    <Content Include="App\third-Party\highcharts\themes\dark-unica.js" />
+    <Content Include="App\third-Party\highcharts\themes\gray.js" />
+    <Content Include="App\third-Party\highcharts\themes\grid-light.js" />
+    <Content Include="App\third-Party\highcharts\themes\grid.js" />
+    <Content Include="App\third-Party\highcharts\themes\sand-signika.js" />
+    <Content Include="App\third-Party\highcharts\themes\skies.js" />
+    <Content Include="App\third-Party\html5-file-upload\assets\css\styles.css" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\background_tile_1.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\background_tile_2.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\background_tile_3.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\blue_line.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\done.png" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\logo.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\assets\img\tzine.png" />
+    <Content Include="App\third-Party\html5-file-upload\assets\js\jquery.filedrop.js" />
+    <Content Include="App\third-Party\html5-file-upload\assets\js\ModeratingPhotosScript.js" />
+    <Content Include="App\third-Party\html5-file-upload\assets\js\script.js" />
+    <Content Include="App\third-Party\html5-file-upload\assets\js\TranscriptionTemplateScript.js" />
+    <Content Include="App\third-Party\html5-file-upload\img\background_tile_1.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\img\background_tile_2.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\img\background_tile_3.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\img\blue_line.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\img\done.png" />
+    <Content Include="App\third-Party\html5-file-upload\img\logo.jpg" />
+    <Content Include="App\third-Party\html5-file-upload\img\tzine.png" />
+    <Content Include="App\third-Party\html5-file-upload\index.html" />
+    <Content Include="App\third-Party\loadOver\load1.gif" />
+    <Content Include="App\third-Party\loadOver\loading.png" />
+    <Content Include="App\third-Party\loadOver\loadover.css" />
+    <Content Include="App\third-Party\loadOver\loadover.js" />
+    <Content Include="App\third-Party\MinimalForm\css\component.css" />
+    <Content Include="App\third-Party\MinimalForm\css\demo.css" />
+    <Content Include="App\third-Party\MinimalForm\css\normalize.css" />
+    <Content Include="App\third-Party\MinimalForm\fonts\codropsicons\codropsicons.svg" />
+    <Content Include="App\third-Party\MinimalForm\fonts\codropsicons\license.txt" />
+    <Content Include="App\third-Party\MinimalForm\fonts\icomoon\icomoon.svg" />
+    <Content Include="App\third-Party\MinimalForm\index.html" />
+    <Content Include="App\third-Party\MinimalForm\js\classie.js" />
+    <Content Include="App\third-Party\MinimalForm\js\modernizr.custom.js" />
+    <Content Include="App\third-Party\MinimalForm\js\stepsForm.js" />
+    <Content Include="App\third-Party\ng-table-master\.gitignore" />
+    <Content Include="App\third-Party\ng-table-master\examples\app\app.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\app\main.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\css\bootstrap-theme.min.css" />
+    <Content Include="App\third-Party\ng-table-master\examples\css\bootstrap.min.css" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo1.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo10_tableWithCheckbox.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo11_CustomerFilter.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo12.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo13.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo14.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo15_exportToCSV.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo16_EditableDemo.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo17.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo18.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo19_MultipleTablePerPage.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo2.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo20_dynamicColumns.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo21_dynamicGrouping.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo22_inline_edit.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo23_sorting_filtering.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo24_rowSelection_find.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo25_find.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo26_find.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo27.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo28.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo3.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo4.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo5.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo6_AjaxDataLoad.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo7.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo8.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\demo9.html" />
+    <Content Include="App\third-Party\ng-table-master\examples\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\angular-mocks.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\angular-resource.min.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\angular.min.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\jquery-1.9.1.min.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\ng-table-export.src.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\ng-table-resizable-columns.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\js\require.js" />
+    <Content Include="App\third-Party\ng-table-master\examples\partials\editRow.html" />
+    <Content Include="App\third-Party\ng-table-master\Gruntfile.js" />
+    <Content Include="App\third-Party\ng-table-master\karma.conf.js" />
+    <Content Include="App\third-Party\ng-table-master\ng-table.css" />
+    <Content Include="App\third-Party\ng-table-master\ng-table.js" />
+    <Content Include="App\third-Party\ng-table-master\ng-table.min.css" />
+    <Content Include="App\third-Party\ng-table-master\ng-table.min.js" />
+    <Content Include="App\third-Party\ng-table-master\src\ng-table\filters\select-multiple.html" />
+    <Content Include="App\third-Party\ng-table-master\src\ng-table\filters\select.html" />
+    <Content Include="App\third-Party\ng-table-master\src\ng-table\filters\text.html" />
+    <Content Include="App\third-Party\ng-table-master\src\ng-table\header.html" />
+    <Content Include="App\third-Party\ng-table-master\src\ng-table\pager.html" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\01-intro.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\02-app.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\03-params.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\04-controller.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\05-directive.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\06-pagination.js" />
+    <Content Include="App\third-Party\ng-table-master\src\scripts\07-outro.js" />
+    <Content Include="App\third-Party\ng-table-master\test\tableControllerSpec.js" />
+    <Content Include="App\third-Party\ng-table-master\test\tableParamsSpec.js" />
+    <Content Include="App\third-Party\ng-table-master\test\tableSpec.js" />
+    <Content Include="App\third-Party\noticeui\build\noticeui.png" />
+    <Content Include="App\third-Party\noticeui\css\noticeui.css" />
+    <Content Include="App\third-Party\noticeui\demo.html" />
+    <Content Include="App\third-Party\noticeui\example_files\logo.png" />
+    <Content Include="App\third-Party\noticeui\example_files\style.css" />
+    <Content Include="App\third-Party\noticeui\images\noticeui\notice-bg.png" />
+    <Content Include="App\third-Party\noticeui\images\noticeui\notice-tabs.png" />
+    <Content Include="App\third-Party\noticeui\index.html" />
+    <Content Include="App\third-Party\noticeui\nfo.png" />
+    <Content Include="App\third-Party\sidr-package\jquery.sidr.min.js" />
+    <Content Include="App\third-Party\sidr-package\stylesheets\jquery.sidr.dark.css" />
+    <Content Include="App\third-Party\sidr-package\stylesheets\jquery.sidr.light.css" />
+    <Content Include="App\third-Party\skill\controller.js" />
+    <Content Include="App\third-Party\skill\greybg.png" />
+    <Content Include="App\third-Party\skill\index.html" />
+    <Content Include="App\third-Party\skill\jquery.js" />
+    <Content Include="App\third-Party\skill\main.css" />
+    <Content Include="App\third-Party\SmartWizard-master\images\loader.gif" />
+    <Content Include="App\third-Party\SmartWizard-master\index.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\js\jquery-1.4.2.min.js" />
+    <Content Include="App\third-Party\SmartWizard-master\js\jquery.smartWizard-2.0.js" />
+    <Content Include="App\third-Party\SmartWizard-master\js\jquery.smartWizard-2.0.min.js" />
+    <Content Include="App\third-Party\SmartWizard-master\MIT-LICENSE.txt" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\images\loader.gif" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\index.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\js\jquery-1.4.2.min.js" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\js\jquery.smartWizard-2.0.js" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\js\jquery.smartWizard-2.0.min.js" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\MIT-LICENSE.txt" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\smartwizard2-ajax.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\smartwizard2-multiple.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\smartwizard2-vertical.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\styles\smart_wizard.css" />
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\styles\smart_wizard_vertical.css" />
+    <Content Include="App\third-Party\SmartWizard-master\smartwizard2-ajax.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\smartwizard2-multiple.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\smartwizard2-vertical.htm" />
+    <Content Include="App\third-Party\SmartWizard-master\styles\smart_wizard.css" />
+    <Content Include="App\third-Party\SmartWizard-master\styles\smart_wizard_vertical.css" />
+    <Content Include="App\third-Party\Swiper-master\.gitignore" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\css\appstore.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\css\idangerous.swiper.3dflow.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\css\normalize.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\big\7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\img\thumbs\8.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\index.html" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\js\appstore.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\js\idangerous.swiper-2.0.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\js\idangerous.swiper.3dflow-2.0.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\appstore\js\jquery.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\css\gallery-app.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\css\normalize.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\img\gallery-7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\index.html" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\js\gallery-app.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\js\idangerous.swiper-2.0.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\gallery\js\jquery.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\css\movies-app.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\css\normalize.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\img\8.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\index.html" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\js\idangerous.swiper-2.0.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\js\jquery.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\movies\js\movies-app.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\css\idangerous.swiper.scrollbar.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\css\normalize.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\css\simple-app.css" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\img\gallery-7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\index.html" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\js\idangerous.swiper-2.0.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\js\idangerous.swiper.scrollbar-2.0.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\js\jquery.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demo-apps\simple\js\simple-app.js" />
+    <Content Include="App\third-Party\Swiper-master\demos\01-default.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\02-vertical-mode.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\03-dynamic-slides.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\04-scroll-container.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\05-free-mode.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\06-carousel-mode.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\07-carousel-loop.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\08-nested.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\09-nested-loop.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\10-tabs.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\11-tabs-feedback.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\12-partial-display.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\13-threshold.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\14-different-widths.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\15-centered-slides.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\16-visibility-api.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\17-responsive.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\18-pull-to-refresh.html" />
+    <Content Include="App\third-Party\Swiper-master\demos\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\demos\css\idangerous.swiper.scrollbar.css" />
+    <Content Include="App\third-Party\Swiper-master\demos\img\arrows.png" />
+    <Content Include="App\third-Party\Swiper-master\demos\img\bb.jpg" />
+    <Content Include="App\third-Party\Swiper-master\demos\img\slider1-1.png" />
+    <Content Include="App\third-Party\Swiper-master\demos\img\slider1-2.png" />
+    <Content Include="App\third-Party\Swiper-master\demos\js\idangerous.swiper-2.1.min.js" />
+    <Content Include="App\third-Party\Swiper-master\demos\js\idangerous.swiper.scrollbar-2.1.js" />
+    <Content Include="App\third-Party\Swiper-master\demos\js\jquery-1.10.1.min.js" />
+    <Content Include="App\third-Party\Swiper-master\dist\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\dist\idangerous.swiper.js" />
+    <Content Include="App\third-Party\Swiper-master\dist\idangerous.swiper.min.js" />
+    <Content Include="App\third-Party\Swiper-master\Gruntfile.js" />
+    <Content Include="App\third-Party\Swiper-master\movies\css\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\movies\css\movies-app.css" />
+    <Content Include="App\third-Party\Swiper-master\movies\css\normalize.css" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\1.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\2.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\3.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\4.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\5.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\6.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\7.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\img\8.jpg" />
+    <Content Include="App\third-Party\Swiper-master\movies\index.html" />
+    <Content Include="App\third-Party\Swiper-master\movies\js\idangerous.swiper-2.0.min.js" />
+    <Content Include="App\third-Party\Swiper-master\movies\js\jquery.min.js" />
+    <Content Include="App\third-Party\Swiper-master\movies\js\movies-app.js" />
+    <Content Include="App\third-Party\Swiper-master\movies\swiper_simple_test.html" />
+    <Content Include="App\third-Party\Swiper-master\src\idangerous.swiper.css" />
+    <Content Include="App\third-Party\Swiper-master\src\idangerous.swiper.js" />
+    <Content Include="App\third-Party\toastmessage\css\jquery.toastmessage.css" />
+    <Content Include="App\third-Party\toastmessage\images\close.gif" />
+    <Content Include="App\third-Party\toastmessage\images\error.png" />
+    <Content Include="App\third-Party\toastmessage\images\notice.png" />
+    <Content Include="App\third-Party\toastmessage\images\success.png" />
+    <Content Include="App\third-Party\toastmessage\images\warning.png" />
+    <Content Include="App\third-Party\toastmessage\js\jquery.toastmessage.js" />
+    <Content Include="App\third-Party\wysihtml5\.gitignore" />
+    <Content Include="App\third-Party\wysihtml5\.settings\.gitignore" />
+    <Content Include="App\third-Party\wysihtml5\dist\bootstrap-wysihtml5-0.0.2.css" />
+    <Content Include="App\third-Party\wysihtml5\dist\bootstrap-wysihtml5-0.0.2.js" />
+    <Content Include="App\third-Party\wysihtml5\dist\bootstrap-wysihtml5-0.0.2.min.js" />
+    <Content Include="App\third-Party\wysihtml5\index.html" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\bootstrap-responsive.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\bootstrap-responsive.min.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\bootstrap.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\bootstrap.min.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\prettify.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\css\wysiwyg-color.css" />
+    <Content Include="App\third-Party\wysihtml5\lib\img\glyphicons-halflings-white.png" />
+    <Content Include="App\third-Party\wysihtml5\lib\img\glyphicons-halflings.png" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap-button.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap-switch.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap.min.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\bootstrap3-wysihtml5.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\jquery-1.7.2.min.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\prettify.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\wysihtml5-0.3.0.js" />
+    <Content Include="App\third-Party\wysihtml5\lib\js\wysihtml5-0.3.0.min.js" />
+    <Content Include="App\third-Party\wysihtml5\src\bootstrap-wysihtml5.css" />
+    <Content Include="App\third-Party\wysihtml5\src\bootstrap-wysihtml5.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ar-AR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.bg-BG.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ca-CT.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.cs-CZ.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.da-DK.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.de-DE.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.el-GR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.es-AR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.es-ES.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.fr-FR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.hr-HR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.it-IT.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ja-JP.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ko-KR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.lt-LT.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.mo-MD.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.nb-NB.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.nl-NL.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.pl-PL.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.pt-BR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ru-RU.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.sk-SK.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.sv-SE.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.tr-TR.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.ua-UA.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.zh-CN.js" />
+    <Content Include="App\third-Party\wysihtml5\src\locales\bootstrap-wysihtml5.zh-TW.js" />
+    <Content Include="App\third-Party\wysihtml5\test\bootstrap_wysihtml5\parserRules_test.js" />
+    <Content Include="App\third-Party\wysihtml5\test\browser_test.js" />
+    <Content Include="App\third-Party\wysihtml5\test\editor_test.js" />
+    <Content Include="App\third-Party\wysihtml5\test\incompatible_test.js" />
+    <Content Include="App\third-Party\wysihtml5\test\index.html" />
+    <Content Include="App\third-Party\wysihtml5\test\support\html_equal.js" />
+    <Content Include="App\third-Party\wysihtml5\test\undo_manager_test.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\third-Party\html5-file-upload\uploads\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\img\indexPageSlider\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\js\angular\ngSanitize\.jshintrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontawesome-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontawesome-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontello\fontello.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontello\fontello.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\template\fonts\fontello\fontello.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\demo\.classpath" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\demo\.project" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\demo\src\log4j.properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\demo\war\WEB-INF\logging.properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\nuget\build.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\nuget\Package.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-file-upload-master\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-input-stars-master\bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-input-stars-master\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\angular-xeditable-0.1.8\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\codropsicons\codropsicons.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\codropsicons\codropsicons.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\codropsicons\codropsicons.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\icomoon\icomoon.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\icomoon\icomoon.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\fonts\icomoon\icomoon.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\MinimalForm\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\.bowerrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\.jshintrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\.travis.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\CONTRIBUTING.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\examples\fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\examples\fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\examples\fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\ng-table.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\ng-table.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\ng-table-master\src\styles\ng-table.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\noticeui\codeshox.nfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\skill\activity.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\services\service.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\services\service.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\SmartWizard-master\smartwizard2-validation.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\SmartWizard-master\smartwizard2-validation.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\.jshintrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\CHANGELOG.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\component.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\Swiper-master\src\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\component.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\Gemfile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\Gemfile.lock" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\LICENCE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\Rakefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\readme.textile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\test\lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\test\README" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\third-Party\wysihtml5\VERSION" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5383</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5383/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

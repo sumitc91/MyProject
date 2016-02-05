@@ -1,0 +1,228 @@
+﻿<!--container start-->
+<div class="container">
+    <div class="row">
+       
+        <!-- Main content -->
+        <section class="content">
+            <!-- top row -->
+            <div class="row">
+                <div class="col-xs-12 connectedSortable">
+
+                </div><!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-color box-bordered">
+                        <div class="box-title">
+                            <h3>
+                                <i class="icon-user"></i>Sumit's Profile
+                            </h3>
+                        </div>
+                        
+                        <div class="box-content nopadding">
+                            <div class="tab-content padding tab-content-inline tab-content-bottom">
+                                <uib-tabset>
+                                    <uib-tab heading="Profile">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="widget no-margin">
+                                                    <div class="widget-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="thumbnail">
+                                                                    <img src="{{clientDetailResponse.imageUrl}}" alt="300x200">
+                                                                    <br>
+                                                                    <h4 class="center-align-text">UI Designer</h4>
+                                                                    <p class="btn-stack center-align-text">
+                                                                        <a class="btn btn-info" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-twitter"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-primary" href="javascript:;" ng-click="openFacebookAuthWindow()" data-original-title="" title="">
+                                                                            <i class="fa fa-facebook"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-danger" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-google-plus"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-success" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-pinterest"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-warning" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-youtube"></i>
+                                                                        </a>
+                                                                    </p>
+                                                                </div>
+                                                                <br>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                                                                <form class="form-horizontal">
+                                                                    <br>
+                                                                    <h5>
+                                                                        Personal Information
+                                                                    </h5>
+                                                                    <hr>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="userName">First Name</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" placeholder="Name" id="userName" ng-model="clientDetailResponse.FirstName" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="location">Last Name</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" placeholder="Location" id="location" ng-model="clientDetailResponse.LastName" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="webUrl">Email Id</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" placeholder="Website Url" id="webUrl" ng-model="clientDetailResponse.Username" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="webUrl">About</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea rows="5" class="form-control"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <button class="btn btn-info pull-right" type="submit">
+                                                                            Save changes
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </uib-tab>
+                                    <uib-tab heading="Reputation">
+                                        <form action="#" class="form-horizontal ng-pristine ng-valid">
+                                            <div class="control-group">
+                                                <label for="asdf" class="control-label">
+                                                    Email notifications
+                                                </label>
+                                                <div class="controls">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="asdf">
+                                                        Send me security emails
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="asdf">
+                                                        Send system emails
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="asdf">
+                                                        Lorem ipsum dolor
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="asdf">
+                                                        Minim veli
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label for="asdf" class="control-label">
+                                                    Email for notifications
+                                                </label>
+                                                <div class="controls">
+                                                    <select name="email" id="email">
+                                                        <option value="1">asdf@blasdas.com</option>
+                                                        <option value="2">johnDoe@asdasf.de</option>
+                                                        <option value="3">janeDoe@janejanejane.net</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <input type="submit" class="btn btn-primary" value="Save">
+                                                <input type="reset" class="btn" value="Discard changes">
+                                            </div>
+                                        </form>
+                                    </uib-tab>
+                                    <uib-tab heading="Jobgraphy">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="widget no-margin">
+                                                    <div class="widget-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="thumbnail">
+                                                                    <img src="{{clientDetailResponse.imageUrl}}" alt="300x200">
+                                                                    <br>
+                                                                    <h4 class="center-align-text">UI Designer</h4>
+                                                                    <p class="btn-stack center-align-text">
+                                                                        <a class="btn btn-info" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-twitter"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-primary" href="javascript:;" ng-click="openFacebookAuthWindow()" data-original-title="" title="">
+                                                                            <i class="fa fa-facebook"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-danger" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-google-plus"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-success" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-pinterest"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-warning" href="javascript:;" data-original-title="" title="">
+                                                                            <i class="fa fa-youtube"></i>
+                                                                        </a>
+                                                                    </p>
+                                                                </div>
+                                                                <br>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                                                                <form class="form-horizontal">
+                                                                    <div ng-show="true">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="emailId">Old Password</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="email" placeholder="Email ID" id="emailId" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputPassword">New Password</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="password" placeholder="Password" id="inputPassword" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputPassword1">Confirm Password</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="password" placeholder="Confirm Password" id="inputPassword1" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-actions">
+                                                                        <button class="btn btn-info pull-right" type="submit">
+                                                                            Save changes
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.Left col -->
+            </div><!-- /.row (main row) -->
+
+        </section><!-- /.content -->
+    </div>
+</div>
+
+
+
+

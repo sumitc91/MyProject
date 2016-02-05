@@ -1,0 +1,308 @@
+﻿
+<div class="row" style="min-height: 90px;"></div>  
+<!--container start-->
+<div class="container" ng-controller="beforeLoginPostYourNotice">
+    <div class="row">
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- top row -->
+            <div class="row">
+                <div class="col-xs-12 connectedSortable">
+
+                </div><!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <h3>Stacked <button type="button" class="btn btn-sm btn-primary" ng-click="randomStacked()">Randomize</button></h3>
+                <uib-progress><uib-bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+            </div>
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-color box-bordered">
+                        <div class="box-title">
+                            <div style="min-height: 30px;">
+                                <i class="icon-user"></i><span style="color: white;">Post Your Notice</span>
+                            </div>
+                        </div>
+
+                        <div class="box-content nopadding" ng-controller="beforeLoginPostYourNotice">
+                            <div class="tab-content padding tab-content-inline tab-content-bottom">
+                                <div id="rootwizard" class="form-wizard">
+
+                                    <uib-tabset justified="true">
+                                        <uib-tab heading="Company Notice Info">
+
+                                            <table class="table background-color-light-green">
+                                                <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Name"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Email"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Company Name : </td>
+                                                        <td>
+                                                            <div angucomplete-alt
+                                                                 id="companyName"
+                                                                 placeholder="Enter Company Name"
+                                                                 pause="500"
+                                                                 selected-object="selectCompany"
+                                                                 remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
+                                                                 remote-url-request-formatter="remoteUrlRequestFn"
+                                                                 remote-url-data-field="Payload"
+                                                                 title-field="companyname"
+                                                                 minlength="2"
+                                                                 input-class="form-control form-control-small"
+                                                                 ng-model="companyName"
+                                                                 image-field="squarelogourl"
+                                                                 match-class="highlight" />
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Location : </td>
+                                                        <td>
+                                                            <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details" />
+                                                            <br />{{details.formatted_address}} | {{details.address_components}}
+                                                        </td>
+                                                        <td>
+                                                            
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Designation : </td>
+                                                        <td>
+                                                            <div angucomplete-alt
+                                                                 id="ex5"
+                                                                 placeholder="Designation"
+                                                                 pause="500"
+                                                                 selected-object="selectedProject"
+                                                                 remote-url="http://{{sitehosturl}}/Search/GetDesignationDetails?q="
+                                                                 remote-url-request-formatter="remoteUrlRequestFn"
+                                                                 remote-url-data-field="Payload"
+                                                                 title-field="designation"
+                                                                 minlength="2"
+                                                                 ng-model="PostStoryModel.designation"
+                                                                 input-class="form-control form-control-small"
+                                                                 match-class="highlight"/>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table background-color-light-red">
+                                                <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Max Notice Period : </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Max Notice Period ">
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Min Notice Period : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Min Notice Period "></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Option for Buyout : </td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'yes'" uib-uncheckable>Yes</label>
+                                                                <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'no'" uib-uncheckable>No</label>
+                                                                <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'dontknow'" uib-uncheckable>Don't Know</label>
+                                                            </div>
+                                                            <br />
+                                                            <div ng-show="radioModel">You Selected : <span ng-bind="radioModel"></span>  </div>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                            <div class="background-color-light-blue">
+                                                Are you Looking for a Change :
+                                                <div class="btn-group">
+                                                    <label class="btn btn-warning" ng-model="lookingForChangeRadioModel" uib-btn-radio="'yes'" uib-uncheckable>Yes</label>
+                                                    <label class="btn btn-warning" ng-model="lookingForChangeRadioModel" uib-btn-radio="'no'" uib-uncheckable>No</label>
+                                                    <label class="btn btn-warning" ng-model="lookingForChangeRadioModel" uib-btn-radio="'dontknow'" uib-uncheckable>Don't Know</label>
+                                                </div>
+                                                <br />
+                                                <div ng-show="lookingForChangeRadioModel">You Selected : <span ng-bind="lookingForChangeRadioModel"></span>  </div>
+                                            </div>
+
+                                            <table class="table background-color-light-red" ng-show="lookingForChangeRadioModel=='yes'">
+                                                <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Expected CTC : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Expected CTC"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Reason of Switch : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table background-color-light-red" ng-show="lookingForChangeRadioModel=='no'">
+                                                <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>Reason of Stay : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            
+
+                                            <table class="table background-color-light-green">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ratings</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>Work Culture : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Employee Development/Training : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Appraisal Process : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Senior Management : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>HR Policies : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Your Boss/Manager : </td>
+                                                        <td><input type="text" class="form-control" placeholder="Location"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table background-color-light-green">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Suggestion</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>
+                                                            <textarea class="textarea" placeholder="Enter Your Jobgraphy ..." style="width: 100%; height: 250px" id="PostStoryContentData"></textarea>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table background-color-light-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary">Save</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger">Reset</button>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </uib-tab>
+                                        <uib-tab heading="SJ">Short Labeled Justified content</uib-tab>
+                                        <uib-tab heading="Long Justified">Long Labeled Justified content</uib-tab>
+                                    </uib-tabset>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.Left col -->
+            </div><!-- /.row (main row) -->
+
+        </section><!-- /.content -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+</script>
+
