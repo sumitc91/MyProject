@@ -1,0 +1,63 @@
+﻿<!--breadcrumbs start-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Login</h1>
+            </div>
+            <h5>
+                Clock's ticking and don't know <span style="color:#48cfad">what to do?</span>, <span style="color:#48cfad">when to quit? </span> or <span style="color:#48cfad">where to join </span>. Let's help each other and talk about <span style="color:#48cfad">Notice Period</span>!
+            </h5>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->  
+
+<!--container start-->
+<div class="login-bg" ng-controller="beforeLoginLoginPage">
+    <div class="container">
+        <div class="form-wrapper">
+            <form class="form-signin wow fadeInUp">
+                <h2 class="form-signin-heading">sign in now</h2>
+                <ul style="margin-left: 0;" ng-show="showHeaderErrors" class="alert alert-{{HeaderAlert.classType}} alert-dismissable ng-hide">
+                    <li ng-show="HeaderAlert.visible" ng-bind="HeaderAlert.message"></li>
+                    <li ng-show="ForgetPasswordAlert.visible"> <span ng-bind="ForgetPasswordAlert.message"></span> <a href="#"> Request a new one.</a></li>
+                </ul>
+                <div class="login-wrap">
+                    <input type="text" class="form-control" placeholder="User ID" ng-model="EmailId" autofocus>
+                    <input type="password" class="form-control" placeholder="Password" ng-model="Password">
+                    <label class="checkbox">
+                        <input type="checkbox" value="remember-me" ng-model="KeepMeSignedInCheckBox" checked="checked"> Remember me
+                        <span class="pull-right">
+                            <a data-toggle="modal" href="#/forgetpassword"> Forgot Password?</a>
+
+                        </span>
+                    </label>
+                    <button class="btn btn-lg btn-login btn-block" type="submit" ng-click="Login()">Sign in</button>
+                    
+                    <ul class="alert alert-danger alert-dismissable" ng-show="showFooterErrors" style="margin-left: 0;">
+                        <li ng-show="EmailIdAlert.visible" ng-bind="EmailIdAlert.message"></li>
+                        <li ng-show="PasswordAlert.visible" ng-bind="PasswordAlert.message"></li>
+                    </ul>
+
+                    <p>or you can sign in via social network</p>
+                    <div class="sb field text-center">
+                        <a class="btn btn-social-icon btn-facebook" ng-click="openFacebookAuthWindow()"><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-google-plus" ng-click="openGoogleAuthWindow()"><i class="fa fa-google-plus"></i></a>
+                        <!--<a class="btn btn-social-icon btn-linkedin" ng-click="openLinkedinAuthWindow()"><i class="fa fa-linkedin"></i></a>-->
+
+                    </div>
+                    <div class="registration">
+                        Don't have an account yet?
+                        <a href="#/signup/user">
+                            Create an account
+                        </a>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--container end-->

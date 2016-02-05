@@ -1,0 +1,319 @@
+﻿<div ng-controller="beforeLoginSearch">
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <div angucomplete-alt
+                             id="companyName"
+                             placeholder="Enter Company Name"
+                             pause="500"
+                             selected-object="selectCompany"
+                             remote-url="http://{{sitehosturl}}/solr/GetCompanyDetailsAutocomplete?q="
+                             remote-url-request-formatter="remoteUrlRequestFn"
+                             remote-url-data-field="Payload"
+                             title-field="companyname"
+                             minlength="2"
+                             input-class="form-control form-control-small"
+                             ng-model="companyName"
+                             image-field="squarelogourl"
+                             match-class="highlight" ng-keypress="myFunct($event)" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default btn-primary" ng-click="searchCompany()">Search</button>
+                    </div>
+                </div>     
+             </div>
+         </div>
+      </div>
+    
+    <!--container start-->
+    <div class="container">
+        <div class="row">
+            <!--blog start-->
+            <div class="col-lg-9 ">
+                <div class="blog-item2" ng-repeat="result in searchResult">
+                    <div class="row">
+                        <div class="col-lg-2 col-sm-2">
+                            <div>
+                                <span class="date">
+                                    <a href="{{result.linkurl}}"><img src="{{result.squarelogourl}}" width="80px" /></a>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-10 col-sm-10">
+                            <div class="col-lg-10 col-sm-10">
+
+                                <span style="font-size:18px">
+                                    <a href="{{result.linkurl}}" ng-bind="result.companyname">
+
+                                    </a>
+                                </span>
+                                <div class="clear"></div>
+                                <span ng-bind="result.description | cut:true:300:' ...'"> </span>
+                                <p class="text-primary">
+                                    Website : <span ng-bind="result.website"></span> , Average Notice : <span ng-bind="result.avgnoticeperiod"></span>
+                                </p>
+                                <p class="text-primary">
+                                    Average Rating : <span ng-bind="result.averagerating"></span>  (<span ng-bind="result.totalratingcount"></span>), Total Reviews : <span ng-bind="result.totalreviews"></span>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="text-center" id="SearchPageSelectPaginationId" ng-show="pagination.show">
+                    <uib-pagination total-items="queryParam.totalMatch" ng-model="queryParam.currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+
+                    <pre>Page: <span ng-bind="queryParam.currentPage"></span> / <span ng-bind="queryParam.totalNumberOfPages"></span></pre>
+                </div>
+                
+            </div>
+
+            <div class="col-lg-3">
+                <div class="blog-side-item">
+                    <div class="search-row">
+                        <input type="text" class="form-control" placeholder="Search here">
+                    </div>
+                    <div class="category">
+                        <h3>
+                            Categories
+                        </h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right pr-10">
+                                    </i>
+                                    Animals
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right pr-10">
+                                    </i>
+                                    Landscape
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right pr-10">
+                                    </i>
+                                    Portait
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right pr-10">
+                                    </i>
+                                    Wild Life
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right pr-10">
+                                    </i>
+                                    Video
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="blog-post">
+                        <h3>
+                            Latest Blog Post
+                        </h3>
+                        <div class="media">
+                            <a class="pull-left" href="javascript:;">
+                                <img class=" " src="../../Template/img/blog/blog-thumb-1.jpg" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a href="javascript:;">
+                                        02 May 2014
+                                    </a>
+                                </h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a class="pull-left" href="javascript:;">
+                                <img class=" " src="../../Template/img/blog/blog-thumb-2.jpg" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a href="javascript:;">
+                                        02 May 2014
+                                    </a>
+                                </h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a class="pull-left" href="javascript:;">
+                                <img class=" " src="../../Template/img/blog/blog-thumb-3.jpg" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a href="javascript:;">
+                                        02 May 2014
+                                    </a>
+                                </h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tags">
+                        <h3>
+                            Tags
+                        </h3>
+                        <ul class="tag">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    flat
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    clean
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    admin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    UI
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    responsive
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    Web Design
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    UIX
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    flat Admin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tags pr-5">
+                                    </i>
+                                    Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="archive">
+                        <h3>
+                            Archive
+                        </h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-double-right pr-10">
+                                    </i>
+                                    May 2014
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-double-right pr-10">
+                                    </i>
+                                    April 2014
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-double-right pr-10">
+                                    </i>
+                                    March 2014
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-double-right pr-10">
+                                    </i>
+                                    February 2014
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-double-right pr-10">
+                                    </i>
+                                    January 2014
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!--blog end-->
+        </div>
+
+    </div>
+    <!--container end-->
+</div> 
+
+
+<style type="text/css">
+    .blog-item2 {
+    border-bottom: 1px dashed #ddd;
+    margin-bottom: 40px;
+    padding-bottom: 0px;
+}
+</style>

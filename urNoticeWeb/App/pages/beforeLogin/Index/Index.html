@@ -1,0 +1,328 @@
+﻿<div ng-controller="beforeLoginIndex">
+    <div>
+
+        <div class="carousel2" data-ride="carousel">
+            <div class="carousel2-inner">
+                <div class="item active">
+                    <img src="{{sliderImage}}" alt="First slide" height="300px">
+                </div>                
+            </div>
+            <a class="left carousel2-control" href="" ng-click="prevSlide()"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel2-control" href="" ng-click="nextSlide()" style="float: right;"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+        <div class="search">
+            
+               
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-section">
+                            <div class="row">
+                                <form role="form">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <div angucomplete-alt
+                                                 id="companyName"
+                                                 placeholder="Start Typing Company Name..."
+                                                 pause="500"
+                                                 selected-object="selectCompany"
+                                                 remote-url="http://{{sitehosturl}}/solr/GetCompanyDetailsAutocomplete?q="
+                                                 remote-url-request-formatter="remoteUrlRequestFn"
+                                                 remote-url-data-field="Payload"
+                                                 title-field="companyname"
+                                                 minlength="2"
+                                                 input-class="form-control form-control-small"
+                                                 ng-model="companyName"
+                                                 image-field="squarelogourl"
+                                                 match-class="highlight" ng-keypress="myFunct($event)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-default btn-primary" ng-click="searchCompany()">Search</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                
+           
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row mar-b-50">
+            <div class="col-md-12">                
+                <div class="feature-box">
+                    <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
+                        <div class="feature-box-heading">
+                            <em>
+                                <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/Template/img/1.png" alt="" width="100" height="100">
+
+                            </em>
+                            <h4>
+                                <b>See Reviews</b>
+                            </h4>
+                        </div>
+                        <p class="text-center">
+                            Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris.
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
+                        <div class="feature-box-heading">
+                            <em>
+                                <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/Template/img/2.png" alt="" width="100" height="100">
+                            </em>
+                            <h4>
+                                <b>Check Stories</b>
+                            </h4>
+                        </div>
+                        <p class="text-center">
+                            Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris.
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
+                        <div class="feature-box-heading">
+                            <em>
+                                <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/Template/img/3.png" alt="" width="100" height="100">
+                            </em>
+                            <h4>
+                                <b>Notice Period</b>
+                            </h4>
+                        </div>
+                        <p class="text-center">
+                            Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris.
+                        </p>
+                    </div>
+                </div>
+
+                <!--feature end-->
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="home-services">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        In case you need any help
+                    </h2>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-service">
+                        <div class="icon-wrap ico-bg round-fifty wow fadeInDown">
+                            <i class="fa fa-question">
+                            </i>
+                        </div>
+                        <div class="h-service-content wow fadeInUp">
+                            <h3>
+                                PRESALE QUESTION
+                            </h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim  laborum.
+                                <br>
+                                <a href="#">
+                                    Learn more
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="h-service">
+                        <div class="icon-wrap ico-bg round-fifty wow fadeInDown">
+                            <i class="fa fa-h-square">
+                            </i>
+                        </div>
+                        <div class="h-service-content wow fadeInUp">
+                            <h3>
+                                NEED SUPPORT?
+                            </h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim  laborum.
+                                <br>
+                                <a href="#">
+                                    Learn more
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="h-service">
+                        <div class="icon-wrap ico-bg round-fifty wow fadeInDown">
+                            <i class="fa fa-users">
+                            </i>
+                        </div>
+                        <div class="h-service-content wow fadeInUp">
+                            <h3>
+                                CHECK FORUM
+                            </h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim  laborum.
+                                <br>
+                                <a href="#">
+                                    Learn more
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+
+        </div>
+        <!-- /container -->
+
+    </div>
+    <!-- service end -->
+    <div class="hr">
+        <span class="hr-inner"></span>
+    </div>
+
+
+</div>
+
+
+
+
+<!--<script>
+    $('a.info').tooltip();
+
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function (slider) {
+                $('body').removeClass('loading');
+            }
+        });
+    });
+
+    
+    jQuery(document).ready(function () {
+        jQuery('ul.superfish').superfish();
+    });
+
+    /*new WOW().init();*/
+
+
+</script>-->
+<style type="text/css">
+    
+    .bannerTextSize {
+        font-size: x-large;
+    }
+
+    .bannerTextSizeHeading {
+        font-size: x-large;
+    }
+
+    #opacity4 {
+        opacity: 0.95 !important;
+        filter: alpha(opacity=95) !important; /* For IE8 and earlier */
+    }
+
+    .bs-search::after {
+    color: #bbb;
+    content: "Search Company";
+    font-size: 12px;
+    font-weight: 700;
+    left: 15px;
+    letter-spacing: 1px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 15px;
+}
+
+    .bs-search {
+    background-color: #f8f8f8;
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px;
+    padding: 45px 15px 15px;
+    position: relative;
+}
+
+  
+ .carousel2 {
+   height: 592px;
+    
+}
+.carousel2 .item {
+  height:150px;
+  background-color: #777;
+}
+.carousel2-inner > .item > img {
+ 
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 335px;
+}
+
+.carousel2-control.left,
+.carousel2-control.right {
+    background: none;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.carousel2-control {
+    background: #000000 !important;
+    
+    color: #FFFFFF;
+    font-size: 20px;
+    left: 0;
+    line-height: 53px;
+    opacity: 0.2;
+    
+    text-align: center;
+    text-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+   
+    
+}
+.carousel2-control:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.carousel2-control:hover,
+.carousel2-control:focus { opacity: 0.6 }
+.carousel2-caption {
+    background: rgba(0,0,0,0.6);
+    padding-bottom: 0px;
+    bottom: 0;
+    color: #FFFFFF;
+    left: 0 !important;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    position: absolute;
+    right: 0 !important;
+    text-align: center;
+    text-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    z-index: 10;
+}
+.carousel2-caption p { text-align: center }
+
+.search {
+ 
+ margin-top: -35%!important;
+}
+.search .form-section {
+    background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;
+    border: 2px solid #414141;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+</style>

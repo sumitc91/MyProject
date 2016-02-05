@@ -1,0 +1,108 @@
+﻿<!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Dashboard
+                        <small>Control panel</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content" ng-controller="UserAfterLoginIndex">                   
+                    
+
+                    <!-- Main row -->
+                    <div class="row">
+                       <section class="col-lg-12 connectedSortable">        
+                                        <div class="box box-color box-bordered">
+							<div class="box-title">
+								<h3>
+									<i class="icon-search"></i>
+									My Jongraphies
+								</h3>
+							</div>
+							<div class="box-content nopadding">
+								
+								<div class="search-results">
+									<ul>
+										<li ng-repeat="Thread in InProgressTaskList">                                            	                                        								
+											<article ng-show="Thread.userStatus == 'assigned'" class="oJobTile callout callout-danger">
+                                                <button class="oBtnCloseSmall oRight oJobHideButton"></button>
+                                                
+                                                <h1 class="oRowTitle oH3">
+                                                     <a href="#/showTemplateDetail/{{Thread.type}}/{{Thread.subType}}/{{Thread.refKey}}"><span ng-bind="Thread.title"></span></a></h1>
+                                                <div class="oSupportInfo">
+                                                    <strong> Info</strong>
+                                                    Total Threads : <span style="color:#368ee0" ng-bind="Thread.totalThreads"></span>&nbsp; Remaining Thread : <span style="color:#368ee0" ng-bind="Thread.remainingThreads"></span>&nbsp; Max Earning : <span style="color:#368ee0" ng-bind="Thread.currency"></span><span style="color:#368ee0" ng-bind="Thread.earningPerThreads"></span>                                                    
+                                                </div>
+											    <div class="oDescription">
+											        <div>
+											            this is short discription of the job.
+											        </div>
+											    </div>                                                
+                                                <div class="oSupportInfo">
+                                                    <strong>Category:</strong><span ng-bind="Thread.type"></span>
+                                                    |&nbsp;<strong>Sub Category:</strong><span ng-bind="Thread.subType"></span>
+                                                    |&nbsp;<span>This job is Assigned to you and having Deadline at : <b><span ng-bind="Thread.userDeadline"></span></b></span>
+                                                    |&nbsp;<span>visit <a href="#/userThreads/active">My Active Job</a> tab for further details.</span>
+                                                </div>
+                                            </article>
+                                            
+                                            <article ng-show="Thread.userStatus == 'done'" class="oJobTile callout callout-info">
+                                                <button class="oBtnCloseSmall oRight oJobHideButton"></button>
+                                                
+                                                <h1 class="oRowTitle oH3">
+                                                    <a href="#/showTemplateDetail/{{Thread.type}}/{{Thread.subType}}/{{Thread.refKey}}"><span ng-bind="Thread.title"></span></a></h1>
+                                                <div class="oSupportInfo">
+                                                    <strong> Info</strong>
+                                                    Total Threads : <span style="color:#368ee0" ng-bind="Thread.totalThreads"></span>&nbsp; Remaining Thread : <span style="color:#368ee0" ng-bind="Thread.remainingThreads"></span>&nbsp; Max Earning : <span style="color:#368ee0" ng-bind="Thread.currency"></span><span style="color:#368ee0" ng-bind="Thread.earningPerThreads"></span>                                                    
+                                                </div>
+                                                <div class="oDescription">
+                                                    <div>
+                                                        this is short discription of the job.
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="oSupportInfo">
+                                                    <strong>Category:</strong><span ng-bind="Thread.type"></span>
+                                                    |&nbsp;<strong>Sub Category:</strong><span ng-bind="Thread.subType"></span>
+                                                    |&nbsp;<span>You have already completed this job.</span>
+                                                    |&nbsp;<span>visit <a href="#/userThreads/completed">My Completed Job </a> tab for further details.</span>
+                                                </div>
+                                            </article>
+                                            
+										    <article ng-show="Thread.userStatus == 'new'" class="oJobTile callout callout-warning">
+										        <button class="oBtnCloseSmall oRight oJobHideButton"></button>
+                                                
+										        <h1 class="oRowTitle oH3">
+										            <a href="#/showTemplateDetail/{{Thread.type}}/{{Thread.subType}}/{{Thread.refKey}}"><span ng-bind="Thread.title"></span></a></h1>
+										        <div class="oSupportInfo">
+										            <strong> Info</strong>
+										            Total Threads : <span style="color:#368ee0" ng-bind="Thread.totalThreads"></span>&nbsp; Remaining Thread : <span style="color:#368ee0" ng-bind="Thread.remainingThreads"></span>&nbsp; Max Earning : <span style="color:#368ee0" ng-bind="Thread.currency"></span><span style="color:#368ee0" ng-bind="Thread.earningPerThreads"></span>                                                    
+										        </div>
+										        <div class="oDescription">
+										            <div>
+										                this is short discription of the job.
+										            </div>
+										        </div>
+										        <div class="oSupportInfo">
+										            <strong>Category:</strong><span ng-bind="Thread.type"></span>
+										            |&nbsp;<strong>Sub Category:</strong><span ng-bind="Thread.subType"></span>
+										        </div>
+										    </article>
+
+										</li>
+									    
+									</ul>
+                                    
+								</div>
+								
+							</div>
+						</div>
+                       </section><!-- /.content -->
+                    </div><!-- /.row (main row) -->
+
+                </section><!-- /.content -->
