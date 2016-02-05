@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FacebookLogin</title>
+    <script src="../../../App/js/jquery.min.js"></script>
+    <script src="../../App/js/m2ei18n.js"></script>
+    <script src="../../../App/Property/urNoticeProperties.js" type="text/javascript"></script>
+    <script src="../../../App/js/jquery.cookie.js" type="text/javascript"></script>
+    <script>
+
+
+        $(document).ready(function ($) {
+            $.cookie('utmzt', '@ViewBag.umtzt', { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+            $.cookie('utmzk', '@ViewBag.umtzk', { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+            $.cookie('utmzv', '@ViewBag.umtzv', { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+            $.cookie('userName', '@ViewBag.userName', { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+            $.cookie('userImageUrl', '@ViewBag.userImageUrl', { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+
+            $.cookie('kmsi', true, { expires: 365, path: '/' });
+            //console.log($.cookie('refKey'));
+            if ($.cookie('refKey') != null && $.cookie('refKey') != "" && '@ViewBag.isNewUser' == 'true') {
+                var refKey = "NA";
+                if ($.cookie('refKey') != null && $.cookie('refKey') != "")
+                    refKey = $.cookie('refKey');
+                var url = ServerContextPath.empty + '/SocialAuth/UpdateUserRefKey?refKey=' + refKey;
+                var headers = {
+                    'Content-Type': 'application/json',
+                    'UTMZT': $.cookie('utmzt'),
+                    'UTMZK': $.cookie('utmzk'),
+                    'UTMZV': $.cookie('utmzv')
+                };
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    headers: headers
+                }).done(function(data, status) {
+                    console.log(data);
+
+                    removeRefCookies(ServerContextPath.cookieDomain);
+                    updateMe('login');
+                });
+            } else {
+                updateMe('login');
+            }
+                
+        });
+
+
+    </script>
+</head>
+<body>
+    <div>
+        please wait..
+        
+    </div>
+</body>
+</html>

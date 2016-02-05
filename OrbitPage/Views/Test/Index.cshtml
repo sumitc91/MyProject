@@ -1,0 +1,786 @@
+﻿@{
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <style type="text/css">
+        .gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
+            font-weight: 400;
+        }
+    </style>
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <style type="text/css">
+        .gm-style .gm-style-cc span, .gm-style .gm-style-cc a, .gm-style .gm-style-mtc div {
+            font-size: 10px;
+        }
+    </style>
+    
+    <style type="text/css">
+        .gm-style {
+            font-family: Roboto,Arial,sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            text-decoration: none;
+        }
+
+            .gm-style img {
+                max-width: none;
+            }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+
+    <!-- Stylesheets -->    
+    <link rel="stylesheet" href="../../App/template/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../App/template/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../App/template/flexslider.css">
+    <link rel="stylesheet" type="text/css" href="../../App/pages/beforeLogin/css/BeforeLoginStyle.css" />    
+
+</head>
+
+<body class="loaded">
+    <div id="main-wrapper">
+
+        <header id="header" class="header-style-1">
+            <div class="header-top-bar">
+                <div class="container">
+
+                    <!-- Header Language -->
+                    <div class="header-language clearfix">
+                        <ul>
+                            <li class="active"><a href="#">En</a></li>
+                            <li><a href="#">Fr</a></li>
+                            <li><a href="#">De</a></li>
+                            <li><a href="#">It</a></li>
+                        </ul>
+                    </div> <!-- end .header-language -->
+                    <!-- Bookmarks -->
+                    <a href="#" class="btn btn-link bookmarks">Bookmarks</a><div class="header-register">
+                        <a href="#" class="btn btn-link">Register</a>                        
+                    </div><div class="header-login">
+                        <a href="#" class="btn btn-link">Login</a>                        
+                    </div>
+
+                    <!-- Header Register -->
+                    <!-- end .header-register -->
+                    <!-- Header Login -->
+                    <!-- end .header-login -->
+
+                </div> <!-- end .container -->
+            </div> <!-- end .header-top-bar -->
+
+            <div class="header-nav-bar">
+                <div class="container">
+
+                    <!-- Logo -->
+                    <div class="css-table logo">
+                        <div class="css-table-cell">
+                            <a href="index.html">
+                                <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/App/img/logo_small.jpg" alt="">
+                            </a> <!-- end .logo -->
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <a href="#" id="mobile-menu-toggle"><span></span></a>
+
+                    <!-- Primary Nav -->
+                    <nav>
+
+                        <ul class="primary-nav">
+                            <li class="active has-submenu">
+                                <a href="index.html">Home</a>
+                                <ul>
+                                    <li><a href="index.html">Home with Boxes</a></li>
+                                    <li><a href="homepage-slider.html">Home with Slider</a></li>
+                                </ul>
+                                <span class="submenu-arrow"></span>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="jobs.html">Jobs</a>
+                                <ul>
+                                    <li><a href="jobs.html">Jobs Listings</a></li>
+                                    <li><a href="jobs-single.html">Jobs Details</a></li>
+                                </ul>
+                                <span class="submenu-arrow"></span>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="candidates.html">Candidates</a>
+                                <ul>
+                                    <li><a href="candidates.html">Candidates Listings</a></li>
+                                    <li><a href="candidates-sidebar.html">Candidates Listings Sidebar</a></li>
+                                    <li><a href="candidates-single.html">Candidates Details</a></li>
+                                </ul>
+                                <span class="submenu-arrow"></span>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="about-us.html">About Us</a>
+                                <ul>
+                                    <li><a href="partners.html">Partners</a></li>
+                                    <li><a href="contact-us.html">Contact Us</a></li>
+                                </ul>
+                                <span class="submenu-arrow"></span>
+                            </li>
+                            <li><a href="register.html">Register</a></li>
+                            <li><a href="shortcodes.html">Shortcodes</a></li>
+                        </ul>
+                    </nav>
+                </div> <!-- end .container -->
+
+                <div id="mobile-menu-container" class="container">
+                    <div class="login-register">
+                        
+                    </div>
+                    <div class="menu"></div>
+                </div>
+            </div> <!-- end .header-nav-bar -->
+
+            <div class="header-search-bar">
+                <div class="container">
+                    <form>
+                        <div class="basic-form clearfix">
+                            <a href="#" class="toggle"><span></span></a>
+
+                            <div class="hsb-input-1">
+                                <input type="text" class="form-control" placeholder="I'm looking for a ...">
+                            </div>
+
+                            <div class="hsb-text-1">in</div>
+
+                            <div class="hsb-container">
+                                <div class="hsb-input-2">
+                                    <input type="text" class="form-control" placeholder="Location">
+                                </div>
+
+
+                                <div class="hsb-select">
+                                    <select class="form-control">
+                                        <option value="0">Select Category</option>
+                                        <option value="">Category</option>
+                                        <option value="">Category</option>
+                                        <option value="">Category</option>
+                                        <option value="">Category</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="hsb-submit">
+                                <input type="submit" class="btn btn-default btn-block" value="Search">
+                            </div>
+                        </div>
+
+                        <div class="advanced-form">
+                            <div class="container">
+                                <div class="row">
+                                    <label class="col-md-3">Distance</label>
+
+                                    <div class="col-md-9">
+                                        <div class="range-slider">
+                                            <div class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-min="1" data-max="200" data-current="100" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 49.7487%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 49.7487%;"></a></div>
+                                            <div class="last-value"><span>100</span> km</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-3">Rating</label>
+
+                                    <div class="col-md-9">
+                                        <div class="range-slider">
+                                            <div class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-min="1" data-max="100" data-current="20" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 19.1919%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 19.1919%;"></a></div>
+                                            <div class="last-value">&gt; <span>20</span> %</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-3">Days Published</label>
+
+                                    <div class="col-md-9">
+                                        <div class="range-slider">
+                                            <div class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-min="1" data-max="60" data-current="30" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 49.1525%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 49.1525%;"></a></div>
+                                            <div class="last-value">&lt; <span>30</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-3">Location</label>
+
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" placeholder="Switzerland">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-3">Industry</label>
+
+                                    <div class="col-md-9">
+                                        <select class="form-control">
+                                            <option value="">Select Industry</option>
+                                            <option value="">Option 1</option>
+                                            <option value="">Option 2</option>
+                                            <option value="">Option 3</option>
+                                            <option value="">Option 4</option>
+                                            <option value="">Option 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- end .header-search-bar -->
+
+            <div class="header-banner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="header-banner-box register">
+                                <div class="counter-container">
+                                    <ul class="counter clearfix">
+                                        <li class="zero">0</li>
+                                        <li>3</li>
+                                        <li>5</li>
+                                        <li>1</li>
+                                        <li>0</li>
+                                        <li>9</li>
+                                    </ul>
+
+                                    <div><span>Jobs</span></div>
+                                </div>
+
+                                <a href="#" class="btn btn-default">Register Now</a>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="header-banner-box post-job">
+                                <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/verified.png" alt="">
+
+                                <a href="#" class="btn btn-red">Post a Job</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .header-banner -->
+        </header> <!-- end #header -->
+
+        <div id="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 page-content">
+                        <div class="title-lines">
+                            <h3 class="mt0">Find a Job Per</h3>
+                        </div>
+
+                        <div class="find-job-tabs responsive-tabs">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#find-job-tabs-map">Map</a></li>
+                                <li><a href="#find-job-tabs-industry">Industry</a></li>
+                                <li><a href="#find-job-tabs-role">Type</a></li>
+                                <li><a href="#find-job-tabs-country">Country</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <a href="#findjobtabsmap" class="acc-link active first">Map</a><div class="tab-pane active" id="find-job-tabs-map">
+                                   
+
+                                    <hr class="m0 primary">
+
+                                    <div class="row p30">
+                                        <div class="col-sm-6">
+                                            <ul class="filter-list">
+                                                <li><a href="#">Asia <span>(1234)</span></a></li>
+                                                <li><a href="#">Africa <span>(5678)</span></a></li>
+                                                <li><a href="#">Europe <span>(910)</span></a></li>
+                                                <li><a href="#">North America <span>(347)</span></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <ul class="filter-list">
+                                                <li><a href="#">Central America <span>(52)</span></a></li>
+                                                <li><a href="#">South America <span>(117)</span></a></li>
+                                                <li><a href="#">Oceania <span>(736)</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#find-job-tabs-industry" class="acc-link">Industry</a><div class="tab-pane" id="find-job-tabs-industry">
+                                    <div class="row p30">
+                                        <div class="col-sm-6">
+                                            <h6 class="mt0">Administrative and Support Services</h6>
+
+                                            <ul class="filter-list">
+                                                <li><a href="#">Support Services <span>(34)</span></a></li>
+                                                <li><a href="#">Consulting Services <span>(142)</span></a></li>
+                                                <li><a href="#">Customer Service <span>(67)</span></a></li>
+                                                <li><a href="#">Employment Placement <span>(24)</span></a></li>
+                                                <li><a href="#">Agencies/Recruiting <span>(113)</span></a></li>
+                                                <li><a href="#">Human Resources <span>(27)</span></a></li>
+                                                <li><a href="#">Administration <span>(57)</span></a></li>
+                                                <li><a href="#">Contracts/Purchasing <span>(29)</span></a></li>
+                                                <li><a href="#">Secretarial <span>(22)</span></a></li>
+                                                <li><a href="#">Security <span>(26)</span></a></li>
+                                                <li><a href="#">Telemarketing <span>(4)</span></a></li>
+                                                <li><a href="#">Translation <span>(12)</span></a></li>
+                                                <li><a href="#">Management <span>(70)</span></a></li>
+                                                <li><a href="#">Business Support <span>(29)</span></a></li>
+                                            </ul>
+
+                                            <h6>Healthcare and Science</h6>
+
+                                            <ul class="filter-list">
+                                                <li><a href="#">Pharmaceutical <span>(42)</span></a></li>
+                                                <li><a href="#">Manufacturing <span>(149)</span></a></li>
+                                                <li><a href="#">Mechanical <span>(28)</span></a></li>
+                                                <li><a href="#">Technical/Maintenance <span>(40)</span></a></li>
+                                                <li><a href="#">Lubricants/Greases Blending <span>(10)</span></a></li>
+                                                <li><a href="#">Textiles <span>(10)</span></a></li>
+                                                <li><a href="#">Aerospace and Defense <span>(14)</span></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <h6 class="mt0">Manufacturing and Industrial</h6>
+
+                                            <ul class="filter-list">
+                                                <li><a href="#">Agriculture/Forestry/Fishing <span>(42)</span></a></li>
+                                                <li><a href="#">Installation/Maintenance <span>(37)</span></a></li>
+                                                <li><a href="#">Manufacturing and Production <span>(96)</span></a></li>
+                                                <li><a href="#">Mining <span>(9)</span></a></li>
+                                                <li><a href="#">Safety/Environment <span>(21)</span></a></li>
+                                                <li><a href="#">Industrial <span>(184)</span></a></li>
+                                                <li><a href="#">Manufacturing <span>(149)</span></a></li>
+                                                <li><a href="#">Mechanical <span>(28)</span></a></li>
+                                                <li><a href="#">Technical/Maintenance <span>(40)</span></a></li>
+                                                <li><a href="#">Lubricants/Greases Blending <span>(10)</span></a></li>
+                                                <li><a href="#">Textiles <span>(10)</span></a></li>
+                                                <li><a href="#">Aerospace and Defense <span>(14)</span></a></li>
+                                            </ul>
+
+                                            <h6>Healthcare and Science</h6>
+
+                                            <ul class="filter-list">
+                                                <li><a href="#">Pharmaceutical <span>(42)</span></a></li>
+                                                <li><a href="#">Manufacturing <span>(149)</span></a></li>
+                                                <li><a href="#">Mechanical <span>(28)</span></a></li>
+                                                <li><a href="#">Technical/Maintenance <span>(40)</span></a></li>
+                                                <li><a href="#">Lubricants/Greases Blending <span>(10)</span></a></li>
+                                                <li><a href="#">Textiles <span>(10)</span></a></li>
+                                                <li><a href="#">Aerospace and Defense <span>(14)</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#find-job-tabs-role" class="acc-link">Type</a><div class="tab-pane" id="find-job-tabs-role">
+                                    <div class="p30">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, harum, optio, repudiandae voluptatum illum et ipsam quisquam at dolore illo eaque odio inventore quos esse reiciendis laudantium nobis aperiam iure!</p>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <ul class="filter-list">
+                                                    <li><a href="#">Accounting/Banking/Finance Jobs <span>(581)</span></a></li>
+                                                    <li><a href="#">Administration Jobs <span>(406)</span></a></li>
+                                                    <li><a href="#">Art/Design/Creative Jobs <span>(176)</span></a></li>
+                                                    <li><a href="#">Customer Service Jobs <span>(334)</span></a></li>
+                                                    <li><a href="#">Education/Training Jobs <span>(180)</span></a></li>
+                                                    <li><a href="#">Engineering Jobs <span>(978)</span></a></li>
+                                                    <li><a href="#">Healthcare/Medical Jobs <span>(131)</span></a></li>
+                                                    <li><a href="#">Human Resources/Personnel Jobs <span>(318)</span></a></li>
+                                                    <li><a href="#">Law/Legal Jobs <span>(61)</span></a></li>
+                                                    <li><a href="#">Logistics Jobs <span>(144)</span></a></li>
+                                                    <li><a href="#">Management Jobs <span>(743)</span></a></li>
+                                                    <li><a href="#">Law/Legal Jobs <span>(61)</span></a></li>
+                                                    <li><a href="#">Logistics Jobs <span>(144)</span></a></li>
+                                                    <li><a href="#">Management Jobs <span>(743)</span></a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <ul class="filter-list">
+                                                    <li><a href="#">Marketing/PR Jobs <span>(329)</span></a></li>
+                                                    <li><a href="#">Other Jobs <span>(326)</span></a></li>
+                                                    <li><a href="#">Purchasing/Procurement Jobs <span>(130)</span></a></li>
+                                                    <li><a href="#">Quality Control Jobs <span>(93)</span></a></li>
+                                                    <li><a href="#">Research Jobs <span>(33)</span></a></li>
+                                                    <li><a href="#">Safety Jobs <span>(72)</span></a></li>
+                                                    <li><a href="#">Sales Jobs <span>(1061)</span></a></li>
+                                                    <li><a href="#">Secretarial Jobs <span>(155)</span></a></li>
+                                                    <li><a href="#">Support Services Jobs <span>(744)</span></a></li>
+                                                    <li><a href="#">Technology/IT Jobs <span>(546)</span></a></li>
+                                                    <li><a href="#">Writing/Editing Jobs <span>(19)</span></a></li>
+                                                    <li><a href="#">Support Services Jobs <span>(744)</span></a></li>
+                                                    <li><a href="#">Technology/IT Jobs <span>(546)</span></a></li>
+                                                    <li><a href="#">Writing/Editing Jobs <span>(19)</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> <!-- end .find-job-tabs -->
+
+                        <div class="title-lines">
+                            <h3>Latest Jobs</h3>
+                        </div>
+
+                        <div class="latest-jobs-section white-container">
+                            <div class="flexslider clearfix">
+                                <ul class="slides">
+                                    <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
+                                        <div class="image">
+                                            <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                            <a href="#" class="btn btn-default fa fa-search"></a>
+                                            <a href="#" class="btn btn-default fa fa-link"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a href="#" class="read-more">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;" class="flex-active-slide">
+                                        <div class="image">
+                                            <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                            <a href="#" class="btn btn-default fa fa-search"></a>
+                                            <a href="#" class="btn btn-default fa fa-link"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a href="#" class="read-more">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;" class="">
+                                        <div class="image">
+                                            <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                            <a href="#" class="btn btn-default fa fa-search"></a>
+                                            <a href="#" class="btn btn-default fa fa-link"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a href="#" class="read-more">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;" class="">
+                                        <div class="image">
+                                            <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                            <a href="#" class="btn btn-default fa fa-search"></a>
+                                            <a href="#" class="btn btn-default fa fa-link"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a href="#" class="read-more">Read More</a></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li></ol>
+                            </div>
+                        </div> <!-- end .latest-jobs-section -->
+
+                       @* <div class="title-lines">
+                            <h3>Our Partners</h3>
+                        </div>
+
+                        <div class="our-partners-section white-container">
+                            <ul class="clearfix">
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-1.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-2.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-3.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-2.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-3.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="css-table">
+                                        <div class="css-table-cell">
+                                            <a href="#"><img src="http://188.226.173.21/html/careers/img/content/logo-1.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> <!-- end .our-partners-section -->*@
+                        
+                    </div> <!-- end .page-content -->
+
+                    <div class="col-sm-4 page-sidebar">
+                        <aside>
+                            <div class="widget sidebar-widget white-container social-widget">
+                                <h5 class="widget-title">Share Us</h5>
+
+                                <div class="widget-content">
+                                    <div class="row row-p5">
+                                        <div class="col-xs-6 col-md-3 share-box facebook">
+                                            <div class="count">86</div>
+                                            <a href="#">Facebook</a>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-3 share-box twitter">
+                                            <div class="count">2.2k</div>
+                                            <a href="#">Twitter</a>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-3 share-box google">
+                                            <div class="count">324</div>
+                                            <a href="#">Google +</a>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-3 share-box linkedin">
+                                            <div class="count">1.5k</div>
+                                            <a href="#">LinkedIn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget sidebar-widget text-center">
+                                <a href="#"><img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/App/img/logo_small.jpg" alt=""></a>
+                            </div>
+
+                        </aside>
+                    </div> <!-- end .page-sidebar -->
+                </div>
+            </div> <!-- end .container -->
+
+            <div class="success-stories-section">
+                <div class="container">
+                    <h5 class="mt10">Success Stories</h5>
+
+                    <div>
+                        <div class="flexslider">
+
+                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+
+                                    <li style="float: left; display: block; width: 130px;">
+                                        <a href="#">
+                                            <img class="thumb" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg" alt="" draggable="false">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="flex-direction-nav"><li><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a></li><li><a class="flex-next" href="#"></a></li></ul>
+                </div>
+            </div>
+        </div> <!-- end #page-content -->
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-md-4">
+                        <div class="widget">
+                            <div class="widget-content">
+                                <img class="logo" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/App/img/logo_small.jpg" alt="">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, sunt illum dolore dolor vel perferendis nisi sequi laudantium porro blanditiis!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-4">
+                        <div class="widget">
+                            <h6 class="widget-title">Navigation</h6>
+
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-12 col-md-6">
+                                        <ul class="footer-links">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">Jobs</a></li>
+                                            <li><a href="#">Candidates</a></li>
+                                            <li><a href="#">Partners</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-12 col-md-6">
+                                        <ul class="footer-links">
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Contact Us</a></li>
+                                            <li><a href="#">Terms &amp; Conditions</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="widget">
+                            <h6 class="widget-title">Follow Us</h6>
+
+                            <div class="widget-content">
+                                <ul class="footer-links">
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Twitter</a></li>
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Youtube</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="widget">
+                            <h6 class="widget-title">Popular Jobs</h6>
+
+                            <div class="widget-content">
+                                <ul class="footer-links">
+                                    <li><a href="#">Web Developer</a></li>
+                                    <li><a href="#">Web Designer</a></li>
+                                    <li><a href="#">UX Engineer</a></li>
+                                    <li><a href="#">Account Manager</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <div class="container">
+                    <p>© Copyright 2014 <a href="#">Careers</a> | All Rights Reserved | Powered by <a href="#">UOU Apps</a></p>
+
+                    <ul class="footer-social">
+                        <li><a href="#" class="fa fa-facebook"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" class="fa fa-linkedin"></a></li>
+                        <li><a href="#" class="fa fa-google-plus"></a></li>
+                        <li><a href="#" class="fa fa-pinterest"></a></li>
+                        <li><a href="#" class="fa fa-dribbble"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer> <!-- end #footer -->
+
+    </div> <!-- end #main-wrapper -->
+    <!-- Scripts -->    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://188.226.173.21/html/careers/js/jquery-1.11.0.min.js"><\/script>')</script>
+    
+    <script src="../../App/js/urNoticeScript.js"></script>
+</body>
+</html>
