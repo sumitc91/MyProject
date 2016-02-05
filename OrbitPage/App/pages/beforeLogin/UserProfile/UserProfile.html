@@ -1,227 +1,439 @@
-﻿<!--container start-->
-<div class="container">
-    <div class="row">
-       
-        <!-- Main content -->
-        <section class="content">
-            <!-- top row -->
+﻿<div style="background-color: rgb(246, 246, 246);">
+    
+    <div class="row" style="min-height: 50px;"></div>
+
+    <div class="page-title">
+
+        <div class="breadcrumb-env">
+
+            <ol class="breadcrumb bc-1">
+                <li>
+                    <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+                </li>
+                <li>
+
+                    <a href="extra-gallery.html">Extra</a>
+                </li>
+                <li class="active">
+
+                    <strong>Profile</strong>
+                </li>
+            </ol>
+
+        </div>
+
+    </div>
+
+    <!--container start-->
+    <div class="container">
+        <section class="profile-env">
+
             <div class="row">
-                <div class="col-xs-12 connectedSortable">
 
-                </div><!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <section class="col-lg-12 connectedSortable">
-                    <div class="box box-color box-bordered">
-                        <div class="box-title">
-                            <h3>
-                                <i class="icon-user"></i>Sumit's Profile
-                            </h3>
-                        </div>
-                        
-                        <div class="box-content nopadding">
-                            <div class="tab-content padding tab-content-inline tab-content-bottom">
-                                <uib-tabset>
-                                    <uib-tab heading="Profile">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="widget no-margin">
-                                                    <div class="widget-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                                                                <div class="thumbnail">
-                                                                    <img src="{{clientDetailResponse.imageUrl}}" alt="300x200">
-                                                                    <br>
-                                                                    <h4 class="center-align-text">UI Designer</h4>
-                                                                    <p class="btn-stack center-align-text">
-                                                                        <a class="btn btn-info" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-twitter"></i>
-                                                                        </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-primary" href="javascript:;" ng-click="openFacebookAuthWindow()" data-original-title="" title="">
-                                                                            <i class="fa fa-facebook"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-danger" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-google-plus"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-success" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-pinterest"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-warning" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-youtube"></i>
-                                                                        </a>
-                                                                    </p>
-                                                                </div>
-                                                                <br>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                                                                <form class="form-horizontal">
-                                                                    <br>
-                                                                    <h5>
-                                                                        Personal Information
-                                                                    </h5>
-                                                                    <hr>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-3 control-label" for="userName">First Name</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" placeholder="Name" id="userName" ng-model="clientDetailResponse.FirstName" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-3 control-label" for="location">Last Name</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" placeholder="Location" id="location" ng-model="clientDetailResponse.LastName" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-3 control-label" for="webUrl">Email Id</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" placeholder="Website Url" id="webUrl" ng-model="clientDetailResponse.Username" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-3 control-label" for="webUrl">About</label>
-                                                                        <div class="col-sm-9">
-                                                                            <textarea rows="5" class="form-control"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-actions">
-                                                                        <button class="btn btn-info pull-right" type="submit">
-                                                                            Save changes
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </uib-tab>
-                                    <uib-tab heading="Reputation">
-                                        <form action="#" class="form-horizontal ng-pristine ng-valid">
-                                            <div class="control-group">
-                                                <label for="asdf" class="control-label">
-                                                    Email notifications
-                                                </label>
-                                                <div class="controls">
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="asdf">
-                                                        Send me security emails
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="asdf">
-                                                        Send system emails
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="asdf">
-                                                        Lorem ipsum dolor
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="asdf">
-                                                        Minim veli
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label for="asdf" class="control-label">
-                                                    Email for notifications
-                                                </label>
-                                                <div class="controls">
-                                                    <select name="email" id="email">
-                                                        <option value="1">asdf@blasdas.com</option>
-                                                        <option value="2">johnDoe@asdasf.de</option>
-                                                        <option value="3">janeDoe@janejanejane.net</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <input type="submit" class="btn btn-primary" value="Save">
-                                                <input type="reset" class="btn" value="Discard changes">
-                                            </div>
-                                        </form>
-                                    </uib-tab>
-                                    <uib-tab heading="Jobgraphy">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="widget no-margin">
-                                                    <div class="widget-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                                                                <div class="thumbnail">
-                                                                    <img src="{{clientDetailResponse.imageUrl}}" alt="300x200">
-                                                                    <br>
-                                                                    <h4 class="center-align-text">UI Designer</h4>
-                                                                    <p class="btn-stack center-align-text">
-                                                                        <a class="btn btn-info" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-twitter"></i>
-                                                                        </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-primary" href="javascript:;" ng-click="openFacebookAuthWindow()" data-original-title="" title="">
-                                                                            <i class="fa fa-facebook"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-danger" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-google-plus"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-success" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-pinterest"></i>
-                                                                        </a>
-                                                                        <a class="btn btn-warning" href="javascript:;" data-original-title="" title="">
-                                                                            <i class="fa fa-youtube"></i>
-                                                                        </a>
-                                                                    </p>
-                                                                </div>
-                                                                <br>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                                                                <form class="form-horizontal">
-                                                                    <div ng-show="true">
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 control-label" for="emailId">Old Password</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="email" placeholder="Email ID" id="emailId" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 control-label" for="inputPassword">New Password</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="password" placeholder="Password" id="inputPassword" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 control-label" for="inputPassword1">Confirm Password</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="password" placeholder="Confirm Password" id="inputPassword1" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                <div class="col-sm-3">
 
-                                                                    <br>
+                    <!-- User Info Sidebar -->
+                    <div class="user-info-sidebar">
 
-                                                                    <div class="form-actions">
-                                                                        <button class="btn btn-info pull-right" type="submit">
-                                                                            Save changes
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </uib-tab>
-                                </uib-tabset>
-                            </div>
-                        </div>
+                        <a class="user-img" href="#">
+                            <img class="img-cirlce img-responsive img-thumbnail" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                        </a>
+
+                        <a class="user-name" href="#">
+                            Art Ramadani
+                            <span class="user-status is-online"></span>
+                        </a>
+
+                        <span class="user-title">
+                            CEO at <strong>Google</strong>
+                        </span>
+
+                        <hr>
+
+                        <ul class="list-unstyled user-info-list">
+                            <li>
+                                <i class="fa-home"></i>
+                                Prishtina, Kosovo
+                            </li>
+                            <li>
+                                <i class="fa-briefcase"></i>
+                                <a href="#">Laborator</a>
+                            </li>
+                            <li>
+                                <i class="fa-graduation-cap"></i>
+                                University of Bologna
+                            </li>
+                        </ul>
+
+                        <hr>
+
+                        <ul class="list-unstyled user-friends-count">
+                            <li>
+                                <span>643</span>
+                                followers
+                            </li>
+                            <li>
+                                <span>108</span>
+                                following
+                            </li>
+                        </ul>
+
+                        <button class="btn btn-success btn-block text-left" type="button">
+                            Following
+                            <i class="fa-check pull-right"></i>
+                        </button>
                     </div>
-                </section><!-- /.Left col -->
-            </div><!-- /.row (main row) -->
 
-        </section><!-- /.content -->
+                </div>
+
+                <div class="col-sm-9">
+
+                    <!-- User Post form and Timeline -->
+                    <form class="profile-post-form" action="" method="post">
+                        <textarea placeholder="What's on your mind?" class="form-control input-unstyled input-lg autogrow" style="overflow: hidden; word-wrap: break-word; height: 84px;"></textarea>
+                        <i class="el-edit block-icon"></i>
+
+                        <ul class="list-unstyled list-inline form-action-buttons">
+                            <li>
+                                <button class="btn btn-unstyled" type="button">
+                                    <i class="el-camera"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-unstyled" type="button">
+                                    <i class="el-attach"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-unstyled" type="button">
+                                    <i class="el-mic"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-unstyled" type="button">
+                                    <i class="el-music"></i>
+                                </button>
+                            </li>
+                        </ul>
+
+                        <button class="btn btn-single btn-xs btn-success post-story-button" type="submit">Post</button>
+                    </form>
+
+
+                    <!-- User timeline stories -->
+                    <section class="user-timeline-stories">
+
+                        <!-- Timeline Story Type: Status -->
+                        <article class="timeline-story">
+
+                            <i class="fa-paper-plane-empty block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a class="user-img" href="#">
+                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> posted a status <a href="#">update</a>.
+                                    <time>12 hours ago</time>
+                                </div>
+
+                            </header>
+
+                            <div class="story-content">
+                                <!-- Story Content Wrapped inside Paragraph -->
+                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
+
+                                <!-- Story Options Links -->
+                                <div class="story-options-links">
+                                    <a href="#">
+                                        <i class="linecons-heart"></i>
+                                        Like
+                                        <span>(3)</span>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="linecons-comment"></i>
+                                        Comments
+                                        <span>(5)</span>
+                                    </a>
+                                </div>
+
+
+                                <!-- Story Comments -->
+                                <ul class="list-unstyled story-comments">
+                                    <li>
+
+                                        <div class="story-comment">
+                                            <a class="comment-user-img" href="#">
+                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                            </a>
+
+                                            <div class="story-comment-content">
+                                                <a class="story-comment-user-name" href="#">
+                                                    Arlind Nushi
+                                                    <time>01 December 2014 - 17:54</time>
+                                                </a>
+
+                                                <p>Him these are visit front end for seven walls. Money eat scale now ask law learn.</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+                                        <div class="story-comment">
+                                            <a class="comment-user-img" href="#">
+                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                            </a>
+
+                                            <div class="story-comment-content">
+                                                <a class="story-comment-user-name" href="#">
+                                                    Eroll Maxhuni
+                                                    <time>04 November 2014 - 17:54</time>
+                                                </a>
+
+                                                <p>Taken no great widow spoke of it small. Genius use except son esteem merely her limits.</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+
+                                <form class="story-comment-form" action="" method="post">
+                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
+                                </form>
+                            </div>
+
+                        </article>
+
+                        <!-- Timeline Story Type: Audio -->
+                        <article class="timeline-story">
+
+                            <i class="fa-music block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a class="user-img" href="#">
+                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> posted an audio <a href="#">track</a>.
+                                    <time>22 hours ago</time>
+                                </div>
+
+                            </header>
+
+                            <!-- Audio Track -->
+                            <div class="story-audio-item">
+                                <div class="story-content">
+
+                                    <div class="audio-track-info">
+                                        <div class="artist-info">MC Kresha - Emceeclopedy</div>
+                                        <div class="track-length">2:14 - 4:31</div>
+                                    </div>
+
+                                    <div class="audio-track-timeline">
+                                        <div class="play-pause">
+                                            <a href="#">
+                                                <i class="fa-to-start"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa-pause"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa-to-end"></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="track-timeline">
+                                            <div class="track-timeline-empty">
+                                                <div style="width:49.4%" class="track-fill"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="track-volume">
+                                            <a href="#">
+                                                <i class="fa-volume-up"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="story-content">
+
+                                <!-- Story Options Links -->
+                                <div class="story-options-links">
+                                    <a class="liked" href="#">
+                                        <i class="linecons-heart"></i>
+                                        Like
+                                        <span>(10)</span>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="linecons-comment"></i>
+                                        Comments
+                                        <span>(0)</span>
+                                    </a>
+                                </div>
+
+                                <form class="story-comment-form" action="" method="post">
+                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                        <!-- Timeline Story Type: Check-in -->
+                        <article class="timeline-story">
+
+                            <i class="fa-pin block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a class="user-img" href="#">
+                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> checked in at <a href="#">Laborator</a>.
+                                    <time>1 day ago</time>
+                                </div>
+
+                            </header>
+
+
+                            <div class="story-content">
+
+                                <div class="story-checkin">
+                                    <div style="height: 180px; width: 100%;" class="map-checkin" id="sample-checkin"></div>
+                                </div>
+
+                                <!-- Story Options Links -->
+                                <div class="story-options-links">
+                                    <a href="#">
+                                        <i class="linecons-heart"></i>
+                                        Like
+                                        <span>(4)</span>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="linecons-comment"></i>
+                                        Comment
+                                        <span>(1)</span>
+                                    </a>
+                                </div>
+
+
+                                <!-- Story Comments -->
+                                <ul class="list-unstyled story-comments">
+                                    <li>
+
+                                        <div class="story-comment">
+                                            <a class="comment-user-img" href="#">
+                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                            </a>
+
+                                            <div class="story-comment-content">
+                                                <a class="story-comment-user-name" href="#">
+                                                    Ylli Pylla
+                                                    <time>22 October 2014 - 17:54</time>
+                                                </a>
+
+                                                <p>Appear an manner as no limits either praise in. In in written on charmed justice is amiable farther besides.</p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+
+                                <form class="story-comment-form" action="" method="post">
+                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                        <!-- Timeline Story Type: Photos -->
+                        <article class="timeline-story">
+
+                            <i class="fa-camera-retro block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a class="user-img" href="#">
+                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> added <strong>3</strong> photos to <a href="#">Holiday Trip</a> album.
+                                    <time>a week ago</time>
+                                </div>
+
+                            </header>
+
+                            <div class="story-content">
+
+                                <div class="story-album">
+                                    <div class="col-1">
+                                        <a href="#">
+                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a class="base-padding" href="#">
+                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                        </a>
+                                        <div class="vspacer v2"></div>
+                                        <a href="#">
+                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Story Options Links -->
+                                <div class="story-options-links">
+                                    <a class="liked" href="#">
+                                        <i class="linecons-heart"></i>
+                                        Like
+                                        <span>(2)</span>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="linecons-comment"></i>
+                                        Comments
+                                        <span>(0)</span>
+                                    </a>
+                                </div>
+
+                                <form class="story-comment-form" action="" method="post">
+                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </section>
     </div>
 </div>
+
 
 
 
