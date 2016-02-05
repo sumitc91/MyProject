@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="urnoticeAnalyticsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="urnoticeAnalyticsModelStoreContainer">
+    <EntitySet Name="GoogleApiCheckLastSynceds" EntityType="urnoticeAnalyticsModel.Store.GoogleApiCheckLastSynceds" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoogleApiContacts" EntityType="urnoticeAnalyticsModel.Store.GoogleApiContacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoogleApiContactsArchiveds" EntityType="urnoticeAnalyticsModel.Store.GoogleApiContactsArchiveds" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VirtualFriendLists" EntityType="urnoticeAnalyticsModel.Store.VirtualFriendLists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VirtualFriendListJsons" EntityType="urnoticeAnalyticsModel.Store.VirtualFriendListJsons" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="GoogleApiCheckLastSynceds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="startIndex" Type="int" Nullable="false" />
+    <Property Name="itemPerPage" Type="int" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="entryListString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+    <Property Name="isVirtualFriendListUpdated" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContactsArchiveds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="startIndex" Type="int" Nullable="false" />
+    <Property Name="itemPerPage" Type="int" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="entryListString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VirtualFriendLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="source" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+    <Property Name="name1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="name2" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="VirtualFriendListJsons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="jsonData" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="urnoticeAnalyticsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GoogleApiCheckLastSynced">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoogleApiContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startIndex" Type="Int32" Nullable="false" />
+          <Property Name="itemPerPage" Type="Int32" Nullable="false" />
+          <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="entryListString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+          <Property Name="isVirtualFriendListUpdated" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoogleApiContactsArchived">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startIndex" Type="Int32" Nullable="false" />
+          <Property Name="itemPerPage" Type="Int32" Nullable="false" />
+          <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="entryListString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VirtualFriendList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+          <Property Name="name1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="urnoticeAnalyticsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GoogleApiCheckLastSynceds" EntityType="Self.GoogleApiCheckLastSynced" />
+          <EntitySet Name="GoogleApiContacts" EntityType="Self.GoogleApiContact" />
+          <EntitySet Name="GoogleApiContactsArchiveds" EntityType="Self.GoogleApiContactsArchived" />
+          <EntitySet Name="VirtualFriendLists" EntityType="Self.VirtualFriendList" />
+          <EntitySet Name="VirtualFriendListJsons" EntityType="urnoticeAnalyticsModel.VirtualFriendListJson" />
+        </EntityContainer>
+        <EntityType Name="VirtualFriendListJson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user1" Type="String" Nullable="false" />
+          <Property Name="jsonData" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="urnoticeAnalyticsModelStoreContainer" CdmEntityContainer="urnoticeAnalyticsEntities">
+    <EntitySetMapping Name="GoogleApiCheckLastSynceds">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.GoogleApiCheckLastSynced)">
+        <MappingFragment StoreEntitySet="GoogleApiCheckLastSynceds">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="lastContactUpdated" ColumnName="lastContactUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoogleApiContacts">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.GoogleApiContact)">
+        <MappingFragment StoreEntitySet="GoogleApiContacts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="startIndex" ColumnName="startIndex" />
+          <ScalarProperty Name="itemPerPage" ColumnName="itemPerPage" />
+          <ScalarProperty Name="lastContactUpdated" ColumnName="lastContactUpdated" />
+          <ScalarProperty Name="entryListString" ColumnName="entryListString" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="isVirtualFriendListUpdated" ColumnName="isVirtualFriendListUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoogleApiContactsArchiveds">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.GoogleApiContactsArchived)">
+        <MappingFragment StoreEntitySet="GoogleApiContactsArchiveds">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="startIndex" ColumnName="startIndex" />
+          <ScalarProperty Name="itemPerPage" ColumnName="itemPerPage" />
+          <ScalarProperty Name="lastContactUpdated" ColumnName="lastContactUpdated" />
+          <ScalarProperty Name="entryListString" ColumnName="entryListString" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VirtualFriendLists">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.VirtualFriendList)">
+        <MappingFragment StoreEntitySet="VirtualFriendLists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="id1" ColumnName="id1" />
+          <ScalarProperty Name="id2" ColumnName="id2" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="source" ColumnName="source" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="name1" ColumnName="name1" />
+          <ScalarProperty Name="name2" ColumnName="name2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VirtualFriendListJsons">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAnalyticsModel.VirtualFriendListJson)">
+        <MappingFragment StoreEntitySet="VirtualFriendListJsons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="user1" ColumnName="user1" />
+          <ScalarProperty Name="jsonData" ColumnName="jsonData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

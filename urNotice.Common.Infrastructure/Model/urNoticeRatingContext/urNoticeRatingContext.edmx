@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="urnoticeRatingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobgraphyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="BlogUserActivities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobgraphyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="voteType" Type="smallint" Nullable="false" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="ChatGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chatMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="senderId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isInformative" Type="smallint" Nullable="false" />
+          <Property Name="reportSpam" Type="smallint" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="markSpamCount" Type="int" Nullable="false" />
+          <Property Name="upvote" Type="int" Nullable="false" />
+          <Property Name="downvote" Type="int" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyDesignationXmls">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Company" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isUsed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyFromInsiderXls">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isUsed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyGalleries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="markSpamCount" Type="int" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyRatings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="workCulture" Type="float" />
+          <Property Name="employeeDevelopment" Type="float" />
+          <Property Name="appraisalProcess" Type="float" />
+          <Property Name="seniorManagement" Type="float" />
+          <Property Name="hrPolicies" Type="float" />
+          <Property Name="yourManager" Type="float" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="updatedDate" Type="datetime" />
+          <Property Name="overAllRating" Type="float" />
+          <Property Name="workLifeBalance" Type="float" />
+          <Property Name="salary" Type="float" />
+          <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="Jobgraphies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" />
+          <Property Name="designationId" Type="nvarchar(max)" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="employeeType" Type="smallint" />
+          <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="images" Type="nvarchar(max)" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="storyType" Type="smallint" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isSolrUpdated" Type="bit" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="JobgraphyComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobgraphyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="JobgraphyUserActivities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobgraphyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="voteType" Type="smallint" Nullable="false" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="NoticePeriodInfoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="showAnonymous" Type="bit" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" />
+          <Property Name="designationId" Type="nvarchar(max)" />
+          <Property Name="ctc" Type="bigint" />
+          <Property Name="maxNoticePeriod" Type="int" />
+          <Property Name="minNoticePeriod" Type="int" />
+          <Property Name="noticePeriodServed" Type="int" />
+          <Property Name="buyOutOption" Type="bit" />
+          <Property Name="lookingForChange" Type="bit" />
+          <Property Name="expectedCTC" Type="bigint" />
+          <Property Name="suggestion" Type="nvarchar(max)" />
+          <Property Name="createdDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="joiningDate" Type="datetime" />
+          <Property Name="resigningDate" Type="datetime" />
+          <Property Name="managerBehaviourChanged" Type="bit" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isHikeOffered" Type="bit" Nullable="false" />
+          <Property Name="hikePercentOffered" Type="float" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="workCulture" Type="smallint" />
+          <Property Name="employeeDevelopment" Type="smallint" />
+          <Property Name="appraisalProcess" Type="smallint" />
+          <Property Name="seniorManagement" Type="smallint" />
+          <Property Name="hrPolicies" Type="smallint" />
+          <Property Name="yourManager" Type="smallint" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="suggestionToBoss" Type="nvarchar(max)" />
+          <Property Name="suggestionToCompany" Type="nvarchar(max)" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="overAllRating" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isAnonymous" Type="bit" Nullable="false" />
+          <Property Name="workLifeBalance" Type="smallint" />
+          <Property Name="salary" Type="smallint" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReasonsToStays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="updatedTechnology" Type="bit" Nullable="false" />
+          <Property Name="suitingLocation" Type="bit" Nullable="false" />
+          <Property Name="enoughOnSiteOpportunity" Type="bit" Nullable="false" />
+          <Property Name="adequateSalary" Type="bit" Nullable="false" />
+          <Property Name="executingMbaInProgress" Type="bit" Nullable="false" />
+          <Property Name="contractCompulsions" Type="bit" Nullable="false" />
+          <Property Name="recognitionAndAppreciation" Type="bit" Nullable="false" />
+          <Property Name="supportiveTeam" Type="bit" Nullable="false" />
+          <Property Name="personalReasons" Type="bit" Nullable="false" />
+          <Property Name="others" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReasonToLeaves">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="noRecognition" Type="bit" Nullable="false" />
+          <Property Name="noOpportunity" Type="bit" Nullable="false" />
+          <Property Name="underpaid" Type="bit" Nullable="false" />
+          <Property Name="workpressure" Type="bit" Nullable="false" />
+          <Property Name="lackOfRoleClarity" Type="bit" Nullable="false" />
+          <Property Name="organisationalDecline" Type="bit" Nullable="false" />
+          <Property Name="outdatedTechnology" Type="bit" Nullable="false" />
+          <Property Name="poorTeam" Type="bit" Nullable="false" />
+          <Property Name="incompetentManager" Type="bit" Nullable="false" />
+          <Property Name="personalReasons" Type="bit" Nullable="false" />
+          <Property Name="furtherStudies" Type="bit" Nullable="false" />
+          <Property Name="others" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="locationId" Type="nvarchar(max)" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="verifiedBy" Type="nvarchar(max)" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDBSynced" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="urnoticeRatingModelStoreContainer">
+          <EntitySet Name="BlogComments" EntityType="Self.BlogComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogUserActivities" EntityType="Self.BlogUserActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatGroups" EntityType="Self.ChatGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyComments" EntityType="Self.CompanyComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDesignationXmls" EntityType="Self.CompanyDesignationXmls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFromInsiderXls" EntityType="Self.CompanyFromInsiderXls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyGalleries" EntityType="Self.CompanyGalleries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyRatings" EntityType="Self.CompanyRatings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobgraphies" EntityType="Self.Jobgraphies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobgraphyComments" EntityType="Self.JobgraphyComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobgraphyUserActivities" EntityType="Self.JobgraphyUserActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoticePeriodInfoes" EntityType="Self.NoticePeriodInfoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReasonsToStays" EntityType="Self.ReasonsToStays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReasonToLeaves" EntityType="Self.ReasonToLeaves" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="urnoticeRatingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BlogComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BlogUserActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="voteType" Type="Int16" Nullable="false" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ChatGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chatMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="senderId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isInformative" Type="Int16" Nullable="false" />
+          <Property Name="reportSpam" Type="Int16" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CompanyComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="markSpamCount" Type="Int32" Nullable="false" />
+          <Property Name="upvote" Type="Int32" Nullable="false" />
+          <Property Name="downvote" Type="Int32" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CompanyDesignationXml">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isUsed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CompanyFromInsiderXl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isUsed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CompanyGallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="markSpamCount" Type="Int32" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CompanyRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="workCulture" Type="Double" />
+          <Property Name="employeeDevelopment" Type="Double" />
+          <Property Name="appraisalProcess" Type="Double" />
+          <Property Name="seniorManagement" Type="Double" />
+          <Property Name="hrPolicies" Type="Double" />
+          <Property Name="yourManager" Type="Double" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <Property Name="overAllRating" Type="Double" />
+          <Property Name="workLifeBalance" Type="Double" />
+          <Property Name="salary" Type="Double" />
+          <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Jobgraphy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="designationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="employeeType" Type="Int16" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="storyType" Type="Int16" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isSolrUpdated" Type="Boolean" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="JobgraphyComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="JobgraphyUserActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="voteType" Type="Int16" Nullable="false" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="NoticePeriodInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="designationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ctc" Type="Int64" />
+          <Property Name="maxNoticePeriod" Type="Int32" />
+          <Property Name="minNoticePeriod" Type="Int32" />
+          <Property Name="noticePeriodServed" Type="Int32" />
+          <Property Name="buyOutOption" Type="Boolean" />
+          <Property Name="lookingForChange" Type="Boolean" />
+          <Property Name="expectedCTC" Type="Int64" />
+          <Property Name="suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="joiningDate" Type="DateTime" Precision="3" />
+          <Property Name="resigningDate" Type="DateTime" Precision="3" />
+          <Property Name="managerBehaviourChanged" Type="Boolean" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isHikeOffered" Type="Boolean" Nullable="false" />
+          <Property Name="hikePercentOffered" Type="Double" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="workCulture" Type="Int16" />
+          <Property Name="employeeDevelopment" Type="Int16" />
+          <Property Name="appraisalProcess" Type="Int16" />
+          <Property Name="seniorManagement" Type="Int16" />
+          <Property Name="hrPolicies" Type="Int16" />
+          <Property Name="yourManager" Type="Int16" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="suggestionToBoss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="suggestionToCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="overAllRating" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="workLifeBalance" Type="Int16" />
+          <Property Name="salary" Type="Int16" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ReasonsToStay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updatedTechnology" Type="Boolean" Nullable="false" />
+          <Property Name="suitingLocation" Type="Boolean" Nullable="false" />
+          <Property Name="enoughOnSiteOpportunity" Type="Boolean" Nullable="false" />
+          <Property Name="adequateSalary" Type="Boolean" Nullable="false" />
+          <Property Name="executingMbaInProgress" Type="Boolean" Nullable="false" />
+          <Property Name="contractCompulsions" Type="Boolean" Nullable="false" />
+          <Property Name="recognitionAndAppreciation" Type="Boolean" Nullable="false" />
+          <Property Name="supportiveTeam" Type="Boolean" Nullable="false" />
+          <Property Name="personalReasons" Type="Boolean" Nullable="false" />
+          <Property Name="others" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ReasonToLeaf">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="noRecognition" Type="Boolean" Nullable="false" />
+          <Property Name="noOpportunity" Type="Boolean" Nullable="false" />
+          <Property Name="underpaid" Type="Boolean" Nullable="false" />
+          <Property Name="workpressure" Type="Boolean" Nullable="false" />
+          <Property Name="lackOfRoleClarity" Type="Boolean" Nullable="false" />
+          <Property Name="organisationalDecline" Type="Boolean" Nullable="false" />
+          <Property Name="outdatedTechnology" Type="Boolean" Nullable="false" />
+          <Property Name="poorTeam" Type="Boolean" Nullable="false" />
+          <Property Name="incompetentManager" Type="Boolean" Nullable="false" />
+          <Property Name="personalReasons" Type="Boolean" Nullable="false" />
+          <Property Name="furtherStudies" Type="Boolean" Nullable="false" />
+          <Property Name="others" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isDBSynced" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="urnoticeRatingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlogComments" EntityType="Self.BlogComment" />
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
+          <EntitySet Name="BlogUserActivities" EntityType="Self.BlogUserActivity" />
+          <EntitySet Name="ChatGroups" EntityType="Self.ChatGroup" />
+          <EntitySet Name="CompanyComments" EntityType="Self.CompanyComment" />
+          <EntitySet Name="CompanyDesignationXmls" EntityType="Self.CompanyDesignationXml" />
+          <EntitySet Name="CompanyFromInsiderXls" EntityType="Self.CompanyFromInsiderXl" />
+          <EntitySet Name="CompanyGalleries" EntityType="Self.CompanyGallery" />
+          <EntitySet Name="CompanyRatings" EntityType="Self.CompanyRating" />
+          <EntitySet Name="Jobgraphies" EntityType="Self.Jobgraphy" />
+          <EntitySet Name="JobgraphyComments" EntityType="Self.JobgraphyComment" />
+          <EntitySet Name="JobgraphyUserActivities" EntityType="Self.JobgraphyUserActivity" />
+          <EntitySet Name="NoticePeriodInfoes" EntityType="Self.NoticePeriodInfo" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="ReasonsToStays" EntityType="Self.ReasonsToStay" />
+          <EntitySet Name="ReasonToLeaves" EntityType="Self.ReasonToLeaf" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="urnoticeRatingModelStoreContainer" CdmEntityContainer="urnoticeRatingEntities">
+          <EntitySetMapping Name="BlogComments">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.BlogComment">
+              <MappingFragment StoreEntitySet="BlogComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogUserActivities">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.BlogUserActivity">
+              <MappingFragment StoreEntitySet="BlogUserActivities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="voteType" ColumnName="voteType" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatGroups">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.ChatGroup">
+              <MappingFragment StoreEntitySet="ChatGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="chatMessage" ColumnName="chatMessage" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="senderId" ColumnName="senderId" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isInformative" ColumnName="isInformative" />
+                <ScalarProperty Name="reportSpam" ColumnName="reportSpam" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyComments">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyComment">
+              <MappingFragment StoreEntitySet="CompanyComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="markSpamCount" ColumnName="markSpamCount" />
+                <ScalarProperty Name="upvote" ColumnName="upvote" />
+                <ScalarProperty Name="downvote" ColumnName="downvote" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDesignationXmls">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyDesignationXml">
+              <MappingFragment StoreEntitySet="CompanyDesignationXmls">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="isUsed" ColumnName="isUsed" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFromInsiderXls">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyFromInsiderXl">
+              <MappingFragment StoreEntitySet="CompanyFromInsiderXls">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="isUsed" ColumnName="isUsed" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyGalleries">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyGallery">
+              <MappingFragment StoreEntitySet="CompanyGalleries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="markSpamCount" ColumnName="markSpamCount" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyRatings">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyRating">
+              <MappingFragment StoreEntitySet="CompanyRatings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="workCulture" ColumnName="workCulture" />
+                <ScalarProperty Name="employeeDevelopment" ColumnName="employeeDevelopment" />
+                <ScalarProperty Name="appraisalProcess" ColumnName="appraisalProcess" />
+                <ScalarProperty Name="seniorManagement" ColumnName="seniorManagement" />
+                <ScalarProperty Name="hrPolicies" ColumnName="hrPolicies" />
+                <ScalarProperty Name="yourManager" ColumnName="yourManager" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="overAllRating" ColumnName="overAllRating" />
+                <ScalarProperty Name="workLifeBalance" ColumnName="workLifeBalance" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobgraphies">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.Jobgraphy">
+              <MappingFragment StoreEntitySet="Jobgraphies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="employeeType" ColumnName="employeeType" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="storyType" ColumnName="storyType" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobgraphyComments">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.JobgraphyComment">
+              <MappingFragment StoreEntitySet="JobgraphyComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobgraphyUserActivities">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.JobgraphyUserActivity">
+              <MappingFragment StoreEntitySet="JobgraphyUserActivities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="voteType" ColumnName="voteType" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoticePeriodInfoes">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.NoticePeriodInfo">
+              <MappingFragment StoreEntitySet="NoticePeriodInfoes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+                <ScalarProperty Name="ctc" ColumnName="ctc" />
+                <ScalarProperty Name="maxNoticePeriod" ColumnName="maxNoticePeriod" />
+                <ScalarProperty Name="minNoticePeriod" ColumnName="minNoticePeriod" />
+                <ScalarProperty Name="noticePeriodServed" ColumnName="noticePeriodServed" />
+                <ScalarProperty Name="buyOutOption" ColumnName="buyOutOption" />
+                <ScalarProperty Name="lookingForChange" ColumnName="lookingForChange" />
+                <ScalarProperty Name="expectedCTC" ColumnName="expectedCTC" />
+                <ScalarProperty Name="suggestion" ColumnName="suggestion" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="joiningDate" ColumnName="joiningDate" />
+                <ScalarProperty Name="resigningDate" ColumnName="resigningDate" />
+                <ScalarProperty Name="managerBehaviourChanged" ColumnName="managerBehaviourChanged" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isHikeOffered" ColumnName="isHikeOffered" />
+                <ScalarProperty Name="hikePercentOffered" ColumnName="hikePercentOffered" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.Rating">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="workCulture" ColumnName="workCulture" />
+                <ScalarProperty Name="employeeDevelopment" ColumnName="employeeDevelopment" />
+                <ScalarProperty Name="appraisalProcess" ColumnName="appraisalProcess" />
+                <ScalarProperty Name="seniorManagement" ColumnName="seniorManagement" />
+                <ScalarProperty Name="hrPolicies" ColumnName="hrPolicies" />
+                <ScalarProperty Name="yourManager" ColumnName="yourManager" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="suggestionToBoss" ColumnName="suggestionToBoss" />
+                <ScalarProperty Name="suggestionToCompany" ColumnName="suggestionToCompany" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="overAllRating" ColumnName="overAllRating" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="workLifeBalance" ColumnName="workLifeBalance" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReasonsToStays">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.ReasonsToStay">
+              <MappingFragment StoreEntitySet="ReasonsToStays">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="updatedTechnology" ColumnName="updatedTechnology" />
+                <ScalarProperty Name="suitingLocation" ColumnName="suitingLocation" />
+                <ScalarProperty Name="enoughOnSiteOpportunity" ColumnName="enoughOnSiteOpportunity" />
+                <ScalarProperty Name="adequateSalary" ColumnName="adequateSalary" />
+                <ScalarProperty Name="executingMbaInProgress" ColumnName="executingMbaInProgress" />
+                <ScalarProperty Name="contractCompulsions" ColumnName="contractCompulsions" />
+                <ScalarProperty Name="recognitionAndAppreciation" ColumnName="recognitionAndAppreciation" />
+                <ScalarProperty Name="supportiveTeam" ColumnName="supportiveTeam" />
+                <ScalarProperty Name="personalReasons" ColumnName="personalReasons" />
+                <ScalarProperty Name="others" ColumnName="others" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReasonToLeaves">
+            <EntityTypeMapping TypeName="urnoticeRatingModel.ReasonToLeaf">
+              <MappingFragment StoreEntitySet="ReasonToLeaves">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="noRecognition" ColumnName="noRecognition" />
+                <ScalarProperty Name="noOpportunity" ColumnName="noOpportunity" />
+                <ScalarProperty Name="underpaid" ColumnName="underpaid" />
+                <ScalarProperty Name="workpressure" ColumnName="workpressure" />
+                <ScalarProperty Name="lackOfRoleClarity" ColumnName="lackOfRoleClarity" />
+                <ScalarProperty Name="organisationalDecline" ColumnName="organisationalDecline" />
+                <ScalarProperty Name="outdatedTechnology" ColumnName="outdatedTechnology" />
+                <ScalarProperty Name="poorTeam" ColumnName="poorTeam" />
+                <ScalarProperty Name="incompetentManager" ColumnName="incompetentManager" />
+                <ScalarProperty Name="personalReasons" ColumnName="personalReasons" />
+                <ScalarProperty Name="furtherStudies" ColumnName="furtherStudies" />
+                <ScalarProperty Name="others" ColumnName="others" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

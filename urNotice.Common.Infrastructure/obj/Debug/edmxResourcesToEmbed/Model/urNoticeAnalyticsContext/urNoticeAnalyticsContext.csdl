@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="urnoticeAnalyticsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GoogleApiCheckLastSynced">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="startIndex" Type="Int32" Nullable="false" />
+    <Property Name="itemPerPage" Type="Int32" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="entryListString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+    <Property Name="isVirtualFriendListUpdated" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContactsArchived">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="startIndex" Type="Int32" Nullable="false" />
+    <Property Name="itemPerPage" Type="Int32" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="entryListString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VirtualFriendList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+    <Property Name="name1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="name2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="urnoticeAnalyticsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GoogleApiCheckLastSynceds" EntityType="Self.GoogleApiCheckLastSynced" />
+    <EntitySet Name="GoogleApiContacts" EntityType="Self.GoogleApiContact" />
+    <EntitySet Name="GoogleApiContactsArchiveds" EntityType="Self.GoogleApiContactsArchived" />
+    <EntitySet Name="VirtualFriendLists" EntityType="Self.VirtualFriendList" />
+    <EntitySet Name="VirtualFriendListJsons" EntityType="urnoticeAnalyticsModel.VirtualFriendListJson" />
+  </EntityContainer>
+  <EntityType Name="VirtualFriendListJson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user1" Type="String" Nullable="false" />
+    <Property Name="jsonData" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>

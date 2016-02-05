@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="urnoticeAuthModelStoreContainer" CdmEntityContainer="urnoticeAuthEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.Admin)">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="priviledgeLevel" ColumnName="priviledgeLevel" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.Company)">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="headquarters" ColumnName="headquarters" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="founded" ColumnName="founded" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="revenue" ColumnName="revenue" />
+          <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+          <ScalarProperty Name="mission" ColumnName="mission" />
+          <ScalarProperty Name="founder" ColumnName="founder" />
+          <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="lastUpdatedBy" ColumnName="lastUpdatedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="universalName" ColumnName="universalName" />
+          <ScalarProperty Name="averageRating" ColumnName="averageRating" />
+          <ScalarProperty Name="totalNumberOfRatings" ColumnName="totalNumberOfRatings" />
+          <ScalarProperty Name="totalReviews" ColumnName="totalReviews" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyDesignationInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.CompanyDesignationInfo)">
+        <MappingFragment StoreEntitySet="CompanyDesignationInfoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+          <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+          <ScalarProperty Name="numOfSalary" ColumnName="numOfSalary" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanySubParts">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.CompanySubPart)">
+        <MappingFragment StoreEntitySet="CompanySubParts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+          <ScalarProperty Name="lastUpdatedBy" ColumnName="lastUpdatedBy" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="averageRating" ColumnName="averageRating" />
+          <ScalarProperty Name="totalNumberOfRatings" ColumnName="totalNumberOfRatings" />
+          <ScalarProperty Name="totalReviews" ColumnName="totalReviews" />
+          <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
+          <ScalarProperty Name="logoUrl" ColumnName="logoUrl" />
+          <ScalarProperty Name="squareLogoUrl" ColumnName="squareLogoUrl" />
+          <ScalarProperty Name="specialities" ColumnName="specialities" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="avgNoticePeriod" ColumnName="avgNoticePeriod" />
+          <ScalarProperty Name="buyoutPercentage" ColumnName="buyoutPercentage" />
+          <ScalarProperty Name="maxNoticePeriod" ColumnName="maxNoticePeriod" />
+          <ScalarProperty Name="minNoticePeriod" ColumnName="minNoticePeriod" />
+          <ScalarProperty Name="avgHikePercentage" ColumnName="avgHikePercentage" />
+          <ScalarProperty Name="percLookingForChange" ColumnName="percLookingForChange" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.CompanyType)">
+        <MappingFragment StoreEntitySet="CompanyTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contactUs">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.contactU)">
+        <MappingFragment StoreEntitySet="contactUs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="heading" ColumnName="heading" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReplyMessage" ColumnName="ReplyMessage" />
+          <ScalarProperty Name="RepliedBy" ColumnName="RepliedBy" />
+          <ScalarProperty Name="RepliedDateTime" ColumnName="RepliedDateTime" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Designations">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.Designation)">
+        <MappingFragment StoreEntitySet="Designations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="designationName" ColumnName="designationName" />
+          <ScalarProperty Name="displayName" ColumnName="displayName" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacebookAuths">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.FacebookAuth)">
+        <MappingFragment StoreEntitySet="FacebookAuths">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="facebookId" ColumnName="facebookId" />
+          <ScalarProperty Name="facebookUsername" ColumnName="facebookUsername" />
+          <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForgetPasswords">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.ForgetPassword)">
+        <MappingFragment StoreEntitySet="ForgetPasswords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="linkedinAuths">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.linkedinAuth)">
+        <MappingFragment StoreEntitySet="linkedinAuths">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="oauth_Token" ColumnName="oauth_Token" />
+          <ScalarProperty Name="oauth_TokenSecret" ColumnName="oauth_TokenSecret" />
+          <ScalarProperty Name="oauth_verifier" ColumnName="oauth_verifier" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.Location)">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="subLocality" ColumnName="subLocality" />
+          <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="formatted_address" ColumnName="formatted_address" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecommendedBies">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.RecommendedBy)">
+        <MappingFragment StoreEntitySet="RecommendedBies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RecommendedTo" ColumnName="RecommendedTo" />
+          <ScalarProperty Name="RecommendedFrom" ColumnName="RecommendedFrom" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="isValid" ColumnName="isValid" />
+          <ScalarProperty Name="RecommendedFromUsername" ColumnName="RecommendedFromUsername" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subscriptions">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.Subscription)">
+        <MappingFragment StoreEntitySet="Subscriptions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="subscriptionType" ColumnName="subscriptionType" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="emaiId" ColumnName="emaiId" />
+          <ScalarProperty Name="isRegisteredUser" ColumnName="isRegisteredUser" />
+          <ScalarProperty Name="isEmailAvailable" ColumnName="isEmailAvailable" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAlerts">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserAlert)">
+        <MappingFragment StoreEntitySet="UserAlerts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="titleText" ColumnName="titleText" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="priority" ColumnName="priority" />
+          <ScalarProperty Name="iconUrl" ColumnName="iconUrl" />
+          <ScalarProperty Name="messageFrom" ColumnName="messageFrom" />
+          <ScalarProperty Name="messageTo" ColumnName="messageTo" />
+          <ScalarProperty Name="AlertSeen" ColumnName="AlertSeen" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCompanyInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserCompanyInfo)">
+        <MappingFragment StoreEntitySet="UserCompanyInfoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="salaryRange" ColumnName="salaryRange" />
+          <ScalarProperty Name="isHappy" ColumnName="isHappy" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="shareReasonPublic" ColumnName="shareReasonPublic" />
+          <ScalarProperty Name="shareAsAnonymous" ColumnName="shareAsAnonymous" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEarningHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserEarningHistory)">
+        <MappingFragment StoreEntitySet="UserEarningHistories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="subtype" ColumnName="subtype" />
+          <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEarnings">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserEarning)">
+        <MappingFragment StoreEntitySet="UserEarnings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="approved" ColumnName="approved" />
+          <ScalarProperty Name="pending" ColumnName="pending" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserMessage)">
+        <MappingFragment StoreEntitySet="UserMessages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="titleText" ColumnName="titleText" />
+          <ScalarProperty Name="bodyText" ColumnName="bodyText" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="priority" ColumnName="priority" />
+          <ScalarProperty Name="iconUrl" ColumnName="iconUrl" />
+          <ScalarProperty Name="messageFrom" ColumnName="messageFrom" />
+          <ScalarProperty Name="messageTo" ColumnName="messageTo" />
+          <ScalarProperty Name="messageSeen" ColumnName="messageSeen" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserReputationMappings">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserReputationMapping)">
+        <MappingFragment StoreEntitySet="UserReputationMappings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="subType" ColumnName="subType" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="reputation" ColumnName="reputation" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserReputations">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.UserReputation)">
+        <MappingFragment StoreEntitySet="UserReputations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="ReputationScore" ColumnName="ReputationScore" />
+          <ScalarProperty Name="UserBadge" ColumnName="UserBadge" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="source" ColumnName="source" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="locked" ColumnName="locked" />
+          <ScalarProperty Name="keepMeSignedIn" ColumnName="keepMeSignedIn" />
+          <ScalarProperty Name="registrationTime" ColumnName="registrationTime" />
+          <ScalarProperty Name="lastUpdatedDate" ColumnName="lastUpdatedDate" />
+          <ScalarProperty Name="fixedGuid" ColumnName="fixedGuid" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="priviledgeLevel" ColumnName="priviledgeLevel" />
+          <ScalarProperty Name="timeZone" ColumnName="timeZone" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="isPhoneActive" ColumnName="isPhoneActive" />
+          <ScalarProperty Name="userCoverPic" ColumnName="userCoverPic" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValidateUserKeys">
+      <EntityTypeMapping TypeName="IsTypeOf(urnoticeAuthModel.ValidateUserKey)">
+        <MappingFragment StoreEntitySet="ValidateUserKeys">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

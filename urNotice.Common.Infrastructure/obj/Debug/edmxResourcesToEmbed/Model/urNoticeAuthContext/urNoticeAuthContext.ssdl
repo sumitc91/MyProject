@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="urnoticeAuthModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="urnoticeAuthModelStoreContainer">
+    <EntitySet Name="Admins" EntityType="urnoticeAuthModel.Store.Admins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Companies" EntityType="urnoticeAuthModel.Store.Companies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyDesignationInfoes" EntityType="urnoticeAuthModel.Store.CompanyDesignationInfoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanySubParts" EntityType="urnoticeAuthModel.Store.CompanySubParts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyTypes" EntityType="urnoticeAuthModel.Store.CompanyTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="contactUs" EntityType="urnoticeAuthModel.Store.contactUs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Designations" EntityType="urnoticeAuthModel.Store.Designations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FacebookAuths" EntityType="urnoticeAuthModel.Store.FacebookAuths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ForgetPasswords" EntityType="urnoticeAuthModel.Store.ForgetPasswords" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="linkedinAuths" EntityType="urnoticeAuthModel.Store.linkedinAuths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="urnoticeAuthModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RecommendedBies" EntityType="urnoticeAuthModel.Store.RecommendedBies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subscriptions" EntityType="urnoticeAuthModel.Store.Subscriptions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserAlerts" EntityType="urnoticeAuthModel.Store.UserAlerts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserCompanyInfoes" EntityType="urnoticeAuthModel.Store.UserCompanyInfoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserEarningHistories" EntityType="urnoticeAuthModel.Store.UserEarningHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserEarnings" EntityType="urnoticeAuthModel.Store.UserEarnings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserMessages" EntityType="urnoticeAuthModel.Store.UserMessages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserReputationMappings" EntityType="urnoticeAuthModel.Store.UserReputationMappings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserReputations" EntityType="urnoticeAuthModel.Store.UserReputations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="urnoticeAuthModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ValidateUserKeys" EntityType="urnoticeAuthModel.Store.ValidateUserKeys" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="priviledgeLevel" Type="smallint" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="website" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="headquarters" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="size" Type="bigint" Nullable="true" />
+    <Property Name="founded" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="industry" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="revenue" Type="bigint" Nullable="true" />
+    <Property Name="descriptions" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="mission" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="founder" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="lastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastUpdatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="universalName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="averageRating" Type="float" Nullable="false" />
+    <Property Name="totalNumberOfRatings" Type="bigint" Nullable="false" />
+    <Property Name="totalReviews" Type="bigint" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CompanyDesignationInfoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="locationId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="designationId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="avgSalary" Type="float" Nullable="false" />
+    <Property Name="numOfSalary" Type="int" Nullable="false" />
+    <Property Name="isVerified" Type="bit" Nullable="false" />
+    <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CompanySubParts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="locationId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="website" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="size" Type="bigint" Nullable="true" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="lastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="lastUpdatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="averageRating" Type="float" Nullable="false" />
+    <Property Name="totalNumberOfRatings" Type="bigint" Nullable="false" />
+    <Property Name="totalReviews" Type="bigint" Nullable="false" />
+    <Property Name="isPrimary" Type="bit" Nullable="false" />
+    <Property Name="logoUrl" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="squareLogoUrl" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="specialities" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="avgNoticePeriod" Type="float" Nullable="false" />
+    <Property Name="buyoutPercentage" Type="float" Nullable="false" />
+    <Property Name="maxNoticePeriod" Type="int" Nullable="false" />
+    <Property Name="minNoticePeriod" Type="int" Nullable="false" />
+    <Property Name="avgHikePercentage" Type="float" Nullable="false" />
+    <Property Name="percLookingForChange" Type="float" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="true" />
+    <Property Name="telephone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CompanyTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isVerified" Type="bit" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="contactUs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="heading" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReplyMessage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RepliedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RepliedDateTime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Designations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="designationName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="displayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isVerified" Type="bit" Nullable="false" />
+    <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="FacebookAuths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="facebookId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="facebookUsername" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AuthToken" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ForgetPasswords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="linkedinAuths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="oauth_Token" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="oauth_TokenSecret" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="oauth_verifier" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="state" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="country" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isVerified" Type="bit" Nullable="false" />
+    <Property Name="verifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="district" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="subLocality" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="postal_code" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="latitude" Type="float" Nullable="true" />
+    <Property Name="longitude" Type="float" Nullable="true" />
+    <Property Name="formatted_address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RecommendedBies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecommendedTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RecommendedFrom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="true" />
+    <Property Name="isValid" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RecommendedFromUsername" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Subscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subscriptionType" Type="smallint" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="emaiId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isRegisteredUser" Type="bit" Nullable="false" />
+    <Property Name="isEmailAvailable" Type="bit" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserAlerts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="titleText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" Nullable="false" />
+    <Property Name="priority" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iconUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messageFrom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messageTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AlertSeen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserCompanyInfoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="startDate" Type="datetime" Nullable="true" />
+    <Property Name="endDate" Type="datetime" Nullable="true" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="designationId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="salaryRange" Type="int" Nullable="true" />
+    <Property Name="isHappy" Type="bit" Nullable="true" />
+    <Property Name="reason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="createdDate" Type="datetime" Nullable="true" />
+    <Property Name="shareReasonPublic" Type="bit" Nullable="true" />
+    <Property Name="shareAsAnonymous" Type="bit" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserEarningHistories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="subtype" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="paymentMode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="amount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" Nullable="false" />
+    <Property Name="userType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="currency" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserEarnings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="total" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="approved" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pending" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="currency" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="true" />
+    <Property Name="userType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserMessages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="titleText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="bodyText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" Nullable="false" />
+    <Property Name="priority" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iconUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messageFrom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messageTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messageSeen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserReputationMappings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="subType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="true" />
+    <Property Name="reputation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserReputations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReputationScore" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserBadge" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isActive" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="source" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="imageUrl" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="gender" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="locked" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="keepMeSignedIn" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="registrationTime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="lastUpdatedDate" Type="datetime" Nullable="true" />
+    <Property Name="fixedGuid" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isVerified" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="priviledgeLevel" Type="smallint" Nullable="false" />
+    <Property Name="timeZone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="phone" Type="bigint" Nullable="true" />
+    <Property Name="isPhoneActive" Type="bit" Nullable="true" />
+    <Property Name="userCoverPic" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="locationId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="fid" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ValidateUserKeys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isDBSynced" Type="bit" Nullable="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="urnoticeRatingModelStoreContainer" CdmEntityContainer="urnoticeRatingEntities">
+    <EntitySetMapping Name="BlogComments">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.BlogComment">
+        <MappingFragment StoreEntitySet="BlogComments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.Blog">
+        <MappingFragment StoreEntitySet="Blogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BlogUserActivities">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.BlogUserActivity">
+        <MappingFragment StoreEntitySet="BlogUserActivities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="voteType" ColumnName="voteType" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroups">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.ChatGroup">
+        <MappingFragment StoreEntitySet="ChatGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="chatMessage" ColumnName="chatMessage" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="senderId" ColumnName="senderId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isInformative" ColumnName="isInformative" />
+          <ScalarProperty Name="reportSpam" ColumnName="reportSpam" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyComments">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyComment">
+        <MappingFragment StoreEntitySet="CompanyComments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="markSpamCount" ColumnName="markSpamCount" />
+          <ScalarProperty Name="upvote" ColumnName="upvote" />
+          <ScalarProperty Name="downvote" ColumnName="downvote" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyDesignationXmls">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyDesignationXml">
+        <MappingFragment StoreEntitySet="CompanyDesignationXmls">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="isUsed" ColumnName="isUsed" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyFromInsiderXls">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyFromInsiderXl">
+        <MappingFragment StoreEntitySet="CompanyFromInsiderXls">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="isUsed" ColumnName="isUsed" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyGalleries">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyGallery">
+        <MappingFragment StoreEntitySet="CompanyGalleries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="markSpamCount" ColumnName="markSpamCount" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyRatings">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.CompanyRating">
+        <MappingFragment StoreEntitySet="CompanyRatings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="workCulture" ColumnName="workCulture" />
+          <ScalarProperty Name="employeeDevelopment" ColumnName="employeeDevelopment" />
+          <ScalarProperty Name="appraisalProcess" ColumnName="appraisalProcess" />
+          <ScalarProperty Name="seniorManagement" ColumnName="seniorManagement" />
+          <ScalarProperty Name="hrPolicies" ColumnName="hrPolicies" />
+          <ScalarProperty Name="yourManager" ColumnName="yourManager" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="overAllRating" ColumnName="overAllRating" />
+          <ScalarProperty Name="workLifeBalance" ColumnName="workLifeBalance" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jobgraphies">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.Jobgraphy">
+        <MappingFragment StoreEntitySet="Jobgraphies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="employeeType" ColumnName="employeeType" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="storyType" ColumnName="storyType" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isSolrUpdated" ColumnName="isSolrUpdated" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobgraphyComments">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.JobgraphyComment">
+        <MappingFragment StoreEntitySet="JobgraphyComments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobgraphyUserActivities">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.JobgraphyUserActivity">
+        <MappingFragment StoreEntitySet="JobgraphyUserActivities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="jobgraphyId" ColumnName="jobgraphyId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="voteType" ColumnName="voteType" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoticePeriodInfoes">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.NoticePeriodInfo">
+        <MappingFragment StoreEntitySet="NoticePeriodInfoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="showAnonymous" ColumnName="showAnonymous" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="ctc" ColumnName="ctc" />
+          <ScalarProperty Name="maxNoticePeriod" ColumnName="maxNoticePeriod" />
+          <ScalarProperty Name="minNoticePeriod" ColumnName="minNoticePeriod" />
+          <ScalarProperty Name="noticePeriodServed" ColumnName="noticePeriodServed" />
+          <ScalarProperty Name="buyOutOption" ColumnName="buyOutOption" />
+          <ScalarProperty Name="lookingForChange" ColumnName="lookingForChange" />
+          <ScalarProperty Name="expectedCTC" ColumnName="expectedCTC" />
+          <ScalarProperty Name="suggestion" ColumnName="suggestion" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="joiningDate" ColumnName="joiningDate" />
+          <ScalarProperty Name="resigningDate" ColumnName="resigningDate" />
+          <ScalarProperty Name="managerBehaviourChanged" ColumnName="managerBehaviourChanged" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isHikeOffered" ColumnName="isHikeOffered" />
+          <ScalarProperty Name="hikePercentOffered" ColumnName="hikePercentOffered" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.Rating">
+        <MappingFragment StoreEntitySet="Ratings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="workCulture" ColumnName="workCulture" />
+          <ScalarProperty Name="employeeDevelopment" ColumnName="employeeDevelopment" />
+          <ScalarProperty Name="appraisalProcess" ColumnName="appraisalProcess" />
+          <ScalarProperty Name="seniorManagement" ColumnName="seniorManagement" />
+          <ScalarProperty Name="hrPolicies" ColumnName="hrPolicies" />
+          <ScalarProperty Name="yourManager" ColumnName="yourManager" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="suggestionToBoss" ColumnName="suggestionToBoss" />
+          <ScalarProperty Name="suggestionToCompany" ColumnName="suggestionToCompany" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="overAllRating" ColumnName="overAllRating" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+          <ScalarProperty Name="workLifeBalance" ColumnName="workLifeBalance" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReasonsToStays">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.ReasonsToStay">
+        <MappingFragment StoreEntitySet="ReasonsToStays">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="updatedTechnology" ColumnName="updatedTechnology" />
+          <ScalarProperty Name="suitingLocation" ColumnName="suitingLocation" />
+          <ScalarProperty Name="enoughOnSiteOpportunity" ColumnName="enoughOnSiteOpportunity" />
+          <ScalarProperty Name="adequateSalary" ColumnName="adequateSalary" />
+          <ScalarProperty Name="executingMbaInProgress" ColumnName="executingMbaInProgress" />
+          <ScalarProperty Name="contractCompulsions" ColumnName="contractCompulsions" />
+          <ScalarProperty Name="recognitionAndAppreciation" ColumnName="recognitionAndAppreciation" />
+          <ScalarProperty Name="supportiveTeam" ColumnName="supportiveTeam" />
+          <ScalarProperty Name="personalReasons" ColumnName="personalReasons" />
+          <ScalarProperty Name="others" ColumnName="others" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReasonToLeaves">
+      <EntityTypeMapping TypeName="urnoticeRatingModel.ReasonToLeaf">
+        <MappingFragment StoreEntitySet="ReasonToLeaves">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="noRecognition" ColumnName="noRecognition" />
+          <ScalarProperty Name="noOpportunity" ColumnName="noOpportunity" />
+          <ScalarProperty Name="underpaid" ColumnName="underpaid" />
+          <ScalarProperty Name="workpressure" ColumnName="workpressure" />
+          <ScalarProperty Name="lackOfRoleClarity" ColumnName="lackOfRoleClarity" />
+          <ScalarProperty Name="organisationalDecline" ColumnName="organisationalDecline" />
+          <ScalarProperty Name="outdatedTechnology" ColumnName="outdatedTechnology" />
+          <ScalarProperty Name="poorTeam" ColumnName="poorTeam" />
+          <ScalarProperty Name="incompetentManager" ColumnName="incompetentManager" />
+          <ScalarProperty Name="personalReasons" ColumnName="personalReasons" />
+          <ScalarProperty Name="furtherStudies" ColumnName="furtherStudies" />
+          <ScalarProperty Name="others" ColumnName="others" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="verifiedBy" ColumnName="verifiedBy" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="isDBSynced" ColumnName="isDBSynced" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

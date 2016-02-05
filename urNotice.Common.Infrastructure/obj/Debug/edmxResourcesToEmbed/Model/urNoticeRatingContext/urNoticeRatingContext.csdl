@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="urnoticeRatingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BlogComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BlogUserActivity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="voteType" Type="Int16" Nullable="false" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ChatGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="chatMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="senderId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isInformative" Type="Int16" Nullable="false" />
+    <Property Name="reportSpam" Type="Int16" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CompanyComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="markSpamCount" Type="Int32" Nullable="false" />
+    <Property Name="upvote" Type="Int32" Nullable="false" />
+    <Property Name="downvote" Type="Int32" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CompanyDesignationXml">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isUsed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CompanyFromInsiderXl">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isUsed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CompanyGallery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="markSpamCount" Type="Int32" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CompanyRating">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="workCulture" Type="Double" />
+    <Property Name="employeeDevelopment" Type="Double" />
+    <Property Name="appraisalProcess" Type="Double" />
+    <Property Name="seniorManagement" Type="Double" />
+    <Property Name="hrPolicies" Type="Double" />
+    <Property Name="yourManager" Type="Double" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <Property Name="overAllRating" Type="Double" />
+    <Property Name="workLifeBalance" Type="Double" />
+    <Property Name="salary" Type="Double" />
+    <Property Name="isSolrUpdated" Type="Boolean" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Jobgraphy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="designationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="employeeType" Type="Int16" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="storyType" Type="Int16" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="Boolean" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="JobgraphyComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="JobgraphyUserActivity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jobgraphyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="voteType" Type="Int16" Nullable="false" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="NoticePeriodInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="showAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="designationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ctc" Type="Int64" />
+    <Property Name="maxNoticePeriod" Type="Int32" />
+    <Property Name="minNoticePeriod" Type="Int32" />
+    <Property Name="noticePeriodServed" Type="Int32" />
+    <Property Name="buyOutOption" Type="Boolean" />
+    <Property Name="lookingForChange" Type="Boolean" />
+    <Property Name="expectedCTC" Type="Int64" />
+    <Property Name="suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="createdDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="joiningDate" Type="DateTime" Precision="3" />
+    <Property Name="resigningDate" Type="DateTime" Precision="3" />
+    <Property Name="managerBehaviourChanged" Type="Boolean" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isHikeOffered" Type="Boolean" Nullable="false" />
+    <Property Name="hikePercentOffered" Type="Double" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="workCulture" Type="Int16" />
+    <Property Name="employeeDevelopment" Type="Int16" />
+    <Property Name="appraisalProcess" Type="Int16" />
+    <Property Name="seniorManagement" Type="Int16" />
+    <Property Name="hrPolicies" Type="Int16" />
+    <Property Name="yourManager" Type="Int16" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="suggestionToBoss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="suggestionToCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="overAllRating" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="workLifeBalance" Type="Int16" />
+    <Property Name="salary" Type="Int16" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ReasonsToStay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="updatedTechnology" Type="Boolean" Nullable="false" />
+    <Property Name="suitingLocation" Type="Boolean" Nullable="false" />
+    <Property Name="enoughOnSiteOpportunity" Type="Boolean" Nullable="false" />
+    <Property Name="adequateSalary" Type="Boolean" Nullable="false" />
+    <Property Name="executingMbaInProgress" Type="Boolean" Nullable="false" />
+    <Property Name="contractCompulsions" Type="Boolean" Nullable="false" />
+    <Property Name="recognitionAndAppreciation" Type="Boolean" Nullable="false" />
+    <Property Name="supportiveTeam" Type="Boolean" Nullable="false" />
+    <Property Name="personalReasons" Type="Boolean" Nullable="false" />
+    <Property Name="others" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ReasonToLeaf">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="noRecognition" Type="Boolean" Nullable="false" />
+    <Property Name="noOpportunity" Type="Boolean" Nullable="false" />
+    <Property Name="underpaid" Type="Boolean" Nullable="false" />
+    <Property Name="workpressure" Type="Boolean" Nullable="false" />
+    <Property Name="lackOfRoleClarity" Type="Boolean" Nullable="false" />
+    <Property Name="organisationalDecline" Type="Boolean" Nullable="false" />
+    <Property Name="outdatedTechnology" Type="Boolean" Nullable="false" />
+    <Property Name="poorTeam" Type="Boolean" Nullable="false" />
+    <Property Name="incompetentManager" Type="Boolean" Nullable="false" />
+    <Property Name="personalReasons" Type="Boolean" Nullable="false" />
+    <Property Name="furtherStudies" Type="Boolean" Nullable="false" />
+    <Property Name="others" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="companyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="locationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isVerified" Type="Boolean" Nullable="false" />
+    <Property Name="verifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isDBSynced" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="urnoticeRatingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BlogComments" EntityType="Self.BlogComment" />
+    <EntitySet Name="Blogs" EntityType="Self.Blog" />
+    <EntitySet Name="BlogUserActivities" EntityType="Self.BlogUserActivity" />
+    <EntitySet Name="ChatGroups" EntityType="Self.ChatGroup" />
+    <EntitySet Name="CompanyComments" EntityType="Self.CompanyComment" />
+    <EntitySet Name="CompanyDesignationXmls" EntityType="Self.CompanyDesignationXml" />
+    <EntitySet Name="CompanyFromInsiderXls" EntityType="Self.CompanyFromInsiderXl" />
+    <EntitySet Name="CompanyGalleries" EntityType="Self.CompanyGallery" />
+    <EntitySet Name="CompanyRatings" EntityType="Self.CompanyRating" />
+    <EntitySet Name="Jobgraphies" EntityType="Self.Jobgraphy" />
+    <EntitySet Name="JobgraphyComments" EntityType="Self.JobgraphyComment" />
+    <EntitySet Name="JobgraphyUserActivities" EntityType="Self.JobgraphyUserActivity" />
+    <EntitySet Name="NoticePeriodInfoes" EntityType="Self.NoticePeriodInfo" />
+    <EntitySet Name="Ratings" EntityType="Self.Rating" />
+    <EntitySet Name="ReasonsToStays" EntityType="Self.ReasonsToStay" />
+    <EntitySet Name="ReasonToLeaves" EntityType="Self.ReasonToLeaf" />
+  </EntityContainer>
+</Schema>

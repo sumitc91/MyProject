@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="urnoticeAnalyticsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GoogleApiCheckLastSynceds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="startIndex" Type="int" Nullable="false" />
+    <Property Name="itemPerPage" Type="int" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" />
+    <Property Name="entryListString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+    <Property Name="isVirtualFriendListUpdated" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoogleApiContactsArchiveds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="startIndex" Type="int" Nullable="false" />
+    <Property Name="itemPerPage" Type="int" Nullable="false" />
+    <Property Name="lastContactUpdated" Type="nvarchar(max)" />
+    <Property Name="entryListString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VirtualFriendLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="source" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSolrUpdated" Type="bit" Nullable="false" />
+    <Property Name="name1" Type="nvarchar(max)" />
+    <Property Name="name2" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="urnoticeAnalyticsModelStoreContainer">
+    <EntitySet Name="GoogleApiCheckLastSynceds" EntityType="Self.GoogleApiCheckLastSynceds" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoogleApiContacts" EntityType="Self.GoogleApiContacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoogleApiContactsArchiveds" EntityType="Self.GoogleApiContactsArchiveds" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VirtualFriendLists" EntityType="Self.VirtualFriendLists" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
