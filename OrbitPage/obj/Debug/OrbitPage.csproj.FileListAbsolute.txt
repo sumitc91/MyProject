@@ -51,8 +51,6 @@ C:\code\svn\OrbitPage\OrbitPage\bin\OrbitPage.dll.config
 C:\code\svn\OrbitPage\OrbitPage\bin\OrbitPage.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\OrbitPage.pdb
 C:\code\svn\OrbitPage\OrbitPage\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\OrbitPage\bin\Facebook.dll
-C:\code\svn\OrbitPage\OrbitPage\bin\log4net.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Web.Infrastructure.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll

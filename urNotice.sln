@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "urNotice", "urNotice\urNotice.csproj", "{AB456FF9-71F0-432D-961F-F7504339E215}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "urNotice.Tests", "urNotice.Tests\urNotice.Tests.csproj", "{BA6287D3-25B5-4169-94FA-083A7D311962}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{87AA0BE7-8EE3-4F93-8410-1A72177F28A7}"
@@ -48,14 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.QA|Any CPU.ActiveCfg = QA|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.QA|Any CPU.Build.0 = QA|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB456FF9-71F0-432D-961F-F7504339E215}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA6287D3-25B5-4169-94FA-083A7D311962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA6287D3-25B5-4169-94FA-083A7D311962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA6287D3-25B5-4169-94FA-083A7D311962}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
