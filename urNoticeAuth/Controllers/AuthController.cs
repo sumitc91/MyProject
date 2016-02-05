@@ -28,7 +28,7 @@ namespace urNoticeAuth.Controllers
         // GET: /Auth/
        
         public delegate void LogoutDelegate(HttpRequestBase requestData);
-        private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
+        //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
         private readonly AuthService _authService = new AuthService();
         private static readonly ILogger log = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
         private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
@@ -111,19 +111,19 @@ namespace urNoticeAuth.Controllers
         {
             var headers = new HeaderManager(requestData);
             urNoticeSession session = TokenManager.getLogoutSessionInfo(headers.AuthToken);
-            if (session != null)
-            {
-                var user = _db.Users.SingleOrDefault(x => x.username == session.UserName);
-                if (user != null) user.keepMeSignedIn = "false";
-                try
-                {
-                    _db.SaveChanges();
-                }
-                catch (DbEntityValidationException e)
-                {
-                    DbContextException.LogDbContextException(e);
-                }
-            }
+            //if (session != null)
+            //{
+            //    var user = _db.Users.SingleOrDefault(x => x.username == session.UserName);
+            //    if (user != null) user.keepMeSignedIn = "false";
+            //    try
+            //    {
+            //        _db.SaveChanges();
+            //    }
+            //    catch (DbEntityValidationException e)
+            //    {
+            //        DbContextException.LogDbContextException(e);
+            //    }
+            //}
             new TokenManager().Logout(headers.AuthToken);
         }
 
