@@ -1,0 +1,193 @@
+﻿<div ng-controller="beforeLoginContactUs">
+    
+    <div class="row" style="min-height: 90px;"></div>  
+    <!--container start-->
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-5 col-sm-5 address">
+                <section class="contact-infos">
+                    <h4 class="title custom-font text-black">
+                        ADDRESS
+                    </h4>
+                    <address>
+                        BTM 2nd Stage
+                        <br>
+                        Bengaluru - 560076
+                        <br>
+                        Karnataka - India
+                    </address>
+                </section>
+                <section class="contact-infos">
+                    <h4 class="title custom-font text-black">
+                        BUSINESS HOURS$
+                    </h4>
+                    <p>
+                        Monday - Friday 8am to 4pm
+                        <br>
+                        Saturday - 7am to 6pm
+                        <br>
+                        Sunday- Closed
+                        <br>
+                    </p>
+                </section>
+                <section class="contact-infos">
+                    <h4>
+                        Email
+                    </h4>
+                    <p>
+                        <i class="icon-email">
+                        </i>
+                        contact@orbitpage.com
+                    </p>
+
+                    <p>
+                        <i class="icon-email">
+                        </i>
+                        infor@orbitpage.com
+                    </p>
+
+                </section>
+            </div>
+            <div class="col-lg-7 col-sm-7 address">
+                <h4>
+                    Drop us a line so that we can hear from you
+                </h4>
+                <div class="contact-form">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="name">
+                                Name
+                            </label>
+                            <input type="text" id="name" placeholder="Your Name" ng-model="ContactUsData.Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email
+                            </label>
+                            <input type="text" id="email" ng-model="ContactUsData.Email" placeholder="your@domain.com" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">
+                                Phone
+                            </label>
+                            <input type="text" id="phone" placeholder="+44 00 123" ng-model="ContactUsData.Phone" class="form-control">
+                        </div>
+                        <div class="field">
+                            <textarea required="" class="form-control" id="message" ng-model="ContactUsData.Message" placeholder="Message" name="message"></textarea>
+                            <span class="entypo-comment icon"></span>
+                            <span class="slick-tip left bg_uni_inputBox">Your message</span>
+                        </div>
+                        <!-- Message copy button -->
+                        <div class="field">
+                            <ul class="alert alert-danger alert-dismissable" ng-show="showErrors" style="margin-left: 0;">
+                                <li ng-show="NameAlert.visible" ng-bind="NameAlert.message"></li>
+                                <li ng-show="EmailIdAlert.visible" ng-bind="EmailIdAlert.message"></li>
+                                <li ng-show="PhoneAlert.visible" ng-bind="PhoneAlert.message"></li>
+                                <li ng-show="TypeAlert.visible" ng-bind="TypeAlert.message"></li>
+                                <li ng-show="MessageAlert.visible" ng-bind="MessageAlert.message"></li>
+                            </ul>
+                            <input type="checkbox" ng-model="ContactUsData.SendMeACopy" checked="checked" name="send-copy" id="send-copy">
+                            <label class="tick" for="send-copy"><span>Send me a copy of this message</span></label>
+
+                            <!-- Send button -->
+                            <input type="button" class="btn btn-primary btn-flat" value="Submit" ng-click="ContactUsRequestSubmit()">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--container end-->
+
+    <div class="container">
+        <div class="row">
+            <div class='col-md-offset-2 col-md-8 text-center'>
+                <h2>
+                    Responsive Quote Carousel BS3
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 mar-b-30">
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <!-- Bottom Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#quote-carousel" data-slide-to="0" class="active">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="1">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="2">
+                        </li>
+                    </ol>
+
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner">
+
+                        <!-- Quote 1 -->
+                        <div class="item active">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-3 text-center">
+                                        <img class="img-circle" src="../../Template/img/person_1.png" style="width: 100px;height:100px;" alt="">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p>
+                                            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!
+                                        </p>
+                                        <small>
+                                            Someone famous
+                                        </small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                        <!-- Quote 2 -->
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-3 text-center">
+                                        <img class="img-circle" src="../../Template/img/person_2.png" style="width: 100px;height:100px;" alt="">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.
+                                        </p>
+                                        <small>
+                                            Someone famous
+                                        </small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                        <!-- Quote 3 -->
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-3 text-center">
+                                        <img class="img-circle" src="../../Template/img/person_3.png" style="width: 100px;height:100px;" alt="">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.
+                                        </p>
+                                        <small>
+                                            Someone famous
+                                        </small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

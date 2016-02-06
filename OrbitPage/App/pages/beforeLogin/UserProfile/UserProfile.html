@@ -1,440 +1,666 @@
 ﻿<div style="background-color: rgb(246, 246, 246);">
     
     <div class="row" style="min-height: 50px;"></div>
-
-    <div class="page-title">
-
-        <div class="breadcrumb-env">
-
-            <ol class="breadcrumb bc-1">
-                <li>
-                    <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
-                </li>
-                <li>
-
-                    <a href="extra-gallery.html">Extra</a>
-                </li>
-                <li class="active">
-
-                    <strong>Profile</strong>
-                </li>
-            </ol>
-
-        </div>
-
-    </div>
-
-    <!--container start-->
     <div class="container">
-        <section class="profile-env">
-
-            <div class="row">
-
-                <div class="col-sm-3">
-
-                    <!-- User Info Sidebar -->
-                    <div class="user-info-sidebar">
-
-                        <a class="user-img" href="#">
-                            <img class="img-cirlce img-responsive img-thumbnail" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                        </a>
-
-                        <a class="user-name" href="#">
-                            Art Ramadani
-                            <span class="user-status is-online"></span>
-                        </a>
-
-                        <span class="user-title">
-                            CEO at <strong>Google</strong>
-                        </span>
-
-                        <hr>
-
-                        <ul class="list-unstyled user-info-list">
-                            <li>
-                                <i class="fa-home"></i>
-                                Prishtina, Kosovo
-                            </li>
-                            <li>
-                                <i class="fa-briefcase"></i>
-                                <a href="#">Laborator</a>
-                            </li>
-                            <li>
-                                <i class="fa-graduation-cap"></i>
-                                University of Bologna
-                            </li>
-                        </ul>
-
-                        <hr>
-
-                        <ul class="list-unstyled user-friends-count">
-                            <li>
-                                <span>643</span>
-                                followers
-                            </li>
-                            <li>
-                                <span>108</span>
-                                following
-                            </li>
-                        </ul>
-
-                        <button class="btn btn-success btn-block text-left" type="button">
-                            Following
-                            <i class="fa-check pull-right"></i>
-                        </button>
-                    </div>
-
+        <div class="cover profile">
+            <div class="wrapper">
+                <div class="image">
+                    <img height="250" alt="people" ng-src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/4363b5d5-df6a-4ea2-8d4c-a0e28536859e.png" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/4363b5d5-df6a-4ea2-8d4c-a0e28536859e.png">
+                </div>
+            </div>
+            <div class="cover-info">
+                <div class="avatar">
+                    <img width="110px" alt="people" ng-src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/9e09f732-dd2e-4359-b2ba-31aa89450f5d.png" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/9e09f732-dd2e-4359-b2ba-31aa89450f5d.png">
+                </div>
+                <div class="name">
+                    <a ng-bind="companyDetails.companyname" href="" class="ng-binding">Accenture</a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
                 </div>
 
-                <div class="col-sm-9">
-
-                    <!-- User Post form and Timeline -->
-                    <form class="profile-post-form" action="" method="post">
-                        <textarea placeholder="What's on your mind?" class="form-control input-unstyled input-lg autogrow" style="overflow: hidden; word-wrap: break-word; height: 84px;"></textarea>
-                        <i class="el-edit block-icon"></i>
-
-                        <ul class="list-unstyled list-inline form-action-buttons">
-                            <li>
-                                <button class="btn btn-unstyled" type="button">
-                                    <i class="el-camera"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="btn btn-unstyled" type="button">
-                                    <i class="el-attach"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="btn btn-unstyled" type="button">
-                                    <i class="el-mic"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="btn btn-unstyled" type="button">
-                                    <i class="el-music"></i>
-                                </button>
-                            </li>
-                        </ul>
-
-                        <button class="btn btn-single btn-xs btn-success post-story-button" type="submit">Post</button>
-                    </form>
-
-
-                    <!-- User timeline stories -->
-                    <section class="user-timeline-stories">
-
-                        <!-- Timeline Story Type: Status -->
-                        <article class="timeline-story">
-
-                            <i class="fa-paper-plane-empty block-icon"></i>
-
-                            <!-- User info -->
-                            <header>
-
-                                <a class="user-img" href="#">
-                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                </a>
-
-                                <div class="user-details">
-                                    <a href="#">Art Ramadani</a> posted a status <a href="#">update</a>.
-                                    <time>12 hours ago</time>
-                                </div>
-
-                            </header>
-
-                            <div class="story-content">
-                                <!-- Story Content Wrapped inside Paragraph -->
-                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
-
-                                <!-- Story Options Links -->
-                                <div class="story-options-links">
-                                    <a href="#">
-                                        <i class="linecons-heart"></i>
-                                        Like
-                                        <span>(3)</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <i class="linecons-comment"></i>
-                                        Comments
-                                        <span>(5)</span>
-                                    </a>
-                                </div>
-
-
-                                <!-- Story Comments -->
-                                <ul class="list-unstyled story-comments">
-                                    <li>
-
-                                        <div class="story-comment">
-                                            <a class="comment-user-img" href="#">
-                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                            </a>
-
-                                            <div class="story-comment-content">
-                                                <a class="story-comment-user-name" href="#">
-                                                    Arlind Nushi
-                                                    <time>01 December 2014 - 17:54</time>
-                                                </a>
-
-                                                <p>Him these are visit front end for seven walls. Money eat scale now ask law learn.</p>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <li>
-
-                                        <div class="story-comment">
-                                            <a class="comment-user-img" href="#">
-                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                            </a>
-
-                                            <div class="story-comment-content">
-                                                <a class="story-comment-user-name" href="#">
-                                                    Eroll Maxhuni
-                                                    <time>04 November 2014 - 17:54</time>
-                                                </a>
-
-                                                <p>Taken no great widow spoke of it small. Genius use except son esteem merely her limits.</p>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                </ul>
-
-                                <form class="story-comment-form" action="" method="post">
-                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
-                                </form>
-                            </div>
-
-                        </article>
-
-                        <!-- Timeline Story Type: Audio -->
-                        <article class="timeline-story">
-
-                            <i class="fa-music block-icon"></i>
-
-                            <!-- User info -->
-                            <header>
-
-                                <a class="user-img" href="#">
-                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                </a>
-
-                                <div class="user-details">
-                                    <a href="#">Art Ramadani</a> posted an audio <a href="#">track</a>.
-                                    <time>22 hours ago</time>
-                                </div>
-
-                            </header>
-
-                            <!-- Audio Track -->
-                            <div class="story-audio-item">
-                                <div class="story-content">
-
-                                    <div class="audio-track-info">
-                                        <div class="artist-info">MC Kresha - Emceeclopedy</div>
-                                        <div class="track-length">2:14 - 4:31</div>
-                                    </div>
-
-                                    <div class="audio-track-timeline">
-                                        <div class="play-pause">
-                                            <a href="#">
-                                                <i class="fa-to-start"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa-pause"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa-to-end"></i>
-                                            </a>
-                                        </div>
-
-                                        <div class="track-timeline">
-                                            <div class="track-timeline-empty">
-                                                <div style="width:49.4%" class="track-fill"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="track-volume">
-                                            <a href="#">
-                                                <i class="fa-volume-up"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="story-content">
-
-                                <!-- Story Options Links -->
-                                <div class="story-options-links">
-                                    <a class="liked" href="#">
-                                        <i class="linecons-heart"></i>
-                                        Like
-                                        <span>(10)</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <i class="linecons-comment"></i>
-                                        Comments
-                                        <span>(0)</span>
-                                    </a>
-                                </div>
-
-                                <form class="story-comment-form" action="" method="post">
-                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
-                                </form>
-
-                            </div>
-
-                        </article>
-
-                        <!-- Timeline Story Type: Check-in -->
-                        <article class="timeline-story">
-
-                            <i class="fa-pin block-icon"></i>
-
-                            <!-- User info -->
-                            <header>
-
-                                <a class="user-img" href="#">
-                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                </a>
-
-                                <div class="user-details">
-                                    <a href="#">Art Ramadani</a> checked in at <a href="#">Laborator</a>.
-                                    <time>1 day ago</time>
-                                </div>
-
-                            </header>
-
-
-                            <div class="story-content">
-
-                                <div class="story-checkin">
-                                    <div style="height: 180px; width: 100%;" class="map-checkin" id="sample-checkin"></div>
-                                </div>
-
-                                <!-- Story Options Links -->
-                                <div class="story-options-links">
-                                    <a href="#">
-                                        <i class="linecons-heart"></i>
-                                        Like
-                                        <span>(4)</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <i class="linecons-comment"></i>
-                                        Comment
-                                        <span>(1)</span>
-                                    </a>
-                                </div>
-
-
-                                <!-- Story Comments -->
-                                <ul class="list-unstyled story-comments">
-                                    <li>
-
-                                        <div class="story-comment">
-                                            <a class="comment-user-img" href="#">
-                                                <img class="img-circle img-responsive" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                            </a>
-
-                                            <div class="story-comment-content">
-                                                <a class="story-comment-user-name" href="#">
-                                                    Ylli Pylla
-                                                    <time>22 October 2014 - 17:54</time>
-                                                </a>
-
-                                                <p>Appear an manner as no limits either praise in. In in written on charmed justice is amiable farther besides.</p>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                </ul>
-
-                                <form class="story-comment-form" action="" method="post">
-                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
-                                </form>
-
-                            </div>
-
-                        </article>
-
-                        <!-- Timeline Story Type: Photos -->
-                        <article class="timeline-story">
-
-                            <i class="fa-camera-retro block-icon"></i>
-
-                            <!-- User info -->
-                            <header>
-
-                                <a class="user-img" href="#">
-                                    <img class="img-responsive img-circle" alt="user-img" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                </a>
-
-                                <div class="user-details">
-                                    <a href="#">Art Ramadani</a> added <strong>3</strong> photos to <a href="#">Holiday Trip</a> album.
-                                    <time>a week ago</time>
-                                </div>
-
-                            </header>
-
-                            <div class="story-content">
-
-                                <div class="story-album">
-                                    <div class="col-1">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                        </a>
-                                    </div>
-                                    <div class="col-2">
-                                        <a class="base-padding" href="#">
-                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                        </a>
-                                        <div class="vspacer v2"></div>
-                                        <a href="#">
-                                            <img class="img-responsive" alt="album-image" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/images.jpeg">
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Story Options Links -->
-                                <div class="story-options-links">
-                                    <a class="liked" href="#">
-                                        <i class="linecons-heart"></i>
-                                        Like
-                                        <span>(2)</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <i class="linecons-comment"></i>
-                                        Comments
-                                        <span>(0)</span>
-                                    </a>
-                                </div>
-
-                                <form class="story-comment-form" action="" method="post">
-                                    <textarea placeholder="Reply..." class="form-control input-unstyled autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 76px;"></textarea>
-                                </form>
-
-                            </div>
-
-                        </article>
-
-                    </section>
+                <div class="cover-nav">
+                    <div class="col-lg-2 col-sm-2">
+                        <a ng-bind="companyDetails.companyname" href="" class="ng-binding">Accenture</a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <ul ng-class="listClass" readonly="readonly" ng-model="companyDetails.averagerating" icon-full="fa-star" icon-hover="hover" icon-empty="fa-star-o" icon-base="fa fa-fw" max="5" class="ng-scope ng-valid angular-input-stars"><!-- ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star-o"></i></li><!-- end ngRepeat: item in items track by $index --></ul>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <small>(<span ng-bind="averageRatingInDoubleFormat" class="ng-binding">4</span> rating from <span ng-bind="companyDetails.totalratingcount" class="ng-binding">1</span> Reviews)</small>
+                    </div>
+                    <div ng-show="userCompanyAnalyticsLoaded" class="col-lg-6 col-sm-6" style="">
+                        You Visited &nbsp;<a ng-bind="userCompanyAnalytics.Count" href="" class="ng-binding">47</a> times |  Last Visited :&nbsp; <a href="" class="ng-binding">2016-02-06 01:58:25 PM</a>
+                    </div>
 
                 </div>
 
             </div>
 
+        </div>
+        <section class="profile-env">
+
+            <div class="col-md-12">
+                <div class="col-md-4 col-sm-5 col-xs-12 col-left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-user-detail">
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-suitcase"></i>Works at <a href="#">software development</a></li>
+                                        <li><i class="fa fa-calendar"></i>Born on August 12, 1991</li>
+                                        <li><i class="fa fa-rss"></i>Followed by <a href="#">51 People</a></li>
+                                    </ul>
+                                </div>
+                                <div class="panel-footer text-center"><a href="#"><i class="fa fa-share"></i>Read more...</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-friends">
+                                <div class="panel-heading">
+                                    <a href="#" class="pull-right">View all&nbsp;<i class="fa fa-share-square-o"></i></a>
+                                    <h3 class="panel-title"><i class="fa fa-users"></i>&nbsp; Friends</h3>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <ul class="friends">
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-4.jpg" title="Jhoanath matew" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-3.jpg" title="Martha creawn" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-2.jpg" title="Jeferh smith" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-9.jpg" title="Linda palma" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-9.jpg" title="Lindo polmo" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-5.jpg" title="andrew cartson" class="img-responsive tip"> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-photos">
+                                <div class="panel-heading">
+                                    <a href="#" class="pull-right">View all&nbsp;<i class="fa fa-share-square-o"></i></a>
+                                    <h3 class="panel-title"><i class="fa fa-image"></i>&nbsp;Photos</h3>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <ul class="photos">
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/1.jpg" alt="photo 1" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/2.jpg" alt="photo 2" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/3.jpg" alt="photo 3" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/4.jpg" alt="photo 4" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/5.jpg" alt="photo 5" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/6.jpg" alt="photo 6" class="img-responsive show-in-modal"> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-groups">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-users"></i>&nbsp;Groups</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-5.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Bootdey competitors</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-1.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Git in action</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-6.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Bootdey Snippets</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-2.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Html 5 live</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-7 col-xs-12 col-right">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="well well-sm well-social-post">
+                                <form>
+                                    <ul class="list-inline" id="list_PostActions">
+                                        <li class="active"><a href="#"><i class="fa fa-edit"></i><span class="hidden-xs">Update status</span></a></li>
+                                        <li><a href="#"><i class="fa fa-camera"></i><span class="hidden-xs">Add photos/Video</span></a></li>
+                                        <li><a href="#"><i class="fa fa-photo"></i><span class="hidden-xs">Create photo album</span></a></li>
+                                    </ul>
+                                    <textarea class="form-control" placeholder="What's in your mind?"></textarea>
+                                    <ul class="list-inline post-actions">
+                                        <li><a href="#"><span class="glyphicon glyphicon-camera"></span></a></li>
+                                        <li><a href="#" class="glyphicon glyphicon-user"></a></li>
+                                        <li><a href="#" class="glyphicon glyphicon-map-marker"></a></li>
+                                        <li class="pull-right"><a href="#" class="btn btn-info btn-xs btn-fill">Post</a></li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white post panel-shadow">
+                                <div class="post-heading">
+                                    <div class="pull-left image"><img src="http://demos.bootdey.com/dee-dee/img/Profile/profile.jpg" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left meta">
+                                        <div class="title h5"><a href="#" class="post-user-name">Marting lowenyert</a> uploaded a photo.</div>
+                                        <h6 class="text-muted time">5 seconds ago</h6>
+                                    </div>
+                                </div>
+                                <div class="post-image"><img src="http://demos.bootdey.com/dee-dee/img/Post/place-234-87.jpg" class="image show-in-modal" alt="image post"></div>
+                                <div class="post-description">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique dignissim urna, in dictum mauris sagittis eget. Integer luctus risus ac diam ultrices, ultricies tempus arcu sollicitudin</p>
+                                    <div class="stats"><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-thumbs-up icon"></i>228 </a><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-share icon"></i>128 </a></div>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="input-group"><input class="form-control" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a href="#"><i class="fa fa-edit"></i></a></span></div>
+                                    <ul class="comments-list">
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/guy-4.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Markton contz</a></h4>
+                                                    <h5 class="time">7 minutes ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/woman-8.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Yira Cartmen</a></h4>
+                                                    <h5 class="time">3 minutes ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                            </div>
+                                        </li>
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/child-1.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Dora ty bluekl</a></h4>
+                                                    <h5 class="time">10 seconds ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel panel-white post panel-shadow">
+                                <div class="post-heading">
+                                    <div class="pull-left image"><img src="http://demos.bootdey.com/dee-dee/img/Profile/profile.jpg" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left meta">
+                                        <div class="title h5"><a href="#" class="post-user-name">Marting lowenyert</a> uploaded a photo.</div>
+                                        <h6 class="text-muted time">5 seconds ago</h6>
+                                    </div>
+                                </div>
+                                <div class="post-image"><img src="http://demos.bootdey.com/dee-dee/img/Post/pic1.jpg" class="image show-in-modal" alt="image post"></div>
+                                <div class="post-description">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique dignissim urna, in dictum mauris sagittis eget</p>
+                                    <div class="stats"><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-thumbs-up icon"></i>228 </a><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-share icon"></i>128 </a></div>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="input-group"><input class="form-control" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a href="#"><i class="fa fa-edit"></i></a></span></div>
+                                    <ul class="comments-list">
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/guy-3.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Antony andrew lobghi</a></h4>
+                                                    <h5 class="time">7 minutes ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/guy-2.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Jeferh Smith</a></h4>
+                                                    <h5 class="time">3 minutes ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                            </div>
+                                        </li>
+                                        <li class="comment">
+                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/woman-2.jpg" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#">Maria fernanda coronel</a></h4>
+                                                    <h5 class="time">10 seconds ago</h5>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </section>
     </div>
+ 
+
 </div>
 
 
 
 
+<style type="text/css">
+    
+    
+body {
+    overflow-x: hidden;
+}
+.main {
+    height: 100%;
+}
+.blurred-container .img-src, .blurred-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 320px;
+}
+.navbar-header .navbar-brand img {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+.navbar-brand b {
+    display: inline-block;
+}
+.navbar .navbar-brand {
+    margin-top: 0;
+}
+.navbar-opts li a [class^="fa"] {
+    display: block;
+    text-align: center;
+}
+.navbar-transparent .navbar-nav > li > a {
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+#navbar-profile .navbar-nav li a .fa {
+    margin: 4px;
+}
+.navbar-white {
+    background-color: #fff !important;
+    border-color: #e7e7e7;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.18);
+}
+.navbar-transparent .navbar-nav .active a {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    color: #ffffff;
+}
+.navbar-transparent .navbar-nav li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    color: #ffffff;
+}
+.user-name {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    left: 310px;
+    position: absolute;
+    text-rendering: optimizelegibility;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    top: -80px;
+}
+.profile-photo {
+    border: 5px solid #fff;
+    cursor: pointer;
+    height: 180px;
+    left: 100px;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    position: absolute;
+    top: -160px;
+    width: 180px;
+}
+.profile-opts .btn {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+@media (max-width: 768px) {
+.btn-responsive {
+    border-radius: 3px;
+    font-size: 80%;
+    line-height: 1;
+    padding: 2px 4px;
+}
+.profile-photo {
+    height: 130px;
+    left: 10px;
+    top: -100px;
+    width: 130px;
+}
+.user-name {
+    font-size: 20px;
+    left: 160px;
+}
+.navbar-opts li a [class^="fa"] {
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 2px;
+    text-align: center;
+}
+}
+@media (min-width: 769px) and (max-width: 992px) {
+.btn-responsive {
+    font-size: 90%;
+    line-height: 1.2;
+    padding: 4px 9px;
+}
+.profile-photo {
+    height: 160px;
+    left: 35px;
+    top: -140px;
+    width: 160px;
+}
+.user-name {
+    font-size: 25px;
+    left: 220px;
+}
+}
+.hidden {
+    display: none;
+}
+.container-timeline {
+    margin-top: 10px;
+}
+.panel-user-detail .fa {
+    color: #999999;
+    margin-right: 3px;
+}
+@media screen and (max-width: 500px) {
+div[class*="col-"] {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+}
+.panel-user-detail, .panel-friends, .panel-likes, .panel-movies, .panel-groups, .post, .panel-friends, .panel-user-photos, .text-content, .about-container .panel, .container-about, .panel-photos {
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.14);
+}
+.panel-footer {
+    background-color: #ffffff;
+}
+.well-social-post {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.14);
+}
+.well-social-post .glyphicon, .well-social-post .fa, .well-social-post [class^="icon-"], .well-social-post [class*="icon-"] {
+    color: #999999;
+    font-weight: bold;
+    margin-right: 3px;
+}
+.well-social-post a, .well-social-post a:hover, .well-social-post a:active, .well-social-post a:focus {
+    text-decoration: none;
+}
+.well-social-post .list-inline {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.well-social-post .list-inline li {
+    position: relative;
+}
+.well-social-post .list-inline li.active::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #dddddd;
+    content: "";
+    display: block;
+    height: 0;
+    left: calc(50% - 5px);
+    position: absolute;
+    top: 30px;
+    width: 0;
+}
+.well-social-post .list-inline li.active a {
+    color: #222222;
+    font-weight: bold;
+}
+.well-social-post .form-control {
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 68px;
+    resize: vertical;
+    width: 100%;
+}
+.well-social-post .list-inline {
+    padding: 10px;
+}
+.well-social-post .list-inline li + li {
+    margin-left: 10px;
+}
+.well-social-post .post-actions {
+    background-color: #f6f7f8;
+    border-top-color: #e9eaed;
+    margin: 0;
+}
+.panel-friends .friends {
+    background: #fff none repeat scroll 0 0;
+    display: inline-block;
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+.panel-friends .friends li {
+    float: left;
+    margin: 0;
+    width: 33.33%;
+}
+.panel-friends .friends li a {
+    display: block;
+    padding-left: 1px;
+    padding-top: 1px;
+}
+.panel-friends .friends li a img:hover {
+    opacity: 0.7;
+    transform: scale(1.2, 1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+.panel-friends .friends li a img, .photos li a img {
+    width: 100%;
+}
+.panel-likes .carousel-inner .item img {
+    height: 80px;
+    max-width: 100%;
+}
+.panel-likes .carousel-control.right {
+}
+.panel-likes .thumbnail {
+    border: 0 none;
+}
+.panel-photos .photos li {
+    float: left;
+    margin: 0;
+    width: 50%;
+}
+.panel-photos .photos {
+    background: #fff none repeat scroll 0 0;
+    display: inline-block;
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+.panel-photos .photos li {
+    float: left;
+    margin: 0;
+    width: 33.33%;
+}
+.panel-photos .photos li a {
+    display: block;
+    padding-left: 1px;
+    padding-top: 1px;
+}
+.panel-photos .photos li a img {
+    width: 100%;
+}
+.panel-photos .photos li a img:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transform: scale(1.2, 1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+#carousel-movies .item img {
+    height: 50%;
+}
+#carousel-movies img {
+    height: 225px;
+    max-height: 225px;
+    width: auto;
+}
+.panel-white {
+    border: 1px solid #dddddd;
+}
+.panel-white .panel-heading {
+    background-color: #fff;
+    border-color: #ddd;
+    color: #333;
+}
+.panel-white .panel-footer {
+    background-color: #fff;
+    border-color: #ddd;
+}
+.post .post-heading {
+    height: 95px;
+    padding: 20px 15px;
+}
+.post .post-heading .avatar {
+    display: block;
+    height: 60px;
+    margin-right: 15px;
+    width: 60px;
+}
+.post .post-heading .meta .title {
+    margin-bottom: 0;
+}
+.post .post-heading .meta .title a:hover {
+    color: #aaaaaa;
+}
+.post .post-heading .meta .time {
+    color: #999;
+    margin-top: 8px;
+    text-transform: lowercase;
+}
+.post .post-image .image {
+    cursor: pointer;
+    height: auto;
+    width: 100%;
+}
+.post .post-description {
+    padding: 15px;
+}
+.post .post-description p {
+    font-size: 14px;
+}
+.post .post-description .stats {
+    margin-top: 20px;
+}
+.post .post-description .stats .stat-item {
+    display: inline-block;
+    margin-right: 15px;
+}
+.post .post-description .stats .stat-item .icon {
+    margin-right: 8px;
+}
+.post .post-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+}
+.post .post-footer .input-group-addon a {
+    color: #454545;
+}
+.post .post-footer .comments-list {
+    list-style-type: none;
+    margin-top: 20px;
+    padding: 0;
+}
+.post .post-footer .comments-list .comment {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+}
+.post .post-footer .comments-list .comment .avatar {
+    height: 35px;
+    width: 35px;
+}
+.post .post-footer .comments-list .comment .comment-heading {
+    display: block;
+    width: 100%;
+}
+.post .post-footer .comments-list .comment .comment-heading .comment-user-name {
+    display: inline;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 0;
+}
+.post .post-footer .comments-list .comment .comment-heading .time {
+    color: #aaa;
+    display: inline;
+    font-size: 12px;
+    margin-top: 0;
+}
+.post .post-footer .comments-list .comment .comment-body {
+    margin-left: 50px;
+}
+.post .post-footer .comments-list .comment > .comments-list {
+    margin-left: 50px;
+}
+.post .input-group .form-control {
+    z-index: 1;
+}
+.panel-user-photos img:hover {
+    border-radius: 0;
+    cursor: pointer;
+    opacity: 0.7;
+    transform: scale(1.2, 1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+.panel-user-photos img {
+    margin-bottom: 20px;
+}
+.panel-user-photos img:hover {
+    filter: none;
+}
+.affix + .container {
+    padding-top: 50px !important;
+}
+.carousel-indicators {
+    left: 90%;
+    width: 60%;
+}
 
+</style>

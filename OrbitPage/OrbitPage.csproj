@@ -338,6 +338,7 @@
     <Content Include="App\pages\beforeLogin\SingleBlog\SingleBlog.js" />
     <Content Include="App\pages\beforeLogin\TnC\TnC.html" />
     <Content Include="App\pages\beforeLogin\TnC\TnC.js" />
+    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile - Copy.html" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.html" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />

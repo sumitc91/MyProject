@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>NoticeUI </title>
+	
+<style type="text/css" media="screen">
+
+	
+* { padding: 0; margin: 0; }
+
+body
+{
+	background: #DDD;
+	font: 12px/1.7em arial, sans-serif;
+	margin: 0 auto 75px;
+}
+
+
+.dropui { margin: 10px 5px 20px; }
+
+.dropui-content h2 { font-size: 12px; font-style: italic; font-weight: bold; margin-bottom: .75em; text-align: center; }
+</style>
+
+	<link rel="stylesheet" href="./example_files/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" href="./css/noticeui.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+
+
+
+</head>
+
+<body id="">
+	
+<div id="wrapper">
+	
+<h1>NoticeUI - MadeByAmp</h1>
+
+<p>NoticeUI is a clean and stylish way to display important notifications to your users.</p>
+ 
+
+<p>To get started with NoticeUI add the noticeui.css stylesheet to your document:</p>
+
+<pre>
+&lt;link rel="stylesheet" href="noticeui.css" type="text/css" media="screen" title="no title" charset="utf-8" /&gt;
+</pre>
+<br />
+<p>Then add the images folder contained in this download to your project and make sure all the image paths in the noticeui.css file are correct.</p>
+
+<h2 style="font-size: 14px;"><a href="demo.html">View full demo</a></h2>
+<br />
+
+
+<p style="background: #FFC;">For support email the author through his Code Canyon author page <a href="http://codecanyon.net/user/MadeByAmp">http://codecanyon.net/user/MadeByAmp</a></p>
+
+	<br />
+	<hr />
+
+
+
+<h3>Simple Notice</h3>
+
+	<div class="noticeui noticeui-success">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+		
+		<span></span>
+	</div>
+<p>To change the content of the notice, modify the contents of the paragraph tag below.</p>
+
+<p>To change the notice type, use one of the four predefined notice types: <strong>.noticeui-success, .noticeui-warn, .noticeui-error, .noticeui-info</strong></p>
+
+<pre>
+&lt;div class="noticeui noticeui-success"&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	labore et dolore magna aliqua. &lt;/p&gt;
+		
+	&lt;span&gt;&lt;/span&gt;
+&lt;/div&gt;	
+</pre>
+
+
+
+
+<h3>Notice with Heading</h3>
+
+	<div class="noticeui noticeui-warn">
+		<h5>Warning!</h5>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+		
+		<span></span>
+	</div>
+<p>To change the content of the notice, modify the contents of the paragraph tag below.</p>
+<p>To change the heading of the notice, modify the text in the H5 tag below.</p>
+
+<p>To change the notice type, use one of the four predefined notice types: <strong>.noticeui-success, .noticeui-warn, .noticeui-error, .noticeui-info</strong></p>
+<pre>
+&lt;div class="noticeui noticeui-warn"&gt;
+	&lt;h5&gt;Warning!&lt;/h5&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	labore et dolore magna aliqua. &lt;/p&gt;
+	
+	&lt;span&gt;&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+
+
+
+
+<h3>Notice with Heading and Unordered List</h3>
+
+	<div class="noticeui noticeui-error">
+		<h5>Error!</h5>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+		<ul>
+			<li>Vivamus mattis nibh sed purus ullamcorper mollis.</li>
+			<li>Phasellus egestas nulla lobortis est eleifend dapibus.</li>
+			<li>Morbi at nisi blandit eros rhoncus gravida et quis leo.</li>
+		</ul>
+		<span></span>
+	</div>
+<p>To change the content of the notice, modify the contents of the paragraph tag below.</p>
+<p>To change the heading of the notice, modify the text in the H5 tag below.</p>
+<p>To change the unordered list in the notice, modify the list items below adding or removing items as necessary.</p>
+
+<p>To change the notice type, use one of the four predefined notice types: <strong>.noticeui-success, .noticeui-warn, .noticeui-error, .noticeui-info</strong></p>
+<pre>
+&lt;div class="noticeui noticeui-error"&gt;
+	&lt;h5&gt;Error!&lt;/h5&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	labore et dolore magna aliqua. &lt;/p&gt;
+	&lt;ul&gt;
+		&lt;li&gt;Vivamus mattis nibh sed purus ullamcorper mollis.&lt;/li&gt;
+		&lt;li&gt;Phasellus egestas nulla lobortis est eleifend dapibus.&lt;/li&gt;
+		&lt;li&gt;Morbi at nisi blandit eros rhoncus gravida et quis leo.&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;span&gt;&lt;/span&gt;
+&lt;/div&gt;	
+</pre>
+
+
+<br />
+
+<h3>Utility Classes</h3>
+
+<p><strong>NoticeUI comes with four predefined notices:</strong></p>
+
+<ol>
+	<li><strong>Success</strong> - .noticeui-success</li>
+	<li><strong>Warning</strong> - .noticeui-warn</li>
+	<li><strong>Error</strong> - .noticeui-error</li>
+	<li><strong>Information</strong> - .noticeui-info</li>
+</ol>
+
+
+
+</div>
+
+</body>
+
+</html>

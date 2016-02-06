@@ -1,0 +1,175 @@
+﻿<div class="container-fluid-searchbox" ng-controller="beforeLoginIndex">
+    <div class="row" style="min-height: 50px;"></div>
+    <div class="searchDiv" style="background-image:url({{searchBackgroundImage}});">
+        <div class="row" style="min-height: 175px;"></div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <a href=""><img ng-src="{{landingPageLogourl}}" alt="" ng-cloak></a>
+                <span style="float: right;" ng-class="themeTextColor"><strong>Stay Connected ! Explore Professional World</strong></span>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row" style="min-height: 30px;"></div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div angucomplete-alt
+                     id="companyName"
+                     placeholder="{{searchBoxText}}"
+                     pause="500"
+                     selected-object="selectCompany"
+                     remote-url="http://{{sitehosturl}}/search/GetCompanyDetailsAutocomplete?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="companyname"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     ng-model="companyName"
+                     image-field="squarelogourl"
+                     match-class="highlight" ng-keypress="myFunct($event)"></div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row" style="min-height: 30px;"></div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+                <div class="col-sm-6"><button type="button" class="btn btn-default" ng-click="searchCompany()">Search</button></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="col-sm-6"><button type="button" class="btn btn-warning">I'm Feeling Lucky</button></div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row" style="min-height: 235px;"></div>
+    </div>
+
+    <div class="row">
+        <div id="page-content">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 page-content">
+
+                        <div class="title-lines">
+                            <h3 ng-bind="beforeLoginIndexLatestWorkgraphy"></h3>
+                        </div>
+
+                        <div class="latest-jobs-section white-container">
+                            <div class="flexslider clearfix">
+                                <ul class="slides">
+                                    <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;" class="">
+                                        <div class="image">
+                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
+                                            <a class="btn btn-default fa fa-search" href="#"></a>
+                                            <a class="btn btn-default fa fa-link" href="#"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;">
+                                        <div class="image">
+                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
+                                            <a class="btn btn-default fa fa-search" href="#"></a>
+                                            <a class="btn btn-default fa fa-link" href="#"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
+                                        <div class="image">
+                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
+                                            <a class="btn btn-default fa fa-search" href="#"></a>
+                                            <a class="btn btn-default fa fa-link" href="#"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
+                                        </div>
+                                    </li>
+
+                                    <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
+                                        <div class="image">
+                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
+                                            <a class="btn btn-default fa fa-search" href="#"></a>
+                                            <a class="btn btn-default fa fa-link" href="#"></a>
+                                        </div>
+
+                                        <div class="content">
+                                            <h6>Front-End Developer at Envato</h6>
+                                            <span class="location">Sydney, Australia</span>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li></ol>
+                            </div>
+                        </div> <!-- end .latest-jobs-section -->
+
+
+
+                    </div> <!-- end .page-content -->
+
+                </div>
+            </div>
+
+            <div class="success-stories-section">
+                <div class="container">
+                    <h5 class="mt10" ng-bind="beforeLoginIndexTopCompanies"></h5>
+
+                    <div>
+                        <div class="flexslider">
+
+                            <div style="overflow: hidden; position: relative;" class="flex-viewport">
+                                <ul style="width: 100%;" class="slides">
+                                    <li style="float: left; display: block; width: 110px" ng-repeat="competitor in competitorDetails">
+                                        <a href="{{competitor.linkurl}}">
+                                            <img draggable="false" alt="" ng-src="{{competitor.squarelogourl}}" class="thumb" style="width:100px;height:100px">
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="flex-direction-nav"><li><a tabindex="-1" href="#" class="flex-prev flex-disabled"></a></li><li><a href="#" class="flex-next"></a></li></ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .whiteColor {
+        color: white;
+    }
+
+    .blackColor {
+        color: black;
+    }
+     .searchDiv {           
+         background-repeat: no-repeat;
+         background-size: 100% auto;
+         background-position: center top;
+         background-attachment: fixed;
+     }
+
+    .container-fluid-searchbox {
+        margin-left: auto;
+        margin-right: auto;    
+    }
+</style>

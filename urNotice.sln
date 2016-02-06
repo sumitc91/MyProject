@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitPageUrNotice", "OrbitP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitPageWorkgraphy", "OrbitPageWorkgraphy\OrbitPageWorkgraphy.csproj", "{B55B0455-6617-4D61-9A33-B9619923C92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitPageAdmin", "OrbitPageAdmin\OrbitPageAdmin.csproj", "{0C92BB70-06AD-41D2-9E36-A388B89FA96F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +160,14 @@ Global
 		{B55B0455-6617-4D61-9A33-B9619923C92A}.QA|Any CPU.Build.0 = Release|Any CPU
 		{B55B0455-6617-4D61-9A33-B9619923C92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B55B0455-6617-4D61-9A33-B9619923C92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.QA|Any CPU.Build.0 = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C92BB70-06AD-41D2-9E36-A388B89FA96F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
