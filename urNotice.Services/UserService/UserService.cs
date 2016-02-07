@@ -156,11 +156,10 @@ namespace urNotice.Services.UserService
         public string GetUserPost(urNoticeSession session, string @from, string to, string accessKey, string secretKey)
         {
             string url = "http://54.148.127.109:8182";            
-            string graphName = "graph";
-            string vertexId = "2569472";
+            string graphName = "graph";            
             string outLabel = "WallPost";
-            string gremlinQuery ="g.v(" + vertexId + ").out('_label','" + outLabel + "')[" + from + ".." + to + "]";
-            string response = new GraphVertexOperations().GetVertexDetail(url,gremlinQuery,vertexId,graphName,null);
+            string gremlinQuery ="g.v(" + session.UserVertexId + ").out('_label','" + outLabel + "')[" + from + ".." + to + "]";
+            string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, session.UserVertexId, graphName, null);
 
             return response;
         }
