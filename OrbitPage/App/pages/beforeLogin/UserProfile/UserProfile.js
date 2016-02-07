@@ -1,8 +1,10 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload,$timeout, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
+
+        _.defer(function () { $scope.$apply(); });
 
         $scope.name = "Sumit Chourasia";
         $scope.UserPostList = [];
@@ -11,10 +13,12 @@ define([appLocation.preLogin], function (app) {
         $scope.createNewUserPost = function () {
             createNewUserPost();
         };
-
+        $scope.NewPostImageUrl = {
+            //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
+        };
         function createNewUserPost() {
 
-            var url = ServerContextPath.userServer + '/User/UserPost?message=' + $scope.UserPostMessage;
+            var url = ServerContextPath.userServer + '/User/UserPost?message=' + $scope.UserPostMessage + '&image=' + $scope.NewPostImageUrl.link_m;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),
@@ -30,7 +34,8 @@ define([appLocation.preLogin], function (app) {
                 stopBlockUI();
                 //console.log(data);
                 getUserPost();
-
+                $scope.UserPostMessage = "";
+                $scope.NewPostImageUrl = {};
             });
         };
 
@@ -49,9 +54,13 @@ define([appLocation.preLogin], function (app) {
                 }).success(function (data, status, headers, config) {
 
                     stopBlockUI();
-
-                    $scope.NewCompany.squareLogoUrl = data.data.link_s;
-
+                        
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = data.data;
+                    });
+                    
+                        
+                    
                 });
 
             }

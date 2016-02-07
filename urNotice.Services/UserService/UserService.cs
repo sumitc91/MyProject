@@ -71,7 +71,7 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message, string accessKey, string secretKey)
+        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image, string accessKey, string secretKey)
         {
             var response = new Dictionary<string, string>();
             string url = TitanGraphConfig.Server;
@@ -83,7 +83,7 @@ namespace urNotice.Services.UserService
             properties["PostMessage"] = message;
             properties["PostedByUser"] = session.UserName;
             properties["PostedTime"] = DateTimeUtil.GetUtcTime().ToString("s");
-            properties["PostImage"] = "https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/be159063-77ca-4729-a63b-8928380922e0.png";
+            properties["PostImage"] = image;
             
 
             IDictionary<string,string> addVertexResponse = new GraphVertexOperations().AddVertex(url, vertexId, graphName, properties);

@@ -92,6 +92,15 @@ appRequire = require
             urNoticeScript: {
                 deps: ["jquery"]
             },
+            angularjs_fileUpload_shim: {//new
+                deps: ["angular", "jquery"]
+            },
+            angularjs_fileUpload: {//new
+                deps: ["angular", "jquery", "angularjs_fileUpload_shim"]
+            },
+            AngularFileUploadController: { //new
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "beforeLoginCookieService", "fancybox", "angularjs_fileUpload", "angularjs_fileUpload_shim"]
+            },
             beforeLoginSolrService: {
                 deps: ["jquery", "angular", "configureBlockUI", "jquery_blockUI", "toastMessage", "angular_resource"]
             },
@@ -132,7 +141,7 @@ appRequire = require
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui","AngularFileUploadController"]
             },
         },
         paths: {
@@ -156,6 +165,8 @@ appRequire = require
             restangular: "../../App/js/restangular.min",
             angular_animate: "../../App/js/angular-animate",
 
+            angularjs_fileUpload_shim: "../../App/third-Party/angular-file-upload-master/dist/angular-file-upload-shim.min",
+            angularjs_fileUpload: "../../App/third-Party/angular-file-upload-master/dist/angular-file-upload.min",
             configureBlockUI: "../../App/js/configureBlockUI",
             angular_route: "../../App/js/angular-route",
             angular_resource: "../../App/js/angular-resource.min",
@@ -174,6 +185,7 @@ appRequire = require
             // Application Related JS
             //==============================================================================================================
             beforeLoginCookieService: "../../../../App/pages/beforeLogin/controller/common/CookieService",
+            AngularFileUploadController: "../../App/Pages/beforeLogin/controller/common/AngularFileUploadController",//new
             beforeLoginApp: ".././../App/pages/beforeLogin/controller/beforeLoginApp",
             beforeLoginIndex: "../../App/pages/beforeLogin/Index/index",
             beforeLoginSolrService: "../../App/pages/beforeLogin/controller/common/SolrService",
@@ -201,7 +213,8 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "domReady", "fancybox", "ngAutocomplete", "angucomplete_alt_min",
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
-    "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile"
+    "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
+    "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

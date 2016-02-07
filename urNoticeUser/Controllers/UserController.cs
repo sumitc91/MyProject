@@ -53,13 +53,14 @@ namespace urNoticeUser.Controllers
         public JsonResult UserPost()
         {
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+            var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, accessKey, secretKey);
+                var newUserPostResponse = new UserService().CreateNewUserPost(session, message,image, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
