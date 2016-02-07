@@ -11,7 +11,10 @@ using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.GraphService;
 
 namespace urNotice.Services.UserService
 {
@@ -64,6 +67,100 @@ namespace urNotice.Services.UserService
                 response.Status = 500;
                 response.Message = "exception occured !!!";
             }
+            return response;
+        }
+
+        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message, string accessKey, string secretKey)
+        {
+            var response = new Dictionary<string, string>();
+            string url = "http://54.148.127.109:8182";            
+            string graphName = "graph";
+
+            string vertexId = session.UserName + "_" + DateTime.Now.Ticks;
+
+            var properties = new Dictionary<string, string>();
+            properties["PostMessage"] = message;
+            properties["PostedByUser"] = session.UserName;
+            properties["PostedTime"] = DateTimeUtil.GetUtcTime().ToString("s");
+            properties["PostImage"] = "https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/be159063-77ca-4729-a63b-8928380922e0.png";
+            
+
+            IDictionary<string,string> addVertexResponse = new GraphVertexOperations().AddVertex(url, vertexId, graphName, properties);
+
+            var orbitPageVertexDetail = new OrbitPageVertexDetail
+            {
+                url = url,
+                vertexId = addVertexResponse[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
+
+            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.VertexDetail.ToString(),
+                    orbitPageVertexDetail.vertexId,
+                    session.UserName,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    orbitPageVertexDetail,
+                    null,
+                    false,
+                    accessKey,
+                    secretKey
+                    );
+            
+            //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
+            string edgeId = session.UserName + "_" + DateTime.Now.Ticks;
+
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = orbitPageVertexDetail.vertexId;
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTime().ToString("s");
+            properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
+
+
+            IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(url, edgeId, graphName, properties);
+
+            var edgeDetail = new OrbitPageEdgeDetail
+            {
+                url = url,
+                edgeId = addEdgeResponse[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
+            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.EdgeDetail.ToString(),
+                    edgeDetail.edgeId,
+                    session.UserName,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    edgeDetail,
+                    false,
+                    accessKey,
+                    secretKey
+                    );
+
+            return response;
+        }
+
+        public string GetUserPost(urNoticeSession session, string @from, string to, string accessKey, string secretKey)
+        {
+            string url = "http://54.148.127.109:8182";            
+            string graphName = "graph";
+            string vertexId = "2569472";
+            string outLabel = "WallPost";
+            string gremlinQuery ="g.v(" + vertexId + ").out('_label','" + outLabel + "')[" + from + ".." + to + "]";
+            string response = new GraphVertexOperations().GetVertexDetail(url,gremlinQuery,vertexId,graphName,null);
+
             return response;
         }
     }

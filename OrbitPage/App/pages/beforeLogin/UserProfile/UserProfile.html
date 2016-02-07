@@ -1,5 +1,5 @@
-﻿<div style="background-color: rgb(246, 246, 246);">
-    
+﻿<div style="background-color: rgb(246, 246, 246);" ng-controller="beforeLoginUserProfile">
+
     <div class="row" style="min-height: 50px;"></div>
     <div class="container">
         <div class="cover profile">
@@ -13,12 +13,12 @@
                     <img width="110px" alt="people" ng-src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/9e09f732-dd2e-4359-b2ba-31aa89450f5d.png" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/9e09f732-dd2e-4359-b2ba-31aa89450f5d.png">
                 </div>
                 <div class="name">
-                    <a ng-bind="companyDetails.companyname" href="" class="ng-binding">Accenture</a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
+                    <a ng-bind="name" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
                 </div>
 
                 <div class="cover-nav">
                     <div class="col-lg-2 col-sm-2">
-                        <a ng-bind="companyDetails.companyname" href="" class="ng-binding">Accenture</a>
+                        <a ng-bind="name" href="" class=" ng-binding"></a>
                     </div>
                     <div class="col-lg-2 col-sm-2">
                         <ul ng-class="listClass" readonly="readonly" ng-model="companyDetails.averagerating" icon-full="fa-star" icon-hover="hover" icon-empty="fa-star-o" icon-base="fa fa-fw" max="5" class="ng-scope ng-valid angular-input-stars"><!-- ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star-o"></i></li><!-- end ngRepeat: item in items track by $index --></ul>
@@ -137,7 +137,7 @@
                                         <li><a href="#"><i class="fa fa-camera"></i><span class="hidden-xs">Add photos/Video</span></a></li>
                                         <li><a href="#"><i class="fa fa-photo"></i><span class="hidden-xs">Create photo album</span></a></li>
                                     </ul>
-                                    <textarea class="form-control" placeholder="What's in your mind?"></textarea>
+                                    <textarea class="form-control" ng-model="UserPostMessage" placeholder="What's in your mind?"></textarea>
                                     <ul class="list-inline post-actions">
                                         <li><a href="#"><span class="glyphicon glyphicon-camera"></span></a></li>
                                         <li><a href="#" class="glyphicon glyphicon-user"></a></li>
@@ -258,7 +258,7 @@
 
         </section>
     </div>
- 
+
 
 </div>
 

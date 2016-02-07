@@ -60,15 +60,10 @@ C:\code\svn\OrbitPage\urNoticeAnalytics\bin\AWSSDK.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.Extended.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.SqlServer.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Facebook.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\GaDotNet.Common.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\log4net.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Web.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Newtonsoft.Json.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Owin.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\SolrNet.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\System.Net.Http.Formatting.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\System.Web.Helpers.dll

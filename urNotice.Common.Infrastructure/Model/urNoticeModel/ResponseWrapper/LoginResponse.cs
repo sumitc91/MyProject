@@ -10,6 +10,7 @@
         public string Username { get; set; }
         public string imageUrl { get; set; }
         public string TimeStamp { get; set; }
+        public string VertexId { get; set; }
 
         public string Code { get; set; }
     }

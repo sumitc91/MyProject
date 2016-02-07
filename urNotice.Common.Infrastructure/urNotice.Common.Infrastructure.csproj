@@ -142,6 +142,8 @@
     <Compile Include="Common\Constants\EmailConstants\SmptCreateAccountConstants.cs" />
     <Compile Include="Common\Constants\TitanGraphConstants.cs" />
     <Compile Include="Common\Enum\DynamoDbHashKeyDataType.cs" />
+    <Compile Include="Common\Enum\EdgeLabelEnum.cs" />
+    <Compile Include="Common\Enum\EdgePropertyEnum.cs" />
     <Compile Include="Common\Logger\ILogger.cs" />
     <Compile Include="Common\Logger\Logger.cs" />
     <Compile Include="Encryption\AES.cs" />
@@ -263,8 +265,11 @@
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageCompany.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageCompanyUserWorkgraphyTable.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageDesignation.cs" />
+    <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageEdgeDetail.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageGoogleApiContact.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageUser.cs" />
+    <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageUserPost.cs" />
+    <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageVertexDetail.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\UserAnalytics.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\UserCompanyAnalytics.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\UserCompanyNoticePeriodInfoAnalytics.cs" />
@@ -272,6 +277,8 @@
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdemailResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdphoneNumberResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ContactUsRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\CreateStoryRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\LoginRequest.cs" />

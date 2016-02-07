@@ -116,6 +116,8 @@ namespace urNotice.Services.AuthService
                     null,
                     null,
                     null,
+                    null,
+                    null,
                     false,
                     accessKey,
                     secretKey
@@ -174,6 +176,7 @@ namespace urNotice.Services.AuthService
                     userData.LastName = userInfo.OrbitPageUser.lastName;
                     userData.Username = userInfo.OrbitPageUser.username;
                     userData.imageUrl = userInfo.OrbitPageUser.imageUrl;
+                    userData.VertexId = userInfo.OrbitPageUser.vertexId;
 
                     userData.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     userData.Code = "200";

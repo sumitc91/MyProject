@@ -60,7 +60,7 @@ namespace urNoticeAuth.Controllers
 
             if (responseData.Code == "200")
             {
-                var session = new urNoticeSession(req.UserName);
+                var session = new urNoticeSession(req.UserName, responseData.VertexId);
                 TokenManager.CreateSession(session);
                 responseData.UTMZT = session.SessionId;
             }

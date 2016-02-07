@@ -40,6 +40,12 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         public OrbitPageDesignation OrbitPageDesignation { get; set; }
 
         [DynamoDBProperty]
+        public OrbitPageVertexDetail OrbitPageVertexDetail { get; set; }
+
+        [DynamoDBProperty]
+        public OrbitPageEdgeDetail OrbitPageEdgeDetail { get; set; }
+
+        [DynamoDBProperty]
         public List<VirtualFriendList> OrbitPageGoogleApiContact { get; set; }
 
         [DynamoDBProperty]

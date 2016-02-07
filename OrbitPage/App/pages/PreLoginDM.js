@@ -131,6 +131,9 @@ appRequire = require
             beforeLoginSearch: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
+            beforeLoginUserProfile: {
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+            },
         },
         paths: {
             //==============================================================================================================
@@ -184,7 +187,7 @@ appRequire = require
             beforeLoginCompanyDetails: "../../App/pages/beforeLogin/CompanyDetails/CompanyDetails",
             beforeLoginUserDetails: "../../App/pages/beforeLogin/UserDetails/UserDetails",
             beforeLoginSearch: "../../App/pages/beforeLogin/Search/Search",
-
+            beforeLoginUserProfile: "../../App/pages/beforeLogin/UserProfile/UserProfile",
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
             
         },
@@ -198,7 +201,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "domReady", "fancybox", "ngAutocomplete", "angucomplete_alt_min",
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
-    "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails"
+    "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

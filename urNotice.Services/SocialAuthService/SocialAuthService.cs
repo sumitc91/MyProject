@@ -76,7 +76,7 @@ namespace urNotice.Services.SocialAuthService
 
                             new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
-                            var session = new urNoticeSession(userInfo.ObjectId);
+                            var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -142,7 +142,7 @@ namespace urNotice.Services.SocialAuthService
 
                             new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
-                            var session = new urNoticeSession(userInfo.ObjectId);
+                            var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -200,6 +200,8 @@ namespace urNotice.Services.SocialAuthService
                             null,
                             null,
                             null,
+                            null,
+                            null,
                             false,
                             accessKey,
                             secretKey
@@ -234,7 +236,7 @@ namespace urNotice.Services.SocialAuthService
                         response.Message = "user Login via facebook";
                         try
                         {
-                            var session = new urNoticeSession(userInfo.ObjectId);
+                            var session = new urNoticeSession(userInfo.ObjectId, user.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                         }

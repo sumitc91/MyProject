@@ -57,7 +57,6 @@ C:\code\svn\OrbitPage\urNoticeAuth\bin\urNoticeAuth.dll.config
 C:\code\svn\OrbitPage\urNoticeAuth\bin\urNoticeAuth.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\urNoticeAuth.pdb
 C:\code\svn\OrbitPage\urNoticeAuth\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\urNoticeAuth\bin\log4net.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\Microsoft.Owin.Cors.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\Microsoft.Owin.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\Microsoft.Practices.ServiceLocation.dll

@@ -33,7 +33,21 @@ namespace urNotice.Services.DynamoDbService
             return userAnalytics;
         }
 
-        public OrbitPageCompanyUserWorkgraphyTable CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(string dataType, string objectId, string compareId, string facebookId, string facebookAuthKey, OrbitPageUser orbitPageUser, OrbitPageCompany orbitPageCompany, OrbitPageDesignation orbitPageDesignation, List<VirtualFriendList> orbitPageGoogleApiContact, Boolean isSolrUpdated, string accessKey, string secretKey)
+        public OrbitPageCompanyUserWorkgraphyTable CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+            string dataType, 
+            string objectId, 
+            string compareId, 
+            string facebookId, 
+            string facebookAuthKey, 
+            OrbitPageUser orbitPageUser, 
+            OrbitPageCompany orbitPageCompany, 
+            OrbitPageDesignation orbitPageDesignation, 
+            List<VirtualFriendList> orbitPageGoogleApiContact,
+            OrbitPageVertexDetail orbitPageVertexDetail,
+            OrbitPageEdgeDetail orbitPageEdgeDetail,
+            Boolean isSolrUpdated, 
+            string accessKey, 
+            string secretKey)
         {
             var context = GetDynamoDbContext(accessKey, secretKey);
 
@@ -45,6 +59,8 @@ namespace urNotice.Services.DynamoDbService
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUser = orbitPageUser;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageGoogleApiContact = orbitPageGoogleApiContact;
             orbitPageCompanyUserWorkgraphyTable.FacebookAuthToken = facebookAuthKey;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail = orbitPageVertexDetail;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageEdgeDetail = orbitPageEdgeDetail;
             orbitPageCompanyUserWorkgraphyTable.CreatedDate = DateTimeUtil.GetUtcTime();
 
             context.Save(orbitPageCompanyUserWorkgraphyTable);

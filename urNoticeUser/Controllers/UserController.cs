@@ -5,7 +5,9 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
@@ -37,6 +39,53 @@ namespace urNoticeUser.Controllers
             {
                 var clientDetailResponse = new UserService().GetClientDetails(session.UserName,accessKey,secretKey);              
                 return Json(clientDetailResponse,JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public JsonResult UserPost()
+        {
+            var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, accessKey, secretKey);
+                return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public JsonResult GetUserPost()
+        {
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                var getUserPostResponse = new UserService().GetUserPost(session,from,to, accessKey, secretKey);
+                var getUserPostResponseDeserialized = JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+                return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
             }
             else
             {

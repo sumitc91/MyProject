@@ -13,6 +13,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         OrbitPageDesignation,
         OrbitPageFacebookId,
         FacebookFriends,
-        GmailFriends
+        GmailFriends,
+        VertexDetail,
+        EdgeDetail
     }
 }

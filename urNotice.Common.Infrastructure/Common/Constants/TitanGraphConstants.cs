@@ -9,5 +9,6 @@ namespace urNotice.Common.Infrastructure.Common.Constants
     public class TitanGraphConstants
     {
         public const String Id = "_id";
+        public const String RexsterUri = "RexsterUri";
     }
 }

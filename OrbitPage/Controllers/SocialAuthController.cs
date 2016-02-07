@@ -296,7 +296,7 @@ namespace OrbitPage.Controllers
                             }
                             new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
-                            var session = new urNoticeSession(userInfo.OrbitPageUser.email);
+                            var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             ViewBag.umtzt = response.Payload.UTMZT;
@@ -362,6 +362,8 @@ namespace OrbitPage.Controllers
                             null,
                             null,
                             null,
+                            null,
+                            null,
                             false,
                             accessKey,
                             secretKey
@@ -393,7 +395,7 @@ namespace OrbitPage.Controllers
                         response.Message = "user Login via google";
                         try
                         {
-                            var session = new urNoticeSession(user.email);
+                            var session = new urNoticeSession(user.email,user.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
 
@@ -767,7 +769,7 @@ namespace OrbitPage.Controllers
                         new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
 
-                        var session = new urNoticeSession(userInfo.OrbitPageUser.email);
+                        var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
                         TokenManager.CreateSession(session);
                         response.Payload.UTMZT = session.SessionId;
                         ViewBag.umtzt = response.Payload.UTMZT;
@@ -813,6 +815,8 @@ namespace OrbitPage.Controllers
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         false,
                         accessKey,
                         secretKey
@@ -840,7 +844,7 @@ namespace OrbitPage.Controllers
                     response.Message = "user Login via google";
                     try
                     {
-                        var session = new urNoticeSession(user.email);
+                        var session = new urNoticeSession(user.email,user.vertexId);
                         TokenManager.CreateSession(session);
                         response.Payload.UTMZT = session.SessionId;
 

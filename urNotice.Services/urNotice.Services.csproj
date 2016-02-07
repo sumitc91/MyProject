@@ -82,6 +82,8 @@
     <Compile Include="AuthService\AuthService.cs" />
     <Compile Include="AuthService\IAuthService.cs" />
     <Compile Include="DynamoDbService\DynamoDbService.cs" />
+    <Compile Include="GraphService\GraphEdgeOperations.cs" />
+    <Compile Include="GraphService\GraphVertexOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RatingService\RatingService.cs" />
     <Compile Include="SessionService\SessionService.cs" />
