@@ -6,7 +6,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.name = "Sumit Chourasia";
         
-        $scope.Login = function() {
+        $scope.createNewUserPost = function () {
             createNewUserPost();
         };
 

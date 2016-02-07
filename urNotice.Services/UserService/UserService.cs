@@ -149,6 +149,7 @@ namespace urNotice.Services.UserService
                     secretKey
                     );
 
+            response["status"] = "200";
             return response;
         }
 
