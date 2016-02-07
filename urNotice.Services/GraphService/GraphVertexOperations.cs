@@ -47,7 +47,7 @@ namespace urNotice.Services.GraphService
         {
 
         //http://localhost:8182/graphs/graph/vertices/2571776/tp/gremlin?script=g.v(2569472).out(“_label”,”WallPost”)[0..1]
-
+            //
             var uri = new StringBuilder("/graphs/" + graphName + "/vertices/" + vertexId);
 
             if (gremlinQuery != null)

@@ -152,15 +152,15 @@
                         <div class="col-md-12" ng-repeat="post in UserPostList">
                             <div class="panel panel-white post panel-shadow">
                                 <div class="post-heading">
-                                    <div class="pull-left image"><img src="http://demos.bootdey.com/dee-dee/img/Profile/profile.jpg" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left image"><img ng-src="{{post.userInfo.ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
-                                        <div class="title h5"><a href="#" class="post-user-name">Marting lowenyert</a> uploaded a photo.</div>
-                                        <h6 class="text-muted time">5 seconds ago</h6>
+                                        <div class="title h5"><a href="" class="post-user-name" ng-bind="post.userInfo.FirstName"></a> &nbsp;<a href="" class="post-user-name" ng-bind="post.userInfo.LastName"></a></div>
+                                        <h6 class="text-muted time" ng-bind="post.postInfo.PostedTime"></h6>
                                     </div>
                                 </div>
-                                <div class="post-image"><img ng-src="{{post.PostImage}}" class="image show-in-modal" alt="image post"></div>
+                                <div class="post-image"><img ng-src="{{post.postInfo.PostImage}}" class="image show-in-modal" alt="image post"></div>
                                 <div class="post-description">
-                                    <p ng-bind="post.PostMessage"></p>
+                                    <p ng-bind="post.postInfo.PostMessage"></p>
                                     <div class="stats"><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-thumbs-up icon"></i>228 </a><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-share icon"></i>128 </a></div>
                                 </div>
                                 <div class="post-footer">

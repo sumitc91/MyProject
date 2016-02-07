@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Services.GraphService;
 
 namespace urNotice.Services.TitanService
 {
@@ -14,24 +17,24 @@ namespace urNotice.Services.TitanService
     {
         public Dictionary<String, String> InsertNewUserToTitan(OrbitPageUser user, bool toBeOptimized)
         {
-            String uri = "http://54.148.127.109:8182/graphs/graph/vertices/" + user.email + "?name=" + user.email + "&gender=" + user.gender;
 
-            var client = new RestClient(uri);
-            var request = new RestRequest();
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
 
-            request.Method = Method.POST;
-            request.AddHeader("Accept", "application/json");
-            request.Parameters.Clear();
-            request.AddParameter("application/json", "", ParameterType.RequestBody);
+            string vertexId = user.email;
 
-            var res = client.Execute(request);
-            var content = res.Content; // raw content as string 
+            var properties = new Dictionary<string, string>();
+            properties["FirstName"] = user.firstName;
+            properties["LastName"] = user.lastName;
+            properties["Username"] = user.email;
+            properties["Gender"] = user.gender;
+            properties["CreatedTime"] = DateTimeUtil.GetUtcTime().ToString("s");
+            properties["ImageUrl"] = user.imageUrl;
+            properties["CoverImageUrl"] = user.userCoverPic;
 
-            dynamic jsonResponse = JsonConvert.DeserializeObject(content);
-            var response = new Dictionary<String, String>();
-            response["status"] = "200";
-            response[TitanGraphConstants.Id] = jsonResponse.results._id;
-            return response;
+            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(url, vertexId, graphName, properties);
+
+            return addVertexResponse;
         }
     }
 }

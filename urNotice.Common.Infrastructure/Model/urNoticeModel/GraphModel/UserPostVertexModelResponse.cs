@@ -8,7 +8,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
 {
     public class UserPostVertexModelResponse
     {
-        public Boolean success { get; set; }
+        public Boolean success { get; set; }       
         public List<UserPostVertexModel> results { get; set; }
     }
 }

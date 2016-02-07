@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Common.Logger;
@@ -73,8 +74,8 @@ namespace urNotice.Services.UserService
         public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message, string accessKey, string secretKey)
         {
             var response = new Dictionary<string, string>();
-            string url = "http://54.148.127.109:8182";            
-            string graphName = "graph";
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
 
             string vertexId = session.UserName + "_" + DateTime.Now.Ticks;
 
@@ -155,10 +156,11 @@ namespace urNotice.Services.UserService
 
         public string GetUserPost(urNoticeSession session, string @from, string to, string accessKey, string secretKey)
         {
-            string url = "http://54.148.127.109:8182";            
-            string graphName = "graph";            
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;            
             string outLabel = "WallPost";
-            string gremlinQuery ="g.v(" + session.UserVertexId + ").out('_label','" + outLabel + "')[" + from + ".." + to + "]";
+            //g.v(2569472).as('userInfo').out('_label','WallPost').as('postInfo')[0..2].select{it}{it}
+            string gremlinQuery = "g.v(" + session.UserVertexId + ").as('userInfo').out('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].select{it}{it}";
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, session.UserVertexId, graphName, null);
 
             return response;
