@@ -35,7 +35,7 @@ define([appLocation.preLogin], function (app) {
                 //console.log(data);
                 getUserPost();
                 $scope.UserPostMessage = "";
-                $scope.NewPostImageUrl = {};
+                $scope.NewPostImageUrl.link_s="";
             });
         };
 
