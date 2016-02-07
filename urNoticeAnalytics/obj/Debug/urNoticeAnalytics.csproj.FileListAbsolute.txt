@@ -84,7 +84,6 @@ C:\code\svn\OrbitPage\urNoticeAnalytics\bin\AWSSDK.pdb
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.xml
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.Extended.xml
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\EntityFramework.SqlServer.xml
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Facebook.xml
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Newtonsoft.Json.xml

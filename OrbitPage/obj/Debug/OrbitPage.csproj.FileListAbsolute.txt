@@ -74,7 +74,6 @@ C:\code\svn\OrbitPage\OrbitPage\bin\AWSSDK.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\OrbitPage\bin\urNotice.Services.pdb
 C:\code\svn\OrbitPage\OrbitPage\bin\EntityFramework.xml
-C:\code\svn\OrbitPage\OrbitPage\bin\Facebook.xml
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\OrbitPage\bin\Newtonsoft.Json.xml

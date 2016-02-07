@@ -89,7 +89,6 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\EntityFramework.xml
 C:\code\svn\OrbitPage\urNoticeUser\bin\AWSSDK.pdb
 C:\code\svn\OrbitPage\urNoticeUser\bin\SolrNet.pdb
 C:\code\svn\OrbitPage\urNoticeUser\bin\SolrNet.xml
-C:\code\svn\OrbitPage\urNoticeUser\bin\Facebook.xml
 C:\code\svn\OrbitPage\urNoticeUser\bin\RestSharp.xml
 C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.xml

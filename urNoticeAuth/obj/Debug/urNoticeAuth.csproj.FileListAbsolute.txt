@@ -102,7 +102,6 @@ C:\code\svn\OrbitPage\urNoticeAuth\bin\System.Web.WebPages.xml
 C:\code\svn\OrbitPage\urNoticeAuth\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\urNoticeAuth\bin\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\urNoticeAuth\bin\AWSSDK.pdb
-C:\code\svn\OrbitPage\urNoticeAuth\bin\Facebook.xml
 C:\code\svn\OrbitPage\urNoticeAuth\bin\RestSharp.xml
 C:\code\svn\OrbitPage\urNoticeAuth\obj\Debug\urNoticeAuth.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNoticeAuth\obj\Debug\urNoticeAuth.dll

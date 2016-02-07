@@ -50,7 +50,6 @@ C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\AWSSDK.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\EntityFramework.xml
-C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Facebook.xml
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Newtonsoft.Json.xml

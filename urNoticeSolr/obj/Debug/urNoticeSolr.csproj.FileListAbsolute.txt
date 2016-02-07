@@ -91,7 +91,6 @@ C:\code\svn\OrbitPage\urNoticeSolr\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\urNoticeSolr\bin\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\urNoticeSolr\bin\EntityFramework.xml
 C:\code\svn\OrbitPage\urNoticeSolr\bin\AWSSDK.pdb
-C:\code\svn\OrbitPage\urNoticeSolr\bin\Facebook.xml
 C:\code\svn\OrbitPage\urNoticeSolr\bin\RestSharp.xml
 C:\code\svn\OrbitPage\urNoticeSolr\obj\Debug\urNoticeSolr.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNoticeSolr\obj\Debug\urNoticeSolr.dll
