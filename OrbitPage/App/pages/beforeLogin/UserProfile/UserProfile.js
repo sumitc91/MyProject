@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         $scope.name = "Sumit Chourasia";
@@ -32,6 +32,30 @@ define([appLocation.preLogin], function (app) {
                 getUserPost();
 
             });
+        };
+
+        $scope.onFileSelectLogoUrl = function ($files) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    $scope.NewCompany.squareLogoUrl = data.data.link_s;
+
+                });
+
+            }
+
         };
 
         function getUserPost() {
