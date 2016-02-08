@@ -5,20 +5,20 @@
         <div class="cover profile">
             <div class="wrapper">
                 <div class="image">
-                    <img height="250" alt="people" ng-src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/4363b5d5-df6a-4ea2-8d4c-a0e28536859e.png" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/company/medium/4363b5d5-df6a-4ea2-8d4c-a0e28536859e.png">
+                    <img height="250" alt="people" ng-src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/companyRectangleImageNotAvailable.png" >
                 </div>
             </div>
             <div class="cover-info">
                 <div class="avatar">
-                    <img width="110px" alt="people" ng-src="{{clientDetailResponse.imageUrl}}"/>
+                    <img width="110px" alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" />
                 </div>
                 <div class="name">
-                    <a ng-bind="clientDetailResponse.FirstName" href="" class="ng-binding"></a>&nbsp;<a ng-bind="clientDetailResponse.LastName" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
+                    <a ng-bind="post.userInfo.Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="post.userInfo.Lastname" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
                 </div>
 
                 <div class="cover-nav">
                     <div class="col-lg-2 col-sm-2">
-                        <a ng-bind="clientDetailResponse.FirstName" href="" class="ng-binding"></a>&nbsp;<a ng-bind="clientDetailResponse.LastName" href="" class="ng-binding"></a>
+                        <a ng-bind="CurrentUserDetails.Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="CurrentUserDetails.Lastname" href="" class="ng-binding"></a>
                     </div>
                     <div class="col-lg-2 col-sm-2">
                         <ul ng-class="listClass" readonly="readonly" ng-model="companyDetails.averagerating" icon-full="fa-star" icon-hover="hover" icon-empty="fa-star-o" icon-base="fa fa-fw" max="5" class="ng-scope ng-valid angular-input-stars"><!-- ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star-o"></i></li><!-- end ngRepeat: item in items track by $index --></ul>

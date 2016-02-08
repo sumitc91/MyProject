@@ -75,3 +75,4 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Http.W
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Razor.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.pdb
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.csprojResolveAssemblyReference.cache

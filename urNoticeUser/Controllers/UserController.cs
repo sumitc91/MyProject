@@ -83,17 +83,29 @@ namespace urNoticeUser.Controllers
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            isValidToken = true;//TODO: currently hard coded.
             if (isValidToken)
-            {        
-               
+            {
+                Boolean isRequestValid = true;
                 if(String.IsNullOrWhiteSpace(vertexId) || vertexId.Equals("undefined"))
                 {
-                    vertexId = session.UserVertexId;
+                    if (session != null)
+                        vertexId = session.UserVertexId;
+                    else
+                        isRequestValid = false;
                 }
-                                 
-                var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
-                var getUserPostResponseDeserialized = JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
-                return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+
+                if (isRequestValid)
+                {
+                    var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    var getUserPostResponseDeserialized =
+                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {                    
+                    return Json("not a valid request", JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {

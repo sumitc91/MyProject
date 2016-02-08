@@ -7,8 +7,10 @@ define([appLocation.preLogin], function (app) {
         _.defer(function () { $scope.$apply(); });
         $scope.visitedUserVertexId = $routeParams.vertexId;
 
-       
+        $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
+        
+        getUserInformation();
         getUserPost();
 
         $scope.createNewUserPost = function () {
@@ -72,6 +74,29 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        function getUserInformation() {
+            var url = ServerContextPath.solrServer + '/Search/UserDetailsById?uid=' + $scope.visitedUserVertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            startBlockUI('wait..', 3);
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                stopBlockUI();
+                $scope.$apply(function () {
+                    $scope.CurrentUserDetails = data.Payload[0];
+                    console.log($scope.CurrentUserDetails);
+                });
+                
+            });
+        };
+
         function getUserPost() {
             var url = ServerContextPath.userServer + '/User/GetUserPost?from=0&to=10&vertexId=' + $scope.visitedUserVertexId;
             var headers = {
@@ -91,11 +116,12 @@ define([appLocation.preLogin], function (app) {
                     $scope.UserPostList = data.results;
                     console.log($scope.UserPostList);
                 });
-                
+
             });
         };
 
     });
 
+      
 });
 

@@ -106,7 +106,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.selectUser = function (selected) {
             console.log(selected);
-            location.href = "/#userprofile/" + selected.originalObject.vertexId;
+            location.href = "/#userprofile/" + selected.originalObject.VertexId;
 
         };
 

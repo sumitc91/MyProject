@@ -202,6 +202,7 @@ namespace urNoticeSolr.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        
         public JsonResult CompanyDetailsById()
         {
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();
@@ -247,12 +248,12 @@ namespace urNoticeSolr.Controllers
             {
 
                 var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
-                var solrQuery = new SolrQuery("username:" + uid);
+                var solrQuery = new SolrQuery("(username:" + uid+") || (vertexId:" + uid+")");
                 var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
                 {
                     Rows = 10,
                     Start = 0,
-                    Fields = new[] { "id", "firstname", "lastname", "gender", "profilepic", "isactive", "source", "email", "phone", "username", "coverpic" }
+                    Fields = new[] { "id", "firstname", "lastname","name", "gender", "profilepic", "isactive", "source", "email", "phone", "username", "coverpic" }
                 });
                 response.Payload = solrQueryExecute;
                 response.Status = 200;
