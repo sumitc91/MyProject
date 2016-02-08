@@ -84,84 +84,40 @@ namespace urNotice.Services.UserService
             properties["PostedByUser"] = session.UserName;
             properties["PostedTime"] = DateTimeUtil.GetUtcTime().ToString("s");
             properties["PostImage"] = image;
-            
+            IDictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(session.UserName,url, vertexId, graphName, properties, accessKey, secretKey);
 
-            IDictionary<string,string> addVertexResponse = new GraphVertexOperations().AddVertex(url, vertexId, graphName, properties);
 
-            var orbitPageVertexDetail = new OrbitPageVertexDetail
-            {
-                url = url,
-                vertexId = addVertexResponse[TitanGraphConstants.Id],
-                graphName = graphName,
-                properties = properties
-            };
-
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.VertexDetail.ToString(),
-                    orbitPageVertexDetail.vertexId,
-                    session.UserName,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    orbitPageVertexDetail,
-                    null,
-                    false,
-                    accessKey,
-                    secretKey
-                    );
-            
-            //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
             string edgeId = session.UserName + "_" + DateTime.Now.Ticks;
-
             properties = new Dictionary<string, string>();
             properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
-            properties[EdgePropertyEnum._inV.ToString()] = orbitPageVertexDetail.vertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Created.ToString();                      
+            IDictionary<string, string> addCreatedByEdgeResponse = new GraphEdgeOperations().AddEdge(session,url, edgeId, graphName, properties,accessKey,secretKey);
+            
+            //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
+            edgeId = session.UserName + "_" + DateTime.Now.Ticks;
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._inV.ToString()] = session.UserVertexId;
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
+            properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTime().ToString("s");
             properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
 
-
-            IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(url, edgeId, graphName, properties);
-
-            var edgeDetail = new OrbitPageEdgeDetail
-            {
-                url = url,
-                edgeId = addEdgeResponse[TitanGraphConstants.Id],
-                graphName = graphName,
-                properties = properties
-            };
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.EdgeDetail.ToString(),
-                    edgeDetail.edgeId,
-                    session.UserName,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    edgeDetail,
-                    false,
-                    accessKey,
-                    secretKey
-                    );
+            IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session,url, edgeId, graphName, properties, accessKey,secretKey);
 
             response["status"] = "200";
             return response;
         }
 
-        public string GetUserPost(urNoticeSession session, string @from, string to, string accessKey, string secretKey)
+        public string GetUserPost(string userVertexId, string @from, string to, string accessKey, string secretKey)
         {
             string url = TitanGraphConfig.Server;
             string graphName = TitanGraphConfig.Graph;            
             string outLabel = "WallPost";
             //g.v(2569472).as('userInfo').out('_label','WallPost').as('postInfo')[0..2].select{it}{it}
-            string gremlinQuery = "g.v(" + session.UserVertexId + ").as('userInfo').out('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].select{it}{it}";
-            string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, session.UserVertexId, graphName, null);
+            string gremlinQuery = "g.v(" + userVertexId + ").as('userInfo').in('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].select{it}{it}";
+            string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
         }

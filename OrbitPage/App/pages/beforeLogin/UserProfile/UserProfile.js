@@ -1,12 +1,13 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload,$timeout, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload,$timeout,$routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
+        $scope.visitedUserVertexId = $routeParams.vertexId;
 
-        $scope.name = "Sumit Chourasia";
+       
         $scope.UserPostList = [];
         getUserPost();
 
@@ -35,7 +36,11 @@ define([appLocation.preLogin], function (app) {
                 //console.log(data);
                 getUserPost();
                 $scope.UserPostMessage = "";
-                $scope.NewPostImageUrl.link_s="";
+
+                $timeout(function () {
+                    $scope.NewPostImageUrl.link_s = "";
+                });
+                
             });
         };
 
@@ -68,7 +73,7 @@ define([appLocation.preLogin], function (app) {
         };
 
         function getUserPost() {
-            var url = ServerContextPath.userServer + '/User/GetUserPost?from=0&to=10';
+            var url = ServerContextPath.userServer + '/User/GetUserPost?from=0&to=10&vertexId=' + $scope.visitedUserVertexId;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),

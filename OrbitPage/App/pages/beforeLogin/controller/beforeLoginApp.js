@@ -40,6 +40,7 @@ define([appLocation.preLogin], function (app) {
                        when("/career", { templateUrl: "../../App/pages/beforeLogin/Career/Career.html" }).
                        when("/editpage", { templateUrl: "../../App/pages/beforeLogin/EditPage/EditPage.html" }).
                        when("/userprofile", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).
+                       when("/userprofile/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).
                        otherwise({ templateUrl: "../../App/pages/beforeLogin/404/404.html" });
 
 

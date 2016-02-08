@@ -100,7 +100,7 @@ namespace urNotice.Services.AuthService
             }
             
             
-            var userVertexIdInfo = new TitanService.TitanService().InsertNewUserToTitan(user, false);
+            var userVertexIdInfo = new TitanService.TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
             user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
             try
             {

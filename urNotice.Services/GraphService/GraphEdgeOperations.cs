@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Session;
 
 namespace urNotice.Services.GraphService
 {
     public class GraphEdgeOperations
     {
-        public Dictionary<String, String> AddEdge(string url, string edgeId, string graphName, Dictionary<string, string> properties)
+        public Dictionary<String, String> AddEdge(urNoticeSession session, string url, string edgeId, string graphName, Dictionary<string, string> properties, string accessKey, string secretKey)
         {
 
-            var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges/" + edgeId + "?");
+            //var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges/" + edgeId + "?");
+            var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges?");
 
             foreach (KeyValuePair<string, string> property in properties)
             {
@@ -38,6 +42,33 @@ namespace urNotice.Services.GraphService
             var response = new Dictionary<String, String>();
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
+
+
+            // add edge to dynamodb.
+            var edgeDetail = new OrbitPageEdgeDetail
+            {
+                url = url,
+                edgeId = response[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
+            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.EdgeDetail.ToString(),
+                    edgeDetail.edgeId,
+                    session.UserName,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    edgeDetail,
+                    false,
+                    accessKey,
+                    secretKey
+                    );
+
             return response;
         }
     }

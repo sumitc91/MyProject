@@ -347,7 +347,7 @@ namespace OrbitPage.Controllers
                     
 
 
-                    var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false);
+                    var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
                     user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
                     
                     try
@@ -799,7 +799,7 @@ namespace OrbitPage.Controllers
                     keepMeSignedIn = CommonConstants.TRUE
                 };
 
-                var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false);
+                var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
                 user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
 
 

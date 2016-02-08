@@ -15,14 +15,11 @@ namespace urNotice.Services.TitanService
 {
     public class TitanService
     {
-        public Dictionary<String, String> InsertNewUserToTitan(OrbitPageUser user, bool toBeOptimized)
+        public Dictionary<String, String> InsertNewUserToTitan(OrbitPageUser user, bool toBeOptimized, string accessKey, string secretKey)
         {
 
             string url = TitanGraphConfig.Server;
-            string graphName = TitanGraphConfig.Graph;
-
-            string vertexId = user.email;
-
+           
             var properties = new Dictionary<string, string>();
             properties["FirstName"] = user.firstName;
             properties["LastName"] = user.lastName;
@@ -32,7 +29,7 @@ namespace urNotice.Services.TitanService
             properties["ImageUrl"] = user.imageUrl;
             properties["CoverImageUrl"] = user.userCoverPic;
 
-            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(url, vertexId, graphName, properties);
+            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(user.email, url, user.email, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             return addVertexResponse;
         }

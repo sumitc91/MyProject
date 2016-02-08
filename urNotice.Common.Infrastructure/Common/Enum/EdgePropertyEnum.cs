@@ -11,6 +11,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         _outV,
         _inV,
         _label,
+        PostedBy,
         PostedDate,
         EdgeMessage
     }

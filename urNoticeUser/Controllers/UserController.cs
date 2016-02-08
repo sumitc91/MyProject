@@ -77,14 +77,21 @@ namespace urNoticeUser.Controllers
         {
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
             var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
-            {
-                var getUserPostResponse = new UserService().GetUserPost(session,from,to, accessKey, secretKey);
+            {        
+               
+                if(String.IsNullOrWhiteSpace(vertexId) || vertexId.Equals("undefined"))
+                {
+                    vertexId = session.UserVertexId;
+                }
+                                 
+                var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
                 var getUserPostResponseDeserialized = JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
                 return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
             }

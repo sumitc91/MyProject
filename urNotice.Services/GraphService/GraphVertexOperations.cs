@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Session;
 
 namespace urNotice.Services.GraphService
 {
     public class GraphVertexOperations
     {
-        public Dictionary<String, String> AddVertex(string url,string vertexId,string graphName,Dictionary<string,string> properties)
+        public Dictionary<String, String> AddVertex(string email, string url, string vertexId, string graphName, Dictionary<string, string> properties, string accessKey, string secretKey)
         {
             
-            var uri = new StringBuilder("/graphs/" + graphName + "/vertices/" + vertexId + "?");
+            //var uri = new StringBuilder("/graphs/" + graphName + "/vertices/" + vertexId + "?");
+            var uri = new StringBuilder("/graphs/" + graphName + "/vertices?");
 
             foreach (KeyValuePair<string, string> property in properties)
             {
@@ -39,6 +43,32 @@ namespace urNotice.Services.GraphService
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
             response[TitanGraphConstants.RexsterUri] = uri.ToString();
+
+            var orbitPageVertexDetail = new OrbitPageVertexDetail
+            {
+                url = url,
+                vertexId = response[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
+
+            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.VertexDetail.ToString(),
+                    orbitPageVertexDetail.vertexId,
+                    email,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    orbitPageVertexDetail,
+                    null,
+                    false,
+                    accessKey,
+                    secretKey
+                    );
+
             return response;
         }
 
