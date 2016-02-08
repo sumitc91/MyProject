@@ -11,7 +11,7 @@
         public string imageUrl { get; set; }
         public string gender { get; set; }
         public string isLocked { get; set; }
-        
-        
+
+        public string vertexId { get; set; }
     }
 }

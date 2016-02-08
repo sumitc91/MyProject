@@ -159,7 +159,7 @@ namespace urNotice.Services.SolrService
                 {
                     Rows = 1,
                     Start = 0,
-                    Fields = new[] { "id", "firstname", "lastname", "gender", "profilepic", "isactive", "source", "email" }
+                    Fields = new[] { "id", "firstname", "lastname", "gender", "profilepic", "isactive", "source", "email","vertexId" }
                 });
 
                 if (solrQueryExecute != null && solrQueryExecute.Count > 0)
@@ -173,7 +173,8 @@ namespace urNotice.Services.SolrService
                         imageUrl = solrQueryExecute[0].Profilepic,
                         IsActive = solrQueryExecute[0].Isactive,
                         LastName = solrQueryExecute[0].Lastname,
-                        Username = solrQueryExecute[0].Username
+                        Username = solrQueryExecute[0].Username,
+                        vertexId = solrQueryExecute[0].VertexId
                     };
 
                     response.Status = 200;
