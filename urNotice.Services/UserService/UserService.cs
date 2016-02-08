@@ -71,13 +71,11 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image, string accessKey, string secretKey)
+        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image,string vertexId, string accessKey, string secretKey)
         {
             var response = new Dictionary<string, string>();
             string url = TitanGraphConfig.Server;
             string graphName = TitanGraphConfig.Graph;
-
-            string vertexId = session.UserName + "_" + DateTime.Now.Ticks;
 
             var properties = new Dictionary<string, string>();
             properties["PostMessage"] = message;
@@ -97,10 +95,22 @@ namespace urNotice.Services.UserService
             //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
             edgeId = session.UserName + "_" + DateTime.Now.Ticks;
             properties = new Dictionary<string, string>();
-            properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-            properties[EdgePropertyEnum._inV.ToString()] = session.UserVertexId;
+
+            if (vertexId != null && vertexId != session.UserVertexId)
+            {
+                properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+                properties[EdgePropertyEnum._inV.ToString()] = vertexId;
+                properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
+            }
+            else
+            {
+                properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+                properties[EdgePropertyEnum._inV.ToString()] = session.UserVertexId;
+                properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
+            }
+            
+            
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
-            properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTime().ToString("s");
             properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
 
@@ -116,7 +126,8 @@ namespace urNotice.Services.UserService
             string graphName = TitanGraphConfig.Graph;            
             string outLabel = "WallPost";
             //g.v(2569472).as('userInfo').out('_label','WallPost').as('postInfo')[0..2].select{it}{it}
-            string gremlinQuery = "g.v(" + userVertexId + ").as('userInfo').in('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].select{it}{it}";
+            //g.v(768).in('_label','WallPost').as('postInfo')[0..10].in('_label','Created').as('userInfo').select{it}{it}
+            string gremlinQuery = "g.v(" + userVertexId + ").in('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;

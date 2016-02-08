@@ -21,7 +21,7 @@ define([appLocation.preLogin], function (app) {
         };
         function createNewUserPost() {
 
-            var url = ServerContextPath.userServer + '/User/UserPost?message=' + $scope.UserPostMessage + '&image=' + $scope.NewPostImageUrl.link_m;
+            var url = ServerContextPath.userServer + '/User/UserPost?message=' + $scope.UserPostMessage + '&image=' + $scope.NewPostImageUrl.link_m+'&vertexId=' + $scope.visitedUserVertexId;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),

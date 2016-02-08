@@ -54,13 +54,14 @@ namespace urNoticeUser.Controllers
         {
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
             var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message,image, accessKey, secretKey);
+                var newUserPostResponse = new UserService().CreateNewUserPost(session, message,image,vertexId, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
