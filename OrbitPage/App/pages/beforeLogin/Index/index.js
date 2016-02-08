@@ -5,13 +5,20 @@ define([appLocation.preLogin], function (app) {
         $('title').html(window.madetoearn.i18n.beforeLoginOrbitPageCompanyTitle);
         
         //detectIfUserLoggedIn();
-        /*$rootScope.sitehosturl = $location.host();//"localhost:40287";
+        $rootScope.sitehosturl = $location.host();//"localhost:40287";
         if ($location.host() == "localhost") {
             $rootScope.sitehosturl = "localhost:28308";
-        }*/
-        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
+        }
+        //$rootScope.sitehosturl = "www.orbitpage.com/searchapi";
 
-        $scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
+        $scope.searchTypeModel = 'Company';
+
+        //$scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
+        $scope.searchBoxCompanyText = "Search Company";
+        $scope.searchBoxUserText = "Search User";
+        $scope.searchBoxWorkgraphyText = "Search Workgraphy NOT IMPLEMENTED YET !!!";
+
+
         $scope.beforeLoginIndexLatestWorkgraphy = window.madetoearn.i18n.beforeLoginIndexLatestWorkgraphy;
         $scope.beforeLoginIndexTopCompanies = window.madetoearn.i18n.beforeLoginIndexTopCompanies;
         $scope.isCollapsed = true;
@@ -95,6 +102,12 @@ define([appLocation.preLogin], function (app) {
             console.log(selected);
             location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
             
+        };
+
+        $scope.selectUser = function (selected) {
+            console.log(selected);
+            location.href = "/#userprofile/" + selected.originalObject.vertexId;
+
         };
 
         $scope.imageIndex = 2;

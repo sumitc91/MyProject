@@ -3,7 +3,9 @@
     <div class="searchDiv" style="background-image:url({{searchBackgroundImage}});">
         <div class="row" style="min-height: 175px;"></div>
         <div class="row">
-            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                
+            </div>
             <div class="col-sm-4">
                 <a href=""><img ng-src="{{landingPageLogourl}}" alt="" ng-cloak></a>
                 <span style="float: right;" ng-class="themeTextColor"><strong>Stay Connected ! Explore Professional World</strong></span>
@@ -11,12 +13,12 @@
             <div class="col-sm-2"></div>
         </div>
         <div class="row" style="min-height: 30px;"></div>
-        <div class="row">
+        <div class="row" ng-show="searchTypeModel=='Company'">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <div angucomplete-alt
                      id="companyName"
-                     placeholder="{{searchBoxText}}"
+                     placeholder="{{searchBoxCompanyText}}"
                      pause="500"
                      selected-object="selectCompany"
                      remote-url="http://{{sitehosturl}}/search/GetCompanyDetailsAutocomplete?q="
@@ -31,16 +33,63 @@
             </div>
             <div class="col-sm-2"></div>
         </div>
-        <div class="row" style="min-height: 30px;"></div>
+        <div class="row" ng-show="searchTypeModel=='User'">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div angucomplete-alt
+                     id="userName"
+                     placeholder="{{searchBoxUserText}}"
+                     pause="500"
+                     selected-object="selectUser"
+                     remote-url="http://{{sitehosturl}}/search/GetUserDetailsAutocomplete?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="Firstname"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     ng-model="userName"
+                     image-field="Profilepic"
+                     match-class="highlight" ng-keypress="myFunct($event)"></div>
+            </div>
+            <div class="col-sm-2">                
+            </div>
+        </div>
+        <div class="row" ng-show="searchTypeModel=='Workgraphy'">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div angucomplete-alt
+                     id="userName"
+                     placeholder="{{searchBoxWorkgraphyText}}"
+                     pause="500"
+                     selected-object="selectUser"
+                     remote-url="http://{{sitehosturl}}/search/GetUserDetailsAutocomplete?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="Firstname"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     ng-model="userName"
+                     image-field="Profilepic"
+                     match-class="highlight" ng-keypress="myFunct($event)"></div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="row" style="min-height: 30px;">
+            <div class="btn-group">                
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
                 <div class="col-sm-6"><button type="button" class="btn btn-default" ng-click="searchCompany()">Search</button></div>
             </div>
-            <div class="col-sm-2">
-                <div class="col-sm-6"><button type="button" class="btn btn-warning">I'm Feeling Lucky</button></div>
+            <div class="col-sm-4">
+                <label class="btn btn-success" ng-model="searchTypeModel" uib-btn-radio="'Company'" uncheckable>Company</label>
+                <label class="btn btn-success" ng-model="searchTypeModel" uib-btn-radio="'User'" uncheckable>User</label>
+                <label class="btn btn-success" ng-model="searchTypeModel" uib-btn-radio="'Workgraphy'" uncheckable>Workgraphy</label>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-2"></div>
         </div>
         <div class="row" style="min-height: 235px;"></div>
     </div>

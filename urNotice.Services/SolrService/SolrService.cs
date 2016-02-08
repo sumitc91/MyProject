@@ -36,6 +36,7 @@ namespace urNotice.Services.SolrService
                 Email = user.email,
                 Firstname = user.firstName,
                 Lastname = user.lastName,
+                Name = user.firstName + " " +user.lastName,
                 Phone = (user.phone??0).ToString(CultureInfo.InvariantCulture),
                 Profilepic = user.imageUrl,
                 Source = user.source,

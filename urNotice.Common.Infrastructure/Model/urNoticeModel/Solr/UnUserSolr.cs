@@ -18,6 +18,9 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.Solr
         [SolrField("lastname")]
         public String Lastname { get; set; }
 
+        [SolrField("name")]
+        public String Name { get; set; }
+
         [SolrField("gender")]
         public String Gender { get; set; }
 

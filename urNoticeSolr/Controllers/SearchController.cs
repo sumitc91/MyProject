@@ -173,6 +173,35 @@ namespace urNoticeSolr.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetUserDetailsAutocomplete()
+        {
+            var response = new ResponseModel<SolrQueryResults<UnUserSolr>>();
+            var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
+            try
+            {
+                queryText = queryText.Replace(" ", "*");
+                //queryText = queryText.ToLower();
+                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
+
+                String solrQueryString = "(name:" + queryText + "*) || (lastname:" + queryText + "*) || (email:" + queryText + ") || (username:" + queryText + ") || (phone:" + queryText + ")";
+                var solrQuery = new SolrQuery(solrQueryString);
+                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+                {
+                    Rows = 15,
+                    Start = 0,
+                    Fields = new[] { "email","name", "profilepic", "vertexId" }
+                });
+                response.Payload = solrQueryExecute;
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+            response.Status = 401;
+            response.Message = "Unauthorized";
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult CompanyDetailsById()
         {
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();
