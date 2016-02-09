@@ -44,5 +44,6 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public static string phone="phone";
         public static string male="male";
         public static string female="female";
+        public static string undefined = "undefined";
     }
 }

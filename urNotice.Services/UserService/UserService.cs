@@ -127,7 +127,8 @@ namespace urNotice.Services.UserService
             string outLabel = "WallPost";
             //g.v(2569472).as('userInfo').out('_label','WallPost').as('postInfo')[0..2].select{it}{it}
             //g.v(768).in('_label','WallPost').as('postInfo')[0..10].in('_label','Created').as('userInfo').select{it}{it}
-            string gremlinQuery = "g.v(" + userVertexId + ").in('_label','" + outLabel + "').as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+            //g.v(768).as('userInfo').in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[0..10].select{it}{it}
+            string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
