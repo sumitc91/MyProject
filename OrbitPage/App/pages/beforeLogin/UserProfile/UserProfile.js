@@ -16,10 +16,23 @@ define([appLocation.preLogin], function (app) {
         $scope.createNewUserPost = function () {
             createNewUserPost();
         };
+
+        $scope.commentOnUserPost = function (postIndex) {
+            console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+            createNewMessageOnUserPost(postIndex);
+            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
         $scope.NewPostImageUrl = {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
         };
         function createNewUserPost() {
+
+            //var userPostData = {
+            //    Message: $scope.UserPostMessage,
+            //    Image: $scope.NewPostImageUrl.link_m,                
+            //    vertexId: $scope.visitedUserVertexId
+            //};
 
             var url = ServerContextPath.userServer + '/User/UserPost?message=' + $scope.UserPostMessage + '&image=' + $scope.NewPostImageUrl.link_m+'&vertexId=' + $scope.visitedUserVertexId;
             var headers = {
@@ -43,6 +56,39 @@ define([appLocation.preLogin], function (app) {
                     $scope.NewPostImageUrl.link_s = "";
                 });
                 
+            });
+        };
+
+        function createNewMessageOnUserPost(postIndex) {
+
+            //var userPostData = {
+            //    Message: $scope.UserPostMessage,
+            //    Image: $scope.NewPostImageUrl.link_m,                
+            //    vertexId: $scope.visitedUserVertexId
+            //};
+
+            var url = ServerContextPath.userServer + '/User/UserCommentOnPost?message=' + $scope.UserPostList[postIndex].postInfo.postUserComment + '&image=' + '' + '&vertexId=' + $scope.UserPostList[postIndex].postInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            startBlockUI('wait..', 3);
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                stopBlockUI();
+                //console.log(data);
+                getUserPost();
+                $scope.UserPostMessage = "";
+
+                $timeout(function () {
+                    $scope.NewPostImageUrl.link_s = "";
+                });
+
             });
         };
 

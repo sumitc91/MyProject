@@ -145,6 +145,8 @@
     <Compile Include="Common\Enum\DynamoDbHashKeyDataType.cs" />
     <Compile Include="Common\Enum\EdgeLabelEnum.cs" />
     <Compile Include="Common\Enum\EdgePropertyEnum.cs" />
+    <Compile Include="Common\Enum\VertexLabelEnum.cs" />
+    <Compile Include="Common\Enum\VertexPropertyEnum.cs" />
     <Compile Include="Common\Logger\ILogger.cs" />
     <Compile Include="Common\Logger\Logger.cs" />
     <Compile Include="Encryption\AES.cs" />
@@ -278,6 +280,7 @@
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdemailResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdphoneNumberResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserPostCommentModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserVertexModel.cs" />
@@ -317,6 +320,7 @@
     <Compile Include="Model\urNoticeModel\Solr\UNVirtualFriendSolr.cs" />
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerApiCommonDetail.cs" />
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerAuth.cs" />
+    <Compile Include="Model\urNoticeModel\User\UserNewPostRequest.cs" />
     <Compile Include="Model\urNoticeModel\Vo\CreateCompanyDetailVo.cs" />
     <Compile Include="Model\urNoticeModel\Vo\CreateStoryDetailVo.cs" />
     <Compile Include="Model\urNoticeModel\Vo\GeoLocationGoogleApi.cs" />

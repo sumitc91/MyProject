@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Services.GraphService;
@@ -21,13 +22,14 @@ namespace urNotice.Services.TitanService
             string url = TitanGraphConfig.Server;
            
             var properties = new Dictionary<string, string>();
-            properties["FirstName"] = user.firstName;
-            properties["LastName"] = user.lastName;
-            properties["Username"] = user.email;
-            properties["Gender"] = user.gender;
-            properties["CreatedTime"] = DateTimeUtil.GetUtcTime().ToString("s");
-            properties["ImageUrl"] = user.imageUrl;
-            properties["CoverImageUrl"] = user.userCoverPic;
+            properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.User.ToString();
+            properties[VertexPropertyEnum.FirstName.ToString()] = user.firstName;
+            properties[VertexPropertyEnum.LastName.ToString()] = user.lastName;
+            properties[VertexPropertyEnum.Username.ToString()] = user.email;
+            properties[VertexPropertyEnum.Gender.ToString()] = user.gender;
+            properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[VertexPropertyEnum.ImageUrl.ToString()] = user.imageUrl;
+            properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic;
 
             Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(user.email, url, user.email, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 

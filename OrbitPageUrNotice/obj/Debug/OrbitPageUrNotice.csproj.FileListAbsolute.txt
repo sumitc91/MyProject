@@ -53,3 +53,4 @@ C:\code\svn\OrbitPage\OrbitPageUrNotice\bin\System.Web.Http.xml
 C:\code\svn\OrbitPage\OrbitPageUrNotice\bin\System.Web.Http.WebHost.xml
 C:\code\svn\OrbitPage\OrbitPageUrNotice\obj\Debug\OrbitPageUrNotice.dll
 C:\code\svn\OrbitPage\OrbitPageUrNotice\obj\Debug\OrbitPageUrNotice.pdb
+C:\code\svn\OrbitPage\OrbitPageUrNotice\obj\Debug\OrbitPageUrNotice.csprojResolveAssemblyReference.cache

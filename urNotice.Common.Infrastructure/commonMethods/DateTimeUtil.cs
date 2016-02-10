@@ -8,5 +8,15 @@ namespace urNotice.Common.Infrastructure.commonMethods
         {            
             return DateTime.Now.ToUniversalTime();
         }
+
+        public static String GetUtcTimeString()
+        {
+            return GetUtcTime().ToString("o");
+        }
+
+        public static long GetUtcTimeLong()
+        {
+            return GetUtcTime().Ticks;
+        }
     }
 }

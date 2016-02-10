@@ -95,3 +95,9 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.dll
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.pdb
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.Cors.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\Owin.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\System.Web.Cors.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.Cors.xml

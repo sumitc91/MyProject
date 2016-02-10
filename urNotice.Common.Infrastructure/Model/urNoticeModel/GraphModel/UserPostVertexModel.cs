@@ -11,6 +11,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
 
         public WallPostVertexModel postInfo { get; set; }
 
-        public UserVertexModel userInfo { get; set; }
+        public List<UserPostCommentModel> commentsInfo { get; set; }
+        public List<UserVertexModel> userInfo { get; set; }
     }
 }

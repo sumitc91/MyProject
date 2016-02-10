@@ -26,7 +26,7 @@ namespace urNoticeUser
 
             HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
 
-            HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache");
+            //HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache");
 
             if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
             {

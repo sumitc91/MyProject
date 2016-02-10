@@ -13,7 +13,7 @@
                     <img width="110px" alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" />
                 </div>
                 <div class="name">
-                    <a ng-bind="post.userInfo.Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="post.userInfo.Lastname" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
+                    <a ng-bind="post.userInfo[0].Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="post.userInfo[0].Lastname" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
                 </div>
 
                 <div class="cover-nav">
@@ -158,10 +158,10 @@
                         <div class="col-md-12" ng-repeat="post in UserPostList">
                             <div class="panel panel-white post panel-shadow">
                                 <div class="post-heading">
-                                    <div class="pull-left image"><img ng-src="{{post.userInfo.ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
-                                        <div class="title h5"><a href="" class="post-user-name" ng-bind="post.userInfo.FirstName"></a> &nbsp;<a href="" class="post-user-name" ng-bind="post.userInfo.LastName"></a></div>
-                                        <h6 class="text-muted time" ng-bind="post.postInfo.PostedTime"></h6>
+                                        <div class="title h5"><a href="" class="post-user-name" ng-bind="post.userInfo[0].FirstName"></a> &nbsp;<a href="" class="post-user-name" ng-bind="post.userInfo[0].LastName"></a></div>
+                                        <h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>
                                     </div>
                                 </div>
                                 <div class="post-image">
@@ -173,38 +173,19 @@
                                     <div class="stats"><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-thumbs-up icon"></i>228 </a><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-share icon"></i>128 </a></div>
                                 </div>
                                 <div class="post-footer">
-                                    <div class="input-group"><input class="form-control" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a href="#"><i class="fa fa-edit"></i></a></span></div>
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
                                     <ul class="comments-list">
-                                        <li class="comment">
-                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/guy-4.jpg" alt="avatar"> </a>
+                                        <li class="comment" ng-repeat="comment in post.commentsInfo">
+                                            <a class="pull-left" href="#"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
                                             <div class="comment-body">
                                                 <div class="comment-heading">
-                                                    <h4 class="comment-user-name"><a href="#">Markton contz</a></h4>
-                                                    <h5 class="time">7 minutes ago</h5>
+                                                    <h4 class="comment-user-name"><a><span ng-bind="comment.commentedBy[0].FirstName"></span>&nbsp;<span ng-bind="comment.commentedBy[0].LastName"></span></a></h4>
+                                                    <h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>
                                                 </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                <p ng-bind="comment.commentInfo.PostMessage"></p>
                                             </div>
                                         </li>
-                                        <li class="comment">
-                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/woman-8.jpg" alt="avatar"> </a>
-                                            <div class="comment-body">
-                                                <div class="comment-heading">
-                                                    <h4 class="comment-user-name"><a href="#">Yira Cartmen</a></h4>
-                                                    <h5 class="time">3 minutes ago</h5>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                            </div>
-                                        </li>
-                                        <li class="comment">
-                                            <a class="pull-left" href="#"><img class="avatar" src="http://demos.bootdey.com/dee-dee/img/Friends/child-1.jpg" alt="avatar"> </a>
-                                            <div class="comment-body">
-                                                <div class="comment-heading">
-                                                    <h4 class="comment-user-name"><a href="#">Dora ty bluekl</a></h4>
-                                                    <h5 class="time">10 seconds ago</h5>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet</p>
-                                            </div>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>

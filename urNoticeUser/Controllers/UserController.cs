@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
@@ -51,6 +52,35 @@ namespace urNoticeUser.Controllers
 
         }
 
+        //[HttpPost]
+        //public JsonResult UserPost(UserNewPostRequest req)
+        //{
+        //    var message = req.Message;
+        //    var image = req.Image;
+        //    var vertexId = req.VertexId;
+        //    var headers = new HeaderManager(Request);
+        //    urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+        //    var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+        //    if (isValidToken)
+        //    {
+        //        if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
+        //        {
+        //            image = String.Empty;
+        //        }
+        //        var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, vertexId, accessKey, secretKey);
+        //        return Json(newUserPostResponse);
+        //    }
+        //    else
+        //    {
+        //        var response = new ResponseModel<string>();
+        //        response.Status = 401;
+        //        response.Message = "Unauthorized";
+        //        return Json(response);
+        //    }
+
+        //}
+
         public JsonResult UserPost()
         {
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
@@ -67,6 +97,34 @@ namespace urNoticeUser.Controllers
                     image = String.Empty;
                 }
                 var newUserPostResponse = new UserService().CreateNewUserPost(session, message,image,vertexId, accessKey, secretKey);
+                return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public JsonResult UserCommentOnPost()
+        {
+            var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+            var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
+                {
+                    image = String.Empty;
+                }
+                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, vertexId, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
