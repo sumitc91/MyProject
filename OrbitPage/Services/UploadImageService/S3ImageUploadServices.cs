@@ -85,7 +85,17 @@ namespace OrbitPage.Services.UploadImageService
                 {
                     path = path + "." + file.FileName.Split('.').Last();
                     IAmazonS3 client;
-                    Stream inputSteram = ResizeImageFile(file.InputStream, 1024);
+                    Stream inputSteram = null;
+
+                    if (file.FileName.Split('.')[1] == "gif")
+                    {
+                        inputSteram = file.InputStream;
+                    }
+                    else
+                    {
+                        inputSteram = ResizeImageFile(file.InputStream, 1024);
+                    }
+
                     using (client = Amazon.AWSClientFactory.CreateAmazonS3Client(_awsAccessKey, _awsSecretKey, Amazon.RegionEndpoint.APSoutheast1))
                     {
                         var request = new PutObjectRequest()
@@ -93,9 +103,15 @@ namespace OrbitPage.Services.UploadImageService
                             BucketName = _bucketName,
                             CannedACL = S3CannedACL.PublicRead,//PERMISSION TO FILE PUBLIC ACCESIBLE
                             Key = string.Format(path),
-                            InputStream = inputSteram//SEND THE FILE STREAM
+                            InputStream = inputSteram,//SEND THE FILE STREAM,                            
                         };
 
+
+                        if (file.FileName.Split('.')[1] == "gif")
+                        {
+                            request.ContentType = "image/gif";
+                        }
+                        
                         client.PutObject(request);
                     }
                 }
@@ -128,6 +144,21 @@ namespace OrbitPage.Services.UploadImageService
                     ms.Write(buffer, 0, read);
                 }
                 return ms.ToArray();
+            }
+        }
+
+        public static Stream GifImageFileWithoutCompression(Stream imageFileStream) // Set targetSize to 1024
+        {
+            byte[] imageFile = StreamToByteArray(imageFileStream);
+            using (System.Drawing.Image oldImage = System.Drawing.Image.FromStream(new MemoryStream(imageFile)))
+            {
+                using (Bitmap newImage = new Bitmap(oldImage.Width, oldImage.Height, PixelFormat.Format24bppRgb))
+                {
+                    MemoryStream m = new MemoryStream();
+                    newImage.Save(m, ImageFormat.Gif);
+                    return new MemoryStream(m.GetBuffer());
+                    
+                }
             }
         }
 
