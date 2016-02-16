@@ -271,6 +271,7 @@
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageEdgeDetail.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageGoogleApiContact.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageUser.cs" />
+    <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageUserNotification.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageUserPost.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageVertexDetail.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\UserAnalytics.cs" />

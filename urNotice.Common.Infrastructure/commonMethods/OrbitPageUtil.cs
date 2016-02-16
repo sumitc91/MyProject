@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using urNotice.Common.Infrastructure.Common.Enum;
 
 namespace urNotice.Common.Infrastructure.commonMethods
 {
@@ -11,6 +12,11 @@ namespace urNotice.Common.Infrastructure.commonMethods
         public static string ConvertVirtualFriendListToUnVirtualFriendSolrPhoneWithoutFormatting(string id2)
         {
             return id2.Replace("tel:", "").Replace("-", "");            
+        }
+
+        public static string GetNotificationHashKeyUserEmail(string sendToEmail)
+        {
+            return DynamoDbHashKeyDataType.Notification + "_" +sendToEmail;
         }
     }
 }

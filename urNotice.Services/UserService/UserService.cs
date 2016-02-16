@@ -118,8 +118,46 @@ namespace urNotice.Services.UserService
 
             IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
+            var orbitPageUserNotification = new OrbitPageUserNotification
+            {
+                SentByUser = session.UserName,
+                SentByUserVertexId = session.UserVertexId,
+                SentToUser = null,
+                SentToUserVertexId = vertexId,
+                CreatedTime = DateTimeUtil.GetUtcTimeString(),
+                Title = session.UserName + " Posted on your wall",
+                Body = null,
+                PrimaryImage = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png",
+                Type = "PostNotification",
+                VertexId = addVertexResponse[TitanGraphConstants.Id]
+            };
+            SendNotificationToUser(orbitPageUserNotification,accessKey,secretKey);
+
             response["status"] = "200";
             return response;
+        }
+
+        private IDictionary<string, string> SendNotificationToUser(OrbitPageUserNotification orbitPageUserNotification, string accessKey, string secretKey)
+        {            
+            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    OrbitPageUtil.GetNotificationHashKeyUserEmail(orbitPageUserNotification.SentToUserVertexId),
+                    DateTimeUtil.GetUtcTimeString(),
+                    orbitPageUserNotification.SentByUser,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    orbitPageUserNotification,
+                    false,
+                    accessKey,
+                    secretKey
+                    );
+
+            return null;
         }
 
         public string GetUserPost(string userVertexId, string @from, string to, string accessKey, string secretKey)

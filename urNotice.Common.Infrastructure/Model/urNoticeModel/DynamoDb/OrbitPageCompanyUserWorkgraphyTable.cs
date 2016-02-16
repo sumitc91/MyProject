@@ -49,6 +49,12 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         public List<VirtualFriendList> OrbitPageGoogleApiContact { get; set; }
 
         [DynamoDBProperty]
+        public OrbitPageUserNotification OrbitPageUserNotification { get; set; }
+
+        [DynamoDBProperty]
+        public Boolean IsNotificationSeen { get; set; }
+
+        [DynamoDBProperty]
         public Boolean IsSolrUpdated { get; set; }
 
         [DynamoDBProperty]

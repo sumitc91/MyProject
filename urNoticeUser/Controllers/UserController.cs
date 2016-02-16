@@ -11,6 +11,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.DynamoDbService;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
 
@@ -52,6 +53,7 @@ namespace urNoticeUser.Controllers
 
         }
 
+        
         //[HttpPost]
         //public JsonResult UserPost(UserNewPostRequest req)
         //{

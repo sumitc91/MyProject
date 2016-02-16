@@ -156,6 +156,7 @@ define([appLocation.preLogin], function (app) {
             }
             
             loadClientDetails();
+            loadClientNotificationDetails();
         } else {
             console.log("cookie not available.");
         };
@@ -200,6 +201,44 @@ define([appLocation.preLogin], function (app) {
                     alert("Internal Server Error Occured");
                 }
                 else if (data.Status == "401") {                   
+                    $rootScope.isUserLoggedIn = false;
+                    removeAllCookies(ServerContextPath.cookieDomain);
+                }
+            }).error(function (data, status, headers, config) {
+                //stopBlockUI();
+                //showToastMessage("Error", "Internal Server Error Occured.");                
+            });
+        }
+
+        function loadClientNotificationDetails() {
+            var url = ServerContextPath.solrServer + '/Search/GetNotificationDetails';
+            //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV()
+            };
+            //startBlockUI('wait..', 3);
+            //$scope.loadingUserDetails = true;
+            $http({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                //stopBlockUI();
+                $scope.loadingUserDetails = false;
+                
+                $rootScope.clientNotificationDetailResponse = data;
+                $rootScope.clientNotificationDetailResponse.count = data.length;
+
+                console.log($rootScope.clientNotificationDetailResponse);
+                if (data.Status == "500") {
+
+                    alert("Internal Server Error Occured");
+                }
+                else if (data.Status == "401") {
                     $rootScope.isUserLoggedIn = false;
                     removeAllCookies(ServerContextPath.cookieDomain);
                 }

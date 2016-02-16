@@ -64,6 +64,7 @@ namespace urNotice.Services.GraphService
                     null,
                     null,
                     edgeDetail,
+                    null,
                     false,
                     accessKey,
                     secretKey

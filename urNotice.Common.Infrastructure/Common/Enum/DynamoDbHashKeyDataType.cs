@@ -15,6 +15,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         FacebookFriends,
         GmailFriends,
         VertexDetail,
-        EdgeDetail
+        EdgeDetail,
+        Notification
     }
 }

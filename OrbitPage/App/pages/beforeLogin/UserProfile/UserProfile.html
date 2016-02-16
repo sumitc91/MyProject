@@ -170,10 +170,14 @@
                                 </div>
                                 <div class="post-description">
                                     <p ng-bind="post.postInfo.PostMessage"></p>
-                                    <div class="stats"><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-thumbs-up icon"></i>228 </a><a href="#" class="btn btn-default stat-item btn-responsive"><i class="fa fa-share icon"></i>128 </a></div>
+                                    
+                                    <div class="stats">
+                                        <div id="likes-section" style="margin: -5px 0px 0px;"><a href="" class="like-button">Like</a><span class="like-summary">Be the first to like this</span></div>
+                                        <div id="likes-section" style="float: right;margin: -5px 0px 0px;"><a href="" class="like-button">Share</a><span class="like-summary">share this</span></div>
+                                    </div>
                                 </div>
                                 <div class="post-footer">
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    
                                     <ul class="comments-list">
                                         <li class="comment" ng-repeat="comment in post.commentsInfo">
                                             <a class="pull-left" href="#/userprofile/{{comment.commentedBy[0]._id}}"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
@@ -187,6 +191,7 @@
                                         </li>
                                         
                                     </ul>
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
                                 </div>
                             </div>
                         </div>

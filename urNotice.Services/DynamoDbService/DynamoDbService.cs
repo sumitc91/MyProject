@@ -45,6 +45,7 @@ namespace urNotice.Services.DynamoDbService
             List<VirtualFriendList> orbitPageGoogleApiContact,
             OrbitPageVertexDetail orbitPageVertexDetail,
             OrbitPageEdgeDetail orbitPageEdgeDetail,
+            OrbitPageUserNotification orbitPageUserNotification,
             Boolean isSolrUpdated, 
             string accessKey, 
             string secretKey)
@@ -62,7 +63,7 @@ namespace urNotice.Services.DynamoDbService
             orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail = orbitPageVertexDetail;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageEdgeDetail = orbitPageEdgeDetail;
             orbitPageCompanyUserWorkgraphyTable.CreatedDate = DateTimeUtil.GetUtcTime();
-
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUserNotification = orbitPageUserNotification;
             context.Save(orbitPageCompanyUserWorkgraphyTable);
             return orbitPageCompanyUserWorkgraphyTable;
         }
@@ -98,6 +99,19 @@ namespace urNotice.Services.DynamoDbService
                   );
 
             return res.FirstOrDefault();
+
+        }
+
+        public IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableForNotification(string vertexId, string accessKey, string secretKey)
+        {
+            var context = GetDynamoDbContext(accessKey, secretKey);
+            //var res = context.Load<OrbitPageCompanyUserWorkgraphyTable>(dataType, objectId);
+
+            IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(                  
+                  new ScanCondition("DataType", ScanOperator.Equal, OrbitPageUtil.GetNotificationHashKeyUserEmail(vertexId))
+                  );
+
+            return res;
 
         }
 

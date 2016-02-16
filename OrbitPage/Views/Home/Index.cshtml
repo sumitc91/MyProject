@@ -76,6 +76,8 @@ div.middle-div-mobile {
         <link rel="stylesheet" href="../../App/template/flexslider.css">
         <link rel="stylesheet" type="text/css" href="../../App/pages/beforeLogin/css/BeforeLoginStyle.css" />
         <link rel="stylesheet" type="text/css" href="../../App/css/xenon-components.css" />
+        <link rel="stylesheet" type="text/css" href="../../App/css/xenon-core.css" />
+
         <!-- toast message -->
         <link href="../../App/third-Party/toastmessage/css/jquery.toastmessage.css" rel="stylesheet">
         <link rel="stylesheet" href="../../App/third-Party/sidr-package/stylesheets/jquery.sidr.dark.css">
@@ -148,7 +150,7 @@ div.middle-div-mobile {
                             <a href="/#/"><img alt="" ng-src="{{logourl}}" height="50" ng-cloak></a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">                            
                             <ul class="nav navbar-nav">
                                 <li>
                                     <a href="/#/">OrbitPage</a>
@@ -175,6 +177,186 @@ div.middle-div-mobile {
                                 <li ng-show="!isUserLoggedIn">
                                     <a href="#/login">Login</a>
                                 </li>
+
+                                <li class="dropdown hover-line" ng-show="isUserLoggedIn">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="true">
+                                        <i class="fa-envelope-o"></i>
+                                        <span class="badge badge-green">15</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu messages">
+                                        <li>
+
+                                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+
+                                                <li class="active">
+                                                    <!-- "active" class means message is unread -->
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            <strong>Luc Chartier</strong>
+                                                            <span class="light small">- yesterday</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            This ain’t our first item, it is the best of the rest.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="active">
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            <strong>Salma Nyberg</strong>
+                                                            <span class="light small">- 2 days ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            Oh he decisively impression attachment friendship so if everything.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            Hayden Cartwright
+                                                            <span class="light small">- a week ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            Sandra Eberhardt
+                                                            <span class="light small">- 16 days ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            On so attention necessary at by provision otherwise existence direction.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <!-- Repeated -->
+
+                                                <li class="active">
+                                                    <!-- "active" class means message is unread -->
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            <strong>Luc Chartier</strong>
+                                                            <span class="light small">- yesterday</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            This ain’t our first item, it is the best of the rest.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="active">
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            <strong>Salma Nyberg</strong>
+                                                            <span class="light small">- 2 days ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            Oh he decisively impression attachment friendship so if everything.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            Hayden Cartwright
+                                                            <span class="light small">- a week ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="line">
+                                                            Sandra Eberhardt
+                                                            <span class="light small">- 16 days ago</span>
+                                                        </span>
+
+                                                        <span class="line desc small">
+                                                            On so attention necessary at by provision otherwise existence direction.
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
+                                                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 300px;"><div class="ps-scrollbar-y" style="top: 0px; height: 150px;"></div></div>
+                                            </ul>
+
+                                        </li>
+
+                                        <li class="external">
+                                            <a href="mailbox-main.html">
+                                                <span>All Messages</span>
+                                                <i class="fa-link-ext"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown hover-line" ng-show="isUserLoggedIn">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false">
+                                        <i class="fa-bell-o"></i>
+                                        <span class="badge badge-purple" ng-bind="clientNotificationDetailResponse.count"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu notifications" style="min-width: 350px;">
+                                        <li class="top">
+                                            <p class="small">
+                                                <a class="pull-right" href="#">Mark all Read</a>
+                                                You have <strong>3</strong> new notifications.
+                                            </p>
+                                        </li>
+
+                                        <li>
+                                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+                                                <li class="active notification-success" ng-repeat="notification in clientNotificationDetailResponse">
+                                                    <a href="#/userprofile/{{clientDetailResponse.vertexId}}">
+                                                        @*<img ng-src="{{notification.OrbitPageUserNotification.PrimaryImage}}" height="40px">*@
+
+                                                        <span class="line">
+                                                            <strong ng-bind="notification.OrbitPageUserNotification.Title"></strong>
+                                                        </span>
+
+                                                        <span class="line small time">
+                                                            {{notification.OrbitPageUserNotification.CreatedTime | date:"yyyy-MM-dd hh:mm:ss a"}}
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+
+                                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
+                                                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 276px;"><div class="ps-scrollbar-y" style="top: 0px; height: 184px;"></div></div>
+                                            </ul>
+                                        </li>
+
+                                        <li class="external">
+                                            <a href="#">
+                                                <span>View all notifications</span>
+                                                <i class="fa-link-ext"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
                                 <li class="ng-cloak" ng-show="isUserLoggedIn">
                                     <div class="btn-group" uib-dropdown is-open="status.isopen">
                                         <button id="single-button" type="button" class="btn btn-theme" uib-dropdown-toggle ng-disabled="disabled">

@@ -109,6 +109,27 @@ namespace urNoticeSolr.Controllers
 
         }
 
+        public JsonResult GetNotificationDetails()
+        {
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                var clientNotificationDetailResponse = new DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTableForNotification(session.UserVertexId, accessKey, secretKey);
+                return Json(clientNotificationDetailResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public JsonResult IsUsernameExist()
         {
             var response = new ResponseModel<Boolean>();
