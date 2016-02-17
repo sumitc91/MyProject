@@ -156,6 +156,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App\css\all.css" />
     <Content Include="App\css\bannerscollection_zoominout.css" />
+    <Content Include="App\css\jquery.motionCaptcha.0.2.css" />
     <Content Include="App\css\skins\generous\bottomNavBg.png" />
     <Content Include="App\css\skins\generous\bottomNavLeft.png" />
     <Content Include="App\css\skins\generous\bottomNavOFF.png" />
@@ -252,6 +253,7 @@
     <Content Include="App\img\logo5.jpg" />
     <Content Include="App\img\logo6.jpg" />
     <Content Include="App\img\logo_small.jpg" />
+    <Content Include="App\img\motionCaptcha-shapes.jpg" />
     <Content Include="App\js\angular-animate.js" />
     <Content Include="App\js\angular-cookies.js" />
     <Content Include="App\js\angular-cookies.min.js" />
@@ -280,6 +282,7 @@
     <Content Include="App\js\jquery.filedrop.js" />
     <Content Include="App\js\jquery.min - Copy.js" />
     <Content Include="App\js\jquery.min.js" />
+    <Content Include="App\js\jquery.motionCaptcha.0.2.js" />
     <Content Include="App\js\jquery.panzoom.js" />
     <Content Include="App\js\jquery.panzoom.min.js" />
     <Content Include="App\js\jquery.signalR-1.0.1.js" />

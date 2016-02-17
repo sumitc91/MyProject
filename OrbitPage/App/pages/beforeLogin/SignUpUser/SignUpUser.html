@@ -7,7 +7,7 @@
     <div class="login-bg">
         <div class="container">
 
-            <div class="form-signin wow fadeInUp">
+            <form class="form-signin wow fadeInUp" id="mc-form">
                 <h2 class="form-signin-heading">Register now</h2>
                 <div class="login-wrap">
                     <p>Enter personal details</p>
@@ -47,7 +47,8 @@
                             <li ng-show="GenderAlert.visible" ng-bind="GenderAlert.message"></li>
                             <li ng-show="PasswordAlert.visible" ng-bind="PasswordAlert.message"></li>
                         </ul>
-                        <button type="submit" ng-click="UserSignUp()" class="btn btn-success btn-block">Create Account</button>
+                        <!--<button type="submit" ng-click="UserSignUp()" class="btn btn-success btn-block">Create Account</button>-->
+                        <input disabled="disabled" ng-click="UserSignUp()" class="btn btn-success btn-block" autocomplete="false" type="submit" value="CreateAccount">
                         <a href="#/login" class="text-center text-accepter">I already have an Account</a>
                         <div class="div_c"></div>
 
@@ -61,10 +62,19 @@
 
                             </div>
                         </div>
+                        <hr />
+                        <div id="mc">
+                            <p>Please draw the shape in the box to submit the form: (<a onclick="window.location.reload()" href="#" title="Click for a new shape">new shape</a>)</p>
+                            <canvas id="mc-canvas">
+                                Your browser doesn't support the canvas element - please visit in a modern browser.
+                            </canvas>
+                            <input type="hidden" id="mc-action" value="http://josscrowcroft.com/projects/motioncaptcha-jquery-plugin/" />
+
+                        </div>
 
                     </div>
                 </div>
-            </div>
+            </form>
 
         </div>
     </div>
@@ -72,3 +82,15 @@
 
 </div>
 
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+
+			// Do the biznizz:
+			$('#mc-form').motionCaptcha({
+				shapes: ['triangle', 'x', 'rectangle', 'circle', 'check', 'zigzag', 'arrow', 'delete', 'pigtail', 'star']
+			});
+
+			// Yep:
+			$("input.placeholder").placeholder();
+		});
+</script>

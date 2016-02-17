@@ -92,6 +92,9 @@ appRequire = require
             urNoticeScript: {
                 deps: ["jquery"]
             },
+            motionCaptcha: {
+                deps: ["jquery"]
+            },
             angularjs_fileUpload_shim: {//new
                 deps: ["angular", "jquery"]
             },
@@ -114,7 +117,7 @@ appRequire = require
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             beforeLoginSignUpUser: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "motionCaptcha"]
             },
             validateEmail: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
@@ -181,6 +184,7 @@ appRequire = require
             prettify: "../../App/third-Party/wysihtml5/lib/js/prettify",            
             angular_input_stars: "../../App/third-Party/angular-input-stars-master/angular-input-stars",
             urNoticeScript: "../../App/js/urNoticeScript",
+            motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -214,7 +218,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
-    "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController"
+    "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });
