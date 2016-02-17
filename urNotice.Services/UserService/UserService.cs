@@ -125,10 +125,10 @@ namespace urNotice.Services.UserService
                 SentToUser = null,
                 SentToUserVertexId = vertexId,
                 CreatedTime = DateTimeUtil.GetUtcTimeString(),
-                Title = session.UserName + " Posted on your wall",
+                Title = string.Format(UserNotificationText.PostOnUserWall,session.UserName),
                 Body = null,
-                PrimaryImage = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png",
-                Type = "PostNotification",
+                PrimaryImage = UserNotificationText.PrimaryImage,
+                Type = OrbitPageEnum.PostNotification.ToString(),
                 VertexId = addVertexResponse[TitanGraphConstants.Id]
             };
             SendNotificationToUser(orbitPageUserNotification,accessKey,secretKey);
@@ -177,7 +177,7 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public IDictionary<string, string> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string vertexId, string accessKey, string secretKey)
+        public IDictionary<string, string> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string vertexId,string wallVertexId,string postPostedByVertexId, string accessKey, string secretKey)
         {
             var response = new Dictionary<string, string>();
             //string url = TitanGraphConfig.Server;
@@ -212,6 +212,41 @@ namespace urNotice.Services.UserService
             properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
 
             IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            var orbitPageUserWallCommentNotification = new OrbitPageUserNotification
+            {
+                SentByUser = session.UserName,
+                SentByUserVertexId = session.UserVertexId,
+                SentToUser = null,
+                SentToUserVertexId = wallVertexId,
+                CreatedTime = DateTimeUtil.GetUtcTimeString(),
+                Title = string.Format(UserNotificationText.CommentedOnPostOnUserWall, session.UserName),
+                Body = null,
+                PrimaryImage = UserNotificationText.PrimaryImage,
+                Type = OrbitPageEnum.PostNotification.ToString(),
+                VertexId = addVertexResponse[TitanGraphConstants.Id]
+            };
+
+            SendNotificationToUser(orbitPageUserWallCommentNotification, accessKey, secretKey);
+
+            if (wallVertexId != postPostedByVertexId)
+            {
+                var orbitPageUserWallCommentOnOtherNotification = new OrbitPageUserNotification
+                {
+                    SentByUser = session.UserName,
+                    SentByUserVertexId = session.UserVertexId,
+                    SentToUser = null,
+                    SentToUserVertexId = postPostedByVertexId,
+                    CreatedTime = DateTimeUtil.GetUtcTimeString(),
+                    Title = string.Format(UserNotificationText.CommentedOnPostYouPostedOnUserWall, session.UserName, UserNotificationText.Friend),
+                    Body = null,
+                    PrimaryImage = UserNotificationText.PrimaryImage,
+                    Type = OrbitPageEnum.PostNotification.ToString(),
+                    VertexId = addVertexResponse[TitanGraphConstants.Id]
+                };
+
+                SendNotificationToUser(orbitPageUserWallCommentOnOtherNotification, accessKey, secretKey);
+            }
 
             response["status"] = "200";
             return response;

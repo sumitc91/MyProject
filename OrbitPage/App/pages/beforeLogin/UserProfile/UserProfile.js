@@ -67,7 +67,7 @@ define([appLocation.preLogin], function (app) {
             //    vertexId: $scope.visitedUserVertexId
             //};
 
-            var url = ServerContextPath.userServer + '/User/UserCommentOnPost?message=' + $scope.UserPostList[postIndex].postInfo.postUserComment + '&image=' + '' + '&vertexId=' + $scope.UserPostList[postIndex].postInfo._id;
+            var url = ServerContextPath.userServer + '/User/UserCommentOnPost?message=' + $scope.UserPostList[postIndex].postInfo.postUserComment + '&image=' + '' + '&vertexId=' + $scope.UserPostList[postIndex].postInfo._id + '&wallVertexId=' + $scope.visitedUserVertexId + '&postPostedByVertexId=' + $scope.UserPostList[postIndex].userInfo[0]._id;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),

@@ -116,6 +116,10 @@ namespace urNoticeUser.Controllers
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
             var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
             var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+
+            var wallVertexId = Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
+            var postPostedByVertexId = Request.QueryString["postPostedByVertexId"].ToString(CultureInfo.InvariantCulture);
+
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
@@ -126,7 +130,7 @@ namespace urNoticeUser.Controllers
                 {
                     image = String.Empty;
                 }
-                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, vertexId, accessKey, secretKey);
+                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, vertexId,wallVertexId,postPostedByVertexId, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
