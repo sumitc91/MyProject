@@ -49,6 +49,18 @@ define([appLocation.preLogin], function (app) {
         $scope.companyDetails = {
 
         };
+        $scope.showLandingPageLogo = false;
+        var hi = new Vivus('hi-there', { type: 'async', duration: 250, start: 'autostart', dashGap: 30, forceRender: false },
+            function() {
+                if (window.console) {
+                    console.log('Animation finished. [log triggered from callback]');
+                    $scope.showLandingPageLogo = true;
+                    if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                        $scope.$apply();
+                    }
+                }
+            });
+
         getSolrServiceCompetitors();
 
         function getSolrServiceCompetitors() {

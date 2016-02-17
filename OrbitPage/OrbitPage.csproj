@@ -301,6 +301,8 @@
     <Content Include="App\js\singleRController.js" />
     <Content Include="App\js\toastMessage.js" />
     <Content Include="App\js\underscore-min.js" />
+    <Content Include="App\js\vivus.js" />
+    <Content Include="App\js\vivus.min.js" />
     <Content Include="App\pages\beforeLogin\404\404.html" />
     <Content Include="App\pages\beforeLogin\404\404.js" />
     <Content Include="App\pages\beforeLogin\AboutUs\AboutUs.html" />
