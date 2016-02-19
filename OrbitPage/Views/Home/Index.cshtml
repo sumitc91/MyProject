@@ -352,6 +352,8 @@ div.middle-div-mobile {
                                                         <div class="col-sm-9 col-md-9" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your Wall.
                                                             <br />
+                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            <br/>
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
                                                             </span>
