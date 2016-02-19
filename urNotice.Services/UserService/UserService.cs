@@ -255,5 +255,17 @@ namespace urNotice.Services.UserService
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
+
+        public string GetPostByVertexId(string vertexId, string accessKey, string secretKey)
+        {
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
+
+            string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..3].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";
+            //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+            string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);
+
+            return response;
+        }
     }
 }

@@ -212,5 +212,47 @@ namespace urNoticeUser.Controllers
             }
 
         }
+
+        public JsonResult GetPostByVertexId()
+        {            
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            isValidToken = true;//TODO: currently hard coded.
+            if (isValidToken)
+            {
+                Boolean isRequestValid = true;
+                if (String.IsNullOrWhiteSpace(vertexId) || vertexId.Equals("undefined"))
+                {
+                    if (session != null)
+                        vertexId = session.UserVertexId;
+                    else
+                        isRequestValid = false;
+                }
+
+                if (isRequestValid)
+                {
+                    var getUserPostResponse = new UserService().GetPostByVertexId(vertexId, accessKey, secretKey);
+                    var getUserPostResponseDeserialized =
+                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("not a valid request", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }
