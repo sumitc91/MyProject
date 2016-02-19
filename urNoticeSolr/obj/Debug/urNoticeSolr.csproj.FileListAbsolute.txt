@@ -94,3 +94,17 @@ C:\code\svn\OrbitPage\urNoticeSolr\bin\RestSharp.xml
 C:\code\svn\OrbitPage\urNoticeSolr\obj\Debug\urNoticeSolr.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNoticeSolr\obj\Debug\urNoticeSolr.dll
 C:\code\svn\OrbitPage\urNoticeSolr\obj\Debug\urNoticeSolr.pdb
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Owin.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Security.xml
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Cors.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\System.Web.Cors.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.Owin.Cors.xml
