@@ -92,3 +92,10 @@ C:\code\svn\OrbitPage\OrbitPage\bin\AWSSDK.pdb
 C:\code\svn\OrbitPage\OrbitPage\obj\Debug\OrbitPage.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\OrbitPage\obj\Debug\OrbitPage.dll
 C:\code\svn\OrbitPage\OrbitPage\obj\Debug\OrbitPage.pdb
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Owin.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.Security.xml
