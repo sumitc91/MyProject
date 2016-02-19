@@ -96,6 +96,12 @@ define([appLocation.preLogin], function (app) {
         };
     });*/
 
+    app.filter('reverse', function () {
+        return function (items) {
+            return items.slice().reverse();
+        };
+    });
+
     app.filter('cut', function () {
         return function (value, wordwise, max, tail) {
             if (!value) return '';

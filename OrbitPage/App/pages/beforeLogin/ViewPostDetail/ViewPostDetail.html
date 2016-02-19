@@ -36,7 +36,7 @@
                                 <div class="post-footer">
 
                                     <ul class="comments-list">
-                                        <li class="comment" ng-repeat="comment in post.commentsInfo">
+                                        <li class="comment" ng-repeat="comment in post.commentsInfo | reverse">
                                             <a class="pull-left" href="#/userprofile/{{comment.commentedBy[0]._id}}"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
                                             <div class="comment-body">
                                                 <div class="comment-heading">
