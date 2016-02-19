@@ -194,7 +194,7 @@ namespace urNotice.Services.UserService
             //g.v(768).as('userInfo').in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[0..10].select{it}{it}
             //g.v((512)).in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._().transform{ [postInfo : it, comments: it.in('Comment').toList(),userInfo:it.in('Created')] }
             //g.v((512)).in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..1].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..1].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }
-            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..3].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";            
+            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> a.PostedTime <=> b.PostedTime }._()[0..3].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";            
             //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
@@ -261,7 +261,7 @@ namespace urNotice.Services.UserService
             string url = TitanGraphConfig.Server;
             string graphName = TitanGraphConfig.Graph;
 
-            string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..3].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";
+            string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'), commentsInfo: it.in('Comment').sort{ a, b -> a.PostedTime <=> b.PostedTime }._()[0..3].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";
             //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
             string response = new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);
 

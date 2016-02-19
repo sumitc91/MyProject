@@ -47,7 +47,7 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 stopBlockUI();
                 //console.log(data);
-                getUserPost();
+                getPostByVertexId();
                 $scope.UserPostMessage = "";
 
                 $timeout(function () {
