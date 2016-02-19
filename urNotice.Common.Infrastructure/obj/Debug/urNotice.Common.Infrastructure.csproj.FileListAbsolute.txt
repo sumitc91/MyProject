@@ -76,3 +76,7 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Razor.
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.csprojResolveAssemblyReference.cache
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.xml

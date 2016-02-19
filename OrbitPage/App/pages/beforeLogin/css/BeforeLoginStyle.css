@@ -5468,3 +5468,11 @@ input[type="button"].btn-block {
 #likes-section .like-button, .icon-like {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAqFBMV…ecUW3fBNB/L5+33GgiSksFQE1YPkUlciwuETxhox3ghy8Wng9K1E9YIwAAAABJRU5ErkJggg==) no-repeat left center;
 }
+
+.borderlist {
+    list-style-position:inside;
+    border: 1px inset ghostwhite;
+}
+.borderlist:hover {
+    background: #DEDEDE;
+}

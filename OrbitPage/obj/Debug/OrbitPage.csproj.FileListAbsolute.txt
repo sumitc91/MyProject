@@ -68,7 +68,6 @@ C:\code\svn\OrbitPage\OrbitPage\bin\System.Web.WebPages.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\urNotice.Services.dll
-C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\AWSSDK.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\urNotice.Common.Infrastructure.pdb

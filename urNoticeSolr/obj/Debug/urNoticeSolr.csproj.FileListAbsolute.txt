@@ -67,7 +67,6 @@ C:\code\svn\OrbitPage\urNoticeSolr\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Services.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\urNoticeSolr\bin\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\log4net.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\AWSSDK.dll

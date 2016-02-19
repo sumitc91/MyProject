@@ -13,6 +13,13 @@
         showToastMessage("Success", name + ": sent Message - " + message);
     };
 
+    signalRHub.server.registerClient("sumitchourasia91@gmail.com");
+    
+    signalRHub.client.addMessage = function (message) {
+        alert("user registered : " + message);
+
+    };
+
     signalRHub.client.updateBeforeLoginUserProjectDetails = function (totalProjects, successRate, totalUsers, projectCategories) {
         //alert("updateBeforeLoginUserProjectDetailsService");
         //alert("testing");

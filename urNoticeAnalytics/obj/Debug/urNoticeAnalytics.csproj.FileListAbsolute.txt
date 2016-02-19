@@ -76,7 +76,6 @@ C:\code\svn\OrbitPage\urNoticeAnalytics\bin\System.Web.WebPages.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\urNotice.Services.dll
-C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\RestSharp.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNoticeAnalytics\bin\urNotice.Services.pdb

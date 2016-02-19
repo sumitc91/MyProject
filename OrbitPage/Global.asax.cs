@@ -9,6 +9,7 @@ using System.Web.Routing;
 using SolrNet;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
+
 namespace OrbitPage
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -17,6 +18,8 @@ namespace OrbitPage
     {
         protected void Application_Start()
         {
+            //RouteTable.Routes.MapHubs();
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

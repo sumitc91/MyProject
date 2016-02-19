@@ -95,6 +95,10 @@ div.middle-div-mobile {
         <script src="../../App/Property/urNoticeProperties.js" type="text/javascript"></script>
         <script src="../../App/js/googleAnalytics.js"></script>
         
+        @*<script src="../../App/js/jquery.signalR-1.0.1.min.js" type="text/javascript"></script>
+        <script src="signalr/hubs" type="text/javascript"></script>
+        <script src="../../App/js/singleRController.js"></script>*@
+
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -331,13 +335,22 @@ div.middle-div-mobile {
 
                                         <li>
                                             <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
-                                                <li class="active notification-success" ng-repeat="notification in clientNotificationDetailResponse">
-                                                    <div>
+                                                <li class="active notification-success borderlist" ng-repeat="notification in clientNotificationDetailResponse" style="min-height: 50px;">
+                                                    <div class="row">
                                                         <div class="col-sm-2 col-md-2">
                                                             <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="40px" width="40px">
                                                         </div>
-                                                        <div class="col-sm-9 col-md-9">
+                                                        <div class="col-sm-9 col-md-9" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related post.
+                                                            <br />
+                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-9 col-md-9" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your Wall.
                                                             <br />
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
@@ -347,7 +360,6 @@ div.middle-div-mobile {
 
                                                         </div>
                                                     </div>
-                                                    <hr />
                                                 </li>
 
 

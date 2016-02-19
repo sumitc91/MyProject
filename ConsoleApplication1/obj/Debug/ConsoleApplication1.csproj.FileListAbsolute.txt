@@ -46,7 +46,6 @@ C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\System.Web.Http.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\System.Web.Http.WebHost.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\EntityFramework.dll
-C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\log4net.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\SolrNet.dll

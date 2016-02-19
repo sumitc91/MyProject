@@ -77,7 +77,6 @@ C:\code\svn\OrbitPage\urNoticeAuth\bin\System.Web.WebPages.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\urNotice.Services.dll
-C:\code\svn\OrbitPage\urNoticeAuth\bin\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\AWSSDK.dll
 C:\code\svn\OrbitPage\urNoticeAuth\bin\Facebook.dll
