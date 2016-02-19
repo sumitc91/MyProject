@@ -12,6 +12,8 @@
                         <div class="col-md-12" ng-repeat="post in UserPostList">
                             <div class="panel panel-white post panel-shadow">
                                 <div class="post-heading">
+                                    <a href="#/userprofile/{{post.userInfo[0]._id}}" ng-bind="post.userInfo[0].FirstName"></a> Posted on  <a href="#/userprofile/{{post.postedToUser[0]._id}}" ng-bind="post.postedToUser[0].FirstName"></a>'s Wall
+                                    <hr />
                                     <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
                                         <div class="title h5"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
