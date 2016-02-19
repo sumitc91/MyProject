@@ -100,3 +100,7 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\Owin.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\System.Web.Cors.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.xml
 C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.Cors.xml
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Owin.Security.xml

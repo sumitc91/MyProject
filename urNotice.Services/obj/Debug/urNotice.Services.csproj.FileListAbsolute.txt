@@ -62,3 +62,9 @@ C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\System.Web.Http.WebHost.xml
 C:\code\svn\OrbitPage\urNotice.Services\obj\Debug\urNotice.Services.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNotice.Services\obj\Debug\urNotice.Services.dll
 C:\code\svn\OrbitPage\urNotice.Services\obj\Debug\urNotice.Services.pdb
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Owin.dll
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.AspNet.SignalR.Core.xml
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.Security.xml
