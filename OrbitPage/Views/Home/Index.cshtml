@@ -366,13 +366,7 @@ div.middle-div-mobile {
                                                 <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
                                                 <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 276px;"><div class="ps-scrollbar-y" style="top: 0px; height: 184px;"></div></div>
                                             </ul>
-                                        </li>
-                                        <li class="dropdown hover-line" ng-show="isUserLoggedIn">
-                                            <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false">
-                                                <i class="fa-user"></i>
-                                                <span class="badge badge-purple" ng-bind="clientNotificationDetailResponse.count"></span>
-                                            </a>
-
+                                            
                                             <ul class="dropdown-menu notifications" style="width: 450px;">
                                                 <li class="top">
                                                     <p class="small">
@@ -424,30 +418,36 @@ div.middle-div-mobile {
                                             </ul>
                                         </li>
 
-                                        <li class="ng-cloak" ng-show="isUserLoggedIn">
-                                            <div class="btn-group" uib-dropdown is-open="status.isopen">
-                                                <button id="single-button" type="button" class="btn btn-theme" uib-dropdown-toggle ng-disabled="disabled">
-                                                    <span style="color: white;" ng-bind="clientDetailResponse.FirstName"></span> <img ng-src="{{clientDetailResponse.imageUrl}}" class="img-circle" style="max-height: 40px;">
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                                    <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.vertexId}}">My Profile</a></li>
-                                                    <li role="menuitem"><a href="#/editpage">Edit Profile</a></li>
-                                                    <li role="menuitem"><a href="#">Another action</a></li>
-                                                    <li role="menuitem"><a href="#">Something else here</a></li>
-                                                    <li class="divider"></li>
-                                                    <li role="menuitem"><a href="" ng-click="signOut()">Logout</a></li>
-                                                </ul>
-                                            </div>
-
-                                        </li>
-                                        <li ng-show="!isUserLoggedIn">
-                                            <img ng-show="loadingUserDetails" src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
+                                        <li class="external">
+                                            <a href="#">
+                                                <span>View all notifications</span>
+                                                <i class="fa-link-ext"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
 
-                                    </ul>
+                                <li class="ng-cloak" ng-show="isUserLoggedIn">
+                                    <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                        <button id="single-button" type="button" class="btn btn-theme" uib-dropdown-toggle ng-disabled="disabled">
+                                            <span style="color: white;" ng-bind="clientDetailResponse.FirstName"></span> <img ng-src="{{clientDetailResponse.imageUrl}}" class="img-circle" style="max-height: 40px;">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                            <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.vertexId}}">My Profile</a></li>
+                                            <li role="menuitem"><a href="#/editpage">Edit Profile</a></li>
+                                            <li role="menuitem"><a href="#">Another action</a></li>
+                                            <li role="menuitem"><a href="#">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li role="menuitem"><a href="" ng-click="signOut()">Logout</a></li>
+                                        </ul>
+                                    </div>
+
+                                </li>
+                                <li ng-show="!isUserLoggedIn">
+                                    <img ng-show="loadingUserDetails" src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
+                                </li>
+                            </ul>
                         </div>
                         <!-- /.navbar-collapse -->
                     </div>
