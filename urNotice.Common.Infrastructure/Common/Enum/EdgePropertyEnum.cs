@@ -14,6 +14,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         PostedBy,
         PostedDate,
         EdgeMessage,
-        Type
+        Type,
+        NotificationInitiatedByVertexId
     }
 }

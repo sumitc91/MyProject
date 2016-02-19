@@ -211,7 +211,7 @@ define([appLocation.preLogin], function (app) {
         }
 
         function loadClientNotificationDetails() {
-            var url = ServerContextPath.solrServer + '/Search/GetNotificationDetails';
+            var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from=0&to=10';
             //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
             var headers = {
                 'Content-Type': 'application/json',
@@ -230,8 +230,8 @@ define([appLocation.preLogin], function (app) {
                 //stopBlockUI();
                 $scope.loadingUserDetails = false;
                 
-                $rootScope.clientNotificationDetailResponse = data;
-                $rootScope.clientNotificationDetailResponse.count = data.length;
+                $rootScope.clientNotificationDetailResponse = data.results;
+                $rootScope.clientNotificationDetailResponse.count = data.results.length;
 
                 console.log($rootScope.clientNotificationDetailResponse);
                 if (data.Status == "500") {

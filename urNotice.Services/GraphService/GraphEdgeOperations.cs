@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 using RestSharp;
 using urNotice.Common.Infrastructure.Common.Constants;
@@ -22,7 +23,7 @@ namespace urNotice.Services.GraphService
 
             foreach (KeyValuePair<string, string> property in properties)
             {
-                uri.Append(property.Key + "=" + property.Value + "&");
+                uri.Append(property.Key + "=" + HttpUtility.UrlEncode(property.Value) + "&");
             }
 
             //; name=" + user.email + "&gender=" + user.gender;

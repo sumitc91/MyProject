@@ -10,6 +10,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
     {
         Comment,
         User,
-        Post
+        Post,
+        Notification
     }
 }

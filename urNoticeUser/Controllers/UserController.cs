@@ -53,7 +53,33 @@ namespace urNoticeUser.Controllers
 
         }
 
-        
+        public JsonResult GetNotificationDetails()
+        {
+            var headers = new HeaderManager(Request);
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                
+                var clientNotificationDetailResponse = new UserService().GetUserNotification(session.UserVertexId,from,to, accessKey, secretKey);
+                var clientNotificationDetailResponseDeserialized =
+                        JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
+                return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         //[HttpPost]
         //public JsonResult UserPost(UserNewPostRequest req)
         //{
@@ -87,7 +113,7 @@ namespace urNoticeUser.Controllers
         {
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
             var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
-            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var userWallVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
@@ -98,7 +124,7 @@ namespace urNoticeUser.Controllers
                 {
                     image = String.Empty;
                 }
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message,image,vertexId, accessKey, secretKey);
+                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
@@ -115,9 +141,9 @@ namespace urNoticeUser.Controllers
         {
             var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
             var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
-            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var postVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
 
-            var wallVertexId = Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
+            var userWallVertexId = Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
             var postPostedByVertexId = Request.QueryString["postPostedByVertexId"].ToString(CultureInfo.InvariantCulture);
 
             var headers = new HeaderManager(Request);
@@ -130,7 +156,7 @@ namespace urNoticeUser.Controllers
                 {
                     image = String.Empty;
                 }
-                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, vertexId,wallVertexId,postPostedByVertexId, accessKey, secretKey);
+                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, accessKey, secretKey);
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else

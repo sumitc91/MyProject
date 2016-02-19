@@ -19,6 +19,9 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Gender,
         CreatedTime,
         ImageUrl,
-        CoverImageUrl
+        CoverImageUrl,
+        NotifiedByUserVertexId,
+        NotifiedOnPostVertexId,
+        NotifiedOnWallVertexId
     }
 }

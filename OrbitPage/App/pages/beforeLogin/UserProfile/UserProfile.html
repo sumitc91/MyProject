@@ -161,7 +161,8 @@
                                     <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
                                         <div class="title h5"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
-                                        <h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>
+                                        <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
+                                        <h6 class="text-muted time">{{post.postInfo.PostedTime| timeago}}</h6>
                                     </div>
                                 </div>
                                 <div class="post-image">
@@ -184,7 +185,8 @@
                                             <div class="comment-body">
                                                 <div class="comment-heading">
                                                     <h4 class="comment-user-name"><a href="#/userprofile/{{comment.commentedBy[0]._id}}"><span ng-bind="comment.commentedBy[0].FirstName"></span>&nbsp;<span ng-bind="comment.commentedBy[0].LastName"></span></a></h4>
-                                                    <h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>
+                                                    <!--<h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>-->
+                                                    <h5 class="time">{{comment.commentInfo.PostedTime | timeago}}</h5>
                                                 </div>
                                                 <p ng-bind="comment.commentInfo.PostMessage"></p>
                                             </div>

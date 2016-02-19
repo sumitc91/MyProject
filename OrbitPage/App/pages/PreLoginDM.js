@@ -80,11 +80,14 @@ appRequire = require
             bootstrap_ui: {
                 deps: ["jquery", "angular"]
             },
-            prettify: { //used
+            prettify: { //used 
                 deps: ["jquery"]
             },
             jquery_sidr_min: {
                 deps: ["jquery"]
+            },
+            ngtimeago: {
+                deps: ["jquery", "angular"]
             },
             angular_resource: {
                 deps: ["jquery", "angular"]
@@ -101,14 +104,14 @@ appRequire = require
             angularjs_fileUpload: {//new
                 deps: ["angular", "jquery", "angularjs_fileUpload_shim"]
             },
-            AngularFileUploadController: { //new
+            AngularFileUploadController: { //new 
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "beforeLoginCookieService", "fancybox", "angularjs_fileUpload", "angularjs_fileUpload_shim"]
             },
             beforeLoginSolrService: {
                 deps: ["jquery", "angular", "configureBlockUI", "jquery_blockUI", "toastMessage", "angular_resource"]
             },
             beforeLoginApp: {
-                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript"]
+                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago"]
             },
             beforeLoginIndex: {
                 deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
@@ -144,7 +147,7 @@ appRequire = require
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui","AngularFileUploadController"]
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
             },
         },
         paths: {
@@ -185,6 +188,7 @@ appRequire = require
             angular_input_stars: "../../App/third-Party/angular-input-stars-master/angular-input-stars",
             urNoticeScript: "../../App/js/urNoticeScript",
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
+            ngtimeago: "../../App/js/angular/ngtimeago",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -218,7 +222,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
-    "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha"
+    "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

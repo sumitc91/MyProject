@@ -283,6 +283,9 @@
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdemailResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdphoneNumberResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationEdgeInfo.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostCommentModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModelResponse.cs" />

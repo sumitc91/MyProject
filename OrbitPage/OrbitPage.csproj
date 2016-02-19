@@ -265,6 +265,7 @@
     <Content Include="App\js\angular\angucomplete-alt.min.js" />
     <Content Include="App\js\angular\ngSanitize\filter\linky.js" />
     <Content Include="App\js\angular\ngSanitize\sanitize.js" />
+    <Content Include="App\js\angular\ngtimeago.js" />
     <Content Include="App\js\angular\ui-bootstrap-custom-0.14.3.js" />
     <Content Include="App\js\angular\ui-bootstrap-tpls-0.14.3.js" />
     <Content Include="App\js\bannerscollection_zoominout.js" />
@@ -301,6 +302,7 @@
     <Content Include="App\js\singleRController.js" />
     <Content Include="App\js\toastMessage.js" />
     <Content Include="App\js\underscore-min.js" />
+    <Content Include="App\js\jquery.timeago.js" />
     <Content Include="App\js\vivus.js" />
     <Content Include="App\js\vivus.min.js" />
     <Content Include="App\pages\beforeLogin\404\404.html" />

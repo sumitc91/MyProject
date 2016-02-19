@@ -1813,57 +1813,6 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
     padding: 0;
     z-index: 3;
 }
-li .dropdown-menu .dropdown-menu-list, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list {
-    max-height: 300px;
-    overflow: auto;
-    position: relative;
-}
-li .dropdown-menu .dropdown-menu-list li, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li {
-    position: relative;
-}
-li .dropdown-menu .dropdown-menu-list li a, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a {
-    color: #979898;
-    display: block;
-    padding: 20px 30px;
-    position: relative;
-}
-li .dropdown-menu .dropdown-menu-list li a .line, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line {
-    display: block;
-}
-li .dropdown-menu .dropdown-menu-list li a .line.desc, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line.desc {
-    margin-right: 10px;
-    margin-top: 10px;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-li .dropdown-menu .dropdown-menu-list li a .line .light, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line .light {
-    opacity: 0.6;
-}
-li .dropdown-menu .dropdown-menu-list li a .line.small, li .dropdown-menu .dropdown-menu-list li a .line .small, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line.small, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line .small {
-    font-size: 12px;
-}
-li .dropdown-menu .dropdown-menu-list li a .line.time, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a .line.time {
-    font-size: 11px;
-    margin-top: 5px;
-}
-li .dropdown-menu .dropdown-menu-list li a::after, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a::after {
-    background: #ededed none repeat scroll 0 0;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 1px;
-    left: 30px;
-    position: absolute;
-    right: 30px;
-}
-li .dropdown-menu .dropdown-menu-list li a:hover, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li a:hover {
-    color: #606161;
-}
-li .dropdown-menu .dropdown-menu-list li.active a, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu .dropdown-menu-list li.active a {
-    color: #606161;
-}
 .user-info-navbar .user-info-menu > li .dropdown-menu > .top, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu > .top {
     padding: 20px 30px 0;
 }
@@ -5260,23 +5209,7 @@ label.radio-inline input[type="radio"] {
 .input-group.input-group-minimal.focused .input-group-addon {
     border-color: rgba(104, 184, 40, 0.5);
 }
-nav.navbar {
-    border: 0 none;
-}
-nav.navbar form > .btn {
-    margin-bottom: 0;
-}
-nav.navbar .navbar-header .navbar-brand {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-nav.navbar .navbar-nav li a {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-nav.navbar.navbar-inverse .navbar-toggle i {
-    color: #fff;
-}
+
 @media print {
 .sidebar-menu {
     display: none;
