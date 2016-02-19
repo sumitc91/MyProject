@@ -25,3 +25,4 @@ C:\code\svn\OrbitPage\OrbitPageAdmin\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\OrbitPageAdmin\bin\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\OrbitPageAdmin\obj\Debug\OrbitPageAdmin.dll
 C:\code\svn\OrbitPage\OrbitPageAdmin\obj\Debug\OrbitPageAdmin.pdb
+C:\code\svn\OrbitPage\OrbitPageAdmin\obj\Debug\OrbitPageAdmin.csprojResolveAssemblyReference.cache
