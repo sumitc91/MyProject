@@ -261,6 +261,10 @@ define([appLocation.preLogin], function (app) {
             //showToastMessage("Success", "Logged Out");
         };
 
+        $scope.openPost = function (postUrl) {
+            location.href = postUrl;
+        };
+
         $scope.socialButtonClicked = function (name) {
             console.log("functionclicked");
             $().toastmessage('showSuccessToast', "message");

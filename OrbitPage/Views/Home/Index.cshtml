@@ -269,17 +269,18 @@ div.middle-div-mobile {
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
                                                             </span>
                                                         </div>
-                                                        <div class="col-sm-9 col-md-9" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
+                                                        <div class="col-sm-8 col-md-8" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">Post</a> on your Wall.
                                                             <br />
                                                             " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
-                                                            <br/>
+                                                            <br />
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
                                                             </span>
                                                         </div>
-                                                        <div class="col-sm-1 col-md-1">
-
+                                                        <div class="col-sm-2 col-md-2">
+                                                            <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}"><img ng-show="notification.postInfo[0].PostImage" ng-src="{{notification.postInfo[0].PostImage}}" height="50px" width="50px"></a>
+                                                            
                                                         </div>
                                                     </div>
                                                 </li>
