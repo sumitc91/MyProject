@@ -167,7 +167,7 @@ define([appLocation.preLogin], function (app) {
         } else {
             console.log("cookie not available.");
         };
-            
+        
 
         function loadClientDetails() {
             var url = ServerContextPath.solrServer + '/Search/GetDetails?userType=user';
@@ -195,6 +195,9 @@ define([appLocation.preLogin], function (app) {
                     CookieUtil.setUserName(data.Payload.FirstName, userSession.keepMeSignedIn);
                     CookieUtil.setUserImageUrl(data.Payload.imageUrl, userSession.keepMeSignedIn);
                     $rootScope.isUserLoggedIn = true;
+
+                    initSidr(true);
+
                     if (data.Payload.isLocked == "true") {
                         location.href = "/Auth/LockAccount?status=true";
                     }
@@ -255,6 +258,37 @@ define([appLocation.preLogin], function (app) {
             });
         }
 
+        function initSidr(latestUserInfoAvailable) {
+            var sidrMenu = "";
+            sidrMenu += '<h1>' + 'OrbitPage' + '</h1>';
+            sidrMenu += '<ul>';
+            if ($rootScope.isUserLoggedIn && latestUserInfoAvailable) {
+                sidrMenu += '<li><img src=\"' + $rootScope.clientDetailResponse.imageUrl + '\" height=\"30px\" widht=\"30px\" />' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '</li>';
+                sidrMenu += '<li><a href="#/userprofile/' + $rootScope.clientDetailResponse.vertexId + '">My Profile</a></li>';
+                sidrMenu += '<li role="menuitem"><a href="#/editpage">Edit Profile</a></li>';
+            } else {
+                sidrMenu += '<li><a href=\"#/login\">Login</a></li>';
+                sidrMenu += '<li><a href=\"#\">Register</a></li>';
+            }
+
+            sidrMenu += '<li><hr/></li>';
+            sidrMenu += '<li><a href=\"#\">Worgraphy</a></li>';
+            sidrMenu += '<li><a href=\"#\">Urnotice</a></li>';
+
+            sidrMenu += '</ul>';
+
+            $('#responsive-menu-button').sidr({
+                name: 'sidr-callback',
+                source: function () {
+                    return sidrMenu;
+                }
+            });
+
+            $("body").click(function () {
+                $.sidr('close', 'sidr-callback');
+            });
+        }
+
         $scope.signOut = function () {
             logout();
             //$rootScope.isUserLoggedIn = false;
@@ -304,15 +338,13 @@ define([appLocation.preLogin], function (app) {
         } else {
             
         }
+        initSidr(false);
+        //$('#responsive-menu-button').sidr({
+        //    name: 'sidr-main',
+        //    side: 'right',
+        //    source: '#nav_mobi'
+        //});
 
-        $('#responsive-menu-button').sidr({
-            name: 'sidr-main',
-            side: 'right',
-            source: '#nav_mobi'
-        });
-        $("body").click(function () {
-            $.sidr('close', 'sidr-main');
-        });
     });
 
     function loadjscssfile(filename, filetype) {

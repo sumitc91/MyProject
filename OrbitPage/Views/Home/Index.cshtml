@@ -123,36 +123,13 @@ div.middle-div-mobile {
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>*@
+                            
                             <button id="responsive-menu-button" class="navbar-toggle navbar-toggle-orbitpage"
                                     type="button">
                                 <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/show-menu-icon.png" height="50" />
 
                             </button> 
-                            <nav id="nav_mobi">
-                                <ul>
-                                    <li ng-show="!isUserLoggedIn"><a href="#/login" data-i18n="beforeLoginMasterPageLogin"></a></li>
-                                    <li><a href="#?q=*&page=1&perpage=10/search">Search in-depth</a></li>
-                                    <li><a href="#/statistics">Statistics</a></li>
-                                    <li><a href="#/poststory">urJobgraphy</a></li>
-                                    <li><a href="#/contactus" data-i18n="beforeLoginMasterPageFeedback"></a></li>
-                                    <li><a href="#/">Home</a></li>
-                                    <li ng-show="isUserLoggedIn">
-                                        <a href="index.html">Account</a>
-                                    </li>
-                                    <li ng-show="isUserLoggedIn">
-                                        <a href="index1.html">Help Centre</a>
-                                    </li>
-                                    <li ng-show="isUserLoggedIn">
-                                        <a href="" ng-click="signOut()">Logout</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            
 
                             <a href="/#/"><img alt="" ng-src="{{logourl}}" height="50" ng-cloak></a>
                         </div>
@@ -362,7 +339,7 @@ div.middle-div-mobile {
                                             <span class="caret"></span>
                                         </button>
                                         <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                            <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.vertexId}}">My Profile</a></li>
+                                            <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.vertexId}}">My Wall</a></li>
                                             <li role="menuitem"><a href="#/editpage">Edit Profile</a></li>
                                             <li role="menuitem"><a href="#">Another action</a></li>
                                             <li role="menuitem"><a href="#">Something else here</a></li>
