@@ -20,6 +20,8 @@ define([appLocation.preLogin], function (app) {
 
         $scope.createNewUserPost = function () {
             createNewUserPost();
+            $scope.UserPostListInfoAngular.after = 0;
+            $scope.UserPostList = [];
         };
 
         $scope.commentOnUserPost = function (postIndex) {

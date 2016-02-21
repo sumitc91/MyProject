@@ -59,10 +59,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -155,6 +163,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SocialAuthController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -162,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UploadImageService\imgurService.cs" />
     <Compile Include="Services\UploadImageService\S3ImageUploadServices.cs" />
@@ -374,7 +384,6 @@
     <Content Include="App\pages\beforeLogin\TnC\TnC.js" />
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail.html" />
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail.js" />
-    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile - Copy.html" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.html" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />
@@ -857,6 +866,11 @@
     <Content Include="App\third-Party\wysihtml5\test\undo_manager_test.js" />
     <Content Include="changelog.txt" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

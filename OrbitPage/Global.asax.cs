@@ -28,8 +28,8 @@ namespace OrbitPage
 
             //Startup.Init<UnCompanySolr>(ConfigurationManager.AppSettings["unCompanySolr"]);
             //Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
-            Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
-            Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
+            SolrNet.Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
+            SolrNet.Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
         }
     }
 }

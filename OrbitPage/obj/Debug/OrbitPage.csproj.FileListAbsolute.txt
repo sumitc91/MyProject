@@ -99,3 +99,7 @@ C:\code\svn\OrbitPage\OrbitPage\bin\Owin.dll
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.xml
 C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.Security.xml
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\code\svn\OrbitPage\OrbitPage\bin\Microsoft.Owin.Host.SystemWeb.xml
