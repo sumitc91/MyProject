@@ -92,6 +92,18 @@ appRequire = require
             ngtimeago: {
                 deps: ["jquery", "angular"]
             },
+            wysihtml5: {
+                deps: ["jquery"]
+            },
+            bootstrap_wysihtml5: { //used
+                deps: ["jquery", "wysihtml5"]
+            },
+            filedrop: {//new
+                deps: ["jquery"]
+            },
+            fileDropScript: {//new
+                deps: ["jquery", "filedrop", "domReady"]
+            },
             angular_resource: {
                 deps: ["jquery", "angular"]
             },
@@ -155,6 +167,9 @@ appRequire = require
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
             },
+            beforeLoginPostStory: {
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "wysihtml5", "bootstrap_wysihtml5", "prettify", "bootstrap", "filedrop", "fileDropScript", "domReady", "fancybox", "AngularFileUploadController", "ngAutocomplete", "angucomplete_alt_min"]
+            },
         },
         paths: {
             //==============================================================================================================
@@ -196,6 +211,10 @@ appRequire = require
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
             ngtimeago: "../../App/js/angular/ngtimeago",
             ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
+            wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
+            bootstrap_wysihtml5: "../../App/third-Party/wysihtml5/lib/js/bootstrap3-wysihtml5.all.min",
+            filedrop: "../../App/third-Party/html5-file-upload/assets/js/jquery.filedrop",
+            fileDropScript: "../../App/third-Party/html5-file-upload/assets/js/script",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -216,6 +235,7 @@ appRequire = require
             beforeLoginSearch: "../../App/pages/beforeLogin/Search/Search",
             beforeLoginUserProfile: "../../App/pages/beforeLogin/UserProfile/UserProfile",
             beforeLoginViewPostDetail: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail",
+            beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
             
         },
@@ -231,7 +251,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
-    "beforeLoginViewPostDetail", "ng_infinite_scroll"
+    "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });
