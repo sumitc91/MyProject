@@ -222,7 +222,7 @@ div.middle-div-mobile {
                                         <span class="badge badge-purple" ng-bind="clientNotificationDetailResponse.count"></span>
                                     </a>
 
-                                    <ul class="dropdown-menu notifications" style="width: 450px;">
+                                    <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
                                         <li class="top">
                                             <p class="small">
                                                 <a class="pull-right" href="#">Mark all Read</a>
@@ -232,12 +232,13 @@ div.middle-div-mobile {
 
                                         <li>
                                             <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
-                                                <li class="active notification-success borderlist" ng-repeat="notification in clientNotificationDetailResponse" style="min-height: 50px;">
+                                                <li class="active notification-success borderlist" ng-repeat="notification in clientNotificationDetailResponse">
                                                     <div class="row">
+                                                        <div class="col-sm-1 col-md-1"></div>
                                                         <div class="col-sm-2 col-md-2">
-                                                            <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="40px" width="40px">
+                                                            <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="50px" width="50px">
                                                         </div>
-                                                        <div class="col-sm-8 col-md-8" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">post</a>.
                                                             <br />
                                                             " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
@@ -246,7 +247,7 @@ div.middle-div-mobile {
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
                                                             </span>
                                                         </div>
-                                                        <div class="col-sm-8 col-md-8" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">Post</a> on your Wall.
                                                             <br />
                                                             " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
@@ -257,7 +258,7 @@ div.middle-div-mobile {
                                                         </div>
                                                         <div class="col-sm-2 col-md-2">
                                                             <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}"><img ng-show="notification.postInfo[0].PostImage" ng-src="{{notification.postInfo[0].PostImage}}" height="50px" width="50px"></a>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </li>
@@ -266,7 +267,7 @@ div.middle-div-mobile {
                                                 <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
                                                 <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 276px;"><div class="ps-scrollbar-y" style="top: 0px; height: 184px;"></div></div>
                                             </ul>
-                                           
+
                                         </li>
 
                                         <li class="external">
