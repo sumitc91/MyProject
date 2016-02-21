@@ -1,4 +1,4 @@
-
+﻿
 'use strict';
 define([appLocation.preLogin], function (app) {
 
@@ -118,7 +118,7 @@ define([appLocation.preLogin], function (app) {
                 }
             }
 
-            return value + (tail || ' �');
+            return value + (tail || ' …');
         };
     });
 
@@ -151,7 +151,21 @@ define([appLocation.preLogin], function (app) {
         $scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
         $scope.loadingUserDetails = false;
         $rootScope.clientDetailResponse = {};
+        $rootScope.clientNotificationDetailResponseInfo = {
+            busy: false,
+            after: 0,
+            itemPerPage:2
+    };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
+
+        $scope.clientNotificationDetailResponseInfo.nextPage = function () {
+            //alert("working");
+            if ($rootScope.clientNotificationDetailResponseInfo.busy) return;
+            $rootScope.clientNotificationDetailResponseInfo.busy = true;
+            //console.log($rootScope.clientNotificationDetailResponseInfo.after);
+            loadClientNotificationDetails($rootScope.clientNotificationDetailResponseInfo.after, $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage);
+            $rootScope.clientNotificationDetailResponseInfo.after = $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage+1;
+        };
 
         if (CookieUtil.getUTMZT() != null && CookieUtil.getUTMZT() != '' && CookieUtil.getUTMZT() != "") {
             //console.log("cookie available. : " + CookieUtil.getUserName() + "   &  " + CookieUtil.getUserImageUrl());
@@ -163,7 +177,7 @@ define([appLocation.preLogin], function (app) {
             }
             
             loadClientDetails();
-            loadClientNotificationDetails();
+            $scope.clientNotificationDetailResponseInfo.nextPage();
         } else {
             console.log("cookie not available.");
         };
@@ -220,8 +234,10 @@ define([appLocation.preLogin], function (app) {
             });
         }
 
-        function loadClientNotificationDetails() {
-            var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from=0&to=10';
+        
+
+        function loadClientNotificationDetails(from,to) {
+            var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from='+from+'&to='+to;
             //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
             var headers = {
                 'Content-Type': 'application/json',
@@ -239,11 +255,19 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
                 $scope.loadingUserDetails = false;
-                
-                $rootScope.clientNotificationDetailResponse = data.results;
-                $rootScope.clientNotificationDetailResponse.count = data.results.length;
 
-                console.log($rootScope.clientNotificationDetailResponse);
+                if ($rootScope.clientNotificationDetailResponse != null) {
+                    for (var i = 0; i < data.results.length; i++) {                        
+                        $rootScope.clientNotificationDetailResponse.push(data.results[i]);
+                        //console.log($rootScope.clientNotificationDetailResponse);
+                    }
+                }                   
+                else
+                    $rootScope.clientNotificationDetailResponse = data.results;
+
+                $rootScope.clientNotificationDetailResponseInfo.count = $rootScope.clientNotificationDetailResponse.length;
+                $rootScope.clientNotificationDetailResponseInfo.busy = false;
+                //console.log($rootScope.clientNotificationDetailResponse);
                 if (data.Status == "500") {
 
                     alert("Internal Server Error Occured");

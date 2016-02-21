@@ -218,15 +218,15 @@ div.middle-div-mobile {
 
                                 <li class="dropdown hover-line" ng-show="isUserLoggedIn">
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false">
-                                        <i class="fa-bell-o"></i>
-                                        <span class="badge badge-purple" ng-bind="clientNotificationDetailResponse.count"></span>
+                                        <i class="fa-bell-o"></i>                                        
+                                        <span class="badge badge-purple" ng-bind="clientNotificationDetailResponseInfo.count"></span>
                                     </a>
 
                                     <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
                                         <li class="top">
                                             <p class="small">
                                                 <a class="pull-right" href="#">Mark all Read</a>
-                                                You have <strong ng-bind="clientNotificationDetailResponse.count"></strong> new notifications.
+                                                You have <strong ng-bind="clientNotificationDetailResponseInfo.count"></strong> new notifications.
                                             </p>
                                         </li>
 
@@ -236,7 +236,9 @@ div.middle-div-mobile {
                                                     <div class="row">
                                                         <div class="col-sm-1 col-md-1"></div>
                                                         <div class="col-sm-2 col-md-2">
-                                                            <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="50px" width="50px">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}">
+                                                                <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="50px" width="50px">
+                                                            </a>
                                                         </div>
                                                         <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">post</a>.
@@ -263,15 +265,26 @@ div.middle-div-mobile {
                                                     </div>
                                                 </li>
 
-
-                                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
-                                                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 276px;"><div class="ps-scrollbar-y" style="top: 0px; height: 184px;"></div></div>
                                             </ul>
 
                                         </li>
+                                        <li class="external" ng-show='!clientNotificationDetailResponse.busy'>
 
+                                            <a ng-click="clientNotificationDetailResponseInfo.nextPage()">
+                                                <div>Load more...</div>
+                                                <i class="fa-link-ext"></i>
+                                            </a>
+
+
+                                        </li>
                                         <li class="external">
                                             <a href="#">
+                                                <div ng-show='clientNotificationDetailResponse.busy'>Loading data...</div>                                               
+                                                <i class="fa-link-ext"></i>
+                                            </a>
+                                        </li>
+                                        <li class="external">
+                                            <a href="#">                                                                                               
                                                 <span>View all notifications</span>
                                                 <i class="fa-link-ext"></i>
                                             </a>
@@ -499,6 +512,7 @@ div.middle-div-mobile {
                 jQuery("#status").fadeOut();
                 // will fade out the whole DIV that covers the website.
                 jQuery("#preloader").delay(1000).fadeOut("medium");
+
             });
 
             // makes sure the whole site is loaded
@@ -516,6 +530,7 @@ div.middle-div-mobile {
             jQuery(document).ready(function () {
                 jQuery("time.timeago").timeago();
             });
+
         </script>
 
         <style type="text/css">

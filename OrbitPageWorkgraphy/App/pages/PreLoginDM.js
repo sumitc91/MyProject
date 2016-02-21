@@ -98,11 +98,14 @@ appRequire = require
             bootstrap_ui: {
                 deps: ["jquery", "angular"]
             },
-            prettify: { //used
+            prettify: { //used 
                 deps: ["jquery"]
             },
             jquery_sidr_min: {
                 deps: ["jquery"]
+            },
+            ng_infinite_scroll: {
+                deps: ["jquery", "angular"]
             },
             angular_resource: {
                 deps: ["jquery", "angular"]
@@ -117,7 +120,7 @@ appRequire = require
                 deps: ["angularjs_fileUpload_shim", "angularjs_fileUpload"]
             },
             beforeLoginApp: {
-                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript"]
+                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ng_infinite_scroll"]
             },
             beforeLoginIndex: {
                 deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
@@ -197,6 +200,7 @@ appRequire = require
             prettify: "../../App/third-Party/wysihtml5/lib/js/prettify",            
             angular_input_stars: "../../App/third-Party/angular-input-stars-master/angular-input-stars",
             urNoticeScript: "../../App/js/urNoticeScript",
+            ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -229,7 +233,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "filedrop", "angularjs_fileUpload_shim", "angularjs_fileUpload", "fileDropScript",
-    "AngularFileUploadController"
+    "AngularFileUploadController", "ng_infinite_scroll"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

@@ -80,6 +80,9 @@ appRequire = require
             bootstrap_ui: {
                 deps: ["jquery", "angular"]
             },
+            ng_infinite_scroll: {
+                deps: ["jquery", "angular"]
+            },
             prettify: { //used 
                 deps: ["jquery"]
             },
@@ -111,7 +114,7 @@ appRequire = require
                 deps: ["jquery", "angular", "configureBlockUI", "jquery_blockUI", "toastMessage", "angular_resource"]
             },
             beforeLoginApp: {
-                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago"]
+                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago", "ng_infinite_scroll"]
             },
             beforeLoginIndex: {
                 deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
@@ -192,6 +195,7 @@ appRequire = require
             urNoticeScript: "../../App/js/urNoticeScript",
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
             ngtimeago: "../../App/js/angular/ngtimeago",
+            ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -227,7 +231,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
-    "beforeLoginViewPostDetail"
+    "beforeLoginViewPostDetail", "ng_infinite_scroll"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

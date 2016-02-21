@@ -137,7 +137,7 @@ define([appLocation.preLogin], function (app) {
                 stopBlockUI();
                 $scope.$apply(function () {
                     $scope.CurrentUserDetails = data.Payload[0];
-                    console.log($scope.CurrentUserDetails);
+                    //console.log($scope.CurrentUserDetails);
                 });
                 
             });
