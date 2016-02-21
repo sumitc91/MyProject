@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload,$timeout,$routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
@@ -9,9 +9,14 @@ define([appLocation.preLogin], function (app) {
 
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
-        
+        $scope.UserPostListInfoAngular = {
+            busy: false,
+            after: 0,
+            itemPerPage: 2
+        };
+
         getUserInformation();
-        getUserPost();
+        //getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
 
         $scope.createNewUserPost = function () {
             createNewUserPost();
@@ -22,6 +27,9 @@ define([appLocation.preLogin], function (app) {
             createNewMessageOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
+
+        $scope.UserPostListInfo = {};
+
 
         $scope.NewPostImageUrl = {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
@@ -49,7 +57,7 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 stopBlockUI();
                 //console.log(data);
-                getUserPost();
+                getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
                 $scope.UserPostMessage = "";
 
                 $timeout(function () {
@@ -82,7 +90,7 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 stopBlockUI();
                 //console.log(data);
-                getUserPost();
+                getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
                 $scope.UserPostMessage = "";
 
                 $timeout(function () {
@@ -143,31 +151,52 @@ define([appLocation.preLogin], function (app) {
             });
         };
 
-        function getUserPost() {
-            var url = ServerContextPath.userServer + '/User/GetUserPost?from=0&to=10&vertexId=' + $scope.visitedUserVertexId;
+        function getUserPost(from,to) {
+            var url = ServerContextPath.userServer + '/User/GetUserPost?from='+from+'&to='+to+'&vertexId=' + $scope.visitedUserVertexId;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
-            startBlockUI('wait..', 3);
+            //startBlockUI('wait..', 3);
+            $scope.UserPostListInfoAngular.busy = true;
             $.ajax({
                 url: url,
                 method: "GET",
                 headers: headers
             }).done(function (data, status) {
-                stopBlockUI();
+                //stopBlockUI();
+                $scope.UserPostListInfoAngular.busy = false;
                 $scope.$apply(function () {
-                    $scope.UserPostList = data.results;
-                    console.log($scope.UserPostList);
+                    //$scope.UserPostList = data.results;
+
+                    if ($scope.UserPostList != null) {
+                        for (var i = 0; i < data.results.length; i++) {
+                            $scope.UserPostList.push(data.results[i]);
+                            //console.log($rootScope.clientNotificationDetailResponse);
+                        }
+                    }
+                    else
+                        $scope.UserPostList = data.results;
+
+                    //console.log($scope.UserPostList);
                 });
 
             });
         };
 
+        $scope.UserPostListInfo.nextPage = function () {
+            if ($scope.UserPostListInfoAngular.busy) return;
+            $scope.UserPostListInfoAngular.busy = true;
+            getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+            $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage+1;
+            console.log("UserPostListInfo.nextPage called.");
+
+        };
     });
 
-      
+    
+   
 });
 

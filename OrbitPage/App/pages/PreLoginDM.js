@@ -114,7 +114,7 @@ appRequire = require
                 deps: ["jquery", "angular", "configureBlockUI", "jquery_blockUI", "toastMessage", "angular_resource"]
             },
             beforeLoginApp: {
-                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago", "ng_infinite_scroll"]
+                deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago"]
             },
             beforeLoginIndex: {
                 deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
@@ -150,7 +150,7 @@ appRequire = require
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
             },
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
