@@ -108,7 +108,7 @@ define([appLocation.preLogin], function (app) {
 
             userSession.keepMeSignedIn = $scope.KeepMeSignedInCheckBox;
 
-            var url = ServerContextPath.authServer + '/Auth/Login';
+            var url = ServerContextPath.empty + '/Auth/Login';
             var validatePassword = false;
             var validateUsername = false;
 
@@ -169,7 +169,7 @@ define([appLocation.preLogin], function (app) {
                         CookieUtil.setUTIME(data.Payload.TimeStamp, userSession.keepMeSignedIn);
 
                         $.cookie('uservertexid', data.Payload.VertexId, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
-                        $.cookie('userName', data.Payload.Username, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+                        $.cookie('userName', data.Payload.FirstName, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
                         $.cookie('userImageUrl', data.Payload.imageUrl, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
 
                         CookieUtil.setKMSI(userSession.keepMeSignedIn, true); // to store KMSI value for maximum possible time.

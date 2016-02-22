@@ -46,27 +46,27 @@ namespace urNoticeAuth.Controllers
             return Json(_authService.UserRegistration(req, Request, accessKey, secretKey));
         }
 
-        [HttpPost]
-        public JsonResult Login(LoginRequest req)
-        {
-            var returnUrl = "/";
-            //var referral = Request.QueryString["ref"];
-            //var isMobileFacebookLogin = Request.QueryString["isMobileFacebookLogin"];
-            var responseData = new LoginResponse();
-            if (req.Type == "web")
-            {
-                responseData = _authService.WebLogin(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, accessKey, secretKey);
-            }
+        //[HttpPost]
+        //public JsonResult Login(LoginRequest req)
+        //{
+        //    var returnUrl = "/";
+        //    //var referral = Request.QueryString["ref"];
+        //    //var isMobileFacebookLogin = Request.QueryString["isMobileFacebookLogin"];
+        //    var responseData = new LoginResponse();
+        //    if (req.Type == "web")
+        //    {
+        //        responseData = _authService.WebLogin(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, accessKey, secretKey);
+        //    }
 
-            if (responseData.Code == "200")
-            {
-                var session = new urNoticeSession(req.UserName, responseData.VertexId);
-                TokenManager.CreateSession(session);
-                responseData.UTMZT = session.SessionId;
-            }
-            var response = new ResponseModel<LoginResponse> { Status = Convert.ToInt32(responseData.Code), Message = "success", Payload = responseData };
-            return Json(response);
-        }
+        //    if (responseData.Code == "200")
+        //    {
+        //        var session = new urNoticeSession(req.UserName, responseData.VertexId);
+        //        TokenManager.CreateSession(session);
+        //        responseData.UTMZT = session.SessionId;
+        //    }
+        //    var response = new ResponseModel<LoginResponse> { Status = Convert.ToInt32(responseData.Code), Message = "success", Payload = responseData };
+        //    return Json(response);
+        //}
 
         [HttpPost]
         public JsonResult ValidateAccount(ValidateAccountRequest req)

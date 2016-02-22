@@ -1,16 +1,20 @@
 ﻿$(document).ready(function () {
-    var _name ="sumitxyz";
+    ConnectWithSignalRPushNotification();
+});
+
+function ConnectWithSignalRPushNotification() {
+    var _name = "sumitxyz";
     $("#spnName").text(_name);
     $("#txtMsg").val('');
 
     var chatProxy = $.connection.ChatHub;
 
-    
+
 
     $.connection.hub.start().done(function () {
 
         chatProxy.server.registerClient($.cookie('uservertexid'));
-        
+
         $("#btnSend").click(function () {
             chatProxy.server.broadCastMessage($("#spnName").text(), $("#txtMsg").val());
             $("#txtMsg").val('').focus();
@@ -20,13 +24,12 @@
     chatProxy.client.addMessage = function (message) {
         console.log("user registered : " + message);
     };
-    
+
     chatProxy.client.receiveMessage = function (msgFrom, msg) {
         //$("#divChat").append("<li><strong>" + msgFrom + "</strong>:&nbsp;&nbsp;" + msg + "</li>");
         showToastMessage("Success", "<strong>" + msgFrom + "</strong>:&nbsp;&nbsp;" + msg);
     };
-
-});
+}
 
 //$(function () {
 //    // Proxy created on the fly          

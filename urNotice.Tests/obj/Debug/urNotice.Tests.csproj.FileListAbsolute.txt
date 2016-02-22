@@ -135,4 +135,3 @@ C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.WebPages.Deployment.xm
 C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.dll
 C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.pdb
-C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.csprojResolveAssemblyReference.cache

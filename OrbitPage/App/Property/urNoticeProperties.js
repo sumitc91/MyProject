@@ -77,15 +77,6 @@ function detectAndroid() {
     return (navigator.userAgent.match(/Android/i) != null);
 }
 
-function updateMe(data) {
-    if (data == 'login')
-        location.href = "/" + $.cookie('loginType');
-    else if (data == 'fblikepage')
-        location.href = "/user#/facebookLikePage";
-    else if (data == 'error')
-        alert("Internal Server Error Occured !! Try Again");
-}
-
 function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -94,7 +85,7 @@ function getParameterByName(name) {
 function updateMe( data ) {
     if (data == 'login') {
         //location.href = "/" + $.cookie('loginType');
-        redirectAfterLogin();
+        redirectAfterSocialLogin();
     }        
     else if(data == 'fblikepage')
         location.href="/user#/facebookLikePage";
@@ -106,7 +97,7 @@ function setReturnUrlInCookie(data) {
     $.cookie('returnUrl', data, { expires: 365, path: '/' });
 }
 
-function redirectAfterLogin() {
+function redirectAfterSocialLogin() {
     var returnUrl = "";
     if ($.cookie('returnUrl') != null && $.cookie('returnUrl') != "null")
         returnUrl = $.cookie('returnUrl');
@@ -124,6 +115,28 @@ function redirectAfterLogin() {
 
         //window.location = '/#' + returnUrl;
         //window.location.reload();
+    }
+
+}
+
+function redirectAfterLogin() {
+    var returnUrl = "";
+    if ($.cookie('returnUrl') != null && $.cookie('returnUrl') != "null")
+        returnUrl = $.cookie('returnUrl');
+
+    //console.log(returnUrl + " : " + returnUrl.toLowerCase().indexOf("login"));
+    if (returnUrl.toLowerCase().indexOf("login") >= 0 || returnUrl.toLowerCase().indexOf("resetpassword") >= 0) {
+        console.log("/#");
+        //window.location.href = "/#";
+
+        window.location = '/#/';
+        window.location.reload();
+    } else {
+        console.log("/#" + returnUrl);
+        //window.location.href = "/#" + returnUrl;
+
+        window.location = '/#' + returnUrl;
+        window.location.reload();
     }
     
 }
