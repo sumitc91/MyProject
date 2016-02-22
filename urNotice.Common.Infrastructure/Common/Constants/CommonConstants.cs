@@ -45,5 +45,7 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public static string male="male";
         public static string female="female";
         public static string undefined = "undefined";
+        public static string PushNotificationArray = "PushNotificationArray";
+        public static string CommaDelimeter = ",";
     }
 }

@@ -150,7 +150,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
         $scope.loadingUserDetails = false;
-        $rootScope.clientDetailResponse = {};
+        $rootScope.clientDetailResponse = {};        
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
@@ -163,8 +163,14 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.clientNotificationDetailResponseInfo.busy) return;
             $rootScope.clientNotificationDetailResponseInfo.busy = true;
             //console.log($rootScope.clientNotificationDetailResponseInfo.after);
-            loadClientNotificationDetails($rootScope.clientNotificationDetailResponseInfo.after, $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage);
+            loadClientNotificationDetails($rootScope.clientNotificationDetailResponseInfo.after, $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage,false);
             $rootScope.clientNotificationDetailResponseInfo.after = $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage+1;
+        };
+        $scope.clientNotificationDetailResponseInfoUpdateFromPushNotification = function () {
+            //alert("working");                 
+            $rootScope.clientNotificationDetailResponse = [];
+            loadClientNotificationDetails(0, $rootScope.clientNotificationDetailResponseInfo.after+1,true);
+            
         };
 
         if (CookieUtil.getUTMZT() != null && CookieUtil.getUTMZT() != '' && CookieUtil.getUTMZT() != "") {
@@ -173,6 +179,7 @@ define([appLocation.preLogin], function (app) {
             if (CookieUtil.getUserName() != null && CookieUtil.getUserName() != '' && CookieUtil.getUserName() != "") {
                 $rootScope.clientDetailResponse.FirstName = CookieUtil.getUserName();
                 $rootScope.clientDetailResponse.imageUrl = CookieUtil.getUserImageUrl();
+                $rootScope.clientDetailResponse.vertexId = $.cookie('uservertexid');
                 $rootScope.isUserLoggedIn = true;
             }
             
@@ -236,7 +243,7 @@ define([appLocation.preLogin], function (app) {
 
         
 
-        function loadClientNotificationDetails(from,to) {
+        function loadClientNotificationDetails(from, to, isFromPushNotification) {
             var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from='+from+'&to='+to;
             //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
             var headers = {
@@ -267,6 +274,16 @@ define([appLocation.preLogin], function (app) {
 
                 $rootScope.clientNotificationDetailResponseInfo.count = $rootScope.clientNotificationDetailResponse.length;
                 $rootScope.clientNotificationDetailResponseInfo.busy = false;
+
+                if (isFromPushNotification) {
+                    var mssg = "";
+                    if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "WallPostNotification") {
+                        mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Posted On your wall.";                        
+                    } else {
+                        mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Commented on one of your related post.";
+                    }
+                    showToastMessage("Success", mssg);
+                }
                 //console.log($rootScope.clientNotificationDetailResponse);
                 if (data.Status == "500") {
 
@@ -313,7 +330,7 @@ define([appLocation.preLogin], function (app) {
             });
         }
 
-        $scope.signOut = function () {
+        $scope.signOut = function () {            
             logout();
             //$rootScope.isUserLoggedIn = false;
             //showToastMessage("Success", "Logged Out");

@@ -306,6 +306,7 @@
     <Compile Include="Model\urNoticeModel\RequestWrapper\RegisterationRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ResetPasswordRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\UpdateCompanyRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\UserNewCommentOnPostRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ValidateAccountRequest.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\ClientDetailsModel.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\GeoCodeResponse.cs" />

@@ -109,65 +109,65 @@ namespace urNoticeUser.Controllers
 
         //}
 
-        public JsonResult UserPost()
-        {
-            var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
-            var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
-            var userWallVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
-            var headers = new HeaderManager(Request);
-            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+        //public JsonResult UserPost()
+        //{
+        //    var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+        //    var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
+        //    var userWallVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+        //    var headers = new HeaderManager(Request);
+        //    urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
-            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
-            if (isValidToken)
-            {
-                if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
-                {
-                    image = String.Empty;
-                }
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId, accessKey, secretKey);
-                return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                var response = new ResponseModel<string>();
-                response.Status = 401;
-                response.Message = "Unauthorized";
-                return Json(response, JsonRequestBehavior.AllowGet);
-            }
+        //    var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+        //    if (isValidToken)
+        //    {
+        //        if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
+        //        {
+        //            image = String.Empty;
+        //        }
+        //        var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId, accessKey, secretKey);
+        //        return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        var response = new ResponseModel<string>();
+        //        response.Status = 401;
+        //        response.Message = "Unauthorized";
+        //        return Json(response, JsonRequestBehavior.AllowGet);
+        //    }
 
-        }
+        //}
 
-        public JsonResult UserCommentOnPost()
-        {
-            var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
-            var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
-            var postVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+        //public JsonResult UserCommentOnPost()
+        //{
+        //    var message = Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+        //    var image = Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
+        //    var postVertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
 
-            var userWallVertexId = Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
-            var postPostedByVertexId = Request.QueryString["postPostedByVertexId"].ToString(CultureInfo.InvariantCulture);
+        //    var userWallVertexId = Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
+        //    var postPostedByVertexId = Request.QueryString["postPostedByVertexId"].ToString(CultureInfo.InvariantCulture);
 
-            var headers = new HeaderManager(Request);
-            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+        //    var headers = new HeaderManager(Request);
+        //    urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
 
-            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
-            if (isValidToken)
-            {
-                if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
-                {
-                    image = String.Empty;
-                }
-                var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, accessKey, secretKey);
-                return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                var response = new ResponseModel<string>();
-                response.Status = 401;
-                response.Message = "Unauthorized";
-                return Json(response, JsonRequestBehavior.AllowGet);
-            }
+        //    var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+        //    if (isValidToken)
+        //    {
+        //        if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
+        //        {
+        //            image = String.Empty;
+        //        }
+        //        var newUserPostResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, accessKey, secretKey);
+        //        return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        var response = new ResponseModel<string>();
+        //        response.Status = 401;
+        //        response.Message = "Unauthorized";
+        //        return Json(response, JsonRequestBehavior.AllowGet);
+        //    }
 
-        }
+        //}
 
         public JsonResult GetUserPost()
         {

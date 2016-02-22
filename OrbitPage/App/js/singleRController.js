@@ -22,7 +22,16 @@ function ConnectWithSignalRPushNotification() {
     });
 
     chatProxy.client.addMessage = function (message) {
-        console.log("user registered : " + message);
+        console.log(message);
+        
+    };
+
+    chatProxy.client.addNotificationMessage = function (code,message) {
+        console.log(message);
+        var scope = angular.element(document.getElementById("main")).scope();
+        scope.$apply(function () {
+            scope.clientNotificationDetailResponseInfoUpdateFromPushNotification();
+        });
     };
 
     chatProxy.client.receiveMessage = function (msgFrom, msg) {

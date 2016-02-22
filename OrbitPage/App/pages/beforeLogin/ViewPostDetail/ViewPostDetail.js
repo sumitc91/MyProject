@@ -26,27 +26,31 @@ define([appLocation.preLogin], function (app) {
         
         function createNewMessageOnUserPost(postIndex) {
 
-            //var userPostData = {
-            //    Message: $scope.UserPostMessage,
-            //    Image: $scope.NewPostImageUrl.link_m,                
-            //    vertexId: $scope.visitedUserVertexId
-            //};
+            var userPostCommentData = {
+                Message: $scope.UserPostList[postIndex].postInfo.postUserComment,
+                Image: $scope.NewPostImageUrl.link_m,
+                VertexId: $scope.UserPostList[postIndex].postInfo._id,
+                WallVertexId: $scope.UserPostList[postIndex].postedToUser[0]._id,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+            };
 
-            var url = ServerContextPath.userServer + '/User/UserCommentOnPost?message=' + $scope.UserPostList[postIndex].postInfo.postUserComment + '&image=' + '' + '&vertexId=' + $scope.UserPostList[postIndex].postInfo._id + '&wallVertexId=' + $scope.UserPostList[postIndex].postedToUser[0]._id + '&postPostedByVertexId=' + $scope.UserPostList[postIndex].userInfo[0]._id;
+            var url = ServerContextPath.empty + '/User/UserCommentOnPost';
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
+
             startBlockUI('wait..', 3);
-            $.ajax({
+            $http({
                 url: url,
-                method: "GET",
+                method: "POST",
+                data: userPostCommentData,
                 headers: headers
-            }).done(function (data, status) {
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 stopBlockUI();
-                //console.log(data);
                 getPostByVertexId();
                 $scope.UserPostMessage = "";
 
@@ -54,7 +58,10 @@ define([appLocation.preLogin], function (app) {
                     $scope.NewPostImageUrl.link_s = "";
                 });
 
+            }).error(function (data, status, headers, config) {
+
             });
+
         };
 
         $scope.onFileSelectLogoUrl = function ($files) {

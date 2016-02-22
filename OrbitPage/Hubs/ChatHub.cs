@@ -42,6 +42,18 @@ namespace OrbitPage.Hubs
             }
         }
 
+        public void AddNotificationMessage(string code,string msg, string toUser)
+        {
+            lock (connectedClients)
+            {
+                if (connectedClients.ContainsKey(toUser))
+                {
+                    dynamic client = connectedClients[toUser];
+                    client.addNotificationMessage(code,msg);
+                }
+            }
+        }
+
         public void Send(string name, string message)
         {
             Clients.All.sendMessage(name, message);

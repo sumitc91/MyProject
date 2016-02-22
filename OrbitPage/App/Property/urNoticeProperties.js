@@ -217,17 +217,19 @@ function logout(){
 //                           					
 //						});
 //                
-
+             startBlockUI('wait..', 3);
                     $.ajax({
                        type: "POST",
                        url: url,
                        headers: headers,                       
-                       success: function(result) {
+                       success: function (result) {
+                           stopBlockUI();
                            removeAllCookies(ServerContextPath.cookieDomain);
                            location.href = "/";
                            //redirectAfterLogin();
                        },
-                       error: function(request,status,errorThrown) {
+                       error: function (request, status, errorThrown) {
+                           stopBlockUI();
                            removeAllCookies(ServerContextPath.cookieDomain);                            
                            location.href = "/";
                            //redirectAfterLogin();

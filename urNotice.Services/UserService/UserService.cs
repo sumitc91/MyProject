@@ -71,9 +71,9 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public IDictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image,string userWallVertexId, string accessKey, string secretKey)
+        public Dictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image,string userWallVertexId, string accessKey, string secretKey)
         {
-            var response = new Dictionary<string, string>();
+            //var response = new Dictionary<string, string>();
             //string url = TitanGraphConfig.Server;
             //string graphName = TitanGraphConfig.Graph;
 
@@ -103,6 +103,10 @@ namespace urNotice.Services.UserService
                 properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
                 properties[EdgePropertyEnum._inV.ToString()] = userWallVertexId;
                 properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
+                //if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                //    response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+                //else
+                //    response[CommonConstants.PushNotificationArray] = userWallVertexId;
             }
             else
             {
@@ -118,16 +122,24 @@ namespace urNotice.Services.UserService
 
             IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],null, EdgeLabelEnum.WallPostNotification.ToString(), accessKey, secretKey);
+            var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],null, EdgeLabelEnum.WallPostNotification.ToString(), accessKey, secretKey);
 
-            response["status"] = "200";
-            return response;
+            //foreach (var kvp in sendNotificationResponse)
+            //{
+            //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+            //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
+            //                                                          CommonConstants.CommaDelimeter + kvp.Value;
+            //}
+
+
+            sendNotificationResponse["status"] = "200";
+            return sendNotificationResponse;
         }
 
-        private IDictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType, string accessKey, string secretKey)
+        private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType, string accessKey, string secretKey)
         {
             var properties = new Dictionary<string, string>();
-
+            var response = new Dictionary<string, string>();
             
             var edgeId = session.UserName + "_" + DateTime.Now.Ticks;
 
@@ -145,6 +157,10 @@ namespace urNotice.Services.UserService
 
                     IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
+                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+                    else
+                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
                 }
                 
             }
@@ -161,7 +177,11 @@ namespace urNotice.Services.UserService
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
                     IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-   
+
+                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+                    else
+                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
                 }
 
 
@@ -178,10 +198,15 @@ namespace urNotice.Services.UserService
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
                     IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
+                    else
+                        response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
                 }
                 
             }
-            return null;
+            return response;
         }
 
         public string GetUserPost(string userVertexId, string @from, string to, string accessKey, string secretKey)
@@ -203,7 +228,7 @@ namespace urNotice.Services.UserService
 
         public IDictionary<string, string> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, string accessKey, string secretKey)
         {
-            var response = new Dictionary<string, string>();
+            //var response = new Dictionary<string, string>();
             //string url = TitanGraphConfig.Server;
             //string graphName = TitanGraphConfig.Graph;
 
@@ -238,12 +263,17 @@ namespace urNotice.Services.UserService
             IDictionary<string, string> addEdgeResponse = new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
 
-            SendNotificationToUser(session, userWallVertexId, postVertexId,postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString(), accessKey, secretKey);
+            var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString(), accessKey, secretKey);
 
-            
+            //foreach (var kvp in sendNotificationResponse)
+            //{
+            //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+            //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
+            //                                                          CommonConstants.CommaDelimeter + kvp.Value;
+            //}
 
-            response["status"] = "200";
-            return response;
+            sendNotificationResponse["status"] = "200";
+            return sendNotificationResponse;
         }
 
         public string GetUserNotification(string userVertexId,string from,string to, string accessKey, string secretKey)

@@ -18,5 +18,6 @@ namespace urNotice.Common.Infrastructure.commonMethods
         {
             return DynamoDbHashKeyDataType.Notification + "_" +sendToEmail;
         }
+
     }
 }
