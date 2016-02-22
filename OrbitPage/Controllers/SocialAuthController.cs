@@ -280,6 +280,7 @@ namespace OrbitPage.Controllers
                         response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                         response.Payload.FirstName = userInfo.OrbitPageUser.firstName;
                         response.Payload.imageUrl = userInfo.OrbitPageUser.imageUrl;
+                        response.Payload.VertexId = userInfo.OrbitPageUser.vertexId;
                         response.Payload.Code = "210";
                         response.Status = 210;
                         response.Message = "user Login via google";
@@ -304,6 +305,7 @@ namespace OrbitPage.Controllers
                             ViewBag.umtzv = response.Payload.UTMZV;
                             ViewBag.userName = response.Payload.FirstName;
                             ViewBag.userImageUrl = response.Payload.imageUrl;
+                            ViewBag.vertexid = response.Payload.VertexId;
                             ViewBag.isNewUser = "false";
                             return View();
 
@@ -392,6 +394,7 @@ namespace OrbitPage.Controllers
                         response.Payload.Code = "210";
                         response.Payload.FirstName = user.firstName;
                         response.Payload.imageUrl = user.imageUrl;
+                        response.Payload.VertexId = user.vertexId;
                         response.Status = 210;
                         response.Message = "user Login via google";
                         try
@@ -405,6 +408,7 @@ namespace OrbitPage.Controllers
                             ViewBag.umtzv = response.Payload.UTMZV;
                             ViewBag.userName = response.Payload.FirstName;
                             ViewBag.userImageUrl = response.Payload.imageUrl;
+                            ViewBag.vertexid = response.Payload.VertexId;
                             ViewBag.isNewUser = "true";
 
 
@@ -760,6 +764,7 @@ namespace OrbitPage.Controllers
                         response.Payload.UTMZV = encryptedData["UTMZV"];
                         response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                         response.Payload.Code = "210";
+                        response.Payload.VertexId = userInfo.OrbitPageUser.vertexId;
                         response.Status = 210;
                         response.Message = "user Login via facebook";
 
@@ -776,6 +781,7 @@ namespace OrbitPage.Controllers
                         ViewBag.umtzt = response.Payload.UTMZT;
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;
+                        ViewBag.vertexid = response.Payload.VertexId;
                         ViewBag.isNewUser = "false";
                         return View();
 
@@ -842,6 +848,7 @@ namespace OrbitPage.Controllers
                     response.Payload.UTMZV = encryptedData["UTMZV"];
                     response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     response.Payload.Code = "210";
+                    response.Payload.VertexId = user.vertexId;
                     response.Status = 210;
                     response.Message = "user Login via google";
                     try
@@ -853,6 +860,7 @@ namespace OrbitPage.Controllers
                         ViewBag.umtzt = response.Payload.UTMZT;
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;
+                        ViewBag.vertexid = response.Payload.VertexId;
                         ViewBag.isNewUser = "true";
 
                         return View();

@@ -172,6 +172,7 @@ function removeAllCookies(cookieDomain) {
     $.removeCookie('utmzv', { path: '/', domain: cookieDomain });
     $.removeCookie('utime', { path: '/', domain: cookieDomain });
     $.removeCookie('kmsi', { path: '/', domain: cookieDomain });
+    $.removeCookie('uservertexid', { path: '/', domain: cookieDomain });
     $.removeCookie('userName', { path: '/', domain: cookieDomain });
     $.removeCookie('userImageUrl', { path: '/', domain: cookieDomain });
 }

@@ -9,7 +9,7 @@
 
     $.connection.hub.start().done(function () {
 
-        chatProxy.server.registerClient("sumitchourasia91@gmail.com");
+        chatProxy.server.registerClient($.cookie('utmzt'));
         
         $("#btnSend").click(function () {
             chatProxy.server.broadCastMessage($("#spnName").text(), $("#txtMsg").val());

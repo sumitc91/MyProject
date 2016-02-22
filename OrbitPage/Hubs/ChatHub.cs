@@ -11,20 +11,23 @@ namespace OrbitPage.Hubs
         
         private static Dictionary<string, dynamic> connectedClients = new Dictionary<string, dynamic>();
 
-        public void RegisterClient(string userName)
+        public void RegisterClient(string utmzt)
         {
+            if (utmzt == null || utmzt == "undefined")
+                return;
+
             lock (connectedClients)
             {
-                if (connectedClients.ContainsKey(userName))
+                if (connectedClients.ContainsKey(utmzt))
                 {
-                    connectedClients[userName] = Clients.Caller;
+                    connectedClients[utmzt] = Clients.Caller;
                 }
                 else
                 {
-                    connectedClients.Add(userName, Clients.Caller);
+                    connectedClients.Add(utmzt, Clients.Caller);
                 }
             }
-            Clients.Caller.addMessage("'" + userName + "'registered.");
+            Clients.Caller.addMessage("'" + utmzt + "' registered.");
         }
 
         public void AddNotification(string notificationMessage, string toUser)

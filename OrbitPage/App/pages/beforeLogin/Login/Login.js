@@ -167,6 +167,11 @@ define([appLocation.preLogin], function (app) {
                         CookieUtil.setUTMZK(data.Payload.UTMZK, userSession.keepMeSignedIn);
                         CookieUtil.setUTMZV(data.Payload.UTMZV, userSession.keepMeSignedIn);
                         CookieUtil.setUTIME(data.Payload.TimeStamp, userSession.keepMeSignedIn);
+
+                        $.cookie('uservertexid', data.Payload.VertexId, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+                        $.cookie('userName', data.Payload.Username, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+                        $.cookie('userImageUrl', data.Payload.imageUrl, { expires: 365, path: '/', domain: ServerContextPath.cookieDomain });
+
                         CookieUtil.setKMSI(userSession.keepMeSignedIn, true); // to store KMSI value for maximum possible time.
 
 
