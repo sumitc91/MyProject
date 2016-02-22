@@ -9,7 +9,7 @@
 
     $.connection.hub.start().done(function () {
 
-        chatProxy.server.registerClient($.cookie('utmzt'));
+        chatProxy.server.registerClient($.cookie('uservertexid'));
         
         $("#btnSend").click(function () {
             chatProxy.server.broadCastMessage($("#spnName").text(), $("#txtMsg").val());
