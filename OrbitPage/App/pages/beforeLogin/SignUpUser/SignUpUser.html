@@ -9,6 +9,18 @@
 
             <form class="form-signin wow fadeInUp" id="mc-form">
                 <h2 class="form-signin-heading">Register now</h2>
+                <hr />
+                <div class="field">                    
+                    <div class="row text-center">
+                        <div class="col-md-6 col-sm-12">
+                            <button type="button" ng-click="openFacebookAuthWindow()" class="btn btn-primary btn-block">Facebook</button>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-12">
+                            <button type="button" ng-click="openGoogleAuthWindow()" class="btn btn-danger btn-block">Google+</button>
+                        </div>
+                    </div>
+                </div>                
                 <div class="login-wrap">
                     <p>Enter personal details</p>
                     <input type="text" class="form-control" placeholder="First Name" ng-change="changeText()" ng-model="UserFormData.FirstName">
@@ -52,17 +64,6 @@
                         <a href="#/login" class="text-center text-accepter">I already have an Account</a>
                         <div class="div_c"></div>
 
-                        <div class="field">
-                            <div class="clrfx mb-20 bt"><span class="inner-title">Login With</span></div>
-                            <!-- Social Media Buttons -->
-                            <div class="sb field text-center">
-                                <a class="btn btn-social-icon btn-facebook" ng-click="openFacebookAuthWindow()"><i class="fa fa-facebook"></i></a>
-                                <a class="btn btn-social-icon btn-google-plus" ng-click="openGoogleAuthWindow()"><i class="fa fa-google-plus"></i></a>
-                                <!--<a class="btn btn-social-icon btn-linkedin" ng-click="openLinkedinAuthWindow()"><i class="fa fa-linkedin"></i></a>-->
-
-                            </div>
-                        </div>
-                        <hr />
                         <div id="mc">
                             <p>Please draw the shape in the box to submit the form</p>
                             <canvas id="mc-canvas">

@@ -102,7 +102,7 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 stopBlockUI();
                 getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-                $scope.UserPostMessage = "";
+                $scope.userPostCommentData = "";
 
                 $timeout(function () {
                     $scope.NewPostImageUrl.link_s = "";
@@ -133,8 +133,6 @@ define([appLocation.preLogin], function (app) {
                     $timeout(function () {
                         $scope.NewPostImageUrl = data.data;
                     });
-                    
-                        
                     
                 });
 

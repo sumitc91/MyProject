@@ -28,11 +28,23 @@
                     </ul>
 
                     <p>or you can sign in via social network</p>
-                    <div class="sb field text-center">
-                        <a class="btn btn-social-icon btn-facebook" ng-click="openFacebookAuthWindow()"><i class="fa fa-facebook"></i></a>
-                        <a class="btn btn-social-icon btn-google-plus" ng-click="openGoogleAuthWindow()"><i class="fa fa-google-plus"></i></a>
-                        <!--<a class="btn btn-social-icon btn-linkedin" ng-click="openLinkedinAuthWindow()"><i class="fa fa-linkedin"></i></a>-->
+                    <!--<div class="sb field text-center">
+                            <a class="btn btn-social-icon btn-facebook" ng-click="openFacebookAuthWindow()"><i class="fa fa-facebook"></i></a>
+                            <a class="btn btn-social-icon btn-google-plus" ng-click="openGoogleAuthWindow()"><i class="fa fa-google-plus"></i></a>
+                            <a class="btn btn-social-icon btn-linkedin" ng-click="openLinkedinAuthWindow()"><i class="fa fa-linkedin"></i></a>
 
+                        </div>-->
+
+                    <div class="row text-center">
+                        <div class="col-md-6 col-sm-12">
+                            <button type="button" ng-click="openFacebookAuthWindow()" class="btn btn-primary btn-block">Facebook</button>
+                        </div>
+                        <!--<div class="col-md-4 col-sm-12">
+                            <button type="button"  class="btn btn-info btn-block">Twitter</button>
+                        </div>-->
+                        <div class="col-md-6 col-sm-12">
+                            <button type="button" ng-click="openGoogleAuthWindow()" class="btn btn-danger btn-block">Google+</button>
+                        </div>
                     </div>
                     <div class="registration">
                         Don't have an account yet?
