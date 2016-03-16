@@ -17,6 +17,7 @@ define([appLocation.preLogin], function (app) {
         $scope.searchBoxCompanyText = "Search Company";
         $scope.searchBoxUserText = "Search User";
         $scope.searchBoxWorkgraphyText = "Search Workgraphy NOT IMPLEMENTED YET !!!";
+        $scope.searchBoxAllText = "All Search NOT IMPLEMENTED YET !!!";
 
 
         $scope.beforeLoginIndexLatestWorkgraphy = window.madetoearn.i18n.beforeLoginIndexLatestWorkgraphy;
@@ -49,6 +50,11 @@ define([appLocation.preLogin], function (app) {
         $scope.companyDetails = {
 
         };
+
+        $scope.modifiedSearchValue = function (value) {           
+            $scope.searchTypeModel = value;
+        };
+
         $scope.showLandingPageLogo = false;
         var hi = new Vivus('hi-there', { type: 'async', duration: 250, start: 'autostart', dashGap: 30, forceRender: false },
             function() {
