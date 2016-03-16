@@ -53,3 +53,4 @@ C:\code\svn\OrbitPage\urNoticeWeb\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\urNoticeWeb\bin\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\urNoticeWeb\obj\Debug\urNoticeWeb.dll
 C:\code\svn\OrbitPage\urNoticeWeb\obj\Debug\urNoticeWeb.pdb
+C:\code\svn\OrbitPage\urNoticeWeb\obj\Debug\urNoticeWeb.csprojResolveAssemblyReference.cache
