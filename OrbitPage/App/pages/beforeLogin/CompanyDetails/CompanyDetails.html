@@ -35,12 +35,12 @@
         <div class="cover profile">
             <div class="wrapper">
                 <div class="image">
-                    <img alt="people" ng-src="{{companyDetails.logourl}}" height="250">
+                    <img alt="people" ng-src="{{companyDetails.squarelogourl}}" height="250">
                 </div>                
             </div>
             <div class="cover-info">
                 <div class="avatar">
-                    <img alt="people" ng-src="{{companyDetails.squarelogourl}}" width="110px">
+                    <img alt="people" ng-src="{{companyDetails.logourl}}" width="110px">
                 </div>
                 <div class="name"><a href="" ng-bind="companyDetails.companyname"></a> <a ng-show="userCompanyAnalyticsLoaded"> (<span href="" ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit"></span> views)</a>              
                 </div>
@@ -162,7 +162,7 @@
                         </h3>
                         <div class="media" ng-repeat="competitor in competitorDetails">
                             <a class="pull-left gs" href="{{competitor.linkurl}}">
-                                <img class=" " ng-src="{{competitor.squarelogourl}}" alt="" height="50px" width="50px">
+                                <img class=" " ng-src="{{competitor.logourl}}" alt="" height="50px" width="50px">
                             </a>
                             <div class="media-body">
                                 <div class="media-heading">
@@ -181,8 +181,8 @@
                             UrJobgraphy
                         </h3>
                         <div class="media">
-                            <a class="pull-left gs" href="{{companyDetails.squarelogourl}}">
-                                <img class=" " ng-src="{{companyDetails.squarelogourl}}" alt="" height="50px" width="50px">
+                            <a class="pull-left gs" href="{{companyDetails.logourl}}">
+                                <img class=" " ng-src="{{companyDetails.logourl}}" alt="" height="50px" width="50px">
                             </a>
                             <div class="media-body">
                                 <div class="media-heading">

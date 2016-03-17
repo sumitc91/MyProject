@@ -10,7 +10,7 @@
                              placeholder="Enter Company Name"
                              pause="500"
                              selected-object="selectCompany"
-                             remote-url="http://{{sitehosturl}}/solr/GetCompanyDetailsAutocomplete?q="
+                             remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
                              remote-url-request-formatter="remoteUrlRequestFn"
                              remote-url-data-field="Payload"
                              title-field="companyname"
@@ -87,7 +87,7 @@
                         <div class="col-lg-2 col-sm-2">
                             <div>
                                 <span class="date">
-                                    <a href="{{result.linkurl}}"><img ng-src="{{result.squarelogourl}}" width="80px" /></a>
+                                    <a href="{{result.linkurl}}"><img ng-src="{{result.logourl}}" width="80px" /></a>
                                 </span>
                             </div>
 
