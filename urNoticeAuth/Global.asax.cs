@@ -22,8 +22,11 @@ namespace urNoticeAuth
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["unUserSolr"]);
+            
+            Startup.Init<UnCompanySolr>(ConfigurationManager.AppSettings["unCompanySolr"]);
+            Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
+            Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
+            Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

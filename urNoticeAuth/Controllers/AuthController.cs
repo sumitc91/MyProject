@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.Entity.Validation;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -14,6 +15,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.AdminService;
 using urNotice.Services.AuthService;
 using urNoticeAuth.App_Start;
 
@@ -98,6 +100,20 @@ namespace urNoticeAuth.Controllers
             return Json(new AuthService().ForgetPasswordService(id, Request, accessKey, secretKey), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult UpdateDesignations()
+        {
+            //var reader = new StreamReader(System.IO.File.OpenRead(@"C:\code\svn\AllDesignations.csv"));
+            ////var list = new List<Location>();
+
+            //while (!reader.EndOfStream)
+            //{
+            //    var designationName = reader.ReadLine();
+            //    new AdminService().CreateNewDesignation(designationName, "orbitpage@gmail.com", accessKey, secretKey);
+            //}
+            
+            return Json("success", JsonRequestBehavior.AllowGet);
+        }
+    
         [HttpPost]
         public JsonResult ContactUs(ContactUsRequest req)
         {

@@ -74,6 +74,30 @@ namespace urNotice.Services.SolrService
             return response;
         }
 
+        public Dictionary<String, String> AddDesignation(string vertexId, string designationName, bool toBeOptimized)
+        {
+            
+            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<UnDesignationSolr>>();
+            var unDesignationSolrList = new List<UnDesignationSolr>();
+            var designationObj = new UnDesignationSolr
+            {
+                id = vertexId,
+                designation = designationName,
+                vertexId = vertexId
+            };
+
+            unDesignationSolrList.Add(designationObj);
+            solr.AddRange(unDesignationSolrList);
+            solr.Commit();
+            if (toBeOptimized)
+                solr.Optimize();
+
+            var response = new Dictionary<String, String>();
+            response["status"] = "200";
+
+            return response;
+
+        }
         public Dictionary<String, String> InsertVirtualFriendListToSolr(List<UnVirtualFriendSolr> solrvirtualFriendList, bool toBeOptimized)
         {
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<UnVirtualFriendSolr>>();

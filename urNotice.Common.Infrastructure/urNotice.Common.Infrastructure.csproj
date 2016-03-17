@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter\Facebook\FacebookAuthAdapter.cs" />
+    <Compile Include="commonMethods\CsvReader.cs" />
     <Compile Include="commonMethods\DateTimeUtil.cs" />
     <Compile Include="commonMethods\dbContextException.cs" />
     <Compile Include="commonMethods\Emails\forgetPasswordValidationEmail.cs" />

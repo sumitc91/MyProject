@@ -64,3 +64,12 @@ C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\Microsoft.Practices.ServiceL
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\Interop.Microsoft.Office.Interop.Excel.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\Interop.VBIDE.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.ResolveComReference.cache
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\urNotice.Services.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\RestSharp.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\Facebook.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\urNotice.Services.pdb
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\RestSharp.xml

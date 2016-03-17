@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminService\AdminService.cs" />
     <Compile Include="AuthService\AuthService.cs" />
     <Compile Include="AuthService\IAuthService.cs" />
     <Compile Include="DynamoDbService\DynamoDbService.cs" />

@@ -16,6 +16,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         GmailFriends,
         VertexDetail,
         EdgeDetail,
-        Notification
+        Notification,
+        Designation
     }
 }

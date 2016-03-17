@@ -22,6 +22,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         CoverImageUrl,
         NotifiedByUserVertexId,
         NotifiedOnPostVertexId,
-        NotifiedOnWallVertexId
+        NotifiedOnWallVertexId,
+
+        DesignationName,
     }
 }

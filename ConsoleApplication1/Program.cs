@@ -13,38 +13,50 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Runtime;
+using ConsoleApplication1.Service;
 using HtmlAgilityPack;
+using urNotice.Common.Infrastructure.commonMethods;
 
 namespace ConsoleApplication1
 {
     class Program
     {
-        private static AmazonDynamoDBClient client = new AmazonDynamoDBClient();
+        //private static AmazonDynamoDBClient client = new AmazonDynamoDBClient();
         static void Main(string[] args)
         {            
             //System.Diagnostics.Debug.WriteLine("test");
 
-            try
+            using (CsvReader reader = new CsvReader(@"C:\code\svn\final.csv"))
             {
-                DynamoDBContext context = new DynamoDBContext(client);
-                // Get item.
-                GetBook(context, 101);
-
-                // Sample forum and thread to test queries.
-                string forumName = "Amazon DynamoDB";
-                string threadSubject = "DynamoDB Thread 1";
-                // Sample queries.
-                FindRepliesInLast15Days(context, forumName, threadSubject);
-                FindRepliesPostedWithinTimePeriod(context, forumName, threadSubject);
-
-                // Scan table.
-                FindProductsPricedLessThanZero(context);
-                Console.WriteLine("To continue, press Enter");
-                Console.ReadLine();
+                foreach (string[] values in reader.RowEnumerator)
+                {
+                    Console.WriteLine("Row {0} has {1} values.", reader.RowIndex, values.Length);
+                }
             }
-            catch (AmazonDynamoDBException e) { Console.WriteLine(e.Message); }
-            catch (AmazonServiceException e) { Console.WriteLine(e.Message); }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.ReadLine();
+
+            //string response = new FetchDataFromCsv().CsvReaderForAllDesignation();
+            //try
+            //{
+            //    DynamoDBContext context = new DynamoDBContext(client);
+            //    // Get item.
+            //    GetBook(context, 101);
+
+            //    // Sample forum and thread to test queries.
+            //    string forumName = "Amazon DynamoDB";
+            //    string threadSubject = "DynamoDB Thread 1";
+            //    // Sample queries.
+            //    FindRepliesInLast15Days(context, forumName, threadSubject);
+            //    FindRepliesPostedWithinTimePeriod(context, forumName, threadSubject);
+
+            //    // Scan table.
+            //    FindProductsPricedLessThanZero(context);
+            //    Console.WriteLine("To continue, press Enter");
+            //    Console.ReadLine();
+            //}
+            //catch (AmazonDynamoDBException e) { Console.WriteLine(e.Message); }
+            //catch (AmazonServiceException e) { Console.WriteLine(e.Message); }
+            //catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
 

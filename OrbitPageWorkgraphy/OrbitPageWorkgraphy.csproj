@@ -227,8 +227,10 @@
     <Content Include="App\js\angular.js" />
     <Content Include="App\js\angular.min.js" />
     <Content Include="App\js\angular\angucomplete-alt.min.js" />
+    <Content Include="App\js\angular\ng-infinite-scroll.min.js" />
     <Content Include="App\js\angular\ngSanitize\filter\linky.js" />
     <Content Include="App\js\angular\ngSanitize\sanitize.js" />
+    <Content Include="App\js\angular\ngtimeago.js" />
     <Content Include="App\js\angular\ui-bootstrap-custom-0.14.3.js" />
     <Content Include="App\js\angular\ui-bootstrap-tpls-0.14.3.js" />
     <Content Include="App\js\bannerscollection_zoominout.js" />

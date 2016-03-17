@@ -35,5 +35,20 @@ namespace urNotice.Services.TitanService
 
             return addVertexResponse;
         }
+
+        public Dictionary<String, String> InsertNewDesignationToTitan(string adminEmail,string designationName, bool toBeOptimized, string accessKey, string secretKey)
+        {
+
+            string url = TitanGraphConfig.Server;
+
+            var properties = new Dictionary<string, string>();
+            properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Designation.ToString();
+            properties[VertexPropertyEnum.DesignationName.ToString()] = designationName;            
+            properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+
+            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(adminEmail, url, designationName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            return addVertexResponse;
+        }
     }
 }
