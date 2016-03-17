@@ -49,7 +49,9 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\log4net.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.AspNet.SignalR.Owin.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Newtonsoft.Json.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Owin.dll
@@ -63,6 +65,8 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\AWSSDK.pdb
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\EntityFramework.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Facebook.xml
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.xml
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Newtonsoft.Json.xml
@@ -73,10 +77,6 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Net.Http.F
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Http.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Http.WebHost.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Razor.xml
+C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.pdb
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.dll
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.dll
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.xml
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\Microsoft.Owin.Security.xml
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.csprojResolveAssemblyReference.cache

@@ -137,6 +137,7 @@
     <Compile Include="commonMethods\sendEmail.cs" />
     <Compile Include="commonMethods\OrbitPageUtil.cs" />
     <Compile Include="commonMethods\UserNotificationText.cs" />
+    <Compile Include="Common\Config\AwsConfig.cs" />
     <Compile Include="Common\Config\TitanGraphConfig.cs" />
     <Compile Include="Common\Constants\CommonConstants.cs" />
     <Compile Include="Common\Constants\CompanySpecialitiesTypes.cs" />
@@ -273,7 +274,6 @@
       <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\urNoticeModel\AssetClass\ResponseModel.cs" />
-    <Compile Include="Model\urNoticeModel\DynamoDb\CompanyAnalytics.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\CompanyNoticePeriodInfoAnalytics.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageCompany.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageCompanyUserWorkgraphyTable.cs" />
@@ -322,8 +322,6 @@
     <Compile Include="Model\urNoticeModel\ResponseWrapper\ImgurImageUploadResponse.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\linkedinUserDataWrapper.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\LoginResponse.cs" />
-    <Compile Include="Model\urNoticeModel\ResponseWrapper\UserCompanyAnalyticsResponse.cs" />
-    <Compile Include="Model\urNoticeModel\ResponseWrapper\UserCompanyAnalyticsResponseModel.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserMessageList.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserMessagesResponse.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserNotificationList.cs" />

@@ -160,7 +160,7 @@ namespace urNoticeSolr.Controllers
                 {
                     Rows = 15,
                     Start = 0,
-                    Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl" }
+                    Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl", "logourl" }
                 });
                 response.Payload = solrQueryExecute;
             }

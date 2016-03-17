@@ -12,6 +12,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         User,
         Post,
         Notification,
-        Designation
+        Designation,
+        Company
     }
 }

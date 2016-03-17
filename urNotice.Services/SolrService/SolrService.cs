@@ -74,6 +74,76 @@ namespace urNotice.Services.SolrService
             return response;
         }
 
+        public Dictionary<String, String> InsertNewCompanyToSolr(OrbitPageCompany company, bool toBeOptimized)
+        {
+            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<UnCompanySolr>>();
+
+
+            var companyToBeMovedToSolr = new UnCompanySolr
+            {
+                averagerating = company.averageRating,
+                avghikeperct = company.avgHikePercentage,
+                avgnoticeperiod = company.avgNoticePeriod,
+                buyoutpercentage = company.buyoutPercentage,
+                city = company.city,
+                companyid = company.vertexId,
+                companyname = company.CompanyName,
+                displayname = company.DisplayName,
+                country = company.country,
+                description = company.description,
+                district = company.district,
+                formatted_address = company.formatted_address,
+                geo = company.latitude+","+company.longitude,
+                guid = company.vertexId,
+                id = company.vertexId,
+                isprimary = true,
+                latitude = company.latitude,
+                longitude = company.longitude,
+                logourl = company.logoUrl,
+                maxnoticeperiod = company.maxNoticePeriod,
+                minnoticeperiod = company.minNoticePeriod,
+                perclookingforchange = company.percLookingForChange,
+                postal_code = company.postal_code,
+                rating = company.averageRating,
+                size = company.size ?? 0,
+                speciality = company.specialities != null ? company.specialities.Split(',').Select(s => s.Trim())
+                               .Where(s => s != String.Empty)
+                               .ToArray() : null,
+                squarelogourl = company.squareLogoUrl,
+                state = company.state,
+                sublocality = company.sublocality,
+                telephone = company.telephone != null ? company.telephone.Split(',').Select(s => s.Trim())
+                               .Where(s => s != String.Empty)
+                               .ToArray() : null,
+                totalratingcount = company.totalNumberOfRatings,
+                totalreviews = company.totalReviews,
+                website = company.website,
+                workLifeBalanceRating = company.workLifeBalanceRating,
+                salaryRating = company.salaryRating,
+                companyCultureRating = company.companyCultureRating,
+                careerGrowthRating = company.careerGrowthRating,
+                founded = company.founded,
+                founder = company.founder.Trim(),
+                turnover = company.turnover.Trim(),
+                headquarter = company.headquarter.Trim(),
+                employees = company.employees.Trim(),
+                competitors = company.competitors != null ? company.competitors.Split(',').Select(s => s.Trim())
+                               .Where(s => s != String.Empty)
+                               .ToArray() : null,
+                
+            };
+
+            solr.Add(companyToBeMovedToSolr);
+            solr.Commit();
+            if (toBeOptimized)
+                solr.Optimize();
+
+            var response = new Dictionary<String, String>();
+            response["status"] = "200";
+
+            return response;
+        }
+
         public Dictionary<String, String> AddDesignation(string vertexId, string designationName, bool toBeOptimized)
         {
             

@@ -65,13 +65,13 @@ C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\SolrNet.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\AWSSDK.pdb
+C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\Newtonsoft.Json.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.Helpers.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.Mvc.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.Razor.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.WebPages.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.WebPages.Razor.xml
-C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\Newtonsoft.Json.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Net.Http.Formatting.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.Http.xml
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.Http.WebHost.xml

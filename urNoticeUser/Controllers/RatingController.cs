@@ -29,24 +29,9 @@ namespace urNoticeUser.Controllers
         {
             var cid = Request.QueryString["cid"];
 
-            ResponseModel<UserCompanyAnalyticsResponseModel> response;
+            
 
-            var headers = new HeaderManager(Request);
-            urNoticeSession session = new TokenManager().getSessionInfo(headers.AuthToken, headers);
-
-            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
-
-            if (isValidToken)
-            {
-                response = new RatingService().GetUserRatingStatus(accessKey, secretKey,session.UserName, true, cid);
-            }
-            else
-            {
-                response = new RatingService().GetUserRatingStatus(accessKey, secretKey,headers.Ga, false, cid);
-            }
-
-
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json("Not Implemented", JsonRequestBehavior.AllowGet);
         }
     }
 }

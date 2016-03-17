@@ -17,6 +17,9 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.Solr
         [SolrField("companyname")]
         public String companyname { get; set; }
 
+        [SolrField("displayname")]
+        public String displayname { get; set; }
+
         [SolrField("rating")]
         public float rating { get; set; }
 
@@ -100,5 +103,35 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.Solr
 
         [SolrField("geo")]
         public String geo { get; set; }
+
+        [SolrField("workLifeBalanceRating")]
+        public float workLifeBalanceRating { get; set; }
+        
+        [SolrField("salaryRating")]
+        public float salaryRating { get; set; }
+        
+        [SolrField("companyCultureRating")]
+        public float companyCultureRating { get; set; }
+        
+        [SolrField("careerGrowthRating")]
+        public float careerGrowthRating { get; set; }
+
+        [SolrField("founded")]
+        public String founded { get; set; }
+
+        [SolrField("founder")]
+        public String founder { get; set; }
+
+        [SolrField("turnover")]
+        public String turnover { get; set; }
+
+        [SolrField("headquarter")]
+        public String headquarter { get; set; }
+
+        [SolrField("employees")]
+        public String employees { get; set; }
+
+        [SolrField("competitors")]
+        public String[] competitors { get; set; }
     }
 }

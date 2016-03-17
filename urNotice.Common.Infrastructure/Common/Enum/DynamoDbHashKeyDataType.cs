@@ -17,6 +17,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         VertexDetail,
         EdgeDetail,
         Notification,
-        Designation
+        Designation,
+        Company
     }
 }

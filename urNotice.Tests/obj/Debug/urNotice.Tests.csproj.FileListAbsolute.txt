@@ -133,6 +133,6 @@ C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.Razor.xml
 C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.WebPages.xml
 C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\urNotice.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.dll
 C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.pdb
-C:\code\svn\OrbitPage\urNotice.Tests\obj\Debug\urNotice.Tests.csprojResolveAssemblyReference.cache
