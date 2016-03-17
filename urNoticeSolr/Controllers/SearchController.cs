@@ -397,7 +397,7 @@ namespace urNoticeSolr.Controllers
                     Rows = 10,
                     Start = 0,
                     Fields = new[] { "guid", "rating","website","size", "companyname","isprimary",
-                        "squarelogourl"}
+                        "squarelogourl","logourl"}
                 });
 
                 if (solrQueryExecute.Count < 2)
