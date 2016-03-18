@@ -34,6 +34,7 @@ using urNotice.Services.SocialAuthService;
 using urNotice.Services.SocialAuthService.Facebook;
 using urNotice.Services.SocialAuthService.google;
 using urNotice.Services.SocialAuthService.linkedin;
+using urNotice.Services.Solr.SolrUser;
 using urNotice.Services.SolrService;
 using urNotice.Services.TitanService;
 

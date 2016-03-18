@@ -18,6 +18,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.AuthService
 {
@@ -92,7 +93,8 @@ namespace urNotice.Services.AuthService
                 gender = req.Gender.ToLower(),
                 imageUrl = imgurl,                
                 priviledgeLevel = (short) PriviledgeLevel.None,
-                validateUserKeyGuid = guid
+                validateUserKeyGuid = guid,
+                userCoverPic = CommonConstants.CompanySquareLogoNotAvailableImage
             };
             //_db.Users.Add(user);
 

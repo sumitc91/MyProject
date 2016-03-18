@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
+using urNotice.Services.Solr.SolrUser;
 using urNotice.Services.SolrService;
 using urNoticeAnalytics.Common.Constants;
 using urNoticeAnalytics.Common.Logger;

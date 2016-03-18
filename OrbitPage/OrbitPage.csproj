@@ -868,6 +868,8 @@
     <Content Include="App\third-Party\wysihtml5\test\support\html_equal.js" />
     <Content Include="App\third-Party\wysihtml5\test\undo_manager_test.js" />
     <Content Include="changelog.txt" />
+    <Content Include="EmailTemplate\CreateAccountEmail.html" />
+    <Content Include="EmailTemplate\ForgetPasswordEmail.html" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

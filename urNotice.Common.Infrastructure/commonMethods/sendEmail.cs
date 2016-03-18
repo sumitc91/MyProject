@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Reflection;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Logger;
 
 namespace urNotice.Common.Infrastructure.commonMethods
@@ -20,11 +21,11 @@ namespace urNotice.Common.Infrastructure.commonMethods
             var smtpServer = new SmtpClient
             {
                 Credentials =
-                    new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpEmail"],
-                        ConfigurationManager.AppSettings["SmtpPassword"]),
-                Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"].ToString(CultureInfo.InvariantCulture)),
-                Host = ConfigurationManager.AppSettings["SmtpHost"].ToString(CultureInfo.InvariantCulture),
-                EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["SmtpEnableSsl"].ToString(CultureInfo.InvariantCulture))
+                    new System.Net.NetworkCredential(SmtpConfig.SmtpEmail,
+                        SmtpConfig.SmtpPassword),
+                Port = Convert.ToInt32(SmtpConfig.SmtpPort.ToString(CultureInfo.InvariantCulture)),
+                Host = SmtpConfig.SmtpHost.ToString(CultureInfo.InvariantCulture),
+                EnableSsl = Convert.ToBoolean(SmtpConfig.SmtpEnableSsl.ToString(CultureInfo.InvariantCulture))
             };
             _mail = new MailMessage();
             var addr = toEmailAddrList.Split(',');
@@ -73,11 +74,11 @@ namespace urNotice.Common.Infrastructure.commonMethods
             var smtpServer = new SmtpClient
             {
                 Credentials =
-                    new System.Net.NetworkCredential(ConfigurationManager.AppSettings["GmailSmtpEmail"],
-                        ConfigurationManager.AppSettings["GmailSmtpPassword"]),
-                Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"].ToString(CultureInfo.InvariantCulture)),
-                Host = ConfigurationManager.AppSettings["GmailSmtpHost"].ToString(CultureInfo.InvariantCulture),
-                EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["SmtpEnableSsl"].ToString(CultureInfo.InvariantCulture))
+                    new System.Net.NetworkCredential(SmtpConfig.GmailSmtpEmail,
+                        SmtpConfig.GmailSmtpPassword),
+                Port = Convert.ToInt32(SmtpConfig.SmtpPort.ToString(CultureInfo.InvariantCulture)),
+                Host = SmtpConfig.GmailSmtpHost.ToString(CultureInfo.InvariantCulture),
+                EnableSsl = Convert.ToBoolean(SmtpConfig.SmtpEnableSsl.ToString(CultureInfo.InvariantCulture))
             };
             _mail = new MailMessage();
             var addr = toEmailAddrList.Split(',');

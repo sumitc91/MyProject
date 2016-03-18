@@ -118,6 +118,7 @@
     <Compile Include="SocialAuthService\linkedin\oAuthLinkedIn.cs" />
     <Compile Include="SocialAuthService\SocialAuthService.cs" />
     <Compile Include="SolrService\SolrService.cs" />
+    <Compile Include="Solr\SolrUser\SolrUser.cs" />
     <Compile Include="SyncService\SyncService.cs" />
     <Compile Include="TitanService\TitanService.cs" />
     <Compile Include="UserService\UserService.cs" />

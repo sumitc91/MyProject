@@ -16,6 +16,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Services.SocialAuthService.google.Model;
+using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.SocialAuthService.google
 {

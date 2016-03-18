@@ -40,5 +40,12 @@ namespace OrbitPage.Controllers
             var response = new ResponseModel<LoginResponse> { Status = Convert.ToInt32(responseData.Code), Message = "success", Payload = responseData };
             return Json(response);
         }
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult CreateAccount(RegisterationRequest req)
+        {
+            //var returnUrl = "/";
+            return Json(new AuthService().UserRegistration(req, Request, accessKey, secretKey));
+        }
     }
 }

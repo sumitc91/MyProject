@@ -138,6 +138,7 @@
     <Compile Include="commonMethods\OrbitPageUtil.cs" />
     <Compile Include="commonMethods\UserNotificationText.cs" />
     <Compile Include="Common\Config\AwsConfig.cs" />
+    <Compile Include="Common\Config\SmtpConfig.cs" />
     <Compile Include="Common\Config\TitanGraphConfig.cs" />
     <Compile Include="Common\Constants\CommonConstants.cs" />
     <Compile Include="Common\Constants\CompanySpecialitiesTypes.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Model\Person\Consumer.cs" />
     <Compile Include="Model\Person\IPerson.cs" />
     <Compile Include="Model\Solr\SolrUser\ISolrUser.cs" />
-    <Compile Include="Model\Solr\SolrUser\SolrUser.cs" />
     <Compile Include="Model\SourceDB\ISourceDb.cs" />
     <Compile Include="Model\urNoticeAnalyticsContext\GoogleApiCheckLastSynced.cs">
       <DependentUpon>urNoticeAnalyticsContext.tt</DependentUpon>

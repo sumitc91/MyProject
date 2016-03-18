@@ -11,6 +11,7 @@ using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
+using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.SyncService
 {

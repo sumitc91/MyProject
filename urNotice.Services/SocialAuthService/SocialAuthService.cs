@@ -20,6 +20,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.SocialAuthService
 {

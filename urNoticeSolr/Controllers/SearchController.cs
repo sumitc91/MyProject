@@ -19,6 +19,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.DynamoDbService;
 using urNotice.Services.SessionService;
+using urNotice.Services.Solr.SolrUser;
 using urNotice.Services.SolrService;
 
 namespace urNoticeSolr.Controllers

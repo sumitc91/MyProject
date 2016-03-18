@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Reflection;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNoticeAnalytics.Common.Logger;
 
 namespace urNoticeAnalytics.commonMethods
@@ -20,17 +21,17 @@ namespace urNoticeAnalytics.commonMethods
             var smtpServer = new SmtpClient
             {
                 Credentials =
-                    new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpEmail"],
-                        ConfigurationManager.AppSettings["SmtpPassword"]),
-                Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"].ToString(CultureInfo.InvariantCulture)),
-                Host = ConfigurationManager.AppSettings["SmtpHost"].ToString(CultureInfo.InvariantCulture),
-                EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["SmtpEnableSsl"].ToString(CultureInfo.InvariantCulture))
+                    new System.Net.NetworkCredential(SmtpConfig.SmtpEmail,
+                        SmtpConfig.SmtpPassword),
+                Port = Convert.ToInt32(SmtpConfig.SmtpPort.ToString(CultureInfo.InvariantCulture)),
+                Host = SmtpConfig.SmtpHost.ToString(CultureInfo.InvariantCulture),
+                EnableSsl = Convert.ToBoolean(SmtpConfig.SmtpEnableSsl.ToString(CultureInfo.InvariantCulture))
             };
             _mail = new MailMessage();
             var addr = toEmailAddrList.Split(',');
             try
             {
-                _mail.From = new MailAddress(ConfigurationManager.AppSettings["SmtpEmail"], senderName, System.Text.Encoding.UTF8);
+                _mail.From = new MailAddress(SmtpConfig.SmtpEmail, senderName, System.Text.Encoding.UTF8);
                 Byte i;
                 for (i = 0; i < addr.Length; i++)
                     _mail.To.Add(addr[i]);

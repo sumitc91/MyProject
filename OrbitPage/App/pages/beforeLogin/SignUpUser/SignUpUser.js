@@ -218,7 +218,7 @@ define([appLocation.preLogin], function (app) {
                 Referral: 'NA' // TODO: need to update with referral id.
             };
 
-            var url = ServerContextPath.authServer + '/Auth/CreateAccount';
+            var url = ServerContextPath.empty + '/Auth/CreateAccount';
             
 
             updateError();
