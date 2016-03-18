@@ -30,6 +30,8 @@ namespace urNotice.Services.AdminService
                             null,
                             null,
                             null,
+                            null,
+                            null,
                             false,
                             accessKey,
                             secretKey
@@ -47,6 +49,8 @@ namespace urNotice.Services.AdminService
                             DynamoDbHashKeyDataType.Company.ToString(),
                             company.CompanyName,
                             response[TitanGraphConstants.Id],
+                            null,
+                            null,
                             null,
                             null,
                             null,

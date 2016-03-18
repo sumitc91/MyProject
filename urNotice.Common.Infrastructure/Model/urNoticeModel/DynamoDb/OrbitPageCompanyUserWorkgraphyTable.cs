@@ -22,6 +22,12 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         public string CompareId { get; set; }
 
         [DynamoDBProperty]
+        public string InV { get; set; }
+
+        [DynamoDBProperty]
+        public string OutV { get; set; }
+
+        [DynamoDBProperty]
         public string FacebookId { get; set; }
 
         [DynamoDBProperty]

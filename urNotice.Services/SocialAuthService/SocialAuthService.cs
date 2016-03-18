@@ -196,6 +196,8 @@ namespace urNotice.Services.SocialAuthService
                             user.username,
                             null,
                             null,
+                            null,
+                            null,
                             user,
                             null,
                             null,

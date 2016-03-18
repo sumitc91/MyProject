@@ -77,6 +77,5 @@ C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Net.Http.F
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Http.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Http.WebHost.xml
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\bin\Debug\System.Web.Razor.xml
-C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNotice.Common.Infrastructure\obj\Debug\urNotice.Common.Infrastructure.pdb

@@ -38,7 +38,9 @@ namespace urNotice.Services.DynamoDbService
             string objectId, 
             string compareId, 
             string facebookId, 
-            string facebookAuthKey, 
+            string facebookAuthKey,
+            string inV,
+            string outV,
             OrbitPageUser orbitPageUser, 
             OrbitPageCompany orbitPageCompany, 
             OrbitPageDesignation orbitPageDesignation, 
@@ -57,6 +59,8 @@ namespace urNotice.Services.DynamoDbService
             orbitPageCompanyUserWorkgraphyTable.ObjectId = objectId;
             orbitPageCompanyUserWorkgraphyTable.CompareId = compareId;
             orbitPageCompanyUserWorkgraphyTable.FacebookId = facebookId;
+            orbitPageCompanyUserWorkgraphyTable.InV = inV;
+            orbitPageCompanyUserWorkgraphyTable.OutV = outV;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUser = orbitPageUser;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageCompany = orbitPageCompany;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageGoogleApiContact = orbitPageGoogleApiContact;
