@@ -12,6 +12,7 @@ using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
@@ -45,7 +46,8 @@ namespace urNotice.Services.SocialAuthService
             //var ifFacebookUserAlreadyRegistered = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
             if (userInfo.OrbitPageUser != null)
             {
-                var userSolr = new SolrService.SolrService().GetSolrUserData(userInfo.ObjectId, null, null, null);
+                ISolrUser solrUserModel = new SolrUser();
+                var userSolr = solrUserModel.GetPersonData(userInfo.ObjectId, null, null, null,false);//new SolrService.SolrService().GetSolrUserData(userInfo.ObjectId, null, null, null);
                 
                 if (userSolr != null)
                 {
@@ -108,7 +110,9 @@ namespace urNotice.Services.SocialAuthService
 
                 dynamic result = fb.Get("me?fields=id,first_name,last_name,gender,picture{url},email");
                 var email = result.email ?? result.id + "@facebook.com";
-                UnUserSolr userSolr = new SolrService.SolrService().GetSolrUserData(email, null, null,fid);
+
+                ISolrUser solrUserModel = new SolrUser();
+                UnUserSolr userSolr = solrUserModel.GetPersonData(email, null, null, fid,false);//new SolrService.SolrService().GetSolrUserData(email, null, null,fid);
 
                 if (userSolr != null)
                 {
@@ -210,7 +214,9 @@ namespace urNotice.Services.SocialAuthService
                             secretKey
                             );
 
-                        new SolrService.SolrService().InsertNewUserToSolr(user, false);
+                        //new SolrService.SolrService().InsertNewUserToSolr(user, false);                        
+                        solrUserModel.InsertNewUser(user, false);
+                        
                         //new TitanService.TitanService().InsertNewUserToTitan(user, false);
 
                         SignalRController.BroadCastNewUserRegistration();

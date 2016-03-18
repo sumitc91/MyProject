@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
@@ -28,7 +29,8 @@ namespace urNotice.Services.SyncService
             var virtualFriendSolrListHash = new Dictionary<string, List<UnVirtualFriendSolr>>();
             var uniqueFriendListHash = new Dictionary<string, List<string>>();
 
-            var solrUser = new SolrService.SolrService().GetSolrUserFullData(userEmail, null, null);
+            ISolrUser solrUserModel = new SolrUser();
+            var solrUser = solrUserModel.GetPersonData(userEmail, null, null,null,true);//new SolrService.SolrService().GetSolrUserFullData(userEmail, null, null);
 
             uniqueFriendListHash[userEmail]=solrUser.Virtualfriend.ToList();
 

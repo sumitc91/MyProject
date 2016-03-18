@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Logger;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
@@ -96,7 +97,8 @@ namespace urNoticeSolr.Controllers
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                var clientDetailResponse = new SolrService().GetClientDetails(session.UserName);
+                ISolrUser solrUserModel = new SolrUser();
+                var clientDetailResponse = solrUserModel.GetPersonData(session.UserName,null,null,null,true);//new SolrService().GetClientDetails(session.UserName);
                 return Json(clientDetailResponse, JsonRequestBehavior.AllowGet);
             }
             else

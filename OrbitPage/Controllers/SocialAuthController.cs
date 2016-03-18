@@ -20,6 +20,7 @@ using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
@@ -247,7 +248,8 @@ namespace OrbitPage.Controllers
                 //TODO:tobe deleted.
                 //new GoogleService().GetUserFriendListAsync(access_token, googleUserDetails.email);
 
-                var solrUser = new SolrService().GetSolrUserData(googleUserDetails.email,null,null,null);
+                ISolrUser solrUserModel = new SolrUser();                
+                var solrUser = solrUserModel.GetPersonData(googleUserDetails.email, null, null, null, false); //new SolrService().GetSolrUserData(googleUserDetails.email, null, null, null);
                 
                 if (solrUser != null)
                 {
@@ -374,7 +376,10 @@ namespace OrbitPage.Controllers
                             secretKey
                             );
 
-                        new SolrService().InsertNewUserToSolr(user, false);
+                        //new SolrService().InsertNewUserToSolr(user, false);
+                        
+                        solrUserModel.InsertNewUser(user, false);
+                        
                         //new TitanService.TitanService().InsertNewUserToTitan(user, false);
 
                         SignalRController.BroadCastNewUserRegistration();
@@ -834,7 +839,10 @@ namespace OrbitPage.Controllers
                         secretKey
                         );
 
-                    new SolrService().InsertNewUserToSolr(user, false);
+                    //new SolrService().InsertNewUserToSolr(user, false);
+                    ISolrUser solrUserModel = new SolrUser();
+                    solrUserModel.InsertNewUser(user, false);
+
                     //new TitanService.TitanService().InsertNewUserToTitan(user, false);
 
                     SignalRController.BroadCastNewUserRegistration();

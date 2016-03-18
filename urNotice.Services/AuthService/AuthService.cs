@@ -11,6 +11,7 @@ using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
@@ -52,7 +53,8 @@ namespace urNotice.Services.AuthService
             req.FirstName = FirstCharToUpper(req.FirstName);
             req.LastName = FirstCharToUpper(req.LastName);
 
-            var solrUserEmail = new SolrService.SolrService().GetSolrUserData(req.EmailId,req.Username,null,null);
+            ISolrUser solrUserModel = new SolrUser();
+            var solrUserEmail = solrUserModel.GetPersonData(req.EmailId, req.Username, null, null,false);//new SolrService.SolrService().GetSolrUserData(req.EmailId,req.Username,null,null);
             
             if (solrUserEmail != null)
             {
@@ -126,7 +128,10 @@ namespace urNotice.Services.AuthService
                     secretKey
                     );
                 
-                new SolrService.SolrService().InsertNewUserToSolr(user, false);
+                //new SolrService.SolrService().InsertNewUserToSolr(user, false);
+                
+                solrUserModel.InsertNewUser(user,false);
+
                 //new TitanService.TitanService().InsertNewUserToTitan(user, false);
 
                 SendAccountCreationValidationEmail.SendAccountCreationValidationEmailMessage(req, guid, request);
@@ -150,7 +155,8 @@ namespace urNotice.Services.AuthService
         public LoginResponse WebLogin(string userName, string password, string returnUrl, string keepMeSignedIn,string accessKey, string secretKey)
         {
             var userData = new LoginResponse();
-            var userSolrDetail = new SolrService.SolrService().GetSolrUserData(userName,null,null,null); //userName can be email,username,phone.
+            ISolrUser solrUserModel = new SolrUser();
+            var userSolrDetail = solrUserModel.GetPersonData(userName, null, null, null,false);//new SolrService.SolrService().GetSolrUserData(userName,null,null,null); //userName can be email,username,phone.
 
             var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Services.SolrService;
 using urNoticeAnalytics.Common.Constants;
 using urNoticeAnalytics.Common.Logger;
@@ -140,9 +141,12 @@ namespace urNoticeAnalytics.Services
         {
             if (email != null && email != "")
             {
-                var solrUser = new SolrService().GetSolrUserFullData(email, null, null);
+                ISolrUser solrUserModel = new SolrUser();
+
+                var solrUser = solrUserModel.GetPersonData(email, null, null,null,true);//new SolrService().GetSolrUserFullData(email, null, null);
                 solrUser.Virtualfriend = userFriendList.ToArray();
-                new SolrService().InsertNewUserToSolr(solrUser, false);
+                //new SolrService().InsertNewUserToSolr(solrUser, false);                
+                solrUserModel.InsertNewUserToSolr(solrUser,false);
             }
             
             return CommonConstants.SUCCESS_MSG;
