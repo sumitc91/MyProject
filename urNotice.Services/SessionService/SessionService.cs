@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.NoSqlDb.DynamoDb;
 
 namespace urNotice.Services.SessionService
 {
@@ -28,15 +29,14 @@ namespace urNotice.Services.SessionService
 
                 string username = EncryptionClass.GetDecryptionValue(headers.AuthKey, authkey);
 
-                var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+                IDynamoDb dynamoDbModel = new DynamoDb();
+                var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                     DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                     username,
-                    null,
-                    accessKey,
-                    secretKey
+                    null
                     );
 
-
+                
                 if (userInfo != null)
                 {
                     var data = new Dictionary<string, string>();

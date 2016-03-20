@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Solr.SolrCompany;
+using urNotice.Services.Solr.SolrDesignation;
+using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.AdminService
 {
@@ -17,26 +21,12 @@ namespace urNotice.Services.AdminService
 
             var response = new TitanService.TitanService().InsertNewDesignationToTitan(createdBy, designationName, false, accessKey, secretKey);
 
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                            DynamoDbHashKeyDataType.Designation.ToString(),
-                            designationName,
-                            response[TitanGraphConstants.Id],
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            false,
-                            accessKey,
-                            secretKey
-                            );
-            new SolrService.SolrService().AddDesignation(response[TitanGraphConstants.Id], designationName, false);
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            dynamoDbModel.UpsertOrbitPageDesignation(designationName, response[TitanGraphConstants.Id]);
+            
+            ISolrDesignation solrDesignationModel = new SolrDesignation();
+            solrDesignationModel.AddDesignation(response[TitanGraphConstants.Id], designationName, false);
+            
             return true;
         }
 
@@ -45,28 +35,12 @@ namespace urNotice.Services.AdminService
 
             var response = new TitanService.TitanService().InsertNewCompanyToTitan(createdBy, company.CompanyName, false, accessKey, secretKey);
 
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                            DynamoDbHashKeyDataType.Company.ToString(),
-                            company.CompanyName,
-                            response[TitanGraphConstants.Id],
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            company,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            false,
-                            accessKey,
-                            secretKey
-                            );
-
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            dynamoDbModel.UpsertOrbitPageCompany(company, response[TitanGraphConstants.Id]);
+            
             company.vertexId = response[TitanGraphConstants.Id];
-            new SolrService.SolrService().InsertNewCompanyToSolr(company, false);
+            ISolrCompany solrCompanyModel = new SolrCompany();
+            solrCompanyModel.InsertNewCompany(company,false);
             return true;
         }
     }

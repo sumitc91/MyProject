@@ -10,13 +10,14 @@ using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
+using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SocialAuthService.google.Model;
 using urNotice.Services.Solr.SolrUser;
+using urNotice.Services.Solr.SolrVirtualFriends;
 
 namespace urNotice.Services.SocialAuthService.google
 {
@@ -42,13 +43,12 @@ namespace urNotice.Services.SocialAuthService.google
         {
             String URI = "";
 
-            OrbitPageCompanyUserWorkgraphyTable userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                         userEmail,
-                        null,
-                        accessKey,
-                        secretKey
-                        );
+                        null
+                );
 
             //var googleContactSaved = _dbAnalytics.GoogleApiCheckLastSynceds.SingleOrDefault(x => x.emailId == userEmail);
             if (userInfo != null && userInfo.GoogleApiCheckLastSyncedDateTime != null)
@@ -209,26 +209,8 @@ namespace urNotice.Services.SocialAuthService.google
                             jsonData = JsonConvert.SerializeObject(entry.Value)
                         };
 
-                        new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.GmailFriends.ToString(),
-                        userEmail +"_"+ startIndex,
-                        userEmail,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        entry.Value,
-                        null,
-                        null,
-                        null,
-                        false,
-                        accessKey,
-                        secretKey
-                        );
-
+                        IDynamoDb dynamoDbModel = new DynamoDb();
+                        dynamoDbModel.UpsertOrbitPageGoogleApiContacts(entry.Value, userEmail, startIndex);
 
                     }
 
@@ -299,8 +281,8 @@ namespace urNotice.Services.SocialAuthService.google
         {
             if (email != null && email != "")
             {
-
-                new SolrService.SolrService().InsertVirtualFriendListToSolr(userFriendList, false);
+                ISolrVirtualFriends solrVirtualFriends = new SolrVirtualFriends();
+                solrVirtualFriends.InsertVirtualFriendListToSolr(userFriendList, false);                
             }
 
             return CommonConstants.SUCCESS_MSG;

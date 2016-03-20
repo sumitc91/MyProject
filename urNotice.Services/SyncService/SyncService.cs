@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Services.Solr.SolrUser;
+using urNotice.Services.Solr.SolrVirtualFriends;
 
 namespace urNotice.Services.SyncService
 {
@@ -179,8 +179,8 @@ namespace urNotice.Services.SyncService
         {
             if (email != null && email != "")
             {
-
-                new SolrService.SolrService().InsertVirtualFriendListToSolr(userFriendList, false);
+                ISolrVirtualFriends solrVirtualFriends = new SolrVirtualFriends();
+                solrVirtualFriends.InsertVirtualFriendListToSolr(userFriendList,false);                
             }
 
             return CommonConstants.SUCCESS_MSG;

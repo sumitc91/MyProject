@@ -5,7 +5,6 @@ using System.Text;
 using Microsoft.Practices.ServiceLocation;
 using SolrNet;
 using SolrNet.Commands.Parameters;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
@@ -26,6 +25,36 @@ namespace urNotice.Services.Solr.SolrUser
             response["status"] = "200";
 
             return response;
+        }
+
+        public SolrQueryResults<UnUserSolr> GetUserDetailsAutocomplete(string queryText)
+        {
+            queryText = queryText.Replace(" ", "*");            
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
+
+            String solrQueryString = "(name:" + queryText + "*) || (lastname:" + queryText + "*) || (email:" + queryText + ") || (username:" + queryText + ") || (phone:" + queryText + ")";
+            var solrQuery = new SolrQuery(solrQueryString);
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 15,
+                Start = 0,
+                Fields = new[] { "email", "name", "profilepic", "vertexId" }
+            });
+            return solrQueryExecute;
+        }
+
+        public SolrQueryResults<UnUserSolr> UserDetailsById(string uid)
+        {
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
+            var solrQuery = new SolrQuery("(username:" + uid + ") || (vertexId:" + uid + ")");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 10,
+                Start = 0,
+                Fields = new[] { "id", "firstname", "lastname", "name", "gender", "profilepic", "isactive", "source", "email", "phone", "username", "coverpic" }
+            });
+
+            return solrQueryExecute;
         }
 
         public Dictionary<string, string> InsertNewUser(OrbitPageUser user, bool toBeOptimized)

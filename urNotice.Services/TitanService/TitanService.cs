@@ -10,7 +10,7 @@ using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
-using urNotice.Services.GraphService;
+using urNotice.Services.GraphDb;
 
 namespace urNotice.Services.TitanService
 {
@@ -19,8 +19,6 @@ namespace urNotice.Services.TitanService
         public Dictionary<String, String> InsertNewUserToTitan(OrbitPageUser user, bool toBeOptimized, string accessKey, string secretKey)
         {
 
-            string url = TitanGraphConfig.Server;
-           
             var properties = new Dictionary<string, string>();
             properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.User.ToString();
             properties[VertexPropertyEnum.FirstName.ToString()] = user.firstName;
@@ -31,7 +29,8 @@ namespace urNotice.Services.TitanService
             properties[VertexPropertyEnum.ImageUrl.ToString()] = user.imageUrl;
             properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic;
 
-            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(user.email, url, user.email, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(user.email,TitanGraphConfig.Graph,properties);//new GraphVertexOperations().AddVertex(user.email, url, user.email, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             return addVertexResponse;
         }
@@ -39,14 +38,13 @@ namespace urNotice.Services.TitanService
         public Dictionary<String, String> InsertNewDesignationToTitan(string adminEmail,string designationName, bool toBeOptimized, string accessKey, string secretKey)
         {
 
-            string url = TitanGraphConfig.Server;
-
             var properties = new Dictionary<string, string>();
             properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Designation.ToString();
             properties[VertexPropertyEnum.DesignationName.ToString()] = designationName;            
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(adminEmail, url, designationName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail, TitanGraphConfig.Graph,properties);//new GraphVertexOperations().AddVertex(adminEmail, url, designationName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             return addVertexResponse;
         }
@@ -61,7 +59,8 @@ namespace urNotice.Services.TitanService
             properties[VertexPropertyEnum.CompanyName.ToString()] = companyName;
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-            Dictionary<string, string> addVertexResponse = new GraphVertexOperations().AddVertex(adminEmail, url, companyName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail,TitanGraphConfig.Graph,properties);//new GraphVertexOperations().AddVertex(adminEmail, url, companyName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             return addVertexResponse;
         }

@@ -12,15 +12,14 @@ using System.Web.Mvc;
 using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Logger;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
-using urNotice.Services.DynamoDbService;
 using urNotice.Services.SessionService;
+using urNotice.Services.Solr.SolrCompany;
+using urNotice.Services.Solr.SolrDesignation;
 using urNotice.Services.Solr.SolrUser;
-using urNotice.Services.SolrService;
 
 namespace urNoticeSolr.Controllers
 {
@@ -44,18 +43,7 @@ namespace urNoticeSolr.Controllers
         public JsonResult AddDesignation()
         {
             var response = new ResponseModel<String>();
-            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<UnDesignationSolr>>();
-            var unDesignationSolrList = new List<UnDesignationSolr>();
-            var designationObj = new UnDesignationSolr
-            {
-                id = GuidsPredefined.guids[0],
-                designation = "Associate Software Engineer"
-            };
-
-            unDesignationSolrList.Add(designationObj);
-            solr.AddRange(unDesignationSolrList);
-            solr.Commit();
-
+            //TODO: to be implemented 
             response.Status = 200;
             response.Message = "Addes";
             return Json(response, JsonRequestBehavior.AllowGet);
@@ -69,17 +57,8 @@ namespace urNoticeSolr.Controllers
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
             try
             {
-                queryText = queryText.Replace(" ", "*");
-                //queryText = queryText.ToLower();
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnDesignationSolr>>();
-                var solrQuery = new SolrQuery("designation:*" + queryText + "*");
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 15,
-                    Start = 0,
-                    Fields = new[] { "designation", "id" }
-                });
-                response.Payload = solrQueryExecute;
+                ISolrDesignation solrDesignationModel = new SolrDesignation();
+                response.Payload = solrDesignationModel.GetDesignationDetails(queryText);
             }
             catch (Exception ex)
             {
@@ -117,18 +96,11 @@ namespace urNoticeSolr.Controllers
             var response = new ResponseModel<Boolean>();
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);            
             try
-            {
-                                
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
-                var solrQuery = new SolrQuery("(id:" + queryText + ") OR (email:"+queryText+") OR (phone:"+queryText+")");
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 1,
-                    Start = 0,
-                    Fields = new[] {"id" }
-                });
+            {                                                
+                ISolrUser solrUserModel = new SolrUser();
+                var solrQuery = solrUserModel.GetPersonData(queryText,null,null,null,false);
 
-                if (solrQueryExecute == null || solrQueryExecute.Count == 0)
+                if (solrQuery == null)
                 {
                     response.Status = 200;
                     response.Message = "user is unique.";
@@ -155,17 +127,8 @@ namespace urNoticeSolr.Controllers
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
             try
             {
-                queryText = queryText.Replace(" ", "*");
-                //queryText = queryText.ToLower();
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
-                var solrQuery = new SolrQuery("companyname:*" + queryText + "*");
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 15,
-                    Start = 0,
-                    Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl", "logourl" }
-                });
-                response.Payload = solrQueryExecute;
+                ISolrCompany solrCompanyModel = new SolrCompany();
+                response.Payload = solrCompanyModel.GetCompanyDetailsAutocomplete(queryText);
             }
             catch (Exception ex)
             {
@@ -182,19 +145,8 @@ namespace urNoticeSolr.Controllers
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
             try
             {
-                queryText = queryText.Replace(" ", "*");
-                //queryText = queryText.ToLower();
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
-
-                String solrQueryString = "(name:" + queryText + "*) || (lastname:" + queryText + "*) || (email:" + queryText + ") || (username:" + queryText + ") || (phone:" + queryText + ")";
-                var solrQuery = new SolrQuery(solrQueryString);
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 15,
-                    Start = 0,
-                    Fields = new[] { "email","name", "profilepic", "vertexId" }
-                });
-                response.Payload = solrQueryExecute;
+                ISolrUser solrUserModel = new SolrUser();
+                response.Payload = solrUserModel.GetUserDetailsAutocomplete(queryText);
             }
             catch (Exception ex)
             {
@@ -204,32 +156,15 @@ namespace urNoticeSolr.Controllers
             response.Message = "Unauthorized";
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-
-        
+      
         public JsonResult CompanyDetailsById()
         {
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();
             var cid = Request.QueryString["cid"].ToString(CultureInfo.InvariantCulture);
             try
             {
-                //var headers = new HeaderManager(Request);
-                //new TokenManager().getSessionInfo(headers.AuthToken, headers);
-                //urNoticeSession session = new TokenManager().getSessionInfo(headers.AuthToken, headers);
-
-                //if(session != null)
-                //    DynamoDbService.IncrementUserAnalyticsCounter(accessKey, secretKey, session.UserName, cid);
-
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
-                var solrQuery = new SolrQuery("guid:" + cid);
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 10,
-                    Start = 0,
-                    Fields = new[] { "guid","companyid","companyname","rating","website","size","description","averagerating","totalratingcount","totalreviews","isprimary",
-                        "logourl", "squarelogourl", "speciality", "telephone","avgnoticeperiod","buyoutpercentage","maxnoticeperiod","minnoticeperiod","avghikeperct","perclookingforchange",
-                        "sublocality","city","district","state","country","postal_code","latitude","longitude","geo" }
-                });
-                response.Payload = solrQueryExecute;
+                ISolrCompany solrCompanyModel = new SolrCompany();
+                response.Payload = solrCompanyModel.CompanyDetailsById(cid);
                 response.Status = 200;
                 response.Message = "Success";
             }
@@ -249,16 +184,8 @@ namespace urNoticeSolr.Controllers
             var uid = Request.QueryString["uid"].ToString(CultureInfo.InvariantCulture);
             try
             {
-
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
-                var solrQuery = new SolrQuery("(username:" + uid+") || (vertexId:" + uid+")");
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 10,
-                    Start = 0,
-                    Fields = new[] { "id", "firstname", "lastname","name", "gender", "profilepic", "isactive", "source", "email", "phone", "username", "coverpic" }
-                });
-                response.Payload = solrQueryExecute;
+                ISolrUser solrUserModel = new SolrUser();
+                response.Payload = solrUserModel.UserDetailsById(uid);
                 response.Status = 200;
                 response.Message = "Success";
             }
@@ -324,6 +251,7 @@ namespace urNoticeSolr.Controllers
         public JsonResult Search()
         {
             var response = new ResponseModel<Dictionary<String, Object>>();
+            var queryResponse = new Dictionary<String, Object>();
             var q = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
             var page = Request.QueryString["page"].ToString(CultureInfo.InvariantCulture);
             var perpage = Request.QueryString["perpage"].ToString(CultureInfo.InvariantCulture);
@@ -333,37 +261,11 @@ namespace urNoticeSolr.Controllers
             {
                 totalMatch = Request.QueryString["totalMatch"].ToString(CultureInfo.InvariantCulture);
             }
-            if (q == null || q == "")
-                q = "*";
-            else
-                q = q.Replace(" ", "*");
-
-            if (page == null || page == "")
-                page = "0";
-            else
-                page = (Convert.ToInt32(page) - 1).ToString();
-
-            if (perpage == null || perpage == "")
-                perpage = "10";
+            
             try
             {
-
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
-                var solrQuery = new SolrQuery("companyname:*" + q + "*");
-                if (totalMatch == null || totalMatch == "")
-                    totalMatch = solr.Query(solrQuery).Count().ToString();
-
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = Convert.ToInt32(perpage),
-                    Start = Convert.ToInt32(page),
-                    Fields = new[] { "guid","companyid","companyname","rating","website","size","description","averagerating","totalratingcount","totalreviews","isprimary",
-                        "logourl", "squarelogourl", "speciality", "telephone","avgnoticeperiod","buyoutpercentage","maxnoticeperiod","minnoticeperiod","avghikeperct","perclookingforchange",
-                        "sublocality","city","district","state","country","postal_code","latitude","longitude","geo" }
-                });
-
-                var queryResponse = new Dictionary<String, Object>();
-                queryResponse["result"] = solrQueryExecute;
+                ISolrCompany solrCompanyModel = new SolrCompany();
+                queryResponse["result"] = solrCompanyModel.Search(q,page,perpage,totalMatch);
                 queryResponse["count"] = totalMatch;
                 response.Payload = queryResponse;
                 response.Status = 200;
@@ -384,38 +286,11 @@ namespace urNoticeSolr.Controllers
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();
             var size = Request.QueryString["size"].ToString(CultureInfo.InvariantCulture);
             var rating = Request.QueryString["rating"].ToString(CultureInfo.InvariantCulture);
-            var speciality = Request.QueryString["speciality"].ToString(CultureInfo.InvariantCulture);
-            if (speciality != null)
-                speciality = speciality.Replace("(", "*").Replace(")", "*").Replace(" ", "*").Replace(":", "");
-
+            var speciality = Request.QueryString["speciality"].ToString(CultureInfo.InvariantCulture);            
             try
             {
-
-                var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
-                String query = CompanyCompetitorQueryBuilder(size, rating, speciality);
-                var solrQuery = new SolrQuery(query);
-
-                var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                {
-                    Rows = 10,
-                    Start = 0,
-                    Fields = new[] { "guid", "rating","website","size", "companyname","isprimary",
-                        "squarelogourl","logourl"}
-                });
-
-                if (solrQueryExecute.Count < 2)
-                {
-                    query = CompanyCompetitorQueryBuilder(null, rating, speciality);
-                    solrQuery = new SolrQuery(query);
-                    solrQueryExecute = solr.Query(solrQuery, new QueryOptions
-                    {
-                        Rows = 10,
-                        Start = 0,
-                        Fields = new[] { "guid", "rating","website","size", "companyname","isprimary",
-                        "squarelogourl"}
-                    });
-                }
-                response.Payload = solrQueryExecute;
+                ISolrCompany solrCompanyModel = new SolrCompany();
+                response.Payload = solrCompanyModel.GetCompanyCompetitorsDetail(size,rating,speciality);
                 response.Status = 200;
                 response.Message = "Success";
             }
@@ -427,53 +302,6 @@ namespace urNoticeSolr.Controllers
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
-        }
-
-        private String CompanyCompetitorQueryBuilder(String size, String rating, String speciality)
-        {
-            StringBuilder query = new StringBuilder();
-
-            query.Append("(");
-
-            if (size != null)
-            {
-                query.Append("(");
-                query.Append("size:" + size);
-                query.Append(")");
-            }
-
-
-
-            if (speciality != null && speciality != " " && speciality != "")
-            {
-                if (size != null)
-                    query.Append(" AND ");
-
-                query.Append("(");
-                foreach (var companySpeciality in speciality.Split(','))
-                {
-                    var companySpecialityLocal = companySpeciality.Replace(" ", "*");
-                    query.Append("(");
-                    query.Append("speciality:" + companySpecialityLocal.Trim());
-                    query.Append(")");
-
-                    query.Append(" OR ");
-
-                    query.Append("(");
-                    query.Append("speciality: " + companySpecialityLocal.Trim());
-                    query.Append(")");
-
-                    query.Append(" OR ");
-                }
-
-                //queryString = query.ToString();
-                query.Remove(query.Length - 4, 4);
-
-                query.Append(")");
-            }
-            query.Append(")");
-
-            return query.ToString();
         }
 
     }

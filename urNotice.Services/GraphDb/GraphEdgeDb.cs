@@ -6,19 +6,38 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using RestSharp;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
-using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.NoSqlDb.DynamoDb;
 
-namespace urNotice.Services.GraphService
+namespace urNotice.Services.GraphDb
 {
-    public class GraphEdgeOperations
+    public class GraphEdgeDb : IGraphEdgeDb
     {
-        public Dictionary<String, String> AddEdge(urNoticeSession session, string url, string edgeId, string graphName, Dictionary<string, string> properties, string accessKey, string secretKey)
+        public Dictionary<string, string> AddEdge(string userName, string graphName, Dictionary<string, string> properties)
         {
+            string url = TitanGraphConfig.Server;
+            var response = CreateEdge(graphName, properties, url);            
 
-            //var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges/" + edgeId + "?");
+            // add edge to dynamodb.
+            var edgeDetail = new OrbitPageEdgeDetail
+            {
+                url = url,
+                edgeId = response[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            dynamoDbModel.UpsertOrbitPageEdgeDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()],properties[EdgePropertyEnum._outV.ToString()]);
+            
+            return response;
+        }
+
+        private Dictionary<String, String> CreateEdge(string graphName, Dictionary<string, string> properties, string url)
+        {
             var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges?");
 
             foreach (KeyValuePair<string, string> property in properties)
@@ -43,35 +62,6 @@ namespace urNotice.Services.GraphService
             var response = new Dictionary<String, String>();
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
-
-
-            // add edge to dynamodb.
-            var edgeDetail = new OrbitPageEdgeDetail
-            {
-                url = url,
-                edgeId = response[TitanGraphConstants.Id],
-                graphName = graphName,
-                properties = properties
-            };
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.EdgeDetail.ToString(),
-                    edgeDetail.edgeId,
-                    session.UserName,
-                    null,
-                    null,
-                    properties[EdgePropertyEnum._inV.ToString()],
-                    properties[EdgePropertyEnum._outV.ToString()],
-                    null,
-                    null,                   
-                    null,
-                    null,
-                    null,
-                    edgeDetail,
-                    null,
-                    false,
-                    accessKey,
-                    secretKey
-                    );
 
             return response;
         }

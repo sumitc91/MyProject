@@ -11,13 +11,13 @@ using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.AuthService
@@ -109,29 +109,8 @@ namespace urNotice.Services.AuthService
             try
             {
                // _db.SaveChanges();
-
-                new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                    user.email,
-                    user.username,
-                    null,
-                    null,
-                    null,
-                    null,
-                    user,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    false,
-                    accessKey,
-                    secretKey
-                    );
-                
-                //new SolrService.SolrService().InsertNewUserToSolr(user, false);
-                
+                IDynamoDb dynamoDbModel = new DynamoDb();
+                dynamoDbModel.UpsertOrbitPageUser(user,null);                
                 solrUserModel.InsertNewUser(user,false);
 
                 //new TitanService.TitanService().InsertNewUserToTitan(user, false);
@@ -160,12 +139,11 @@ namespace urNotice.Services.AuthService
             ISolrUser solrUserModel = new SolrUser();
             var userSolrDetail = solrUserModel.GetPersonData(userName, null, null, null,false);//new SolrService.SolrService().GetSolrUserData(userName,null,null,null); //userName can be email,username,phone.
 
-            var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                 userSolrDetail.Email,
-                null,
-                accessKey,
-                secretKey
+                null
                 );
 
             //var user = _db.Users.SingleOrDefault(x => x.email == userSolrDetail.Email && x.password == passwrod);
@@ -194,7 +172,9 @@ namespace urNotice.Services.AuthService
                     try
                     {
                         userInfo.OrbitPageUser.keepMeSignedIn = keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
-                        new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                        
+                        dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+                        
                     }
                     catch (DbEntityValidationException e)
                     {
@@ -214,13 +194,14 @@ namespace urNotice.Services.AuthService
         public ResponseModel<String> ValidateAccountService(ValidateAccountRequest req,string accessKey, string secretKey)
         {
             var response = new ResponseModel<string>();
-            var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                 req.userName,
-                null,
-                accessKey,
-                secretKey
-                ); 
+                null
+                );
+
             //_db.ValidateUserKeys.SingleOrDefault(x => x.Username == req.userName && x.guid == req.guid);
 
             if (userInfo != null)
@@ -242,8 +223,9 @@ namespace urNotice.Services.AuthService
                 userInfo.OrbitPageUser.isActive = "true";
                
                 try
-                {
-                    new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo,accessKey,secretKey);
+                {                    
+                    dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+
                 }
                 catch (DbEntityValidationException e)
                 {
@@ -264,13 +246,14 @@ namespace urNotice.Services.AuthService
         public ResponseModel<String> ResendValidationCodeService(ValidateAccountRequest req, HttpRequestBase request, string accessKey, string secretKey)
         {
             var response = new ResponseModel<string>();
-            var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                 req.userName,
-                null,
-                accessKey,
-                secretKey
+                null
                 );
+
            
             if (userInfo != null)
             {
@@ -286,8 +269,9 @@ namespace urNotice.Services.AuthService
                 userInfo.OrbitPageUser.validateUserKeyGuid = Guid.NewGuid().ToString();
                
                 try
-                {
-                    new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                {                    
+                    dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+
                     SendAccountCreationValidationEmail.SendAccountValidationEmailMessage(req.userName, userInfo.OrbitPageUser.validateUserKeyGuid, request);
                 }
                 catch (DbEntityValidationException e)
@@ -311,12 +295,12 @@ namespace urNotice.Services.AuthService
         {
             var response = new ResponseModel<string>();
             id = id.ToLower();
-            var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                 id,
-                null,
-                accessKey,
-                secretKey
+                null
                 );
 
             if (userInfo != null)
@@ -332,8 +316,9 @@ namespace urNotice.Services.AuthService
 
                 userInfo.OrbitPageUser.forgetPasswordGuid = Guid.NewGuid().ToString();
                 try
-                {
-                    new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                {                    
+                    dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+                    
                     var forgetPasswordValidationEmail = new ForgetPasswordValidationEmail();
                     forgetPasswordValidationEmail.SendForgetPasswordValidationEmailMessage(id, userInfo.OrbitPageUser.forgetPasswordGuid, request, DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture));
                 }
@@ -362,13 +347,13 @@ namespace urNotice.Services.AuthService
             var response = new ResponseModel<string>();
             //EncryptionClass.GetDecryptionValue(req.Username, ConfigurationManager.AppSettings["AuthKey"]);
 
-            var userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                 req.Username,
-                null,
-                accessKey,
-                secretKey
+                null
                 );
+
 
             if (userInfo != null && userInfo.OrbitPageUser.forgetPasswordGuid == req.Guid && userInfo.OrbitPageUser.forgetPasswordGuid != CommonConstants.NA)
             {
@@ -379,8 +364,8 @@ namespace urNotice.Services.AuthService
                 userInfo.OrbitPageUser.locked =CommonConstants.FALSE;
 
                 try
-                {
-                   new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                {                    
+                    dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);                   
                 }
                 catch (DbEntityValidationException e)
                 {

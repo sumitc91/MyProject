@@ -6,29 +6,43 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using RestSharp;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
-using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.NoSqlDb.DynamoDb;
 
-namespace urNotice.Services.GraphService
+namespace urNotice.Services.GraphDb
 {
-    public class GraphVertexOperations
+    public class GraphVertexDb : IGraphVertexDb
     {
-        public Dictionary<String, String> AddVertex(string email, string url, string vertexId, string graphName, Dictionary<string, string> properties, string accessKey, string secretKey)
+        public Dictionary<string, string> AddVertex(string email, string graphName, Dictionary<string, string> properties)
         {
-            
-            //var uri = new StringBuilder("/graphs/" + graphName + "/vertices/" + vertexId + "?");
-            var uri = new StringBuilder("/graphs/" + graphName + "/vertices?");
+            string url = TitanGraphConfig.Server;
+            var response = CreateVertex(graphName, properties, url);            
+            var orbitPageVertexDetail = new OrbitPageVertexDetail
+            {
+                url = url,
+                vertexId = response[TitanGraphConstants.Id],
+                graphName = graphName,
+                properties = properties
+            };
 
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            dynamoDbModel.UpsertOrbitPageVertexDetail(orbitPageVertexDetail, email);
+            
+            return response;
+        }
+        private Dictionary<String, String> CreateVertex(string graphName, Dictionary<string, string> properties, string url)
+        {
+            var uri = new StringBuilder("/graphs/" + graphName + "/vertices?");
+            
             foreach (KeyValuePair<string, string> property in properties)
             {
                 uri.Append(property.Key + "=" + HttpUtility.UrlEncode(property.Value) + "&");
             }
 
-                //; name=" + user.email + "&gender=" + user.gender;
-
-            var client = new RestClient(url+uri.ToString());
+            var client = new RestClient(url + uri.ToString());
             var request = new RestRequest();
 
             request.Method = Method.POST;
@@ -44,50 +58,16 @@ namespace urNotice.Services.GraphService
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
             response[TitanGraphConstants.RexsterUri] = uri.ToString();
-
-            var orbitPageVertexDetail = new OrbitPageVertexDetail
-            {
-                url = url,
-                vertexId = response[TitanGraphConstants.Id],
-                graphName = graphName,
-                properties = properties
-            };
-
-            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.VertexDetail.ToString(),
-                    orbitPageVertexDetail.vertexId,
-                    email,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    orbitPageVertexDetail,
-                    null,
-                    null,
-                    false,
-                    accessKey,
-                    secretKey
-                    );
-
             return response;
         }
-
-
-        public string GetVertexDetail(string url,string gremlinQuery, string vertexId, string graphName, Dictionary<string, string> properties)
+        public string GetVertexDetail(string gremlinQuery, string vertexId, string graphName, Dictionary<string, string> properties)
         {
-
-        //http://localhost:8182/graphs/graph/vertices/2571776/tp/gremlin?script=g.v(2569472).out(“_label”,”WallPost”)[0..1]
-            //
             var uri = new StringBuilder("/graphs/" + graphName + "/vertices/" + vertexId);
-
+            string url = TitanGraphConfig.Server;
             if (gremlinQuery != null)
             {
                 uri.Append("/tp/gremlin?");
-                uri.Append("script="+gremlinQuery);                
+                uri.Append("script=" + gremlinQuery);
             }
             else if (properties.Count > 0)
             {
@@ -97,9 +77,6 @@ namespace urNotice.Services.GraphService
                     uri.Append(property.Key + "=" + property.Value + "&");
                 }
             }
-            
-
-            //; name=" + user.email + "&gender=" + user.gender;
 
             var client = new RestClient(url + uri.ToString());
             var request = new RestRequest();
@@ -111,7 +88,6 @@ namespace urNotice.Services.GraphService
 
             var res = client.Execute(request);
             var content = res.Content; // raw content as string 
-
             return content;
         }
     }

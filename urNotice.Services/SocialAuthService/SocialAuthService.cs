@@ -12,7 +12,6 @@ using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
@@ -20,6 +19,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.SocialAuthService
@@ -36,13 +36,8 @@ namespace urNotice.Services.SocialAuthService
             var response = new ResponseModel<LoginResponse>();
             response.Payload = new LoginResponse();
             //var ifFacebookUserAlreadyRegistered = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
-            OrbitPageCompanyUserWorkgraphyTable userInfo = new DynamoDbService.DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(
-                        DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                        fid,
-                        accessKey,
-                        secretKey
-                        );
-            
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(DynamoDbHashKeyDataType.OrbitPageUser.ToString(), fid);
 
             //var ifFacebookUserAlreadyRegistered = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
             if (userInfo.OrbitPageUser != null)
@@ -76,9 +71,9 @@ namespace urNotice.Services.SocialAuthService
                             userInfo.OrbitPageUser.keepMeSignedIn = "true";
                                 //keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
                             userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
-
-                            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
-
+                            
+                            dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+                            
                             var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
@@ -145,8 +140,9 @@ namespace urNotice.Services.SocialAuthService
                             //keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
                             userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
 
-                            new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                            dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
 
+                            
                             var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
@@ -195,26 +191,9 @@ namespace urNotice.Services.SocialAuthService
 
                     try
                     {
-                        new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                            DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                            user.email,
-                            user.username,
-                            null,
-                            null,
-                            null,
-                            null,
-                            user,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            false,
-                            accessKey,
-                            secretKey
-                            );
-
+                        
+                        dynamoDbModel.UpsertOrbitPageUser(user,null);
+                        
                         //new SolrService.SolrService().InsertNewUserToSolr(user, false);                        
                         solrUserModel.InsertNewUser(user, false);
                         
@@ -224,8 +203,9 @@ namespace urNotice.Services.SocialAuthService
 
 
                         
-                        userInfo.ObjectId = user.username;
-                        new DynamoDbService.DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
+                        userInfo.ObjectId = user.username;                        
+                        dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+
                         //new SolrService.SolrService().InsertNewUserToSolr(user, false);
 
                         var data = new Dictionary<string, string>();

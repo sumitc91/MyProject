@@ -20,7 +20,6 @@ using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
-using urNotice.Common.Infrastructure.Model.Solr.SolrUser;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
@@ -28,14 +27,13 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
-using urNotice.Services.DynamoDbService;
+using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SessionService;
 using urNotice.Services.SocialAuthService;
 using urNotice.Services.SocialAuthService.Facebook;
 using urNotice.Services.SocialAuthService.google;
 using urNotice.Services.SocialAuthService.linkedin;
 using urNotice.Services.Solr.SolrUser;
-using urNotice.Services.SolrService;
 using urNotice.Services.TitanService;
 
 namespace OrbitPage.Controllers
@@ -102,13 +100,9 @@ namespace OrbitPage.Controllers
                 if (isValidToken)
                 {
                     //var facebookUserMap = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
-                    OrbitPageCompanyUserWorkgraphyTable userInfo = new DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(
-                        DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                        fid,
-                        accessKey,
-                        secretKey
-                        );
-
+                    IDynamoDb dynamoDbModel = new DynamoDb();
+                    var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(DynamoDbHashKeyDataType.OrbitPageUser.ToString(),fid);
+                    
                     //facebookUserMap.username = session.UserName;
                     try
                     {
@@ -254,15 +248,12 @@ namespace OrbitPage.Controllers
                 
                 if (solrUser != null)
                 {
-                    var userInfo = new DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+                    IDynamoDb dynamoDbModel = new DynamoDb();
+                    var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                         DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                         googleUserDetails.email,
-                        null,
-                        accessKey,
-                        secretKey
-                        );
-
-
+                        null);
+                    
                     if (userInfo == null)
                     {
                         response.Message = "User not found";
@@ -298,8 +289,9 @@ namespace OrbitPage.Controllers
                                 userInfo.GoogleApiCheckLastSyncedDateTime = DateTimeUtil.GetUtcTime();
 
                             }
-                            new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
+                            dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+                            
                             var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
@@ -357,25 +349,27 @@ namespace OrbitPage.Controllers
                     
                     try
                     {
-                        new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                            DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                            user.email,
-                            user.username,
-                            null,
-                            null,
-                            null,
-                            null,
-                            user,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            false,
-                            accessKey,
-                            secretKey
-                            );
+                        IDynamoDb dynamoDbModel = new DynamoDb();
+                        dynamoDbModel.UpsertOrbitPageUser(user,null);
+                        //new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                        //    DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
+                        //    user.email,
+                        //    user.username,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    user,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    null,
+                        //    false,
+                        //    accessKey,
+                        //    secretKey
+                        //    );
 
                         //new SolrService().InsertNewUserToSolr(user, false);
                         
@@ -749,12 +743,11 @@ namespace OrbitPage.Controllers
                     FacebookAuthData.facebookId = Convert.ToString(result.id);
                     FacebookAuthData.facebookUsername = result.id;
 
-                    OrbitPageCompanyUserWorkgraphyTable userInfo = new DynamoDbService().GetOrbitPageCompanyUserWorkgraphyTable(
+                    IDynamoDb dynamoDbModel = new DynamoDb();
+                    var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                         DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                         email,
-                        null,
-                        accessKey,
-                        secretKey
+                        null
                         );
 
                     //var ifAlreadyExists = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
@@ -780,9 +773,9 @@ namespace OrbitPage.Controllers
                         userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
                         userInfo.FacebookAuthToken = access_token;
                         userInfo.FacebookId = FacebookAuthData.facebookId;
-                        new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo, accessKey, secretKey);
 
-
+                        dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
+                        
                         var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
                         TokenManager.CreateSession(session);
                         response.Payload.UTMZT = session.SessionId;
@@ -819,26 +812,9 @@ namespace OrbitPage.Controllers
 
 
                 try
-                {
-                    new DynamoDbService().CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                        user.email,
-                        user.username,
-                        user.facebookId,
-                        access_token,
-                        null,
-                        null,
-                        user,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        false,
-                        accessKey,
-                        secretKey
-                        );
+                {                    
+                    dynamoDbModel.UpsertOrbitPageUser(user, access_token);
+                    
 
                     //new SolrService().InsertNewUserToSolr(user, false);
                     ISolrUser solrUserModel = new SolrUser();
