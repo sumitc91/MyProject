@@ -168,7 +168,7 @@ namespace urNotice.Services.Solr.SolrCompany
                         "squarelogourl"}
                 });
             }
-            throw new NotImplementedException();
+            return solrQueryExecute;
         }
 
         private String CompanyCompetitorQueryBuilder(String size, String rating, String speciality)
