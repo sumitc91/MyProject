@@ -10,6 +10,7 @@ using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
 
@@ -84,6 +85,10 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
             userData.imageUrl = userInfo.imageUrl;
             userData.VertexId = userInfo.vertexId;
 
+            var session = new urNoticeSession(userInfo.email, userInfo.vertexId);
+            TokenManager.CreateSession(session);
+
+            userData.UTMZT = session.SessionId;
             userData.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             userData.Code = "200";
 

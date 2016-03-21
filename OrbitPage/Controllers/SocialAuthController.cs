@@ -752,6 +752,7 @@ namespace OrbitPage.Controllers
                     //var ifAlreadyExists = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
                     if (userInfo != null)
                     {
+
                         var data = new Dictionary<string, string>();
                         data["Username"] = userInfo.OrbitPageUser.email;
                         data["Password"] = userInfo.OrbitPageUser.password;
@@ -767,6 +768,8 @@ namespace OrbitPage.Controllers
                         response.Payload.VertexId = userInfo.OrbitPageUser.vertexId;
                         response.Status = 210;
                         response.Message = "user Login via facebook";
+                        response.Payload.FirstName = userInfo.OrbitPageUser.firstName;
+                        response.Payload.imageUrl = userInfo.OrbitPageUser.imageUrl;
 
                         userInfo.OrbitPageUser.keepMeSignedIn = "true";//keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
                         userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
@@ -782,6 +785,8 @@ namespace OrbitPage.Controllers
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;
                         ViewBag.vertexid = response.Payload.VertexId;
+                        ViewBag.userName = response.Payload.FirstName;
+                        ViewBag.userImageUrl = response.Payload.imageUrl;
                         ViewBag.isNewUser = "false";
                         return View();
 
@@ -839,6 +844,9 @@ namespace OrbitPage.Controllers
                     response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     response.Payload.Code = "210";
                     response.Payload.VertexId = user.vertexId;
+                    response.Payload.FirstName = user.firstName;
+                    response.Payload.imageUrl = user.imageUrl;
+
                     response.Status = 210;
                     response.Message = "user Login via google";
                     try
@@ -851,6 +859,8 @@ namespace OrbitPage.Controllers
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;
                         ViewBag.vertexid = response.Payload.VertexId;
+                        ViewBag.userName = response.Payload.FirstName;
+                        ViewBag.userImageUrl = response.Payload.imageUrl;
                         ViewBag.isNewUser = "true";
 
                         return View();
