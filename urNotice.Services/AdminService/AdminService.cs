@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrCompany;
 using urNotice.Services.Solr.SolrDesignation;
@@ -18,9 +19,9 @@ namespace urNotice.Services.AdminService
 
         public bool CreateNewDesignation(string designationName, string createdBy, string accessKey, string secretKey)
         {
-
-            var response = new TitanService.TitanService().InsertNewDesignationToTitan(createdBy, designationName, false, accessKey, secretKey);
-
+            IGraphDbContract graphDbContract = new GraphDbContract();
+            var response = graphDbContract.InsertNewDesignationInGraphDb(createdBy, designationName);
+            
             IDynamoDb dynamoDbModel = new DynamoDb();
             dynamoDbModel.UpsertOrbitPageDesignation(designationName, response[TitanGraphConstants.Id]);
             
@@ -32,8 +33,9 @@ namespace urNotice.Services.AdminService
 
         public bool CreateNewCompany(OrbitPageCompany company, string createdBy, string accessKey, string secretKey)
         {
+            IGraphDbContract graphDbContract = new GraphDbContract();
 
-            var response = new TitanService.TitanService().InsertNewCompanyToTitan(createdBy, company.CompanyName, false, accessKey, secretKey);
+            var response = graphDbContract.InsertNewCompanyInGraphDb(createdBy,company.CompanyName);
 
             IDynamoDb dynamoDbModel = new DynamoDb();
             dynamoDbModel.UpsertOrbitPageCompany(company, response[TitanGraphConstants.Id]);

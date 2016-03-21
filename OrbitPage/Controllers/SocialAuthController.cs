@@ -27,6 +27,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SessionService;
 using urNotice.Services.SocialAuthService;
@@ -34,7 +35,6 @@ using urNotice.Services.SocialAuthService.Facebook;
 using urNotice.Services.SocialAuthService.google;
 using urNotice.Services.SocialAuthService.linkedin;
 using urNotice.Services.Solr.SolrUser;
-using urNotice.Services.TitanService;
 
 namespace OrbitPage.Controllers
 {
@@ -341,10 +341,10 @@ namespace OrbitPage.Controllers
                         priviledgeLevel = (short)PriviledgeLevel.None,
                         keepMeSignedIn = CommonConstants.TRUE                        
                     };
-                    
 
 
-                    var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
+                    IGraphDbContract graphDbContract = new GraphDbContract();
+                    var userVertexIdInfo = graphDbContract.InsertNewUserInGraphDb(user);
                     user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
                     
                     try
@@ -807,7 +807,9 @@ namespace OrbitPage.Controllers
                     keepMeSignedIn = CommonConstants.TRUE
                 };
 
-                var userVertexIdInfo = new TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
+                IGraphDbContract graphDbContract = new GraphDbContract();
+                var userVertexIdInfo = graphDbContract.InsertNewUserInGraphDb(user);
+                
                 user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
 
 

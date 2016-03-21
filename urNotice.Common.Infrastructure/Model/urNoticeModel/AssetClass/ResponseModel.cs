@@ -4,6 +4,7 @@
     {
         public int Status;
         public string Message;
+        public bool AbortProcess;
         public T Payload;
     }
 }

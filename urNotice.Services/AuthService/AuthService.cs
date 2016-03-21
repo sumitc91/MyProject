@@ -17,7 +17,9 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Person.PersonContract.RegistrationOperation;
 using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.AuthService
@@ -32,103 +34,15 @@ namespace urNotice.Services.AuthService
 
         public ResponseModel<string> UserRegistration(RegisterationRequest req, HttpRequestBase request,string accessKey, string secretKey)
         {
-            var response = new ResponseModel<String>();
-            if (req.EmailId == null)
-            {
-                response.Status = 404;
-                response.Message = "EmailId cann't be null";
-                Logger.Info("EmailId cann't be null");
-                return response;
-            }
-
-            if (req.Username == null)
-            {
-                response.Status = 404;
-                response.Message = "Username cann't be null";
-                Logger.Info("Username cann't be null");
-                return response;
-            }
-
-            req.EmailId = req.EmailId.ToLower();
-            req.Username = req.Username.ToLower();
-            req.FirstName = FirstCharToUpper(req.FirstName);
-            req.LastName = FirstCharToUpper(req.LastName);
-
             ISolrUser solrUserModel = new SolrUser();
-            var solrUserEmail = solrUserModel.GetPersonData(req.EmailId, req.Username, null, null,false);//new SolrService.SolrService().GetSolrUserData(req.EmailId,req.Username,null,null);
-            
-            if (solrUserEmail != null)
-            {
-                response.Status = RegistrationConstants.USERNAME_ALREADY_TAKEN_CODE;
-                response.Message = RegistrationConstants.USERNAME_ALREADY_TAKEN_MSG;
-                Logger.Info("Username/Email Already Taken");
-                return response;
-            }
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            IGraphDbContract graphDbContractModel = new GraphDbContract();
 
-            var guid = Guid.NewGuid().ToString();
-            string imgurl;
-            if (req.Gender.Equals("m") || req.Gender.Equals("M") || req.Gender.ToLower().Equals("male"))
-            {
-                imgurl = CommonConstants.MaleProfessionalAvatar;
-                req.Gender = CommonConstants.male;
-            }
-            else
-            {
-                imgurl = CommonConstants.FemaleProfessionalAvatar;
-                req.Gender = CommonConstants.female;
-            }
-                
-
-            var user = new OrbitPageUser
-            {
-                username = req.Username,
-                email = req.EmailId,
-                password = EncryptionClass.Md5Hash(req.Password),
-                source = req.Source,
-                isActive = CommonConstants.FALSE,
-                guid = guid,
-                fixedGuid = guid,
-                firstName = req.FirstName,
-                lastName = req.LastName,
-                gender = req.Gender.ToLower(),
-                imageUrl = imgurl,                
-                priviledgeLevel = (short) PriviledgeLevel.None,
-                validateUserKeyGuid = guid,
-                userCoverPic = CommonConstants.CompanySquareLogoNotAvailableImage
-            };
-            //_db.Users.Add(user);
-
-            if (!CommonConstants.NA.Equals(req.Referral))
-            {
-                //new ReferralService().payReferralBonusAsync(req.Referral, req.Username, Constants.status_false);
-            }
-            
-            
-            var userVertexIdInfo = new TitanService.TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
-            user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
-            try
-            {
-               // _db.SaveChanges();
-                IDynamoDb dynamoDbModel = new DynamoDb();
-                dynamoDbModel.UpsertOrbitPageUser(user,null);                
-                solrUserModel.InsertNewUser(user,false);
-
-                //new TitanService.TitanService().InsertNewUserToTitan(user, false);
-
-                SendAccountCreationValidationEmail.SendAccountCreationValidationEmailMessage(req, guid, request);
-                SignalRController.BroadCastNewUserRegistration();
-            }
-            catch (DbEntityValidationException e)
-            {
-                DbContextException.LogDbContextException(e);
-                response.Status = CommonConstants.SERVER_ERROR_CODE;
-                response.Message = CommonConstants.SERVER_ERROR_MSG;
-                return response;
-            }
-
-            response.Status = CommonConstants.SUCCESS_CODE;
-            response.Message = CommonConstants.SUCCESS_MSG;
-            response.Payload = RegistrationConstants.ACCOUNT_CREATED_MSG;
+            IOrbitPageRegistration orbitPageRegistration = new OrbitPagePersonRegistration(solrUserModel,dynamoDbModel,graphDbContractModel);
+            orbitPageRegistration.SetIsValidationEmailRequired(true); //email validation is required.
+            var response = orbitPageRegistration.RegisterUser(req,request);
+            //SendAccountCreationValidationEmail.SendAccountCreationValidationEmailMessage(req, guid, request);
+            SignalRController.BroadCastNewUserRegistration();
 
             return response;
         }

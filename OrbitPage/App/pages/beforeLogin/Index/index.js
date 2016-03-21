@@ -71,7 +71,7 @@ define([appLocation.preLogin], function (app) {
 
         function getSolrServiceCompetitors() {
 
-            SolrServiceUtil.get({ size: '10001', rating: '0', speciality: 'Management Consulting,Systems Integration and Technology,Business Process Outsourcing,Application and Infrastructure Outsourcing' }, function (data) {
+            SolrServiceUtil.get({ size: '10001', rating: '0', speciality: 'Technology (IT,Telecom,Dot Com Etc)' }, function (data) {
 
                 if (data.Status == 200) {
                     

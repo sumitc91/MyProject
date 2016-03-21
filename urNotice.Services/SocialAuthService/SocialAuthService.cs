@@ -19,6 +19,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
 
@@ -181,7 +182,9 @@ namespace urNotice.Services.SocialAuthService
                         keepMeSignedIn = CommonConstants.TRUE
                     };
 
-                    var userVertexIdInfo = new TitanService.TitanService().InsertNewUserToTitan(user, false,accessKey,secretKey);
+                    IGraphDbContract graphDbContract = new GraphDbContract();
+                    var userVertexIdInfo = graphDbContract.InsertNewUserInGraphDb(user);
+                    
                     user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
 
                     if (!CommonConstants.NA.Equals(refKey))

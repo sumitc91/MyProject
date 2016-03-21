@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using urNotice.Services.AdminService;
-using urNotice.Services.TitanService;
 
 namespace ConsoleApplication1.Service
 {

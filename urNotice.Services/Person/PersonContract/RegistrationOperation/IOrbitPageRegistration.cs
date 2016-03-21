@@ -11,6 +11,7 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
 {
     public interface IOrbitPageRegistration
     {
-        ResponseModel<string> UserRegistration(RegisterationRequest req, HttpRequestBase request);
+        ResponseModel<string> RegisterUser(RegisterationRequest req, HttpRequestBase request);
+        void SetIsValidationEmailRequired(bool res);
     }
 }

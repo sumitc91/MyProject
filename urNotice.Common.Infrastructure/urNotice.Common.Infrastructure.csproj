@@ -148,6 +148,7 @@
     <Compile Include="Common\Constants\GoogleApiConstants.cs" />
     <Compile Include="Common\Constants\GuidsPredefined.cs" />
     <Compile Include="Common\Constants\LinkedInParseConstants.cs" />
+    <Compile Include="Common\Constants\OrbitPageResponseModel.cs" />
     <Compile Include="Common\Constants\PriviledgeLevel.cs" />
     <Compile Include="Common\Constants\RegistrationConstants.cs" />
     <Compile Include="Common\Constants\ServerConfig.cs" />
