@@ -11,17 +11,16 @@ using System.Reflection;
 using System.Web;
 using Amazon.S3;
 using Amazon.S3.Model;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Services.ErrorLogger;
 
 namespace OrbitPage.Services.UploadImageService
 {
     public class S3ImageUploadServices
     {
 
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();        
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
         private static readonly string _awsAccessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
         private static readonly string _awsSecretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
         private static readonly string _bucketName = ConfigurationManager.AppSettings["Bucketname"];

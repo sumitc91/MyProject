@@ -13,8 +13,7 @@ namespace urNotice.Common.Infrastructure.Session
 {
     public class TokenManager
     {
-        
-        private DbContextException _dbContextException = new DbContextException();
+                
         //private urnoticeAuthEntities _db = null;
 
         public static void CreateSession(urNoticeSession session)

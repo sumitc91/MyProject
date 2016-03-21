@@ -1,26 +1,27 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Web;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants.EmailConstants;
+using urNotice.Common.Infrastructure.commonMethods;
 
-namespace urNotice.Common.Infrastructure.commonMethods.Emails
+namespace urNotice.Services.Email.EmailTemplate
 {
     public class ForgetPasswordValidationEmail
     {
         public void SendForgetPasswordValidationEmailMessage(String toMail, String guid, HttpRequestBase request, string id)
-        {
-            var sendEmail = new SendEmail();
+        {            
             if (request.Url != null)
             {
-                sendEmail.SendEmailMessage(toMail,
+                IEmail emailModel = new EmailFromMandrill.EmailFromMandrill();
+                emailModel.SendEmail(toMail,
                     SmtpForgetPasswordContants.SenderName,
                     SmtpForgetPasswordContants.EmailTitle,
                     ForgetPasswordEmailBodyContent(request.Url.Authority, toMail, guid),
                     null,
                     null,
                     SmtpForgetPasswordContants.SenderName,
-                    ConfigurationManager.AppSettings["SmtpEmailFromDoNotReply"]
+                    SmtpConfig.SmtpEmailFromDoNotReply
                     );
             }
         }

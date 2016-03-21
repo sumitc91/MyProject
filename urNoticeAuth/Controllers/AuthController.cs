@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using urNotice.Common.Infrastructure.Common.Constants;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
@@ -19,6 +18,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.AdminService;
 using urNotice.Services.AuthService;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.ImageService;
 using urNoticeAuth.App_Start;
 

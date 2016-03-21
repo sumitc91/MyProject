@@ -128,16 +128,12 @@
     <Compile Include="Adapter\Facebook\FacebookAuthAdapter.cs" />
     <Compile Include="commonMethods\CsvReader.cs" />
     <Compile Include="commonMethods\DateTimeUtil.cs" />
-    <Compile Include="commonMethods\dbContextException.cs" />
-    <Compile Include="commonMethods\Emails\forgetPasswordValidationEmail.cs" />
-    <Compile Include="commonMethods\Emails\SendContactUsEmail.cs" />
-    <Compile Include="commonMethods\Emails\SendExceptionEmail.cs" />
     <Compile Include="commonMethods\MyWebRequest.cs" />
-    <Compile Include="commonMethods\Emails\sendAccountCreationValidationEmail.cs" />
-    <Compile Include="commonMethods\sendEmail.cs" />
     <Compile Include="commonMethods\OrbitPageUtil.cs" />
     <Compile Include="commonMethods\UserNotificationText.cs" />
     <Compile Include="Common\Config\AwsConfig.cs" />
+    <Compile Include="Common\Config\GaConfig.cs" />
+    <Compile Include="Common\Config\OrbitPageConfig.cs" />
     <Compile Include="Common\Config\SmtpConfig.cs" />
     <Compile Include="Common\Config\TitanGraphConfig.cs" />
     <Compile Include="Common\Constants\CommonConstants.cs" />
@@ -160,8 +156,6 @@
     <Compile Include="Common\Enum\OrbitPageEnum.cs" />
     <Compile Include="Common\Enum\VertexLabelEnum.cs" />
     <Compile Include="Common\Enum\VertexPropertyEnum.cs" />
-    <Compile Include="Common\Logger\ILogger.cs" />
-    <Compile Include="Common\Logger\Logger.cs" />
     <Compile Include="Encryption\AES.cs" />
     <Compile Include="Encryption\Encryption.cs" />
     <Compile Include="Model\GraphDb\IGraphDb.cs" />

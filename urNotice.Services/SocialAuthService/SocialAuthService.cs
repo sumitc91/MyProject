@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Facebook;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
@@ -19,6 +18,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
@@ -27,8 +27,7 @@ namespace urNotice.Services.SocialAuthService
 {
     public class SocialAuthService
     {
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
         //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
         //private oAuthLinkedIn _oauth = new oAuthLinkedIn();
 
@@ -81,9 +80,9 @@ namespace urNotice.Services.SocialAuthService
                             return response;
 
                         }
-                        catch (DbEntityValidationException e)
+                        catch (Exception e)
                         {
-                            DbContextException.LogDbContextException(e);
+                            //DbContextException.LogDbContextException(e);
                             response.Payload.Code = "500";
 
                             return response;
@@ -150,9 +149,9 @@ namespace urNotice.Services.SocialAuthService
                             return response;
 
                         }
-                        catch (DbEntityValidationException e)
+                        catch (Exception e)
                         {
-                            DbContextException.LogDbContextException(e);
+                            //DbContextException.LogDbContextException(e);
                             response.Payload.Code = "500";
 
                             return response;
@@ -233,9 +232,9 @@ namespace urNotice.Services.SocialAuthService
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                         }
-                        catch (DbEntityValidationException e)
+                        catch (Exception e)
                         {
-                            DbContextException.LogDbContextException(e);
+                            //DbContextException.LogDbContextException(e);
                             response.Status = 500;
                             response.Message = "Internal Server Error !!";
                         }
@@ -247,9 +246,9 @@ namespace urNotice.Services.SocialAuthService
 
 
                     }
-                    catch (DbEntityValidationException e)
+                    catch (Exception e)
                     {
-                        DbContextException.LogDbContextException(e);
+                        //DbContextException.LogDbContextException(e);
                         response.Status = 500;
                         response.Message = "Internal Server Error !!!";
                     }

@@ -41,6 +41,14 @@
     <Reference Include="Facebook">
       <HintPath>..\urNotice\dll\Facebook.dll</HintPath>
     </Reference>
+    <Reference Include="GaDotNet.Common, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\urNotice.Common.Infrastructure\dll\GaDotNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\urNotice.Common.Infrastructure\dll\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -98,6 +106,13 @@
     <Compile Include="AdminService\AdminService.cs" />
     <Compile Include="AuthService\AuthService.cs" />
     <Compile Include="AuthService\IAuthService.cs" />
+    <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />
+    <Compile Include="Email\EmailFromMandrill\EmailFromMandrill.cs" />
+    <Compile Include="Email\EmailTemplate\ForgetPasswordValidationEmail.cs" />
+    <Compile Include="Email\EmailTemplate\SendAccountCreationValidationEmail.cs" />
+    <Compile Include="Email\EmailTemplate\SendContactUsEmail.cs" />
+    <Compile Include="Email\EmailTemplate\SendExceptionEmail.cs" />
+    <Compile Include="Email\IEmail.cs" />
     <Compile Include="GraphDb\GraphDbContract\GraphDbContract.cs" />
     <Compile Include="GraphDb\GraphDbContract\IGraphDbContract.cs" />
     <Compile Include="GraphDb\GraphEdgeDb.cs" />
@@ -105,9 +120,13 @@
     <Compile Include="GraphDb\IGraphEdgeDb.cs" />
     <Compile Include="GraphDb\IGraphVertexDb.cs" />
     <Compile Include="ImageService\S3ImageUploadServices.cs" />
+    <Compile Include="ErrorLogger\ILogger.cs" />
+    <Compile Include="ErrorLogger\Logger.cs" />
     <Compile Include="NoSqlDb\DynamoDb\DynamoDb.cs" />
     <Compile Include="NoSqlDb\DynamoDb\IDynamoDb.cs" />
     <Compile Include="Person\Consumer.cs" />
+    <Compile Include="Person\PersonContract\LoginOperation\IOrbitPageLogin.cs" />
+    <Compile Include="Person\PersonContract\LoginOperation\OrbitPageLogin.cs" />
     <Compile Include="Person\PersonContract\RegistrationOperation\IOrbitPageRegistration.cs" />
     <Compile Include="Person\PersonContract\RegistrationOperation\OrbitPagePersonRegistration.cs" />
     <Compile Include="Person\PersonContract\RegistrationOperation\OrbitPagePersonRegistrationTemplate.cs" />

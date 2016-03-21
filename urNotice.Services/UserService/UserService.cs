@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb;
 using urNotice.Services.NoSqlDb.DynamoDb;
 
@@ -22,8 +22,7 @@ namespace urNotice.Services.UserService
 {
     public class UserService
     {
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
         //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
 
         public ResponseModel<ClientDetailsModel> GetClientDetails(string username,string accessKey,string secretKey)

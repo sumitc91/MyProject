@@ -71,8 +71,6 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\urNotice.Services.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\urNoticeUser\bin\log4net.dll
-C:\code\svn\OrbitPage\urNoticeUser\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\AWSSDK.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\SolrNet.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\RestSharp.dll
@@ -104,3 +102,5 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.dll
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.pdb
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.csprojResolveAssemblyReference.cache
+C:\code\svn\OrbitPage\urNoticeUser\bin\log4net.dll
+C:\code\svn\OrbitPage\urNoticeUser\bin\GaDotNet.Common.dll

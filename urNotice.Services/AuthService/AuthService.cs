@@ -7,18 +7,21 @@ using System.Reflection;
 using System.Web;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.Email.EmailTemplate;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Person;
+using urNotice.Services.Person.PersonContract.LoginOperation;
 using urNotice.Services.Person.PersonContract.RegistrationOperation;
 using urNotice.Services.Solr.SolrUser;
 
@@ -34,75 +37,14 @@ namespace urNotice.Services.AuthService
 
         public ResponseModel<string> UserRegistration(RegisterationRequest req, HttpRequestBase request,string accessKey, string secretKey)
         {
-            ISolrUser solrUserModel = new SolrUser();
-            IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
-
-            IOrbitPageRegistration orbitPageRegistration = new OrbitPagePersonRegistration(solrUserModel,dynamoDbModel,graphDbContractModel);
-            orbitPageRegistration.SetIsValidationEmailRequired(true); //email validation is required.
-            var response = orbitPageRegistration.RegisterUser(req,request);
-            //SendAccountCreationValidationEmail.SendAccountCreationValidationEmailMessage(req, guid, request);
-            SignalRController.BroadCastNewUserRegistration();
-
-            return response;
+            IPerson person = new Consumer();
+            return person.RegisterMe(req,request);
         }
 
         public LoginResponse WebLogin(string userName, string password, string returnUrl, string keepMeSignedIn,string accessKey, string secretKey)
         {
-            var userData = new LoginResponse();
-            ISolrUser solrUserModel = new SolrUser();
-            var userSolrDetail = solrUserModel.GetPersonData(userName, null, null, null,false);//new SolrService.SolrService().GetSolrUserData(userName,null,null,null); //userName can be email,username,phone.
-
-            IDynamoDb dynamoDbModel = new DynamoDb();
-            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-                DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-                userSolrDetail.Email,
-                null
-                );
-
-            //var user = _db.Users.SingleOrDefault(x => x.email == userSolrDetail.Email && x.password == passwrod);
-
-            if (userInfo.OrbitPageUser != null && userInfo.OrbitPageUser.password == password)
-            {
-                //var user = _db.Users.SingleOrDefault(x => x.email == userSolrDetail.Email && x.isActive == "true");
-                if (userInfo.OrbitPageUser.isActive == CommonConstants.TRUE)
-                {
-                    var data = new Dictionary<string, string>();
-                    data["Username"] = userInfo.OrbitPageUser.email;
-                    data["Password"] = userInfo.OrbitPageUser.password;
-                    data["userGuid"] = userInfo.OrbitPageUser.guid;
-
-                    var encryptedData = EncryptionClass.encryptUserDetails(data);
-                    userData.UTMZK = encryptedData["UTMZK"];
-                    userData.UTMZV = encryptedData["UTMZV"];
-                    userData.FirstName = userInfo.OrbitPageUser.firstName;
-                    userData.LastName = userInfo.OrbitPageUser.lastName;
-                    userData.Username = userInfo.OrbitPageUser.username;
-                    userData.imageUrl = userInfo.OrbitPageUser.imageUrl;
-                    userData.VertexId = userInfo.OrbitPageUser.vertexId;
-
-                    userData.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-                    userData.Code = "200";
-                    try
-                    {
-                        userInfo.OrbitPageUser.keepMeSignedIn = keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
-                        
-                        dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
-                        
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        DbContextException.LogDbContextException(e);
-                        userData.Code = "500";
-                        return userData;
-                    }
-                }
-                else
-                    userData.Code = "403";
-            }
-            else
-                userData.Code = "401";
-            return userData;
+            IOrbitPageLogin loginModel = new OrbitPageLogin();
+            return loginModel.WebLogin(userName,password,returnUrl,keepMeSignedIn);
         }
 
         public ResponseModel<String> ValidateAccountService(ValidateAccountRequest req,string accessKey, string secretKey)
@@ -141,11 +83,11 @@ namespace urNotice.Services.AuthService
                     dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
 
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception ex)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //Todo:need to log exception.
                     response.Status = 500;
-                    response.Message = "Internal Server Error";
+                    response.Message = "Failed";
                     return response;
                 }
                 response.Status = 200;
@@ -188,9 +130,9 @@ namespace urNotice.Services.AuthService
 
                     SendAccountCreationValidationEmail.SendAccountValidationEmailMessage(req.userName, userInfo.OrbitPageUser.validateUserKeyGuid, request);
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //DbContextException.LogDbContextException(e);
                     response.Status = 500;
                     response.Message = "Internal Server Error !!!";
                     return response;
@@ -236,9 +178,9 @@ namespace urNotice.Services.AuthService
                     var forgetPasswordValidationEmail = new ForgetPasswordValidationEmail();
                     forgetPasswordValidationEmail.SendForgetPasswordValidationEmailMessage(id, userInfo.OrbitPageUser.forgetPasswordGuid, request, DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture));
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //DbContextException.LogDbContextException(e);
                     response.Status = 500;
                     response.Message = "Internal Server Error";
                     return response;
@@ -281,9 +223,9 @@ namespace urNotice.Services.AuthService
                 {                    
                     dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);                   
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //DbContextException.LogDbContextException(e);
                     response.Status = 500;
                     response.Message = "Internal Server Error.";
                     Logger.Info("Save new Reseted Password : " + req.Username);
@@ -334,9 +276,9 @@ namespace urNotice.Services.AuthService
 
                 //SendAccountCreationValidationEmail.SendContactUsEmailMessage(req.SendMeACopy.Equals(Constants.status_true,StringComparison.CurrentCultureIgnoreCase) ? ConfigurationManager.AppSettings["ContactUsReceivingEmailIds"].ToString(CultureInfo.InvariantCulture)+","+req.Email : ConfigurationManager.AppSettings["ContactUsReceivingEmailIds"].ToString(CultureInfo.InvariantCulture), req);
             }
-            catch (DbEntityValidationException e)
+            catch (Exception e)
             {
-                DbContextException.LogDbContextException(e);
+                //DbContextException.LogDbContextException(e);
                 response.Status = 500;
                 response.Message = "Internal Server Error.";
                 Logger.Info("Error occured in contact us");

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace urNotice.Common.Infrastructure.Common.Logger
+namespace urNotice.Services.ErrorLogger
 {
     public interface ILogger
     {

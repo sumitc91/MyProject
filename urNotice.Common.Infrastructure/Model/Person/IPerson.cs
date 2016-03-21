@@ -12,7 +12,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
 {
     public interface IPerson
     {
-        string RegisterMe(RegisterationRequest req, HttpRequestBase request);
+        ResponseModel<string> RegisterMe(RegisterationRequest req, HttpRequestBase request);
         ResponseModel<LoginResponse> Login(string userName, string password);
     }
 }

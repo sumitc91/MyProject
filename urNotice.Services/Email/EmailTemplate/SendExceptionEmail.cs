@@ -1,33 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+using System.Globalization;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants.EmailConstants;
-using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.commonMethods;
+using urNotice.Services.ErrorLogger;
 
-namespace urNotice.Common.Infrastructure.commonMethods.Emails
+namespace urNotice.Services.Email.EmailTemplate
 {
-    public class SendContactUsEmail
+    public class SendExceptionEmail
     {
-        public static void SendContactUsEmailMessage(String toMail, ContactUsRequest req)
-        {
-            var sendEmail = new SendEmail();
+        private ILogger _logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
+        public delegate void exceptionEmailSend_Delegate(String toEmailAddrList, String senderName, String subject, String body, String attachmentsFilePathList, String logoPath, String companyDescription, String sendEmailFrom);
 
-            sendEmail.SendEmailMessage(toMail,
-               SmtpContactUsEmailContants.SenderName,
-                SmtpContactUsEmailContants.EmailTitle,
-                ContactUsEmailBodyContent(req),
-                null,
-                null,
-                SmtpContactUsEmailContants.SenderName,
-                ConfigurationManager.AppSettings["SmtpEmailFrom"]
-                );
 
+        public static void SendExceptionEmailMessage(String toMail, String exceptionMessage)
+        {            
+            IEmail emailModel = new EmailFromGmail.EmailFromGmail();
+            //exceptionEmailSend_Delegate exceptionEmail_delegate = null;
+            //exceptionEmail_delegate = new exceptionEmailSend_Delegate(emailModel.SendEmail);
+            //IAsyncResult CallAsynchMethod = null;
+            String emailFrom = SmtpConfig.GmailSmtpEmailFromDoNotReply;
+            //CallAsynchMethod = exceptionEmail_delegate.BeginInvoke(toMail, SmtpSendExceptionEmailContants.SenderName, SmtpSendExceptionEmailContants.EmailTitle, ExceptionEmailBodyContent(exceptionMessage), null, null, SmtpSendExceptionEmailContants.SenderName,emailFrom, null, null); //invoking the method
+            emailModel.SendEmail(toMail, SmtpSendExceptionEmailContants.SenderName, SmtpSendExceptionEmailContants.EmailTitle, ExceptionEmailBodyContent(exceptionMessage), null, null, SmtpSendExceptionEmailContants.SenderName, emailFrom);
         }
 
-        private static string ContactUsEmailBodyContent(ContactUsRequest req)
+        private static string ExceptionEmailBodyContent(String exceptionMessage)
         {
             var htmlBody = new StringBuilder();
 
@@ -55,13 +54,10 @@ namespace urNotice.Common.Infrastructure.commonMethods.Emails
             htmlBody.Append("<td style=\"color:#333333 !important; font-size:20px; font-family: Arial, Verdana, sans-serif; padding-left:10px;\" height=\"40\">");
             htmlBody.Append("<h3 style=\"font-weight:normal; margin: 20px 0;\">Contact Us</h3>");
             htmlBody.Append("<p style=\"font-size:12px; line-height:18px;\">");
-            htmlBody.Append("User Message. <br /><br />");
-            htmlBody.Append("Name : " + req.Name + "<br /><br />");
-            htmlBody.Append("Email : " + req.Email + "<br /><br />");
-            htmlBody.Append("Phone : " + req.Phone + "<br /><br />");
-            htmlBody.Append("Type : " + req.Type + "<br /><br />");
-            htmlBody.Append("Message : " + req.Message + "<br /><br />");
-            htmlBody.Append("SendMeACopy : " + req.SendMeACopy + "<br /><br />");
+            htmlBody.Append("Exception occured. <br /><br />");
+            htmlBody.Append("Date :" + DateTime.Now.ToLongDateString() + "<br /><br />");
+            htmlBody.Append("time : " + DateTime.Now.ToLongTimeString() + "<br /><br />");
+            htmlBody.Append("Exception : " + exceptionMessage + "<br /><br />");
             htmlBody.Append("</p>");
 
             htmlBody.Append("</td>");

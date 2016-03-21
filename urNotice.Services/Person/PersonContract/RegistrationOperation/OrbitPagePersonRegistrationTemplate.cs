@@ -29,7 +29,7 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
             this._solrUserModel = solrUserModel;            
             this._dynamoDbModel = dynamoDbModel;
             this._graphDbContractModel = graphDbContractModel;
-            IsValidationEmailRequired = false;
+            this.IsValidationEmailRequired = false;
         }
 
         public ResponseModel<string> RegisterUser(RegisterationRequest req, HttpRequestBase request)

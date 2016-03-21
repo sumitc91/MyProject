@@ -11,9 +11,9 @@ using System.Web;
 using Amazon.S3;
 using Amazon.S3.Model;
 using urNotice.Common.Infrastructure.Common.Config;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Services.ErrorLogger;
 
 namespace urNotice.Services.ImageService
 {

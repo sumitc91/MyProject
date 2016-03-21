@@ -38,8 +38,6 @@ C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\System.Web.Http.WebHost.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\EntityFramework.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
-C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\log4net.dll
-C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\SolrNet.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\urNotice.DAO\bin\Debug\urNotice.Common.Infrastructure.pdb

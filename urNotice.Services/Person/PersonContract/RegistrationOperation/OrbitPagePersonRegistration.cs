@@ -10,11 +10,13 @@ using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Constants.EmailConstants;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Services.Email;
+using urNotice.Services.Email.EmailFromGmail;
+using urNotice.Services.Email.EmailFromMandrill;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Solr.SolrUser;
@@ -138,11 +140,12 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
         }
 
         protected override ResponseModel<string> SendAccountVerificationEmail(OrbitPageUser user, HttpRequestBase request)
-        {
-            var sendEmail = new SendEmail();
-            if (request.Url != null)
+        {            
+            if (request != null && request.Url != null)
             {
-                sendEmail.SendEmailMessage(user.email,
+                //IEmail emailModel = new EmailFromGmail();
+                IEmail emailModel = new EmailFromMandrill();
+                emailModel.SendEmail(user.email,
                     SmptCreateAccountConstants.SenderName,
                     SmptCreateAccountConstants.EmailTitle,
                     CreateAccountEmailBodyContent(request.Url.Authority, user),
@@ -151,7 +154,6 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
                     SmptCreateAccountConstants.SenderName,
                     SmtpConfig.SmtpEmailFromDoNotReply
                     );
-
             }
             return OrbitPageResponseModel.SetOk("email sent successfully.");
         }

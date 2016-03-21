@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Web;
-using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants.EmailConstants;
-using urNotice.Common.Infrastructure.Common.Logger;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Services.ErrorLogger;
 
-namespace urNotice.Common.Infrastructure.commonMethods.Emails
+namespace urNotice.Services.Email.EmailTemplate
 {
     public class SendAccountCreationValidationEmail
     {
@@ -24,34 +23,35 @@ namespace urNotice.Common.Infrastructure.commonMethods.Emails
 
         public static void SendAccountCreationValidationEmailMessage(RegisterationRequest req, String guid, HttpRequestBase request)
         {
-            var sendEmail = new SendEmail();
+            
             if (request.Url != null)
             {
-                sendEmail.SendEmailMessage(req.EmailId,
+                IEmail emailModel = new EmailFromMandrill.EmailFromMandrill();
+                emailModel.SendEmail(req.EmailId,
                     SmptCreateAccountConstants.SenderName,
                     SmptCreateAccountConstants.EmailTitle,
                     CreateAccountEmailBodyContent(request.Url.Authority, req, guid),
                     null,
                     null,
                     SmptCreateAccountConstants.SenderName,
-                    ConfigurationManager.AppSettings["SmtpEmailFromDoNotReply"]
+                    SmtpConfig.SmtpEmailFromDoNotReply
                     );
             }
         }
 
         public static void SendAccountValidationEmailMessage(String toMail, String guid, HttpRequestBase request)
-        {
-            var sendEmail = new SendEmail();
+        {            
             if (request.Url != null)
             {
-                sendEmail.SendEmailMessage(toMail,
+                IEmail emailModel = new EmailFromMandrill.EmailFromMandrill();
+                emailModel.SendEmail(toMail,
                     SmptCreateAccountConstants.SenderName,
                     SmptCreateAccountConstants.EmailTitle,
                     ValidateAccountEmailBodyContent(request.Url.Authority, toMail, guid),
                     null,
                     null,
-                    SmptCreateAccountConstants.SenderName, 
-                    ConfigurationManager.AppSettings["SmtpEmailFromDoNotReply"]
+                    SmptCreateAccountConstants.SenderName,
+                    SmtpConfig.SmtpEmailFromDoNotReply
                     );
             }
         }

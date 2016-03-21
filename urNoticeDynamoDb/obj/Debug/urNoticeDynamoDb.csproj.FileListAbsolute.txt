@@ -59,8 +59,6 @@ C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.WebPages.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\log4net.dll
-C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\SolrNet.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\Microsoft.Practices.ServiceLocation.dll
 C:\code\svn\OrbitPage\urNoticeDynamoDb\bin\urNotice.Common.Infrastructure.pdb

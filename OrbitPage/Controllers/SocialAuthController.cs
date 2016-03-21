@@ -16,9 +16,7 @@ using Newtonsoft.Json;
 using SolrNet.Impl;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.commonMethods.Emails;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
@@ -27,6 +25,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SessionService;
@@ -42,8 +41,7 @@ namespace OrbitPage.Controllers
     {
         //
         // GET: /SocialAuth/
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
         //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
         //private readonly urnoticeAnalyticsEntities _dbAnalytics = new urnoticeAnalyticsEntities();
 
@@ -76,9 +74,9 @@ namespace OrbitPage.Controllers
             {
                 response = new SocialAuthService().CheckAndSaveFacebookUserInfoIntoDatabase(fid, CommonConstants.NA, access_token, true,accessKey,secretKey);
             }
-            catch (DbEntityValidationException e)
+            catch (Exception ex)
             {
-                DbContextException.LogDbContextException(e);
+                //Todo:need to log exception.
                 response.Status = 500;
                 response.Message = "Failed";
             }
@@ -110,9 +108,9 @@ namespace OrbitPage.Controllers
                         response.Status = 209;
                         response.Message = "success-";
                     }
-                    catch (DbEntityValidationException e)
+                    catch (Exception ex)
                     {
-                        DbContextException.LogDbContextException(e);
+                        //Todo:need to log exception.
                         response.Status = 500;
                         response.Message = "Failed";
                     }
@@ -185,9 +183,9 @@ namespace OrbitPage.Controllers
                         response.Status = 200;
                         response.Message = "success-";
                     }
-                    catch (DbEntityValidationException e)
+                    catch (Exception ex)
                     {
-                        DbContextException.LogDbContextException(e);
+                        //Todo:need to log exception.
                         response.Status = 500;
                         response.Message = "Failed";
                     }
@@ -305,10 +303,11 @@ namespace OrbitPage.Controllers
                             return View();
 
                         }
-                        catch (DbEntityValidationException e)
+                        catch (Exception ex)
                         {
-                            DbContextException.LogDbContextException(e);
-                            response.Payload.Code = "500";                            
+                            //Todo:need to log exception.
+                            response.Status = 500;
+                            response.Message = "Failed";
                         }
                     }
 
@@ -422,19 +421,19 @@ namespace OrbitPage.Controllers
 
                             return View();
                         }
-                        catch (DbEntityValidationException e)
+                        catch (Exception ex)
                         {
-                            DbContextException.LogDbContextException(e);
+                            //Todo:need to log exception.
                             response.Status = 500;
-                            response.Message = "Internal Server Error !!";
+                            response.Message = "Failed";
                         }
 
                     }
-                    catch (DbEntityValidationException e)
+                    catch (Exception ex)
                     {
-                        DbContextException.LogDbContextException(e);
+                        //Todo:need to log exception.
                         response.Status = 500;
-                        response.Message = "Internal Server Error !!!";
+                        response.Message = "Failed";
                     }
                 }
             }
@@ -856,19 +855,19 @@ namespace OrbitPage.Controllers
 
                         return View();
                     }
-                    catch (DbEntityValidationException e)
+                    catch (Exception ex)
                     {
-                        DbContextException.LogDbContextException(e);
+                        //Todo:need to log exception.
                         response.Status = 500;
-                        response.Message = "Internal Server Error !!";
+                        response.Message = "Failed";
                     }
 
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception ex)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //Todo:need to log exception.
                     response.Status = 500;
-                    response.Message = "Internal Server Error !!!";
+                    response.Message = "Failed";
                 }
             }
             return View();

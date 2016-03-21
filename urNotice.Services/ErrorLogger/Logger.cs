@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Configuration;
 using System.Globalization;
 using GaDotNet.Common;
 using GaDotNet.Common.Data;
 using GaDotNet.Common.Helpers;
 using log4net;
 using log4net.Config;
-using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.commonMethods.Emails;
+using urNotice.Common.Infrastructure.Common.Config;
+using urNotice.Services.Email.EmailTemplate;
 
-namespace urNotice.Common.Infrastructure.Common.Logger
+namespace urNotice.Services.ErrorLogger
 {
     public class Logger : ILogger
     {
@@ -19,7 +18,7 @@ namespace urNotice.Common.Infrastructure.Common.Logger
         public Logger(string currentClassName)
         {
             this._currentClassName = currentClassName;
-            GALoggin = Convert.ToBoolean(ConfigurationManager.AppSettings["GALogging"]);
+            GALoggin = Convert.ToBoolean(GaConfig.GALogging);
 
             logger = LogManager.GetLogger(_currentClassName);
             BasicConfigurator.Configure();
@@ -30,7 +29,7 @@ namespace urNotice.Common.Infrastructure.Common.Logger
 
         public void Info(string message)
         {
-            if (GALoggin && Convert.ToBoolean(ConfigurationManager.AppSettings["GAInfoLogging"]))
+            if (GALoggin && Convert.ToBoolean(GaConfig.GAInfoLogging))
             {
                 TrackGoogleEvents("Logger-Info", "Info", message);
             }
@@ -54,7 +53,7 @@ namespace urNotice.Common.Infrastructure.Common.Logger
             try
             {
                 SendExceptionEmail.SendExceptionEmailMessage(
-                    ConfigurationManager.AppSettings["ExceptionsSendToEmail"].ToString(CultureInfo.InvariantCulture), ex.Message);
+                    OrbitPageConfig.ExceptionsSendToEmail, ex.Message);
             }
             catch (Exception)
             {

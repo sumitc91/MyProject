@@ -5,11 +5,11 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Constants;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.Solr.SolrUser;
 using urNotice.Services.Solr.SolrVirtualFriends;
 
@@ -17,8 +17,7 @@ namespace urNotice.Services.SyncService
 {
     public class SyncService
     {
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
         private readonly urnoticeAnalyticsEntities _dbAnalytics = new urnoticeAnalyticsEntities();
 
         public String SyncGoogleApiContactList(String userEmail)
@@ -167,9 +166,9 @@ namespace urNotice.Services.SyncService
                 googleApiContacts.ForEach(a => a.isVirtualFriendListUpdated = true);
                 
             }
-            catch (DbEntityValidationException e)
+            catch (Exception e)
             {
-                DbContextException.LogDbContextException(e);
+                //DbContextException.LogDbContextException(e);
             }
 
             return null;

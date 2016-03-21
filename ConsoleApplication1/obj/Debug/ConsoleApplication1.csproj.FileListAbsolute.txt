@@ -47,8 +47,6 @@ C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\System.Web.Http.WebHost.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\urNotice.Services.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\EntityFramework.dll
-C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\log4net.dll
-C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\SolrNet.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\RestSharp.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\Facebook.dll
@@ -73,3 +71,5 @@ C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\Interop.VBIDE.dll
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.ResolveComReference.cache
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\code\svn\OrbitPage\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\log4net.dll
+C:\code\svn\OrbitPage\ConsoleApplication1\bin\Debug\GaDotNet.Common.dll

@@ -8,12 +8,12 @@ using Newtonsoft.Json;
 using RestSharp;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
-using urNotice.Common.Infrastructure.Common.Logger;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GoogleApiResponse;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SocialAuthService.google.Model;
 using urNotice.Services.Solr.SolrUser;
@@ -23,8 +23,7 @@ namespace urNotice.Services.SocialAuthService.google
 {
     public class GoogleService
     {
-        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private DbContextException _dbContextException = new DbContextException();
+        private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));       
         //private readonly urnoticeAnalyticsEntities _dbAnalytics = new urnoticeAnalyticsEntities();
 
         public delegate void GoogleApiContactSaveDelegate(string accessToken, string userEmail, string accessKey, string secretKey);
@@ -90,9 +89,9 @@ namespace urNotice.Services.SocialAuthService.google
 
                     //new SyncService.SyncService().SyncGoogleApiContactList(userEmail);
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);                   
+                    //DbContextException.LogDbContextException(e);                   
                 }
 
                 //Console.WriteLine(googleContacts);
@@ -221,9 +220,9 @@ namespace urNotice.Services.SocialAuthService.google
 
 
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //DbContextException.LogDbContextException(e);
                 }
 
 
@@ -266,9 +265,9 @@ namespace urNotice.Services.SocialAuthService.google
                         InsertIntoGoogleApiContactWithPagination(startIndex, perPage, totalCount, accessToken, email,accessKey,secretKey);
                     }
                 }
-                catch (DbEntityValidationException e)
+                catch (Exception e)
                 {
-                    DbContextException.LogDbContextException(e);
+                    //DbContextException.LogDbContextException(e);
                 }
             }
             catch (Exception ex)
