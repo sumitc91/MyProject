@@ -70,6 +70,8 @@ namespace urNoticeSolr.Controllers
 
         public JsonResult GetDetails()
         {
+            var response = new ResponseModel<UnUserSolr>();
+
             var userType = Request.QueryString["userType"].ToString(CultureInfo.InvariantCulture);
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
@@ -78,12 +80,14 @@ namespace urNoticeSolr.Controllers
             if (isValidToken)
             {
                 ISolrUser solrUserModel = new SolrUser();
-                var clientDetailResponse = solrUserModel.GetPersonData(session.UserName,null,null,null,true);//new SolrService().GetClientDetails(session.UserName);
-                return Json(clientDetailResponse, JsonRequestBehavior.AllowGet);
+                response.Payload = solrUserModel.GetPersonData(session.UserName, null, null, null, true);
+                response.Status = 200;
+                response.Message = "Success";
+                return Json(response, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                var response = new ResponseModel<string>();
+                
                 response.Status = 401;
                 response.Message = "Unauthorized";
                 return Json(response, JsonRequestBehavior.AllowGet);

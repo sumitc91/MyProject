@@ -35,16 +35,16 @@ namespace urNotice.Services.AuthService
         public delegate void ContactUsEmailSendDelegate(String emails, ContactUsRequest req);
         
 
-        public ResponseModel<string> UserRegistration(RegisterationRequest req, HttpRequestBase request,string accessKey, string secretKey)
+        public ResponseModel<LoginResponse> UserRegistration(RegisterationRequest req, HttpRequestBase request,string accessKey, string secretKey)
         {
             IPerson person = new Consumer();
             return person.RegisterMe(req,request);
         }
 
-        public LoginResponse WebLogin(string userName, string password, string returnUrl, string keepMeSignedIn,string accessKey, string secretKey)
+        public ResponseModel<LoginResponse> WebLogin(string userName, string password, string returnUrl, string keepMeSignedIn,string accessKey, string secretKey)
         {
             IOrbitPageLogin loginModel = new OrbitPageLogin();
-            return loginModel.WebLogin(userName,password,returnUrl,keepMeSignedIn);
+            return loginModel.Login(userName,password,returnUrl,keepMeSignedIn,false);
         }
 
         public ResponseModel<String> ValidateAccountService(ValidateAccountRequest req,string accessKey, string secretKey)

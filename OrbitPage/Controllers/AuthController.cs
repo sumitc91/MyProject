@@ -25,19 +25,19 @@ namespace OrbitPage.Controllers
             var returnUrl = "/";
             //var referral = Request.QueryString["ref"];
             //var isMobileFacebookLogin = Request.QueryString["isMobileFacebookLogin"];
-            var responseData = new LoginResponse();
+            var response = new ResponseModel<LoginResponse>();
             if (req.Type == "web")
             {
-                responseData = new AuthService().WebLogin(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, accessKey, secretKey);
+                response = new AuthService().WebLogin(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, accessKey, secretKey);
             }
 
-            if (responseData.Code == "200")
+            if (response.Payload.Code == "200")
             {
-                var session = new urNoticeSession(req.UserName, responseData.VertexId);
+                var session = new urNoticeSession(req.UserName, response.Payload.VertexId);
                 TokenManager.CreateSession(session);
-                responseData.UTMZT = session.SessionId;
+                response.Payload.UTMZT = session.SessionId;
             }
-            var response = new ResponseModel<LoginResponse> { Status = Convert.ToInt32(responseData.Code), Message = "success", Payload = responseData };
+            
             return Json(response);
         }
 

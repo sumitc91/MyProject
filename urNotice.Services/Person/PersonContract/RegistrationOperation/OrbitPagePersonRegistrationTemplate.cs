@@ -10,6 +10,7 @@ using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Services.GraphDb;
 using urNotice.Services.GraphDb.GraphDbContract;
@@ -24,26 +25,28 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
         protected IGraphDbContract _graphDbContractModel;
         protected IDynamoDb _dynamoDbModel;
         protected bool IsValidationEmailRequired;
+        protected ResponseModel<LoginResponse> response;
         public OrbitPagePersonRegistrationTemplate(ISolrUser solrUserModel, IDynamoDb dynamoDbModel, IGraphDbContract graphDbContractModel)
         {
             this._solrUserModel = solrUserModel;            
             this._dynamoDbModel = dynamoDbModel;
             this._graphDbContractModel = graphDbContractModel;
             this.IsValidationEmailRequired = false;
+            response = new ResponseModel<LoginResponse>();
         }
 
-        public ResponseModel<string> RegisterUser(RegisterationRequest req, HttpRequestBase request)
+        public ResponseModel<LoginResponse> RegisterUser(RegisterationRequest req, HttpRequestBase request)
         {
 
-            ResponseModel<string> validateInputResponse = ValidateInputResponse(req);
+            var validateInputResponse = ValidateInputResponse(req);
             if (validateInputResponse.AbortProcess) return validateInputResponse;
 
 
-            ResponseModel<string> checkForUniqueUserName = CheckForUniqueUserName(req);
+            var checkForUniqueUserName = CheckForUniqueUserName(req);
             if (checkForUniqueUserName.AbortProcess) return checkForUniqueUserName;
 
             var user = GenerateOrbitPageUserObject(req);
-            if (user == null) return OrbitPageResponseModel.SetNotFound("user is null after passing through GenerateOrbitPageUserObject(req)."); 
+            if (user == null) return OrbitPageResponseModel.SetNotFound("user is null after passing through GenerateOrbitPageUserObject(req).",new LoginResponse()); 
             
             CheckAndSetReferralBonus(req);
 
@@ -61,11 +64,11 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
             this.IsValidationEmailRequired = res;
         }
 
-        protected abstract ResponseModel<String> ValidateInputResponse(RegisterationRequest req);
-        protected abstract ResponseModel<String> CheckForUniqueUserName(RegisterationRequest req);
+        protected abstract ResponseModel<LoginResponse> ValidateInputResponse(RegisterationRequest req);
+        protected abstract ResponseModel<LoginResponse> CheckForUniqueUserName(RegisterationRequest req);
         protected abstract bool CheckAndSetReferralBonus(RegisterationRequest req);
         protected abstract OrbitPageUser GenerateOrbitPageUserObject(RegisterationRequest req);
-        protected abstract ResponseModel<String> SaveUserToDb(OrbitPageUser user);
+        protected abstract ResponseModel<LoginResponse> SaveUserToDb(OrbitPageUser user);
         protected abstract ResponseModel<String> SendAccountVerificationEmail(OrbitPageUser user, HttpRequestBase request);
 
     }

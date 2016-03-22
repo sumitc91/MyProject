@@ -116,7 +116,7 @@ namespace urNotice.Services.Solr.SolrUser
             {
                 return null;
             }
-            
+                        
             return solrQueryExecute[0];
         }
     }

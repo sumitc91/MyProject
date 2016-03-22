@@ -165,7 +165,7 @@ namespace urNotice.Services.Solr.SolrCompany
                     Rows = 10,
                     Start = 0,
                     Fields = new[] { "guid", "rating","website","size", "companyname","isprimary",
-                        "squarelogourl"}
+                        "squarelogourl","logourl"}
                 });
             }
             return solrQueryExecute;

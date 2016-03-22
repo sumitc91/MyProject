@@ -66,7 +66,7 @@ namespace urNotice.Services.Email.EmailFromGmail
             //mail.ReplyToList = new MailAddress(ConfigurationManager.AppSettings["SmtpEmail"].ToString());
             smtpServer.Send(_mail);
 
-            return OrbitPageResponseModel.SetOk("Email sent successfully.");
+            return OrbitPageResponseModel.SetOk("Email sent successfully.", String.Empty);
         }
     }
 }

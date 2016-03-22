@@ -12,7 +12,8 @@ namespace urNotice.Common.Infrastructure.Model.Person
 {
     public interface IPerson
     {
-        ResponseModel<string> RegisterMe(RegisterationRequest req, HttpRequestBase request);
-        ResponseModel<LoginResponse> Login(string userName, string password);
+        ResponseModel<LoginResponse> RegisterMe(RegisterationRequest req, HttpRequestBase request);
+        ResponseModel<LoginResponse> SocialRegisterMe(RegisterationRequest req, HttpRequestBase request);
+        ResponseModel<LoginResponse> Login(string userName, string password,bool decryptPassword);
     }
 }

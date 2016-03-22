@@ -40,8 +40,8 @@ define([appLocation.preLogin], function (app) {
                     $rootScope.clientDetailResponse = data.Payload;
                     //$scope.UserNotificationsList.Messages = data.Payload.Messages;
                     //$scope.UserNotificationsList.Notifications = data.Payload.Notifications;
-                    CookieUtil.setUserName(data.Payload.FirstName + ' ' + data.Payload.LastName, userSession.keepMeSignedIn);
-                    CookieUtil.setUserImageUrl(data.Payload.imageUrl, userSession.keepMeSignedIn);
+                    CookieUtil.setUserName(data.Payload.Firstname + ' ' + data.Payload.LastName, userSession.keepMeSignedIn);
+                    CookieUtil.setUserImageUrl(data.Payload.Profilepic, userSession.keepMeSignedIn);
                     $rootScope.isUserLoggedIn = true;
                     if (data.Payload.isLocked == "true") {
                         location.href = "/Auth/LockAccount?status=true";

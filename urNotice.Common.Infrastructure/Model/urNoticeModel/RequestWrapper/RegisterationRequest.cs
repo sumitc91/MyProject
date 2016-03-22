@@ -10,7 +10,7 @@
         public string Password { get; set; }        
         public string Source { get; set; }
         public string Referral { get; set; }
-
+        public string fid { get; set; }
         public string ImageUrl { get; set; }
     }
 }

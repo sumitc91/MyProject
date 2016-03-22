@@ -14,11 +14,13 @@ using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Services.Email;
 using urNotice.Services.Email.EmailFromGmail;
 using urNotice.Services.Email.EmailFromMandrill;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Person.PersonContract.LoginOperation;
 using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.Person.PersonContract.RegistrationOperation
@@ -29,20 +31,20 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
         {
         }
 
-        protected override ResponseModel<string> ValidateInputResponse(RegisterationRequest req)
+        protected override ResponseModel<LoginResponse> ValidateInputResponse(RegisterationRequest req)
         {
-            if (req == null) return OrbitPageResponseModel.SetNotFound("req object cann't be null.");
-            if (req.EmailId == null) return OrbitPageResponseModel.SetNotFound("EmailId cann't be null");
-            if (req.Username == null) return OrbitPageResponseModel.SetNotFound("Username cann't be null");
+            if (req == null) return OrbitPageResponseModel.SetNotFound("req object cann't be null.",new LoginResponse());
+            if (req.EmailId == null) return OrbitPageResponseModel.SetNotFound("EmailId cann't be null", new LoginResponse());
+            if (req.Username == null) return OrbitPageResponseModel.SetNotFound("Username cann't be null", new LoginResponse());
 
-            return OrbitPageResponseModel.SetOk("valid input");
+            return OrbitPageResponseModel.SetOk("valid input", new LoginResponse());
         }
 
-        protected override ResponseModel<string> CheckForUniqueUserName(RegisterationRequest req)
+        protected override ResponseModel<LoginResponse> CheckForUniqueUserName(RegisterationRequest req)
         {
             var solrUserEmail = _solrUserModel.GetPersonData(req.EmailId, req.Username, null, null, false);
-            if (solrUserEmail != null) return OrbitPageResponseModel.SetAlreadyTaken("Sorry " + req.Username + " username is already taken");
-            return OrbitPageResponseModel.SetOk("Username is unique");
+            if (solrUserEmail != null) return OrbitPageResponseModel.SetAlreadyTaken("Sorry " + req.Username + " username is already taken", new LoginResponse());
+            return OrbitPageResponseModel.SetOk("Username is unique", new LoginResponse());
         }
 
         protected override OrbitPageUser GenerateOrbitPageUserObject(RegisterationRequest req)
@@ -52,16 +54,20 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
             req.FirstName = FirstCharToUpper(req.FirstName);
             req.LastName = FirstCharToUpper(req.LastName);
 
-            if (req.Gender.Equals("m") || req.Gender.Equals("M") || req.Gender.ToLower().Equals("male"))
+            if (IsValidationEmailRequired)            
             {
-                req.ImageUrl = CommonConstants.MaleProfessionalAvatar;
-                req.Gender = CommonConstants.male;
+                if (req.Gender.Equals("m") || req.Gender.Equals("M") || req.Gender.ToLower().Equals("male"))
+                {
+                    req.ImageUrl = CommonConstants.MaleProfessionalAvatar;
+                    req.Gender = CommonConstants.male;
+                }
+                else
+                {
+                    req.ImageUrl = CommonConstants.FemaleProfessionalAvatar;
+                    req.Gender = CommonConstants.female;
+                }
             }
-            else
-            {
-                req.ImageUrl = CommonConstants.FemaleProfessionalAvatar;
-                req.Gender = CommonConstants.female;
-            }
+            
 
             var guid = CreateNewGuid();
             var user = new OrbitPageUser
@@ -79,14 +85,26 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
                 imageUrl = req.ImageUrl,
                 priviledgeLevel = (short)PriviledgeLevel.None,
                 validateUserKeyGuid = guid,
-                userCoverPic = CommonConstants.CompanySquareLogoNotAvailableImage
+                userCoverPic = CommonConstants.CompanySquareLogoNotAvailableImage,
+                keepMeSignedIn = CommonConstants.TRUE
             };
+
+            if(!string.IsNullOrWhiteSpace(req.fid))
+            {
+                user.fid = req.fid;
+            }
+
+            if (!IsValidationEmailRequired)
+            {
+                user.isActive = CommonConstants.TRUE;
+            }
 
             return user;
         }
 
-        protected override ResponseModel<string> SaveUserToDb(OrbitPageUser user)
+        protected override ResponseModel<LoginResponse> SaveUserToDb(OrbitPageUser user)
         {
+            
 
             bool graphDbDataInserted = true;
             bool dynamoDbDataInserted = true;
@@ -123,20 +141,24 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
             if (!graphDbDataInserted)
             {
                 //graph db insertion failed..
-                OrbitPageResponseModel.SetInternalServerError("GraphDb Data insertion Failed.");
+                OrbitPageResponseModel.SetInternalServerError("GraphDb Data insertion Failed.", new LoginResponse());
             }
             else if (!dynamoDbDataInserted)
             {
                 //dynamoDb insertion failed..
-                OrbitPageResponseModel.SetInternalServerError("DynamoDb Data insertion Failed.");
+                OrbitPageResponseModel.SetInternalServerError("DynamoDb Data insertion Failed.", new LoginResponse());
             }
             else if (!solrDbDataInserted)
             {
                 //solr db insertion failed..
-                OrbitPageResponseModel.SetInternalServerError("SolrDb Data insertion Failed.");
+                OrbitPageResponseModel.SetInternalServerError("SolrDb Data insertion Failed.", new LoginResponse());
             }
 
-            return OrbitPageResponseModel.SetOk("Registered Successfully.");
+            IOrbitPageLogin loginModel = new OrbitPageLogin();
+            response.Payload = loginModel.CreateLoginResponseModel(user);
+            response.Status = 200;
+            response.Message = "Registered Successfully.";
+            return response;
         }
 
         protected override ResponseModel<string> SendAccountVerificationEmail(OrbitPageUser user, HttpRequestBase request)
@@ -155,7 +177,7 @@ namespace urNotice.Services.Person.PersonContract.RegistrationOperation
                     SmtpConfig.SmtpEmailFromDoNotReply
                     );
             }
-            return OrbitPageResponseModel.SetOk("email sent successfully.");
+            return OrbitPageResponseModel.SetOk("email sent successfully.", String.Empty);
         }
 
         protected override bool CheckAndSetReferralBonus(RegisterationRequest req)

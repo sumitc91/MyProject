@@ -9,43 +9,47 @@ namespace urNotice.Common.Infrastructure.Common.Constants
 {
     public static class OrbitPageResponseModel
     {
-        public static ResponseModel<String> SetNotFound(String message)
+        public static ResponseModel<T> SetNotFound<T>(string message,T payload)
         {
-            return new ResponseModel<String>
+            return new ResponseModel<T>
             {
                 Status = 404,
                 AbortProcess = true,
-                Message=message                
+                Message = message,
+                Payload = payload
             };
         }
 
-        public static ResponseModel<String> SetOk(String message)
+        public static ResponseModel<T> SetOk<T>(string message, T payload)
         {
-            return new ResponseModel<String>
+            return new ResponseModel<T>
             {
                 Status = 200,
                 AbortProcess = false,
-                Message = message
+                Message = message,
+                Payload = payload
             };
         }
 
-        public static ResponseModel<String> SetAlreadyTaken(String message)
+        public static ResponseModel<T> SetAlreadyTaken<T>(string message, T payload)
         {
-            return new ResponseModel<String>
+            return new ResponseModel<T>
             {
                 Status = 409,
                 AbortProcess = false,
-                Message = message
+                Message = message,
+                Payload = payload
             };
         }
 
-        public static ResponseModel<String> SetInternalServerError(String message)
+        public static ResponseModel<T> SetInternalServerError<T>(string message, T payload)
         {
-            return new ResponseModel<String>
+            return new ResponseModel<T>
             {
                 Status = 500,
                 AbortProcess = false,
-                Message = message
+                Message = message,
+                Payload = payload
             };
         }
     }

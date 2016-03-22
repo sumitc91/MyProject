@@ -144,10 +144,10 @@ div.middle-div-mobile {
                                     <a href="/#/">OrbitPage</a>
                                 </li>
                                 <li>
-                                    <a href="/#/">urNotice</a>
+                                    <a href="http://urnotice.orbitpage.com">urNotice</a>
                                 </li>
                                 <li>
-                                    <a href="/#/">Workgraphy</a>
+                                    <a href="http://workgraphy.orbitpage.com">Workgraphy</a>
                                 </li>
                                 <li>
                                     <a href=""></a>
@@ -157,7 +157,7 @@ div.middle-div-mobile {
                                     <a href="/#/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="/#/">Contribute {{isUserLoggedIn}}</a>
+                                    <a href="/#/">Contribute</a>
                                 </li>
                                 <li ng-show="!isUserLoggedIn">
                                     <a href="#/signup/user">Register</a>
@@ -353,11 +353,11 @@ div.middle-div-mobile {
                                 <li class="ng-cloak" ng-show="isUserLoggedIn">
                                     <div class="btn-group" uib-dropdown is-open="status.isopen">
                                         <button id="single-button" type="button" class="btn btn-theme" uib-dropdown-toggle ng-disabled="disabled">
-                                            <span style="color: white;" ng-bind="clientDetailResponse.FirstName"></span> <img ng-src="{{clientDetailResponse.imageUrl}}" class="img-circle" style="max-height: 40px;">
+                                            <span style="color: white;" ng-bind="clientDetailResponse.Firstname"></span> <img ng-src="{{clientDetailResponse.Profilepic}}" class="img-circle" style="max-height: 40px;">
                                             <span class="caret"></span>
                                         </button>
                                         <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                            <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.vertexId}}">My Wall</a></li>
+                                            <li role="menuitem"><a href="#/userprofile/{{clientDetailResponse.VertexId}}">My Wall</a></li>
                                             <li role="menuitem"><a href="#/editpage">Edit Profile</a></li>
                                             <li role="menuitem"><a href="#">Another action</a></li>
                                             <li role="menuitem"><a href="#">Something else here</a></li>

@@ -177,9 +177,9 @@ define([appLocation.preLogin], function (app) {
             //console.log("cookie available. : " + CookieUtil.getUserName() + "   &  " + CookieUtil.getUserImageUrl());
 
             if (CookieUtil.getUserName() != null && CookieUtil.getUserName() != '' && CookieUtil.getUserName() != "") {
-                $rootScope.clientDetailResponse.FirstName = CookieUtil.getUserName();
-                $rootScope.clientDetailResponse.imageUrl = CookieUtil.getUserImageUrl();
-                $rootScope.clientDetailResponse.vertexId = $.cookie('uservertexid');
+                $rootScope.clientDetailResponse.Firstname = CookieUtil.getUserName();
+                $rootScope.clientDetailResponse.Profilepic = CookieUtil.getUserImageUrl();
+                $rootScope.clientDetailResponse.VertexId = $.cookie('uservertexid');
                 $rootScope.isUserLoggedIn = true;
             }
             
@@ -209,12 +209,14 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
                 $scope.loadingUserDetails = false;
+                console.log(data);
                 if (data.Status == "200") {
                     $rootScope.clientDetailResponse = data.Payload;
                     //$scope.UserNotificationsList.Messages = data.Payload.Messages;
                     //$scope.UserNotificationsList.Notifications = data.Payload.Notifications;
-                    CookieUtil.setUserName(data.Payload.FirstName, userSession.keepMeSignedIn);
-                    CookieUtil.setUserImageUrl(data.Payload.imageUrl, userSession.keepMeSignedIn);
+                    CookieUtil.setUserName(data.Payload.Firstname, userSession.keepMeSignedIn);
+                    CookieUtil.setUserImageUrl(data.Payload.Profilepic, userSession.keepMeSignedIn);
+
                     $rootScope.isUserLoggedIn = true;
 
                     initSidr(true);

@@ -18,9 +18,10 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
 {
     public class OrbitPageLogin : IOrbitPageLogin
     {
-        public LoginResponse WebLogin(string userName, string password, string returnUrl, string keepMeSignedIn)
+        public ResponseModel<LoginResponse> Login(string userName, string password, string returnUrl, string keepMeSignedIn, bool isSocialLogin)
         {
-            var response =new LoginResponse();
+            var response =new ResponseModel<LoginResponse>();
+            response.Payload = new LoginResponse();
             ISolrUser solrUserModel = new SolrUser();
             var userSolrDetail = solrUserModel.GetPersonData(userName, null, null, null, false);
 
@@ -31,11 +32,11 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
                 null
                 );
 
-            if (userInfo.OrbitPageUser != null && userInfo.OrbitPageUser.password == password)
+            if (userInfo.OrbitPageUser != null && (userInfo.OrbitPageUser.password == password))
             {
-                if (userInfo.OrbitPageUser.isActive == CommonConstants.TRUE)
+                if (userInfo.OrbitPageUser.isActive == CommonConstants.TRUE || isSocialLogin)
                 {
-                    response = CreateLoginResponseModel(userInfo.OrbitPageUser); 
+                    response.Payload = CreateLoginResponseModel(userInfo.OrbitPageUser); 
                     try
                     {
                         userInfo.OrbitPageUser.keepMeSignedIn = keepMeSignedIn.Equals("true",
@@ -49,25 +50,27 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
                     catch (Exception ex)
                     {
                         //Todo:need to log exception.
-                        //response.Status = 500;
-                        //response.Message = "Failed";
-                        response.Code = "500";
+                        
+                        response.Status = 500;
+                        response.Payload.Code = "500";
                     }
                 }
                 else
                 {
-                    response.Code = "403";
+                    response.Status = 403;
+                    response.Payload.Code = "403";                    
                 }                    
             }
             else
             {
-                response.Code = "403";
+                response.Status = 403;
+                response.Payload.Code = "403";                
             }
 
             return response;
         }
 
-        private LoginResponse CreateLoginResponseModel(OrbitPageUser userInfo)
+        public LoginResponse CreateLoginResponseModel(OrbitPageUser userInfo)
         {
             var userData = new LoginResponse();
 

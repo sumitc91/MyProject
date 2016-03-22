@@ -47,5 +47,6 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public static string undefined = "undefined";
         public static string PushNotificationArray = "PushNotificationArray";
         public static string CommaDelimeter = ",";
+        public static string Facebook = "facebook";
     }
 }

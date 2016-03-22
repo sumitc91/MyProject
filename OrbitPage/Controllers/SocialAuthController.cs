@@ -18,16 +18,21 @@ using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
 using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Person;
+using urNotice.Services.Person.PersonContract.LoginOperation;
+using urNotice.Services.Person.PersonContract.RegistrationOperation;
 using urNotice.Services.SessionService;
 using urNotice.Services.SocialAuthService;
 using urNotice.Services.SocialAuthService.Facebook;
@@ -743,118 +748,69 @@ namespace OrbitPage.Controllers
                     FacebookAuthData.facebookUsername = result.id;
 
                     IDynamoDb dynamoDbModel = new DynamoDb();
-                    var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                    OrbitPageCompanyUserWorkgraphyTable userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                         DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
                         email,
                         null
                         );
-
-                    //var ifAlreadyExists = _db.FacebookAuths.SingleOrDefault(x => x.facebookId == fid);
+                    
                     if (userInfo != null)
                     {
 
-                        var data = new Dictionary<string, string>();
-                        data["Username"] = userInfo.OrbitPageUser.email;
-                        data["Password"] = userInfo.OrbitPageUser.password;
-                        data["userGuid"] = userInfo.OrbitPageUser.guid;
+                        IPerson loginModel = new Consumer();
 
-                        var encryptedData = EncryptionClass.encryptUserDetails(data);
-
-                        response.Payload = new LoginResponse();
-                        response.Payload.UTMZK = encryptedData["UTMZK"];
-                        response.Payload.UTMZV = encryptedData["UTMZV"];
-                        response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-                        response.Payload.Code = "210";
-                        response.Payload.VertexId = userInfo.OrbitPageUser.vertexId;
+                        response = loginModel.Login(userInfo.OrbitPageUser.email,userInfo.OrbitPageUser.password,true);                        
+                        response.Payload.Code = "210";                        
                         response.Status = 210;
                         response.Message = "user Login via facebook";
-                        response.Payload.FirstName = userInfo.OrbitPageUser.firstName;
-                        response.Payload.imageUrl = userInfo.OrbitPageUser.imageUrl;
-
-                        userInfo.OrbitPageUser.keepMeSignedIn = "true";//keepMeSignedIn.Equals("true", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
+                        
+                        userInfo.OrbitPageUser.isActive = CommonConstants.TRUE;
+                        userInfo.OrbitPageUser.keepMeSignedIn = CommonConstants.TRUE;
                         userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
                         userInfo.FacebookAuthToken = access_token;
                         userInfo.FacebookId = FacebookAuthData.facebookId;
 
                         dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
                         
-                        var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
-                        TokenManager.CreateSession(session);
-                        response.Payload.UTMZT = session.SessionId;
+                        
                         ViewBag.umtzt = response.Payload.UTMZT;
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;
                         ViewBag.vertexid = response.Payload.VertexId;
                         ViewBag.userName = response.Payload.FirstName;
                         ViewBag.userImageUrl = response.Payload.imageUrl;
-                        ViewBag.isNewUser = "false";
+                        ViewBag.isNewUser = CommonConstants.FALSE;
                         return View();
 
                     }
 
-                var guid = Guid.NewGuid().ToString();
-                var user = new OrbitPageUser
+                RegisterationRequest req = new RegisterationRequest()
                 {
-                    username = email,
-                    fid = FacebookAuthData.facebookId,
-                    email = email,
-                    password = EncryptionClass.Md5Hash(Guid.NewGuid().ToString()),
-                    source = "facebook",
-                    isActive = "true",
-                    guid = guid,
-                    fixedGuid = guid,
-                    firstName = result.first_name,
-                    lastName = result.last_name,
-                    gender = result.gender,
-                    imageUrl = result.picture.data.url,
-                    priviledgeLevel = (short)PriviledgeLevel.None,
-                    keepMeSignedIn = CommonConstants.TRUE
+                    EmailId = email,
+                    FirstName = result.first_name,
+                    Gender = result.gender,
+                    ImageUrl = result.picture.data.url,
+                    LastName = result.last_name,
+                    Password = EncryptionClass.Md5Hash(Guid.NewGuid().ToString()),
+                    Referral = CommonConstants.NA,
+                    Source = CommonConstants.Facebook,
+                    Username = email,
+                    fid = Convert.ToString(result.id)
                 };
 
-                IGraphDbContract graphDbContract = new GraphDbContract();
-                var userVertexIdInfo = graphDbContract.InsertNewUserInGraphDb(user);
+                IPerson registrationModel = new Consumer();
+                response = registrationModel.SocialRegisterMe(req, Request);
                 
-                user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
-
-
+                
+                
                 try
                 {                    
-                    dynamoDbModel.UpsertOrbitPageUser(user, access_token);
                     
-
-                    //new SolrService().InsertNewUserToSolr(user, false);
-                    ISolrUser solrUserModel = new SolrUser();
-                    solrUserModel.InsertNewUser(user, false);
-
-                    //new TitanService.TitanService().InsertNewUserToTitan(user, false);
-
-                    SignalRController.BroadCastNewUserRegistration();
-
-
-                    var data = new Dictionary<string, string>();
-                    data["Username"] = user.email;
-                    data["Password"] = user.password;
-                    data["userGuid"] = user.guid;
-
-                    var encryptedData = EncryptionClass.encryptUserDetails(data);
-
-                    response.Payload = new LoginResponse();
-                    response.Payload.UTMZK = encryptedData["UTMZK"];
-                    response.Payload.UTMZV = encryptedData["UTMZV"];
-                    response.Payload.TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-                    response.Payload.Code = "210";
-                    response.Payload.VertexId = user.vertexId;
-                    response.Payload.FirstName = user.firstName;
-                    response.Payload.imageUrl = user.imageUrl;
-
+                    response.Payload.Code = "210";                    
                     response.Status = 210;
                     response.Message = "user Login via google";
                     try
-                    {
-                        var session = new urNoticeSession(user.email,user.vertexId);
-                        TokenManager.CreateSession(session);
-                        response.Payload.UTMZT = session.SessionId;
-
+                    {                        
                         ViewBag.umtzt = response.Payload.UTMZT;
                         ViewBag.umtzk = response.Payload.UTMZK;
                         ViewBag.umtzv = response.Payload.UTMZV;

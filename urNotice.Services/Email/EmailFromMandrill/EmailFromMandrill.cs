@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 
 namespace urNotice.Services.Email.EmailFromMandrill
 {
@@ -65,7 +66,7 @@ namespace urNotice.Services.Email.EmailFromMandrill
             //mail.ReplyToList = new MailAddress(ConfigurationManager.AppSettings["SmtpEmail"].ToString());
             smtpServer.Send(_mail);
 
-            return OrbitPageResponseModel.SetOk("Email sent successfully.");
+            return OrbitPageResponseModel.SetOk("Email sent successfully.",String.Empty);
         }
     }
 }

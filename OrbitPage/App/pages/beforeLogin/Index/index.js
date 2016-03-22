@@ -77,15 +77,12 @@ define([appLocation.preLogin], function (app) {
                     
                     //showToastMessage("Success", data.Message);
                     $scope.competitorDetails = data.Payload;
-                    if ($scope.companyDetails.logourl == 'tps://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/LogoUploadEmpty.png')
-                        $scope.companyDetails.logourl = "http://placehold.it/350x150";
+                    console.log($scope.competitorDetails);
 
                     $.each(data.Payload, function (i, val) {
                         $scope.competitorDetails[i].companyname = data.Payload[i].companyname;
                         $scope.competitorDetails[i].website = data.Payload[i].website;
 
-                        if ($scope.competitorDetails[i].logourl == 'tps://s3-ap-southeast-1.amazonaws.com/urnotice/company/small/LogoUploadEmpty.png')
-                            $scope.competitorDetails[i].logourl = "http://placehold.it/50x50";
 
                         $scope.competitorDetails[i].linkurl = "/#companydetails/" + $scope.competitorDetails[i].companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + $scope.competitorDetails[i].guid;
 
