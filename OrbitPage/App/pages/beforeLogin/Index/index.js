@@ -77,8 +77,7 @@ define([appLocation.preLogin], function (app) {
                     
                     //showToastMessage("Success", data.Message);
                     $scope.competitorDetails = data.Payload;
-                    console.log($scope.competitorDetails);
-
+                    
                     $.each(data.Payload, function (i, val) {
                         $scope.competitorDetails[i].companyname = data.Payload[i].companyname;
                         $scope.competitorDetails[i].website = data.Payload[i].website;

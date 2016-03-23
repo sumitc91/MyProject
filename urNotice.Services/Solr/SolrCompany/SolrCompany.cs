@@ -109,7 +109,7 @@ namespace urNotice.Services.Solr.SolrCompany
                 Start = 0,
                 Fields = new[] { "guid","companyid","companyname","rating","website","size","description","averagerating","totalratingcount","totalreviews","isprimary",
                         "logourl", "squarelogourl", "speciality", "telephone","avgnoticeperiod","buyoutpercentage","maxnoticeperiod","minnoticeperiod","avghikeperct","perclookingforchange",
-                        "sublocality","city","district","state","country","postal_code","latitude","longitude","geo" }
+                        "sublocality","city","district","state","country","postal_code","latitude","longitude","geo","workLifeBalanceRating","salaryRating","companyCultureRating","careerGrowthRating" }
             });
             return solrQueryExecute;
         }

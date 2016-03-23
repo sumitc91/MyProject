@@ -22,6 +22,8 @@ define([appLocation.preLogin], function (app) {
         };
     });
 
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+
     app.controller('beforeLoginCompanyDetails', function ($scope, $http, $route,$uibModal,$log, $rootScope, $routeParams, $location, $timeout, CookieUtil) {
         $('title').html("indexcd"); //TODO: change the title so cann't be tracked in log
         
@@ -62,6 +64,7 @@ define([appLocation.preLogin], function (app) {
                     $scope.averageRatingInDoubleFormat = $scope.companyDetails.averagerating;
                     $scope.companyDetails.averagerating = Math.round($scope.companyDetails.averagerating);
                     $scope.$apply();
+                    showGoogleChart();
                     //console.log($scope.companyDetails);
                     getCompanyCompetitorsDetail($scope.companyDetails.size, $scope.companyDetails.rating, $scope.companyDetails.speciality);
                 }
@@ -72,8 +75,41 @@ define([appLocation.preLogin], function (app) {
 
         }
         
+        function showGoogleChart() {
+            //google.charts.load('current', { packages: ['corechart', 'bar'] });
+            //google.charts.load('41', { packages: ['corechart', 'bar'] });
+            google.charts.setOnLoadCallback(drawBasic);
+        }
+        function drawBasic() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Fields', 'Rating', ],
+              ['Rating', $scope.companyDetails.rating],
+              ['Work Life Balance', $scope.companyDetails.workLifeBalanceRating],
+              ['Salary', $scope.companyDetails.salaryRating],
+              ['Company Culture', $scope.companyDetails.companyCultureRating],
+              ['Career Growth', $scope.companyDetails.careerGrowthRating]
+            ]);
+
+            var options = {
+                title: 'Company Rating Scale',
+                chartArea: { width: '50%' },
+                hAxis: {
+                    title: 'Rating',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Fields'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
         
-        getUserRatingStatus();
+
+        //getUserRatingStatus();
 
         function getCompanyCompetitorsDetail(size, rating, speciality) {
             var url = ServerContextPath.solrServer + '/Search/GetCompanyCompetitorsDetail?size=' + size + '&rating=' + rating + '&speciality=' + speciality;

@@ -113,6 +113,9 @@ appRequire = require
             motionCaptcha: {
                 deps: ["jquery"]
             },
+            googleChartLoader: {
+                deps: ["jquery"]
+            },
             angularjs_fileUpload_shim: {//new
                 deps: ["angular", "jquery"]
             },
@@ -153,7 +156,7 @@ appRequire = require
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui"]
             },
             beforeLoginCompanyDetails: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "googleChartLoader"]
             },
             beforeLoginUserDetails: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
@@ -215,6 +218,7 @@ appRequire = require
             bootstrap_wysihtml5: "../../App/third-Party/wysihtml5/lib/js/bootstrap3-wysihtml5.all.min",
             filedrop: "../../App/third-Party/html5-file-upload/assets/js/jquery.filedrop",
             fileDropScript: "../../App/third-Party/html5-file-upload/assets/js/script",
+            googleChartLoader: "https://www.gstatic.com/charts/loader",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
