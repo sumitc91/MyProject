@@ -144,7 +144,17 @@
                                         </div>
                                     </uib-tab>
                                     <uib-tab heading="Salary">
-                                        Salary
+                                        <div class="row">
+                                            <div ng-repeat="companySalary in CompanySalaryDetails">                                                
+                                                <br />
+                                                <div ng-repeat="salaryInfo in companySalary.salaryInfo">
+                                                    <div>&nbsp; &nbsp; <span ng-bind="companySalary.designationInfo[$index].DesignationName"></span> --&nbsp;Rs &nbsp;<b><span ng-bind="salaryInfo.SalaryAmount"></span></b></div><br />
+                                                    
+                                                </div>
+                                                <br />
+                                                <hr />
+                                            </div>  
+                                        </div>
                                     </uib-tab>
                                     <uib-tab heading="Notice Period">Notice Period Justified content</uib-tab>
                                     <uib-tab heading="Salary">Salary Justified content</uib-tab>

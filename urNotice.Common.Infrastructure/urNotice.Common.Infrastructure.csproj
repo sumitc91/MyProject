@@ -293,6 +293,10 @@
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdemailResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdphoneNumberResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanyDesignationInfoVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryInfoVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationEdgeInfo.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModelResponse.cs" />

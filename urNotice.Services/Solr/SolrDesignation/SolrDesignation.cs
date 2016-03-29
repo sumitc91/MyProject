@@ -48,5 +48,19 @@ namespace urNotice.Services.Solr.SolrDesignation
             });
             return solrQueryExecute;
         }
+
+        public SolrQueryResults<UnDesignationSolr> GetAbsoluteDesignationDetail(string queryText)
+        {
+            queryText = queryText.Replace(" ", "?").Replace(")","?").Replace("(","?");
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnDesignationSolr>>();
+            var solrQuery = new SolrQuery("designation:" + queryText + "");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 15,
+                Start = 0,
+                Fields = new[] { "designation", "id", "vertexId" }
+            });
+            return solrQueryExecute;
+        }
     }
 }

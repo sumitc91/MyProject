@@ -138,6 +138,63 @@ namespace urNotice.Services.UserService
             return sendNotificationResponse;
         }
 
+        public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation, string salary,string jobFromYear,string jobToYear,string companyVertexId)
+        {
+            //var response = new Dictionary<string, string>();
+            //string url = TitanGraphConfig.Server;
+            //string graphName = TitanGraphConfig.Graph;
+
+            var properties = new Dictionary<string, string>();
+
+            properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Salary.ToString();
+            properties[VertexPropertyEnum.DesignationName.ToString()] = designation;
+            properties[VertexPropertyEnum.Salary.ToString()] = salary;
+            properties[VertexPropertyEnum.PostedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[VertexPropertyEnum.JobFromYear.ToString()] = jobFromYear;
+            properties[VertexPropertyEnum.JobToYear.ToString()] = jobToYear;
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties);//new GraphVertexOperations().AddVertex(session.UserName, TitanGraphConfig.Server, userWallVertexId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Salary.ToString();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
+            properties = new Dictionary<string, string>();
+
+            
+            properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._inV.ToString()] = companyVertexId;
+            properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
+            
+
+
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
+
+            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            //var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString(), accessKey, secretKey);
+
+            //foreach (var kvp in sendNotificationResponse)
+            //{
+            //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+            //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
+            //                                                          CommonConstants.CommaDelimeter + kvp.Value;
+            //}
+
+
+            //sendNotificationResponse["status"] = "200";
+            //return sendNotificationResponse;
+            return null;
+        }
+
         private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType, string accessKey, string secretKey)
         {
             var properties = new Dictionary<string, string>();

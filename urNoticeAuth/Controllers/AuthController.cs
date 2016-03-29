@@ -117,6 +117,24 @@ namespace urNoticeAuth.Controllers
             return Json("success", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult UpdateCompanyDesignationSalaries()
+        {
+            var reader = new StreamReader(System.IO.File.OpenRead(@"C:\code\svn\salary.csv"));
+
+            while (!reader.EndOfStream)
+            {
+                var readLine = reader.ReadLine();
+                if (readLine != null)
+                {
+                    string[] line = readLine.Split(',');
+                    //Console.WriteLine(line);
+                    new AdminService().CreateNewCompanyDesignationSalary(line[1],line[0],line[2], "orbitpage@gmail.com", accessKey, secretKey);
+                }
+                //new AdminService().CreateNewCompanyDesignationSalary(designationName, "orbitpage@gmail.com", accessKey, secretKey);
+            }
+
+            return Json("success", JsonRequestBehavior.AllowGet);
+        }
         public JsonResult UpdateCompaniesFromCsv()
         {
 

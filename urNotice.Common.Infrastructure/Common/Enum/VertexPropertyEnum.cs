@@ -25,6 +25,9 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         NotifiedOnWallVertexId,
 
         DesignationName,
-        CompanyName
+        CompanyName,
+        Salary,
+        JobFromYear,
+        JobToYear
     }
 }

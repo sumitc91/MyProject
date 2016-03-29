@@ -99,6 +99,20 @@ namespace urNotice.Services.Solr.SolrCompany
             return solrQueryExecute;
         }
 
+        public SolrQueryResults<UnCompanySolr> GetAbsoluteCompanyDetailsAutocomplete(string queryText)
+        {
+            queryText = queryText.Replace(" ", "?").Replace("(","?").Replace(")","?");
+            //queryText = queryText.ToLower();
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
+            var solrQuery = new SolrQuery("companyname:" + queryText + "");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 15,
+                Start = 0,
+                Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl", "logourl" }
+            });
+            return solrQueryExecute;
+        }
         public SolrQueryResults<UnCompanySolr> CompanyDetailsById(string cid)
         {
             var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();

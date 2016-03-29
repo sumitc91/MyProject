@@ -66,6 +66,7 @@ define([appLocation.preLogin], function (app) {
                     $scope.$apply();
                     showGoogleChart();
                     //console.log($scope.companyDetails);
+                    companySalaryDetailsById();
                     getCompanyCompetitorsDetail($scope.companyDetails.size, $scope.companyDetails.rating, $scope.companyDetails.speciality);
                 }
                 else {
@@ -75,6 +76,27 @@ define([appLocation.preLogin], function (app) {
 
         }
         
+        function companySalaryDetailsById() {
+            var url = ServerContextPath.userServer + '/User/GetCompanySalaryInfo?from=0&to=2&vertexId=' + $scope.companyid;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv')
+            };
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //console.log(data);
+                $scope.CompanySalaryDetails = data.results;
+                
+            });
+
+        }
+
         function showGoogleChart() {
             //google.charts.load('current', { packages: ['corechart', 'bar'] });
             //google.charts.load('41', { packages: ['corechart', 'bar'] });

@@ -12,5 +12,6 @@ namespace urNotice.Services.Solr.SolrDesignation
     public interface ISolrDesignation : ISourceDesignationDb
     {
         SolrQueryResults<UnDesignationSolr> GetDesignationDetails(String queryText);
+        SolrQueryResults<UnDesignationSolr> GetAbsoluteDesignationDetail(string queryText);
     }
 }

@@ -14,6 +14,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         CommentedOnPost,
         CommentedOnPostNotification,
         Comment,
-        Notification,              
+        Notification,
+        Salary      
     }
 }

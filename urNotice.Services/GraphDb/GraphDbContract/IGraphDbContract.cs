@@ -12,5 +12,6 @@ namespace urNotice.Services.GraphDb.GraphDbContract
         Dictionary<String, String> InsertNewUserInGraphDb(OrbitPageUser user);
         Dictionary<String, String> InsertNewDesignationInGraphDb(String adminEmail, String designationName);
         Dictionary<String, String> InsertNewCompanyInGraphDb(String adminEmail, String companyName);
+        String CompanySalaryInfo(string companyVertexId, string from, string to);
     }
 }
