@@ -1,5 +1,5 @@
 ﻿<div ng-controller="beforeLoginPostStory">
-    <div class="row" style="min-height: 50px;"></div>
+    <div class="row" style="min-height: 90px;"></div>  
     <div class="container">
         
         <div class="row">
@@ -64,7 +64,7 @@
                          placeholder="Designation"
                          pause="500"
                          selected-object="selectedProject"
-                         remote-url="http://{{sitehosturl}}/solr/GetDesignationDetails?q="
+                         remote-url="http://{{sitehosturl}}/Search/GetDesignationDetails?q="
                          remote-url-request-formatter="remoteUrlRequestFn"
                          remote-url-data-field="Payload"
                          title-field="designation"
@@ -90,16 +90,16 @@
                          id="companyName"
                          placeholder="Enter Company Name"
                          pause="500"
-                         selected-object="addCompany"
-                         remote-url="http://{{sitehosturl}}/solr/GetCompanyDetailsAutocomplete?q="
+                         selected-object="selectCompany"
+                         remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
                          remote-url-request-formatter="remoteUrlRequestFn"
                          remote-url-data-field="Payload"
                          title-field="companyname"
                          minlength="2"
                          input-class="form-control form-control-small"
                          ng-model="companyName"
-                         image-field="squarelogourl"
-                         match-class="highlight"/>
+                         image-field="logourl"
+                         match-class="highlight" ng-keypress="myFunct($event)" />
                 </div> 
                 <div class="col-md-6">
                     <!--<input type="text" class="form-control" placeholder="Your Location" autofocus="" ng-model="PostStoryModel.location">-->

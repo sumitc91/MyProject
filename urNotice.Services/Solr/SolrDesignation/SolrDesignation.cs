@@ -37,15 +37,27 @@ namespace urNotice.Services.Solr.SolrDesignation
 
         public SolrQueryResults<UnDesignationSolr> GetDesignationDetails(string queryText)
         {
-            queryText = queryText.Replace(" ", "*");            
+            queryText = queryText.Replace(" ", "?");            
             var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnDesignationSolr>>();
-            var solrQuery = new SolrQuery("designation:*" + queryText + "*");
+            var solrQuery = new SolrQuery("designation:" + queryText + "*");
             var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
             {
                 Rows = 15,
                 Start = 0,
                 Fields = new[] { "designation", "id" }
             });
+
+            if (solrQueryExecute == null || solrQueryExecute.Count == 0)
+            {
+                solrQuery = new SolrQuery("designation:*" + queryText + "*");
+                solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+                {
+                    Rows = 15,
+                    Start = 0,
+                    Fields = new[] { "designation", "id" }
+                });
+            }
+            
             return solrQueryExecute;
         }
 

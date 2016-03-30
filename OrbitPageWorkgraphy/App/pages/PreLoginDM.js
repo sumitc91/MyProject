@@ -218,6 +218,7 @@ appRequire = require
             beforeLoginCompanyDetails: "../../App/pages/beforeLogin/CompanyDetails/CompanyDetails",
             beforeLoginUserDetails: "../../App/pages/beforeLogin/UserDetails/UserDetails",
             beforeLoginSearch: "../../App/pages/beforeLogin/Search/Search",
+            beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
             AngularFileUploadController: "../../App/pages/beforeLogin/controller/common/AngularFileUploadController",//new
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
             
@@ -233,7 +234,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "filedrop", "angularjs_fileUpload_shim", "angularjs_fileUpload", "fileDropScript",
-    "AngularFileUploadController", "ng_infinite_scroll", "bootstrap_wysihtml5", "wysihtml5"
+    "AngularFileUploadController", "ng_infinite_scroll", "bootstrap_wysihtml5", "wysihtml5", "beforeLoginPostStory"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });
