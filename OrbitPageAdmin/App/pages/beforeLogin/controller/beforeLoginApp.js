@@ -5,12 +5,10 @@ define([appLocation.preLogin], function (app) {
     app.config(function ($routeProvider, $httpProvider) {
 
         $routeProvider.when("/", { templateUrl : "../../App/pages/beforeLogin/Index/Index.html" }).
-                       when("/signup/user/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpUser/SignUpUser.html" }).
-                       when("/signup/client/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpClient/SignUpClient.html" }).
-                       when("/signup/user", { templateUrl: "../../App/pages/beforeLogin/SignUpUser/SignUpUser.html" }).
-                       when("/signup/client", { templateUrl: "../../App/Pages/BeforeLogin/SignUpClient/SignUpClient.html" }).
-                       when("/login", { templateUrl: "../../App/Pages/BeforeLogin/Login/Login.html" }).
-                       when("/login/:code", { templateUrl: "../../App/Pages/BeforeLogin/Login/Login.html" }).
+                       
+                       when("/allcompanies", { templateUrl: "../../App/Pages/BeforeLogin/AllCompanies/AllCompanies.html" }).
+                       when("/allusers", { templateUrl: "../../App/Pages/BeforeLogin/AllUsers/AllUsers.html" }).
+                       
                        when("/faq", { templateUrl: "../../App/pages/beforeLogin/FAQ/FAQ.html" }).
                        when("/facebookLogin/:userType", { templateUrl: "../../Resource/templates/beforeLogin/contentView/facebookLogin.html" }).
                        when("/facebookLogin", { templateUrl: "../../Resource/templates/beforeLogin/contentView/facebookLogin.html" }).

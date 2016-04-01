@@ -101,10 +101,10 @@ appRequire = require
             beforeLoginIndex: {
                 deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
             },
-            beforeLoginLoginPage: {
+            AllUsersPageController: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
-            beforeLoginSignUpUser: {
+            AllCompaniesController: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             validateEmail: {
@@ -174,8 +174,8 @@ appRequire = require
             beforeLoginApp: ".././../App/pages/beforeLogin/controller/beforeLoginApp",
             beforeLoginIndex: "../../App/pages/beforeLogin/Index/index",
             beforeLoginSolrService: "../../App/pages/beforeLogin/controller/common/SolrService",
-            beforeLoginLoginPage: "../../App/pages/beforeLogin/Login/Login",
-            beforeLoginSignUpUser: "../../App/pages/beforeLogin/SignUpUser/SignUpUser",
+            AllUsersPageController: "../../App/pages/beforeLogin/AllUsers/AllUsers",
+            AllCompaniesController: "../../App/pages/beforeLogin/AllCompanies/AllCompanies",
             validateEmail: "../../App/pages/beforeLogin/ValidateEmail/validateEmail",
             showMessageTemplate: "../../App/pages/beforeLogin/ShowMessage/showMessageTemplate",
             beforeLoginForgetPassword: "../../App/pages/beforeLogin/ForgetPassword/ForgetPassword",
@@ -196,7 +196,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginApp", "jquery_sidr_min", "beforeLoginIndex",
     "prettify", "bootstrap","urNoticeScript","angular_animate",
     "domReady", "fancybox", "ngAutocomplete", "angucomplete_alt_min",
-    "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
+    "angular_input_stars", "bootstrap_ui", "AllUsersPageController", "AllCompaniesController", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails"
 ], function() {
