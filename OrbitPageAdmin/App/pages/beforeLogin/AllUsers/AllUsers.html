@@ -50,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th style="width: 1%">#</th>
-                                    <th style="width: 20%">Name</th>
+                                    <th style="width: 2%">Name</th>
                                     <th>Profile pic</th>
                                     <th>Account Progress</th>
                                     <th>Status</th>
@@ -59,19 +59,19 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="user in allUsers">
-                                    <td>#</td>
-                                    <td>
-                                        <a ng-bind="user.Name"></a>
-                                        <br />
-                                        <small ng-bind="user.Email"></small>
-                                    </td>
+                                    <td ng-bind="$index"></td>
                                     <td>
                                         <ul class="list-inline">
                                             <li>
                                                 <img ng-src="{{user.Profilepic}}" class="avatar" alt="Avatar">
-                                            </li>                                            
+                                            </li>
                                         </ul>
                                     </td>
+                                    <td>
+                                        <a ng-bind="user.Name"></a>
+                                        <br />
+                                        <small ng-bind="user.Email"></small>
+                                    </td>                                    
                                     <td class="project_progress">
                                         <div class="progress progress_sm">
                                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
