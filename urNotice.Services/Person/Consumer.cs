@@ -3,6 +3,7 @@ using System.Web;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
@@ -50,6 +51,11 @@ namespace urNotice.Services.Person
 
             return loginModel.Login(userName, password, null, CommonConstants.TRUE, isSocialLogin);
             
+        }
+
+        public ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail)
+        {
+            throw new NotImplementedException();
         }
     }
 }

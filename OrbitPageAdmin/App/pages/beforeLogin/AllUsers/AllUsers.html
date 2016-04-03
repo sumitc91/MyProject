@@ -82,14 +82,54 @@
                                         <button type="button" class="btn btn-success btn-xs">Success</button>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" ng-click="getFullUserDetails(user.Email)" data-target="#myModal">Edit</button>                                        
+                                        <!--<a ng-click="getFullUserDetails(user.Email)" data-target="#myModal" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>-->
                                         <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                                     </td>
                                 </tr>                                
                             </tbody>
                         </table>
                         <!-- end project list -->
+                        
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" ng-click="getFullUserDetails('sumitchourasia91@gmail.com')" data-target="#myModal">Open Modal</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4 class="brief"><i ng-bind="userFullDetail.username"></i></h4>
+                                        <div class="left col-xs-7">
+                                            <h2><span ng-bind="userFullDetail.firstName"></span>&nbsp;<span ng-bind="userFullDetail.lastName"></span></h2>
+                                            <p><strong>Source: </strong> <span ng-bind="userDetail.source"></span> </p>
+                                            <ul class="list-unstyled">
+                                                <li><i class="fa fa-phone"></i> gender : <span ng-bind="userFullDetail.gender"></span></li>
+                                                <li><i class="fa fa-phone"></i> isActive : <span ng-bind="userFullDetail.isActive"></span> </li>
+                                                <li><i class="fa fa-phone"></i> locked : <span ng-bind="userFullDetail.locked"></span> </li>
+                                                <li><i class="fa fa-phone"></i> keepMeSignedIn : <span ng-bind="userFullDetail.keepMeSignedIn"></span> </li>
+                                                <li><i class="fa fa-phone"></i> vertexId : <span ng-bind="userFullDetail.vertexId"></span> </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="right col-xs-5 text-center">
+                                            <img class="img-circle img-responsive" alt="" ng-src="{{userFullDetail.imageUrl}}">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

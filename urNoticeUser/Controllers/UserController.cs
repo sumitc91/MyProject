@@ -7,10 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.Admin;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
@@ -51,6 +53,20 @@ namespace urNoticeUser.Controllers
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
 
+        }
+
+        public JsonResult GetFullUserDetails()
+        {
+            var email = Request.QueryString["email"].ToString(CultureInfo.InvariantCulture);
+
+            IPerson adminModel = new Admin();
+            if (!string.IsNullOrEmpty(email))
+            {
+                var clientDetailResponse = adminModel.GetFullUserDetail(email);
+                return Json(clientDetailResponse, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("Email address cann't be empty.", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetNotificationDetails()
