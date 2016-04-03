@@ -61,7 +61,7 @@ define([appLocation.preLogin], function (app) {
                 stopBlockUI();
 
                 $scope.userFullDetail = data.Payload;
-                console.log($scope.userFullDetail);
+                //console.log($scope.userFullDetail);
                 if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                     $scope.$apply();
                 }
