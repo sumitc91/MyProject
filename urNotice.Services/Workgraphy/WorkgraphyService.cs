@@ -72,18 +72,18 @@ namespace urNotice.Services.Workgraphy
                     {
                         _solrWorkgraphyModel.InsertNewWorkgraphy(orbitPageWorkgraphy, false);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         solrDbDataInserted = false;
                     }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     dynamoDbDataInserted = false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 graphDbDataInserted = false;
             }
@@ -128,41 +128,47 @@ namespace urNotice.Services.Workgraphy
             };
 
             var images = new List<String>();
-            foreach (var image in req.ImgurList)
+            if (req.ImgurList != null && req.ImgurList.Count > 0)
             {
-                images.Add(image.data.link);
-            }
-
-            foreach (var location in req.location)
-            {
-                if (location.types != null && location.types.Count > 0)
+                foreach (var image in req.ImgurList)
                 {
-                    switch (location.types[0])
-                    {
-                        case "sublocality_level_1":
-                            orbitPageWorkgraphy.sublocality = location.long_name;
-                            break;
-                        case "locality":
-                            orbitPageWorkgraphy.city = location.long_name;
-                            break;
-                        case "administrative_area_level_2":
-                            orbitPageWorkgraphy.district = location.long_name;
-                            break;
-                        case "administrative_area_level_1":
-                            orbitPageWorkgraphy.state = location.long_name;
-                            break;
-                        case "country":
-                            orbitPageWorkgraphy.country = location.long_name;
-                            break;
-                        case "postal_code":
-                            orbitPageWorkgraphy.postal_code = location.long_name;
-                            break;
-
-                    }
+                    images.Add(image.data.link);
                 }
-                
             }
 
+            if (req.location != null && req.location.Count > 0)
+            {
+                foreach (var location in req.location)
+                {
+                    if (location.types != null && location.types.Count > 0)
+                    {
+                        switch (location.types[0])
+                        {
+                            case "sublocality_level_1":
+                                orbitPageWorkgraphy.sublocality = location.long_name;
+                                break;
+                            case "locality":
+                                orbitPageWorkgraphy.city = location.long_name;
+                                break;
+                            case "administrative_area_level_2":
+                                orbitPageWorkgraphy.district = location.long_name;
+                                break;
+                            case "administrative_area_level_1":
+                                orbitPageWorkgraphy.state = location.long_name;
+                                break;
+                            case "country":
+                                orbitPageWorkgraphy.country = location.long_name;
+                                break;
+                            case "postal_code":
+                                orbitPageWorkgraphy.postal_code = location.long_name;
+                                break;
+
+                        }
+                    }
+
+                }
+            }
+            
             orbitPageWorkgraphy.ImagesUrl = images;
 
             return orbitPageWorkgraphy;
@@ -170,7 +176,7 @@ namespace urNotice.Services.Workgraphy
 
         protected urNoticeSession CheckIfAnonymousUserAlreadyPresentInSystem(StoryPostRequest req)
         {
-            var solrUserEmail = _solrUserModel.GetPersonData(req.Data.email, null, null, null, false);
+            var solrUserEmail = _solrUserModel.GetPersonData(req.Data.email, null, null, null, true);
             urNoticeSession response;
             
             if (solrUserEmail != null)

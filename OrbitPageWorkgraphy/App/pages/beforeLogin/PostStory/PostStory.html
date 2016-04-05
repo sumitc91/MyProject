@@ -16,7 +16,7 @@
                 <span>Company Name : </span>
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name" autofocus="" ng-model="PostStoryModel.companyName">
+                <input type="text" class="form-control" placeholder="Company Name" autofocus="" ng-model="PostStoryModel.companyName1">
             </div>
         </div>
         <hr style="color:blue" />
@@ -90,7 +90,7 @@
                          id="companyName"
                          placeholder="Enter Company Name"
                          pause="500"
-                         selected-object="selectCompany"
+                         selected-object="selectedCompany"
                          remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
                          remote-url-request-formatter="remoteUrlRequestFn"
                          remote-url-data-field="Payload"
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div>
-                <input type="checkbox" value="remember-me" ng-model="KeepMeSignedInCheckBox" checked="checked"> Share Anonymously
+                <input type="checkbox" value="remember-me" ng-model="PostStoryModel.shareAnonymously" checked="checked"> Share Anonymously
             </div>
             <div class="row">
                 <button class="btn btn-warning btn-flat" ng-click="InsertPostStoryContent()">Preview</button>

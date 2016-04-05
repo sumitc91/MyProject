@@ -47,10 +47,10 @@ namespace OrbitPageWorkgraphy.Controllers
             {
                 session = new urNoticeSession(req.Data.email, CommonConstants.NA);
             }
-            //var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
 
-            //IWorkgraphyService workgraphyService = new WorkgraphyService(solrUserModel,solrWorkgraphyModel, dynamoDbModel, graphDbContractModel);
-            //response = workgraphyService.PublishNewWorkgraphy(session,req);
+            IWorkgraphyService workgraphyService = new WorkgraphyService(solrUserModel,solrWorkgraphyModel, dynamoDbModel, graphDbContractModel);
+            response = workgraphyService.PublishNewWorkgraphy(session,req);
             
             return Json(response);
         }

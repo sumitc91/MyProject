@@ -33,8 +33,14 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.Solr
         [SolrField("is_anonymous")]
         public Boolean is_anonymous { get; set; }
 
-        [SolrField("create_dby_email")]
-        public String create_dby_email { get; set; }
+        [SolrField("is_email_verified")]
+        public Boolean is_email_verified { get; set; }
+
+        [SolrField("is_admin_verified")]
+        public Boolean is_admin_verified { get; set; }
+
+        [SolrField("created_by_email")]
+        public String created_by_email { get; set; }
 
         [SolrField("created_by_vertex_id")]
         public String created_by_vertex_id { get; set; }

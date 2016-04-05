@@ -236,6 +236,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             orbitPageCompanyUserWorkgraphyTable.OrbitPageEdgeDetail = orbitPageEdgeDetail;
             orbitPageCompanyUserWorkgraphyTable.CreatedDate = DateTimeUtil.GetUtcTime();
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUserNotification = orbitPageUserNotification;
+            
             context.Save(orbitPageCompanyUserWorkgraphyTable);
             return orbitPageCompanyUserWorkgraphyTable;
         }

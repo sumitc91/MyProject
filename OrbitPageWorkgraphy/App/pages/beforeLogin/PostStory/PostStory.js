@@ -23,7 +23,7 @@ define([appLocation.preLogin], function (app) {
             designation: "",
             designationVertexId:"",
             location: "",
-            shareAnonymously: "",
+            shareAnonymously: false,
             employeeType:""
 
         };
@@ -88,16 +88,28 @@ define([appLocation.preLogin], function (app) {
         }
 
         $scope.selectedDesignation = function (selected) {
+            //console.log(selected);
+            $rootScope.PostStoryModel.designation = selected.description.designation;
+            $rootScope.PostStoryModel.designationVertexId = selected.description.vertexId;
+            //console.log($rootScope.PostStoryModel);
+            //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
+
+        };
+
+        $scope.selectedCompany = function (selected) {
             console.log(selected);
+            $rootScope.PostStoryModel.companyName = selected.description.companyname;
+            $rootScope.PostStoryModel.companyVertexId = selected.description.guid;
+            //console.log($rootScope.PostStoryModel);
             //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
 
         };
 
         $scope.SubmitJobStoryToServer = function() {
             $rootScope.PostStoryModel.story = $('#PostStoryContentData').val();
-            
+                
             var jobStoryData = { Data: $rootScope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
-            console.log($scope.details);
+            //console.log($scope.details);
         //var currentTemplateId = new Date().getTime();
 
             var url = ServerContextPath.empty + '/Story/CreateUrJobGraphy';

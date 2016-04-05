@@ -13,7 +13,7 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public const String TRUE = "true";
         public const String FALSE = "false";
         public const String NA = "NA";
-        public const String AnonymousUserVertex = "NA";
+        public const String AnonymousUserVertex = "5120256";
 
         public const string clientImageUrl = "http://i.imgur.com/zdfwnCAm.jpg";
 
@@ -49,5 +49,6 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public static string PushNotificationArray = "PushNotificationArray";
         public static string CommaDelimeter = ",";
         public static string Facebook = "facebook";
+        public static string WorkgraphyIconImage = "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/3033020a-4a44-4d31-aadc-a7ec8928e94f.jpg";
     }
 }
