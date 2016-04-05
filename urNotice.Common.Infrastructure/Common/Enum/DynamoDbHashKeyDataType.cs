@@ -18,6 +18,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         EdgeDetail,
         Notification,
         Designation,
-        Company
+        Company,
+        OrbitPageWorkgraphy
     }
 }

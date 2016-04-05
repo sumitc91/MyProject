@@ -7,8 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using OrbitPage.Services.UploadImageService;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Services.UploadImageService;
 
 namespace OrbitPage.Controllers
 {

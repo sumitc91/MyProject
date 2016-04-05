@@ -16,6 +16,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         FirstName,
         LastName,
         Username,
+        Email,
         Gender,
         CreatedTime,
         ImageUrl,
@@ -28,6 +29,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         CompanyName,
         Salary,
         JobFromYear,
-        JobToYear
+        JobToYear,
+
+        Heading
     }
 }

@@ -40,6 +40,9 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         public OrbitPageUser OrbitPageUser { get; set; }
 
         [DynamoDBProperty]
+        public OrbitPageWorkgraphy OrbitPageWorkgraphy { get; set; }
+
+        [DynamoDBProperty]
         public OrbitPageCompany OrbitPageCompany { get; set; }
 
         [DynamoDBProperty]

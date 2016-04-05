@@ -44,7 +44,7 @@ namespace urNotice.Services.Solr.SolrDesignation
             {
                 Rows = 15,
                 Start = 0,
-                Fields = new[] { "designation", "id" }
+                Fields = new[] { "designation", "id", "vertexId" }
             });
 
             if (solrQueryExecute == null || solrQueryExecute.Count == 0)

@@ -10,5 +10,6 @@ namespace urNotice.Common.Infrastructure.Common.Config
     {        
         public const string ContactUsReceivingEmailIds = "sumitchourasia91@gmail.com";
         public const string ExceptionsSendToEmail = "sumitchourasia91@gmail.com";
+        public const string AuthKey = "cb607bec-83d8-404f-8bb4-dc246e68be60";
     }
 }

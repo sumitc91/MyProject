@@ -13,6 +13,7 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public const String TRUE = "true";
         public const String FALSE = "false";
         public const String NA = "NA";
+        public const String AnonymousUserVertex = "NA";
 
         public const string clientImageUrl = "http://i.imgur.com/zdfwnCAm.jpg";
 

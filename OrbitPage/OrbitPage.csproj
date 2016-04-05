@@ -176,8 +176,6 @@
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\SignalRNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UploadImageService\imgurService.cs" />
-    <Compile Include="Services\UploadImageService\S3ImageUploadServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -890,6 +888,7 @@
   <ItemGroup>
     <Folder Include="App\third-Party\html5-file-upload\uploads\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

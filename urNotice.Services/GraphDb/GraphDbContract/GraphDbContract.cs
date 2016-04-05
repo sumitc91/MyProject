@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Config;
+using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.Workgraphy.Model;
 
 namespace urNotice.Services.GraphDb.GraphDbContract
 {
@@ -26,6 +28,21 @@ namespace urNotice.Services.GraphDb.GraphDbContract
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(user.email, TitanGraphConfig.Graph, properties);
+
+            return addVertexResponse;
+        }
+
+        public Dictionary<string, string> InsertNewWorkgraphyInGraphDb(StoryPostRequest story)
+        {
+            var properties = new Dictionary<string, string>();
+            properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Workgraphy.ToString();            
+            properties[VertexPropertyEnum.Email.ToString()] = story.Data.email;            
+            properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();            
+            //properties[VertexPropertyEnum.CoverImageUrl.ToString()] = story.ImgurList.Count>0?story.ImgurList[0].:CommonConstants.CompanySquareLogoNotAvailableImage;
+            properties[VertexPropertyEnum.Heading.ToString()] = story.Data.heading;
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(story.Data.email, TitanGraphConfig.Graph, properties);
 
             return addVertexResponse;
         }

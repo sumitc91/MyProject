@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using SolrNet;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
 namespace OrbitPageWorkgraphy
 {
@@ -19,6 +22,12 @@ namespace OrbitPageWorkgraphy
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Startup.Init<UnCompanySolr>(ConfigurationManager.AppSettings["UnCompanySolr"]);
+            Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
+            Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
+            Startup.Init<UnWorkgraphySolr>(ConfigurationManager.AppSettings["UnWorkgraphySolr"]);
+            Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
         }
     }
 }

@@ -39,6 +39,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                         null,
                         null,
                         null,
+                        null,
                         orbitPageGoogleApiContact,
                         null,
                         null,
@@ -80,6 +81,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     null,
                     null,
+                    null,
                     orbitPageVertexDetail,
                     null,
                     null,
@@ -97,6 +99,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     inV,
                     outV,
+                    null,
                     null,
                     null,
                     null,
@@ -125,6 +128,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
+                            null,
                             false                           
                             );
         }
@@ -135,6 +139,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             DynamoDbHashKeyDataType.Company.ToString(),
                             company.CompanyName,
                             companyVertexId,
+                            null,
                             null,
                             null,
                             null,
@@ -167,7 +172,30 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
+                            null,
                             false                            
+                            );
+        }
+
+        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy)
+        {
+            return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                            DynamoDbHashKeyDataType.OrbitPageWorkgraphy.ToString(),
+                            orbitPageWorkgraphy.workgraphyVertexId,
+                            orbitPageWorkgraphy.createdByEmail,
+                            null,
+                            null,
+                            null,
+                            null,  
+                            null,
+                            orbitPageWorkgraphy,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            false
                             );
         }
 
@@ -180,6 +208,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             string inV,
             string outV,
             OrbitPageUser orbitPageUser,
+            OrbitPageWorkgraphy orbitPageWorkgraphy,
             OrbitPageCompany orbitPageCompany,
             OrbitPageDesignation orbitPageDesignation,
             List<VirtualFriendList> orbitPageGoogleApiContact,
@@ -199,6 +228,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             orbitPageCompanyUserWorkgraphyTable.InV = inV;
             orbitPageCompanyUserWorkgraphyTable.OutV = outV;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUser = orbitPageUser;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageWorkgraphy = orbitPageWorkgraphy;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageCompany = orbitPageCompany;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageGoogleApiContact = orbitPageGoogleApiContact;
             orbitPageCompanyUserWorkgraphyTable.FacebookAuthToken = facebookAuthKey;
