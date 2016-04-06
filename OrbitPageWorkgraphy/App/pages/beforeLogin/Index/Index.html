@@ -82,7 +82,7 @@
                 <div class="well">
                     <h1 class="text-center">Today's Blogposts</h1>
                     <div class="list-group">
-                        <a href="#" class="list-group-item" ng-repeat="workgraphy in LatestWorkGraphyList">
+                        <a href="#/story/{{workgraphy.vertex_id}}" class="list-group-item" ng-repeat="workgraphy in LatestWorkGraphyList">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
                                     <i><img class="img-responsive" alt="Bootstrap template" src="{{workgraphy.icon_image}}" style="height: 200px; width: 200px;" /></i>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h4 class="list-group-item-heading" ng-bind="workgraphy.heading">Blog Title</h4>
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>                                                                 
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>
                                 <span ng-bind="workgraphy.short_desc | cut:true:300:' ...'"> </span>
                                 <br />
                                 by <p href="#" ng-bind="workgraphy.created_by_email"></p>

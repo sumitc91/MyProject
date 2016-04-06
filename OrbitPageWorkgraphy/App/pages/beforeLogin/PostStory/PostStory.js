@@ -86,6 +86,40 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        $scope.onFileSelect = function ($files) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    //userSession.imgurImageTemplateModeratingPhotos.push(data);
+                    //$scope.refreshModeratingPhotosListDiv();
+                    //angular.element(document.getElementById('ModeratingPhotosViewAfterUploadId')).scope().refreshModeratingPhotosListDiv(); 
+                    //console.log("moderationgphotosscript");
+                    
+
+                    $rootScope.wysiHTML5InputImageTextBoxId = data.data.link_m;
+                    console.log($scope.wysiHTML5InputImageTextBoxId);
+
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = data.data;
+                    });
+
+                });
+
+            }
+
+        };
         $scope.InsertPostStoryContent = function() {
 
             var PostStoryContentData = $('#PostStoryContentData').val();
