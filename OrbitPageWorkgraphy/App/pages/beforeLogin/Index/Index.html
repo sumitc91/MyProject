@@ -2,50 +2,7 @@
     <div class="row" style="min-height: 50px;"></div>
     <div class="row">
 
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-
-            <h1 class="page-header">
-                Workgraphy
-                <small>Where you share professional stories.</small><a type="submit" class="btn btn-primary" href="#/poststory">Share Your Workgraphy</a>
-            </h1>
-
-            <!-- First Blog Post -->
-            <div ng-repeat="workgraphy in LatestWorkGraphyList">
-                <h2>
-                    <a href="#" ng-bind="workgraphy.heading"></a>
-                </h2>
-                <p class="lead">
-                    by <a href="#" ng-bind="workgraphy.created_by_email"></a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>
-                <hr>
-                <img class="img-responsive" ng-src="{{workgraphy.icon_image}}" alt="" style="height: 300px; width: 900px;">
-                <hr>
-                <div ng-bind-html="workgraphy.story"></div>
-                <a class="btn btn-primary" href="#/story/3">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr>
-            </div>
-            
-
-            
-
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
-
-        </div>
-
-        <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
-
             <!-- Blog Search Well -->
             <div class="well">
                 <h4>Blog Search</h4>
@@ -59,7 +16,9 @@
                 </div>
                 <!-- /.input-group -->
             </div>
+        </div>
 
+        <div class="col-md-4">
             <!-- Blog Categories Well -->
             <div class="well">
                 <h4>Blog Categories</h4>
@@ -101,15 +60,146 @@
                 </div>
                 <!-- /.row -->
             </div>
+        </div>
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
 
-            <!-- Side Widget Well -->
-            <div class="well">
-                <h4>Side Widget Well</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
     <!-- /.row -->
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <h1 class="text-center">Today's Blogposts</h1>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item" ng-repeat="workgraphy in LatestWorkGraphyList">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <i><img class="img-responsive" alt="Bootstrap template" src="{{workgraphy.icon_image}}" style="height: 200px; width: 200px;" /></i>
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="list-group-item-heading" ng-bind="workgraphy.heading">Blog Title</h4>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>                                 
+                                <p class="list-group-item-text" ng-bind="workgraphy.short_desc">
+                                </p>
+                                <br />
+                                by <p href="#" ng-bind="workgraphy.created_by_email"></p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="ratetext">Rate it</div>
+                                        <i class="fa fa-thumbs-o-up votes"></i><i class="fa fa-thumbs-o-down votes"></i>
+                                        <div class="stars"></div>
+                                        <h2>464  <small>Clicks</small></h2>
+                                        <div id="rate1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>                        
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+   
 </div>
+
+<style>
+    #cnt1 {
+        background-color: rgba(215, 212, 212, 0.88);
+        width: 90%;
+        margin-bottom: 70px;
+    }
+
+    .feature {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .feature > div > div {
+        padding: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .feature > div:hover > div {
+        margin-top: -10px;
+        border: 1px solid rgb(128, 128, 128);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 5px;
+        background: rgba(232, 215, 215, 0.10);
+        transition: 0.3s;
+    }
+</style>
+
+<style>
+    .blogicon {
+        font-size: 217px;
+        color: #5CB85C;
+    }
+
+    .ratetext {
+        font-size: 37px;
+        text-decoration: underline;
+        padding-bottom: 10px;
+    }
+
+    .votes {
+        font-size: 47px;
+        padding-right: 20px;
+        color: #197BB5;
+    }
+
+    a.list-group-item {
+        height: auto;
+        min-height: 250px;
+    }
+
+        a.list-group-item:hover, a.list-group-item:focus {
+            border-left: 10px solid #5CB85C;
+            border-right: 10px solid #5CB85C;
+        }
+
+    a.list-group-item {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+</style>
+
+<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#rate1').shieldRating({
+            max: 10,
+            step: 0.1,
+            value: 7.3,
+            markPreset: false
+        });
+        $('#rate2').shieldRating({
+            max: 10,
+            step: 0.1,
+            value: 2.7,
+            markPreset: false
+        });
+        $('#rate3').shieldRating({
+            max: 10,
+            step: 0.1,
+            value: 9.3,
+            markPreset: false
+        });
+    });
+</script>
