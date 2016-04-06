@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.ServiceLocation;
 using SolrNet;
+using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
@@ -36,7 +37,7 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
                 latitude = orbitPageWorkgraphy.latitude,
                 longitude = orbitPageWorkgraphy.longitude,
                 postal_code = orbitPageWorkgraphy.postal_code,
-                short_desc = orbitPageWorkgraphy.heading,
+                short_desc = orbitPageWorkgraphy.subTitle,
                 state = orbitPageWorkgraphy.state,
                 story = orbitPageWorkgraphy.story,
                 sublocality = orbitPageWorkgraphy.sublocality,
@@ -54,6 +55,20 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
             
 
             return InsertNewWorkgraphyToSolr(solrWorkgraphy,false);
+        }
+
+        public SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage)
+        {
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnWorkgraphySolr>>();
+            var solrQuery = new SolrQuery("*:*");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = perPage,
+                Start = page,
+                Fields = new[] { "id", "vertex_id", "heading", "short_desc", "story", "company_name", "company_vertex_id", "is_anonymous", "is_email_verified", "is_admin_verified", "created_by_email", "created_by_vertex_id", "icon_image", "created_date", "designation_name", "designation_vertex_id", "city", "sublocality", "state", "postal_code", "country", "district" }
+            });
+
+            return solrQueryExecute;
         }
 
         public Dictionary<String, String> InsertNewWorkgraphyToSolr(UnWorkgraphySolr solrWorkgraphy, bool toBeOptimized)

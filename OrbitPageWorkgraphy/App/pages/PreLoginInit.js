@@ -5,7 +5,7 @@
  */
 define(['angular'], function() {
 
-    var dependances = ['restangular','ngAnimate','ngResource','ngRoute', 'ngSanitize', 'ngAutocomplete', 'angucomplete-alt', 'angular-input-stars', 'ui.bootstrap'];
+    var dependances = ['restangular','ngtimeago','ngAnimate','ngResource','ngRoute', 'ngSanitize', 'ngAutocomplete', 'angucomplete-alt', 'angular-input-stars', 'ui.bootstrap'];
     var app = angular.module("beforeLoginApp", dependances);
     return app;
 });

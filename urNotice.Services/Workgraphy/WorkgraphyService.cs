@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SolrNet;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Model.Workgraphy.Model;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.GraphDb.GraphDbContract;
@@ -34,6 +36,11 @@ namespace urNotice.Services.Workgraphy
             response = new ResponseModel<StoryPostResponse>();
         }
 
+        public SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage)
+        {
+            return _solrWorkgraphyModel.GetLatestWorkgraphy(page, perPage);
+        }
+
         public ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req)
         {
             req.Data.email = req.Data.email.ToLower();
@@ -60,7 +67,7 @@ namespace urNotice.Services.Workgraphy
             //TODO: need to implement try catch for roll back if any exception occurs
             try
             {
-                var workgraphyVertexIdInfo = _graphDbContractModel.InsertNewWorkgraphyInGraphDb(workgraphy);
+                var workgraphyVertexIdInfo = _graphDbContractModel.InsertNewWorkgraphyInGraphDb(session,workgraphy);
                 workgraphy.vertexId = workgraphyVertexIdInfo[TitanGraphConstants.Id];
                 try
                 {
@@ -124,7 +131,7 @@ namespace urNotice.Services.Workgraphy
                 heading = req.Data.heading,
                 shareAnonymously = req.Data.shareAnonymously,
                 story = req.Data.story,
-                
+                subTitle = req.Data.subTitle
             };
 
             var images = new List<String>();

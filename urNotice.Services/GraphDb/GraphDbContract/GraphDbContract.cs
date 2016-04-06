@@ -9,6 +9,7 @@ using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.Workgraphy.Model;
+using urNotice.Common.Infrastructure.Session;
 
 namespace urNotice.Services.GraphDb.GraphDbContract
 {
@@ -32,7 +33,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             return addVertexResponse;
         }
 
-        public Dictionary<string, string> InsertNewWorkgraphyInGraphDb(StoryPostRequest story)
+        public Dictionary<string, string> InsertNewWorkgraphyInGraphDb(urNoticeSession session,StoryPostRequest story)
         {
             var properties = new Dictionary<string, string>();
             properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Workgraphy.ToString();            
@@ -43,6 +44,31 @@ namespace urNotice.Services.GraphDb.GraphDbContract
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(story.Data.email, TitanGraphConfig.Graph, properties);
+
+           
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.PublishedBy.ToString();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = story.Data.companyVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyStory.ToString();
+
+            graphEdgeDbModel = new GraphEdgeDb();
+            addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+
+            properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = story.Data.designationVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyDesignationStory.ToString();
+
+            graphEdgeDbModel = new GraphEdgeDb();
+            addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
 
             return addVertexResponse;
         }

@@ -68,6 +68,9 @@ appRequire = require
             angularjs_fileUpload: {//new
                 deps: ["angular", "jquery"]
             },
+            ngtimeago: {
+                deps: ["jquery", "angular"]
+            },
             wysihtml5: {
                 deps: ["jquery"]
             },
@@ -123,7 +126,7 @@ appRequire = require
                 deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ng_infinite_scroll"]
             },
             beforeLoginIndex: {
-                deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
+                deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate", "ngtimeago"]
             },
             beforeLoginLoginPage: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
@@ -193,6 +196,7 @@ appRequire = require
             domReady: "../../App/js/domReady",
             fileDropScript: "../../App/third-Party/html5-file-upload/assets/js/script",
             fancybox: "../../App/third-Party/fancybox/source/jquery.fancybox.js?v=2.1.5",//new  
+            ngtimeago: "../../App/js/angular/ngtimeago",
             wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
             angularjs_fileUpload_shim: "../../App/third-Party/angular-file-upload-master/dist/angular-file-upload-shim.min",
             angularjs_fileUpload: "../../App/third-Party/angular-file-upload-master/dist/angular-file-upload.min",
@@ -234,7 +238,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angular_input_stars", "bootstrap_ui", "beforeLoginLoginPage", "beforeLoginSignUpUser", "validateEmail",
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "filedrop", "angularjs_fileUpload_shim", "angularjs_fileUpload", "fileDropScript",
-    "AngularFileUploadController", "ng_infinite_scroll", "bootstrap_wysihtml5", "wysihtml5", "beforeLoginPostStory"
+    "AngularFileUploadController", "ng_infinite_scroll", "bootstrap_wysihtml5", "wysihtml5", "beforeLoginPostStory", "ngtimeago"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

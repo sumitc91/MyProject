@@ -27,6 +27,7 @@ namespace urNoticeSolr
             Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
             Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
             Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
+            Startup.Init<UnWorkgraphySolr>(ConfigurationManager.AppSettings["UnWorkgraphySolr"]);
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

@@ -16,10 +16,14 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.ErrorLogger;
+using urNotice.Services.GraphDb.GraphDbContract;
+using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.SessionService;
 using urNotice.Services.Solr.SolrCompany;
 using urNotice.Services.Solr.SolrDesignation;
 using urNotice.Services.Solr.SolrUser;
+using urNotice.Services.Solr.SolrWorkgraphy;
+using urNotice.Services.Workgraphy;
 
 namespace urNoticeSolr.Controllers
 {
@@ -274,6 +278,45 @@ namespace urNoticeSolr.Controllers
                 response.Payload = queryResponse;
                 response.Status = 200;
                 response.Message = "Success";
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                response.Status = 500;
+                response.Message = "Exception occured";
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetLatestWorkgraphy()
+        {
+            var response = new ResponseModel<SolrQueryResults<UnWorkgraphySolr>>();
+
+            ISolrUser solrUserModel = new SolrUser();
+            ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            IGraphDbContract graphDbContractModel = new GraphDbContract();
+
+            var queryResponse = new Dictionary<String, Object>();
+            //var q = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
+            var page = Convert.ToInt32(Request.QueryString["page"].ToString(CultureInfo.InvariantCulture));
+            var perpage = Convert.ToInt32(Request.QueryString["perpage"].ToString(CultureInfo.InvariantCulture));
+
+            var totalMatch = "";
+            if (Request.QueryString["totalMatch"] != null && Request.QueryString["totalMatch"] != "null" && Request.QueryString["totalMatch"] != "undefined")
+            {
+                totalMatch = Request.QueryString["totalMatch"].ToString(CultureInfo.InvariantCulture);
+            }
+
+            try
+            {
+                IWorkgraphyService workgraphyService = new WorkgraphyService(solrUserModel, solrWorkgraphyModel, dynamoDbModel, graphDbContractModel);
+                response.Payload = workgraphyService.GetLatestWorkgraphy(page, perpage);
+                queryResponse["count"] = totalMatch;
+                response.Message = totalMatch;
+                response.Status = 200;
+                
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace urNotice.Common.Infrastructure.Model.Workgraphy.Model
     public class StoryPostData
     {
         public String heading { get; set; }
+        public String subTitle { get; set; }
         public String companyName { get; set; }
         public String companyVertexId { get; set; }
         public String story { get; set; }
