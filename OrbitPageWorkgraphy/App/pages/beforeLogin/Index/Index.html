@@ -89,9 +89,8 @@
                             </div>
                             <div class="col-md-6">
                                 <h4 class="list-group-item-heading" ng-bind="workgraphy.heading">Blog Title</h4>
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>                                 
-                                <p class="list-group-item-text" ng-bind="workgraphy.short_desc">
-                                </p>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>                                                                 
+                                <span ng-bind="workgraphy.short_desc | cut:true:300:' ...'"> </span>
                                 <br />
                                 by <p href="#" ng-bind="workgraphy.created_by_email"></p>
                             </div>

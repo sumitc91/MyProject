@@ -28,6 +28,10 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        if ($rootScope.isUserLoggedIn == true) {
+            $rootScope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
+        }
+
         $scope.refreshModeratingPhotosListDiv = function() {
             $scope.imgurImageTemplateModeratingPhotos = userSession.imgurImageTemplateModeratingPhotos;
             $('.fancybox').fancybox();
