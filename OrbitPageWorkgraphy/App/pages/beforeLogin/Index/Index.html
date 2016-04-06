@@ -176,30 +176,3 @@
         border-right: 10px solid transparent;
     }
 </style>
-
-<!-- you need to include the shieldui css and js assets in order for the charts to work -->
-<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-
-<script type="text/javascript">
-    jQuery(function ($) {
-        $('#rate1').shieldRating({
-            max: 10,
-            step: 0.1,
-            value: 7.3,
-            markPreset: false
-        });
-        $('#rate2').shieldRating({
-            max: 10,
-            step: 0.1,
-            value: 2.7,
-            markPreset: false
-        });
-        $('#rate3').shieldRating({
-            max: 10,
-            step: 0.1,
-            value: 9.3,
-            markPreset: false
-        });
-    });
-</script>
