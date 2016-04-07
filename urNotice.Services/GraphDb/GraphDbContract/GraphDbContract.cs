@@ -116,5 +116,18 @@ namespace urNotice.Services.GraphDb.GraphDbContract
 
             return response;
         }
+
+        public String CompanyWorkgraphyInfo(string companyVertexId, string from, string to)
+        {
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
+            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[workgraphyInfo:it.out('WorkgraphyStory').order{it.b.CreatedTime <=> it.a.CreatedTime}[" + from + ".." + to + "]]}";
+            //string gremlinQuery1 = "g.v(" + companyVertexId + ").order{it.b.CreatedTime <=> it.a.CreatedTime}[" + from + ".." + to + "].transform{[workgraphyInfo:it.out('WorkgraphyStory')]}";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, companyVertexId, TitanGraphConfig.Graph, null);
+
+            return response;
+        }
     }
 }

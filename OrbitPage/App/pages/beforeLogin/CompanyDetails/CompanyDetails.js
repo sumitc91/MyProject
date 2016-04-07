@@ -65,9 +65,10 @@ define([appLocation.preLogin], function (app) {
                     $scope.companyDetails.averagerating = Math.round($scope.companyDetails.averagerating);
                     $scope.$apply();
                     showGoogleChart();
-                    //console.log($scope.companyDetails);
-                    companySalaryDetailsById();
+                    //console.log($scope.companyDetails);                    
                     getCompanyCompetitorsDetail($scope.companyDetails.size, $scope.companyDetails.rating, $scope.companyDetails.speciality);
+                    companySalaryDetailsById();
+                    companyWorkgraphyDetailsById();
                 }
                 else {
                     showToastMessage("Warning", data.Message);
@@ -93,6 +94,27 @@ define([appLocation.preLogin], function (app) {
                 //console.log(data);
                 $scope.CompanySalaryDetails = data.results;
                 
+            });
+
+        }
+
+        function companyWorkgraphyDetailsById() {
+            var url = ServerContextPath.userServer + '/User/GetCompanyWorkgraphyInfo?from=0&to=10&vertexId=' + $scope.companyid;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv')
+            };
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //console.log(data);
+                $scope.CompanyWorkgraphyDetails = data.results[0].workgraphyInfo;
+
             });
 
         }
