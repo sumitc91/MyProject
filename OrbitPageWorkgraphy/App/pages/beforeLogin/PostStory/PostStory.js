@@ -177,7 +177,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.SubmitJobStoryToServer = function() {
             $rootScope.PostStoryModel.story = $('#PostStoryContentData').val();
-                
+            $rootScope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/(<([^>]+)>)/ig, "");
             var jobStoryData = { Data: $rootScope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
             //console.log($scope.details);
         //var currentTemplateId = new Date().getTime();
