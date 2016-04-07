@@ -146,15 +146,44 @@
                                     </uib-tab>
                                     <uib-tab heading="Salary">
                                         <div class="row">
-                                            <div ng-repeat="companySalary in CompanySalaryDetails">
-                                                <br />
-                                                <div ng-repeat="salaryInfo in companySalary.salaryInfo">
-                                                    <div>&nbsp; &nbsp; <span ng-bind="companySalary.designationInfo[$index].DesignationName"></span> --&nbsp;Rs &nbsp;<b><span ng-bind="salaryInfo.SalaryAmount"></span></b></div><br />
-
+                                            <br />
+                                            <div class="container" ng-repeat="companySalary in CompanySalaryDetails" style="width: 70%;">
+                                                <div class="row" ng-repeat="salaryInfo in companySalary.salaryInfo">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                                                        <div class="panel panel-default">
+                                                            <div class="row padall">
+                                                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                                    <span></span>
+                                                                    <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/Starting-Salary.jpg" />
+                                                                </div>
+                                                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                                                    <div class="clearfix">
+                                                                        <div class="pull-left">
+                                                                            <span class="fa fa-inr icon"> <span ng-bind="salaryInfo.SalaryAmount"></span></span>
+                                                                        </div>
+                                                                        <div class="pull-right">
+                                                                            Approx
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4><span class="fa fa-map-marker icon"></span> <span ng-bind="companySalary.designationInfo[$index].DesignationName"></span></h4>
+                                                                        On An Average. <span class="fa fa-search icon pull-right"> More</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <br />
-                                                <hr />
                                             </div>
+                                            <!--<div ng-repeat="companySalary in CompanySalaryDetails">
+                                                    <br />
+                                                    <div ng-repeat="salaryInfo in companySalary.salaryInfo">
+                                                        <div>&nbsp; &nbsp; <span ng-bind="companySalary.designationInfo[$index].DesignationName"></span> --&nbsp;Rs &nbsp;<b><span ng-bind="salaryInfo.SalaryAmount"></span></b></div><br />
+
+                                                    </div>
+                                                    <br />
+                                                    <hr />
+                                                </div>-->
                                         </div>
                                     </uib-tab>
                                     <uib-tab heading="Notice Period">Notice Period Justified content</uib-tab>
