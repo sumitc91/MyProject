@@ -36,7 +36,8 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
             {
                 if (userInfo.OrbitPageUser.isActive == CommonConstants.TRUE || isSocialLogin)
                 {
-                    response.Payload = CreateLoginResponseModel(userInfo.OrbitPageUser); 
+                    response.Payload = CreateLoginResponseModel(userInfo.OrbitPageUser);
+                    response.Status = 200;
                     try
                     {
                         userInfo.OrbitPageUser.keepMeSignedIn = keepMeSignedIn.Equals("true",
