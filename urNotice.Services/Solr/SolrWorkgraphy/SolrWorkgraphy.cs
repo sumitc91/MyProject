@@ -66,6 +66,20 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
                 Rows = perPage,
                 Start = page,
                 OrderBy = new[] { new SortOrder("created_date", Order.DESC)},
+                Fields = new[] { "id", "vertex_id", "heading", "short_desc", "company_name", "company_vertex_id", "is_anonymous", "is_email_verified", "is_admin_verified", "created_by_email", "created_by_vertex_id", "icon_image", "created_date", "designation_name", "designation_vertex_id", "city", "sublocality", "state", "postal_code", "country", "district" },
+            });
+
+            return solrQueryExecute;
+        }
+
+        public SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId)
+        {
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnWorkgraphySolr>>();
+            var solrQuery = new SolrQuery("(vertex_id:" + vertexId+")");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 1,
+                Start = 0,               
                 Fields = new[] { "id", "vertex_id", "heading", "short_desc", "story", "company_name", "company_vertex_id", "is_anonymous", "is_email_verified", "is_admin_verified", "created_by_email", "created_by_vertex_id", "icon_image", "created_date", "designation_name", "designation_vertex_id", "city", "sublocality", "state", "postal_code", "country", "district" },
             });
 
