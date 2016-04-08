@@ -487,22 +487,9 @@ c0 -98 -1 -105 -20 -105 -19 0 -20 7 -20 105 0 98 1 105 20 105 19 0 20 -7 20
                             <h3 ng-bind="beforeLoginIndexLatestWorkgraphy"></h3>
                         </div>
 
-                        <div class="latest-jobs-section white-container">
+                        <div class="latest-jobs-section white-container" ng-repeat="workgraphy in LatestWorkGraphyList">
                             <div class="flexslider clearfix">
                                 <ul class="slides">
-                                    <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;" class="">
-                                        <div class="image">
-                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
-                                            <a class="btn btn-default fa fa-search" href="#"></a>
-                                            <a class="btn btn-default fa fa-link" href="#"></a>
-                                        </div>
-
-                                        <div class="content">
-                                            <h6>Front-End Developer at Envato</h6>
-                                            <span class="location">Sydney, Australia</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
-                                        </div>
-                                    </li>
 
                                     <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;">
                                         <div class="image">
@@ -512,41 +499,14 @@ c0 -98 -1 -105 -20 -105 -19 0 -20 7 -20 105 0 98 1 105 20 105 19 0 20 -7 20
                                         </div>
 
                                         <div class="content">
-                                            <h6>Front-End Developer at Envato</h6>
-                                            <span class="location">Sydney, Australia</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
+                                            <a href="#/story/{{workgraphy.vertex_id}}"><h6 ng-bind="workgraphy.heading | cut:true:50:' ...'"></h6></a>
+                                            <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p><br />
+                                            <p ng-bind="workgraphy.short_desc | cut:true:200:' ...'"></p><br />
+                                            by <span href="#" ng-bind="workgraphy.created_by_email"></span>
                                         </div>
                                     </li>
 
-                                    <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
-                                        <div class="image">
-                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
-                                            <a class="btn btn-default fa fa-search" href="#"></a>
-                                            <a class="btn btn-default fa fa-link" href="#"></a>
-                                        </div>
-
-                                        <div class="content">
-                                            <h6>Front-End Developer at Envato</h6>
-                                            <span class="location">Sydney, Australia</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
-                                        </div>
-                                    </li>
-
-                                    <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
-                                        <div class="image">
-                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
-                                            <a class="btn btn-default fa fa-search" href="#"></a>
-                                            <a class="btn btn-default fa fa-link" href="#"></a>
-                                        </div>
-
-                                        <div class="content">
-                                            <h6>Front-End Developer at Envato</h6>
-                                            <span class="location">Sydney, Australia</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, hic corrupti nobis consequuntur nam praesentium dolorem quo accusamus laborum ab. <a class="read-more" href="#">Read More</a></p>
-                                        </div>
-                                    </li>
                                 </ul>
-                                <ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li></ol>
                             </div>
                         </div> <!-- end .latest-jobs-section -->
 

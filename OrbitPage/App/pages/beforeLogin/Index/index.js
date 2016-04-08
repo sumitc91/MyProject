@@ -101,7 +101,44 @@ define([appLocation.preLogin], function (app) {
             
         }
 
+        getLatestWorkgraphy();
 
+        function getLatestWorkgraphy() {
+
+            $scope.currentPage = 0;
+            $scope.perpage = 3;
+            $scope.totalMatch = 10;
+            var url = ServerContextPath.solrServer + '/Search/GetLatestWorkgraphy?page=' + $scope.currentPage + '&perpage=' + $scope.perpage + '&totalMatch=' + $scope.totalMatch;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                console.log(data);
+                if (data.Status == "200") {
+                   
+                    $scope.totalMatch = data.Message;                    
+                    $scope.LatestWorkGraphyList = data.Payload;
+                    
+                    if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                        $scope.$apply();
+                    }                    
+                }
+                else {
+                    showToastMessage("Warning", data.Message);
+                }
+            });
+
+
+        }
         $scope.myFunct = function(keyEvent) {
             if (keyEvent.which === 13) {
                 location.href = "/#search/?q=" + $("#companyName_value").val() + "&page=1&perpage=10";
