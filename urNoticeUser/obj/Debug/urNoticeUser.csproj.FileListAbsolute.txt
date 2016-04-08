@@ -103,4 +103,3 @@ C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.dll
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.pdb
 C:\code\svn\OrbitPage\urNoticeUser\bin\log4net.dll
 C:\code\svn\OrbitPage\urNoticeUser\bin\GaDotNet.Common.dll
-C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.csprojResolveAssemblyReference.cache

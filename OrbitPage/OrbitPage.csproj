@@ -167,6 +167,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SocialAuthController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -389,6 +390,8 @@
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.js" />
+    <Content Include="App\pages\beforeLogin\Workgraphy\Workgraphy.html" />
+    <Content Include="App\pages\beforeLogin\Workgraphy\Workgraphy.js" />
     <Content Include="App\pages\PreLoginDM.js" />
     <Content Include="App\pages\PreLoginInit.js" />
     <Content Include="App\Property\urNoticeProperties.js" />

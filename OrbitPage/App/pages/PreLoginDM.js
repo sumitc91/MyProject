@@ -173,6 +173,12 @@ appRequire = require
             beforeLoginPostStory: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "wysihtml5", "bootstrap_wysihtml5", "prettify", "bootstrap", "filedrop", "fileDropScript", "domReady", "fancybox", "AngularFileUploadController", "ngAutocomplete", "angucomplete_alt_min"]
             },
+            beforeLoginWorkgraphy: {
+                deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "bootstrap_ui", "angular_animate", "ngtimeago"]
+            },
+            beforeLoginSingleBlog: {
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
+            },
         },
         paths: {
             //==============================================================================================================
@@ -240,6 +246,8 @@ appRequire = require
             beforeLoginUserProfile: "../../App/pages/beforeLogin/UserProfile/UserProfile",
             beforeLoginViewPostDetail: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail",
             beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
+            beforeLoginWorkgraphy: "../../App/pages/beforeLogin/Workgraphy/Workgraphy",
+            beforeLoginSingleBlog: "../../App/pages/beforeLogin/SingleBlog/SingleBlog",
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
             
         },
@@ -255,7 +263,8 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "showMessageTemplate", "beforeLoginForgetPassword", "beforeLoginResetPassword", "beforeLoginEditPage",
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
-    "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory"
+    "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
+    "beforeLoginSingleBlog"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

@@ -1,35 +1,33 @@
 ﻿<div ng-controller="beforeLoginPostStory">
     <div class="row" style="min-height: 90px;"></div>
-
-   
     <div class="container">
-        
+
         <div class="row">
             <div class="col-md-2">
                 <span>Heading : </span>
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Heading" autofocus="" ng-model="PostStoryModel.heading"> 
+                <input type="text" class="form-control" placeholder="Heading" autofocus="" ng-model="PostStoryModel.heading">
             </div>
         </div>
         <br />
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-2">
-                <span>Company Name : </span>
+                <span>Subtitle for Story : </span>
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name" autofocus="" ng-model="PostStoryModel.companyName">
+                <input type="text" class="form-control" placeholder="Subtitle for Story" autofocus="" ng-model="PostStoryModel.subTitle">
             </div>
-        </div>
+        </div>-->
         <hr style="color:blue" />
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="hero-unit">
-                    <textarea class="textarea" placeholder="Enter Your Jobgraphy ..." style="width: 100%; height: 250px" id="PostStoryContentData"></textarea>
+                    <textarea class="textarea" placeholder="Enter Your Jobgraphy ..." style="width: 100%; height: 450px" id="PostStoryContentData"></textarea>
                 </div>
             </div>
-            <div class="col-md-4">
-                
+            <div class="col-md-3">
+
                 <div class="control-group">
                     <label class="control-label">
                         <b><small>drag and drop set of images</small></b>
@@ -37,6 +35,7 @@
                     <div class="controls">
                         <div class="dropbox" id="dropboxModeratingPhotos">
                             <span class="message">Drop images here to upload. <br /><i>(they will only be visible to you)</i></span>
+                            <input type="file" ng-file-select="onFileSelectLogoUrl($files)">
                         </div>
                     </div>
                 </div>
@@ -54,101 +53,93 @@
                 </div>
             </div>
         </div>
+        <hr />
         <!--<div class="row" ng-show="!isUserLoggedIn">-->
         <div class="row">
-                <div class="col-md-6">
-                    <!--<input type="text" class="form-control" placeholder="Name" autofocus="" ng-model="PostStoryModel.name">-->
-                    <!--remote-url="http://urnotice.com/solr/getdetails?q="-->
-                    <!--remote-url="http://localhost:40287/solr/getdetails?q="-->
-                    <!--image-field="imageurl_l"-->
-                    <div angucomplete-alt
-                         id="ex5"
-                         placeholder="Designation"
-                         pause="500"
-                         selected-object="selectedProject"
-                         remote-url="http://{{sitehosturl}}/solr/GetDesignationDetails?q="
-                         remote-url-request-formatter="remoteUrlRequestFn"
-                         remote-url-data-field="Payload"
-                         title-field="designation"
-                         minlength="2"
-                         ng-model="PostStoryModel.designation"
-                         input-class="form-control form-control-small"
-                         match-class="highlight">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Email" autofocus="" ng-model="PostStoryModel.email">
+            <div class="col-md-6">
+                <!--<input type="text" class="form-control" placeholder="Name" autofocus="" ng-model="PostStoryModel.name">-->
+                <!--remote-url="http://urnotice.com/solr/getdetails?q="-->
+                <!--remote-url="http://localhost:40287/solr/getdetails?q="-->
+                <!--image-field="imageurl_l"-->
+                <div angucomplete-alt
+                     id="ex5"
+                     placeholder="Designation"
+                     pause="500"
+                     selected-object="selectedDesignation"
+                     remote-url="http://{{sitehosturl}}/Search/GetDesignationDetails?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="designation"
+                     minlength="2"
+                     ng-model="PostStoryModel.designation"
+                     input-class="form-control form-control-small"
+                     match-class="highlight">
                 </div>
             </div>
-            <br />
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Email" autofocus="" ng-model="PostStoryModel.email" ng-disabled="isUserLoggedIn">
+            </div>
+        </div>
+        <br />
 
-            <!--<div class="row" ng-show="!isUserLoggedIn">-->
-            <div class="row">
-                <div class="col-md-6">
-                    <!--<input type="text" class="form-control" placeholder="Company Name" autofocus="" auto-complete ui-items="designationsAutoComplete" ng-model="selected">
-                        selected = {{selected}}-->
-                    <!--<input type="text" class="form-control" placeholder="Your Designation" autofocus="" ng-model="PostStoryModel.designation">-->
-                    <div angucomplete-alt
-                         id="companyName"
-                         placeholder="Enter Company Name"
-                         pause="500"
-                         selected-object="addCompany"
-                         remote-url="http://{{sitehosturl}}/solr/GetCompanyDetailsAutocomplete?q="
-                         remote-url-request-formatter="remoteUrlRequestFn"
-                         remote-url-data-field="Payload"
-                         title-field="companyname"
-                         minlength="2"
-                         input-class="form-control form-control-small"
-                         ng-model="companyName"
-                         image-field="squarelogourl"
-                         match-class="highlight"/>
-                </div> 
-                <div class="col-md-6">
-                    <!--<input type="text" class="form-control" placeholder="Your Location" autofocus="" ng-model="PostStoryModel.location">-->
-                    <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details" />
-
-                </div>
+        <!--<div class="row" ng-show="!isUserLoggedIn">-->
+        <div class="row">
+            <div class="col-md-6">
+                <!--<input type="text" class="form-control" placeholder="Company Name" autofocus="" auto-complete ui-items="designationsAutoComplete" ng-model="selected">
+                    selected = {{selected}}-->
+                <!--<input type="text" class="form-control" placeholder="Your Designation" autofocus="" ng-model="PostStoryModel.designation">-->
+                <div angucomplete-alt
+                     id="companyName"
+                     placeholder="Enter Company Name"
+                     pause="500"
+                     selected-object="selectedCompany"
+                     remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="companyname"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     ng-model="companyName"
+                     image-field="logourl"
+                     match-class="highlight" ng-keypress="myFunct($event)" />
+            </div>
+            <div class="col-md-6">
+                <!--<input type="text" class="form-control" placeholder="Your Location" autofocus="" ng-model="PostStoryModel.location">-->
+                <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details" />
 
             </div>
-            <div class="row">
-                <div class="form-group move-down">
-                    <label for="Autocomplete2">Autocomplete Model</label>
 
-                    <br>
-                    <b>autocomplete</b>: {{autocomplete}}
-                    <br><br>
-                    <b>details (formatted address)</b>: {{details.formatted_address}}
-
-                </div>
-            </div>
-            <div>
-                <input type="checkbox" value="remember-me" ng-model="KeepMeSignedInCheckBox" checked="checked"> Share Anonymously
-            </div>
-            <div class="row">
-                <button class="btn btn-warning btn-flat" ng-click="InsertPostStoryContent()">Preview</button>
-                <button class="btn btn-success  btn-flat" ng-click="SubmitJobStoryToServer()">Submit</button>
-            </div>
+        </div>
+        <br />
+        <div>
+            <input type="checkbox" value="remember-me" ng-model="PostStoryModel.shareAnonymously" checked="checked"> Share Anonymously
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-warning btn-flat" ng-click="InsertPostStoryContent()">Preview</button>
+            <button class="btn btn-success  btn-flat" ng-click="SubmitJobStoryToServer()">Submit</button>
+        </div>
         <div class="row" ng-show="!isUserLoggedIn">
             <ul style="margin-left: 0;" class="alert alert-warning alert-dismissable">
                 <li class="ng-binding">You are not logged in. either <a href="#/login">Login</a> or provide Email and Name to Submit Post.</li>
             </ul>
         </div>
         <!--Test:
-        <input type="file" ng-file-select="onS3FileSelect($files)" multiple accept="image/*">   -->                                           
+        <input type="file" ng-file-select="onS3FileSelect($files)" multiple accept="image/*">   -->
 
         <hr style="color:green" />
-            <div class="row">
-                Please check Preview of Story before submitting.
-            </div>
-            <div class="row">
-                <h3><span ng-bind="PostStoryModel.heading"></span><br /></h3>
-                <span ng-bind="PostStoryModel.companyName"></span><br />
-                <hr style="color:red" /><br /><br />
-                <div id="PostStoryIDPreview"></div>
-
-            </div>
+        <div class="row">
+            Please check Preview of Story before submitting.
+        </div>
+        <div class="row">
+            <h3><span ng-bind="PostStoryModel.heading"></span><br /></h3>
+            <span ng-bind="PostStoryModel.companyName"></span><br />
+            <hr style="color:red" /><br /><br />
+            <div id="PostStoryIDPreview"></div>
 
         </div>
+
+    </div>
 
 </div>
 
@@ -182,8 +173,10 @@
     letter-spacing: 1px;
 }
 
-    .hero-unit > ul {
-        display: flex;
-        list-style: outside none none;
-    }
+    ul.wysihtml5-toolbar > li {
+    display: list-item;
+    float: left;
+    list-style: outside none none;
+    margin: 0 5px 10px 0;
+}
 </style>

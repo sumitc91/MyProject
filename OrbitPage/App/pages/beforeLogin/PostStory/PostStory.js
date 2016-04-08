@@ -1,15 +1,13 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
-    app.controller('beforeLoginPostStory', function($scope, $http, $rootScope,$location, Restangular, CookieUtil) {
+    app.controller('beforeLoginPostStory', function ($scope, $http, $upload, $timeout, $rootScope, $location, Restangular, CookieUtil) {
         $('title').html("index"); //TODO: change the title so cann't be tracked in log
 
         //detectIfUserLoggedIn();
         //$('.textarea').wysihtml5();
         $scope.designationsAutoComplete = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
+        
+        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
         $scope.details = '';
         $scope.projectDetailsDivShow = false;
         $scope.totalProjects = "124";
@@ -18,15 +16,21 @@ define([appLocation.preLogin], function (app) {
         $rootScope.PostStoryModel = {
             heading: "",
             companyName: "",
+            companyVertexId:"",
             story: "",
             name: "",
             email: "",
             designation: "",
+            designationVertexId:"",
             location: "",
-            shareAnonymously: "",
+            shareAnonymously: false,
             employeeType:""
 
         };
+
+        if ($rootScope.isUserLoggedIn == true) {
+            $rootScope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
+        }
 
         $scope.refreshModeratingPhotosListDiv = function() {
             $scope.imgurImageTemplateModeratingPhotos = userSession.imgurImageTemplateModeratingPhotos;
@@ -50,6 +54,72 @@ define([appLocation.preLogin], function (app) {
             $('.fancybox').fancybox();
         }
 
+        $scope.onFileSelectLogoUrl = function ($files) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    userSession.imgurImageTemplateModeratingPhotos.push(data);
+                    $scope.refreshModeratingPhotosListDiv();
+                    //angular.element(document.getElementById('ModeratingPhotosViewAfterUploadId')).scope().refreshModeratingPhotosListDiv(); 
+                    console.log("moderationgphotosscript");
+                    console.log(userSession.imgurImageTemplateModeratingPhotos);
+
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = data.data;
+                    });
+
+                });
+
+            }
+
+        };
+
+        $scope.onFileSelect = function ($files) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    //userSession.imgurImageTemplateModeratingPhotos.push(data);
+                    //$scope.refreshModeratingPhotosListDiv();
+                    //angular.element(document.getElementById('ModeratingPhotosViewAfterUploadId')).scope().refreshModeratingPhotosListDiv(); 
+                    //console.log("moderationgphotosscript");
+                    
+
+                    $rootScope.wysiHTML5InputImageTextBoxId = data.data.link_m;
+                    console.log($scope.wysiHTML5InputImageTextBoxId);
+
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = data.data;
+                    });
+
+                });
+
+            }
+
+        };
         $scope.InsertPostStoryContent = function() {
 
             var PostStoryContentData = $('#PostStoryContentData').val();
@@ -87,10 +157,29 @@ define([appLocation.preLogin], function (app) {
             return text;
         }
 
+        $scope.selectedDesignation = function (selected) {
+            //console.log(selected);
+            $rootScope.PostStoryModel.designation = selected.description.designation;
+            $rootScope.PostStoryModel.designationVertexId = selected.description.vertexId;
+            //console.log($rootScope.PostStoryModel);
+            //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
+
+        };
+
+        $scope.selectedCompany = function (selected) {
+            console.log(selected);
+            $rootScope.PostStoryModel.companyName = selected.description.companyname;
+            $rootScope.PostStoryModel.companyVertexId = selected.description.guid;
+            //console.log($rootScope.PostStoryModel);
+            //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
+
+        };
+
         $scope.SubmitJobStoryToServer = function() {
             $rootScope.PostStoryModel.story = $('#PostStoryContentData').val();
+            $rootScope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/&nbsp;/g, '').replace(/(<([^>]+)>)/ig, "");
             var jobStoryData = { Data: $rootScope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
-            console.log($scope.details);
+            //console.log($scope.details);
         //var currentTemplateId = new Date().getTime();
 
             var url = ServerContextPath.empty + '/Story/CreateUrJobGraphy';

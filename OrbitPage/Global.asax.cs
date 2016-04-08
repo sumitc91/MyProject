@@ -30,6 +30,13 @@ namespace OrbitPage
             //Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
             SolrNet.Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
             SolrNet.Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
+            SolrNet.Startup.Init<UnWorkgraphySolr>(ConfigurationManager.AppSettings["UnWorkgraphySolr"]);
+
+            //Startup.Init<UnCompanySolr>(ConfigurationManager.AppSettings["UnCompanySolr"]);
+            //Startup.Init<UnDesignationSolr>(ConfigurationManager.AppSettings["UnDesignationSolr"]);
+            //Startup.Init<UnUserSolr>(ConfigurationManager.AppSettings["UnUserSolr"]);
+            //Startup.Init<UnWorkgraphySolr>(ConfigurationManager.AppSettings["UnWorkgraphySolr"]);
+            //Startup.Init<UnVirtualFriendSolr>(ConfigurationManager.AppSettings["UnVirtualFriendSolr"]);
         }
     }
 }
