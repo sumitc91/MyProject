@@ -179,6 +179,12 @@ appRequire = require
             beforeLoginSingleBlog: {
                 deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
             },
+            beforeLoginUrnotice: {
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
+            },
+            beforeLoginPostYourNotice: {
+                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+            },
         },
         paths: {
             //==============================================================================================================
@@ -248,6 +254,8 @@ appRequire = require
             beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
             beforeLoginWorkgraphy: "../../App/pages/beforeLogin/Workgraphy/Workgraphy",
             beforeLoginSingleBlog: "../../App/pages/beforeLogin/SingleBlog/SingleBlog",
+            beforeLoginUrnotice: "../../App/pages/beforeLogin/Urnotice/Urnotice",
+            beforeLoginPostYourNotice: "../../App/pages/beforeLogin/PostYourNotice/PostYourNotice",
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
             
         },
@@ -264,7 +272,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
-    "beforeLoginSingleBlog"
+    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

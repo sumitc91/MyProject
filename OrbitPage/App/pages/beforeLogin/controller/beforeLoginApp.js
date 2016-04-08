@@ -26,6 +26,8 @@ define([appLocation.preLogin], function (app) {
                        when("/poststory", { templateUrl: "../../App/pages/beforeLogin/PostStory/PostStory.html" }).
                        when("/addnewnotice", { templateUrl: "../../App/pages/beforeLogin/AddNewNotice/AddNewNotice.html" }).
                        when("/workgraphy", { templateUrl: "../../App/pages/beforeLogin/Workgraphy/Workgraphy.html" }).
+                       when("/urnotice", { templateUrl: "../../App/pages/beforeLogin/Urnotice/Urnotice.html" }).
+                       when("/postyournotice", { templateUrl: "../../App/pages/beforeLogin/PostYourNotice/PostYourNotice.html" }).
                        when("/story/:storyid", { templateUrl: "../../App/pages/beforeLogin/SingleBlog/SingleBlog.html" }).
                        when("/search", { templateUrl: "../../App/pages/beforeLogin/Search/Search.html" }).
                        when("/search/:q/:page/:perpage", { templateUrl: "../../App/pages/beforeLogin/Search/Search.html" }).

@@ -346,6 +346,10 @@
     <Content Include="App\pages\beforeLogin\Blog\Blog.js" />
     <Content Include="App\pages\beforeLogin\Career\Career.html" />
     <Content Include="App\pages\beforeLogin\Career\Career.js" />
+    <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.html" />
+    <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.js" />
+    <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.html" />
+    <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.js" />
     <Content Include="App\pages\beforeLogin\UserDetails\UserDetails.html" />
     <Content Include="App\pages\beforeLogin\UserDetails\UserDetails.js" />
     <Content Include="App\pages\beforeLogin\CompanyDetails\CompanyDetails.html" />
