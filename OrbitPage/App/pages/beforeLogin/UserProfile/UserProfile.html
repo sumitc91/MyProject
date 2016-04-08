@@ -193,7 +193,7 @@
                                         </li>
 
                                     </ul>
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
                                 </div>
                             </div>
                         </div>

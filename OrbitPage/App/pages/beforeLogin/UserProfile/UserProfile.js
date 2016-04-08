@@ -16,17 +16,19 @@ define([appLocation.preLogin], function (app) {
         };
 
         getUserInformation();
-        //getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+        getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
 
         $scope.createNewUserPost = function () {
             createNewUserPost();
             $scope.UserPostListInfoAngular.after = 0;
-            $scope.UserPostList = [];
+            //$scope.UserPostList = [];
         };
 
         $scope.commentOnUserPost = function (postIndex) {
             console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
             createNewMessageOnUserPost(postIndex);
+            $scope.UserPostListInfoAngular.after = 0;
+            //$scope.UserPostList = [];
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
@@ -61,7 +63,9 @@ define([appLocation.preLogin], function (app) {
             }).success(function (data, status, headers, config) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 stopBlockUI();
+                $scope.UserPostList = [];
                 getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+                //$scope.UserPostList.push(data.Payload);
                 $scope.UserPostMessage = "";
 
                 $timeout(function () {
@@ -84,6 +88,7 @@ define([appLocation.preLogin], function (app) {
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
+            
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
             var headers = {
                 'Content-Type': 'application/json',
@@ -101,7 +106,9 @@ define([appLocation.preLogin], function (app) {
             }).success(function (data, status, headers, config) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 stopBlockUI();
+                $scope.UserPostList = [];
                 getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+                //$scope.UserPostList[postIndex].commentsInfo.push(data.Payload);
                 $scope.userPostCommentData = "";
 
                 $timeout(function () {

@@ -40,10 +40,12 @@ namespace OrbitPage.Controllers
                 {
                     image = String.Empty;
                 }
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId, accessKey, secretKey);
-                if (newUserPostResponse.ContainsKey(CommonConstants.PushNotificationArray))
+
+                Dictionary<string, string> sendNotificationResponse = null;
+                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId,out sendNotificationResponse);
+                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
                 {
-                    new SignalRNotification().SendNewPostNotification(newUserPostResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);                     
+                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);                     
                 }
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
@@ -77,10 +79,11 @@ namespace OrbitPage.Controllers
                 {
                     image = String.Empty;
                 }
-                var newUserPostCommentResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, accessKey, secretKey);
-                if (newUserPostCommentResponse.ContainsKey(CommonConstants.PushNotificationArray))
+                Dictionary<string, string> sendNotificationResponse = null;
+                var newUserPostCommentResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationResponse);
+                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
                 {
-                    new SignalRNotification().SendNewPostNotification(newUserPostCommentResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
+                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }

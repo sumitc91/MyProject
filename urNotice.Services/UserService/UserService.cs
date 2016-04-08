@@ -12,6 +12,7 @@ using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.ErrorLogger;
@@ -70,9 +71,9 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public Dictionary<string, string> CreateNewUserPost(urNoticeSession session, string message,string image,string userWallVertexId, string accessKey, string secretKey)
+        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out Dictionary<string, string> sendNotificationResponse)
         {
-            //var response = new Dictionary<string, string>();
+            var response = new ResponseModel<UserPostVertexModel>();
             //string url = TitanGraphConfig.Server;
             //string graphName = TitanGraphConfig.Graph;
 
@@ -124,18 +125,30 @@ namespace urNotice.Services.UserService
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],null, EdgeLabelEnum.WallPostNotification.ToString(), accessKey, secretKey);
+            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],null, EdgeLabelEnum.WallPostNotification.ToString());
+            var userPostVertexModel = new UserPostVertexModel();
+            userPostVertexModel.postInfo = new WallPostVertexModel()
+            {
+                _id = addVertexResponse[TitanGraphConstants.Id],
+                PostedByUser = session.UserName,
+                PostedTime = DateTimeUtil.GetUtcTimeString(),
+                PostImage = image,
+                PostMessage = message
+            };
 
-            //foreach (var kvp in sendNotificationResponse)
-            //{
-            //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-            //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
-            //                                                          CommonConstants.CommaDelimeter + kvp.Value;
-            //}
+            userPostVertexModel.userInfo = new List<UserVertexModel>();
+            var userVertexModel = new UserVertexModel()
+            {
+                FirstName = session.UserName,//TODO: to fetch first name of user
+                LastName = "",
+                Username = session.UserName,
+                CreatedTime = DateTimeUtil.GetUtcTimeString(),
+                _id = userWallVertexId
+            };
 
+            userPostVertexModel.userInfo.Add(userVertexModel);
 
-            sendNotificationResponse["status"] = "200";
-            return sendNotificationResponse;
+            return response;
         }
 
         public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation, string salary,string jobFromYear,string jobToYear,string companyVertexId)
@@ -195,7 +208,7 @@ namespace urNotice.Services.UserService
             return null;
         }
 
-        private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType, string accessKey, string secretKey)
+        private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
         {
             var properties = new Dictionary<string, string>();
             var response = new Dictionary<string, string>();
@@ -290,9 +303,9 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public IDictionary<string, string> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, string accessKey, string secretKey)
+        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out Dictionary<string, string> sendNotificationResponse)
         {
-            //var response = new Dictionary<string, string>();
+            var response = new ResponseModel<UserPostCommentModel>();
             //string url = TitanGraphConfig.Server;
             //string graphName = TitanGraphConfig.Graph;
 
@@ -329,17 +342,35 @@ namespace urNotice.Services.UserService
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString(), accessKey, secretKey);
+            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
 
-            //foreach (var kvp in sendNotificationResponse)
-            //{
-            //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-            //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
-            //                                                          CommonConstants.CommaDelimeter + kvp.Value;
-            //}
+            var userPostCommentModel = new UserPostCommentModel();
+            userPostCommentModel.commentedBy = new List<UserVertexModel>();
 
-            sendNotificationResponse["status"] = "200";
-            return sendNotificationResponse;
+            var userVertexModel = new UserVertexModel()
+            {
+                FirstName = session.UserName,//TODO: to fetch first name of user
+                LastName = "",
+                Username = session.UserName,
+                CreatedTime = DateTimeUtil.GetUtcTimeString(),
+                _id = userWallVertexId
+            };
+
+            userPostCommentModel.commentedBy.Add(userVertexModel);
+
+            userPostCommentModel.commentInfo = new WallPostVertexModel()
+            {
+                _id = addVertexResponse[TitanGraphConstants.Id],
+                PostedByUser = session.UserName,
+                PostedTime = DateTimeUtil.GetUtcTimeString(),
+                PostImage = image,
+                PostMessage = message
+            };
+
+            response.Payload = userPostCommentModel;
+            response.Status = 200;
+            
+            return response;
         }
 
         public string GetUserNotification(string userVertexId,string from,string to, string accessKey, string secretKey)
