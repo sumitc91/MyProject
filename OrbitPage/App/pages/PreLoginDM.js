@@ -132,58 +132,58 @@ appRequire = require
                 deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago"]
             },
             beforeLoginIndex: {
-                deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
+                deps: ["jquery","beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
             },
             beforeLoginLoginPage: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery","beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             beforeLoginSignUpUser: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "motionCaptcha"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "motionCaptcha"]
             },
             validateEmail: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             showMessageTemplate: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             beforeLoginForgetPassword: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             beforeLoginResetPassword: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
             },
             beforeLoginEditPage: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui"]
             },
             beforeLoginCompanyDetails: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "googleChartLoader"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "googleChartLoader"]
             },
             beforeLoginUserDetails: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginSearch: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
             },
             beforeLoginViewPostDetail: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
             },
             beforeLoginPostStory: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "wysihtml5", "bootstrap_wysihtml5", "prettify", "bootstrap", "filedrop", "fileDropScript", "domReady", "fancybox", "AngularFileUploadController", "ngAutocomplete", "angucomplete_alt_min"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "wysihtml5", "bootstrap_wysihtml5", "prettify", "bootstrap", "filedrop", "fileDropScript", "domReady", "fancybox", "AngularFileUploadController", "ngAutocomplete", "angucomplete_alt_min"]
             },
             beforeLoginWorkgraphy: {
-                deps: ["jquery", "restangular", "angular", "configureBlockUI", "toastMessage", "bootstrap_ui", "angular_animate", "ngtimeago"]
+                deps: ["jquery", "beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "bootstrap_ui", "angular_animate", "ngtimeago"]
             },
             beforeLoginSingleBlog: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
             },
             beforeLoginUrnotice: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
             },
             beforeLoginPostYourNotice: {
-                deps: ["jquery", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
         },
         paths: {
