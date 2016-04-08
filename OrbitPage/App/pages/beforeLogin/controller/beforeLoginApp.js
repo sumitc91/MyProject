@@ -4,7 +4,8 @@ define([appLocation.preLogin], function (app) {
 
     app.config(function ($routeProvider, $httpProvider) {
 
-        $routeProvider.when("/", { templateUrl : "../../App/pages/beforeLogin/Index/Index.html" }).
+        $routeProvider.when("/", { templateUrl: "../../App/pages/beforeLogin/Index/Index.html" }).
+                       when("/index", { templateUrl: "../../App/pages/beforeLogin/Index/Index.html" }).
                        when("/signup/user/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpUser/SignUpUser.html" }).
                        when("/signup/client/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpClient/SignUpClient.html" }).
                        when("/signup/user", { templateUrl: "../../App/pages/beforeLogin/SignUpUser/SignUpUser.html" }).
