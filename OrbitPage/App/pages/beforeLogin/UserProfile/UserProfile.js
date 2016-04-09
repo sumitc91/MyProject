@@ -16,7 +16,7 @@ define([appLocation.preLogin], function (app) {
         };
 
         getUserInformation();
-        getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+        //getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
 
         $scope.createNewUserPost = function () {
             createNewUserPost();
@@ -29,6 +29,12 @@ define([appLocation.preLogin], function (app) {
             createNewMessageOnUserPost(postIndex);
             $scope.UserPostListInfoAngular.after = 0;
             //$scope.UserPostList = [];
+            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
+        $scope.reactionOnUserPost = function (postIndex) {
+            console.log(postIndex);
+            createNewReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
@@ -75,6 +81,46 @@ define([appLocation.preLogin], function (app) {
             }).error(function (data, status, headers, config) {
 
             });
+        };
+
+        function createNewReactionOnUserPost(postIndex) {
+
+            console.log();
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].postInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/UserReactionOnPost';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            startBlockUI('wait..', 3);
+            $http({
+                url: url,
+                method: "POST",
+                data: userPostReactionData,
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                stopBlockUI();                
+                $scope.UserPostMessage = "";
+                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, postIndex);
+                $scope.UserPostList[postIndex].alreadyLiked = false;
+                $timeout(function () {
+                    $scope.NewPostImageUrl.link_s = "";
+                });
+
+            }).error(function (data, status, headers, config) {
+
+            });
+
         };
 
         function createNewMessageOnUserPost(postIndex) {
@@ -163,7 +209,7 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 stopBlockUI();
                 $scope.$apply(function () {
-                    $scope.CurrentUserDetails = data.Payload[0];
+                    $scope.CurrentUserDetails = data.Payload[0];                    
                     //console.log($scope.CurrentUserDetails);
                 });
                 
@@ -193,6 +239,7 @@ define([appLocation.preLogin], function (app) {
                     if ($scope.UserPostList != null) {
                         for (var i = 0; i < data.results.length; i++) {
                             $scope.UserPostList.push(data.results[i]);
+                            $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
                             //console.log($rootScope.clientNotificationDetailResponse);
                         }
                     }
@@ -203,6 +250,29 @@ define([appLocation.preLogin], function (app) {
                 });
 
             });
+        };
+
+        function parseCommentLikeString(likeInfo) {
+            var str = "";
+            //console.log("str -1 " + str);
+            for (var i = 0; i < likeInfo.length; i++) {                
+                if (i <= 5)
+                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + "</a>,";
+
+                if (likeInfo[i]._id == $rootScope.clientDetailResponse.VertexId)
+                    $scope.UserPostList[i].alreadyLiked = true;
+                //console.log("str -"+i+ " " + str);
+            }
+            str += "...";
+            return str;
+        };
+
+        function appentToCommentLikeString(str,index) {
+           
+            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + "</a>," + str;
+
+            $scope.UserPostList[index].alreadyLiked = true;
+            return str;
         };
 
         $scope.UserPostListInfo.nextPage = function () {

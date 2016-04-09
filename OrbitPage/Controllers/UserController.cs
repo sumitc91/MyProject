@@ -96,5 +96,39 @@ namespace OrbitPage.Controllers
             }
 
         }
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult UserReactionOnPost(UserNewReactionRequest userNewReactionRequest)
+        {
+            var reaction = userNewReactionRequest.Reaction;
+
+            var vertexId = userNewReactionRequest.VertexId;
+
+            var userWallVertexId = userNewReactionRequest.WallVertexId;
+            var postPostedByVertexId = userNewReactionRequest.PostPostedByVertexId;
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {                
+                Dictionary<string, string> sendNotificationResponse = null;
+                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, reaction, vertexId, userWallVertexId, postPostedByVertexId, out sendNotificationResponse);
+                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
+                {
+                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
+                }
+                return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }

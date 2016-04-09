@@ -20,10 +20,55 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.reactionOnUserPost = function (postIndex) {
+            console.log(postIndex);
+            createNewReactionOnUserPost(postIndex);
+            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
         $scope.NewPostImageUrl = {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
         };
         
+        function createNewReactionOnUserPost(postIndex) {
+
+            var userPostCommentData = {
+                Reaction: UserReaction.Like,                
+                VertexId: $scope.UserPostList[postIndex].postInfo._id,
+                WallVertexId: $scope.UserPostList[postIndex].postedToUser[0]._id,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/UserCommentOnPost';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            startBlockUI('wait..', 3);
+            $http({
+                url: url,
+                method: "POST",
+                data: userPostCommentData,
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                stopBlockUI();
+                //getPostByVertexId();
+                $scope.UserPostMessage = "";
+
+                $timeout(function () {
+                    $scope.NewPostImageUrl.link_s = "";
+                });
+
+            }).error(function (data, status, headers, config) {
+
+            });
+
+        };
+
         function createNewMessageOnUserPost(postIndex) {
 
             var userPostCommentData = {

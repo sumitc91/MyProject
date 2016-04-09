@@ -155,6 +155,7 @@
     <Compile Include="Common\Enum\EdgeLabelEnum.cs" />
     <Compile Include="Common\Enum\EdgePropertyEnum.cs" />
     <Compile Include="Common\Enum\OrbitPageEnum.cs" />
+    <Compile Include="Common\Enum\UserReactionEnum.cs" />
     <Compile Include="Common\Enum\VertexLabelEnum.cs" />
     <Compile Include="Common\Enum\VertexPropertyEnum.cs" />
     <Compile Include="Encryption\AES.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="Model\urNoticeModel\RequestWrapper\ResetPasswordRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\UpdateCompanyRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\UserNewCommentOnPostRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\UserNewReactionRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ValidateAccountRequest.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\ClientDetailsModel.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\GeoCodeResponse.cs" />

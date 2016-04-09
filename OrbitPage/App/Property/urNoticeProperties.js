@@ -64,6 +64,10 @@ var appLocation = {
     'adminPostLogin': '../../App/Pages/AdminPostLoginInit'
 };
 
+var UserReaction = {
+    Like:"Like"
+};
+
 var mobileDevice = detectmob();
 var ipadDevice = detectipad();
 var isAndroidDevice = detectAndroid();

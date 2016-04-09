@@ -16,6 +16,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         EdgeMessage,
         Type,
         NotificationInitiatedByVertexId,
-        SalaryAmount
+        SalaryAmount,
+        Reaction
     }
 }

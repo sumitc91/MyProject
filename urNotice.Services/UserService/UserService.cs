@@ -281,6 +281,50 @@ namespace urNotice.Services.UserService
                 }
                 
             }
+            else if (notificationType.Equals(EdgeLabelEnum.UserReaction.ToString()))
+            {
+                if (userWallVertexId != session.UserVertexId)
+                {
+                    properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
+                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+
+                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
+                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+
+                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+                    else
+                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
+                }
+
+
+                if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
+                {
+                    properties = new Dictionary<string, string>();
+
+                    properties[EdgePropertyEnum._outV.ToString()] = postPostedByVertexId;
+                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+
+                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
+                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+
+                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
+                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
+                    else
+                        response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
+                }
+
+            }
             return response;
         }
 
@@ -294,7 +338,7 @@ namespace urNotice.Services.UserService
             //g.v(768).as('userInfo').in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[0..10].select{it}{it}
             //g.v((512)).in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._().transform{ [postInfo : it, comments: it.in('Comment').toList(),userInfo:it.in('Created')] }
             //g.v((512)).in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..1].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..1].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }
-            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..5].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";            
+            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..5].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";            
             //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
@@ -370,6 +414,38 @@ namespace urNotice.Services.UserService
             response.Payload = userPostCommentModel;
             response.Status = 200;
             
+            return response;
+        }
+
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, string reaction, string vertexId, string userWallVertexId, string postPostedByVertexId, out Dictionary<string, string> sendNotificationResponse)
+        {
+            var response = new ResponseModel<UserVertexModel>();
+            
+            var properties = new Dictionary<string, string>();
+            if (reaction.Equals(UserReactionEnum.Like.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            {
+                //properties[EdgePropertyEnum.Reaction.ToString()] = UserReactionEnum.Like.ToString();
+                properties[EdgePropertyEnum._label.ToString()] = UserReactionEnum.Like.ToString();
+            }
+            
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = vertexId;
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, vertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
+
+            var userLikeInfo = new UserVertexModel()
+            {
+                _id = session.UserVertexId,                
+            };
+
+            response.Payload = userLikeInfo;
+            response.Status = 200;
+
             return response;
         }
 

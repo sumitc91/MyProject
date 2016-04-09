@@ -13,6 +13,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Created,
         CommentedOnPost,
         CommentedOnPostNotification,
+        UserReaction,
         Comment,
         Notification,
         Salary,

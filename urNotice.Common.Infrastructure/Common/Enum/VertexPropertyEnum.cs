@@ -31,6 +31,6 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         JobFromYear,
         JobToYear,
 
-        Heading
+        Heading,        
     }
 }

@@ -212,6 +212,8 @@ namespace urNoticeUser.Controllers
                     var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
                     var getUserPostResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+
+                    
                     return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
                 }
                 else
