@@ -15,13 +15,13 @@ define([appLocation.preLogin], function (app) {
         
 
         $scope.commentOnUserPost = function (postIndex) {
-            console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+            //console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
             createNewMessageOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
         $scope.reactionOnUserPost = function (postIndex) {
-            console.log(postIndex);
+            //console.log(postIndex);
             createNewReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
@@ -46,26 +46,31 @@ define([appLocation.preLogin], function (app) {
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostCommentData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    //getPostByVertexId();
+                    $scope.UserPostMessage = "";
+                    $scope.UserPostList[postIndex].alreadyLiked = true;
+                    $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    $timeout(function () {
+                        $scope.NewPostImageUrl.link_s = "";
+                    });
 
-            startBlockUI('wait..', 3);
-            $http({
-                url: url,
-                method: "POST",
-                data: userPostCommentData,
-                headers: headers
-            }).success(function (data, status, headers, config) {
-                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                stopBlockUI();
-                //getPostByVertexId();
-                $scope.UserPostMessage = "";
+                }).error(function (data, status, headers, config) {
 
-                $timeout(function () {
-                    $scope.NewPostImageUrl.link_s = "";
                 });
-
-            }).error(function (data, status, headers, config) {
-
-            });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+            
 
         };
 
@@ -86,26 +91,30 @@ define([appLocation.preLogin], function (app) {
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostCommentData,
+                    headers: headers
+                }).success(function(data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    getPostByVertexId();
+                    $scope.UserPostMessage = "";
 
-            startBlockUI('wait..', 3);
-            $http({
-                url: url,
-                method: "POST",
-                data: userPostCommentData,
-                headers: headers
-            }).success(function (data, status, headers, config) {
-                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                stopBlockUI();
-                getPostByVertexId();
-                $scope.UserPostMessage = "";
+                    $timeout(function() {
+                        $scope.NewPostImageUrl.link_s = "";
+                    });
 
-                $timeout(function () {
-                    $scope.NewPostImageUrl.link_s = "";
+                }).error(function(data, status, headers, config) {
+
                 });
-
-            }).error(function (data, status, headers, config) {
-
-            });
+            } else {
+                showToastMessage("Warning", "Please Login to reply on post.");
+            }
+            
 
         };
 
@@ -155,10 +164,39 @@ define([appLocation.preLogin], function (app) {
                 stopBlockUI();
                 $scope.$apply(function () {
                     $scope.UserPostList = data.results;
-                    console.log($scope.UserPostList);
+                    if ($scope.UserPostList != null && $scope.UserPostList.length > 0) {
+                        var i = 0; // only 1 post available.
+                        $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
+                        if ($scope.UserPostList[i].isLiked != null && $scope.UserPostList[i].isLiked.length > 0) {
+                            $scope.UserPostList[i].alreadyLiked = true;
+                        } else {
+                            $scope.UserPostList[i].alreadyLiked = false;
+                        }
+                        //console.log($scope.UserPostList);
+                    } else {
+                        showToastMessage("Warning", "Post Not found.");
+                    }
                 });
 
             });
+        };
+
+        function parseCommentLikeString(likeInfo) {
+            var str = "";
+            //console.log("str -1 " + str);
+            for (var i = 0; i < likeInfo.length; i++) {
+                if (i <= 5)
+                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + "</a>,";
+
+            }
+            str += "...";
+            return str;
+        };
+
+        function appentToCommentLikeString(str) {
+            if (str == null) str = "";
+            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + "</a>," + str;
+            return str;
         };
 
     });

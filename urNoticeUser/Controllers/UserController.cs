@@ -330,7 +330,9 @@ namespace urNoticeUser.Controllers
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
-
+            var userEmail = string.Empty;
+            if (session != null)
+                userEmail = session.UserName;
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             isValidToken = true;//TODO: currently hard coded.
             if (isValidToken)
@@ -346,7 +348,7 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    var getUserPostResponse = new UserService().GetPostByVertexId(vertexId, accessKey, secretKey);
+                    var getUserPostResponse = new UserService().GetPostByVertexId(vertexId, userEmail);
                     var getUserPostResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
                     return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);

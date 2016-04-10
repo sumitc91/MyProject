@@ -151,28 +151,33 @@ define([appLocation.preLogin], function (app) {
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostCommentData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    $scope.UserPostList = [];
+                    getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+                    //$scope.UserPostList[postIndex].commentsInfo.push(data.Payload);
+                    $scope.userPostCommentData = "";
 
-            startBlockUI('wait..', 3);
-            $http({
-                url: url,
-                method: "POST",
-                data: userPostCommentData,
-                headers: headers
-            }).success(function (data, status, headers, config) {
-                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                stopBlockUI();
-                $scope.UserPostList = [];
-                getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-                //$scope.UserPostList[postIndex].commentsInfo.push(data.Payload);
-                $scope.userPostCommentData = "";
+                    $timeout(function () {
+                        $scope.NewPostImageUrl.link_s = "";
+                    });
 
-                $timeout(function () {
-                    $scope.NewPostImageUrl.link_s = "";
+                }).error(function (data, status, headers, config) {
+
                 });
-
-            }).error(function (data, status, headers, config) {
-
-            });
+            }
+            else {
+                showToastMessage("Warning", "Please Login to reply on post.");
+            }
+            
 
         };
 
