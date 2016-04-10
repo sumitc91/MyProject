@@ -190,9 +190,12 @@ namespace urNoticeUser.Controllers
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
             var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
             var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
-
+            var userEmail = string.Empty;
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            if (session != null)
+                userEmail = session.UserName;
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             isValidToken = true;//TODO: currently hard coded.
@@ -209,7 +212,7 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, userEmail);
                     var getUserPostResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
 

@@ -15,7 +15,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
         public List<UserVertexModel> userInfo { get; set; }
 
         public List<UserVertexModel> likeInfo { get; set; }
-
+        public List<UserVertexModel> isLiked { get; set; }        
         public String likeInfoHtml { get; set; }
     }
 }

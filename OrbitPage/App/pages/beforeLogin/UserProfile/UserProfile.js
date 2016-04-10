@@ -9,6 +9,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
+        $scope.UserPostListLastPageReached = false;
         $scope.UserPostListInfoAngular = {
             busy: false,
             after: 0,
@@ -32,8 +33,7 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
-        $scope.reactionOnUserPost = function (postIndex) {
-            console.log(postIndex);
+        $scope.reactionOnUserPost = function (postIndex) {            
             createNewReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
@@ -59,33 +59,39 @@ define([appLocation.preLogin], function (app) {
                 'UTMZK': $.cookie('utmzk'),
                 'UTMZV': $.cookie('utmzv'),
             };
-            startBlockUI('wait..', 3);
-            
-            $http({
-                url: url,
-                method: "POST",
-                data: userPostData,
-                headers: headers
-            }).success(function (data, status, headers, config) {
-                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                stopBlockUI();
-                $scope.UserPostList = [];
-                getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-                //$scope.UserPostList.push(data.Payload);
-                $scope.UserPostMessage = "";
 
-                $timeout(function () {
-                    $scope.NewPostImageUrl.link_s = "";
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    $scope.UserPostList = [];
+                    getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+                    $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage + 1;
+                    //$scope.UserPostList.push(data.Payload);
+                    $scope.UserPostMessage = "";
+
+                    $timeout(function () {
+                        $scope.NewPostImageUrl.link_s = "";
+                    });
+
+                }).error(function (data, status, headers, config) {
+
                 });
-
-            }).error(function (data, status, headers, config) {
-
-            });
+            } else {
+                showToastMessage("Warning", "Please Login to create a post.");
+            }
+            
         };
 
         function createNewReactionOnUserPost(postIndex) {
 
-            console.log();
             var userPostReactionData = {
                 Reaction: UserReaction.Like,
                 VertexId: $scope.UserPostList[postIndex].postInfo._id,
@@ -101,25 +107,28 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
 
-            startBlockUI('wait..', 3);
-            $http({
-                url: url,
-                method: "POST",
-                data: userPostReactionData,
-                headers: headers
-            }).success(function (data, status, headers, config) {
-                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                stopBlockUI();                
-                $scope.UserPostMessage = "";
-                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, postIndex);
-                $scope.UserPostList[postIndex].alreadyLiked = false;
-                $timeout(function () {
-                    $scope.NewPostImageUrl.link_s = "";
+            if ($rootScope.isUserLoggedIn) {                
+                startBlockUI('wait..', 3);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function(data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    $scope.UserPostList[postIndex].alreadyLiked = true;
+                    $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    $timeout(function() {
+                        $scope.NewPostImageUrl.link_s = "";
+                    });
+
+                }).error(function(data, status, headers, config) {
+
                 });
-
-            }).error(function (data, status, headers, config) {
-
-            });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
 
         };
 
@@ -236,15 +245,20 @@ define([appLocation.preLogin], function (app) {
                 $scope.$apply(function () {
                     //$scope.UserPostList = data.results;
 
-                    if ($scope.UserPostList != null) {
+                    if ($scope.UserPostList != null && data.results.length>0) {
                         for (var i = 0; i < data.results.length; i++) {
                             $scope.UserPostList.push(data.results[i]);
                             $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
-                            //console.log($rootScope.clientNotificationDetailResponse);
+                            if ($scope.UserPostList[i].isLiked != null && $scope.UserPostList[i].isLiked.length > 0) {
+                                $scope.UserPostList[i].alreadyLiked = true;
+                            } else {
+                                $scope.UserPostList[i].alreadyLiked = false;
+                            }
                         }
+                    } else {                        
+                        $scope.UserPostListLastPageReached = true;
                     }
-                    else
-                        $scope.UserPostList = data.results;
+                        
 
                     //console.log($scope.UserPostList);
                 });
@@ -259,24 +273,19 @@ define([appLocation.preLogin], function (app) {
                 if (i <= 5)
                     str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + "</a>,";
 
-                if (likeInfo[i]._id == $rootScope.clientDetailResponse.VertexId)
-                    $scope.UserPostList[i].alreadyLiked = true;
-                //console.log("str -"+i+ " " + str);
             }
             str += "...";
             return str;
         };
 
-        function appentToCommentLikeString(str,index) {
-           
+        function appentToCommentLikeString(str) {
+            if (str == null) str = "";
             str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + "</a>," + str;
-
-            $scope.UserPostList[index].alreadyLiked = true;
             return str;
         };
 
         $scope.UserPostListInfo.nextPage = function () {
-            if ($scope.UserPostListInfoAngular.busy) return;
+            if ($scope.UserPostListInfoAngular.busy || $scope.UserPostListLastPageReached) return;
             $scope.UserPostListInfoAngular.busy = true;
             getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
             $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage+1;

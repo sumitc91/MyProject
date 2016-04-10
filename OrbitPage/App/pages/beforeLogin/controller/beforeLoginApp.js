@@ -285,8 +285,10 @@ define([appLocation.preLogin], function (app) {
                     var mssg = "";
                     if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "WallPostNotification") {
                         mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Posted On your wall.";                        
-                    } else {
+                    } else if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "CommentedOnPostNotification") {
                         mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Commented on one of your related post.";
+                    } else if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "UserReaction") {
+                        mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Reacted on one of your related post.";
                     }
                     showToastMessage("Success", mssg);
                 }

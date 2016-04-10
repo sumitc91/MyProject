@@ -53,7 +53,6 @@ C:\code\svn\OrbitPage\OrbitPageWorkgraphy\bin\System.Web.Http.xml
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\bin\System.Web.Http.WebHost.xml
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\obj\Debug\OrbitPageWorkgraphy.dll
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\obj\Debug\OrbitPageWorkgraphy.pdb
-C:\code\svn\OrbitPage\OrbitPageWorkgraphy\obj\Debug\OrbitPageWorkgraphy.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\bin\urNotice.Services.dll
 C:\code\svn\OrbitPage\OrbitPageWorkgraphy\bin\EntityFramework.dll
