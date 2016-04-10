@@ -103,8 +103,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminService\AdminService.cs" />
-    <Compile Include="Admin\Admin.cs" />
+    <Compile Include="DataImport\ImportCompanies\IImportCompanies.cs" />
+    <Compile Include="DataImport\ImportCompanies\ImportCompaniesFromCsv.cs" />
+    <Compile Include="DataImport\ImportDesignations\IImportDesignations.cs" />
+    <Compile Include="DataImport\ImportCompanyDesignationSalaries\IImportCompanyDesignationSalaries.cs" />
+    <Compile Include="DataImport\ImportCompanyDesignationSalaries\ImportCompanyDesignationSalariesFromCsv.cs" />
+    <Compile Include="DataImport\ImportDesignations\ImportDesinationsFromCsv.cs" />
+    <Compile Include="Person\Admin.cs" />
     <Compile Include="AuthService\AuthService.cs" />
     <Compile Include="AuthService\IAuthService.cs" />
     <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />

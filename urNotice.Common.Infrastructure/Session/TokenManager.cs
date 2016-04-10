@@ -7,7 +7,6 @@ using System.Runtime.Caching;
 using SolrNet.Impl;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
-using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 
 namespace urNotice.Common.Infrastructure.Session
 {

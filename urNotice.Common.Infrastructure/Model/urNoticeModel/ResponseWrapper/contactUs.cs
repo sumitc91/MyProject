@@ -7,24 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace urNotice.Common.Infrastructure.Model.urNoticeAuthContext
+namespace urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UserMessage
+    public partial class ContactUs
     {
         public int Id { get; set; }
-        public string userType { get; set; }
         public string username { get; set; }
-        public string titleText { get; set; }
-        public string bodyText { get; set; }
+        public string emailId { get; set; }
+        public string heading { get; set; }
+        public string message { get; set; }
         public System.DateTime dateTime { get; set; }
-        public string priority { get; set; }
-        public string iconUrl { get; set; }
-        public string messageFrom { get; set; }
-        public string messageTo { get; set; }
-        public string messageSeen { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Status { get; set; }
+        public string ReplyMessage { get; set; }
+        public string RepliedBy { get; set; }
+        public string RepliedDateTime { get; set; }
+        public string Type { get; set; }
         public Nullable<bool> isDBSynced { get; set; }
     }
 }

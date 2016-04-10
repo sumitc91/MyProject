@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2.DataModel;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
-using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 
 namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
 {

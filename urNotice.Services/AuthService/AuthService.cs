@@ -10,7 +10,6 @@ using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.Person;
-using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
@@ -244,7 +243,7 @@ namespace urNotice.Services.AuthService
         {
             //TODO: save in some database..
             var response = new ResponseModel<string>();
-            var contactUsData = new contactU
+            var contactUsData = new ContactUs
             {
                 Name = req.Name,
                 Phone = req.Phone,

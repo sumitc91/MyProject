@@ -196,87 +196,6 @@
     <Compile Include="Model\urNoticeAnalyticsContext\VirtualFriendListJson.cs">
       <DependentUpon>urNoticeAnalyticsContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\urNoticeAuthContext\Admin.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\Company.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\CompanyDesignationInfo.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\CompanySubPart.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\CompanyType.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\contactU.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\Designation.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\FacebookAuth.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\ForgetPassword.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\linkedinAuth.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\Location.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\RecommendedBy.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\Subscription.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\urNoticeAuthContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>urNoticeAuthContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\urNoticeAuthContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\urNoticeAuthContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>urNoticeAuthContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\User.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserAlert.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserCompanyInfo.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserEarning.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserEarningHistory.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserMessage.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserReputation.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\UserReputationMapping.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\urNoticeAuthContext\ValidateUserKey.cs">
-      <DependentUpon>urNoticeAuthContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\urNoticeModel\AssetClass\ResponseModel.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\CompanyNoticePeriodInfoAnalytics.cs" />
     <Compile Include="Model\urNoticeModel\DynamoDb\OrbitPageCompany.cs" />
@@ -323,6 +242,8 @@
     <Compile Include="Model\urNoticeModel\RequestWrapper\UserNewReactionRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ValidateAccountRequest.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\ClientDetailsModel.cs" />
+    <Compile Include="Model\urNoticeModel\ResponseWrapper\ContactUs.cs" />
+    <Compile Include="Model\urNoticeModel\ResponseWrapper\FacebookAuth.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\GeoCodeResponse.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\googleAccessTokenWrapper.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\GoogleApi\GeoCodeResponseAddressComponents.cs" />
@@ -452,12 +373,6 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model\urNoticeAuthContext\urNoticeAuthContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>urNoticeAuthContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <EntityDeploy Include="Model\urNoticeAnalyticsContext\urNoticeAnalyticsContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -475,19 +390,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>urNoticeAnalyticsContext.edmx</DependentUpon>
       <LastGenOutput>urNoticeAnalyticsContext.cs</LastGenOutput>
-    </None>
-    <None Include="Model\urNoticeAuthContext\urNoticeAuthContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>urNoticeAuthContext.edmx</DependentUpon>
-      <LastGenOutput>urNoticeAuthContext.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model\urNoticeAuthContext\urNoticeAuthContext.edmx.diagram">
-      <DependentUpon>urNoticeAuthContext.edmx</DependentUpon>
-    </None>
-    <None Include="Model\urNoticeAuthContext\urNoticeAuthContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>urNoticeAuthContext.edmx</DependentUpon>
-      <LastGenOutput>urNoticeAuthContext.cs</LastGenOutput>
     </None>
     <EntityDeploy Include="Model\urNoticeRatingContext\urNoticeRatingContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

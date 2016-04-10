@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.commonMethods;
-using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;

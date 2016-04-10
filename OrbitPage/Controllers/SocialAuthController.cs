@@ -20,7 +20,6 @@ using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeAnalyticsContext;
-using urNotice.Common.Infrastructure.Model.urNoticeAuthContext;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;

@@ -7,22 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace urNotice.Common.Infrastructure.Model.urNoticeAuthContext
+namespace urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Subscription
+    public partial class FacebookAuth
     {
         public int Id { get; set; }
-        public short subscriptionType { get; set; }
-        public string userId { get; set; }
-        public string emaiId { get; set; }
-        public bool isRegisteredUser { get; set; }
-        public bool isEmailAvailable { get; set; }
-        public System.DateTime createdDate { get; set; }
-        public bool isActive { get; set; }
-        public string guid { get; set; }
+        public string username { get; set; }
+        public string datetime { get; set; }
+        public string facebookId { get; set; }
+        public string facebookUsername { get; set; }
+        public string AuthToken { get; set; }
         public Nullable<bool> isDBSynced { get; set; }
     }
 }

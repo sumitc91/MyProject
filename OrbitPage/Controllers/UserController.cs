@@ -9,10 +9,12 @@ using System.Web.Http;
 using System.Web.Mvc;
 using OrbitPage.Hubs;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.Person;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
 
@@ -42,7 +44,8 @@ namespace OrbitPage.Controllers
                 }
 
                 Dictionary<string, string> sendNotificationResponse = null;
-                var newUserPostResponse = new UserService().CreateNewUserPost(session, message, image, userWallVertexId,out sendNotificationResponse);
+                IPerson clientModel = new Consumer();
+                var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationResponse);
                 if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);                     

@@ -12,8 +12,8 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
-using urNotice.Services.Admin;
 using urNotice.Services.GraphDb.GraphDbContract;
+using urNotice.Services.Person;
 using urNotice.Services.SessionService;
 using urNotice.Services.UserService;
 
@@ -42,7 +42,8 @@ namespace urNoticeUser.Controllers
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                var clientDetailResponse = new UserService().GetClientDetails(session.UserName,accessKey,secretKey);              
+                IPerson clientModel = new Consumer();
+                var clientDetailResponse = clientModel.GetPersonDetails(session.UserName);//new UserService().GetClientDetails(session.UserName,accessKey,secretKey);              
                 return Json(clientDetailResponse,JsonRequestBehavior.AllowGet);
             }
             else
