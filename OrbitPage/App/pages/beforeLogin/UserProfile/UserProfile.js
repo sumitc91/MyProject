@@ -26,7 +26,7 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.commentOnUserPost = function (postIndex) {
-            console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+            //console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
             createNewMessageOnUserPost(postIndex);
             $scope.UserPostListInfoAngular.after = 0;
             //$scope.UserPostList = [];
@@ -108,7 +108,9 @@ define([appLocation.preLogin], function (app) {
             };
 
             if ($rootScope.isUserLoggedIn) {                
-                startBlockUI('wait..', 3);
+                //startBlockUI('wait..', 3);
+                $scope.UserPostList[postIndex].alreadyLiked = true;
+                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
                 $http({
                     url: url,
                     method: "POST",
@@ -116,9 +118,8 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function(data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
-                    $scope.UserPostList[postIndex].alreadyLiked = true;
-                    $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
                     $timeout(function() {
                         $scope.NewPostImageUrl.link_s = "";
                     });
@@ -249,15 +250,17 @@ define([appLocation.preLogin], function (app) {
                 $scope.UserPostListInfoAngular.busy = false;
                 $scope.$apply(function () {
                     //$scope.UserPostList = data.results;
-
+                    var absoluteIndex = 0;
                     if ($scope.UserPostList != null && data.results.length>0) {
                         for (var i = 0; i < data.results.length; i++) {
                             $scope.UserPostList.push(data.results[i]);
-                            $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
-                            if ($scope.UserPostList[i].isLiked != null && $scope.UserPostList[i].isLiked.length > 0) {
-                                $scope.UserPostList[i].alreadyLiked = true;
+                            absoluteIndex = from + i;
+                            //console.log("absoluteIndex : "+absoluteIndex);
+                            $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo);
+                            if ($scope.UserPostList[absoluteIndex].isLiked != null && $scope.UserPostList[absoluteIndex].isLiked.length > 0) {
+                                $scope.UserPostList[absoluteIndex].alreadyLiked = true;
                             } else {
-                                $scope.UserPostList[i].alreadyLiked = false;
+                                $scope.UserPostList[absoluteIndex].alreadyLiked = false;
                             }
                         }
                     } else {                        
@@ -294,7 +297,7 @@ define([appLocation.preLogin], function (app) {
             $scope.UserPostListInfoAngular.busy = true;
             getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
             $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage+1;
-            console.log("UserPostListInfo.nextPage called.");
+            //console.log("UserPostListInfo.nextPage called.");
 
         };
     });
