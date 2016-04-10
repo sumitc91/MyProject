@@ -21,8 +21,11 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail);
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
         ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image,string userWallVertexId, out Dictionary<string, string> sendNotificationResponse);
-        
-        
+        ResponseModel<String> ValidateAccountService(ValidateAccountRequest req);
+        ResponseModel<String> ResendValidationCodeService(ValidateAccountRequest req, HttpRequestBase request);
+        ResponseModel<String> ForgetPasswordService(string id, HttpRequestBase request);
+        ResponseModel<String> ResetPasswordService(ResetPasswordRequest req);
+        ResponseModel<String> ContactUsService(ContactUsRequest req);
         //admin services
         Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation,
             string salary, string jobFromYear, string jobToYear, string companyVertexId);

@@ -110,8 +110,6 @@
     <Compile Include="DataImport\ImportCompanyDesignationSalaries\ImportCompanyDesignationSalariesFromCsv.cs" />
     <Compile Include="DataImport\ImportDesignations\ImportDesinationsFromCsv.cs" />
     <Compile Include="Person\Admin.cs" />
-    <Compile Include="AuthService\AuthService.cs" />
-    <Compile Include="AuthService\IAuthService.cs" />
     <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />
     <Compile Include="Email\EmailFromMandrill\EmailFromMandrill.cs" />
     <Compile Include="Email\EmailTemplate\ForgetPasswordValidationEmail.cs" />

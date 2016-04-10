@@ -40,14 +40,15 @@ namespace urNotice.Services.Email.EmailTemplate
         }
 
         public static void SendAccountValidationEmailMessage(String toMail, String guid, HttpRequestBase request)
-        {            
-            if (request.Url != null)
+        {
+            if (request != null && request.Url != null)
             {
+                //IEmail emailModel = new EmailFromGmail();
                 IEmail emailModel = new EmailFromMandrill.EmailFromMandrill();
                 emailModel.SendEmail(toMail,
                     SmptCreateAccountConstants.SenderName,
                     SmptCreateAccountConstants.EmailTitle,
-                    ValidateAccountEmailBodyContent(request.Url.Authority, toMail, guid),
+                    CreateAccountEmailBodyContent(request.Url.Authority,toMail, guid),
                     null,
                     null,
                     SmptCreateAccountConstants.SenderName,
@@ -66,6 +67,18 @@ namespace urNotice.Services.Email.EmailTemplate
 
             string messageBody = template.Replace("{1}", "http://" + SmptCreateAccountConstants.AccountDomain + "/#/" + "validate/" + encryptedUserInfo["EMAIL"] + "/" + encryptedUserInfo["KEY"]);
             return messageBody;   
+        }
+
+        private static string CreateAccountEmailBodyContent(String requestUrlAuthority, String email, String guid)
+        {
+            var template = File.ReadAllText(HttpContext.Current.Server.MapPath("~/EmailTemplate/CreateAccountEmail.html"));
+
+            var encryptedUserInfo = new Dictionary<String, String>();
+            encryptedUserInfo["EMAIL"] = email;
+            encryptedUserInfo["KEY"] = guid;
+
+            string messageBody = template.Replace("{1}", "http://" + SmptCreateAccountConstants.AccountDomain + "/#/" + "validate/" + encryptedUserInfo["EMAIL"] + "/" + encryptedUserInfo["KEY"]);
+            return messageBody;
         }
 
         private static string ValidateAccountEmailBodyContent(String requestUrlAuthority, String toMail, String guid)

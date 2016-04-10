@@ -16,7 +16,6 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
-using urNotice.Services.AuthService;
 using urNotice.Services.DataImport;
 using urNotice.Services.DataImport.ImportCompanies;
 using urNotice.Services.DataImport.ImportCompanyDesignationSalaries;
@@ -37,12 +36,7 @@ namespace urNoticeAuth.Controllers
         // GET: /Auth/
        
         public delegate void LogoutDelegate(HttpRequestBase requestData);
-        //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
-        private readonly AuthService _authService = new AuthService();
-        private static readonly ILogger log = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-
+        
         public ActionResult Index()
         {
             return View();
@@ -52,7 +46,9 @@ namespace urNoticeAuth.Controllers
         public JsonResult CreateAccount(RegisterationRequest req)
         {
             //var returnUrl = "/";
-            return Json(_authService.UserRegistration(req, Request, accessKey, secretKey));
+            IPerson person = new Consumer();
+            var response = person.RegisterMe(req, Request);
+            return Json(response);
         }
 
         //[HttpPost]
@@ -80,7 +76,9 @@ namespace urNoticeAuth.Controllers
         [HttpPost]
         public JsonResult ValidateAccount(ValidateAccountRequest req)
         {
-            return Json(new AuthService().ValidateAccountService(req,accessKey,secretKey));
+            IPerson consumerModel = new Consumer();
+            var response = consumerModel.ValidateAccountService(req);
+            return Json(response);
         }
 
         [HttpPost]
@@ -104,7 +102,10 @@ namespace urNoticeAuth.Controllers
         public JsonResult ForgetPassword()
         {
             var id = Request.QueryString["id"];
-            return Json(new AuthService().ForgetPasswordService(id, Request, accessKey, secretKey), JsonRequestBehavior.AllowGet);
+
+            IPerson consumerModel = new Consumer();
+            var response = consumerModel.ForgetPasswordService(id, Request);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult UpdateDesignations()
@@ -134,9 +135,8 @@ namespace urNoticeAuth.Controllers
         [HttpPost]
         public JsonResult ContactUs(ContactUsRequest req)
         {
-
-            var contactUsService = new AuthService();
-            var response = contactUsService.ContactUsService(req);
+            IPerson consumerModel = new Consumer();
+            var response = consumerModel.ContactUsService(req);
             return Json(response);
         }
 
@@ -161,17 +161,21 @@ namespace urNoticeAuth.Controllers
         }
 
 
-        [HttpPost]
-        public JsonResult ResendValidationCode(ValidateAccountRequest req)
-        {
-            return Json(new AuthService().ResendValidationCodeService(req, Request, accessKey, secretKey));
-        }
+        //[HttpPost]
+        //public JsonResult ResendValidationCode(ValidateAccountRequest req)
+        //{
+        //    IPerson consumerModel = new Consumer();
+        //    var response = consumerModel.ResendValidationCodeService(req, Request);
+        //    return Json(response);
+        //}
 
         //swagger done
         [HttpPost]
         public JsonResult ResetPassword(ResetPasswordRequest req)
         {
-            return Json(new AuthService().ResetPasswordService(req, accessKey, secretKey));
+            IPerson consumerModel = new Consumer();
+            var response = consumerModel.ResetPasswordService(req);
+            return Json(response);
         }
     }
 }

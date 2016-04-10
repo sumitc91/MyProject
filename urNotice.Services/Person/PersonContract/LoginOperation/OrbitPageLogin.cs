@@ -25,6 +25,13 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
             ISolrUser solrUserModel = new SolrUser();
             var userSolrDetail = solrUserModel.GetPersonData(userName, null, null, null, false);
 
+            if (userSolrDetail == null)
+            {
+                response.Status = 401;
+                response.Payload.Code = "401";
+                return response;
+            }
+
             IDynamoDb dynamoDbModel = new DynamoDb();
             var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                 DynamoDbHashKeyDataType.OrbitPageUser.ToString(),

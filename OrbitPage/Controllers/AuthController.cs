@@ -6,19 +6,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using urNotice.Common.Infrastructure.Encryption;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
-using urNotice.Services.AuthService;
 using System.Web.Mvc;
+using urNotice.Services.Person;
+using urNotice.Services.Person.PersonContract.LoginOperation;
+
 namespace OrbitPage.Controllers
 {
     public class AuthController : Controller
     {
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-
+        
         [System.Web.Mvc.HttpPost]
         public JsonResult Login(LoginRequest req)
         {
@@ -28,7 +29,8 @@ namespace OrbitPage.Controllers
             var response = new ResponseModel<LoginResponse>();
             if (req.Type == "web")
             {
-                response = new AuthService().WebLogin(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, accessKey, secretKey);
+                IOrbitPageLogin loginModel = new OrbitPageLogin();
+                response = loginModel.Login(req.UserName, EncryptionClass.Md5Hash(req.Password), returnUrl, req.KeepMeSignedInCheckBox, false);
             }
 
             if (response.Payload.Code == "200")
@@ -45,7 +47,17 @@ namespace OrbitPage.Controllers
         public JsonResult CreateAccount(RegisterationRequest req)
         {
             //var returnUrl = "/";
-            return Json(new AuthService().UserRegistration(req, Request, accessKey, secretKey));
+            IPerson person = new Consumer();
+            var response = person.RegisterMe(req, Request);
+            return Json(response);
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult ResendValidationCode(ValidateAccountRequest req)
+        {
+            IPerson consumerModel = new Consumer();
+            var response = consumerModel.ResendValidationCodeService(req, Request);
+            return Json(response);
         }
     }
 }

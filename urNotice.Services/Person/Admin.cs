@@ -63,6 +63,32 @@ namespace urNotice.Services.Person
         {
             throw new NotImplementedException();
         }
+
+        public ResponseModel<string> ValidateAccountService(ValidateAccountRequest req)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> ResendValidationCodeService(ValidateAccountRequest req, HttpRequestBase request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> ForgetPasswordService(string id, HttpRequestBase request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> ResetPasswordService(ResetPasswordRequest req)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> ContactUsService(ContactUsRequest req)
+        {
+            throw new NotImplementedException();
+        }
+
         //TODO: not used method.
         public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation,
             string salary, string jobFromYear, string jobToYear, string companyVertexId)
