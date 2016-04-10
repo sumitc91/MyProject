@@ -312,8 +312,8 @@ define([appLocation.preLogin], function (app) {
             sidrMenu += '<h1>' + 'OrbitPage' + '</h1>';
             sidrMenu += '<ul>';
             if ($rootScope.isUserLoggedIn && latestUserInfoAvailable) {
-                sidrMenu += '<li><img src=\"' + $rootScope.clientDetailResponse.imageUrl + '\" height=\"30px\" widht=\"30px\" />' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '</li>';
-                sidrMenu += '<li><a href="#/userprofile/' + $rootScope.clientDetailResponse.vertexId + '">My Profile</a></li>';
+                sidrMenu += '<li><img src=\"' + $rootScope.clientDetailResponse.Profilepic + '\" height=\"30px\" widht=\"30px\" />' + $rootScope.clientDetailResponse.Firstname + ' ' + $rootScope.clientDetailResponse.Lastname + '</li>';
+                sidrMenu += '<li><a href="#/userprofile/' + $rootScope.clientDetailResponse.VertexId + '">My Profile</a></li>';
                 sidrMenu += '<li role="menuitem"><a href="#/editpage">Edit Profile</a></li>';
             } else {
                 sidrMenu += '<li><a href=\"#/login\">Login</a></li>';
@@ -321,9 +321,10 @@ define([appLocation.preLogin], function (app) {
             }
 
             sidrMenu += '<li><hr/></li>';
-            sidrMenu += '<li><a href=\"#\">Worgraphy</a></li>';
-            sidrMenu += '<li><a href=\"#\">Urnotice</a></li>';
-
+            sidrMenu += '<li><a href=\"#/">Worgraphy</a></li>';
+            sidrMenu += '<li><a href=\"#/urnotice">Urnotice</a></li>';
+            sidrMenu += '<li><a href=\"#/workgraphy">Worgraphy</a></li>';
+            
             sidrMenu += '</ul>';
 
             $('#responsive-menu-button').sidr({
