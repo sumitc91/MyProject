@@ -149,7 +149,6 @@ namespace urNotice.Services.Person
                 
                 if(!string.IsNullOrEmpty(editPersonModel.CoverPic))
                     properties[VertexPropertyEnum.CoverImageUrl.ToString()] = editPersonModel.CoverPic;
-                
 
                 IGraphVertexDb graphVertexDbModel = new GraphVertexDb();
                 graphVertexDbModel.UpdateVertex(userInfo.OrbitPageUser.vertexId, editPersonModel.Email,TitanGraphConfig.Graph,properties);

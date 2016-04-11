@@ -38,6 +38,7 @@ namespace urNotice.Services.GraphDb
         public Dictionary<string, string> UpdateVertex(string vertexId,string email, string graphName, Dictionary<string, string> properties)
         {
             string url = TitanGraphConfig.Server;
+
             var response = UpdateGraphVertex(vertexId,graphName, properties, url);
             var orbitPageVertexDetail = new OrbitPageVertexDetail
             {
@@ -82,6 +83,9 @@ namespace urNotice.Services.GraphDb
             {                
                 uri.Append(property.Key + "=" + HttpUtility.UrlEncode(property.Value) + "&");
             }
+
+            if (properties.ContainsKey(VertexPropertyEnum.CoverImageUrl.ToString()) && string.IsNullOrEmpty(properties[VertexPropertyEnum.CoverImageUrl.ToString()]))
+                properties[VertexPropertyEnum.CoverImageUrl.ToString()] = CommonConstants.CompanySquareLogoNotAvailableImage;
 
             var client = new RestClient(url + uri.ToString());
             var request = new RestRequest();

@@ -53,6 +53,14 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             var context = GetDynamoDbContext();
             var res = context.Load<OrbitPageCompanyUserWorkgraphyTable>(dataType, objectId);
             return res;
+
+            //IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
+            //      new ScanCondition("DataType", ScanOperator.Equal, dataType),
+            //      new ScanCondition("ObjectId", ScanOperator.Equal, objectId)
+            //      );
+
+            //return res.FirstOrDefault();
+            
         }
 
         public OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(string dataType, string facebookId)
