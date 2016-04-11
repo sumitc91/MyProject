@@ -162,6 +162,7 @@ define([appLocation.preLogin], function (app) {
     };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
+
         $scope.clientNotificationDetailResponseInfo.nextPage = function () {
             //alert("working");
             if ($rootScope.clientNotificationDetailResponseInfo.busy) return;

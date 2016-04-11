@@ -1,9 +1,9 @@
 ﻿
 <div class="row" style="min-height: 90px;"></div>  
 <!--container start-->
-<div class="container">
+<div class="container" ng-controller="beforeLoginEditPage">
     <div class="row">
-       
+
         <!-- Main content -->
         <section class="content">
             <!-- top row -->
@@ -23,8 +23,8 @@
                                 <i class="icon-user"></i><span style="color: white;">Edit user profile</span>
                             </div>
                         </div>
-                        
-                        <div class="box-content nopadding" ng-controller="beforeLoginEditPage">                            
+
+                        <div class="box-content nopadding" ng-controller="beforeLoginEditPage">
                             <div class="tab-content padding tab-content-inline tab-content-bottom">
                                 <uib-tabset>
                                     <uib-tab heading="Profile">
@@ -59,7 +59,7 @@
                                                                 <br>
                                                             </div>
                                                             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                                                                <form class="form-horizontal">                                                                  
+                                                                <form class="form-horizontal">
                                                                     <br>
                                                                     <h5>
                                                                         Personal Information
@@ -80,7 +80,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-sm-3 control-label" for="webUrl">Email Id</label>
                                                                         <div class="col-sm-9">
-                                                                            <input type="text" placeholder="Website Url" id="webUrl" ng-model="clientDetailResponse.Email" class="form-control">
+                                                                            <input type="text" placeholder="Website Url" id="webUrl" ng-model="disabledEmailModel" class="form-control" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -90,7 +90,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-actions">
-                                                                        <button class="btn btn-info pull-right" type="submit">
+                                                                        <button class="btn btn-info pull-right" type="submit" ng-click="submitEditProfile()">
                                                                             Save changes
                                                                         </button>
                                                                     </div>
@@ -200,7 +200,7 @@
                                                                     </div>
 
                                                                     <br>
-                                                                    
+
                                                                     <div class="form-actions">
                                                                         <button class="btn btn-info pull-right" type="submit">
                                                                             Save changes

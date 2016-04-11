@@ -7,6 +7,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.loadingUserDetails = false;
         $rootScope.clientDetailResponse = {};
+        $scope.disabledEmailModel = "";
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
         if (CookieUtil.getUTMZT() != null && CookieUtil.getUTMZT() != '' && CookieUtil.getUTMZT() != "") {
@@ -38,6 +39,7 @@ define([appLocation.preLogin], function (app) {
                 $scope.loadingUserDetails = false;
                 if (data.Status == "200") {
                     $rootScope.clientDetailResponse = data.Payload;
+                    $scope.disabledEmailModel = $rootScope.clientDetailResponse.Email;
                     //$scope.UserNotificationsList.Messages = data.Payload.Messages;
                     //$scope.UserNotificationsList.Notifications = data.Payload.Notifications;
                     CookieUtil.setUserName(data.Payload.Firstname + ' ' + data.Payload.LastName, userSession.keepMeSignedIn);
@@ -62,6 +64,42 @@ define([appLocation.preLogin], function (app) {
                 //stopBlockUI();
                 //showToastMessage("Error", "Internal Server Error Occured.");                
             });
+        };
+
+        $scope.submitEditProfile = function() {
+
+            var editPersonRequest = {
+                FirstName: $rootScope.clientDetailResponse.Firstname,
+                LastName: $rootScope.clientDetailResponse.Lastname,
+                ImageUrl: $rootScope.clientDetailResponse.Profilepic,
+                CoverPic: $rootScope.clientDetailResponse.Coverpic,
+                Email: $rootScope.clientDetailResponse.Email
+            };
+
+            var url = ServerContextPath.empty + '/User/EditPersonDetails';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV(),
+                '_ga': $.cookie('_ga')
+            };
+                
+            startBlockUI('wait..', 3);
+            $http({
+                url: url,
+                method: "POST",
+                data: editPersonRequest,
+                headers: headers
+            }).success(function(data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                stopBlockUI();                
+                showToastMessage("Success", "Successfully Edited");
+            }).error(function(data, status, headers, config) {
+
+            });
+                
+            
         };
 
         $scope.openFacebookAuthWindow = function () {

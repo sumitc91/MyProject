@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
+using SolrNet;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
@@ -12,7 +13,9 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Common.Infrastructure.signalRPushNotifications;
 using urNotice.Services.Email.EmailTemplate;
@@ -21,6 +24,7 @@ using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Person.PersonContract.LoginOperation;
 using urNotice.Services.Person.PersonContract.RegistrationOperation;
+using urNotice.Services.Solr.SolrCompany;
 using urNotice.Services.Solr.SolrUser;
 
 namespace urNotice.Services.Person
@@ -106,6 +110,80 @@ namespace urNotice.Services.Person
             return response;
         }
 
+        public ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel)
+        {
+            var response = new ResponseModel<EditPersonModel>();
+
+            if (session.UserName != editPersonModel.Email)
+            {
+                response.Status = 401;
+                response.Message = "Unauthenticated";
+                return response;
+            }
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
+                        editPersonModel.Email,
+                        null);            
+            if (userInfo != null)
+            {
+                //update dynamodb
+                var orbitPageCompanyUserWorkgraphyTable = new OrbitPageCompanyUserWorkgraphyTable();
+                orbitPageCompanyUserWorkgraphyTable = GenerateOrbitPageUserObject(userInfo, editPersonModel);                                
+                dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(orbitPageCompanyUserWorkgraphyTable);
+
+                //update graphDb
+                var properties = new Dictionary<string, string>();
+                properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.User.ToString();
+
+                if(!string.IsNullOrEmpty(editPersonModel.FirstName))
+                    properties[VertexPropertyEnum.FirstName.ToString()] = editPersonModel.FirstName;
+
+                if(!string.IsNullOrEmpty(editPersonModel.LastName))
+                    properties[VertexPropertyEnum.LastName.ToString()] = editPersonModel.LastName;
+                
+
+                if(!string.IsNullOrEmpty(editPersonModel.ImageUrl))
+                    properties[VertexPropertyEnum.ImageUrl.ToString()] = editPersonModel.ImageUrl;
+                
+                if(!string.IsNullOrEmpty(editPersonModel.CoverPic))
+                    properties[VertexPropertyEnum.CoverImageUrl.ToString()] = editPersonModel.CoverPic;
+                
+
+                IGraphVertexDb graphVertexDbModel = new GraphVertexDb();
+                graphVertexDbModel.UpdateVertex(userInfo.OrbitPageUser.vertexId, editPersonModel.Email,TitanGraphConfig.Graph,properties);
+
+                //update solr
+                ISolrUser solrUserModel = new SolrUser();
+                solrUserModel.InsertNewUser(orbitPageCompanyUserWorkgraphyTable.OrbitPageUser,false);
+
+                response.Status = 200;
+                response.Message = "success";
+                response.Payload = editPersonModel;
+            }
+            else
+            {
+                response.Status = 404;
+                response.Message = "username not found";
+            }
+
+            return response;
+        }
+
+        private OrbitPageCompanyUserWorkgraphyTable GenerateOrbitPageUserObject(
+            OrbitPageCompanyUserWorkgraphyTable orbitPageCompanyUserWorkgraphyTable, EditPersonModel editPersonModel)
+        {
+            
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.firstName = editPersonModel.FirstName;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.lastName = editPersonModel.LastName;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.imageUrl = editPersonModel.ImageUrl;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.userCoverPic = editPersonModel.CoverPic;            
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.lastUpdatedDate = DateTimeUtil.GetUtcTime();
+
+            return orbitPageCompanyUserWorkgraphyTable;
+        }
+
         public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image,string userWallVertexId, out Dictionary<string, string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostVertexModel>();
@@ -174,6 +252,20 @@ namespace urNotice.Services.Person
             userPostVertexModel.userInfo.Add(userVertexModel);
 
             return response;  
+        }
+
+        public SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId,string cid)
+        {
+            ISolrCompany solrCompanyModel = new SolrCompany();
+            var response = solrCompanyModel.CompanyDetailsById(cid);
+
+            if (userVertexId != null)
+            {
+                IGraphDbContract graphDbContractModel = new GraphDbContract();
+                //graphDbContractModel.
+            }
+
+            return response;
         }
 
         public ResponseModel<string> ValidateAccountService(ValidateAccountRequest req)

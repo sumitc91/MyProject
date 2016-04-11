@@ -186,7 +186,7 @@ define([appLocation.preLogin], function (app) {
             //console.log("str -1 " + str);
             for (var i = 0; i < likeInfo.length; i++) {
                 if (i <= 5)
-                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + "</a>,";
+                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName +" "+likeInfo[i].LastName+  "</a>,";
 
             }
             str += "...";
@@ -195,7 +195,7 @@ define([appLocation.preLogin], function (app) {
 
         function appentToCommentLikeString(str) {
             if (str == null) str = "";
-            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + "</a>," + str;
+            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
             return str;
         };
 

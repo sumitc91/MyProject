@@ -232,6 +232,7 @@
     <Compile Include="Model\urNoticeModel\GraphModel\WallPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ContactUsRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\CreateStoryRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\EditProfile\EditPersonModel.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\LoginRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\NewCompanyRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\NewDesignationRequest.cs" />

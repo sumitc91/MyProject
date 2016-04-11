@@ -75,10 +75,10 @@ C:\code\svn\OrbitPage\urNoticeSolr\bin\System.Web.WebPages.Razor.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Common.Infrastructure.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Services.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\EntityFramework.dll
-C:\code\svn\OrbitPage\urNoticeSolr\bin\log4net.dll
-C:\code\svn\OrbitPage\urNoticeSolr\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\AWSSDK.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\log4net.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\RestSharp.dll
+C:\code\svn\OrbitPage\urNoticeSolr\bin\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\Facebook.dll
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNoticeSolr\bin\urNotice.Services.pdb

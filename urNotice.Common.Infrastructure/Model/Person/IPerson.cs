@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using SolrNet;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 
 namespace urNotice.Common.Infrastructure.Model.Person
@@ -20,7 +23,13 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<LoginResponse> Login(string userName, string password,bool decryptPassword);
         ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail);
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
+        ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
         ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image,string userWallVertexId, out Dictionary<string, string> sendNotificationResponse);
+
+
+        SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid);
+
+        //anonymous services
         ResponseModel<String> ValidateAccountService(ValidateAccountRequest req);
         ResponseModel<String> ResendValidationCodeService(ValidateAccountRequest req, HttpRequestBase request);
         ResponseModel<String> ForgetPasswordService(string id, HttpRequestBase request);

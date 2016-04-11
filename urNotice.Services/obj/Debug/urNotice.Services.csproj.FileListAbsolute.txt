@@ -36,6 +36,8 @@ C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\urNotice.Services.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\urNotice.Services.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\AWSSDK.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\EntityFramework.dll
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\GaDotNet.Common.dll
+C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\log4net.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\Microsoft.Owin.Security.dll
@@ -48,8 +50,6 @@ C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\System.Net.Http.Formatting.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\System.Web.Http.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\System.Web.Http.WebHost.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\urNotice.Common.Infrastructure.dll
-C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\log4net.dll
-C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\GaDotNet.Common.dll
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\urNotice.Common.Infrastructure.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\AWSSDK.pdb
 C:\code\svn\OrbitPage\urNotice.Services\bin\Debug\EntityFramework.xml

@@ -16,6 +16,8 @@ namespace urNotice.Services.GraphDb
 {
     public class GraphEdgeDb : IGraphEdgeDb
     {
+        private delegate Dictionary<string, string> AddEdgeAsyncDelegate(string userName, string graphName, Dictionary<string, string> properties);
+
         public Dictionary<string, string> AddEdge(string userName, string graphName, Dictionary<string, string> properties)
         {
             string url = TitanGraphConfig.Server;
@@ -34,6 +36,13 @@ namespace urNotice.Services.GraphDb
             dynamoDbModel.UpsertOrbitPageEdgeDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()],properties[EdgePropertyEnum._outV.ToString()]);
             
             return response;
+        }
+
+        public Dictionary<string, string> AddEdgeAsync(string userName, string graphName, Dictionary<string, string> properties)
+        {
+            var addEdgeAsyncDelegate = new AddEdgeAsyncDelegate(AddEdge);
+            addEdgeAsyncDelegate.BeginInvoke(userName, graphName, properties, null, null);
+            return null;
         }
 
         private Dictionary<String, String> CreateEdge(string graphName, Dictionary<string, string> properties, string url)

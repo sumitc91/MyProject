@@ -10,6 +10,8 @@ namespace urNotice.Services.GraphDb
     public interface IGraphVertexDb :  IGraphDb
     {
         Dictionary<String, String> AddVertex(string email, string graphName, Dictionary<string, string> properties);
+
+        Dictionary<string, string> UpdateVertex(string vertexId, string email, string graphName, Dictionary<string, string> properties);
         String GetVertexDetail(string gremlinQuery, string vertexId, string graphName, Dictionary<string, string> properties);
     }
 }

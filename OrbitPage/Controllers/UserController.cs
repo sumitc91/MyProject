@@ -12,6 +12,7 @@ using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.Person;
@@ -123,6 +124,33 @@ namespace OrbitPage.Controllers
                     new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult EditPersonDetails(EditPersonModel editPersonModel)
+        {
+            
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken && session != null)
+            {
+                
+                IPerson personModel = new Consumer();
+                var response = personModel.EditPersonDetails(session,editPersonModel);
+
+                return Json(response, JsonRequestBehavior.AllowGet);
             }
             else
             {

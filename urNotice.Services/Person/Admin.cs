@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using SolrNet;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
@@ -10,7 +11,9 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.GraphDb;
 using urNotice.Services.GraphDb.GraphDbContract;
@@ -58,8 +61,18 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,
             out Dictionary<string, string> sendNotificationResponse)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid)
         {
             throw new NotImplementedException();
         }

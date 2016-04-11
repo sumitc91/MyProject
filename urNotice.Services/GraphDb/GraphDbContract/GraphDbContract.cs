@@ -101,6 +101,21 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             return addVertexResponse;
         }
 
+        public Dictionary<string, string> IncrementVisitedCountInGraphDbAsync(string vertexFrom,string vertexTo,string label)
+        {
+            
+            var properties = new Dictionary<string, string>();
+            properties[EdgePropertyEnum._outV.ToString()] = vertexFrom;
+            properties[EdgePropertyEnum._inV.ToString()] = vertexTo;
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.PublishedBy.ToString();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            //IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdgeAsync(session.UserName, TitanGraphConfig.Graph, properties);
+
+            return null;
+        }
+
         public String CompanySalaryInfo(string companyVertexId, string from, string to)
         {
             string url = TitanGraphConfig.Server;
