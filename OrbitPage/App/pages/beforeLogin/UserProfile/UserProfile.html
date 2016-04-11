@@ -160,7 +160,7 @@
                                 <div class="post-heading">
                                     <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
-                                        <div class="title h5"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
+                                        <div class="title"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
                                         <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
                                         <h6 class="text-muted time">{{post.postInfo.PostedTime| timeago}}</h6>
                                     </div>
@@ -512,6 +512,7 @@
         width: 60px;
     }
     .post .post-heading .meta .title {
+        font-size: initial;
         margin-bottom: 0;
     }
     .post .post-heading .meta .title a:hover {
