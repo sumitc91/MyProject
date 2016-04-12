@@ -101,19 +101,23 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             return addVertexResponse;
         }
 
-        public Dictionary<string, string> IncrementVisitedCountInGraphDbAsync(string vertexFrom,string vertexTo,string label)
+        public Dictionary<string, string> PersonVisitedCompanyAddEdgeGraphDbAsync(string username, string vertexFrom, string vertexTo)
+        {
+            return AddEdgeGraphDbAsync(username, vertexFrom, vertexTo, EdgeLabelEnum.Visited.ToString());
+        }
+        private Dictionary<string, string> AddEdgeGraphDbAsync(string username,string vertexFrom,string vertexTo,string label)
         {
             
             var properties = new Dictionary<string, string>();
             properties[EdgePropertyEnum._outV.ToString()] = vertexFrom;
             properties[EdgePropertyEnum._inV.ToString()] = vertexTo;
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.PublishedBy.ToString();
+            properties[EdgePropertyEnum._label.ToString()] = label;
 
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-            //IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdgeAsync(session.UserName, TitanGraphConfig.Graph, properties);
+            Dictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdgeAsync(username, TitanGraphConfig.Graph, properties);
 
-            return null;
+            return addCreatedByEdgeResponse;
         }
 
         public String CompanySalaryInfo(string companyVertexId, string from, string to)

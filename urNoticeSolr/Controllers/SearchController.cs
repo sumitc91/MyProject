@@ -169,10 +169,21 @@ namespace urNoticeSolr.Controllers
         {
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();
             var cid = Request.QueryString["cid"].ToString(CultureInfo.InvariantCulture);
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            
             try
             {
                 ISolrCompany solrCompanyModel = new SolrCompany();
                 response.Payload = solrCompanyModel.CompanyDetailsById(cid);
+                if (isValidToken && response.Payload != null && response.Payload.Count>0)
+                {
+                    IGraphDbContract graphDbContractModel = new GraphDbContract();
+                    graphDbContractModel.PersonVisitedCompanyAddEdgeGraphDbAsync(session.UserName, session.UserVertexId,
+                        response.Payload[0].companyid);
+                }
                 response.Status = 200;
                 response.Message = "Success";
             }

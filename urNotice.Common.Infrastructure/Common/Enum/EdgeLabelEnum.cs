@@ -19,6 +19,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Salary,
         PublishedBy,
         WorkgraphyStory,
-        WorkgraphyDesignationStory
+        WorkgraphyDesignationStory,
+        Visited
     }
 }

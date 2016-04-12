@@ -17,5 +17,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
         Dictionary<String, String> InsertNewCompanyInGraphDb(String adminEmail, String companyName);
         String CompanySalaryInfo(string companyVertexId, string from, string to);
         String CompanyWorkgraphyInfo(string companyVertexId, string from, string to);
+
+        Dictionary<string, string> PersonVisitedCompanyAddEdgeGraphDbAsync(string username, string vertexFrom, string vertexTo);
     }
 }
