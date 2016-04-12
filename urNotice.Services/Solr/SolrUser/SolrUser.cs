@@ -101,7 +101,7 @@ namespace urNotice.Services.Solr.SolrUser
                 fieldsToBeReturned = new String[]
                 {
                     "id", "firstname", "lastname", "gender", "profilepic", "isactive", "source", "email", "phone",
-                    "uidcode", "username", "friends", "virtualfriend", "vertexId"
+                    "uidcode", "username", "friends", "virtualfriend", "vertexId","coverpic"
                 };
             }
             

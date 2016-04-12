@@ -33,9 +33,23 @@
                                                 <div class="widget no-margin">
                                                     <div class="widget-body">
                                                         <div class="row">
+                                                            <div class="col-md-8">
+                                                                <img height="250" ng-src="{{clientDetailResponse.Coverpic}}" alt="Cover Pic is not set for your profile.">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h3>Change Cover Pic</h3>
+                                                                <h5>650x220 Dimension Preferred.</h5>
+                                                                <p>(Please Click on Save button to make changes reflect to database after changing profile/cover pic.)</p>
+                                                                <input type="file" ng-file-select="onCoverPicFileSelectLogoUrl($files)">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="row">
                                                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                                                 <div class="thumbnail">
-                                                                    <img src="{{clientDetailResponse.Profilepic}}" alt="300x200">
+                                                                    <img ng-src="{{clientDetailResponse.Profilepic}}" alt="300x200">
+                                                                    <input type="file" ng-file-select="onProfilePicFileSelectLogoUrl($files)">
                                                                     <br>
                                                                     <h4 class="center-align-text">UI Designer</h4>
                                                                     <p class="btn-stack center-align-text">

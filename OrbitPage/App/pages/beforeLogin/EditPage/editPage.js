@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginEditPage', function ($scope, $http, $rootScope, CookieUtil) {
+    app.controller('beforeLoginEditPage', function ($scope, $http,$upload, $timeout, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
         
 
@@ -100,6 +100,46 @@ define([appLocation.preLogin], function (app) {
             });
                 
             
+        };
+
+        $scope.onCoverPicFileSelectLogoUrl = function ($files) {
+
+            startBlockUI('wait..', 3);            
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    stopBlockUI();                    
+                    $timeout(function () {
+                        $rootScope.clientDetailResponse.Coverpic = data.data.link;
+                    });                    
+                });
+            }
+        };
+
+        $scope.onProfilePicFileSelectLogoUrl = function ($files) {
+
+            startBlockUI('wait..', 3);
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    stopBlockUI();
+                    $timeout(function () {
+                        $rootScope.clientDetailResponse.Profilepic = data.data.link;
+                    });
+                });
+            }
         };
 
         $scope.openFacebookAuthWindow = function () {
