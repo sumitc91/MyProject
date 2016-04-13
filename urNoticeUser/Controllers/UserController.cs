@@ -320,6 +320,51 @@ namespace urNoticeUser.Controllers
 
         }
 
+        public JsonResult GetCompanyNoticePeriodInfo()
+        {
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            isValidToken = true;//TODO: currently hard coded.
+            if (isValidToken)
+            {
+                Boolean isRequestValid = true;
+                if (String.IsNullOrWhiteSpace(vertexId) || vertexId.Equals("undefined"))
+                {
+                    if (session != null)
+                        vertexId = session.UserVertexId;
+                    else
+                        isRequestValid = false;
+                }
+
+                if (isRequestValid)
+                {
+                    IGraphDbContract graphDbContract = new GraphDbContract();
+                    var getCompanyNoticePeriodInfoResponse = graphDbContract.CompanyNoticePeriodInfo(vertexId, from, to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    var getCompanyNoticePeriodInfoResponseDeserialized =
+                        JsonConvert.DeserializeObject<CompanyNoticePeriodVertexModelResponse>(getCompanyNoticePeriodInfoResponse);
+                    return Json(getCompanyNoticePeriodInfoResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("not a valid request", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public JsonResult GetCompanyWorkgraphyInfo()
         {
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);

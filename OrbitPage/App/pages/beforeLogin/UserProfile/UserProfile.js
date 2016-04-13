@@ -29,7 +29,11 @@ define([appLocation.preLogin], function (app) {
 
         $scope.commentOnUserPost = function (postIndex) {
             //console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+            console.log("postIndex : " + postIndex);
             createNewMessageOnUserPost(postIndex);
+
+            //$scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex - 1;
+            //console.log("$scope.UserPostList[postIndex].messageFromIndex : " + $scope.UserPostList[postIndex].messageFromIndex);
             $scope.UserPostListInfoAngular.after = 0;
             //$scope.UserPostList = [];
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
@@ -41,10 +45,11 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.loadMoreMessage = function (postVerexId, postIndex) {
-            console.log("postVerexId : " + postVerexId + "   --- postIndex : " + postIndex);
+            //console.log("postVerexId : " + postVerexId + "   --- postIndex : " + postIndex);
             $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
 
+            console.log("$scope.UserPostList[postIndex].messageFromIndex 2: " + $scope.UserPostList[postIndex].messageFromIndex);
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);
             //createNewReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);

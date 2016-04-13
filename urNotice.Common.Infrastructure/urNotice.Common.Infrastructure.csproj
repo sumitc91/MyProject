@@ -217,6 +217,9 @@
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListGdphoneNumberResponse.cs" />
     <Compile Include="Model\urNoticeModel\GoogleApiResponse\GoogleApiContactListResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyDesignationInfoVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanyNoticePeriodInfoVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanyNoticePeriodVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\CompanyNoticePeriodVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryInfoVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanySalaryVertexModelResponse.cs" />

@@ -136,6 +136,22 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             return response;
         }
 
+        public String CompanyNoticePeriodInfo(string companyVertexId, string from, string to)
+        {
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
+
+
+            //string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it, commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[0..5].transform{[commentInfo:it, commentedBy: it.in('Created')]},userInfo:it.in('Created')] }";
+            //string gremlinQuery = "g.v(" + companyVertexId + ").out('Salary').transform{[salaryInfo:it.inE('Salary')[0..5],designationInfo:it]}";
+            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[range:it.outE('NoticePeriodRange'),designationInfo:it.out('NoticePeriodRange')]}";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, companyVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+
+            return response;
+        }
+
         public String CompanyWorkgraphyInfo(string companyVertexId, string from, string to)
         {
             string url = TitanGraphConfig.Server;

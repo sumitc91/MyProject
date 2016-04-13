@@ -186,8 +186,47 @@
                                                 </div>-->
                                         </div>
                                     </uib-tab>
-                                    <uib-tab heading="Notice Period">Notice Period Justified content</uib-tab>
-                                    <uib-tab heading="Salary">Salary Justified content</uib-tab>
+                                    <uib-tab heading="Notice Period">
+                                        <div class="row">
+                                            <br />
+                                            <div class="container" ng-repeat="noticePeriod in CompanyNoticePeriodDetails" style="width: 70%;">
+                                                <div class="row" ng-repeat="range in noticePeriod.range">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                                                        <div class="panel panel-default">
+                                                            <div class="row padall">
+                                                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                                    <span></span>
+                                                                    <img src="https://s3-ap-southeast-1.amazonaws.com/urnotice/images/notice_period.jpg" />
+                                                                </div>
+                                                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                                                    <div class="clearfix">
+                                                                        <div class="pull-left">
+                                                                            <span class="fa fa-map-marker icon"> &nbsp;</span><span ng-bind="noticePeriod.designationInfo[$index].DesignationName"></span>
+                                                                        </div>
+                                                                        <div class="pull-right">
+                                                                            Approx
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div ng-if="range.RangeValue=='NotAvailable'"><h4>Not Available</h4></div>
+                                                                        <div ng-if="range.RangeValue=='ZeroToFifteen'"><h4>0 to 15 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='FifteenToThirty'"><h4>15 - 30 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='ThirtyToFourtyFive'"><h4>30 - 45 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='FourtyfiveToSixty'"><h4>45 - 60 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='SixtytoSeventyfive'"><h4>60 - 75 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='SeventyfiveToNinety'"><h4>75 - 90 Days</h4></div>
+                                                                        <div ng-if="range.RangeValue=='NinetyPlus'"><h4>90+ Days</h4></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </uib-tab>
+                                    <!--<uib-tab heading="Salary">Salary Justified content</uib-tab>-->
                                     <uib-tab heading="Workgraphy">
                                         <div class="container">
                                             <br />

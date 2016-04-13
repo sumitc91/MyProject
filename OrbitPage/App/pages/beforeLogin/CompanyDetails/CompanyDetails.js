@@ -68,6 +68,7 @@ define([appLocation.preLogin], function (app) {
                     //console.log($scope.companyDetails);                    
                     getCompanyCompetitorsDetail($scope.companyDetails.size, $scope.companyDetails.rating, $scope.companyDetails.speciality);
                     companySalaryDetailsById();
+                    companyNoticePeriodDetailsById();
                     companyWorkgraphyDetailsById();
                 }
                 else {
@@ -94,6 +95,27 @@ define([appLocation.preLogin], function (app) {
                 //console.log(data);
                 $scope.CompanySalaryDetails = data.results;
                 
+            });
+
+        }
+
+        function companyNoticePeriodDetailsById() {
+            var url = ServerContextPath.userServer + '/User/GetCompanyNoticePeriodInfo?from=0&to=2&vertexId=' + $scope.companyid;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv')
+            };
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //console.log(data);
+                $scope.CompanyNoticePeriodDetails = data.results;
+
             });
 
         }
