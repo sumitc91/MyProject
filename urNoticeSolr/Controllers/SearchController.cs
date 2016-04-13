@@ -44,17 +44,6 @@ namespace urNoticeSolr.Controllers
             return View();
         }
 
-        public JsonResult AddDesignation()
-        {
-            var response = new ResponseModel<String>();
-            //TODO: to be implemented 
-            response.Status = 200;
-            response.Message = "Addes";
-            return Json(response, JsonRequestBehavior.AllowGet);
-
-
-        }
-
         public JsonResult GetDesignationDetails()
         {
             var response = new ResponseModel<SolrQueryResults<UnDesignationSolr>>();

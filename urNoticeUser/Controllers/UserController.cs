@@ -235,6 +235,46 @@ namespace urNoticeUser.Controllers
 
         }
 
+        public JsonResult GetUserPostMessages()
+        {
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var userEmail = string.Empty;
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            if (session != null)
+                userEmail = session.UserName;
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            isValidToken = true;//TODO: currently hard coded.
+            if (isValidToken)
+            {
+                
+                if (!String.IsNullOrWhiteSpace(vertexId) && !vertexId.Equals("undefined"))
+                {
+                    var getUserPostMessagesResponse = new UserService().GetUserPostMessages(vertexId, from, to);
+                    var getUserPostMessagesResponseDeserialized =
+                        JsonConvert.DeserializeObject<UserPostMessagesVertexModelResponse>(getUserPostMessagesResponse);
+
+
+                    return Json(getUserPostMessagesResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("not a valid request", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
         public JsonResult GetCompanySalaryInfo()
         {
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);

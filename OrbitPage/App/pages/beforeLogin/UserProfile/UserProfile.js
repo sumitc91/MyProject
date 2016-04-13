@@ -7,6 +7,8 @@ define([appLocation.preLogin], function (app) {
         _.defer(function () { $scope.$apply(); });
         $scope.visitedUserVertexId = $routeParams.vertexId;
 
+        var messagesPerCall = 5;
+
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
         $scope.UserPostListLastPageReached = false;
@@ -38,8 +40,45 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.loadMoreMessage = function (postVerexId, postIndex) {
+            console.log("postVerexId : " + postVerexId + "   --- postIndex : " + postIndex);
+            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
+            $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
+
+            loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);
+            //createNewReactionOnUserPost(postIndex);
+            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
         $scope.UserPostListInfo = {};
 
+        function loadMoreMessage(vertexId, postIndex,from, to) {
+            var url = ServerContextPath.userServer + '/User/GetUserPostMessages?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);
+            $scope.UserPostList[postIndex].loadingIcon = true;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                //console.log(data.results);
+                $scope.UserPostList[postIndex].loadingIcon = false;
+                $scope.$apply(function () {
+                    for (var i = 0; i < data.results.length; i++) {
+                        $scope.UserPostList[postIndex].commentsInfo.push(data.results[i]);
+                    }
+                    
+                });
+
+            });
+        };
 
         $scope.NewPostImageUrl = {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
@@ -293,6 +332,8 @@ define([appLocation.preLogin], function (app) {
                             absoluteIndex = from + i;
                             //console.log("absoluteIndex : "+absoluteIndex);
                             $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo);
+                            $scope.UserPostList[absoluteIndex].messageFromIndex = 0;
+                            $scope.UserPostList[absoluteIndex].messageToIndex = $scope.UserPostList[absoluteIndex].messageFromIndex + messagesPerCall - 1;
                             if ($scope.UserPostList[absoluteIndex].isLiked != null && $scope.UserPostList[absoluteIndex].isLiked.length > 0) {
                                 $scope.UserPostList[absoluteIndex].alreadyLiked = true;
                             } else {
