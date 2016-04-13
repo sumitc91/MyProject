@@ -20,6 +20,7 @@ using urNotice.Services.DataImport;
 using urNotice.Services.DataImport.ImportCompanies;
 using urNotice.Services.DataImport.ImportCompanyDesignationSalaries;
 using urNotice.Services.DataImport.ImportDesignations;
+using urNotice.Services.DataImport.ImportNoticePeriods;
 using urNotice.Services.ErrorLogger;
 using urNotice.Services.ImageService;
 using urNotice.Services.Person;
@@ -123,6 +124,15 @@ namespace urNoticeAuth.Controllers
             //response = importCompanyDesignationSalariesModel.ImportCompanyDesignationAllSalaries();
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult UpdateCompanyDesignationNoticePeriod()
+        {
+            IImportNoticePeriods importNoticePeriodsModel = new ImportNoticePeriods();
+            bool response = false;
+            response = importNoticePeriodsModel.ImportCompanyAllDesignationNoticePeriods();
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UpdateCompaniesFromCsv()
         {
             IImportCompanies importCompaniesModel = new ImportCompaniesFromCsv();

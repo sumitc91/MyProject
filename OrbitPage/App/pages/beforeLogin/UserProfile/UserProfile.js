@@ -145,6 +145,30 @@ define([appLocation.preLogin], function (app) {
             };
 
             
+            var newCommentPosted = {
+                "commentInfo": {
+                    "PostImage": $scope.NewPostImageUrl.link_m,
+                    "PostedByUser": $rootScope.clientDetailResponse.Email,
+                    "PostedTime": new Date($.now()),
+                    "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
+                    "_id": "",
+                    "_type": null
+                },
+                "commentedBy": [
+                    {
+                        "FirstName": $rootScope.clientDetailResponse.Firstname,
+                        "LastName": $rootScope.clientDetailResponse.Lastname,
+                        "Username": $rootScope.clientDetailResponse.Email,
+                        "Gender": $rootScope.clientDetailResponse.Gender,
+                        "CreatedTime": new Date($.now()),
+                        "ImageUrl": $rootScope.clientDetailResponse.Profilepic,
+                        "CoverImageUrl": $rootScope.clientDetailResponse.Coverpic,
+                        "_id": $rootScope.clientDetailResponse.VertexId,
+                        "_type": null
+                    }
+                ]
+            };
+
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
             var headers = {
                 'Content-Type': 'application/json',
@@ -153,7 +177,18 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
             if ($rootScope.isUserLoggedIn) {
-                startBlockUI('wait..', 3);
+
+                var commentsNewList = [];
+                commentsNewList.push(newCommentPosted);
+                $scope.UserPostList[postIndex].postInfo.postUserComment = "";
+
+                for (var i = 0; i < $scope.UserPostList[postIndex].commentsInfo.length;i++) {
+                    commentsNewList.push($scope.UserPostList[postIndex].commentsInfo[i]);
+                }
+
+                $scope.UserPostList[postIndex].commentsInfo = commentsNewList;
+                $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = true;
+                //startBlockUI('wait..', 3);
                 $http({
                     url: url,
                     method: "POST",
@@ -161,10 +196,11 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
-                    $scope.UserPostList = [];
-                    getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-                    //$scope.UserPostList[postIndex].commentsInfo.push(data.Payload);
+                    //stopBlockUI();
+                    //$scope.UserPostList = [];
+                    //getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
+                    //$scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
+                    $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = false;
                     $scope.userPostCommentData = "";
 
                     $timeout(function () {

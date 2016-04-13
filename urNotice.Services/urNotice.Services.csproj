@@ -109,6 +109,8 @@
     <Compile Include="DataImport\ImportCompanyDesignationSalaries\IImportCompanyDesignationSalaries.cs" />
     <Compile Include="DataImport\ImportCompanyDesignationSalaries\ImportCompanyDesignationSalariesFromCsv.cs" />
     <Compile Include="DataImport\ImportDesignations\ImportDesinationsFromCsv.cs" />
+    <Compile Include="DataImport\ImportNoticePeriods\IImportNoticePeriods.cs" />
+    <Compile Include="DataImport\ImportNoticePeriods\ImportNoticePeriods.cs" />
     <Compile Include="Person\Admin.cs" />
     <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />
     <Compile Include="Email\EmailFromMandrill\EmailFromMandrill.cs" />

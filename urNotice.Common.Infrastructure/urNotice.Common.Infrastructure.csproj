@@ -154,6 +154,7 @@
     <Compile Include="Common\Enum\DynamoDbHashKeyDataType.cs" />
     <Compile Include="Common\Enum\EdgeLabelEnum.cs" />
     <Compile Include="Common\Enum\EdgePropertyEnum.cs" />
+    <Compile Include="Common\Enum\NoticePeriodRangeEnum.cs" />
     <Compile Include="Common\Enum\OrbitPageEnum.cs" />
     <Compile Include="Common\Enum\UserReactionEnum.cs" />
     <Compile Include="Common\Enum\VertexLabelEnum.cs" />

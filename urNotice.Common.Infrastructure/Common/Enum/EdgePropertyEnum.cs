@@ -17,6 +17,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Type,
         NotificationInitiatedByVertexId,
         SalaryAmount,
+        RangeValue,
         Reaction
     }
 }

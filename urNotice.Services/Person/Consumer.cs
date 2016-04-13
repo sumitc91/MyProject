@@ -512,6 +512,12 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public bool CreateNewCompanyDesignationNoticePeriod(string companyName, string designationName, string noticePeriodRange,
+            string createdBy)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CreateNewCompany(OrbitPageCompany company, string createdBy)
         {
             throw new NotImplementedException();

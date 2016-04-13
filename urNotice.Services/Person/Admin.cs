@@ -189,6 +189,41 @@ namespace urNotice.Services.Person
             return true;
         }
 
+        public bool CreateNewCompanyDesignationNoticePeriod(string companyName, string designationName, string noticePeriodRange,
+            string createdBy)
+        {
+            //IGraphDbContract graphDbContract = new GraphDbContract();
+            //var response = graphDbContract.InsertNewDesignationInGraphDb(createdBy, designationName);
+
+            //IDynamoDb dynamoDbModel = new DynamoDb();
+            //dynamoDbModel.UpsertOrbitPageDesignation(designationName, response[TitanGraphConstants.Id]);
+
+            ISolrDesignation solrDesignationModel = new SolrDesignation();
+            ISolrCompany solrCompanyModel = new SolrCompany();
+            var designationDetails = solrDesignationModel.GetAbsoluteDesignationDetail(designationName);
+            if (designationDetails != null && designationDetails.Count > 0)
+            {
+                var companyDetails = solrCompanyModel.GetAbsoluteCompanyDetailsAutocomplete(companyName);
+                if (companyDetails != null && companyDetails.Count > 0)
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>();
+                    properties = new Dictionary<string, string>();
+                    properties[EdgePropertyEnum._outV.ToString()] = companyDetails[0].guid;
+                    properties[EdgePropertyEnum._inV.ToString()] = designationDetails[0].vertexId;
+                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.NoticePeriodRange.ToString();
+                    properties[EdgePropertyEnum.RangeValue.ToString()] = noticePeriodRange;
+                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+
+                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+                    IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(createdBy, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+                }
+            }
+            //solrDesignationModel.AddDesignation(response[TitanGraphConstants.Id], designationName, false);
+
+            return true;
+        }
+
         public bool CreateNewCompany(OrbitPageCompany company, string createdBy)
         {
             IGraphDbContract graphDbContract = new GraphDbContract();

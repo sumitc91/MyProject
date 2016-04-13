@@ -17,6 +17,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Comment,
         Notification,
         Salary,
+        NoticePeriodRange,
         PublishedBy,
         WorkgraphyStory,
         WorkgraphyDesignationStory,

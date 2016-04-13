@@ -41,7 +41,8 @@ namespace urNotice.Common.Infrastructure.Model.Person
         bool CreateNewDesignation(string designationName, string createdBy);
         bool CreateNewCompanyDesignationSalary(string companyName, string designationName, string salary,
             string createdBy);
-
+        bool CreateNewCompanyDesignationNoticePeriod(string companyName, string designationName, string noticePeriodRange,
+            string createdBy);
         bool CreateNewCompany(OrbitPageCompany company, string createdBy);
     }
 }

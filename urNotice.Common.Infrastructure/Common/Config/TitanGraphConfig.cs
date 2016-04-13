@@ -8,7 +8,7 @@ namespace urNotice.Common.Infrastructure.Common.Config
 {
     public class TitanGraphConfig
     {
-        public const string Server = "http://52.26.99.234:8182";
+        public const string Server = "http://52.38.91.123:8182";
         public const string Graph = "graph";
     }
 }
