@@ -12,7 +12,7 @@
                         <div class="col-md-12" ng-repeat="post in UserPostList">
                             <div class="panel panel-white post panel-shadow">
                                 <div class="post-heading">
-                                    <a href="#/userprofile/{{post.userInfo[0]._id}}" ng-bind="post.userInfo[0].FirstName"></a> Posted on  <a href="#/userprofile/{{post.postedToUser[0]._id}}" ng-bind="post.postedToUser[0].FirstName"></a>'s Wall
+                                    <a href="#/userprofile/{{post.userInfo[0]._id}}"><span ng-bind="post.userInfo[0].FirstName"></span> &nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a> Posted on  <a href="#/userprofile/{{post.postedToUser[0]._id}}"><span ng-bind="post.postedToUser[0].FirstName"></span>&nbsp;<span ng-bind="post.postedToUser[0].LastName"></span></a>'s Wall
                                     <hr />
                                     <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
@@ -34,22 +34,22 @@
                                     </div>
                                 </div>
                                 <div class="post-footer">
-
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
                                     <ul class="comments-list">
-                                        <li class="comment" ng-repeat="comment in post.commentsInfo | reverse">
+                                        <li class="comment" ng-repeat="comment in post.commentsInfo"> <!--comment in post.commentsInfo | reverse-->
                                             <a class="pull-left" href="#/userprofile/{{comment.commentedBy[0]._id}}"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
                                             <div class="comment-body">
                                                 <div class="comment-heading">
                                                     <h4 class="comment-user-name"><a href="#/userprofile/{{comment.commentedBy[0]._id}}"><span ng-bind="comment.commentedBy[0].FirstName"></span>&nbsp;<span ng-bind="comment.commentedBy[0].LastName"></span></a></h4>
                                                     <!--<h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>-->
-                                                    <h5 class="time">{{comment.commentInfo.PostedTime | timeago}}</h5>
+                                                    <h5 class="time">{{comment.commentInfo.PostedTime | timeago}}</h5> <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
                                                 </div>
                                                 <p ng-bind="comment.commentInfo.PostMessage"></p>
                                             </div>
                                         </li>
 
-                                    </ul>
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    </ul>                                    
+                                    <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load More..<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
                                 </div>
                             </div>
                         </div>

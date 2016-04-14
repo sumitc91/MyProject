@@ -6,7 +6,7 @@ define([appLocation.preLogin], function (app) {
 
         _.defer(function () { $scope.$apply(); });
         $scope.postVertexId = $routeParams.vertexId;
-
+        var messagesPerCall = 5;
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
         
@@ -30,6 +30,42 @@ define([appLocation.preLogin], function (app) {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
         };
         
+        $scope.loadMoreMessage = function (postVerexId, postIndex) {
+            
+            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
+            $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
+
+            loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
+        };
+
+        function loadMoreMessage(vertexId, postIndex, from, to) {
+            var url = ServerContextPath.userServer + '/User/GetUserPostMessages?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);
+            $scope.UserPostList[postIndex].loadingIcon = true;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                //console.log(data.results);
+                $scope.UserPostList[postIndex].loadingIcon = false;
+                $scope.$apply(function () {
+                    for (var i = 0; i < data.results.length; i++) {
+                        $scope.UserPostList[postIndex].commentsInfo.push(data.results[i]);
+                    }
+
+                });
+
+            });
+        };
+
         function createNewReactionOnUserPost(postIndex) {
 
             var userPostCommentData = {
@@ -39,7 +75,7 @@ define([appLocation.preLogin], function (app) {
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
-            var url = ServerContextPath.empty + '/User/UserCommentOnPost';
+            var url = ServerContextPath.empty + '/User/UserReactionOnPost';
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),
@@ -47,7 +83,9 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
             if ($rootScope.isUserLoggedIn) {
-                startBlockUI('wait..', 3);
+                //startBlockUI('wait..', 3);
+                $scope.UserPostList[postIndex].alreadyLiked = true;
+                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
                 $http({
                     url: url,
                     method: "POST",
@@ -55,14 +93,14 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
+                    //stopBlockUI();
                     //getPostByVertexId();
-                    $scope.UserPostMessage = "";
-                    $scope.UserPostList[postIndex].alreadyLiked = true;
-                    $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
-                    $timeout(function () {
-                        $scope.NewPostImageUrl.link_s = "";
-                    });
+                    //$scope.UserPostMessage = "";
+                    //$scope.UserPostList[postIndex].alreadyLiked = true;
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function () {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
 
                 }).error(function (data, status, headers, config) {
 
@@ -84,6 +122,30 @@ define([appLocation.preLogin], function (app) {
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
+            var newCommentPosted = {
+                "commentInfo": {
+                    "PostImage": $scope.NewPostImageUrl.link_m,
+                    "PostedByUser": $rootScope.clientDetailResponse.Email,
+                    "PostedTime": new Date($.now()),
+                    "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
+                    "_id": "",
+                    "_type": null
+                },
+                "commentedBy": [
+                    {
+                        "FirstName": $rootScope.clientDetailResponse.Firstname,
+                        "LastName": $rootScope.clientDetailResponse.Lastname,
+                        "Username": $rootScope.clientDetailResponse.Email,
+                        "Gender": $rootScope.clientDetailResponse.Gender,
+                        "CreatedTime": new Date($.now()),
+                        "ImageUrl": $rootScope.clientDetailResponse.Profilepic,
+                        "CoverImageUrl": $rootScope.clientDetailResponse.Coverpic,
+                        "_id": $rootScope.clientDetailResponse.VertexId,
+                        "_type": null
+                    }
+                ]
+            };
+
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
             var headers = {
                 'Content-Type': 'application/json',
@@ -92,7 +154,18 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
             if ($rootScope.isUserLoggedIn) {
-                startBlockUI('wait..', 3);
+                //startBlockUI('wait..', 3);
+                var commentsNewList = [];
+                commentsNewList.push(newCommentPosted);
+                $scope.UserPostList[postIndex].postInfo.postUserComment = "";
+
+                for (var i = 0; i < $scope.UserPostList[postIndex].commentsInfo.length; i++) {
+                    commentsNewList.push($scope.UserPostList[postIndex].commentsInfo[i]);
+                }
+
+                $scope.UserPostList[postIndex].commentsInfo = commentsNewList;
+                $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = true;
+
                 $http({
                     url: url,
                     method: "POST",
@@ -100,9 +173,12 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function(data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
-                    getPostByVertexId();
+                    //stopBlockUI();
+                    //getPostByVertexId();
                     $scope.UserPostMessage = "";
+
+                    $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = false;
+                    $scope.userPostCommentData = "";
 
                     $timeout(function() {
                         $scope.NewPostImageUrl.link_s = "";
@@ -166,6 +242,8 @@ define([appLocation.preLogin], function (app) {
                     $scope.UserPostList = data.results;
                     if ($scope.UserPostList != null && $scope.UserPostList.length > 0) {
                         var i = 0; // only 1 post available.
+                        $scope.UserPostList[i].messageFromIndex = 0;
+                        $scope.UserPostList[i].messageToIndex = $scope.UserPostList[i].messageFromIndex + messagesPerCall - 1;
                         $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
                         if ($scope.UserPostList[i].isLiked != null && $scope.UserPostList[i].isLiked.length > 0) {
                             $scope.UserPostList[i].alreadyLiked = true;

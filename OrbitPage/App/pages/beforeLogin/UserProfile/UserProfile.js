@@ -44,15 +44,11 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
-        $scope.loadMoreMessage = function (postVerexId, postIndex) {
-            //console.log("postVerexId : " + postVerexId + "   --- postIndex : " + postIndex);
+        $scope.loadMoreMessage = function (postVerexId, postIndex) {            
             $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
 
-            console.log("$scope.UserPostList[postIndex].messageFromIndex 2: " + $scope.UserPostList[postIndex].messageFromIndex);
-            loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);
-            //createNewReactionOnUserPost(postIndex);
-            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+            loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
         };
 
         $scope.UserPostListInfo = {};
@@ -164,9 +160,9 @@ define([appLocation.preLogin], function (app) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                     //stopBlockUI();                    
                     //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
-                    $timeout(function() {
-                        $scope.NewPostImageUrl.link_s = "";
-                    });
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
 
                 }).error(function(data, status, headers, config) {
 
