@@ -358,6 +358,22 @@ namespace urNotice.Services.UserService
 
             return response;
         }
+
+        public string GetUserPostLikes(string userVertexId, string @from, string to)
+        {
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
+
+
+            string gremlinQuery = "g.v(" + userVertexId + ").in('Like').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[likeInfo:it]}";
+            //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+
+            return response;
+        }
+
         public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out Dictionary<string, string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostCommentModel>();

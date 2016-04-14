@@ -1,12 +1,12 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
         $scope.visitedUserVertexId = $routeParams.vertexId;
-
+       
         var messagesPerCall = 5;
 
         $scope.CurrentUserDetails = {};
@@ -44,6 +44,12 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.showLikedByUsers = function (postVertexId) {
+            $scope.UserPostLikes = [];
+            showLikedByUsersOnUserPost(postVertexId,0,5);
+            
+        };
+
         $scope.loadMoreMessage = function (postVerexId, postIndex) {            
             $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
@@ -51,7 +57,40 @@ define([appLocation.preLogin], function (app) {
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
         };
 
+        $scope.closeModelAndNavigateTo = function (vid) {
+            //console.log("inside closeModelAndNavigateTo");            
+            //$('#closeModalId').click();
+            //window.location.href = "/#/userprofile/" + vid;
+            alert("Navigation not implemented yet.");
+            //console.log("#/userprofile/" + vid);
+        };
+        
         $scope.UserPostListInfo = {};
+
+        function showLikedByUsersOnUserPost(vertexId, from, to) {
+            var url = ServerContextPath.userServer + '/User/GetUserPostLikes?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);  
+            $scope.UserPostLikesLoading = true;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                //console.log(data.results);
+                $scope.UserPostLikesLoading = false;
+                $scope.UserPostLikes = data.results;
+                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                    $scope.$apply();
+                }
+            });
+        };
 
         function loadMoreMessage(vertexId, postIndex,from, to) {
             var url = ServerContextPath.userServer + '/User/GetUserPostMessages?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
@@ -356,9 +395,11 @@ define([appLocation.preLogin], function (app) {
             var str = "";
             //console.log("str -1 " + str);
             for (var i = 0; i < likeInfo.length; i++) {                
-                if (i <= 5)
-                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName +" "+likeInfo[i].LastName+ "</a>,";
-
+                if (i <= 5) {
+                    //str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + " " + likeInfo[i].LastName + "</a>,";
+                    str += "" + likeInfo[i].FirstName + " " + likeInfo[i].LastName + ",";
+                }
+                 
             }
             str += "...";
             return str;
@@ -366,7 +407,8 @@ define([appLocation.preLogin], function (app) {
 
         function appentToCommentLikeString(str) {
             if (str == null) str = "";
-            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+            //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+            str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
             return str;
         };
 

@@ -40,7 +40,7 @@ define([appLocation.preLogin], function (app) {
         $scope.userFullDetail = {};
 
         $scope.getFullUserDetails = function (email) {
-            getFullUserDetails(email)
+            getFullUserDetails(email);
         };
 
         function getFullUserDetails(email) {
