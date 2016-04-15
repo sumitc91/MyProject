@@ -29,7 +29,11 @@
                                     <p ng-bind="post.postInfo.PostMessage"></p>
 
                                     <div class="stats">
-                                        <div id="likes-section" style="margin: -5px 0px 0px;"><a href="" class="like-button" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a><a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="undoReactionOnUserPost($index)">Unlike</a><span class="like-summary" ng-bind-html="post.likeInfoHtml"></span></div>
+                                        <div id="likes-section" style="margin: -5px 0px 0px;">
+                                            <a href="" class="like-button" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
+                                            <a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="undoReactionOnUserPost($index)">Unlike</a>
+                                            <a class="like-summary" ng-click="showLikedByUsers(post.postInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal" ng-bind-html="post.likeInfoHtml"></a>
+                                        </div>
                                         <div id="likes-section" style="float: right;margin: -5px 0px 0px;"><a href="" class="like-button">Share</a><span class="like-summary">share this</span></div>
                                     </div>
                                 </div>
@@ -54,7 +58,31 @@
                             </div>
                         </div>
 
-                       
+                        <!-- Modal -->
+                        <div class="modal fade" id="showLikedByUsersModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Liked By :</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div ng-show='UserPostLikesLoading'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+                                        <p ng-repeat="like in UserPostLikes">
+                                            <a ng-click="closeModelAndNavigateTo(like.likeInfo._id)"><img class="img-circle" style="max-height: 40px;" ng-src="{{like.likeInfo.ImageUrl}}"> &nbsp; <span ng-bind="like.likeInfo.FirstName"></span>&nbsp; <span ng-bind="like.likeInfo.LastName"></span></a>
+                                        </p>
+
+                                        <p><a class="like-summary" ng-click="showMoreLikedByUsers()">Load More..</a></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="closeModalId" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

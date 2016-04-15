@@ -1,12 +1,14 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginViewPostDetail', function ($scope, $http, $upload, $timeout, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginViewPostDetail', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
         $scope.postVertexId = $routeParams.vertexId;
         var messagesPerCall = 5;
+        $scope.UserPostLikesPerCall = 5;
+
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
         
@@ -30,12 +32,70 @@ define([appLocation.preLogin], function (app) {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
         };
         
+        $scope.closeModelAndNavigateTo = function (vid) {
+            //console.log("inside closeModelAndNavigateTo");  
+            $(".modal-backdrop.in").hide();
+            $('#closeModalId').click();
+            $location.url('/userprofile/' + vid);
+            //window.location.href = "/#/userprofile/" + vid;
+
+            //alert("Navigation not implemented yet.");
+            //console.log("#/userprofile/" + vid);
+        };
+
+        $scope.showLikedByUsers = function (postVertexId) {
+            $scope.UserPostLikes = [];
+            $scope.UserPostLikesFrom = 0;
+
+            $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
+
+            $scope.UserPostLikesCurrentPostVertexId = postVertexId;
+            showLikedByUsersOnUserPost(postVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
+
+        };
+
+        $scope.showMoreLikedByUsers = function () {
+
+            $scope.UserPostLikesFrom = $scope.UserPostLikesTo + 1;
+            $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
+            showLikedByUsersOnUserPost($scope.UserPostLikesCurrentPostVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
+
+        };
+
         $scope.loadMoreMessage = function (postVerexId, postIndex) {
             
             $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
 
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
+        };
+
+        function showLikedByUsersOnUserPost(vertexId, from, to) {
+            var url = ServerContextPath.userServer + '/User/GetUserPostLikes?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);  
+            $scope.UserPostLikesLoading = true;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                //console.log(data.results);
+                $scope.UserPostLikesLoading = false;
+                for (var i = 0; i < data.results.length; i++) {
+                    $scope.UserPostLikes.push(data.results[i]);
+                }
+                //$scope.UserPostLikes = data.results;
+                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                    $scope.$apply();
+                }
+            });
         };
 
         function loadMoreMessage(vertexId, postIndex, from, to) {
@@ -259,15 +319,22 @@ define([appLocation.preLogin], function (app) {
             });
         };
 
-        function parseCommentLikeString(likeInfo) {
+        function parseCommentLikeString(likeInfo, likeInfoCount) {
             var str = "";
-            //console.log("str -1 " + str);
+            //console.log("likeInfo " + likeInfo);
             for (var i = 0; i < likeInfo.length; i++) {
-                if (i <= 5)
-                    str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName +" "+likeInfo[i].LastName+  "</a>,";
-
+                str += " " + likeInfo[i].FirstName + " " + likeInfo[i].LastName;
+                if (i != likeInfo.length - 1) {
+                    str += ",";
+                } else {
+                    str += " ";
+                }
             }
-            str += "...";
+            if (likeInfoCount > 2) {
+                str += "and " + (likeInfoCount - likeInfo.length) + " more liked this";
+            } else {
+                str += " liked this";
+            }
             return str;
         };
 

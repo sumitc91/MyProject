@@ -1,16 +1,20 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location,$uibModal, $log, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
         $scope.visitedUserVertexId = $routeParams.vertexId;
        
         var messagesPerCall = 5;
+        $scope.UserPostLikesPerCall = 5;
 
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
+        
+        
+
         $scope.UserPostListLastPageReached = false;
         $scope.UserPostListInfoAngular = {
             busy: false,
@@ -29,7 +33,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.commentOnUserPost = function (postIndex) {
             //console.log($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
-            console.log("postIndex : " + postIndex);
+            //console.log("postIndex : " + postIndex);
             createNewMessageOnUserPost(postIndex);
 
             //$scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex - 1;
@@ -46,8 +50,21 @@ define([appLocation.preLogin], function (app) {
 
         $scope.showLikedByUsers = function (postVertexId) {
             $scope.UserPostLikes = [];
-            showLikedByUsersOnUserPost(postVertexId,0,5);
+            $scope.UserPostLikesFrom = 0;
             
+            $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
+
+            $scope.UserPostLikesCurrentPostVertexId = postVertexId;
+            showLikedByUsersOnUserPost(postVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
+            
+        };
+
+        $scope.showMoreLikedByUsers = function () {
+
+            $scope.UserPostLikesFrom = $scope.UserPostLikesTo+1;
+            $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
+            showLikedByUsersOnUserPost($scope.UserPostLikesCurrentPostVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
+
         };
 
         $scope.loadMoreMessage = function (postVerexId, postIndex) {            
@@ -88,7 +105,10 @@ define([appLocation.preLogin], function (app) {
                 //stopBlockUI();
                 //console.log(data.results);
                 $scope.UserPostLikesLoading = false;
-                $scope.UserPostLikes = data.results;
+                for (var i = 0; i < data.results.length; i++) {
+                    $scope.UserPostLikes.push(data.results[i]);
+                }
+                //$scope.UserPostLikes = data.results;
                 if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                     $scope.$apply();
                 }
@@ -373,8 +393,8 @@ define([appLocation.preLogin], function (app) {
                         for (var i = 0; i < data.results.length; i++) {
                             $scope.UserPostList.push(data.results[i]);
                             absoluteIndex = from + i;
-                            //console.log("absoluteIndex : "+absoluteIndex);
-                            $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo);
+                            console.log("absoluteIndex : "+absoluteIndex);
+                            $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo,$scope.UserPostList[absoluteIndex].likeInfoCount);
                             $scope.UserPostList[absoluteIndex].messageFromIndex = 0;
                             $scope.UserPostList[absoluteIndex].messageToIndex = $scope.UserPostList[absoluteIndex].messageFromIndex + messagesPerCall - 1;
                             if ($scope.UserPostList[absoluteIndex].isLiked != null && $scope.UserPostList[absoluteIndex].isLiked.length > 0) {
@@ -394,17 +414,22 @@ define([appLocation.preLogin], function (app) {
             });
         };
 
-        function parseCommentLikeString(likeInfo) {
+        function parseCommentLikeString(likeInfo,likeInfoCount) {
             var str = "";
-            //console.log("str -1 " + str);
-            for (var i = 0; i < likeInfo.length; i++) {                
-                if (i <= 5) {
-                    //str += "<a href='#/userprofile/" + likeInfo[i]._id + "'>" + likeInfo[i].FirstName + " " + likeInfo[i].LastName + "</a>,";
-                    str += "" + likeInfo[i].FirstName + " " + likeInfo[i].LastName + ",";
+            //console.log("likeInfo " + likeInfo);
+            for (var i = 0; i < likeInfo.length; i++) {
+                str += " " + likeInfo[i].FirstName + " " + likeInfo[i].LastName;
+                if (i != likeInfo.length - 1) {
+                    str += ",";
+                } else {
+                    str += " ";
                 }
-                 
             }
-            str += "...";
+            if (likeInfoCount > 2) {
+                str += "and " + (likeInfoCount - likeInfo.length) + " more liked this";
+            } else {
+                str += " liked this";
+            }
             return str;
         };
 
