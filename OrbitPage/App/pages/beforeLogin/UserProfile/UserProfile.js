@@ -428,7 +428,10 @@ define([appLocation.preLogin], function (app) {
             if (likeInfoCount > 2) {
                 str += "and " + (likeInfoCount - likeInfo.length) + " more liked this";
             } else {
-                str += " liked this";
+                if (likeInfoCount > 0)
+                    str += " liked this";
+                else
+                    str += "be the first one to like this";
             }
             return str;
         };
