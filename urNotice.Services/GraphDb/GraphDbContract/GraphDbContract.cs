@@ -25,7 +25,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.Gender.ToString()] = user.gender;
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
             properties[VertexPropertyEnum.ImageUrl.ToString()] = user.imageUrl;
-            properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic;
+            properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic??"";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(user.email, TitanGraphConfig.Graph, properties);

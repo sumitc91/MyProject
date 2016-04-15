@@ -56,8 +56,8 @@ namespace OrbitPage.Controllers
         private oAuthLinkedIn _oauth = new oAuthLinkedIn();
         string fb_scope = "email,user_friends";
         //string fb_scope = "email";
-        string gmail_scope = "email profile https://www.google.com/m8/feeds/";
-        //string gmail_scope = "email profile";
+        //string gmail_scope = "email profile https://www.google.com/m8/feeds/";
+        string gmail_scope = "email profile";
 
         public ActionResult Index()
         {

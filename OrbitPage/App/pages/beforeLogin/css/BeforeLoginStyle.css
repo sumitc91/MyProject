@@ -5478,6 +5478,10 @@ input[type="button"].btn-block {
 }
 
 
+.modal-open {
+    overflow: scroll !important;
+}
+
 /*form > div {
     position: relative;
     overflow: hidden;

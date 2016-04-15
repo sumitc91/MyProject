@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location,$uibModal, $log, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         _.defer(function () { $scope.$apply(); });
@@ -58,10 +58,13 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.closeModelAndNavigateTo = function (vid) {
-            //console.log("inside closeModelAndNavigateTo");            
-            //$('#closeModalId').click();
+            //console.log("inside closeModelAndNavigateTo");  
+            $(".modal-backdrop.in").hide();
+            $('#closeModalId').click();
+            $location.url('/userprofile/'+vid);
             //window.location.href = "/#/userprofile/" + vid;
-            alert("Navigation not implemented yet.");
+            
+            //alert("Navigation not implemented yet.");
             //console.log("#/userprofile/" + vid);
         };
         

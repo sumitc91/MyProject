@@ -30,6 +30,9 @@ namespace urNotice.Services.SocialAuthService.google
 
         public void GetUserFriendListAsync(string accessToken, string userEmail, string accessKey, string secretKey)
         {
+            //currently deactivated this feature.
+            return;
+
             //var isValidToken = ThreadPool.QueueUserWorkItem(new WaitCallback(asyncLogoutThread), Request);
             GoogleApiContactSaveDelegate googleApiContactSaveDelegate = null;
             googleApiContactSaveDelegate = new GoogleApiContactSaveDelegate(GetUserFriendList);
