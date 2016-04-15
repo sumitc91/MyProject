@@ -215,9 +215,10 @@
                                     </div>
                                     <div class="modal-body">
                                         <div ng-show='UserPostLikesLoading'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
-                                        <p ng-repeat="like in UserPostLikes">
-                                            <a ng-click="closeModelAndNavigateTo(like.likeInfo._id)"><img class="img-circle" style="max-height: 40px;" ng-src="{{like.likeInfo.ImageUrl}}"> &nbsp; <span ng-bind="like.likeInfo.FirstName"></span>&nbsp; <span ng-bind="like.likeInfo.LastName"></span></a>                                           
-                                        </p>
+                                        <div ng-repeat="like in UserPostLikes">
+                                            <a ng-click="closeModelAndNavigateTo(like.likeInfo._id)"><img class="img-circle" style="max-height: 40px; max-width: 40px;" ng-src="{{like.likeInfo.ImageUrl}}"> &nbsp; <span ng-bind="like.likeInfo.FirstName"></span>&nbsp; <span ng-bind="like.likeInfo.LastName"></span></a>                                           
+                                            <hr />
+                                        </div>
                                         
                                         <p><a class="like-summary" ng-click="showMoreLikedByUsers()" >Load More..</a></p>
                                     </div>
