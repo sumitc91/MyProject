@@ -145,7 +145,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].alreadyLiked = true;
-                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml,$scope.UserPostList[postIndex].likeInfoCount);
                 $http({
                     url: url,
                     method: "POST",
@@ -304,7 +304,7 @@ define([appLocation.preLogin], function (app) {
                         var i = 0; // only 1 post available.
                         $scope.UserPostList[i].messageFromIndex = 0;
                         $scope.UserPostList[i].messageToIndex = $scope.UserPostList[i].messageFromIndex + messagesPerCall - 1;
-                        $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo);
+                        $scope.UserPostList[i].likeInfoHtml = parseCommentLikeString($scope.UserPostList[i].likeInfo, $scope.UserPostList[i].likeInfoCount);
                         if ($scope.UserPostList[i].isLiked != null && $scope.UserPostList[i].isLiked.length > 0) {
                             $scope.UserPostList[i].alreadyLiked = true;
                         } else {
@@ -341,9 +341,14 @@ define([appLocation.preLogin], function (app) {
             return str;
         };
 
-        function appentToCommentLikeString(str) {
+        function appentToCommentLikeString(str, likeInfoCount) {
             if (str == null) str = "";
-            str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+            if (likeInfoCount > 0) {
+                //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+                str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
+            } else {
+                str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + " liked this";
+            }
             return str;
         };
 

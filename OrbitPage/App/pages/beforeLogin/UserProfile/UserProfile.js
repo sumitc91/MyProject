@@ -212,7 +212,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {                
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].alreadyLiked = true;
-                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                $scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, $scope.UserPostList[postIndex].likeInfoCount);
                 $http({
                     url: url,
                     method: "POST",
@@ -436,10 +436,14 @@ define([appLocation.preLogin], function (app) {
             return str;
         };
 
-        function appentToCommentLikeString(str) {
+        function appentToCommentLikeString(str,likeInfoCount) {
             if (str == null) str = "";
-            //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
-            str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
+            if (likeInfoCount > 0) {
+                //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+                str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
+            } else {
+                str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + " liked this";
+            }
             return str;
         };
 
