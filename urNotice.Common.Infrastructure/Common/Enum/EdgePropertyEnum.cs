@@ -13,6 +13,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         _label,
         PostedBy,
         PostedDate,
+        PostedDateLong,
         EdgeMessage,
         Type,
         NotificationInitiatedByVertexId,

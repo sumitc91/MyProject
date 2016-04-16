@@ -38,6 +38,23 @@ namespace urNotice.Services.GraphDb
             return response;
         }
 
+        public Dictionary<string, string> DeleteEdge(string inV, string outV,string label)
+        {
+            string url = TitanGraphConfig.Server;
+            
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(                        
+                        inV,
+                        outV,
+                        label);
+            if (edgeInfo == null)
+                return null;
+
+            var response = DeleteEdgeNative(TitanGraphConfig.Graph, edgeInfo.ObjectId, url);
+            dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
+            return response;
+        }
+
         public Dictionary<string, string> AddEdgeAsync(string userName, string graphName, Dictionary<string, string> properties)
         {
             var addEdgeAsyncDelegate = new AddEdgeAsyncDelegate(AddEdge);
@@ -72,6 +89,29 @@ namespace urNotice.Services.GraphDb
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
 
+            return response;
+        }
+
+        private Dictionary<String, String> DeleteEdgeNative(string graphName, string edgeId, string url)
+        {
+            var uri = new StringBuilder(url + "/graphs/" + graphName + "/edges/"+edgeId);
+
+            //graphs/<graph>/edges/3
+            
+            var client = new RestClient(uri.ToString());
+            var request = new RestRequest();
+
+            request.Method = Method.DELETE;
+            request.AddHeader("Accept", "application/json");
+            request.Parameters.Clear();
+            request.AddParameter("application/json", "", ParameterType.RequestBody);
+
+            var res = client.Execute(request);
+            var content = res.Content; // raw content as string 
+
+            //dynamic jsonResponse = JsonConvert.DeserializeObject(content);
+            var response = new Dictionary<String, String>();
+            response["status"] = "200";            
             return response;
         }
     }

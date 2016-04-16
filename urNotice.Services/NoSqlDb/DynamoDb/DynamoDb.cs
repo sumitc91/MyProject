@@ -40,6 +40,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                         null,
                         null,
                         null,
+                        null,
                         orbitPageGoogleApiContact,
                         null,
                         null,
@@ -75,12 +76,37 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             return res.FirstOrDefault();
 
         }
+
+        public OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(string inV, string outV,string label)
+        {
+            var context = GetDynamoDbContext();
+
+            IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
+                new ScanCondition("DataType", ScanOperator.Equal, DynamoDbHashKeyDataType.EdgeDetail.ToString()),
+                new ScanCondition("Label", ScanOperator.Equal, label),
+                new ScanCondition("InV", ScanOperator.Equal, inV),
+                new ScanCondition("OutV", ScanOperator.Equal, outV)
+                  );
+
+            return res.FirstOrDefault();
+
+        }
+
+        public bool DeleteOrbitPageCompanyUserWorkgraphyTable(OrbitPageCompanyUserWorkgraphyTable res)
+        {
+            var context = GetDynamoDbContext();
+            context.Delete(res);
+            return true;
+
+        }
+
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageVertexDetail(OrbitPageVertexDetail orbitPageVertexDetail, String userName)
         {
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
                     DynamoDbHashKeyDataType.VertexDetail.ToString(),
                     orbitPageVertexDetail.vertexId,
                     userName,
+                    null,
                     null,
                     null,
                     null,
@@ -107,6 +133,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     inV,
                     outV,
+                    orbitPageEdgeDetail.properties[EdgePropertyEnum._label.ToString()],
                     null,
                     null,
                     null,
@@ -137,6 +164,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
+                            null,
                             false                           
                             );
         }
@@ -147,6 +175,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             DynamoDbHashKeyDataType.Company.ToString(),
                             company.CompanyName,
                             companyVertexId,
+                            null,
                             null,
                             null,
                             null,
@@ -173,6 +202,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             accessToken,
                             null,
                             null,
+                            null,
                             orbitPageUser,
                             null,
                             null,
@@ -196,6 +226,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,  
                             null,
+                            null,
                             orbitPageWorkgraphy,
                             null,
                             null,
@@ -215,6 +246,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             string facebookAuthKey,
             string inV,
             string outV,
+            string label,
             OrbitPageUser orbitPageUser,
             OrbitPageWorkgraphy orbitPageWorkgraphy,
             OrbitPageCompany orbitPageCompany,
@@ -235,9 +267,12 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             orbitPageCompanyUserWorkgraphyTable.FacebookId = facebookId;
             orbitPageCompanyUserWorkgraphyTable.InV = inV;
             orbitPageCompanyUserWorkgraphyTable.OutV = outV;
+            orbitPageCompanyUserWorkgraphyTable.Label = label;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUser = orbitPageUser;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageWorkgraphy = orbitPageWorkgraphy;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageCompany = orbitPageCompany;
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageDesignation = orbitPageDesignation;
+            orbitPageCompanyUserWorkgraphyTable.IsSolrUpdated = isSolrUpdated;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageGoogleApiContact = orbitPageGoogleApiContact;
             orbitPageCompanyUserWorkgraphyTable.FacebookAuthToken = facebookAuthKey;
             orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail = orbitPageVertexDetail;

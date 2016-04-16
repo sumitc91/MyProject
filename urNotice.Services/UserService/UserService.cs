@@ -471,6 +471,25 @@ namespace urNotice.Services.UserService
             return response;
         }
 
+        public ResponseModel<String> RemoveReactionOnUserPost(urNoticeSession session, string vertexId)
+        {
+            var response = new ResponseModel<String>();
+
+            if (session == null || session.UserName ==null)
+            {
+                response.Status = 401;
+                response.Message = "Unauthenticated";
+                return response;
+            }
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            graphEdgeDbModel.DeleteEdge(vertexId, session.UserVertexId, UserReactionEnum.Like.ToString());
+            
+            response.Payload = "success";
+            response.Status = 200;
+
+            return response;
+        }
         public string GetUserNotification(string userVertexId,string from,string to, string accessKey, string secretKey)
         {
             

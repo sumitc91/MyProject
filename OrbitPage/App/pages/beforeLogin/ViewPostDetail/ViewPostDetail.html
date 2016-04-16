@@ -31,7 +31,7 @@
                                     <div class="stats">
                                         <div id="likes-section" style="margin: -5px 0px 0px;">
                                             <a href="" class="like-button" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
-                                            <a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="undoReactionOnUserPost($index)">Unlike</a>
+                                            <a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="removeReactionOnUserPost($index)">Unlike</a>
                                             <a class="like-summary" ng-click="showLikedByUsers(post.postInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal" ng-bind-html="post.likeInfoHtml"></a>
                                         </div>
                                         <div id="likes-section" style="float: right;margin: -5px 0px 0px;"><a href="" class="like-button">Share</a><span class="like-summary">share this</span></div>

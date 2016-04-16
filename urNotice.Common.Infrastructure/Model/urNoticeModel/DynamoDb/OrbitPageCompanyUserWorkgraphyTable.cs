@@ -27,6 +27,9 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         public string OutV { get; set; }
 
         [DynamoDBProperty]
+        public string Label { get; set; }
+
+        [DynamoDBProperty]
         public string FacebookId { get; set; }
 
         [DynamoDBProperty]

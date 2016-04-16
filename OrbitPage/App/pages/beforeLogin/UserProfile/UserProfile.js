@@ -48,6 +48,11 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.removeReactionOnUserPost = function (postIndex) {
+            removeReactionOnUserPost(postIndex);
+            //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
         $scope.showLikedByUsers = function (postVertexId) {
             $scope.UserPostLikes = [];
             $scope.UserPostLikesFrom = 0;
@@ -227,6 +232,49 @@ define([appLocation.preLogin], function (app) {
                     //});
 
                 }).error(function(data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
+        function removeReactionOnUserPost(postIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].postInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/RemoveReactionOnPost?vertexId=' + $scope.UserPostList[postIndex].postInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                //startBlockUI('wait..', 3);
+                $scope.UserPostList[postIndex].alreadyLiked = false;
+                $scope.UserPostList[postIndex].likeInfoHtml = removeFromCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, $scope.UserPostList[postIndex].likeInfoCount);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
 
                 });
             } else {
@@ -443,6 +491,17 @@ define([appLocation.preLogin], function (app) {
                 str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
             } else {
                 str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + " liked this";
+            }
+            return str;
+        };
+
+        function removeFromCommentLikeString(str, likeInfoCount) {
+            if (str == null) str = "";
+            if (likeInfoCount == 1) {
+                //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
+                str = "be the first one to like this";
+            } else {
+                str = str.replace($rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname, "").replace($rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + ",", "");
             }
             return str;
         };

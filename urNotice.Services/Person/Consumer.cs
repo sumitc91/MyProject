@@ -539,6 +539,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.WallPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -561,6 +562,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -583,6 +585,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -605,6 +608,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -627,6 +631,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
