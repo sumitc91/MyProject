@@ -497,7 +497,7 @@ define([appLocation.preLogin], function (app) {
 
         function removeFromCommentLikeString(str, likeInfoCount) {
             if (str == null) str = "";
-            if (likeInfoCount == 1) {
+            if (likeInfoCount <= 1) {
                 //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
                 str = "be the first one to like this";
             } else {
