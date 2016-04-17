@@ -54,8 +54,8 @@ namespace OrbitPage.Controllers
         private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
 
         private oAuthLinkedIn _oauth = new oAuthLinkedIn();
-        string fb_scope = "email,user_friends";
-        //string fb_scope = "email";
+        //string fb_scope = "email,user_friends";
+        string fb_scope = "email";
         //string gmail_scope = "email profile https://www.google.com/m8/feeds/";
         string gmail_scope = "email profile";
 

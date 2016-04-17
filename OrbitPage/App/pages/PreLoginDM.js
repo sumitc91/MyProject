@@ -116,6 +116,9 @@ appRequire = require
             googleChartLoader: {
                 deps: ["jquery"]
             },
+            jquery_hovercard_min: {
+                deps: ["jquery"]
+            },
             angularjs_fileUpload_shim: {//new
                 deps: ["angular", "jquery"]
             },
@@ -165,7 +168,7 @@ appRequire = require
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_hovercard_min"]
             },
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
@@ -224,6 +227,7 @@ appRequire = require
             angular_input_stars: "../../App/third-Party/angular-input-stars-master/angular-input-stars",
             urNoticeScript: "../../App/js/urNoticeScript",
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
+            jquery_hovercard_min: "../../App/js/jquery.hovercard.min",
             ngtimeago: "../../App/js/angular/ngtimeago",
             ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
@@ -272,7 +276,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
-    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice"
+    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "jquery_hovercard_min"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

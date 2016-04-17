@@ -68,6 +68,16 @@ define([appLocation.preLogin], function (app) {
 
         $scope.submitEditProfile = function() {
 
+            if ($rootScope.clientDetailResponse.Firstname.length > 15) {
+                showToastMessage("Warning", "First Name Cann't be greater than 15 characters");
+                return;
+            }
+
+            if ($rootScope.clientDetailResponse.Lastname.length > 15) {
+                showToastMessage("Warning", "Last Name Cann't be greater than 15 characters");
+                return;
+            }
+
             var editPersonRequest = {
                 FirstName: $rootScope.clientDetailResponse.Firstname,
                 LastName: $rootScope.clientDetailResponse.Lastname,

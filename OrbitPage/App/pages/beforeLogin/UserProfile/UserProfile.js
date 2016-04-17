@@ -454,11 +454,11 @@ define([appLocation.preLogin], function (app) {
                     } else {                        
                         $scope.UserPostListLastPageReached = true;
                     }
-                        
 
                     //console.log($scope.UserPostList);
                 });
 
+                initializeHoverCard();
             });
         };
 

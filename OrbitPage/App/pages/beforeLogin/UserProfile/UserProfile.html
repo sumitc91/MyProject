@@ -46,7 +46,9 @@
                                     <ul class="list-unstyled">
                                         <li><i class="fa fa-suitcase"></i>Works at <a href="#">software development</a></li>
                                         <li><i class="fa fa-calendar"></i>Born on August 12, 1991</li>
-                                        <li><i class="fa fa-rss"></i>Followed by <a href="#">51 People</a></li>
+                                        <li><i class="fa fa-rss"></i>Followed by                                             
+                                            <a href="#">51 People</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="panel-footer text-center"><a href="#"><i class="fa fa-share"></i>Read more...</a></div>
@@ -160,7 +162,12 @@
                                 <div class="post-heading">
                                     <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
                                     <div class="pull-left meta">
-                                        <div class="title"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
+                                        <div class="title">
+                                            <span class="hover_div">
+                                                <!--<a class="show_hovercard" user_name="gaurav">Gaurav</a>-->
+                                                <a href="#/userprofile/{{post.userInfo[0]._id}}" class="show_hovercard"><span class="show_hovercard" user_name="{{post.userInfo[0].Username}}" ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span class="show_hovercard" user_name="{{post.userInfo[0].Username}}" ng-bind="post.userInfo[0].LastName"></span></a>
+                                            </span>                                            
+                                        </div>
                                         <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
                                         <h6 class="text-muted time">{{post.postInfo.PostedTime| timeago}}</h6>
                                     </div>
@@ -643,11 +650,25 @@
         width: 60%;
     }
 
+    .hover_div {
+    position:relative;
+    }
+
+    .hovercard {
+        position: absolute;
+        width:300px;
+        padding:3px;
+        height: 100px;
+        border:1px solid #ccc;
+        border-radius: 3px;
+        background-color: white;
+        z-index:1999
+    }
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$(".fancybox").fancybox();
-	});
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    });
 
 </script>

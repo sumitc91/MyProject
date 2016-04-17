@@ -249,3 +249,27 @@ function logout(){
          }
                      
 }
+
+function initializeHoverCard() {
+    console.log("initializeHoverCard");
+    $('.show_hovercard').on({
+        'mouseenter': function (e) {
+            var $current_node = $(this);
+
+            var target = $(e.target);
+            var user_name = target.attr('user_name');
+
+            console.log(user_name);
+            var $parent = $current_node.parent();
+            var markup = "<div class='hovercard'>" + user_name + "'s hovercard</div>";
+            $parent.append(markup);
+        }
+    });
+
+    $('.hover_div').on({
+        'mouseleave': function (e) {
+            var $hovercard = $(this).find('.hovercard');
+            $hovercard.remove();
+        }
+    });
+}

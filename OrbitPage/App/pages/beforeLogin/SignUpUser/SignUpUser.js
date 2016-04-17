@@ -206,7 +206,18 @@ define([appLocation.preLogin], function (app) {
             updateError();
         };
 
-        $scope.UserSignUp = function() {
+        $scope.UserSignUp = function () {
+
+            if ($scope.UserFormData.FirstName.length > 15) {
+                showToastMessage("Warning", "First Name Cann't be greater than 15 characters");
+                return;
+            }
+
+            if ($scope.UserFormData.LastName.length > 15) {
+                showToastMessage("Warning", "Last Name Cann't be greater than 15 characters");
+                return;
+            }
+
             var userSignUpData = {
                 FirstName: $scope.UserFormData.FirstName,
                 LastName: $scope.UserFormData.LastName,
