@@ -165,7 +165,7 @@
                                         <div class="title">
                                             <span class="hover_div">
                                                 <!--<a class="show_hovercard" user_name="gaurav">Gaurav</a>-->
-                                                <a href="#/userprofile/{{post.userInfo[0]._id}}" class="show_hovercard"><span class="show_hovercard" user_name="{{post.userInfo[0].Username}}" ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span class="show_hovercard" user_name="{{post.userInfo[0].Username}}" ng-bind="post.userInfo[0].LastName"></span></a>
+                                                <a href="#/userprofile/{{post.userInfo[0]._id}}" user_name="{{post.userInfo[0].Username}}" class="show_hovercard" name="{{post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName}}" profile_pic="{{post.userInfo[0].ImageUrl}}" cover_pic="{{post.userInfo[0].CoverImageUrl}}" ng-bind="post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName"></a>
                                             </span>                                            
                                         </div>
                                         <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
@@ -656,9 +656,9 @@
 
     .hovercard {
         position: absolute;
-        width:300px;
+        width:400px;
         padding:3px;
-        height: 100px;
+        height: 300px;
         border:1px solid #ccc;
         border-radius: 3px;
         background-color: white;

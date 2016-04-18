@@ -250,18 +250,67 @@ function logout(){
                      
 }
 
+function createHoverCardHtml2(name, profilePic, coverPic) {
+
+    var hoverCardHtml = "";
+    hoverCardHtml+='<div class="container">'+
+	'<div class="row">'+
+		'<div class="col-lg-3 col-sm-6">'+
+
+            '<div class="card hovercard">'+
+                '<div class="cardheader" style="background-image: url(' + coverPic + ')">' +
+
+                '</div>'+
+                '<div class="avatar">'+
+                    '<img alt="" src="' + profilePic + '">' +
+                '</div>'+
+                '<div class="info">'+
+                    '<div class="title">'+
+                        '<a target="_blank" href="http://scripteden.com/">' + name + '</a>' +
+                    '</div>'+
+                    '<div class="desc">Passionate designer</div>'+
+                    '<div class="desc">Curious developer</div>'+
+                    '<div class="desc">Tech geek</div>'+
+                '</div>'+
+                '<div class="bottom">'+
+                    '<a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">'+
+                        '<i class="fa fa-twitter"></i>'+
+                    '</a>'+
+                    '<a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">'+
+                         '<i class="fa fa-google-plus"></i>'+
+                     '</a>'+
+                     '<a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">'+
+                         '<i class="fa fa-facebook"></i>'+
+                     '</a>'+
+                     '<a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">'+
+                         '<i class="fa fa-behance"></i>'+
+                     '</a>'+
+                '</div>'+
+              '</div>'+
+
+            '</div>'+
+
+        '</div>'+
+    '</div>';
+
+    return hoverCardHtml;
+}
+
 function initializeHoverCard() {
-    console.log("initializeHoverCard");
+    
     $('.show_hovercard').on({
         'mouseenter': function (e) {
             var $current_node = $(this);
 
             var target = $(e.target);
             var user_name = target.attr('user_name');
-
+            var profilePic = target.attr('profile_pic');
+            var coverPic = target.attr('cover_pic');
+            var name = target.attr('name');
             console.log(user_name);
+            var markUpHtml = createHoverCardHtml2(name, profilePic, coverPic);
             var $parent = $current_node.parent();
-            var markup = "<div class='hovercard'>" + user_name + "'s hovercard</div>";
+            var markup = "<div class='hovercard'>" + markUpHtml + "</div>";
             $parent.append(markup);
         }
     });
