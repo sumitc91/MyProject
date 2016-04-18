@@ -273,16 +273,16 @@ function createHoverCardHtml2(name, profilePic, coverPic) {
                     '<div class="desc">Tech geek</div>'+
                 '</div>'+
                 '<div class="bottom">'+
-                    '<a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">'+
+                    '<a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/orbitpage">'+
                         '<i class="fa fa-twitter"></i>'+
                     '</a>'+
-                    '<a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">'+
+                    '<a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+orbitpage">'+
                          '<i class="fa fa-google-plus"></i>'+
                      '</a>'+
-                     '<a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">'+
+                     '<a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/orbitpage">'+
                          '<i class="fa fa-facebook"></i>'+
                      '</a>'+
-                     '<a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">'+
+                     '<a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/orbitpage">'+
                          '<i class="fa fa-behance"></i>'+
                      '</a>'+
                 '</div>'+
