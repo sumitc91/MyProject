@@ -126,6 +126,15 @@ define([appLocation.preLogin], function (app) {
         };
     });
 
+    // html filter (render text as html)
+    app.filter('html', [
+        '$sce', function($sce) {
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }
+    ]);
+
     app.directive('autoComplete', function ($timeout) {
         return function (scope, iElement, iAttrs) {
             iElement.autocomplete({

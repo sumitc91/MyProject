@@ -9,5 +9,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
     public class CompanyWorkgraphyVertexModel
     {
         public List<CompanyWorkgraphyInfoVertexModel> workgraphyInfo { get; set; }
+        public string count { get; set; }
+        public string userCount { get; set; }
     }
 }

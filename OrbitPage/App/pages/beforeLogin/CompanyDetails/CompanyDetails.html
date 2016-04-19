@@ -43,7 +43,7 @@
                     <img alt="people" ng-src="{{companyDetails.logourl}}" width="110px">
                 </div>
                 <div class="name">
-                    <a href="" ng-bind="companyDetails.companyname"></a> <a ng-show="userCompanyAnalyticsLoaded"> (<span href="" ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit"></span> views)</a>
+                    <a href="" ng-bind="companyDetails.companyname"></a> <a ng-show="userCompanyAnalyticsLoaded"> ( You visited <span ng-bind="userCountVisit">0</span> times | Overall <span ng-bind="countVisit">0</span> visits)</a>
                 </div>
 
                 <div class="cover-nav">

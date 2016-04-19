@@ -467,6 +467,8 @@ define([appLocation.preLogin], function (app) {
             //console.log("likeInfo " + likeInfo);
             for (var i = 0; i < likeInfo.length; i++) {
                 str += " " + likeInfo[i].FirstName + " " + likeInfo[i].LastName;
+                //str += ' <span user_name="'+likeInfo[i].Username+'" class="show_hovercard" name="'+likeInfo[i].FirstName +' ' + likeInfo[i].LastName+'" profile_pic="'+likeInfo[i].ImageUrl+'" cover_pic="'+likeInfo[i].CoverImageUrl+'">'+likeInfo[i].FirstName+' '+likeInfo[i].LastName+'</span>';
+                //str += '<a cover_pic="" profile_pic="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" name="Goop Chup" class="show_hovercard ng-binding" user_name="786goopchup@gmail.com" href="#/userprofile/17928960">Goop Chup</a>';
                 if (i != likeInfo.length - 1) {
                     str += ",";
                 } else {
@@ -487,10 +489,12 @@ define([appLocation.preLogin], function (app) {
         function appentToCommentLikeString(str,likeInfoCount) {
             if (str == null) str = "";
             if (likeInfoCount > 0) {
-                //str = "<a href='#/userprofile/" + $rootScope.clientDetailResponse.VertexId + "'>" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "</a>," + str;
                 str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
+                //str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + "," + str;
+                //str += ' <span user_name="' + $rootScope.clientDetailResponse.Username + '" class="show_hovercard" name="' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '" profile_pic="' + $rootScope.clientDetailResponse.ImageUrl + '" cover_pic="' + $rootScope.clientDetailResponse.CoverImageUrl + '">' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '</span>,'+str;
             } else {
                 str = "" + $rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + " liked this";
+                //str += ' <span user_name="' + $rootScope.clientDetailResponse.Username + '" class="show_hovercard" name="' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '" profile_pic="' + $rootScope.clientDetailResponse.ImageUrl + '" cover_pic="' + $rootScope.clientDetailResponse.CoverImageUrl + '">' + $rootScope.clientDetailResponse.FirstName + ' ' + $rootScope.clientDetailResponse.LastName + '</span>' + " liked this";
             }
             return str;
         };

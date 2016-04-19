@@ -136,7 +136,13 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 //console.log(data);
                 $scope.CompanyWorkgraphyDetails = data.results[0].workgraphyInfo;
-
+                $scope.countVisit = data.results[0].count;
+                $scope.userCountVisit = data.results[0].userCount;
+                $scope.userCompanyAnalyticsLoaded = true;
+                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                    $scope.$apply();
+                }
+                
             });
 
         }
@@ -264,39 +270,6 @@ define([appLocation.preLogin], function (app) {
         $scope.toggleAnimation = function () {
             $scope.animationsEnabled = !$scope.animationsEnabled;
         };
-
-        function getUserRatingStatus() {
-            var url = ServerContextPath.userServer + '/Rating/GetUserRatingStatus?cid=' + $scope.companyid;
-            var headers = {
-                'Content-Type': 'application/json',
-                'UTMZT': $.cookie('utmzt'),
-                'UTMZK': $.cookie('utmzk'),
-                'UTMZV': $.cookie('utmzv'),
-                '_ga': $.cookie('_ga')
-            };
-
-            $.ajax({
-                url: url,
-                method: "GET",
-                headers: headers
-            }).done(function (data, status) {
-                //console.log(data);
-                //$scope.showUserInputRatingStar = true;
-                $scope.userCompanyAnalyticsLoaded = true;
-                if (data.Status == "200") {
-                    //showToastMessage("Success", data.Message);
-                    
-                    $scope.userRatingData = data.Payload.Rating;                    
-                    //console.log(data.Paylod);
-                }
-                
-                $scope.userCompanyAnalytics = data.Payload.UserCompanyAnalytics;
-                $scope.userCompanyAnalytics.LastActivity = validateAndReplaceToDateFormat($scope.userCompanyAnalytics.LastActivity);
-                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
-                    $scope.$apply();
-                }
-            });
-        }
 
     });
 

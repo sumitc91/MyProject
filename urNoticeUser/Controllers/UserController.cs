@@ -412,11 +412,13 @@ namespace urNoticeUser.Controllers
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
             var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
             var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
-
+            var username = string.Empty;
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
-
+            
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+                username = session.UserName;
             isValidToken = true;//TODO: currently hard coded.
             if (isValidToken)
             {
@@ -432,7 +434,7 @@ namespace urNoticeUser.Controllers
                 if (isRequestValid)
                 {
                     IGraphDbContract graphDbContract = new GraphDbContract();
-                    var getCompanyWorkgraphyInfoResponse = graphDbContract.CompanyWorkgraphyInfo(vertexId, from, to);
+                    var getCompanyWorkgraphyInfoResponse = graphDbContract.CompanyWorkgraphyInfo(vertexId,username, from, to);
                     var getCompanyWorkgraphyInfoResponseDeserialized =
                         JsonConvert.DeserializeObject<CompanyWorkgraphyVertexModelResponse>(getCompanyWorkgraphyInfoResponse);
                     return Json(getCompanyWorkgraphyInfoResponseDeserialized, JsonRequestBehavior.AllowGet);

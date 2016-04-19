@@ -152,11 +152,11 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             return response;
         }
 
-        public String CompanyWorkgraphyInfo(string companyVertexId, string from, string to)
+        public String CompanyWorkgraphyInfo(string companyVertexId,string username, string from, string to)
         {
             string url = TitanGraphConfig.Server;
             string graphName = TitanGraphConfig.Graph;
-            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[workgraphyInfo:it.out('WorkgraphyStory').order{it.b.CreatedTime <=> it.a.CreatedTime}[" + from + ".." + to + "]]}";
+            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[workgraphyInfo:it.out('WorkgraphyStory').order{it.b.CreatedTime <=> it.a.CreatedTime}[" + from + ".." + to + "],count:it.in('Visited').count(),userCount:it.in('Visited').has('Username','" + username + "').count()]}";
             //string gremlinQuery1 = "g.v(" + companyVertexId + ").order{it.b.CreatedTime <=> it.a.CreatedTime}[" + from + ".." + to + "].transform{[workgraphyInfo:it.out('WorkgraphyStory')]}";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
