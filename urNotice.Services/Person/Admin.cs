@@ -72,6 +72,12 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,
+            string postPostedByVertexId, string notificationType)
+        {
+            throw new NotImplementedException();
+        }
+
         public SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid)
         {
             throw new NotImplementedException();

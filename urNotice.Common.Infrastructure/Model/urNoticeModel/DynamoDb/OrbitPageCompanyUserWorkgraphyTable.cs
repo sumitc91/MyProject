@@ -71,5 +71,8 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         [DynamoDBProperty]
         public DateTime CreatedDate { get; set; }
 
+        [DynamoDBProperty]
+        public long? LastNotificationSeenTimeStamp { get; set; }
+
     }
 }

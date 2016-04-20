@@ -9,6 +9,7 @@ using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
+using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
@@ -17,6 +18,7 @@ using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb;
 using urNotice.Services.NoSqlDb.DynamoDb;
+using urNotice.Services.Person;
 
 namespace urNotice.Services.UserService
 {
@@ -202,125 +204,125 @@ namespace urNotice.Services.UserService
             return null;
         }
 
-        private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
-        {
-            var properties = new Dictionary<string, string>();
-            var response = new Dictionary<string, string>();
+        //private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
+        //{
+        //    var properties = new Dictionary<string, string>();
+        //    var response = new Dictionary<string, string>();
             
-            var edgeId = session.UserName + "_" + DateTime.Now.Ticks;
+        //    var edgeId = session.UserName + "_" + DateTime.Now.Ticks;
 
-            if (notificationType.Equals(EdgeLabelEnum.WallPostNotification.ToString()))
-            {
-                if (userWallVertexId != session.UserVertexId)
-                {
-                    properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
-                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+        //    if (notificationType.Equals(EdgeLabelEnum.WallPostNotification.ToString()))
+        //    {
+        //        if (userWallVertexId != session.UserVertexId)
+        //        {
+        //            properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
+        //            properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
 
-                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
-                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
-                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.WallPostNotification.ToString();
-                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+        //            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+        //            properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+        //            properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.WallPostNotification.ToString();
+        //            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+        //            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+        //            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
-                    else
-                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
-                }
+        //            if (response.ContainsKey(CommonConstants.PushNotificationArray))
+        //                response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+        //            else
+        //                response[CommonConstants.PushNotificationArray] = userWallVertexId;
+        //        }
                 
-            }
-            else if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
-            {
-                if (userWallVertexId != session.UserVertexId)
-                {
-                    properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
-                    properties[EdgePropertyEnum._inV.ToString()] =postVertexId;
+        //    }
+        //    else if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
+        //    {
+        //        if (userWallVertexId != session.UserVertexId)
+        //        {
+        //            properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
+        //            properties[EdgePropertyEnum._inV.ToString()] =postVertexId;
 
-                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
-                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
-                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
-                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+        //            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+        //            properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+        //            properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
+        //            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+        //            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+        //            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
-                    else
-                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
-                }
+        //            if (response.ContainsKey(CommonConstants.PushNotificationArray))
+        //                response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+        //            else
+        //                response[CommonConstants.PushNotificationArray] = userWallVertexId;
+        //        }
 
 
-                if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
-                {
-                    properties = new Dictionary<string, string>();
+        //        if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
+        //        {
+        //            properties = new Dictionary<string, string>();
 
-                    properties[EdgePropertyEnum._outV.ToString()] = postPostedByVertexId;
-                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+        //            properties[EdgePropertyEnum._outV.ToString()] = postPostedByVertexId;
+        //            properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
 
-                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
-                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
-                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
-                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+        //            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+        //            properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+        //            properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
+        //            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+        //            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+        //            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
-                    else
-                        response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
-                }
+        //            if (response.ContainsKey(CommonConstants.PushNotificationArray))
+        //                response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
+        //            else
+        //                response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
+        //        }
                 
-            }
-            else if (notificationType.Equals(EdgeLabelEnum.UserReaction.ToString()))
-            {
-                if (userWallVertexId != session.UserVertexId)
-                {
-                    properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
-                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+        //    }
+        //    else if (notificationType.Equals(EdgeLabelEnum.UserReaction.ToString()))
+        //    {
+        //        if (userWallVertexId != session.UserVertexId)
+        //        {
+        //            properties[EdgePropertyEnum._outV.ToString()] = userWallVertexId;
+        //            properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
 
-                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
-                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
-                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
-                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+        //            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+        //            properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+        //            properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
+        //            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+        //            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+        //            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
-                    else
-                        response[CommonConstants.PushNotificationArray] = userWallVertexId;
-                }
+        //            if (response.ContainsKey(CommonConstants.PushNotificationArray))
+        //                response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
+        //            else
+        //                response[CommonConstants.PushNotificationArray] = userWallVertexId;
+        //        }
 
 
-                if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
-                {
-                    properties = new Dictionary<string, string>();
+        //        if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
+        //        {
+        //            properties = new Dictionary<string, string>();
 
-                    properties[EdgePropertyEnum._outV.ToString()] = postPostedByVertexId;
-                    properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
+        //            properties[EdgePropertyEnum._outV.ToString()] = postPostedByVertexId;
+        //            properties[EdgePropertyEnum._inV.ToString()] = postVertexId;
 
-                    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
-                    properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
-                    properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
-                    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+        //            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Notification.ToString();
+        //            properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
+        //            properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
+        //            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
 
-                    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-                    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+        //            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+        //            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-                    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-                        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
-                    else
-                        response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
-                }
+        //            if (response.ContainsKey(CommonConstants.PushNotificationArray))
+        //                response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + postPostedByVertexId;
+        //            else
+        //                response[CommonConstants.PushNotificationArray] = postPostedByVertexId;
+        //        }
 
-            }
-            return response;
-        }
+        //    }
+        //    return response;
+        //}
 
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
@@ -408,7 +410,8 @@ namespace urNotice.Services.UserService
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
+            IPerson consumerModel = new Consumer();
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
 
             var userPostCommentModel = new UserPostCommentModel();
             userPostCommentModel.commentedBy = new List<UserVertexModel>();
@@ -458,7 +461,8 @@ namespace urNotice.Services.UserService
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
             IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, vertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());
+            IPerson consumerModel = new Consumer();
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());
 
             var userLikeInfo = new UserVertexModel()
             {

@@ -523,7 +523,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        private Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
+        public Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
         {
             var properties = new Dictionary<string, string>();
             var response = new Dictionary<string, string>();
@@ -539,8 +539,8 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.WallPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
-
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = GetCurrentTimeStampForGraphDb();
+                    
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
@@ -562,7 +562,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = GetCurrentTimeStampForGraphDb();
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -585,7 +585,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.CommentedOnPostNotification.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = GetCurrentTimeStampForGraphDb();
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -608,7 +608,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = GetCurrentTimeStampForGraphDb();
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -631,7 +631,7 @@ namespace urNotice.Services.Person
                     properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = session.UserVertexId;
                     properties[EdgePropertyEnum.Type.ToString()] = EdgeLabelEnum.UserReaction.ToString();
                     properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = "(i," + DateTimeUtil.GetUtcTime().Ticks + ")";
+                    properties[EdgePropertyEnum.PostedDateLong.ToString()] = GetCurrentTimeStampForGraphDb();
 
                     IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
                     IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
@@ -644,6 +644,11 @@ namespace urNotice.Services.Person
 
             }
             return response;
+        }
+
+        private string GetCurrentTimeStampForGraphDb()
+        {
+            return "(long," + Convert.ToString(DateTimeUtil.GetUtcTime().Ticks) + ")";
         }
     }
 }

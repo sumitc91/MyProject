@@ -45,7 +45,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                         null,
                         null,
                         null,
-                        false
+                        false,
+                        null
                         );
         }
 
@@ -100,6 +101,30 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
 
         }
 
+        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,long timeStamp)
+        {
+            return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
+                    userName,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    timeStamp
+                    );
+        }
+
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageVertexDetail(OrbitPageVertexDetail orbitPageVertexDetail, String userName)
         {
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
@@ -119,7 +144,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     orbitPageVertexDetail,
                     null,
                     null,
-                    false                    
+                    false,
+                    null
                     );
         }
 
@@ -142,7 +168,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     orbitPageEdgeDetail,
                     null,
-                    false                    
+                    false,
+                    null
                     );
         }
 
@@ -165,7 +192,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
-                            false                           
+                            false,
+                            null
                             );
         }
 
@@ -188,7 +216,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
-                            false                            
+                            false,
+                            null
                             );
         }
 
@@ -211,7 +240,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
-                            false                            
+                            false,
+                            null
                             );
         }
 
@@ -234,7 +264,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             null,
-                            false
+                            false,
+                            null
                             );
         }
 
@@ -255,7 +286,8 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             OrbitPageVertexDetail orbitPageVertexDetail,
             OrbitPageEdgeDetail orbitPageEdgeDetail,
             OrbitPageUserNotification orbitPageUserNotification,
-            Boolean isSolrUpdated
+            Boolean isSolrUpdated,
+            long? lastNotificationSeenTimeStamp
             )
         {
             var context = GetDynamoDbContext();
@@ -279,7 +311,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             orbitPageCompanyUserWorkgraphyTable.OrbitPageEdgeDetail = orbitPageEdgeDetail;
             orbitPageCompanyUserWorkgraphyTable.CreatedDate = DateTimeUtil.GetUtcTime();
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUserNotification = orbitPageUserNotification;
-            
+            orbitPageCompanyUserWorkgraphyTable.LastNotificationSeenTimeStamp = lastNotificationSeenTimeStamp;
             context.Save(orbitPageCompanyUserWorkgraphyTable);
             return orbitPageCompanyUserWorkgraphyTable;
         }
