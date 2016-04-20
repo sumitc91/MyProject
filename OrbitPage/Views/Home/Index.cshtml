@@ -235,7 +235,7 @@ div.middle-div-mobile {
                                         </li>
 
                                         <li>
-                                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+                                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>
                                                 <li class="active notification-success borderlist" ng-repeat="notification in clientNotificationDetailResponse">
                                                     <div class="row">
                                                         <div class="col-sm-1 col-md-1"></div>
@@ -291,10 +291,9 @@ div.middle-div-mobile {
 
                                         </li>
                                         <li class="external">
-                                            <a href="#">
-                                                <div ng-show='clientNotificationDetailResponse.busy'>Loading data...</div>                                               
-                                                <i class="fa-link-ext"></i>
-                                            </a>
+                                           
+                                             <div ng-show='clientNotificationDetailResponse.busy'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+                                                
                                         </li>
                                         <li class="external">
                                             <a href="#">                                                                                               

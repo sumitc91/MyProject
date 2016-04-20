@@ -290,6 +290,11 @@ define([appLocation.preLogin], function (app) {
             };
             //startBlockUI('wait..', 3);
             //$scope.loadingUserDetails = true;
+            $rootScope.clientNotificationDetailResponseInfo.busy = true;
+            //if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+            //    $scope.$apply();
+            //}
+
             $http({
                 url: url,
                 method: "GET",
@@ -322,6 +327,10 @@ define([appLocation.preLogin], function (app) {
                     }
                     showToastMessage("Success", mssg);
                 }
+
+                //if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                //    $scope.$apply();
+                //}
                 //console.log($rootScope.clientNotificationDetailResponse);
                 if (data.Status == "500") {
 
