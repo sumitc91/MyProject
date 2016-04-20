@@ -171,6 +171,26 @@ define([appLocation.preLogin], function (app) {
     };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
+        
+        $scope.seenNotification = function () {
+            var url = ServerContextPath.userServer + '/User/SeenNotification';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv')
+            };
+            $rootScope.clientNotificationDetailResponseInfo.count = 0;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //console.log(data);
+                //$scope.CompanyNoticePeriodDetails = data.results;
+
+            });
+        };
 
         $scope.clientNotificationDetailResponseInfo.nextPage = function () {
             //alert("working");
@@ -288,7 +308,7 @@ define([appLocation.preLogin], function (app) {
                 else
                     $rootScope.clientNotificationDetailResponse = data.results;
 
-                $rootScope.clientNotificationDetailResponseInfo.count = $rootScope.clientNotificationDetailResponse.length;
+                $rootScope.clientNotificationDetailResponseInfo.count = data.unread;
                 $rootScope.clientNotificationDetailResponseInfo.busy = false;
 
                 if (isFromPushNotification) {

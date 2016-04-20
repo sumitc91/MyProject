@@ -10,5 +10,6 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
     {
         public Boolean success { get; set; }
         public List<UserNotificationVertexModel> results { get; set; }
+        public long  unread {get;set;}
     }
 }

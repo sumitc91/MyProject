@@ -221,9 +221,9 @@ div.middle-div-mobile {
                                 </li>
 
                                 <li class="dropdown hover-line" ng-show="isUserLoggedIn">
-                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false" ng-click="seenNotification()">
                                         <i class="fa-bell-o"></i>                                        
-                                        <span class="badge badge-purple" ng-bind="clientNotificationDetailResponseInfo.count"></span>
+                                        <span ng-show="clientNotificationDetailResponseInfo.count>0" class="badge badge-purple" ng-bind="clientNotificationDetailResponseInfo.count"></span>
                                     </a>
 
                                     <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">

@@ -233,6 +233,7 @@
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostLikesModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostLikesVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostMessagesVertexModelResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserPostUnreadNotificationsResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserVertexModel.cs" />

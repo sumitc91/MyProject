@@ -82,9 +82,11 @@ namespace urNoticeUser.Controllers
             if (isValidToken)
             {
                 
-                var clientNotificationDetailResponse = new UserService().GetUserNotification(session.UserVertexId,from,to, accessKey, secretKey);
+                var clientNotificationDetailResponse = new UserService().GetUserNotification(session,from,to, accessKey, secretKey);
                 var clientNotificationDetailResponseDeserialized =
                         JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
+                if (clientNotificationDetailResponseDeserialized!= null)
+                    clientNotificationDetailResponseDeserialized.unread = new UserService().GetUserUnreadNotificationCount(session);
                 return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
             }
             else
@@ -97,6 +99,27 @@ namespace urNoticeUser.Controllers
 
         }
 
+        public JsonResult SeenNotification()
+        {
+            var headers = new HeaderManager(Request);            
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                IPerson consumerModel = new Consumer();
+                var seenNotificationResponse = consumerModel.SeenNotification(session.UserName);
+                return Json(seenNotificationResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
         //[HttpPost]
         //public JsonResult UserPost(UserNewPostRequest req)
         //{

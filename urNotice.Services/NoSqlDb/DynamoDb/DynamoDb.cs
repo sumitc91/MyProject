@@ -93,6 +93,25 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
 
         }
 
+        public long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName)
+        {
+            var context = GetDynamoDbContext();
+
+            IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
+                new ScanCondition("DataType", ScanOperator.Equal, DynamoDbHashKeyDataType.LastSeenNotification.ToString()),
+                new ScanCondition("ObjectId", ScanOperator.Equal, userName)                
+                  );
+
+            if (res != null)
+            {
+                var result = res.FirstOrDefault();
+                if (result != null)
+                    return result.LastNotificationSeenTimeStamp;
+            }
+
+            return null;
+        }
+
         public bool DeleteOrbitPageCompanyUserWorkgraphyTable(OrbitPageCompanyUserWorkgraphyTable res)
         {
             var context = GetDynamoDbContext();
@@ -104,7 +123,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,long timeStamp)
         {
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
+                    DynamoDbHashKeyDataType.LastSeenNotification.ToString(),
                     userName,
                     null,
                     null,

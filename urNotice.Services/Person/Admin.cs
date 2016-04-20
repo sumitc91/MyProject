@@ -72,6 +72,11 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public ResponseModel<string> SeenNotification(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
         public Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,
             string postPostedByVertexId, string notificationType)
         {

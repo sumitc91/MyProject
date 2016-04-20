@@ -496,6 +496,16 @@ namespace urNotice.Services.Person
             return response;
         }
 
+        public ResponseModel<string> SeenNotification(string userName)
+        {
+            var response = new ResponseModel<string>();
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            dynamoDbModel.UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(userName, DateTimeUtil.GetUtcTime().Ticks);
+            response.Status = 200;
+            response.Message = "success";
+            return response;
+        }
+
         public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation, string salary,
             string jobFromYear, string jobToYear, string companyVertexId)
         {
