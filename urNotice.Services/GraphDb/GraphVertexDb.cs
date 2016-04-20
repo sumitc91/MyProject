@@ -79,6 +79,16 @@ namespace urNotice.Services.GraphDb
                 }                    
             }
 
+            //new properties that is not available in old properties
+            foreach (KeyValuePair<string, string> property in properties)
+            {
+                //merge updated values in dictionary..
+                if (!newProperties.ContainsKey(property.Key))
+                {
+                    newProperties[property.Key] = properties[property.Key];
+                }
+            }
+
             foreach (KeyValuePair<string, string> property in newProperties)
             {                
                 uri.Append(property.Key + "=" + HttpUtility.UrlEncode(property.Value) + "&");
