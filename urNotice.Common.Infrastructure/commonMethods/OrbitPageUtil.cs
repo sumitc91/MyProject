@@ -19,5 +19,9 @@ namespace urNotice.Common.Infrastructure.commonMethods
             return DynamoDbHashKeyDataType.Notification + "_" +sendToEmail;
         }
 
+        public static string GetCurrentTimeStampForGraphDb()
+        {
+            return "(long," + Convert.ToString(DateTimeUtil.GetUtcTime().Ticks) + ")";
+        }
     }
 }

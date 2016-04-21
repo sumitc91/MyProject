@@ -314,6 +314,7 @@
     <Content Include="App\js\jquery.motionCaptcha.0.2.js" />
     <Content Include="App\js\jquery.panzoom.js" />
     <Content Include="App\js\jquery.panzoom.min.js" />
+    <Content Include="App\js\jquery.particleground.js" />
     <Content Include="App\js\jquery.signalR-1.0.1.js" />
     <Content Include="App\js\jquery.signalR-1.0.1.min.js" />
     <Content Include="App\js\jquery.signalR-2.1.1.js" />
@@ -347,6 +348,7 @@
     <Content Include="App\pages\beforeLogin\Blog\Blog.js" />
     <Content Include="App\pages\beforeLogin\Career\Career.html" />
     <Content Include="App\pages\beforeLogin\Career\Career.js" />
+    <Content Include="App\pages\beforeLogin\Login\Login2.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.js" />
     <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.html" />

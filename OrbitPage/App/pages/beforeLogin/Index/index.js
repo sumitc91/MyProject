@@ -66,7 +66,7 @@ define([appLocation.preLogin], function (app) {
                     }
                 }
             });
-
+        
         getSolrServiceCompetitors();
 
         function getSolrServiceCompetitors() {
@@ -186,8 +186,6 @@ define([appLocation.preLogin], function (app) {
             $scope.sliderImage = "https://s3-ap-southeast-1.amazonaws.com/urnotice/App/img/indexPageSlider/slider_final_low_3_" + $scope.imageIndex + ".jpg";
             $scope.$$phase || $scope.$apply();
         };
-
-
 
         $scope.myInterval = 5000;
         $scope.noWrapSlides = false;

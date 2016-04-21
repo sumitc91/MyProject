@@ -112,6 +112,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[EdgePropertyEnum._outV.ToString()] = vertexFrom;
             properties[EdgePropertyEnum._inV.ToString()] = vertexTo;
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
             properties[EdgePropertyEnum._label.ToString()] = label;
 
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();

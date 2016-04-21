@@ -11,6 +11,7 @@ define([appLocation.preLogin], function (app) {
                        when("/signup/user", { templateUrl: "../../App/pages/beforeLogin/SignUpUser/SignUpUser.html" }).
                        when("/signup/client", { templateUrl: "../../App/Pages/BeforeLogin/SignUpClient/SignUpClient.html" }).
                        when("/login", { templateUrl: "../../App/Pages/BeforeLogin/Login/Login.html" }).
+                       when("/login2", { templateUrl: "../../App/Pages/BeforeLogin/Login/Login2.html" }).
                        when("/login/:code", { templateUrl: "../../App/Pages/BeforeLogin/Login/Login.html" }).
                        when("/faq", { templateUrl: "../../App/pages/beforeLogin/FAQ/FAQ.html" }).
                        when("/facebookLogin/:userType", { templateUrl: "../../Resource/templates/beforeLogin/contentView/facebookLogin.html" }).

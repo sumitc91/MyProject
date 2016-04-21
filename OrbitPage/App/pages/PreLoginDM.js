@@ -116,9 +116,9 @@ appRequire = require
             googleChartLoader: {
                 deps: ["jquery"]
             },
-            jquery_hovercard_min: {
-                deps: ["jquery"]
-            },
+            //jquery_particleground: {
+            //    deps: ["jquery"]
+            //},
             angularjs_fileUpload_shim: {//new
                 deps: ["angular", "jquery"]
             },
@@ -135,7 +135,7 @@ appRequire = require
                 deps: ["jquery", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "ngtimeago"]
             },
             beforeLoginIndex: {
-                deps: ["jquery","beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
+                deps: ["jquery", "beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "jquery_sidr_min", "bootstrap_ui", "urNoticeScript", "beforeLoginSolrService", "angular_animate"]
             },
             beforeLoginLoginPage: {
                 deps: ["jquery","beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage"]
@@ -168,7 +168,7 @@ appRequire = require
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_hovercard_min"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
             },
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
@@ -227,7 +227,7 @@ appRequire = require
             angular_input_stars: "../../App/third-Party/angular-input-stars-master/angular-input-stars",
             urNoticeScript: "../../App/js/urNoticeScript",
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
-            jquery_hovercard_min: "../../App/js/jquery.hovercard.min",
+            //jquery_particleground: "../../App/js/jquery.particleground",
             ngtimeago: "../../App/js/angular/ngtimeago",
             ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
@@ -276,7 +276,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
-    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "jquery_hovercard_min"
+    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });
