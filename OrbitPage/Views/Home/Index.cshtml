@@ -281,20 +281,18 @@ div.middle-div-mobile {
                                             </ul>
 
                                         </li>
-                                        <li class="external" ng-show='!clientNotificationDetailResponse.busy'>
+                                        <li class="external">
 
+                                            <div ng-show='loadingNotificationDetails'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+
+                                        </li>
+                                        <li class="external" ng-show='!clientNotificationDetailResponse.busy'>
                                             <a ng-click="clientNotificationDetailResponseInfo.nextPage()">
                                                 <div>Load more...</div>
                                                 <i class="fa-link-ext"></i>
                                             </a>
-
-
                                         </li>
-                                        <li class="external">
-                                           
-                                             <div ng-show='clientNotificationDetailResponse.busy'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
-                                                
-                                        </li>
+                                        
                                         <li class="external">
                                             <a href="#">                                                                                               
                                                 <span>View all notifications</span>

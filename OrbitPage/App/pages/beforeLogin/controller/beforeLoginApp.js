@@ -167,7 +167,7 @@ define([appLocation.preLogin], function (app) {
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
-            itemPerPage:2
+            itemPerPage:5
     };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
@@ -295,6 +295,7 @@ define([appLocation.preLogin], function (app) {
             //startBlockUI('wait..', 3);
             //$scope.loadingUserDetails = true;
             $rootScope.clientNotificationDetailResponseInfo.busy = true;
+            $scope.loadingNotificationDetails = true;
             //if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
             //    $scope.$apply();
             //}
@@ -307,28 +308,24 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
                 //console.log("loadClientNotificationDetails success : " + from + " -- " + to);
-                $scope.loadingUserDetails = false;
+                $scope.loadingNotificationDetails = false;
+                $rootScope.clientNotificationDetailResponseInfo.busy = false;
+                $rootScope.clientNotificationDetailResponseInfo.count = data.unread;
+                
+
                 if (isFromPushNotification || from==0) {
                     $rootScope.clientNotificationDetailResponse = [];
                 }
 
-                if (data != null && data.results != null && data.results.length>0) {
-                    //console.log("loadClientNotificationDetails success not null: " + from + " -- " + to);
-                    for (var i = 0; i < data.results.length; i++) {
-                        //console.log("compare : " + from + i + " < " + data.unread + " ---> " + (from + i) < data.unread);
+                if (data != null && data.results != null && data.results.length>0) {                    
+                    for (var i = 0; i < data.results.length; i++) {                        
                         if ((from + i) < data.unread) {
-                            data.results[i].class = "unread_notification";
-                            console.log(data.results[i]);
+                            data.results[i].class = "unread_notification";                            
                         }
-                        $rootScope.clientNotificationDetailResponse.push(data.results[i]);
-                        //console.log($rootScope.clientNotificationDetailResponse);
+                        $rootScope.clientNotificationDetailResponse.push(data.results[i]);                        
                     }
                 }                   
                 
-
-                $rootScope.clientNotificationDetailResponseInfo.count = data.unread;
-                $rootScope.clientNotificationDetailResponseInfo.busy = false;
-
                 if (isFromPushNotification) {
                     var mssg = "";
                     if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "WallPostNotification") {
