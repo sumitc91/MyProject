@@ -246,7 +246,7 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
                 $scope.loadingUserDetails = false;
-                console.log(data);
+                //console.log(data);
                 if (data.Status == "200") {
                     $rootScope.clientDetailResponse = data.Payload;
                     //$scope.UserNotificationsList.Messages = data.Payload.Messages;
@@ -285,6 +285,7 @@ define([appLocation.preLogin], function (app) {
         function loadClientNotificationDetails(from, to, isFromPushNotification) {
             var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from='+from+'&to='+to;
             //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
+            //console.log("loadClientNotificationDetails : "+from+" -- "+to);
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': CookieUtil.getUTMZT(),
@@ -305,19 +306,25 @@ define([appLocation.preLogin], function (app) {
             }).success(function (data, status, headers, config) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
+                //console.log("loadClientNotificationDetails success : " + from + " -- " + to);
                 $scope.loadingUserDetails = false;
-                if (isFromPushNotification) {
+                if (isFromPushNotification || from==0) {
                     $rootScope.clientNotificationDetailResponse = [];
                 }
 
-                if ($rootScope.clientNotificationDetailResponse != null) {
-                    for (var i = 0; i < data.results.length; i++) {                        
+                if (data != null && data.results != null && data.results.length>0) {
+                    //console.log("loadClientNotificationDetails success not null: " + from + " -- " + to);
+                    for (var i = 0; i < data.results.length; i++) {
+                        //console.log("compare : " + from + i + " < " + data.unread + " ---> " + (from + i) < data.unread);
+                        if ((from + i) < data.unread) {
+                            data.results[i].class = "unread_notification";
+                            console.log(data.results[i]);
+                        }
                         $rootScope.clientNotificationDetailResponse.push(data.results[i]);
                         //console.log($rootScope.clientNotificationDetailResponse);
                     }
                 }                   
-                else
-                    $rootScope.clientNotificationDetailResponse = data.results;
+                
 
                 $rootScope.clientNotificationDetailResponseInfo.count = data.unread;
                 $rootScope.clientNotificationDetailResponseInfo.busy = false;
@@ -348,7 +355,7 @@ define([appLocation.preLogin], function (app) {
                 }
             }).error(function (data, status, headers, config) {
                 //stopBlockUI();
-                //showToastMessage("Error", "Internal Server Error Occured.");                
+                showToastMessage("Error", "Internal Server Error Occured.");                
             });
         }
 

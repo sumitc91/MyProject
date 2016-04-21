@@ -236,7 +236,7 @@ div.middle-div-mobile {
 
                                         <li>
                                             <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>
-                                                <li class="active notification-success borderlist" ng-repeat="notification in clientNotificationDetailResponse">
+                                                <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientNotificationDetailResponse">
                                                     <div class="row" ng-click="showPost(notification.postInfo[0]._id)">
                                                         <div class="col-sm-1 col-md-1"></div>
                                                         <div class="col-sm-2 col-md-2">
