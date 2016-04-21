@@ -201,8 +201,7 @@ define([appLocation.preLogin], function (app) {
             $rootScope.clientNotificationDetailResponseInfo.after = $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage+1;
         };
         $scope.clientNotificationDetailResponseInfoUpdateFromPushNotification = function () {
-            //alert("working");                 
-            $rootScope.clientNotificationDetailResponse = [];
+            //alert("working");                             
             loadClientNotificationDetails(0, $rootScope.clientNotificationDetailResponseInfo.after+1,true);
             
         };
@@ -303,6 +302,9 @@ define([appLocation.preLogin], function (app) {
                 //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                 //stopBlockUI();
                 $scope.loadingUserDetails = false;
+                if (isFromPushNotification) {
+                    $rootScope.clientNotificationDetailResponse = [];
+                }
 
                 if ($rootScope.clientNotificationDetailResponse != null) {
                     for (var i = 0; i < data.results.length; i++) {                        
