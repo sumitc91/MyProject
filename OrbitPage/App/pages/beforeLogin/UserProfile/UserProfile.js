@@ -79,6 +79,12 @@ define([appLocation.preLogin], function (app) {
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
         };
 
+        $scope.removeUploadedPostImage = function() {
+            $timeout(function () {
+                $scope.NewPostImageUrl = {};
+            });
+        };
+
         $scope.closeModelAndNavigateTo = function (vid) {
             //console.log("inside closeModelAndNavigateTo");  
             $(".modal-backdrop.in").hide();
@@ -179,14 +185,16 @@ define([appLocation.preLogin], function (app) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                     stopBlockUI();
                     $scope.UserPostList = [];
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = {};
+                    });
+
                     getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
                     $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage + 1;
                     //$scope.UserPostList.push(data.Payload);
                     $scope.UserPostMessage = "";
 
-                    $timeout(function () {
-                        $scope.NewPostImageUrl.link_s = "";
-                    });
+                    
 
                 }).error(function (data, status, headers, config) {
 

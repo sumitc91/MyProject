@@ -142,8 +142,9 @@
                                     </ul>
                                     <textarea class="form-control" ng-model="UserPostMessage" placeholder="What's in your mind?"></textarea>
                                     <ul class="list-inline">
-                                        <li>                                            
+                                        <li ng-show="NewPostImageUrl.link_s">
                                             <a class="fancybox" rel="group" href="{{NewPostImageUrl.link_s}}"><img style="max-width: 200px;" ng-src="{{NewPostImageUrl.link_s}}" alt="" /></a>
+                                            <input type="button" value="Remove" ng-click="removeUploadedPostImage()"/>
                                         </li>
                                     </ul>
                                     <ul class="list-inline post-actions">

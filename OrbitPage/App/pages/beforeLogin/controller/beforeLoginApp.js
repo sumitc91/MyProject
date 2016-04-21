@@ -192,6 +192,10 @@ define([appLocation.preLogin], function (app) {
             });
         };
 
+        $scope.showPost = function (postId) {
+            $location.url('/viewpostdetail/' + postId);
+        };
+
         $scope.clientNotificationDetailResponseInfo.nextPage = function () {
             //alert("working");
             if ($rootScope.clientNotificationDetailResponseInfo.busy) return;
