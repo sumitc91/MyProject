@@ -479,44 +479,53 @@ c0 -98 -1 -105 -20 -105 -19 0 -20 7 -20 105 0 98 1 105 20 105 19 0 20 -7 20
     <div class="row">
         <div id="page-content">
 
-            <div class="container">
+            <div class="container" ng-show="LatestWorkGraphyList">
+
                 <div class="row">
-                    <div class="col-sm-12 page-content">
-
-                        <div class="title-lines">
-                            <h3 ng-bind="beforeLoginIndexLatestWorkgraphy"></h3>
-                        </div>
-
-                        <div class="latest-jobs-section white-container" ng-repeat="workgraphy in LatestWorkGraphyList">
-                            <div class="flexslider clearfix">
-                                <ul class="slides">
-
-                                    <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;">
-                                        <div class="image">
-                                            <img draggable="false" alt="" src="https://s3-ap-southeast-1.amazonaws.com/urnotice/users/images.jpeg">
-                                            <a class="btn btn-default fa fa-search" href="#"></a>
-                                            <a class="btn btn-default fa fa-link" href="#"></a>
+                    <div class="title-lines">
+                        <h3 ng-bind="beforeLoginIndexLatestWorkgraphy"></h3>
+                    </div>
+                    <div class="container">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                            </ol>
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div ng-class="{0:'item active', 1:'item',2:'item',3:'item',4:'item',5:'item',6:'item'}[$index]" ng-repeat="workgraphy in LatestWorkGraphyList">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="thumbnail adjust1">
+                                                <div class="col-md-2 col-sm-2 col-xs-12"> <img class="media-object img-rounded img-responsive" ng-src="{{workgraphy.icon_image}}" height="100"> </div>
+                                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                                    <div class="caption">
+                                                        <a href="#/story/{{workgraphy.vertex_id}}" class="text-info lead adjust2" ng-bind="workgraphy.heading | cut:true:50:' ...'"></a>
+                                                        <p><span class="glyphicon glyphicon-thumbs-up"></span> <span ng-bind="workgraphy.short_desc | cut:true:200:' ...'"></span></p>
+                                                        <blockquote class="adjust2">
+                                                            <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date | date:'yyyy-MM-dd HH:mm:ss Z' }} ( {{workgraphy.created_date| timeago}} )</p>
+                                                            <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> <span ng-bind="workgraphy.created_by_email"></span></cite></small>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <div class="content">
-                                            <a href="#/story/{{workgraphy.vertex_id}}"><h6 ng-bind="workgraphy.heading | cut:true:50:' ...'"></h6></a>
-                                            <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p><br />
-                                            <p ng-bind="workgraphy.short_desc | cut:true:200:' ...'"></p><br />
-                                            by <span href="#" ng-bind="workgraphy.created_by_email"></span>
-                                        </div>
-                                    </li>
-
-                                </ul>
                             </div>
-                        </div> <!-- end .latest-jobs-section -->
 
-
-
-                    </div> <!-- end .page-content -->
+                        </div>
+                    </div>
 
                 </div>
             </div>
-
+            <br />
             <div class="success-stories-section">
                 <div class="container">
                     <h5 class="mt10" ng-bind="beforeLoginIndexTopCompanies"></h5>
@@ -563,4 +572,44 @@ c0 -98 -1 -105 -20 -105 -19 0 -20 7 -20 105 0 98 1 105 20 105 19 0 20 -7 20
         margin-left: auto;
         margin-right: auto;    
     }
+
+
+    .carousel-indicators .active {
+    background: #31708f;
+}
+.content {
+    margin-top: 20px;
+}
+.adjust1 {
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+.adjust2 {
+    margin: 0;
+}
+.carousel-indicators li {
+    border: 1px solid #ccc;
+}
+.carousel-control {
+    color: #31708f;
+    width: 5%;
+}
+.carousel-control:hover,
+.carousel-control:focus {
+    color: #31708f;
+}
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none;
+}
+.media-object {
+    margin: auto;
+    margin-top: 15%;
+}
+@media screen and (max-width: 768px) {
+    .media-object {
+        margin-top: 0;
+    }
+}
 </style>

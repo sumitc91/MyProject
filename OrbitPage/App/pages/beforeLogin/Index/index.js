@@ -106,7 +106,7 @@ define([appLocation.preLogin], function (app) {
         function getLatestWorkgraphy() {
 
             $scope.currentPage = 0;
-            $scope.perpage = 3;
+            $scope.perpage = 6;
             $scope.totalMatch = 10;
             var url = ServerContextPath.solrServer + '/Search/GetLatestWorkgraphy?page=' + $scope.currentPage + '&perpage=' + $scope.perpage + '&totalMatch=' + $scope.totalMatch;
             var headers = {
