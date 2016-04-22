@@ -169,10 +169,18 @@ define([appLocation.preLogin], function (app) {
             busy: false,
             after: 0,
             itemPerPage:3
-    };
+        };
+
+        $rootScope.chatBox = {
+            show: false
+        };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
-        
+        $scope.showChatBox = function () {
+            $('#hangout').show();
+            $rootScope.chatBox.show = true;
+        };
+
         $scope.seenNotification = function () {
             var url = ServerContextPath.userServer + '/User/SeenNotification';
             var headers = {
@@ -255,8 +263,7 @@ define([appLocation.preLogin], function (app) {
                     CookieUtil.setUserName(data.Payload.Firstname, userSession.keepMeSignedIn);
                     CookieUtil.setUserImageUrl(data.Payload.Profilepic, userSession.keepMeSignedIn);
 
-                    $rootScope.isUserLoggedIn = true;
-
+                    $rootScope.isUserLoggedIn = true;                    
                     initSidr(true);
 
                     if (data.Payload.isLocked == "true") {

@@ -297,6 +297,7 @@
     <Content Include="App\js\angular\ui-bootstrap-custom-0.14.3.js" />
     <Content Include="App\js\angular\ui-bootstrap-tpls-0.14.3.js" />
     <Content Include="App\js\bannerscollection_zoominout.js" />
+    <Content Include="App\js\chat_index.js" />
     <Content Include="App\js\configureBlockUI.js" />
     <Content Include="App\js\domReady.js" />
     <Content Include="App\js\dragend.js" />
