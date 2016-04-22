@@ -353,6 +353,8 @@ define([appLocation.preLogin], function (app) {
                 }
             }).error(function (data, status, headers, config) {
                 //stopBlockUI();
+                $scope.loadingNotificationDetails = false;
+                $rootScope.clientNotificationDetailResponseInfo.busy = false;
                 showToastMessage("Error", "Internal Server Error Occured.");                
             });
         }

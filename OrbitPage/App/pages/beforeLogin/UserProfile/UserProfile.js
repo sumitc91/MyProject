@@ -173,6 +173,13 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
 
+            console.log(userPostData);
+            
+            if (isNullOrEmpty(userPostData.Message) && isNullOrEmpty(userPostData.Image)) {
+                showToastMessage("Warning", "You cannot submit Empty Post.");
+                return;
+            }
+            
             if ($rootScope.isUserLoggedIn) {
                 startBlockUI('wait..', 3);
 
@@ -302,7 +309,10 @@ define([appLocation.preLogin], function (app) {
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
-            
+            if (isNullOrEmpty($scope.UserPostList[postIndex].postInfo.postUserComment)) {
+                showToastMessage("Warning", "You cannot submit empty message.");
+                return;
+            }
             var newCommentPosted = {
                 "commentInfo": {
                     "PostImage": $scope.NewPostImageUrl.link_m,

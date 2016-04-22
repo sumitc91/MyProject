@@ -322,3 +322,7 @@ function initializeHoverCard() {
         }
     });
 }
+
+function isNullOrEmpty(str) {
+    return (str == null || str == "");
+};

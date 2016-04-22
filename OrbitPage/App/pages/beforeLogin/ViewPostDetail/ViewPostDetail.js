@@ -230,6 +230,11 @@ define([appLocation.preLogin], function (app) {
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
+            if (isNullOrEmpty($scope.UserPostList[postIndex].postInfo.postUserComment)) {
+                showToastMessage("Warning", "You cannot submit empty message.");
+                return;
+            }
+
             var newCommentPosted = {
                 "commentInfo": {
                     "PostImage": $scope.NewPostImageUrl.link_m,
