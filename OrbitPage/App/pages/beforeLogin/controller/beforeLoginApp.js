@@ -168,7 +168,7 @@ define([appLocation.preLogin], function (app) {
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
-            itemPerPage:5
+            itemPerPage:3
     };
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
