@@ -168,7 +168,7 @@ define([appLocation.preLogin], function (app) {
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
-            itemPerPage:3
+            itemPerPage:6
         };
 
         $rootScope.chatBox = {
@@ -177,8 +177,11 @@ define([appLocation.preLogin], function (app) {
         //$('title').html("index"); //TODO: change the title so cann't be tracked in log
 
         $scope.showChatBox = function () {
+            //$('.list-text').show();
+            
             $('#hangout').show();
             $rootScope.chatBox.show = true;
+            
         };
 
         $scope.seenNotification = function () {
@@ -374,6 +377,8 @@ define([appLocation.preLogin], function (app) {
                 sidrMenu += '<li><img src=\"' + $rootScope.clientDetailResponse.Profilepic + '\" height=\"30px\" widht=\"30px\" />' + $rootScope.clientDetailResponse.Firstname + ' ' + $rootScope.clientDetailResponse.Lastname + '</li>';
                 sidrMenu += '<li><a href="#/userprofile/' + $rootScope.clientDetailResponse.VertexId + '">My Profile</a></li>';
                 sidrMenu += '<li role="menuitem"><a href="#/editpage">Edit Profile</a></li>';
+                sidrMenu += '<li role="menuitem"><a ng-click="showChatBox()">Show Chatbox</a></li>';
+                
             } else {
                 sidrMenu += '<li><a href=\"#/login\">Login</a></li>';
                 sidrMenu += '<li><a href=\"#\">Register</a></li>';
@@ -387,14 +392,17 @@ define([appLocation.preLogin], function (app) {
             sidrMenu += '</ul>';
 
             $('#responsive-menu-button').sidr({
-                name: 'sidr-callback',
+                //name: 'sidr-callback',
+                name: 'sidr-right',
+                side: 'right',
                 source: function () {
                     return sidrMenu;
                 }
             });
 
             $("body").click(function () {
-                $.sidr('close', 'sidr-callback');
+                //$.sidr('close', 'sidr-callback');
+                $.sidr('close', 'sidr-right');
             });
         }
 

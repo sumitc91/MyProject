@@ -265,6 +265,7 @@
     <Compile Include="Model\urNoticeModel\ResponseWrapper\ImgurImageUploadResponse.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\linkedinUserDataWrapper.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\LoginResponse.cs" />
+    <Compile Include="Model\urNoticeModel\ResponseWrapper\SearchAllResponseModel.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserMessageList.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserMessagesResponse.cs" />
     <Compile Include="Model\urNoticeModel\ResponseWrapper\UserNotificationList.cs" />

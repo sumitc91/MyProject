@@ -6313,8 +6313,7 @@ input.nostyle {
   transition: all 0.2s ease;
 }
 .i-group input {
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
+  font-size: 18px;  
   display: block;
   background: #fafafa;
   color: #636363;

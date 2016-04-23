@@ -1386,6 +1386,7 @@
 
                              /* Firefox (or possibly just Gecko) likes to not round values up
                               * when a ms measurement is used for the animation */
+                             if (ev.elapsedTime === undefined) ev.elapsedTime = maxDuration;
                              var elapsedTime = parseFloat(ev.elapsedTime.toFixed(ELAPSED_TIME_MAX_DECIMAL_PLACES));
 
                              /* $manualTimeStamp is a mocked timeStamp value which is set

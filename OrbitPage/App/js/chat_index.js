@@ -1,6 +1,6 @@
     // First route to show
     var GLOBALSTATE = {
-        route: '.list-account'
+        route: '.list-text'
     };
 
     // Set first Route
@@ -118,8 +118,10 @@
 
         if (route !== '.list-account') {
             $('#add-contact-floater').addClass('hidden');
+            //$('#chat-floater').addClass('hidden');
         } else {
             $('#add-contact-floater').removeClass('hidden');
+            //$('#chat-floater').removeClass('hidden');
         }
 
         if (route !== '.list-text') {

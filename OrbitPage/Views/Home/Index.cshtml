@@ -239,7 +239,7 @@ div.middle-div-mobile {
 
                                         <li>
                                             @*<ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>*@
-                                                <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+                                                <ul id="userNotificationDivId" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
                                                     <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientNotificationDetailResponse">
                                                         <div class="row" ng-click="showPost(notification.postInfo[0]._id)">
                                                             <div class="col-sm-1 col-md-1"></div>
@@ -424,7 +424,7 @@ div.middle-div-mobile {
                             <div class="center"><canvas id="colorpick" width="250" height="220"></canvas></div>
                         </div>
                     </div>
-                    <div class="list-account">
+                    @*<div class="list-account">
                         <div class="meta-bar"><input class="nostyle search-filter" type="text" placeholder="Search" /></div>
                         <ul class="list mat-ripple">
                             <li><img src="http://lorempixel.com/100/100/people/1/"><span class="name">Angie</span><i class="mdi mdi-menu-down"></i> </li>
@@ -439,8 +439,9 @@ div.middle-div-mobile {
                             <li><img src="http://lorempixel.com/100/100/people/"><span class="name">Doozer</span><i class="mdi mdi-menu-down"></i></li>
                             <li><img src="http://lorempixel.com/100/100/people/"><span class="name">Munk</span><i class="mdi mdi-menu-down"></i></li>
                         </ul>
-                    </div>
+                    </div>*@
                     <div class="list-text">
+                        <div class="meta-bar"><input class="nostyle search-filter" type="text" placeholder="Name, phone number" /></div>
                         <ul class="list mat-ripple">
                             <li>
                                 <img src="http://lorempixel.com/100/100/people/1/">
@@ -518,13 +519,13 @@ div.middle-div-mobile {
                                 <div class="message current">...</div>
                             </li>
                         </ul>
-                        <div class="meta-bar chat"><input class="nostyle chat-input" type="text" placeholder="Message..." /> <i class="mdi mdi-send"></i></div>
+                        <div class="meta-bar chat"><input class="nostyle chat-input" type="text" placeholder="Message..." style="display: inline-block;" /> <i class="mdi mdi-send"></i></div>
                     </div>
                     <ul class="nav control mat-ripple tiny">
 
-                        <li data-route=".list-account"><i class="mdi mdi-account-multiple"></i></li>
-                        <li data-route=".list-text"><i class="mdi mdi-comment-text"></i></li>
-                        <li data-route=".list-phone"><i class="mdi mdi-phone"></i></li>
+                        @*<li data-route=".list-account"><i class="mdi mdi-account-multiple"></i></li>*@
+                        <li id="mdiCommentTextLinkId" data-route=".list-text"><i class="mdi mdi-comment-text"></i></li>
+                        <li id="mdiPhoneLinkId" data-route=".list-phone"><i class="mdi mdi-phone"></i></li>
                     </ul>
                 </div>
 
@@ -689,13 +690,15 @@ div.middle-div-mobile {
 
             $(function () {
                 
-                window.madetoearn.i18nLocalizePage();                
+                window.madetoearn.i18nLocalizePage();
+                
             });
 
             jQuery(document).ready(function () {
                 jQuery("time.timeago").timeago();
             });
 
+            
             
         </script>
 

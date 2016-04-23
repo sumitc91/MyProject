@@ -153,7 +153,25 @@ namespace urNoticeSolr.Controllers
             response.Message = "Unauthorized";
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-      
+
+        public JsonResult SearchAll()
+        {
+            var response = new ResponseModel<SearchAllResponseModel>();
+            var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
+            try
+            {
+                ISolrUser solrUserModel = new SolrUser();
+                response.Payload = solrUserModel.SearchAllAutocomplete(queryText);
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+            response.Status = 401;
+            response.Message = "Unauthorized";
+            return Json(response, JsonRequestBehavior.AllowGet);   
+        }
+
         public JsonResult CompanyDetailsById()
         {
             var response = new ResponseModel<SolrQueryResults<UnCompanySolr>>();

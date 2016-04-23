@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
+using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.Person;
 using urNotice.Services.SessionService;
@@ -27,6 +29,7 @@ namespace urNoticeUser.Controllers
         private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
         private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
 
+        private ILogger _logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
 
         public ActionResult Index()
         {
@@ -81,13 +84,21 @@ namespace urNoticeUser.Controllers
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                
-                var clientNotificationDetailResponse = new UserService().GetUserNotification(session,from,to, accessKey, secretKey);
-                var clientNotificationDetailResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
-                if (clientNotificationDetailResponseDeserialized!= null)
-                    clientNotificationDetailResponseDeserialized.unread = new UserService().GetUserUnreadNotificationCount(session);
-                return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                try
+                {
+                    var clientNotificationDetailResponse = new UserService().GetUserNotification(session, from, to, accessKey, secretKey);
+                    var clientNotificationDetailResponseDeserialized =
+                            JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
+                    if (clientNotificationDetailResponseDeserialized != null)
+                        clientNotificationDetailResponseDeserialized.unread = new UserService().GetUserUnreadNotificationCount(session);
+                    return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("Graph Db Exception", ex);
+                    return Json("Exception Occured.", JsonRequestBehavior.AllowGet);
+                }
+               
             }
             else
             {

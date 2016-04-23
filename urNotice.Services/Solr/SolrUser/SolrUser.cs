@@ -6,12 +6,15 @@ using Microsoft.Practices.ServiceLocation;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
 namespace urNotice.Services.Solr.SolrUser
 {
     public class SolrUser : ISolrUser
     {
+        //private delegate Dictionary<string, string> AddEdgeAsyncDelegate(string userName, string graphName, Dictionary<string, string> properties);
+        //private delegate Dictionary<string, string> AddEdgeAsyncDelegate(string userName, string graphName, Dictionary<string, string> properties);
         public Dictionary<String, String> InsertNewUserToSolr(UnUserSolr solrUser, bool toBeOptimized)
         {
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<UnUserSolr>>();
@@ -41,6 +44,11 @@ namespace urNotice.Services.Solr.SolrUser
                 Fields = new[] { "email", "name", "profilepic", "vertexId" }
             });
             return solrQueryExecute;
+        }
+
+        public SearchAllResponseModel SearchAllAutocomplete(string queryText)
+        {
+            throw new NotImplementedException();
         }
 
         public SolrQueryResults<UnUserSolr> UserDetailsById(string uid)

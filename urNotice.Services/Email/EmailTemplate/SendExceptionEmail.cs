@@ -10,8 +10,7 @@ using urNotice.Services.ErrorLogger;
 namespace urNotice.Services.Email.EmailTemplate
 {
     public class SendExceptionEmail
-    {
-        private ILogger _logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
+    {        
         public delegate void exceptionEmailSend_Delegate(String toEmailAddrList, String senderName, String subject, String body, String attachmentsFilePathList, String logoPath, String companyDescription, String sendEmailFrom);
 
 
