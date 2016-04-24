@@ -12,6 +12,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         PostMessage,
         PostedByUser,
         PostedTime,
+        PostedTimeLong,
         PostImage,
         FirstName,
         LastName,
@@ -31,6 +32,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         JobFromYear,
         JobToYear,
 
-        Heading,        
+        Heading,
+        IsVerified
     }
 }

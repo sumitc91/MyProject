@@ -256,6 +256,7 @@ appRequire = require
             beforeLoginUserProfile: "../../App/pages/beforeLogin/UserProfile/UserProfile",
             beforeLoginViewPostDetail: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail",
             beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
+            beforeLoginPostBlog: "../../App/pages/beforeLogin/PostBlog/PostBlog",
             beforeLoginWorkgraphy: "../../App/pages/beforeLogin/Workgraphy/Workgraphy",
             beforeLoginSingleBlog: "../../App/pages/beforeLogin/SingleBlog/SingleBlog",
             beforeLoginUrnotice: "../../App/pages/beforeLogin/Urnotice/Urnotice",
@@ -276,7 +277,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
-    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice"
+    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

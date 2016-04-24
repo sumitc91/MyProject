@@ -11,7 +11,7 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
 {
     public interface ISolrWorkgraphy
     {
-        Dictionary<String,String> InsertNewWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy, bool optimize);
+        Dictionary<String,String> InsertNewWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy,string type, bool optimize);
         SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage);
         SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId);
     }

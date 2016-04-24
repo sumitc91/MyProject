@@ -46,7 +46,7 @@ namespace urNotice.Services.Workgraphy
             return _solrWorkgraphyModel.GetParticularWorkgraphyWithVertexId(vertexId);
         }
 
-        public ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req)
+        public ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req,string type)
         {
             req.Data.email = req.Data.email.ToLower();
 
@@ -58,10 +58,10 @@ namespace urNotice.Services.Workgraphy
                 session = CheckIfAnonymousUserAlreadyPresentInSystem(req);
             }
 
-            return SaveUserToDb(session,req);
+            return SaveUserToDb(session,req,type);
         }
 
-        protected ResponseModel<StoryPostResponse> SaveUserToDb(urNoticeSession session, StoryPostRequest workgraphy)
+        protected ResponseModel<StoryPostResponse> SaveUserToDb(urNoticeSession session, StoryPostRequest workgraphy,string type)
         {
 
 
@@ -82,7 +82,7 @@ namespace urNotice.Services.Workgraphy
                     _dynamoDbModel.UpsertOrbitPageWorkgraphy(orbitPageWorkgraphy);
                     try
                     {
-                        _solrWorkgraphyModel.InsertNewWorkgraphy(orbitPageWorkgraphy, false);
+                        _solrWorkgraphyModel.InsertNewWorkgraphy(orbitPageWorkgraphy,type, false);
                     }
                     catch (Exception ex)
                     {

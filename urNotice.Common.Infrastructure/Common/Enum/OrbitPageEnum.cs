@@ -8,6 +8,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
 {
     public enum OrbitPageEnum
     {
-        PostNotification
+        PostNotification,
+        Workgraphy,
+        Blog
     }
 }

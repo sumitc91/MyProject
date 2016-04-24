@@ -25,6 +25,7 @@ define([appLocation.preLogin], function (app) {
                        when("/privacy", { templateUrl: "../../App/pages/beforeLogin/Privacy/Privacy.html" }).
                        when("/stories", { templateUrl: "../../App/pages/beforeLogin/Blog/Blog.html" }).
                        when("/poststory", { templateUrl: "../../App/pages/beforeLogin/PostStory/PostStory.html" }).
+                       when("/postblog", { templateUrl: "../../App/pages/beforeLogin/PostBlog/PostBlog.html" }).
                        when("/addnewnotice", { templateUrl: "../../App/pages/beforeLogin/AddNewNotice/AddNewNotice.html" }).
                        when("/workgraphy", { templateUrl: "../../App/pages/beforeLogin/Workgraphy/Workgraphy.html" }).
                        when("/urnotice", { templateUrl: "../../App/pages/beforeLogin/Urnotice/Urnotice.html" }).
@@ -149,6 +150,21 @@ define([appLocation.preLogin], function (app) {
         };
     });
 
+    app.directive('myContextmenu', function ($parse) {
+        return {
+            compile: function (tElem, tAttrs) {
+                var fn = $parse(tAttrs.myContextmenu);
+                return function (scope, elem, attrs) {
+                    elem.on('contextmenu', function (evt) {
+                        scope.$apply(function () {
+                            fn(scope, { $event: evt });
+                        });
+                    });
+                };
+            }
+        };
+    });
+
     app.controller('beforeLoginMasterPageController', function ($scope, $location, $http, $rootScope, CookieUtil) {
 
         _.defer(function () { $scope.$apply(); });
@@ -210,12 +226,14 @@ define([appLocation.preLogin], function (app) {
 
         $scope.clientNotificationDetailResponseInfo.nextPage = function () {
             //alert("working");
+            
             if ($rootScope.clientNotificationDetailResponseInfo.busy) return;
             $rootScope.clientNotificationDetailResponseInfo.busy = true;
             //console.log($rootScope.clientNotificationDetailResponseInfo.after);
             loadClientNotificationDetails($rootScope.clientNotificationDetailResponseInfo.after, $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage,false);
             $rootScope.clientNotificationDetailResponseInfo.after = $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage+1;
         };
+
         $scope.clientNotificationDetailResponseInfoUpdateFromPushNotification = function () {
             //alert("working");                             
             loadClientNotificationDetails(0, $rootScope.clientNotificationDetailResponseInfo.after+1,true);

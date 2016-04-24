@@ -13,7 +13,7 @@ define([appLocation.preLogin], function (app) {
         $scope.totalProjects = "124";
         $scope.successRate = "91";
         $scope.totalUsers = "3423";
-        $rootScope.PostStoryModel = {
+        $scope.PostStoryModel = {
             heading: "",
             companyName: "",
             companyVertexId:"",
@@ -29,7 +29,7 @@ define([appLocation.preLogin], function (app) {
         };
 
         if ($rootScope.isUserLoggedIn == true) {
-            $rootScope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
+            $scope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
         }
 
         $scope.refreshModeratingPhotosListDiv = function() {
@@ -159,26 +159,30 @@ define([appLocation.preLogin], function (app) {
 
         $scope.selectedDesignation = function (selected) {
             //console.log(selected);
-            $rootScope.PostStoryModel.designation = selected.description.designation;
-            $rootScope.PostStoryModel.designationVertexId = selected.description.vertexId;
-            //console.log($rootScope.PostStoryModel);
+            $scope.PostStoryModel.designation = selected.description.designation;
+            $scope.PostStoryModel.designationVertexId = selected.description.vertexId;
+            //console.log($scope.PostStoryModel);
             //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
 
         };
 
         $scope.selectedCompany = function (selected) {
             console.log(selected);
-            $rootScope.PostStoryModel.companyName = selected.description.companyname;
-            $rootScope.PostStoryModel.companyVertexId = selected.description.guid;
-            //console.log($rootScope.PostStoryModel);
+            $scope.PostStoryModel.companyName = selected.description.companyname;
+            $scope.PostStoryModel.companyVertexId = selected.description.guid;
+            //console.log($scope.PostStoryModel);
             //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
 
         };
 
-        $scope.SubmitJobStoryToServer = function() {
-            $rootScope.PostStoryModel.story = $('#PostStoryContentData').val();
-            $rootScope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/&nbsp;/g, '').replace(/(<([^>]+)>)/ig, "");
-            var jobStoryData = { Data: $rootScope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
+        $scope.SubmitJobStoryToServer = function () {
+            if ($rootScope.isUserLoggedIn == true) {
+                $scope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
+            }
+
+            $scope.PostStoryModel.story = $('#PostStoryContentData').val();
+            $scope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/&nbsp;/g, '').replace(/(<([^>]+)>)/ig, "");
+            var jobStoryData = { Data: $scope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
             //console.log($scope.details);
         //var currentTemplateId = new Date().getTime();
 

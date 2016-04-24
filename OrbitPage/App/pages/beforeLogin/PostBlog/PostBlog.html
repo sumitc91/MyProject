@@ -1,0 +1,152 @@
+﻿<div ng-controller="beforeLoginPostBlog">
+    <div class="row" style="min-height: 90px;"></div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-2">
+                <span>Blog Heading : </span>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Heading" autofocus="" ng-model="PostStoryModel.heading">
+            </div>
+        </div>
+        <br />
+        <!--<div class="row">
+            <div class="col-md-2">
+                <span>Subtitle for Story : </span>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Subtitle for Story" autofocus="" ng-model="PostStoryModel.subTitle">
+            </div>
+        </div>-->
+        <hr style="color:blue" />
+        <div class="row">
+            <div class="col-md-9">
+                <div class="hero-unit">
+                    <textarea class="textarea" placeholder="Enter Your Blog ..." style="width: 100%; height: 450px" id="PostStoryContentData"></textarea>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <b><small>drag and drop set of images</small></b>
+                    </label>
+                    <div class="controls">
+                        <div class="dropbox" id="dropboxModeratingPhotos">
+                            <span class="message">Drop images here to upload. <br /><i>(they will only be visible to you)</i></span>
+                            <input type="file" ng-file-select="onFileSelectLogoUrl($files)">
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group" id="ModeratingPhotosViewAfterUploadId">
+                    <label class="control-label">
+                        <b><small>your uploaded files will appear in this section</small></b>
+                    </label>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-lg-3 col-xs-6" ng-repeat="imgurImage in imgurImageTemplateModeratingPhotos">
+                                <a title="{{imgurImageTemplateModeratingPhotosImageTitleOptionsList}}" data-fancybox-group="gallery" href="{{imgurImage.data.link}}" class="fancybox"><img class="MaxUploadedSmallSizedModeratingPhotos" alt="" ng-src="{{imgurImage.data.link_s}}"></a><br /><span class="imgurImagesUploadManageClass" ng-click="DeleteEditImgurImageByIdFunction(imgurImage.data.id)">delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        
+        <!--<div class="row" ng-show="!isUserLoggedIn">-->
+        <div class="row">
+            <div class="col-md-6">
+                <!--<input type="text" class="form-control" placeholder="Company Name" autofocus="" auto-complete ui-items="designationsAutoComplete" ng-model="selected">
+                    selected = {{selected}}-->
+                <!--<input type="text" class="form-control" placeholder="Your Designation" autofocus="" ng-model="PostStoryModel.designation">-->
+                <div angucomplete-alt
+                     id="companyName"
+                     placeholder="Enter Company Name"
+                     pause="500"
+                     selected-object="selectedCompany"
+                     remote-url="http://{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
+                     remote-url-request-formatter="remoteUrlRequestFn"
+                     remote-url-data-field="Payload"
+                     title-field="companyname"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     ng-model="companyName"
+                     image-field="logourl"
+                     match-class="highlight" ng-keypress="myFunct($event)" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Email" autofocus="" ng-model="PostStoryModel.email" ng-show="!isUserLoggedIn">
+            </div>
+        </div>
+        <br />
+        <div>
+            <input type="checkbox" value="remember-me" ng-model="PostStoryModel.shareAnonymously" checked="checked"> Share Anonymously
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-warning btn-flat" ng-click="InsertPostStoryContent()">Preview</button>
+            <button class="btn btn-success  btn-flat" ng-click="SubmitJobStoryToServer()">Submit</button>
+        </div>
+        <div class="row" ng-show="!isUserLoggedIn">
+            <ul style="margin-left: 0;" class="alert alert-warning alert-dismissable">
+                <li class="ng-binding">You are not logged in. either <a href="#/login">Login</a> or provide Email and Name to Submit Post.</li>
+            </ul>
+        </div>
+        <!--Test:
+        <input type="file" ng-file-select="onS3FileSelect($files)" multiple accept="image/*">   -->
+
+        <hr style="color:green" />
+        <div class="row">
+            Please check Preview of Blog before submitting.
+        </div>
+        <div class="row">
+            <h3><span ng-bind="PostStoryModel.heading"></span><br /></h3>
+            <span ng-bind="PostStoryModel.companyName"></span><br />
+            <hr style="color:red" /><br /><br />
+            <div id="PostStoryIDPreview"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- The main script file - html5 upload -->
+<script src="../../App/third-Party/html5-file-upload/assets/js/ModeratingPhotosScript.js"></script>
+
+<script>
+    $('.textarea').wysihtml5();
+</script>
+
+<style type="text/css">
+    .bs-jobgraphyHeading {
+    position: relative;
+    padding: 45px 15px 15px;
+    /* margin: 0 -15px 15px; */
+    background-color: #F8f8f8;
+    /* box-shadow: inset 0 3px 6px rgba(0,0,0,.05); */
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px 1px;
+}
+    .bs-jobgraphyHeading:after {
+    content: "Your Jobgraphy Heading";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+    ul.wysihtml5-toolbar > li {
+    display: list-item;
+    float: left;
+    list-style: outside none none;
+    margin: 0 5px 10px 0;
+}
+</style>

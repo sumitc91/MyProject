@@ -7,6 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
@@ -15,7 +16,7 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
 {
     public class SolrWorkgraphy: ISolrWorkgraphy
     {
-        public Dictionary<string, string> InsertNewWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy, bool optimize)
+        public Dictionary<string, string> InsertNewWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy,string type, bool optimize)
         {
             var solrWorkgraphy = new UnWorkgraphySolr()
             {
@@ -41,8 +42,10 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
                 state = orbitPageWorkgraphy.state,
                 story = orbitPageWorkgraphy.story,
                 sublocality = orbitPageWorkgraphy.sublocality,
-                vertex_id = orbitPageWorkgraphy.workgraphyVertexId
-                
+                vertex_id = orbitPageWorkgraphy.workgraphyVertexId,
+                is_admin_verified=false,
+                is_email_verified = false,
+                type = type
             };
 
             if (orbitPageWorkgraphy.ImagesUrl != null && orbitPageWorkgraphy.ImagesUrl.Count > 0)
@@ -60,7 +63,7 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
         public SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage)
         {
             var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnWorkgraphySolr>>();
-            var solrQuery = new SolrQuery("*:*");
+            var solrQuery = new SolrQuery("(type:"+OrbitPageEnum.Workgraphy+")");
             var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
             {
                 Rows = perPage,

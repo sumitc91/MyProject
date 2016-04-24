@@ -38,9 +38,11 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             var properties = new Dictionary<string, string>();
             properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Workgraphy.ToString();            
             properties[VertexPropertyEnum.Email.ToString()] = story.Data.email;            
-            properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();            
+            properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[VertexPropertyEnum.PostedTimeLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();    
             //properties[VertexPropertyEnum.CoverImageUrl.ToString()] = story.ImgurList.Count>0?story.ImgurList[0].:CommonConstants.CompanySquareLogoNotAvailableImage;
             properties[VertexPropertyEnum.Heading.ToString()] = story.Data.heading;
+            properties[VertexPropertyEnum.IsVerified.ToString()] = CommonConstants.FALSE;
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(story.Data.email, TitanGraphConfig.Graph, properties);
@@ -54,22 +56,28 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
             IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
 
-            properties = new Dictionary<string, string>();
-            properties[EdgePropertyEnum._outV.ToString()] = story.Data.companyVertexId;
-            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyStory.ToString();
+            if (!string.IsNullOrEmpty(story.Data.companyVertexId))
+            {
+                properties = new Dictionary<string, string>();
+                properties[EdgePropertyEnum._outV.ToString()] = story.Data.companyVertexId;
+                properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+                properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyStory.ToString();
 
-            graphEdgeDbModel = new GraphEdgeDb();
-            addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+                graphEdgeDbModel = new GraphEdgeDb();
+                addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            }
 
-            properties = new Dictionary<string, string>();
-            properties[EdgePropertyEnum._outV.ToString()] = story.Data.designationVertexId;
-            properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyDesignationStory.ToString();
+            if (!string.IsNullOrEmpty(story.Data.designationVertexId))
+            {
+                properties = new Dictionary<string, string>();
+                properties[EdgePropertyEnum._outV.ToString()] = story.Data.designationVertexId;
+                properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+                properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyDesignationStory.ToString();
 
-            graphEdgeDbModel = new GraphEdgeDb();
-            addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
-
+                graphEdgeDbModel = new GraphEdgeDb();
+                addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            }
+            
             return addVertexResponse;
         }
 

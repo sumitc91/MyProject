@@ -92,5 +92,8 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.Solr
         [SolrField("geo")]
         public String geo { get; set; }
 
+        [SolrField("type")]
+        public String type { get; set; }
+
     }
 }

@@ -350,6 +350,8 @@
     <Content Include="App\pages\beforeLogin\Career\Career.html" />
     <Content Include="App\pages\beforeLogin\Career\Career.js" />
     <Content Include="App\pages\beforeLogin\Login\Login2.html" />
+    <Content Include="App\pages\beforeLogin\PostBlog\PostBlog.html" />
+    <Content Include="App\pages\beforeLogin\PostBlog\PostBlog.js" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.js" />
     <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.html" />

@@ -13,7 +13,7 @@ namespace urNotice.Services.Workgraphy
 {
     public interface IWorkgraphyService
     {
-        ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req);
+        ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req,string type);
         SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage);
         SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId);
     }
