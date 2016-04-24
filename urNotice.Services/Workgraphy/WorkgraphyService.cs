@@ -41,6 +41,11 @@ namespace urNotice.Services.Workgraphy
             return _solrWorkgraphyModel.GetLatestWorkgraphy(page, perPage);
         }
 
+        public SolrQueryResults<UnWorkgraphySolr> GetLatestBlogs(int page, int perPage)
+        {
+            return _solrWorkgraphyModel.GetLatestBlogs(page, perPage);
+        }
+
         public SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId)
         {
             return _solrWorkgraphyModel.GetParticularWorkgraphyWithVertexId(vertexId);

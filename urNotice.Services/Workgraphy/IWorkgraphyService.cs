@@ -15,6 +15,7 @@ namespace urNotice.Services.Workgraphy
     {
         ResponseModel<StoryPostResponse> PublishNewWorkgraphy(urNoticeSession session, StoryPostRequest req,string type);
         SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage);
+        SolrQueryResults<UnWorkgraphySolr> GetLatestBlogs(int page, int perPage);
         SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId);
     }
 }

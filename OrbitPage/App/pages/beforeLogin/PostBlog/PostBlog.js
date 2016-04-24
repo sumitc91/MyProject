@@ -179,6 +179,17 @@ define([appLocation.preLogin], function (app) {
 
             $scope.PostStoryModel.story = $('#PostStoryContentData').val();
             $scope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/&nbsp;/g, '').replace(/(<([^>]+)>)/ig, "");
+
+            if (isNullOrEmpty($scope.PostStoryModel.story)) {
+                showToastMessage("Success", "Body cannot be Blank");
+                return;
+            }
+
+            if (isNullOrEmpty($scope.PostStoryModel.heading)) {
+                showToastMessage("Success", "Heading cannot be Blank");
+                return;
+            }
+
             var jobStoryData = { Data: $scope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
             //console.log($scope.details);
             //var currentTemplateId = new Date().getTime();
@@ -207,9 +218,10 @@ define([appLocation.preLogin], function (app) {
                 }).success(function(data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                     stopBlockUI();
-                    userSession.listOfImgurImages = [];
-                    var id = data.Message.split('-')[1];
+                    //userSession.listOfImgurImages = [];
+                    //var id = data.Message.split('-')[1];
                     //location.href = "#/";
+                    clearPostStoryScreen();
                     showToastMessage("Success", "Successfully Created");
                 }).error(function(data, status, headers, config) {
 
@@ -219,6 +231,17 @@ define([appLocation.preLogin], function (app) {
             }
             
         };
+
+        function clearPostStoryScreen() {
+            $scope.PostStoryModel.companyname = "";
+            $scope.PostStoryModel.companyVertexId = "";
+            $scope.PostStoryModel.designation = "";
+            $scope.PostStoryModel.designationVertexId = "";
+            $scope.PostStoryModel.story = "";
+            $scope.PostStoryModel.heading = "";
+            userSession.listOfImgurImages = [];
+            $('#PostStoryContentData').html();
+        }
 
         $scope.result = ''
         //    $scope.details = ''

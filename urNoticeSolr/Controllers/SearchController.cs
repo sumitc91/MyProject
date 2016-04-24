@@ -346,6 +346,45 @@ namespace urNoticeSolr.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetLatestBlogs()
+        {
+            var response = new ResponseModel<SolrQueryResults<UnWorkgraphySolr>>();
+
+            ISolrUser solrUserModel = new SolrUser();
+            ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            IGraphDbContract graphDbContractModel = new GraphDbContract();
+
+            var queryResponse = new Dictionary<String, Object>();
+            //var q = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
+            var page = Convert.ToInt32(Request.QueryString["page"].ToString(CultureInfo.InvariantCulture));
+            var perpage = Convert.ToInt32(Request.QueryString["perpage"].ToString(CultureInfo.InvariantCulture));
+
+            var totalMatch = "";
+            if (Request.QueryString["totalMatch"] != null && Request.QueryString["totalMatch"] != "null" && Request.QueryString["totalMatch"] != "undefined")
+            {
+                totalMatch = Request.QueryString["totalMatch"].ToString(CultureInfo.InvariantCulture);
+            }
+
+            try
+            {
+                IWorkgraphyService workgraphyService = new WorkgraphyService(solrUserModel, solrWorkgraphyModel, dynamoDbModel, graphDbContractModel);
+                response.Payload = workgraphyService.GetLatestBlogs(page, perpage);
+                queryResponse["count"] = totalMatch;
+                response.Message = totalMatch;
+                response.Status = 200;
+
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                response.Status = 500;
+                response.Message = "Exception occured";
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetParticularWorkgraphyWithVertexId()
         {
             var response = new ResponseModel<SolrQueryResults<UnWorkgraphySolr>>();

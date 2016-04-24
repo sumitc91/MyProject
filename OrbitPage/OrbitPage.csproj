@@ -354,6 +354,8 @@
     <Content Include="App\pages\beforeLogin\PostBlog\PostBlog.js" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.js" />
+    <Content Include="App\pages\beforeLogin\SingleWorkgraphy\SingleWorkgraphy.html" />
+    <Content Include="App\pages\beforeLogin\SingleWorkgraphy\SingleWorkgraphy.js" />
     <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.html" />
     <Content Include="App\pages\beforeLogin\Urnotice\Urnotice.js" />
     <Content Include="App\pages\beforeLogin\UserDetails\UserDetails.html" />
@@ -400,6 +402,8 @@
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.js" />
+    <Content Include="App\pages\beforeLogin\AllBlogs\AllBlogs.html" />
+    <Content Include="App\pages\beforeLogin\AllBlogs\AllBlogs.js" />
     <Content Include="App\pages\beforeLogin\Workgraphy\Workgraphy.html" />
     <Content Include="App\pages\beforeLogin\Workgraphy\Workgraphy.js" />
     <Content Include="App\pages\PreLoginDM.js" />

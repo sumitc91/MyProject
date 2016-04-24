@@ -28,9 +28,11 @@ define([appLocation.preLogin], function (app) {
                        when("/postblog", { templateUrl: "../../App/pages/beforeLogin/PostBlog/PostBlog.html" }).
                        when("/addnewnotice", { templateUrl: "../../App/pages/beforeLogin/AddNewNotice/AddNewNotice.html" }).
                        when("/workgraphy", { templateUrl: "../../App/pages/beforeLogin/Workgraphy/Workgraphy.html" }).
+                       when("/allblogs", { templateUrl: "../../App/pages/beforeLogin/AllBlogs/AllBlogs.html" }).
                        when("/urnotice", { templateUrl: "../../App/pages/beforeLogin/Urnotice/Urnotice.html" }).
                        when("/postyournotice", { templateUrl: "../../App/pages/beforeLogin/PostYourNotice/PostYourNotice.html" }).
-                       when("/story/:storyid", { templateUrl: "../../App/pages/beforeLogin/SingleBlog/SingleBlog.html" }).
+                       when("/story/:storyid", { templateUrl: "../../App/pages/beforeLogin/SingleWorkgraphy/SingleWorkgraphy.html" }).
+                       when("/blog/:blogid", { templateUrl: "../../App/pages/beforeLogin/SingleBlog/SingleBlog.html" }).
                        when("/search", { templateUrl: "../../App/pages/beforeLogin/Search/Search.html" }).
                        when("/search/:q/:page/:perpage", { templateUrl: "../../App/pages/beforeLogin/Search/Search.html" }).
                        when("/404", { templateUrl: "../../App/pages/beforeLogin/404/404.html" }).

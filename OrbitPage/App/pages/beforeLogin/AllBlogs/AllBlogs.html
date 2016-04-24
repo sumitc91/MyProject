@@ -1,0 +1,178 @@
+﻿<div class="container" ng-controller="beforeLoginAllBlogs">
+    <div class="row" style="min-height: 60px;"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <!-- Blog Search Well -->
+            <div class="well">
+                <h4>Blog Search</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+                <a href="#/postblog">Post Your Blog</a>
+                <!-- /.input-group -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h4>Blog Categories</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                            <li>
+                                <a href="#">Category Name</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+
+            <!-- Side Widget Well -->
+            <div class="well">
+                <h4>Side Widget Well</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <h1 class="text-center">Today's Blogposts</h1>
+                    <div class="list-group">
+                        <a href="#/blog/{{workgraphy.vertex_id}}" class="list-group-item" ng-repeat="workgraphy in LatestWorkGraphyList">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <i><img class="img-responsive" alt="Bootstrap template" ng-src="{{workgraphy.icon_image}}" style="height: 200px; width: 200px;" /></i>
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="list-group-item-heading" ng-bind="workgraphy.heading | cut:true:50:' ...'"></h4>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on {{workgraphy.created_date| timeago}}</p>
+                                <span ng-bind="workgraphy.short_desc | cut:true:300:' ...'"> </span>
+                                <br />
+                                by <p href="#" ng-bind="workgraphy.created_by_email"></p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="ratetext">Rate it</div>
+                                        <i class="fa fa-thumbs-o-up votes"></i><i class="fa fa-thumbs-o-down votes"></i>
+                                        <div class="stars"></div>
+                                        <h2>464  <small>Clicks</small></h2>
+                                        <div id="rate1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    #cnt1 {
+        background-color: rgba(215, 212, 212, 0.88);
+        width: 90%;
+        margin-bottom: 70px;
+    }
+
+    .feature {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .feature > div > div {
+        padding: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .feature > div:hover > div {
+        margin-top: -10px;
+        border: 1px solid rgb(128, 128, 128);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 5px;
+        background: rgba(232, 215, 215, 0.10);
+        transition: 0.3s;
+    }
+</style>
+
+<style>
+    .blogicon {
+        font-size: 217px;
+        color: #5CB85C;
+    }
+
+    .ratetext {
+        font-size: 37px;
+        text-decoration: underline;
+        padding-bottom: 10px;
+    }
+
+    .votes {
+        font-size: 47px;
+        padding-right: 20px;
+        color: #197BB5;
+    }
+
+    a.list-group-item {
+        height: auto;
+        min-height: 250px;
+    }
+
+        a.list-group-item:hover, a.list-group-item:focus {
+            border-left: 10px solid #5CB85C;
+            border-right: 10px solid #5CB85C;
+        }
+
+    a.list-group-item {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+</style>

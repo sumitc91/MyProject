@@ -103,4 +103,3 @@ C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.pdb
 C:\code\svn\OrbitPage\urNoticeUser\bin\Microsoft.Practices.ServiceLocation.xml
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.dll
 C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.pdb
-C:\code\svn\OrbitPage\urNoticeUser\obj\Debug\urNoticeUser.csprojResolveAssemblyReference.cache

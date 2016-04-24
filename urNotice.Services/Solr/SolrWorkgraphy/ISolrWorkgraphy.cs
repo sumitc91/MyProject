@@ -13,6 +13,7 @@ namespace urNotice.Services.Solr.SolrWorkgraphy
     {
         Dictionary<String,String> InsertNewWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy,string type, bool optimize);
         SolrQueryResults<UnWorkgraphySolr> GetLatestWorkgraphy(int page, int perPage);
+        SolrQueryResults<UnWorkgraphySolr> GetLatestBlogs(int page, int perPage);
         SolrQueryResults<UnWorkgraphySolr> GetParticularWorkgraphyWithVertexId(int vertexId);
     }
 }

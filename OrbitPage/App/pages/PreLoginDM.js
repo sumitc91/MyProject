@@ -179,7 +179,13 @@ appRequire = require
             beforeLoginWorkgraphy: {
                 deps: ["jquery", "beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "bootstrap_ui", "angular_animate", "ngtimeago"]
             },
+            beforeLoginAllBlogs: {
+                deps: ["jquery", "beforeLoginApp", "restangular", "angular", "configureBlockUI", "toastMessage", "bootstrap_ui", "angular_animate", "ngtimeago"]
+            },
             beforeLoginSingleBlog: {
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
+            },
+            beforeLoginSingleWorkgraphy: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
             },
             beforeLoginUrnotice: {
@@ -258,7 +264,9 @@ appRequire = require
             beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
             beforeLoginPostBlog: "../../App/pages/beforeLogin/PostBlog/PostBlog",
             beforeLoginWorkgraphy: "../../App/pages/beforeLogin/Workgraphy/Workgraphy",
+            beforeLoginAllBlogs: "../../App/pages/beforeLogin/AllBlogs/AllBlogs",
             beforeLoginSingleBlog: "../../App/pages/beforeLogin/SingleBlog/SingleBlog",
+            beforeLoginSingleWorkgraphy: "../../App/pages/beforeLogin/SingleWorkgraphy/SingleWorkgraphy",
             beforeLoginUrnotice: "../../App/pages/beforeLogin/Urnotice/Urnotice",
             beforeLoginPostYourNotice: "../../App/pages/beforeLogin/PostYourNotice/PostYourNotice",
             //TweenMax_min: "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min",
@@ -277,7 +285,8 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "beforeLoginCompanyDetails", "beforeLoginSearch", "beforeLoginUserDetails", "beforeLoginUserProfile",
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
-    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog"
+    "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog", "beforeLoginAllBlogs",
+    "beforeLoginSingleWorkgraphy"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

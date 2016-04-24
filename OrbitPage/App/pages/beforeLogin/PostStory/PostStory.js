@@ -1,6 +1,6 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
-    app.controller('beforeLoginPostStory', function ($scope, $http, $upload, $timeout, $rootScope, $location, Restangular, CookieUtil) {
+    app.controller('beforeLoginPostStory', function ($scope, $http, $upload, $timeout, $rootScope,$window, $location, Restangular, CookieUtil) {
         $('title').html("index"); //TODO: change the title so cann't be tracked in log
 
         //detectIfUserLoggedIn();
@@ -175,57 +175,89 @@ define([appLocation.preLogin], function (app) {
 
         };
 
-        $scope.SubmitJobStoryToServer = function () {
+        $scope.SubmitJobStoryToServer = function() {
             if ($rootScope.isUserLoggedIn == true) {
                 $scope.PostStoryModel.email = $rootScope.clientDetailResponse.Email;
             }
 
             $scope.PostStoryModel.story = $('#PostStoryContentData').val();
             $scope.PostStoryModel.subTitle = $('#PostStoryContentData').val().replace(/&nbsp;/g, '').replace(/(<([^>]+)>)/ig, "");
+
+            if (isNullOrEmpty($scope.PostStoryModel.story)) {
+                showToastMessage("Success", "Body cannot be Blank");
+                return;
+            }
+
+            if (isNullOrEmpty($scope.PostStoryModel.heading)) {
+                showToastMessage("Success", "Heading cannot be Blank");
+                return;
+            }
+
+            if (isNullOrEmpty($scope.PostStoryModel.designationVertexId)) {
+                showToastMessage("Success", "Please Select designation.");
+                return;
+            }
+
+            if (isNullOrEmpty($scope.PostStoryModel.companyVertexId)) {
+                showToastMessage("Success", "Please Select company.");
+                return;
+            }
+
             var jobStoryData = { Data: $scope.PostStoryModel, ImgurList: userSession.imgurImageTemplateModeratingPhotos, location: $scope.details.address_components, formatted_address: $scope.details.formatted_address };
             //console.log($scope.details);
-        //var currentTemplateId = new Date().getTime();
+            //var currentTemplateId = new Date().getTime();
 
             var url = ServerContextPath.empty + '/Story/CreateUrJobGraphy';
-        var headers = {
-            'Content-Type': 'application/json',
-            'UTMZT': CookieUtil.getUTMZT(),
-            'UTMZK': CookieUtil.getUTMZK(),
-            'UTMZV': CookieUtil.getUTMZV(),
-            '_ga': $.cookie('_ga')
-        };
-        //var isValidAmountPerThreadTextBoxInput = ($('#amountPerThreadTextBoxInput').val() != "") && $('#amountPerThreadTextBoxInput').val() >= 0.03;
-        //var isValidTotalNumberOfThreads = ($('#totalNumberOfThreads').val() != "") && $('#totalNumberOfThreads').val() >= 1;
-        //if (!isValidAmountPerThreadTextBoxInput || !isValidTotalNumberOfThreads) {
-        if ($scope.details == '') {
-            showToastMessage("Error", "Some Fields are invalid !!! Locatin must be defined.");
-        } else {
-            console.log(jobStoryData);
-            //if ((jobStoryData.Data.PostStoryModel.heading != "") && (jobStoryData.Data.PostStoryModel.heading != null))
-            if(true)
-            {
-                startBlockUI('wait..', 3);
-                $http({
-                    url: url,
-                    method: "POST",
-                    data: jobStoryData,
-                    headers: headers
-                }).success(function(data, status, headers, config) {
-                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
-                    userSession.listOfImgurImages = [];
-                    var id = data.Message.split('-')[1];
-                    //location.href = "#/";
-                    showToastMessage("Success", "Successfully Created");
-                }).error(function(data, status, headers, config) {
-
-                });
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV(),
+                '_ga': $.cookie('_ga')
+            };
+            //var isValidAmountPerThreadTextBoxInput = ($('#amountPerThreadTextBoxInput').val() != "") && $('#amountPerThreadTextBoxInput').val() >= 0.03;
+            //var isValidTotalNumberOfThreads = ($('#totalNumberOfThreads').val() != "") && $('#totalNumberOfThreads').val() >= 1;
+            //if (!isValidAmountPerThreadTextBoxInput || !isValidTotalNumberOfThreads) {
+            if ($scope.details == '') {
+                showToastMessage("Error", "Some Fields are invalid !!! Locatin must be defined.");
             } else {
-                showToastMessage("Error", "Title of the Template cann't be empty");
-            }
-        }
-    }
+                console.log(jobStoryData);
+                //if ((jobStoryData.Data.PostStoryModel.heading != "") && (jobStoryData.Data.PostStoryModel.heading != null))
+                if (true) {
+                    startBlockUI('wait..', 3);
+                    $http({
+                        url: url,
+                        method: "POST",
+                        data: jobStoryData,
+                        headers: headers
+                    }).success(function(data, status, headers, config) {
+                        //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                        stopBlockUI();
+                        //userSession.listOfImgurImages = [];
+                        //var id = data.Message.split('-')[1];                        
+                        clearPostStoryScreen();
+                        showToastMessage("Success", "Successfully Created");
+                        //location.href = "#/poststory";
+                        $window.location.reload();
+                    }).error(function(data, status, headers, config) {
 
+                    });
+                } else {
+                    showToastMessage("Error", "Title of the Template cann't be empty");
+                }
+            }
+        };
+
+        function clearPostStoryScreen() {
+            $scope.PostStoryModel.companyname = "";
+            $scope.PostStoryModel.companyVertexId = "";
+            $scope.PostStoryModel.designation = "";
+            $scope.PostStoryModel.designationVertexId = "";
+            $scope.PostStoryModel.story = "";
+            $scope.PostStoryModel.heading = "";
+            userSession.listOfImgurImages = [];
+            $('#PostStoryContentData').html();
+        }
         
 
         $scope.result = ''
