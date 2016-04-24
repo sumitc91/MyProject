@@ -1,6 +1,6 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
-    app.controller('beforeLoginPostBlog', function ($scope, $http, $upload, $timeout, $rootScope, $location, Restangular, CookieUtil) {
+    app.controller('beforeLoginPostBlog', function ($scope, $http, $upload, $timeout, $rootScope, $window, $location, Restangular, CookieUtil) {
         $('title').html("index"); //TODO: change the title so cann't be tracked in log
 
         //detectIfUserLoggedIn();
@@ -221,7 +221,8 @@ define([appLocation.preLogin], function (app) {
                     //userSession.listOfImgurImages = [];
                     //var id = data.Message.split('-')[1];
                     //location.href = "#/";
-                    clearPostStoryScreen();
+                    //clearPostStoryScreen();
+                    $window.location.reload();
                     showToastMessage("Success", "Successfully Created");
                 }).error(function(data, status, headers, config) {
 
