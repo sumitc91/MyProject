@@ -20,6 +20,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Email,
         Gender,
         CreatedTime,
+        CreatedTimeLong,
         ImageUrl,
         CoverImageUrl,
         NotifiedByUserVertexId,

@@ -24,6 +24,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.Username.ToString()] = user.email;
             properties[VertexPropertyEnum.Gender.ToString()] = user.gender;
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[VertexPropertyEnum.CreatedTimeLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
             properties[VertexPropertyEnum.ImageUrl.ToString()] = user.imageUrl;
             properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic??"";
 

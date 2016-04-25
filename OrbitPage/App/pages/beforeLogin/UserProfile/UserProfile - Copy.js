@@ -145,13 +145,9 @@ define([appLocation.preLogin], function (app) {
                 //console.log(data.results);
                 $scope.UserPostList[postIndex].loadingIcon = false;
                 $scope.$apply(function () {
-                    if (data.results != null && data.results.length > 0) {
-                        data.results = reverseCommentsInfoList(data.results);
-                        $scope.UserPostList[postIndex].commentsInfo = appendOldCommentsToCommentList($scope.UserPostList[postIndex].commentsInfo, data.results);
+                    for (var i = 0; i < data.results.length; i++) {
+                        $scope.UserPostList[postIndex].commentsInfo.push(data.results[i]);
                     }
-                    //for (var i = 0; i < data.results.length; i++) {                        
-                        //$scope.UserPostList[postIndex].commentsInfo.push(data.results[i]);
-                    //}
                     
                 });
 
@@ -349,10 +345,16 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
             if ($rootScope.isUserLoggedIn) {
-                
+
+                var commentsNewList = [];
+                commentsNewList.push(newCommentPosted);
                 $scope.UserPostList[postIndex].postInfo.postUserComment = "";
 
-                $scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
+                for (var i = 0; i < $scope.UserPostList[postIndex].commentsInfo.length;i++) {
+                    commentsNewList.push($scope.UserPostList[postIndex].commentsInfo[i]);
+                }
+
+                $scope.UserPostList[postIndex].commentsInfo = commentsNewList;
                 $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = true;
                 //startBlockUI('wait..', 3);
                 $http({
@@ -455,11 +457,6 @@ define([appLocation.preLogin], function (app) {
                     var absoluteIndex = 0;
                     if ($scope.UserPostList != null && data.results.length>0) {
                         for (var i = 0; i < data.results.length; i++) {
-
-                            if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
-                                data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);
-                            }
-
                             $scope.UserPostList.push(data.results[i]);
                             absoluteIndex = from + i;
                             console.log("absoluteIndex : "+absoluteIndex);
@@ -471,7 +468,6 @@ define([appLocation.preLogin], function (app) {
                             } else {
                                 $scope.UserPostList[absoluteIndex].alreadyLiked = false;
                             }
-
                         }
                     } else {                        
                         $scope.UserPostListLastPageReached = true;
@@ -483,26 +479,6 @@ define([appLocation.preLogin], function (app) {
                 initializeHoverCard();
             });
         };
-
-        function appendOldCommentsToCommentList(oldList, newList) {
-            var newCommentList = [];
-            for (var j = 0; j < newList.length; j++) {
-                newCommentList.push(newList[j]);
-            }
-
-            for (var k = 0; k < oldList.length; k++) {
-                newCommentList.push(oldList[k]);
-            }
-            return newCommentList;
-        }
-
-        function reverseCommentsInfoList(newList) {
-            var reversedList = [];
-            for (var i = newList.length - 1; i >= 0; i--) {
-                reversedList.push(newList[i]);
-            }
-            return reversedList;
-        }
 
         function parseCommentLikeString(likeInfo,likeInfoCount) {
             var str = "";
