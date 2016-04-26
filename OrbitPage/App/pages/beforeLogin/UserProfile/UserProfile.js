@@ -505,8 +505,20 @@ define([appLocation.preLogin], function (app) {
 
         function reverseCommentsInfoList(newList) {
             var reversedList = [];
-            for (var i = newList.length - 1; i >= 0; i--) {
+            for (var i = newList.length - 1; i >= 0; i--) {                
                 newList[i].editableMode = false;
+                if (newList[i].commentInfo.PostedByUser == $rootScope.clientDetailResponse.Email) {
+                    newList[i].isAuthenticToEdit = true;
+                } else {
+                    newList[i].isAuthenticToEdit = false;
+                }
+
+                if ($scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
+                    newList[i].isLoggedInUserWall = true;
+                } else {
+                    newList[i].isLoggedInUserWall = false;
+                }
+
                 reversedList.push(newList[i]);                
             }
             return reversedList;
