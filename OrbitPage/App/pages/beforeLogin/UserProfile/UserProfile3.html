@@ -1,0 +1,275 @@
+﻿<div style="background-color: rgb(246, 246, 246);" ng-controller="beforeLoginUserProfile">
+
+    <div class="row" style="min-height: 50px;"></div>
+    <div class="container">
+        <div class="cover profile">
+            <div class="wrapper">
+                <div class="image">
+                    <img height="250" alt="Cover Pic not available." ng-src="{{CurrentUserDetails.Coverpic}}">
+                </div>
+            </div>
+            <div class="cover-info">
+                <div class="avatar">
+                    <img width="110px" alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" />
+                </div>
+                <div class="name">
+                    <a ng-bind="post.userInfo[0].Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="post.userInfo[0].Lastname" href="" class="ng-binding"></a> <a ng-show="userCompanyAnalyticsLoaded" class="" style=""> (<span ng-bind="userCompanyAnalytics.CompanyAnalytics.PageVisit" href="" class="ng-binding">43</span> views)</a>
+                </div>
+
+                <div class="cover-nav">
+                    <div class="col-lg-2 col-sm-2">
+                        <a ng-bind="CurrentUserDetails.Firstname" href="" class="ng-binding"></a>&nbsp;<a ng-bind="CurrentUserDetails.Lastname" href="" class="ng-binding"></a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <ul ng-class="listClass" readonly="readonly" ng-model="companyDetails.averagerating" icon-full="fa-star" icon-hover="hover" icon-empty="fa-star-o" icon-base="fa fa-fw" max="5" class="ng-scope ng-valid angular-input-stars"><!-- ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star active" style=""></i></li><!-- end ngRepeat: item in items track by $index --><li ng-repeat="item in items track by $index" ng-mouseleave="unpaintStars($index, false)" ng-mouseenter="paintStars($index, true)" ng-touch="paintStars($index)" class="ng-scope"><i ng-click="setValue($index, $event)" ng-class="getClass($index)" class="fa fa-fw fa-star-o"></i></li><!-- end ngRepeat: item in items track by $index --></ul>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <small><span  class="ng-binding">4</span> <span class="ng-binding"> Mutual Associates</span></small>
+                    </div>
+                    <div class="col-lg-6 col-sm-6" style="">
+                        <button type="button" class="btn btn-info">Send Associate Request</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <section class="profile-env">
+
+            <div class="col-md-12">
+                <div class="col-md-4 col-sm-5 col-xs-12 col-left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-user-detail">
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-suitcase"></i>Works at <a href="#">software development</a></li>
+                                        <li><i class="fa fa-calendar"></i>Born on August 12, 1991</li>
+                                        <li><i class="fa fa-rss"></i>Followed by                                             
+                                            <a href="#">51 People</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="panel-footer text-center"><a href="#"><i class="fa fa-share"></i>Read more...</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-friends">
+                                <div class="panel-heading">
+                                    <a href="#" class="pull-right">View all&nbsp;<i class="fa fa-share-square-o"></i></a>
+                                    <h3 class="panel-title"><i class="fa fa-users"></i>&nbsp; Friends</h3>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <ul class="friends">
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-4.jpg" title="Jhoanath matew" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-3.jpg" title="Martha creawn" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-2.jpg" title="Jeferh smith" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/woman-9.jpg" title="Linda palma" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-9.jpg" title="Lindo polmo" class="img-responsive tip"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Friends/guy-5.jpg" title="andrew cartson" class="img-responsive tip"> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-photos">
+                                <div class="panel-heading">
+                                    <a href="#" class="pull-right">View all&nbsp;<i class="fa fa-share-square-o"></i></a>
+                                    <h3 class="panel-title"><i class="fa fa-image"></i>&nbsp;Photos</h3>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <ul class="photos">
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/1.jpg" alt="photo 1" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/2.jpg" alt="photo 2" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/3.jpg" alt="photo 3" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/4.jpg" alt="photo 4" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/5.jpg" alt="photo 5" class="img-responsive show-in-modal"> </a></li>
+                                        <li><a href="#"><img src="http://demos.bootdey.com/dee-dee/img/Photos/6.jpg" alt="photo 6" class="img-responsive show-in-modal"> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-groups">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-users"></i>&nbsp;Groups</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-5.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Bootdey competitors</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-1.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Git in action</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-6.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Bootdey Snippets</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="col-xs-3 col-sm-6 col-md-3"><img src="http://demos.bootdey.com/dee-dee/img/Likes/likes-2.png" alt="Group" class="img-responsive img-circle"></div>
+                                            <div class="col-xs-9 col-sm-6"><span class="name">Html 5 live</span></div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-7 col-xs-12 col-right">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="well well-sm well-social-post">
+                                <form>
+                                    <ul class="list-inline" id="list_PostActions">
+                                        <li class="active"><a href="#"><i class="fa fa-edit"></i><span class="hidden-xs">Update status</span></a></li>
+                                        <li><input type="file" ng-file-select="onFileSelectLogoUrl($files)"></li>
+                                        <!--<li><a href="#"><i class="fa fa-camera"></i><span class="hidden-xs">Add photos/Video</span></a></li>-->
+                                        <li><a href="#"><i class="fa fa-photo"></i><span class="hidden-xs">Create photo album</span></a></li>
+                                    </ul>
+                                    <textarea class="form-control" ng-model="UserPostMessage" placeholder="What's in your mind?"></textarea>
+                                    <ul class="list-inline">
+                                        <li ng-show="NewPostImageUrl.link_s">
+                                            <a class="fancybox" rel="group" href="{{NewPostImageUrl.link_s}}"><img style="max-width: 200px;" ng-src="{{NewPostImageUrl.link_s}}" alt="" /></a>
+                                            <input type="button" value="Remove" ng-click="removeUploadedPostImage()"/>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-inline post-actions">
+                                        <li><a href="#"><span class="glyphicon glyphicon-camera"></span></a></li>
+                                        <li><a href="#" class="glyphicon glyphicon-user"></a></li>
+                                        <li><a href="#" class="glyphicon glyphicon-map-marker"></a></li>
+                                        <li class="pull-right"><a class="btn btn-info btn-xs btn-fill" ng-click="createNewUserPost()">Post</a></li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" infinite-scroll='UserPostListInfo.nextPage()' infinite-scroll-disabled='UserPostListInfo.busy' infinite-scroll-distance='1'>
+                        <div class="col-md-12" ng-repeat="post in UserPostList">
+                            <div class="panel panel-white post panel-shadow">
+                                <div class="post-heading">
+                                    <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left meta">
+                                        <div class="title">
+                                            <span class="hover_div">
+                                                <!--<a class="show_hovercard" user_name="gaurav">Gaurav</a>-->
+                                                <a href="#/userprofile/{{post.userInfo[0]._id}}" user_name="{{post.userInfo[0].Username}}" class="show_hovercard" name="{{post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName}}" profile_pic="{{post.userInfo[0].ImageUrl}}" cover_pic="{{post.userInfo[0].CoverImageUrl}}" ng-bind="post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName"></a>
+                                            </span>                                            
+                                        </div>
+                                        <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
+                                        <h6 class="text-muted time">{{post.postInfo.PostedTime| timeago}}</h6>
+                                    </div>
+                                </div>
+                                <div class="post-image">
+                                    <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" /></a>
+                                    <!--<img ng-src="{{post.postInfo.PostImage}}" class="image show-in-modal" alt="image post">-->
+                                </div>
+                                <div class="post-description">
+                                    <p ng-bind="post.postInfo.PostMessage"></p>
+
+                                    <div class="stats">
+                                        <div id="likes-section" style="margin: -5px 0px 0px;">
+                                            <a href="" class="like-button" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
+                                            <a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="removeReactionOnUserPost($index)">Unlike</a>
+                                            <span class="hover_div"><a class="like-summary" ng-click="showLikedByUsers(post.postInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal" ng-bind-html="post.likeInfoHtml | html"></a></span>
+
+                                        </div>                                        
+                                        <div id="likes-section" style="float: right;margin: -5px 0px 0px;"><a href="" class="like-button">Share</a><span class="like-summary">share this</span></div>
+                                    </div>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].loadingIcon"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    <ul class="comments-list">
+                                        <li class="comment" ng-repeat="comment in post.commentsInfo"><!--comment in post.commentsInfo | reverse-->
+                                            <a class="pull-left" href="#/userprofile/{{comment.commentedBy[0]._id}}"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
+                                                    <!--<h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>-->
+                                                    <h5 class="time">{{comment.commentInfo.PostedTime | timeago}}</h5><img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                                </div>
+                                                <p ng-bind="comment.commentInfo.PostMessage"></p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load More..<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show='UserPostListInfoAngular.busy'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="showLikedByUsersModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Liked By :</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div ng-show='UserPostLikesLoading'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+                                        <div ng-repeat="like in UserPostLikes">
+                                            <a ng-click="closeModelAndNavigateTo(like.likeInfo._id)"><img class="img-circle" style="max-height: 40px; max-width: 40px;" ng-src="{{like.likeInfo.ImageUrl}}"> &nbsp; 
+                                                <span ng-bind="like.likeInfo.FirstName"></span>&nbsp; <span ng-bind="like.likeInfo.LastName"></span>
+                                                <!--<span user_name="{{like.likeInfo.Username}}" class="show_hovercard" name="{{like.likeInfo.FirstName +' ' + like.likeInfo.LastName}}" profile_pic="{{like.likeInfo.ImageUrl}}" cover_pic="{{like.likeInfo.CoverImageUrl}}" ng-bind="like.likeInfo.FirstName +' ' + like.likeInfo.LastName"></span>-->
+                                            </a>                                           
+                                            <hr />
+                                        </div>
+                                        
+                                        <p><a class="like-summary" ng-click="showMoreLikedByUsers()" >Load More..</a></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="closeModalId" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                        
+                    </div>
+                    
+
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+
+</div>
+
+
+
+
+<style type="text/css">
+    
+    body {
+        overflow-x: hidden;
+    }
+    .main {
+        height: 100%;
+    }
+    
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    });
+
+</script>

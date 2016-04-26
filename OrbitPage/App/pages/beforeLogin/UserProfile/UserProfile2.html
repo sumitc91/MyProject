@@ -199,8 +199,13 @@
                                 </a>
                                 <div class="cmt-details">
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
-                                    <span ng-bind="comment.commentInfo.PostMessage"></span><img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
-                                    <p>{{comment.commentInfo.PostedTime | timeago}} - <a href="" class="like-link">Like</a> &nbsp;<a href="" class="like-link">Edit</a> &nbsp;<a href="" class="like-link">Delete</a></p>
+                                    <span ng-bind="comment.commentInfo.PostMessage" ng-show="!comment.editableMode"></span>                                    
+                                    <div ng-show="comment.editableMode">
+                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">
+                                        <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
+                                    </div>
+                                    <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                    <p>{{comment.commentInfo.PostedTime | timeago}} - <a href="" class="like-link">Like</a> &nbsp;<a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode" class="like-link">Edit</a> &nbsp;<a href="" class="like-link">Delete</a></p>
                                 </div>
                             </li>                                                       
                             <li>

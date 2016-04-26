@@ -463,12 +463,13 @@ define([appLocation.preLogin], function (app) {
                         for (var i = 0; i < data.results.length; i++) {
 
                             if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
-                                data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);
+                                data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);                                
                             }
 
                             $scope.UserPostList.push(data.results[i]);
+                            //console.log("commentinfo2 new : " + $scope.UserPostList[0].commentsInfo[0].editableMode);
                             absoluteIndex = from + i;
-                            console.log("absoluteIndex : "+absoluteIndex);
+                            //console.log("absoluteIndex : "+absoluteIndex);
                             $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo,$scope.UserPostList[absoluteIndex].likeInfoCount);
                             $scope.UserPostList[absoluteIndex].messageFromIndex = 0;
                             $scope.UserPostList[absoluteIndex].messageToIndex = $scope.UserPostList[absoluteIndex].messageFromIndex + messagesPerCall - 1;
@@ -505,7 +506,8 @@ define([appLocation.preLogin], function (app) {
         function reverseCommentsInfoList(newList) {
             var reversedList = [];
             for (var i = newList.length - 1; i >= 0; i--) {
-                reversedList.push(newList[i]);
+                newList[i].editableMode = false;
+                reversedList.push(newList[i]);                
             }
             return reversedList;
         }
@@ -556,6 +558,29 @@ define([appLocation.preLogin], function (app) {
                 str = str.replace($rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname + ",", "").replace($rootScope.clientDetailResponse.Firstname + " " + $rootScope.clientDetailResponse.Lastname, "");
             }
             return str;
+        };
+
+        $scope.enableEditcommentOnUserPost = function(postIndex, commentIndex) {           
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = true;
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }           
+        };
+
+        $scope.cancelEditcommentOnUserPost = function (postIndex, commentIndex) {            
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = false;
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }            
+        };
+
+        $scope.submitEditcommentOnUserPost = function (postIndex, commentIndex) {
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = false;            
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
         };
 
         $scope.UserPostListInfo.nextPage = function () {
