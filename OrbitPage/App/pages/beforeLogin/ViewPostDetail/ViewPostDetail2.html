@@ -1,0 +1,505 @@
+﻿<div style="background-color: rgb(246, 246, 246);" ng-controller="beforeLoginViewPostDetail">
+
+    <div class="row" style="min-height: 150px;"></div>
+    <div class="container">
+       
+        <section class="profile-env">
+
+            <div class="col-md-12">                
+                <div class="col-md-12 col-sm-12 col-xs-12 col-right">
+                    
+                    <div class="row">
+                        <div class="col-md-12" ng-repeat="post in UserPostList">
+                            <div class="panel panel-white post panel-shadow">
+                                <div class="post-heading">
+                                    <a href="#/userprofile/{{post.userInfo[0]._id}}"><span ng-bind="post.userInfo[0].FirstName"></span> &nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a> Posted on  <a href="#/userprofile/{{post.postedToUser[0]._id}}"><span ng-bind="post.postedToUser[0].FirstName"></span>&nbsp;<span ng-bind="post.postedToUser[0].LastName"></span></a>'s Wall
+                                    <hr />
+                                    <div class="pull-left image"><img ng-src="{{post.userInfo[0].ImageUrl}}" class="img-rounded avatar" alt="user profile image"></div>
+                                    <div class="pull-left meta">
+                                        <div class="title h5"><a href="#/userprofile/{{post.userInfo[0]._id}}" class="post-user-name"><span ng-bind="post.userInfo[0].FirstName"></span>&nbsp;<span ng-bind="post.userInfo[0].LastName"></span></a></div>
+                                        <!--<h6 class="text-muted time" >{{post.postInfo.PostedTime| date:"yyyy-MM-dd hh:mm:ss a"}}</h6>-->
+                                        <h6 class="text-muted time">{{post.postInfo.PostedTime| timeago}}</h6>
+                                    </div>
+                                </div>
+                                <div class="post-image">
+                                    <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" /></a>
+                                    <!--<img ng-src="{{post.postInfo.PostImage}}" class="image show-in-modal" alt="image post">-->
+                                </div>
+                                <div class="post-description">
+                                    <p ng-bind="post.postInfo.PostMessage"></p>
+
+                                    <div class="stats">
+                                        <div id="likes-section" style="margin: -5px 0px 0px;">
+                                            <a href="" class="like-button" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
+                                            <a href="" class="like-button" ng-show="post.alreadyLiked" ng-click="removeReactionOnUserPost($index)">Unlike</a>
+                                            <a class="like-summary" ng-click="showLikedByUsers(post.postInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal" ng-bind-html="post.likeInfoHtml"></a>
+                                        </div>
+                                        <div id="likes-section" style="float: right;margin: -5px 0px 0px;"><a href="" class="like-button">Share</a><span class="like-summary">share this</span></div>
+                                    </div>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    <ul class="comments-list">
+                                        <li class="comment" ng-repeat="comment in post.commentsInfo"> <!--comment in post.commentsInfo | reverse-->
+                                            <a class="pull-left" href="#/userprofile/{{comment.commentedBy[0]._id}}"><img class="avatar" ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="avatar"> </a>
+                                            <div class="comment-body">
+                                                <div class="comment-heading">
+                                                    <h4 class="comment-user-name"><a href="#/userprofile/{{comment.commentedBy[0]._id}}"><span ng-bind="comment.commentedBy[0].FirstName"></span>&nbsp;<span ng-bind="comment.commentedBy[0].LastName"></span></a></h4>
+                                                    <!--<h5 class="time">{{comment.commentInfo.PostedTime | date:"yyyy-MM-dd hh:mm:ss a"}}</h5>-->
+                                                    <h5 class="time">{{comment.commentInfo.PostedTime | timeago}}</h5> <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                                </div>
+                                                <p ng-bind="comment.commentInfo.PostMessage"></p>
+                                            </div>
+                                        </li>
+
+                                    </ul>                                    
+                                    <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load More..<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="showLikedByUsersModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Liked By :</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div ng-show='UserPostLikesLoading'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+                                        <div ng-repeat="like in UserPostLikes">
+                                            <a ng-click="closeModelAndNavigateTo(like.likeInfo._id)"><img class="img-circle" style="max-height: 40px; max-width: 40px;" ng-src="{{like.likeInfo.ImageUrl}}"> &nbsp; <span ng-bind="like.likeInfo.FirstName"></span>&nbsp; <span ng-bind="like.likeInfo.LastName"></span></a>
+                                            <hr />
+                                        </div>
+
+                                        <p><a class="like-summary" ng-click="showMoreLikedByUsers()">Load More..</a></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="closeModalId" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+
+</div>
+
+
+
+
+<style type="text/css">
+    
+    
+    body {
+        overflow-x: hidden;
+    }
+    .main {
+        height: 100%;
+    }
+    .blurred-container .img-src, .blurred-container {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 320px;
+    }
+    .navbar-header .navbar-brand img {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+    }
+    .navbar-brand b {
+        display: inline-block;
+    }
+    .navbar .navbar-brand {
+        margin-top: 0;
+    }
+    .navbar-opts li a [class^="fa"] {
+        display: block;
+        text-align: center;
+    }
+    .navbar-transparent .navbar-nav > li > a {
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    }
+    #navbar-profile .navbar-nav li a .fa {
+        margin: 4px;
+    }
+    .navbar-white {
+        background-color: #fff !important;
+        border-color: #e7e7e7;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.18);
+    }
+    .navbar-transparent .navbar-nav .active a {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        color: #ffffff;
+    }
+    .navbar-transparent .navbar-nav li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        color: #ffffff;
+    }
+    .user-name {
+        color: #fff;
+        font-size: 25px;
+        font-weight: bold;
+        left: 310px;
+        position: absolute;
+        text-rendering: optimizelegibility;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        top: -80px;
+    }
+    .profile-photo {
+        border: 5px solid #fff;
+        cursor: pointer;
+        height: 180px;
+        left: 100px;
+        margin-bottom: 8px;
+        margin-top: 10px;
+        position: absolute;
+        top: -160px;
+        width: 180px;
+    }
+    .profile-opts .btn {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+    @media (max-width: 768px) {
+        .btn-responsive {
+            border-radius: 3px;
+            font-size: 80%;
+            line-height: 1;
+            padding: 2px 4px;
+        }
+        .profile-photo {
+            height: 130px;
+            left: 10px;
+            top: -100px;
+            width: 130px;
+        }
+        .user-name {
+            font-size: 20px;
+            left: 160px;
+        }
+        .navbar-opts li a [class^="fa"] {
+            display: inline-block;
+            font-size: 18px;
+            margin-right: 2px;
+            text-align: center;
+        }
+    }
+    @media (min-width: 769px) and (max-width: 992px) {
+        .btn-responsive {
+            font-size: 90%;
+            line-height: 1.2;
+            padding: 4px 9px;
+        }
+        .profile-photo {
+            height: 160px;
+            left: 35px;
+            top: -140px;
+            width: 160px;
+        }
+        .user-name {
+            font-size: 25px;
+            left: 220px;
+        }
+    }
+    .hidden {
+        display: none;
+    }
+    .container-timeline {
+        margin-top: 10px;
+    }
+    .panel-user-detail .fa {
+        color: #999999;
+        margin-right: 3px;
+    }
+    @media screen and (max-width: 500px) {
+        div[class*="col-"] {
+            padding-left: 2px !important;
+            padding-right: 2px !important;
+        }
+    }
+    .panel-user-detail, .panel-friends, .panel-likes, .panel-movies, .panel-groups, .post, .panel-friends, .panel-user-photos, .text-content, .about-container .panel, .container-about, .panel-photos {
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.14);
+    }
+    .panel-footer {
+        background-color: #ffffff;
+    }
+    .well-social-post {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 0;
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.14);
+    }
+    .well-social-post .glyphicon, .well-social-post .fa, .well-social-post [class^="icon-"], .well-social-post [class*="icon-"] {
+        color: #999999;
+        font-weight: bold;
+        margin-right: 3px;
+    }
+    .well-social-post a, .well-social-post a:hover, .well-social-post a:active, .well-social-post a:focus {
+        text-decoration: none;
+    }
+    .well-social-post .list-inline {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    .well-social-post .list-inline li {
+        position: relative;
+    }
+    .well-social-post .list-inline li.active::after {
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #dddddd;
+        content: "";
+        display: block;
+        height: 0;
+        left: calc(50% - 5px);
+        position: absolute;
+        top: 30px;
+        width: 0;
+    }
+    .well-social-post .list-inline li.active a {
+        color: #222222;
+        font-weight: bold;
+    }
+    .well-social-post .form-control {
+        border: medium none;
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 68px;
+        resize: vertical;
+        width: 100%;
+    }
+    .well-social-post .list-inline {
+        padding: 10px;
+    }
+    .well-social-post .list-inline li + li {
+        margin-left: 10px;
+    }
+    .well-social-post .post-actions {
+        background-color: #f6f7f8;
+        border-top-color: #e9eaed;
+        margin: 0;
+    }
+    .panel-friends .friends {
+        background: #fff none repeat scroll 0 0;
+        display: inline-block;
+        list-style: outside none none;
+        margin-bottom: 0;
+        padding: 0;
+        right: 0;
+        top: 0;
+        z-index: 2;
+    }
+    .panel-friends .friends li {
+        float: left;
+        margin: 0;
+        width: 33.33%;
+    }
+    .panel-friends .friends li a {
+        display: block;
+        padding-left: 1px;
+        padding-top: 1px;
+    }
+    .panel-friends .friends li a img:hover {
+        opacity: 0.7;
+        transform: scale(1.2, 1.2);
+        transition-duration: 500ms;
+        transition-timing-function: ease-out;
+    }
+    .panel-friends .friends li a img, .photos li a img {
+        width: 100%;
+    }
+    .panel-likes .carousel-inner .item img {
+        height: 80px;
+        max-width: 100%;
+    }
+    .panel-likes .carousel-control.right {
+    }
+    .panel-likes .thumbnail {
+        border: 0 none;
+    }
+    .panel-photos .photos li {
+        float: left;
+        margin: 0;
+        width: 50%;
+    }
+    .panel-photos .photos {
+        background: #fff none repeat scroll 0 0;
+        display: inline-block;
+        list-style: outside none none;
+        margin-bottom: 0;
+        padding: 0;
+        right: 0;
+        top: 0;
+        z-index: 2;
+    }
+    .panel-photos .photos li {
+        float: left;
+        margin: 0;
+        width: 33.33%;
+    }
+    .panel-photos .photos li a {
+        display: block;
+        padding-left: 1px;
+        padding-top: 1px;
+    }
+    .panel-photos .photos li a img {
+        width: 100%;
+    }
+    .panel-photos .photos li a img:hover {
+        cursor: pointer;
+        opacity: 0.7;
+        transform: scale(1.2, 1.2);
+        transition-duration: 500ms;
+        transition-timing-function: ease-out;
+    }
+    #carousel-movies .item img {
+        height: 50%;
+    }
+    #carousel-movies img {
+        height: 225px;
+        max-height: 225px;
+        width: auto;
+    }
+    .panel-white {
+        border: 1px solid #dddddd;
+    }
+    .panel-white .panel-heading {
+        background-color: #fff;
+        border-color: #ddd;
+        color: #333;
+    }
+    .panel-white .panel-footer {
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .post .post-heading {
+        height: 95px;
+        padding: 20px 15px;
+    }
+    .post .post-heading .avatar {
+        display: block;
+        height: 60px;
+        margin-right: 15px;
+        width: 60px;
+    }
+    .post .post-heading .meta .title {
+        margin-bottom: 0;
+    }
+    .post .post-heading .meta .title a:hover {
+        color: #aaaaaa;
+    }
+    .post .post-heading .meta .time {
+        color: #999;
+        margin-top: 8px;
+        text-transform: lowercase;
+    }
+    .post .post-image .image {
+        cursor: pointer;
+        height: auto;
+        width: 100%;
+    }
+    .post .post-description {
+        padding: 15px;
+    }
+    .post .post-description p {
+        font-size: 14px;
+    }
+    .post .post-description .stats {
+        margin-top: 20px;
+    }
+    .post .post-description .stats .stat-item {
+        display: inline-block;
+        margin-right: 15px;
+    }
+    .post .post-description .stats .stat-item .icon {
+        margin-right: 8px;
+    }
+    .post .post-footer {
+        border-top: 1px solid #ddd;
+        padding: 15px;
+    }
+    .post .post-footer .input-group-addon a {
+        color: #454545;
+    }
+    .post .post-footer .comments-list {
+        list-style-type: none;
+        margin-top: 20px;
+        padding: 0;
+    }
+    .post .post-footer .comments-list .comment {
+        display: block;
+        margin: 20px 0;
+        width: 100%;
+    }
+    .post .post-footer .comments-list .comment .avatar {
+        height: 35px;
+        width: 35px;
+    }
+    .post .post-footer .comments-list .comment .comment-heading {
+        display: block;
+        width: 100%;
+    }
+    .post .post-footer .comments-list .comment .comment-heading .comment-user-name {
+        display: inline;
+        font-size: 14px;
+        font-weight: bold;
+        margin-right: 10px;
+        margin-top: 0;
+    }
+    .post .post-footer .comments-list .comment .comment-heading .time {
+        color: #aaa;
+        display: inline;
+        font-size: 12px;
+        margin-top: 0;
+    }
+    .post .post-footer .comments-list .comment .comment-body {
+        margin-left: 50px;
+    }
+    .post .post-footer .comments-list .comment > .comments-list {
+        margin-left: 50px;
+    }
+    .post .input-group .form-control {
+        z-index: 1;
+    }
+    .panel-user-photos img:hover {
+        border-radius: 0;
+        cursor: pointer;
+        opacity: 0.7;
+        transform: scale(1.2, 1.2);
+        transition-duration: 500ms;
+        transition-timing-function: ease-out;
+    }
+    .panel-user-photos img {
+        margin-bottom: 20px;
+    }
+    .panel-user-photos img:hover {
+        filter: none;
+    }
+    .affix + .container {
+        padding-top: 50px !important;
+    }
+    .carousel-indicators {
+        left: 90%;
+        width: 60%;
+    }
+
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>

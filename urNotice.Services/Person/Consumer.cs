@@ -192,6 +192,7 @@ namespace urNotice.Services.Person
             properties[VertexPropertyEnum.PostMessage.ToString()] = message;
             properties[VertexPropertyEnum.PostedByUser.ToString()] = session.UserName;
             properties[VertexPropertyEnum.PostedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[VertexPropertyEnum.PostedTimeLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
             properties[VertexPropertyEnum.PostImage.ToString()] = image;
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
@@ -223,7 +224,8 @@ namespace urNotice.Services.Person
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+            //properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 

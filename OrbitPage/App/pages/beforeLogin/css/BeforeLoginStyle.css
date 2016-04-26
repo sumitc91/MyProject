@@ -6974,3 +6974,11 @@ input:focus ~ .bar:after {
 .recent-highlight {
     background: #FF6C60 !important;
 }
+
+
+.floatRight {
+    z-index: 10;  
+    position: absolute;  
+    right: 0;  
+    top: 0;
+}
