@@ -271,7 +271,10 @@ define([appLocation.preLogin], function (app) {
                 $scope.UserPostList[postIndex].postInfo.postUserComment = "";
 
                 $scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
-                $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = true;
+                var commentAddedAtIndex = $scope.UserPostList[postIndex].commentsInfo.length - 1;
+
+                $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = true;
+                $scope.UserPostList[postIndex].commentsInfo[0].disableInputBox = true;
 
                 $http({
                     url: url,
@@ -284,7 +287,8 @@ define([appLocation.preLogin], function (app) {
                     //getPostByVertexId();
                     $scope.UserPostMessage = "";
 
-                    $scope.UserPostList[postIndex].commentsInfo[0].loadingIcon = false;
+                    $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = false;
+                    $scope.UserPostList[postIndex].commentsInfo[0].disableInputBox = false;
                     $scope.userPostCommentData = "";
 
                     $timeout(function() {

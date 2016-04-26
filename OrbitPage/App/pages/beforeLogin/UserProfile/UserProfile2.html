@@ -199,8 +199,8 @@
                                 </a>
                                 <div class="cmt-details">
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
-                                    <span ng-bind="comment.commentInfo.PostMessage"></span>
-                                    <p>{{comment.commentInfo.PostedTime | timeago}} - <a href="" class="like-link">Like</a> &nbsp;<a href="" class="like-link">Edit</a> &nbsp;<a href="" class="like-link">Delete</a></p><img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                    <span ng-bind="comment.commentInfo.PostMessage"></span><img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                    <p>{{comment.commentInfo.PostedTime | timeago}} - <a href="" class="like-link">Like</a> &nbsp;<a href="" class="like-link">Edit</a> &nbsp;<a href="" class="like-link">Delete</a></p>
                                 </div>
                             </li>                                                       
                             <li>
@@ -208,7 +208,7 @@
                                     <img ng-src="{{clientDetailResponse.Profilepic}}" alt="">
                                 </a>
                                 <div class="cmt-form">
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].loadingIcon"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
                                 </div>
                             </li>
                         </ul>
