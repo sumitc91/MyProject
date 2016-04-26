@@ -198,6 +198,7 @@ define([appLocation.preLogin], function (app) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].alreadyLiked = false;
                 $scope.UserPostList[postIndex].likeInfoHtml = removeFromCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, $scope.UserPostList[postIndex].likeInfoCount);
+                $scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
                 $http({
                     url: url,
                     method: "POST",
