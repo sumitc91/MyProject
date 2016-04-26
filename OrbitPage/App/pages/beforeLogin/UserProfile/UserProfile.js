@@ -340,8 +340,9 @@ define([appLocation.preLogin], function (app) {
                         "_id": $rootScope.clientDetailResponse.VertexId,
                         "_type": null
                     }
-                ]
-            };
+                ],
+                "isAuthenticToEdit": true
+        };
 
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
             var headers = {
@@ -357,7 +358,7 @@ define([appLocation.preLogin], function (app) {
                 $scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
                 var commentAddedAtIndex = $scope.UserPostList[postIndex].commentsInfo.length - 1;
 
-                $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = true;
+                $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = true;                
                 $scope.UserPostList[postIndex].commentsInfo[0].disableInputBox = true;
                 //startBlockUI('wait..', 3);
                 $http({
