@@ -401,7 +401,7 @@ define([appLocation.preLogin], function (app) {
                     newList[i].isAuthenticToEdit = false;
                 }
 
-                if ($scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
+                if ($scope.UserPostList[0].postedToUser[0]._id == $rootScope.clientDetailResponse.VertexId) {
                     newList[i].isLoggedInUserWall = true;
                 } else {
                     newList[i].isLoggedInUserWall = false;
