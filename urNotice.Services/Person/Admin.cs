@@ -66,6 +66,11 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,
             out Dictionary<string, string> sendNotificationResponse)
         {

@@ -352,6 +352,7 @@
     <Content Include="App\pages\beforeLogin\Login\Login2.html" />
     <Content Include="App\pages\beforeLogin\PostBlog\PostBlog.html" />
     <Content Include="App\pages\beforeLogin\PostBlog\PostBlog.js" />
+    <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice - Copy.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.html" />
     <Content Include="App\pages\beforeLogin\PostYourNotice\PostYourNotice.js" />
     <Content Include="App\pages\beforeLogin\SingleWorkgraphy\SingleWorkgraphy.html" />
@@ -402,7 +403,7 @@
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail2.html" />
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail.html" />
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail.js" />
-    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.html" />
+    <Content Include="App\pages\beforeLogin\UserProfile\UserProfile3.html" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.js" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.html" />
     <Content Include="App\pages\beforeLogin\ValidateEmail\validateEmail.js" />

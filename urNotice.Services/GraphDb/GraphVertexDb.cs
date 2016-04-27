@@ -58,7 +58,7 @@ namespace urNotice.Services.GraphDb
         {
             var uri = new StringBuilder("/graphs/" + graphName + "/vertices/"+vertexId+"?");
 
-            var oldProperties = GetUserVertexDetails(vertexId);
+            var oldProperties = GetVertexDetails(vertexId);
             var newProperties = new Dictionary<String, String>();
 
             if (oldProperties == null)
@@ -89,13 +89,20 @@ namespace urNotice.Services.GraphDb
                 }
             }
 
+            //if user want to delete previous uploaded image.
+            if (oldProperties.ContainsKey(VertexPropertyEnum.CoverImageUrl.ToString()) &&
+                !properties.ContainsKey(VertexPropertyEnum.CoverImageUrl.ToString()))
+            {
+                newProperties.Remove(VertexPropertyEnum.CoverImageUrl.ToString());
+            }
+
+            if (newProperties.ContainsKey(VertexPropertyEnum.CoverImageUrl.ToString()) && string.IsNullOrEmpty(newProperties[VertexPropertyEnum.CoverImageUrl.ToString()]))
+                newProperties[VertexPropertyEnum.CoverImageUrl.ToString()] = CommonConstants.CompanySquareLogoNotAvailableImage;
+
             foreach (KeyValuePair<string, string> property in newProperties)
             {                
                 uri.Append(property.Key + "=" + HttpUtility.UrlEncode(property.Value) + "&");
             }
-
-            if (properties.ContainsKey(VertexPropertyEnum.CoverImageUrl.ToString()) && string.IsNullOrEmpty(properties[VertexPropertyEnum.CoverImageUrl.ToString()]))
-                properties[VertexPropertyEnum.CoverImageUrl.ToString()] = CommonConstants.CompanySquareLogoNotAvailableImage;
 
             var client = new RestClient(url + uri.ToString());
             var request = new RestRequest();
@@ -114,7 +121,7 @@ namespace urNotice.Services.GraphDb
             return newProperties;
         }
 
-        private Dictionary<string, string> GetUserVertexDetails(string vertexId)
+        private Dictionary<string, string> GetVertexDetails(string vertexId)
         {
             IDynamoDb dynamoDbModel = new DynamoDb();
             var orbitPageCompanyUserWorkgraphyTable = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(DynamoDbHashKeyDataType.VertexDetail.ToString(),

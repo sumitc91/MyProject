@@ -2040,12 +2040,14 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
     color: #333;
 }
 #chat {
-    background: #fff none repeat scroll 0 0;
-    display: none;
+    background: #303641 none repeat scroll 0 0;
+    bottom: 0;
+    display: block;
     position: relative;
-    vertical-align: top;
+    right: 0;
+    top: 0;
     width: 280px;
-    z-index: 100;
+    z-index: 5;
 }
 body.chat-open #chat {
     display: table-cell;

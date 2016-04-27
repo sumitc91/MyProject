@@ -184,5 +184,31 @@ namespace OrbitPage.Controllers
             }
 
         }
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult EditMessageDetails(EditMessageRequest messageReq)
+        {
+
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken && session != null)
+            {
+
+                IPerson personModel = new Consumer();
+                var response = personModel.EditMessageDetails(session, messageReq);
+
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }

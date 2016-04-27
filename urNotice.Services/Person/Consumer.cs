@@ -170,6 +170,37 @@ namespace urNotice.Services.Person
             return response;
         }
 
+        public ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq)
+        {
+            var response = new ResponseModel<string>();
+
+            if (session.UserVertexId != messageReq.userVertex)
+            {
+                response.Status = 401;
+                response.Message = "Unauthenticated";
+                return response;
+            }
+
+            
+            //update graphDb
+            var properties = new Dictionary<string, string>();
+            
+            if (!string.IsNullOrEmpty(messageReq.message))
+                properties[VertexPropertyEnum.PostMessage.ToString()] = messageReq.message;
+            
+            if (!string.IsNullOrEmpty(messageReq.imageUrl))
+                properties[VertexPropertyEnum.PostImage.ToString()] = messageReq.imageUrl;            
+            
+            IGraphVertexDb graphVertexDbModel = new GraphVertexDb();
+            graphVertexDbModel.UpdateVertex(messageReq.messageVertex, session.UserName, TitanGraphConfig.Graph, properties);            
+            
+            response.Status = 200;
+            response.Message = "success";
+            response.Payload = "successfully edited.";
+            
+            return response;
+        }
+
         private OrbitPageCompanyUserWorkgraphyTable GenerateOrbitPageUserObject(
             OrbitPageCompanyUserWorkgraphyTable orbitPageCompanyUserWorkgraphyTable, EditPersonModel editPersonModel)
         {

@@ -463,6 +463,7 @@ define([appLocation.preLogin], function (app) {
                     if ($scope.UserPostList != null && data.results.length>0) {
                         for (var i = 0; i < data.results.length; i++) {
 
+                            data.results[i].postInfo.editableMode = false;
                             if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
                                 data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);                                
                             }
@@ -573,6 +574,81 @@ define([appLocation.preLogin], function (app) {
             return str;
         };
 
+        $scope.enableEditOnUserPost = function (postIndex) {
+            $scope.UserPostList[postIndex].postInfo.editableMode = true;
+            $scope.UserPostList[postIndex].postInfo.OriginalPostMessage = $scope.UserPostList[postIndex].postInfo.PostMessage;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
+        $scope.cancelEditOnUserPost = function (postIndex) {
+            $scope.UserPostList[postIndex].postInfo.editableMode = false;
+            $scope.UserPostList[postIndex].postInfo.PostMessage = $scope.UserPostList[postIndex].postInfo.OriginalPostMessage;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
+        $scope.submitEditOnUserPost = function (postIndex) {
+            $scope.UserPostList[postIndex].postInfo.editableMode = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+
+            submitEditPost(postIndex);
+        };
+
+        function submitEditPost(postIndex) {
+
+            if (isNullOrEmpty($scope.UserPostList[postIndex].postInfo.PostMessage)) {
+                showToastMessage("Warning", "You cann't submit empty message.");
+                return;
+            }
+
+            //if ($scope.UserPostList[postIndex].postInfo.PostMessage == $scope.UserPostList[postIndex].postInfo.OriginalPostMessage) {
+            //    //showToastMessage("Warning", "You cann't submit empty message.");
+            //    return;
+            //}
+
+            var editMessageRequest = {
+                message: $scope.UserPostList[postIndex].postInfo.PostMessage,
+                imageUrl: $scope.UserPostList[postIndex].postInfo.PostImage,
+                messageVertex: $scope.UserPostList[postIndex].postInfo._id,
+                userVertex: $rootScope.clientDetailResponse.VertexId,
+                userEmail: $rootScope.clientDetailResponse.Email,
+                wallVertex: $scope.visitedUserVertexId
+            };
+
+            var url = ServerContextPath.empty + '/User/EditMessageDetails';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV(),
+                '_ga': $.cookie('_ga')
+            };
+
+            //startBlockUI('wait..', 3);
+            $scope.UserPostList[postIndex].postInfo.loadingIcon = true;
+            $http({
+                url: url,
+                method: "POST",
+                data: editMessageRequest,
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                $scope.UserPostList[postIndex].postInfo.loadingIcon = false;
+                //stopBlockUI();
+                showToastMessage("Success", "Successfully Edited");
+            }).error(function (data, status, headers, config) {
+
+            });
+
+
+        };
+
+
         $scope.enableEditcommentOnUserPost = function(postIndex, commentIndex) {           
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = true;
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage;
@@ -590,10 +666,61 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.submitEditcommentOnUserPost = function (postIndex, commentIndex) {
-            $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = false;            
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = false;         
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }
+
+            submitEditMessage(postIndex, commentIndex);
+        };
+
+        function submitEditMessage(postIndex, commentIndex) {
+            
+            if (isNullOrEmpty($scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage)) {
+                showToastMessage("Warning", "You cann't submit empty message.");
+                return;
+            }
+
+            if ($scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage == $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage) {
+                //showToastMessage("Warning", "You cann't submit empty message.");
+                return;
+            }
+
+            var editMessageRequest = {
+                message: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage,
+                imageUrl: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage,
+                messageVertex: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
+                userVertex: $rootScope.clientDetailResponse.VertexId,
+                userEmail: $rootScope.clientDetailResponse.Email,
+                wallVertex: $scope.visitedUserVertexId
+            };
+
+            var url = ServerContextPath.empty + '/User/EditMessageDetails';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV(),
+                '_ga': $.cookie('_ga')
+            };
+
+            //startBlockUI('wait..', 3);
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].loadingIcon = true;
+            $http({
+                url: url,
+                method: "POST",
+                data: editMessageRequest,
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].loadingIcon = false;
+                //stopBlockUI();
+                showToastMessage("Success", "Successfully Edited");
+            }).error(function (data, status, headers, config) {
+
+            });
+
+
         };
 
         $scope.UserPostListInfo.nextPage = function () {

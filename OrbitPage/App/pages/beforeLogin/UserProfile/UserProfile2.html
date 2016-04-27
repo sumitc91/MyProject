@@ -159,7 +159,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-                                    <li role="menuitem"><a href="">Edit</a></li>
+                                    <li role="menuitem"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
                                     <li role="menuitem"><a href="">Delete</a></li>
                                     <li class="divider"></li>
                                     <li role="menuitem"><a href="">Mark Spam</a></li>
@@ -168,12 +168,16 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <p class="fb-user-status" ng-bind="post.postInfo.PostMessage">                        
+                    <p class="fb-user-status" ng-bind="post.postInfo.PostMessage" ng-show="!post.postInfo.editableMode">
                     </p>
+                    <img ng-show="post.postInfo.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                    <!--<textarea rows="4" cols="50" ng-bind="post.postInfo.PostMessage" ng-show="post.postInfo.editableMode"></textarea>-->
+                    <input ng-show="post.postInfo.editableMode" ng-model="post.postInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit Post" type="text">
                     <div class="post-image">
                         <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" style="max-height:400px"/></a>
                         <!--<img ng-src="{{post.postInfo.PostImage}}" class="image show-in-modal" alt="image post">-->
                     </div>
+                    <div class="editable-buttons" ng-show="post.postInfo.editableMode"><button type="button" ng-click="submitEditOnUserPost($index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditOnUserPost($index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
                     <div class="fb-status-container fb-border">
                         <div class="fb-time-action">
                             <a title="Like this" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
@@ -256,45 +260,29 @@
         </div>
     </div>
     <div class="col-md-2">
-        <div class="fb-timeliner">
-            <h2 class="recent-highlight">Recent</h2>
-            <ul>
-                <li class="active"><a href="#">December</a></li>
-                <li><a href="#">November</a></li>
-                <li><a href="#">October</a></li>
-                <li><a href="#">September</a></li>
-                <li><a href="#">August</a></li>
-                <li><a href="#">July</a></li>
-                <li><a href="#">June</a></li>
-                <li><a href="#">May</a></li>
-                <li><a href="#">April</a></li>
-                <li><a href="#">March</a></li>
-                <li><a href="#">February</a></li>
-                <li><a href="#">January</a></li>
-            </ul>
-        </div>
-        <div class="fb-timeliner">
-            <h2>2012</h2>
-            <ul>
-                <li><a href="#">August</a></li>
-                <li><a href="#">July</a></li>
-                <li><a href="#">June</a></li>
-                <li><a href="#">May</a></li>
-                <li><a href="#">April</a></li>
-                <li><a href="#">March</a></li>
-                <li><a href="#">February</a></li>
-                <li><a href="#">January</a></li>
-            </ul>
-        </div>
-        <div class="fb-timeliner">
-            <h2>2011</h2>
-            <ul>
-                <li><a href="#">May</a></li>
-                <li><a href="#">April</a></li>
-                <li><a href="#">March</a></li>
-                <li><a href="#">February</a></li>
-                <li><a href="#">January</a></li>
-            </ul>
+        <div data-max-chat-history="25" data-order-by-status="1" data-current-user="Art Ramadani" class="fixed" id="chat">
+            <div class="chat-inner" style="overflow: hidden;" tabindex="5000">
+                <h2 class="chat-header">
+                    <a class="chat-close" href="#"><i class="entypo-cancel"></i></a> <i class="entypo-users"></i>
+                    Chat
+                    <span class="badge badge-success">3</span>
+                </h2>
+                <div id="group-1" class="chat-group"> <strong>Favorites</strong>      <a data-conversation-history="#sample_history" id="sample-user-123" href="#"><span class="user-status is-online"></span> <em>Catherine J. Watkins</em><span class="badge badge-info">1</span></a><a href="#" id="ui-id-1"><span class="user-status is-online"></span> <em>Nicholas R. Walker</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-2"><span class="user-status is-busy"></span> <em>Susan J. Best</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-4"><span class="user-status is-idle"></span> <em>Fernando G. Olson</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-3"><span class="user-status is-offline"></span> <em>Brandon S. Young</em><span class="badge badge-info is-hidden">0</span></a></div>
+                <div id="group-2" class="chat-group"> <strong>Work</strong>    <a href="#" id="ui-id-7" class=""><span class="user-status is-busy"></span> <em>Rodrigo E. Lozano</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-5"><span class="user-status is-offline"></span> <em>Robert J. Garcia</em><span class="badge badge-info is-hidden">0</span></a><a data-conversation-history="#sample_history_2" href="#" id="ui-id-6"><span class="user-status is-offline"></span> <em>Daniel A. Pena</em><span class="badge badge-info">2</span></a></div>
+                <div id="group-3" class="chat-group"> <strong>Social</strong>     <a href="#" id="ui-id-10"><span class="user-status is-online"></span> <em>Kathleen M. Canales</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-8"><span class="user-status is-busy"></span> <em>Velma G. Pearson</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-9"><span class="user-status is-offline"></span> <em>Margaret R. Dedmon</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-11"><span class="user-status is-offline"></span> <em>Tracy J. Rodriguez</em><span class="badge badge-info is-hidden">0</span></a></div>
+            </div>
+            <!-- conversation template -->
+            <div class="chat-conversation" style="display: none; top: 0px; opacity: 0;">
+                <div class="conversation-header"> <a class="conversation-close" href="#"><i class="entypo-cancel"></i></a> <span class="user-status is-busy"></span> <span class="display-name">Rodrigo E. Lozano</span> <small>Busy</small> </div>
+                <ul class="conversation-body">
+                    <li>
+                        <span class="user">Art Ramadani</span>
+                        <p>hi</p>
+                        <span class="time">23:39</span>
+                    </li>
+                </ul>
+                <div class="chat-textarea"> <textarea placeholder="Type your message" class="form-control autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea> </div>
+            </div>
         </div>
     </div>    
 </div>
