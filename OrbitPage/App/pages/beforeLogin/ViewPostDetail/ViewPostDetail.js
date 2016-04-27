@@ -257,7 +257,8 @@ define([appLocation.preLogin], function (app) {
                         "_id": $rootScope.clientDetailResponse.VertexId,
                         "_type": null
                     }
-                ]
+                ],
+                "isAuthenticToEdit": true
             };
 
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
@@ -289,6 +290,7 @@ define([appLocation.preLogin], function (app) {
                     $scope.UserPostMessage = "";
 
                     $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = false;
+                    $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].commentInfo._id = data.Payload.commentInfo._id;
                     $scope.UserPostList[postIndex].commentsInfo[0].disableInputBox = false;
                     $scope.userPostCommentData = "";
 

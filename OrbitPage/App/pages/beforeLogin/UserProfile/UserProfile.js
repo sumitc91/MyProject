@@ -373,6 +373,7 @@ define([appLocation.preLogin], function (app) {
                     //getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
                     //$scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
                     $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].loadingIcon = false;
+                    $scope.UserPostList[postIndex].commentsInfo[commentAddedAtIndex].commentInfo._id = data.Payload.commentInfo._id;
                     $scope.UserPostList[postIndex].commentsInfo[0].disableInputBox = false;
                     $scope.userPostCommentData = "";
 
