@@ -189,7 +189,9 @@ namespace urNotice.Services.Person
                 properties[VertexPropertyEnum.PostMessage.ToString()] = messageReq.message;
             
             if (!string.IsNullOrEmpty(messageReq.imageUrl))
-                properties[VertexPropertyEnum.PostImage.ToString()] = messageReq.imageUrl;            
+                properties[VertexPropertyEnum.PostImage.ToString()] = messageReq.imageUrl;
+            else
+                properties[VertexPropertyEnum.PostImage.ToString()] = "";
             
             IGraphVertexDb graphVertexDbModel = new GraphVertexDb();
             graphVertexDbModel.UpdateVertex(messageReq.messageVertex, session.UserName, TitanGraphConfig.Graph, properties);            

@@ -197,6 +197,8 @@ namespace OrbitPage.Controllers
             {
 
                 IPerson personModel = new Consumer();
+                if (string.IsNullOrEmpty(messageReq.imageUrl))
+                    messageReq.deletePreviousImage = true;
                 var response = personModel.EditMessageDetails(session, messageReq);
 
                 return Json(response, JsonRequestBehavior.AllowGet);

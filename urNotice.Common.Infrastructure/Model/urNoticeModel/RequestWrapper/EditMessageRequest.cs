@@ -14,5 +14,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper
         public string userVertex { get; set; }
         public string userEmail { get; set; }
         public string wallVertex { get; set; }
+
+        public bool deletePreviousImage { get; set; }
     }
 }

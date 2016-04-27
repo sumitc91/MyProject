@@ -53,6 +53,16 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.removeImageOnUserPost = function (postIndex) {
+            $scope.UserPostList[postIndex].postInfo.OriginalPostImage = $scope.UserPostList[postIndex].postInfo.PostImage;
+            $scope.UserPostList[postIndex].postInfo.PostImage = "";
+            //console.log(postIndex);
+            //console.log($scope.UserPostList[postIndex].postInfo.OriginalPostImage);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
         $scope.showLikedByUsers = function (postVertexId) {
             $scope.UserPostLikes = [];
             $scope.UserPostLikesFrom = 0;
@@ -412,6 +422,32 @@ define([appLocation.preLogin], function (app) {
                         $scope.NewPostImageUrl = data.data;
                     });
                     
+                });
+
+            }
+
+        };
+
+        $scope.onEditFileSelectLogoUrl = function ($files,postIndex) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    $timeout(function () {
+                        $scope.UserPostList[postIndex].postInfo.PostImage = data.data.link_s;
+                    });
+
                 });
 
             }

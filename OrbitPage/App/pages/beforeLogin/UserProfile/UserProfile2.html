@@ -173,9 +173,13 @@
                     <img ng-show="post.postInfo.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
                     <!--<textarea rows="4" cols="50" ng-bind="post.postInfo.PostMessage" ng-show="post.postInfo.editableMode"></textarea>-->
                     <input ng-show="post.postInfo.editableMode" ng-model="post.postInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit Post" type="text">
-                    <div class="post-image">
-                        <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" style="max-height:400px"/></a>
-                        <!--<img ng-src="{{post.postInfo.PostImage}}" class="image show-in-modal" alt="image post">-->
+                    <div class="post-image" ng-show="!post.postInfo.editableMode && post.postInfo.PostImage">
+                        <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" style="max-height:400px" /></a>
+                    </div>
+                    <div class="post-image" ng-show="post.postInfo.editableMode">
+                        <img class="image" ng-show="post.postInfo.PostImage" ng-src="{{post.postInfo.PostImage}}" alt="" style="max-height:200px" />
+                        <input type="button" value="delete" ng-show="post.postInfo.PostImage" ng-click="removeImageOnUserPost($index)" />
+                        <input type="file" ng-file-select="onEditFileSelectLogoUrl($files,$index)">
                     </div>
                     <div class="editable-buttons" ng-show="post.postInfo.editableMode"><button type="button" ng-click="submitEditOnUserPost($index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditOnUserPost($index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
                     <div class="fb-status-container fb-border">
