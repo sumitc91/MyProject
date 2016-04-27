@@ -11,7 +11,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.CurrentUserDetails = {};
         $scope.UserPostList = [];
-        
+        $scope.visitedUserVertexId = 0;
         getPostByVertexId();
 
         
@@ -370,6 +370,7 @@ define([appLocation.preLogin], function (app) {
                         } else {
                             $scope.UserPostList[absoluteIndex].alreadyLiked = false;
                         }
+                        $scope.visitedUserVertexId = $scope.UserPostList[absoluteIndex].postedToUser[0]._id;
                         //console.log($scope.UserPostList);
                     } else {
                         showToastMessage("Warning", "Post Not found.");
@@ -401,7 +402,7 @@ define([appLocation.preLogin], function (app) {
                     newList[i].isAuthenticToEdit = false;
                 }
 
-                if ($scope.UserPostList[0].postedToUser[0]._id == $rootScope.clientDetailResponse.VertexId) {
+                if ($scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
                     newList[i].isLoggedInUserWall = true;
                 } else {
                     newList[i].isLoggedInUserWall = false;
