@@ -319,19 +319,19 @@ define([appLocation.preLogin], function (app) {
             
             var userPostCommentData = {
                 Message: $scope.UserPostList[postIndex].postInfo.postUserComment,
-                Image: $scope.NewPostImageUrl.link_m,
+                Image: $scope.UserPostList[postIndex].postInfo.newCommentImage,
                 VertexId: $scope.UserPostList[postIndex].postInfo._id,
                 WallVertexId:$scope.visitedUserVertexId,
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
             };
 
-            if (isNullOrEmpty($scope.UserPostList[postIndex].postInfo.postUserComment)) {
+            if (isNullOrEmpty($scope.UserPostList[postIndex].postInfo.postUserComment) && isNullOrEmpty($scope.UserPostList[postIndex].postInfo.newCommentImage)) {
                 showToastMessage("Warning", "You cannot submit empty message.");
                 return;
             }
             var newCommentPosted = {
                 "commentInfo": {
-                    "PostImage": $scope.NewPostImageUrl.link_m,
+                    "PostImage": $scope.UserPostList[postIndex].postInfo.newCommentImage,
                     "PostedByUser": $rootScope.clientDetailResponse.Email,
                     "PostedTime": new Date($.now()),
                     "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
@@ -364,6 +364,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                 
                 $scope.UserPostList[postIndex].postInfo.postUserComment = "";
+                $scope.UserPostList[postIndex].postInfo.newCommentImage = "";
 
                 $scope.UserPostList[postIndex].commentsInfo.push(newCommentPosted);
                 var commentAddedAtIndex = $scope.UserPostList[postIndex].commentsInfo.length - 1;
@@ -452,6 +453,38 @@ define([appLocation.preLogin], function (app) {
 
             }
 
+        };
+
+        $scope.onCommentImageFileUpload = function ($files, postIndex) {
+
+            console.log("postIndex : " + postIndex);
+            console.log();
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    $timeout(function () {
+                        $scope.UserPostList[postIndex].postInfo.newCommentImage = data.data.link_s;
+                    });
+
+                });
+
+            }
+
+        };
+
+        $scope.removeUploadedCommentImage = function(postIndex) {
+            $scope.UserPostList[postIndex].postInfo.newCommentImage = "";
         };
 
         function getUserInformation() {
@@ -685,6 +718,17 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        $scope.uploadImageOncomment = function (postIndex) {
+
+            $scope.currentUploadingPostIndex = postIndex;
+            
+            //$scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = true;
+            //$scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            document.getElementById('my_comment_file').click();
+        };
 
         $scope.enableEditcommentOnUserPost = function(postIndex, commentIndex) {           
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = true;

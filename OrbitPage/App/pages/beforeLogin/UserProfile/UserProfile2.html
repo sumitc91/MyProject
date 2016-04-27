@@ -143,6 +143,8 @@
         
         <!-- posts -->
         <div infinite-scroll='UserPostListInfo.nextPage()' infinite-scroll-disabled='UserPostListInfo.busy' infinite-scroll-distance='1'>
+            <input type="file" style="display:none" id="my_comment_file" ng-file-select="onCommentImageFileUpload($files,currentUploadingPostIndex)">
+            
             <section class="panel" ng-repeat="post in UserPostList">
                 <div class="panel-body">
                     
@@ -207,9 +209,13 @@
                                 </a>
                                 <div class="cmt-details">
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
-                                    <span ng-bind="comment.commentInfo.PostMessage" ng-show="!comment.editableMode"></span>                                    
+                                    <span ng-bind="comment.commentInfo.PostMessage" ng-show="!comment.editableMode"></span>
+                                    <div class="post-image" ng-show="comment.commentInfo.PostImage">
+                                        <a class="fancybox" rel="group" href="{{comment.commentInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{comment.commentInfo.PostImage}}" alt="" style="max-height:100px" /></a>
+                                    </div>
+                                                                        
                                     <div ng-show="comment.editableMode">
-                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">
+                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">                                        
                                         <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
                                     </div>
                                     <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
@@ -224,8 +230,24 @@
                                     <img ng-src="{{clientDetailResponse.Profilepic}}" alt="">
                                 </a>
                                 <div class="cmt-form">
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox"> <span class="input-group-addon"><a ng-click="commentOnUserPost($index)"><i class="fa fa-edit"></i></a></span></div>
+                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox"> 
+                                        <span class="input-group-addon">
+                                            <a ng-click="uploadImageOncomment($index)"><i class="fa fa-camera"></i></a>                                       
+                                            <a ng-click="commentOnUserPost($index)">                                            
+                                                <i class="fa fa-edit"></i>                                        
+                                            </a>                                    
+                                        </span>
+                                    </div>
                                 </div>
+                                <div>
+                                    <ul class="list-inline">
+                                        <li ng-show="post.postInfo.newCommentImage">
+                                            <a class="fancybox" rel="group" href="{{post.postInfo.newCommentImage}}"><img style="max-width: 200px;" ng-src="{{post.postInfo.newCommentImage}}" alt="" /></a>
+                                            <input type="button" value="Remove" ng-click="removeUploadedCommentImage($index)" />
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </li>
                         </ul>
                         <div class="clearfix"></div>
