@@ -28,9 +28,17 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.reactionOnUserPostComment = function (postIndex, commentIndex) {
+            createNewReactionOnUserPostComment(postIndex, commentIndex);
+        };
+
         $scope.removeReactionOnUserPost = function (postIndex) {
             removeReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
+        };
+
+        $scope.removeReactionOnUserPostComment = function (postIndex, commentIndex) {
+            removeReactionOnUserPostComment(postIndex, commentIndex);
         };
 
         $scope.removeImageOnUserPost = function (postIndex) {
@@ -198,6 +206,49 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        function createNewReactionOnUserPostComment(postIndex, commentIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/UserReactionOnPost';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                //startBlockUI('wait..', 3);
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = true;
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount + 1;
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
         function removeReactionOnUserPost(postIndex) {
 
             var userPostReactionData = {
@@ -220,6 +271,51 @@ define([appLocation.preLogin], function (app) {
                 $scope.UserPostList[postIndex].alreadyLiked = false;
                 $scope.UserPostList[postIndex].likeInfoHtml = removeFromCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml, $scope.UserPostList[postIndex].likeInfoCount);
                 //$scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
+        function removeReactionOnUserPostComment(postIndex, commentIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/RemoveReactionOnPost?vertexId=' + $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                //startBlockUI('wait..', 3);
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = false;
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount - 1;
+                //$scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
+
                 $http({
                     url: url,
                     method: "POST",
@@ -501,6 +597,11 @@ define([appLocation.preLogin], function (app) {
             var reversedList = [];
             for (var i = newList.length - 1; i >= 0; i--) {
                 newList[i].editableMode = false;
+
+                if (newList[i].isLiked.length > 0) {
+                    newList[i].alreadyLiked = true;
+                }
+
                 if (newList[i].commentInfo.PostedByUser == $rootScope.clientDetailResponse.Email) {
                     newList[i].isAuthenticToEdit = true;
                 } else {
