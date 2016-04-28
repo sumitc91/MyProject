@@ -117,17 +117,17 @@
                 <button class="btn btn-danger pull-right" ng-click="createNewUserPost()">Post</button>
                 <ul class="nav nav-pills">
                     <li>
-                        <a href="#"><i class="fa fa-map-marker"></i></a>
+                        <a href=""><i class="fa fa-map-marker"></i></a>
                     </li>
                     <li>
                         <input type="file" style="display:none" id="my_file" ng-file-select="onFileSelectLogoUrl($files)">
                         <a id="get_file"><i class="fa fa-camera"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class=" fa fa-film"></i></a>
+                        <a href=""><i class=" fa fa-film"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-microphone"></i></a>
+                        <a href=""><i class="fa fa-microphone"></i></a>
                     </li>
                 </ul>
             </footer>
@@ -162,7 +162,7 @@
                                 </button>
                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
                                     <li role="menuitem" ng-show="post.userInfo[0]._id == clientDetailResponse.VertexId"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
-                                    <li role="menuitem" ng-show="post.postedToUser[0]._id == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a href="">Delete</a></li>
+                                    <li role="menuitem" ng-show="visitedUserVertexId == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a href="">Delete</a></li>
                                     <!--<li class="divider"></li>-->
                                     <li role="menuitem"><a href="">Mark Spam</a></li>
                                 </ul>
