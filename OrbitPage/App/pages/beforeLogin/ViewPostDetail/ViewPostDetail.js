@@ -378,7 +378,9 @@ define([appLocation.preLogin], function (app) {
                         "_type": null
                     }
                 ],
-                "isAuthenticToEdit": true
+                "isAuthenticToEdit": true,
+                "likeCount": 0,
+                "isLiked": []
             };
 
             var url = ServerContextPath.empty + '/User/UserCommentOnPost';
