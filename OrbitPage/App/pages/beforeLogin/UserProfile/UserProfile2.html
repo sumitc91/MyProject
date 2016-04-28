@@ -232,7 +232,8 @@
                                         
                                         &nbsp;
                                         <a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode && comment.isAuthenticToEdit" class="like-link">Edit</a> &nbsp;
-                                        <a href="" class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall">Delete</a>
+                                        <a class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall" confirmed-click="deleteOnUserPostComment()" ng-confirm-click="Would you like to delete this comment?">Delete</a>
+                                        <!--<a class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall" ng-click="deleteOnUserPostComment($parent.$index,$index)">Delete</a>-->
                                     </p>
                                 </div>
                             </li>                                                       

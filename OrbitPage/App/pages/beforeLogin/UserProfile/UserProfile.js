@@ -43,6 +43,10 @@ define([appLocation.preLogin], function (app) {
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
         };
 
+        $scope.deleteOnUserPostComment = function (postIndex, commentIndex) {
+            deleteCommentOnUserPost(postIndex, commentIndex);
+        };
+
         $scope.reactionOnUserPost = function (postIndex) {            
             createNewReactionOnUserPost(postIndex);
             //createNewMessageOnUserPost($scope.UserPostList[postIndex].postInfo._id, $scope.UserPostList[postIndex].postInfo.postUserComment);
@@ -400,6 +404,51 @@ define([appLocation.preLogin], function (app) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = false;
                 $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount - 1;
+                //$scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
+
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
+        function deleteCommentOnUserPost(postIndex, commentIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/DeleteCommentOnPost?vertexId=' + $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                //startBlockUI('wait..', 3);
+                //$scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = false;
+                //$scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount - 1;
                 //$scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
 
                 $http({
