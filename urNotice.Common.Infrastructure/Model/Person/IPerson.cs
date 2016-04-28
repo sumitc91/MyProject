@@ -25,9 +25,9 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
         ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
         ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq);
-        ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image,string userWallVertexId, out Dictionary<string, string> sendNotificationResponse);
+        ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse);
         ResponseModel<string> SeenNotification(string userName);
-        Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId,string postVertexId, string postPostedByVertexId, string notificationType);
+        HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType);
 
         SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid);
 

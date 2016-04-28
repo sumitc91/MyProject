@@ -44,12 +44,12 @@ namespace OrbitPage.Controllers
                     image = String.Empty;
                 }
 
-                Dictionary<string, string> sendNotificationResponse = null;
+                HashSet<string> sendNotificationHashSetResponse = null;
                 IPerson clientModel = new Consumer();
-                var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationResponse);
-                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
+                var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationHashSetResponse);
+                if (sendNotificationHashSetResponse.Count > 0)
                 {
-                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);                     
+                    new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);                     
                 }
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
@@ -83,11 +83,11 @@ namespace OrbitPage.Controllers
                 {
                     image = String.Empty;
                 }
-                Dictionary<string, string> sendNotificationResponse = null;
-                var newUserPostCommentResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationResponse);
-                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
+                HashSet<string> sendNotificationHashSetResponse = null;
+                var newUserPostCommentResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationHashSetResponse);
+                if (sendNotificationHashSetResponse.Count>0)
                 {
-                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
+                    new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }
@@ -112,11 +112,11 @@ namespace OrbitPage.Controllers
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {                
-                Dictionary<string, string> sendNotificationResponse = null;
-                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationResponse);
-                if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
+                HashSet<string> sendNotificationHashSetResponse = null;
+                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationHashSetResponse);
+                if (sendNotificationHashSetResponse.Count>0)
                 {
-                    new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);
+                    new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }

@@ -9,11 +9,11 @@ namespace OrbitPage.Hubs
 {
     public class SignalRNotification
     {
-        public string SendNewPostNotification(string vertexIds)
+        public string SendNewPostNotification(HashSet<string> vertexIds)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
 
-            foreach (var vertexId in vertexIds.Split(','))
+            foreach (var vertexId in vertexIds)
             {
                 if(!string.IsNullOrWhiteSpace(vertexId))
                     new ChatHub().AddNotificationMessage("1","message", vertexId);

@@ -280,6 +280,8 @@
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerApiCommonDetail.cs" />
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerAuth.cs" />
     <Compile Include="Model\urNoticeModel\User\UserNewPostRequest.cs" />
+    <Compile Include="Model\urNoticeModel\User\UserNotificationGraphModel.cs" />
+    <Compile Include="Model\urNoticeModel\User\UserPushNotificationListWrapper.cs" />
     <Compile Include="Model\urNoticeModel\Vo\CreateCompanyDetailVo.cs" />
     <Compile Include="Model\urNoticeModel\Vo\CreateStoryDetailVo.cs" />
     <Compile Include="Model\urNoticeModel\Vo\GeoLocationGoogleApi.cs" />

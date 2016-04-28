@@ -72,7 +72,7 @@ namespace urNotice.Services.Person
         }
 
         public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,
-            out Dictionary<string, string> sendNotificationResponse)
+            out HashSet<string> sendNotificationResponse)
         {
             throw new NotImplementedException();
         }
@@ -82,7 +82,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,
+        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,
             string postPostedByVertexId, string notificationType)
         {
             throw new NotImplementedException();
