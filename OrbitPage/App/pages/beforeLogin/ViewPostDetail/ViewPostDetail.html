@@ -98,7 +98,7 @@
                                                         {{comment.commentInfo.PostedTime | timeago}} -
                                                         <a class="like-link" title="Like this" ng-show="!comment.alreadyLiked" ng-click="reactionOnUserPostComment($parent.$index,$index)">Like</a>
                                                         <a class="like-link" title="Unlike this" ng-show="comment.alreadyLiked" ng-click="removeReactionOnUserPostComment($parent.$index,$index)">Unlike</a>
-                                                        <a class="like-link" title="Likes Count"> (<span ng-bind="comment.likeCount"></span>) </a>
+                                                        <a class="like-link" title="Likes Count"> <span class="hover_div"><span class="like-summary" ng-click="showLikedByUsers(comment.commentInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal">(<span ng-bind="comment.likeCount"></span>)</span></span>  </a>
                                                         &nbsp;
                                                         <a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode && comment.isAuthenticToEdit" class="like-link">Edit</a> &nbsp;
                                                         <a href="" class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall">Delete</a>
