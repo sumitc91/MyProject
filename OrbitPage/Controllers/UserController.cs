@@ -104,12 +104,7 @@ namespace OrbitPage.Controllers
         [System.Web.Mvc.HttpPost]
         public JsonResult UserReactionOnPost(UserNewReactionRequest userNewReactionRequest)
         {
-            var reaction = userNewReactionRequest.Reaction;
-
-            var vertexId = userNewReactionRequest.VertexId;
-
-            var userWallVertexId = userNewReactionRequest.WallVertexId;
-            var postPostedByVertexId = userNewReactionRequest.PostPostedByVertexId;
+            
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
@@ -118,7 +113,7 @@ namespace OrbitPage.Controllers
             if (isValidToken)
             {                
                 Dictionary<string, string> sendNotificationResponse = null;
-                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, reaction, vertexId, userWallVertexId, postPostedByVertexId, out sendNotificationResponse);
+                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationResponse);
                 if (sendNotificationResponse.ContainsKey(CommonConstants.PushNotificationArray))
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationResponse.FirstOrDefault(x => x.Key == CommonConstants.PushNotificationArray).Value);

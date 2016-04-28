@@ -166,7 +166,8 @@ define([appLocation.preLogin], function (app) {
                 Reaction: UserReaction.Like,                
                 VertexId: $scope.UserPostList[postIndex].postInfo._id,
                 WallVertexId: $scope.UserPostList[postIndex].postedToUser[0]._id,
-                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id,
+                IsParentPost: true,
             };
 
             var url = ServerContextPath.empty + '/User/UserReactionOnPost';
@@ -212,7 +213,9 @@ define([appLocation.preLogin], function (app) {
                 Reaction: UserReaction.Like,
                 VertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
                 WallVertexId: $scope.visitedUserVertexId,
-                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id
+                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id,
+                IsParentPost: false,
+                ParentVertexId: $scope.UserPostList[postIndex].postInfo._id
             };
 
             var url = ServerContextPath.empty + '/User/UserReactionOnPost';

@@ -14,6 +14,7 @@ using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.ErrorLogger;
@@ -443,10 +444,16 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, string reaction, string vertexId, string userWallVertexId, string postPostedByVertexId, out Dictionary<string, string> sendNotificationResponse)
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest, out Dictionary<string, string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserVertexModel>();
-            
+            var reaction = userNewReactionRequest.Reaction;
+
+            var vertexId = userNewReactionRequest.VertexId;
+
+            var userWallVertexId = userNewReactionRequest.WallVertexId;
+            var postPostedByVertexId = userNewReactionRequest.PostPostedByVertexId;
+
             var properties = new Dictionary<string, string>();
             if (reaction.Equals(UserReactionEnum.Like.ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
@@ -461,6 +468,10 @@ namespace urNotice.Services.UserService
 
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
             IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+
+            //if comment is liked.
+            if (!userNewReactionRequest.IsParentPost)
+                vertexId = userNewReactionRequest.ParentVertexId;
 
             IPerson consumerModel = new Consumer();
             sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());

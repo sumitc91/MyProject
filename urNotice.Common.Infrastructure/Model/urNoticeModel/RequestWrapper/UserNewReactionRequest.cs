@@ -12,5 +12,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper
         public String VertexId { get; set; }
         public String WallVertexId { get; set; }
         public String PostPostedByVertexId { get; set; }
+        public bool IsParentPost { get; set; }
+        public String ParentVertexId { get; set; }
     }
 }
