@@ -63,6 +63,17 @@ define([appLocation.preLogin], function (app) {
             }
         };
 
+        $scope.removeImageOnUserPostComment = function (postIndex, commentIndex) {
+
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostImage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage;            
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage = "";
+            //console.log(postIndex);
+            //console.log($scope.UserPostList[postIndex].postInfo.OriginalPostImage);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
         $scope.showLikedByUsers = function (postVertexId) {
             $scope.UserPostLikes = [];
             $scope.UserPostLikesFrom = 0;
@@ -483,6 +494,32 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        $scope.onEditFileSelectLogoUrlForComments = function ($files, postIndex,commentIndex) {
+
+            startBlockUI('wait..', 3);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                $scope.upload = $upload.upload({
+                    url: '/Upload/UploadAngularFileOnImgUr', //UploadAngularFileOnImgUr                    
+                    data: { myObj: $scope.myModelObj },
+                    file: file, // or list of files ($files) for html5 only                    
+                }).progress(function (evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+
+                    stopBlockUI();
+
+                    $timeout(function () {
+                        $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage = data.data.link_s;
+                    });
+
+                });
+
+            }
+
+        };
+
         $scope.removeUploadedCommentImage = function(postIndex) {
             $scope.UserPostList[postIndex].postInfo.newCommentImage = "";
         };
@@ -655,6 +692,7 @@ define([appLocation.preLogin], function (app) {
         $scope.cancelEditOnUserPost = function (postIndex) {
             $scope.UserPostList[postIndex].postInfo.editableMode = false;
             $scope.UserPostList[postIndex].postInfo.PostMessage = $scope.UserPostList[postIndex].postInfo.OriginalPostMessage;
+            $scope.UserPostList[postIndex].postInfo.PostImage = $scope.UserPostList[postIndex].postInfo.OriginalPostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }
@@ -741,6 +779,7 @@ define([appLocation.preLogin], function (app) {
         $scope.cancelEditcommentOnUserPost = function (postIndex, commentIndex) {            
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = false;
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage;
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }            
@@ -762,10 +801,11 @@ define([appLocation.preLogin], function (app) {
                 return;
             }
 
-            if ($scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage == $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage) {
-                //showToastMessage("Warning", "You cann't submit empty message.");
-                return;
-            }
+            //if ($scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage == $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage
+            //    && $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage == $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostImage) {
+            //    //showToastMessage("Warning", "You cann't submit empty message.");
+            //    return;
+            //}
 
             var editMessageRequest = {
                 message: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage,

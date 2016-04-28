@@ -161,9 +161,9 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-                                    <li role="menuitem"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
-                                    <li role="menuitem"><a href="">Delete</a></li>
-                                    <li class="divider"></li>
+                                    <li role="menuitem" ng-show="post.userInfo[0]._id == clientDetailResponse.VertexId"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
+                                    <li role="menuitem" ng-show="post.postedToUser[0]._id == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a href="">Delete</a></li>
+                                    <!--<li class="divider"></li>-->
                                     <li role="menuitem"><a href="">Mark Spam</a></li>
                                 </ul>
                             </div>
@@ -210,15 +210,20 @@
                                 <div class="cmt-details">
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
                                     <span ng-bind="comment.commentInfo.PostMessage" ng-show="!comment.editableMode"></span>
-                                    <div class="post-image" ng-show="comment.commentInfo.PostImage">
-                                        <a class="fancybox" rel="group" href="{{comment.commentInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{comment.commentInfo.PostImage}}" alt="" style="max-height:100px" /></a>
-                                    </div>
-                                                                        
                                     <div ng-show="comment.editableMode">
-                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">                                        
+                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">
                                         <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
                                     </div>
                                     <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                                    <div class="post-image" ng-show="comment.commentInfo.PostImage && !comment.editableMode">
+                                        <a class="fancybox" rel="group" href="{{comment.commentInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{comment.commentInfo.PostImage}}" alt="" style="max-height:100px" /></a>
+                                    </div>
+                                    <div class="post-image" ng-show="comment.editableMode">
+                                        <img class="image" ng-show="comment.commentInfo.PostImage" ng-src="{{comment.commentInfo.PostImage}}" alt="" style="max-height:200px" />
+                                        <input type="button" value="delete" ng-show="comment.commentInfo.PostImage" ng-click="removeImageOnUserPostComment($parent.$index,$index)" />
+                                        <input type="file" ng-file-select="onEditFileSelectLogoUrlForComments($files,$parent.$index,$index)">
+                                    </div>                                    
+                                    
                                     <p ng-show="!comment.loadingIcon">
                                         {{comment.commentInfo.PostedTime | timeago}} -
                                         <a href="" class="like-link">Like</a> &nbsp;<a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode && comment.isAuthenticToEdit" class="like-link">Edit</a> &nbsp;<a href="" class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall">Delete</a>
@@ -288,7 +293,7 @@
         </div>
     </div>
     <div class="col-md-2">
-        <div data-max-chat-history="25" data-order-by-status="1" data-current-user="Art Ramadani" class="fixed" id="chat">
+        <div data-max-chat-history="25" data-order-by-status="1" data-current-user="Art Ramadani" class="fixed" id="chat" ng-show="!IsMobileDevice">
             <div class="chat-inner" style="overflow: hidden;" tabindex="5000">
                 <h2 class="chat-header">
                     <a class="chat-close" href="#"><i class="entypo-cancel"></i></a> <i class="entypo-users"></i>
@@ -317,7 +322,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".fancybox").fancybox();
+        $(".fancybox").fancybox({
+            helpers: {
+                overlay: {
+                    locked: false
+                }
+            }
+        });
     });
 
     document.getElementById('get_file').onclick = function () {
