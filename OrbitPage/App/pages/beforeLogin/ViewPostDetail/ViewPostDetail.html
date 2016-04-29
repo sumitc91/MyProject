@@ -31,7 +31,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
                                                     <li role="menuitem" ng-show="post.userInfo[0]._id == clientDetailResponse.VertexId"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
-                                                    <li role="menuitem" ng-show="post.postedToUser[0]._id == clientDetailResponse.VertexId"><a href="">Delete</a></li>
+                                                    <li role="menuitem" ng-show="post.postedToUser[0]._id == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a confirmed-click="deleteUserPost($index)" ng-confirm-click="Would you like to delete this comment?">Delete</a></li>
                                                     <li class="divider"></li>
                                                     <li role="menuitem"><a href="">Mark Spam</a></li>
                                                 </ul>
@@ -101,7 +101,8 @@
                                                         <a class="like-link" title="Likes Count"> <span class="hover_div"><span class="like-summary" ng-click="showLikedByUsers(comment.commentInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal">(<span ng-bind="comment.likeCount"></span>)</span></span>  </a>
                                                         &nbsp;
                                                         <a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode && comment.isAuthenticToEdit" class="like-link">Edit</a> &nbsp;
-                                                        <a href="" class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall">Delete</a>
+                                                        <!--<a href="" class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall">Delete</a>-->
+                                                        <a class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall" confirmed-click="deleteOnUserPostComment($parent.$index,$index)" ng-confirm-click="Would you like to delete this comment?">Delete</a>
                                                     </p>
                                                 </div>
                                             </li>  
@@ -170,7 +171,9 @@
                 </div>
             </div>
 
-
+            <div ng-show="UserPostList.length==0" ng-cloak>
+                <h5>Not Available.</h5>
+            </div>
         </section>
     </div>
 

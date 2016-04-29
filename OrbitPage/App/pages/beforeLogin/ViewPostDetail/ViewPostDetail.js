@@ -66,6 +66,15 @@ define([appLocation.preLogin], function (app) {
             //link_s:"https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/9ac2bfce-a1eb-4a51-9f18-ad5591a72cc0.png"
         };
         
+        $scope.deleteOnUserPostComment = function (postIndex, commentIndex) {
+            deleteCommentOnUserPost(postIndex, commentIndex);
+        };
+
+        $scope.deleteUserPost = function (postIndex) {
+            //console.log("deleteUserPost : "+postIndex);
+            deleteOnUserPost(postIndex);
+        };
+
         $scope.closeModelAndNavigateTo = function (vid) {
             //console.log("inside closeModelAndNavigateTo");  
             $(".modal-backdrop.in").hide();
@@ -339,6 +348,110 @@ define([appLocation.preLogin], function (app) {
                 showToastMessage("Warning", "Please Login to Make your reaction on post.");
             }
 
+        };
+
+        function deleteOnUserPost(postIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].postInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/DeleteCommentOnPost?vertexId=' + $scope.UserPostList[postIndex].postInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+
+            if ($rootScope.isUserLoggedIn) {
+                spliceOnUserPost(postIndex);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
+        function spliceOnUserPost(postIndex) {
+            $scope.UserPostList.splice(postIndex, 1);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
+        function deleteCommentOnUserPost(postIndex, commentIndex) {
+
+            var userPostReactionData = {
+                Reaction: UserReaction.Like,
+                VertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id,
+                WallVertexId: $scope.visitedUserVertexId,
+                PostPostedByVertexId: $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentedBy[0]._id
+            };
+
+            var url = ServerContextPath.empty + '/User/DeleteCommentOnPost?vertexId=' + $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo._id;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+
+            if ($rootScope.isUserLoggedIn) {
+                spliceCommentOnUserPost(postIndex, commentIndex);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostReactionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    //stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make your reaction on post.");
+            }
+
+        };
+
+        function spliceCommentOnUserPost(postIndex, commentIndex) {
+            console.log("splice PostIndex : " + postIndex);
+            console.log("splice commentIndex : " + commentIndex);
+            //var index = $scope.UserPostList[postIndex].commentsInfo.indexOf(commentIndex);
+            //console.log("splice index : " + index);
+
+            $scope.UserPostList[postIndex].commentsInfo.splice(commentIndex, 1);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("splice index : end ");
         };
 
         function createNewMessageOnUserPost(postIndex) {
