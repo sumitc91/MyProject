@@ -46,6 +46,9 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                         null,
                         null,
                         false,
+                        null,
+                        null,
+                        null,
                         null
                         );
         }
@@ -169,12 +172,16 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     null,
                     false,
-                    timeStamp
+                    timeStamp,
+                    null,
+                    null,
+                    null
                     );
         }
 
-        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageVertexDetail(OrbitPageVertexDetail orbitPageVertexDetail, String userName)
+        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageVertexDetail(OrbitPageVertexDetail orbitPageVertexDetail, String userName, HashSet<string> canEdit, HashSet<string> canDelete, HashSet<string> sendNotificationToUsers)
         {
+            
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
                     DynamoDbHashKeyDataType.VertexDetail.ToString(),
                     orbitPageVertexDetail.vertexId,
@@ -193,12 +200,18 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     null,
                     null,
                     false,
-                    null
+                    null,
+                    canEdit,
+                    canDelete,
+                    sendNotificationToUsers
                     );
         }
 
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageEdgeDetail(OrbitPageEdgeDetail orbitPageEdgeDetail, String userName,String inV,String outV)
         {
+            var canEdit = new HashSet<string> { };
+            var canDelete = new HashSet<string> { };
+
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
                     DynamoDbHashKeyDataType.EdgeDetail.ToString(),
                     orbitPageEdgeDetail.edgeId,
@@ -217,6 +230,9 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     orbitPageEdgeDetail,
                     null,
                     false,
+                    null,
+                    canEdit,
+                    canDelete,
                     null
                     );
         }
@@ -241,12 +257,15 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             false,
+                            null,
+                            null,
+                            null,
                             null
                             );
         }
 
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageCompany(OrbitPageCompany company, string companyVertexId)
-        {
+        {            
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
                             DynamoDbHashKeyDataType.Company.ToString(),
                             company.CompanyName,
@@ -265,6 +284,9 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             false,
+                            null,
+                            null,
+                            null,
                             null
                             );
         }
@@ -289,12 +311,17 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             false,
+                            null,
+                            null,
+                            null,
                             null
                             );
         }
 
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy)
         {
+            var sendNotificationToUsers = new HashSet<string> {orbitPageWorkgraphy.createdByVertexId};
+
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
                             DynamoDbHashKeyDataType.OrbitPageWorkgraphy.ToString(),
                             orbitPageWorkgraphy.workgraphyVertexId,
@@ -313,7 +340,10 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                             null,
                             null,
                             false,
-                            null
+                            null,
+                            null,
+                            null,
+                            sendNotificationToUsers
                             );
         }
 
@@ -335,7 +365,10 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             OrbitPageEdgeDetail orbitPageEdgeDetail,
             OrbitPageUserNotification orbitPageUserNotification,
             Boolean isSolrUpdated,
-            long? lastNotificationSeenTimeStamp
+            long? lastNotificationSeenTimeStamp,
+            HashSet<String> canEdit,
+            HashSet<String> canDelete,
+            HashSet<String> sendNotificationToUserList
             )
         {
             var context = GetDynamoDbContext();
@@ -360,6 +393,10 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             orbitPageCompanyUserWorkgraphyTable.CreatedDate = DateTimeUtil.GetUtcTime();
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUserNotification = orbitPageUserNotification;
             orbitPageCompanyUserWorkgraphyTable.LastNotificationSeenTimeStamp = lastNotificationSeenTimeStamp;
+            orbitPageCompanyUserWorkgraphyTable.CanEdit = canEdit;
+            orbitPageCompanyUserWorkgraphyTable.CanDelete = canDelete;
+            orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList = sendNotificationToUserList;
+
             context.Save(orbitPageCompanyUserWorkgraphyTable);
             return orbitPageCompanyUserWorkgraphyTable;
         }

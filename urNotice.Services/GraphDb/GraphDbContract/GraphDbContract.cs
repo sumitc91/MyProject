@@ -29,7 +29,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.CoverImageUrl.ToString()] = user.userCoverPic??"";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(user.email, TitanGraphConfig.Graph, properties);
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(user.email, TitanGraphConfig.Graph, properties,null,null,null);
 
             return addVertexResponse;
         }
@@ -45,8 +45,13 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.Heading.ToString()] = story.Data.heading;
             properties[VertexPropertyEnum.IsVerified.ToString()] = CommonConstants.FALSE;
 
+            var hashtSet = new HashSet<String>() { session.UserVertexId };
+            //var canEdit = new HashSet<String>() { session.UserVertexId};
+            //var canDelete = new HashSet<String>() { session.UserVertexId };
+            //var sendNotificationToUsers = new HashSet<String>() { session.UserVertexId };
+
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(story.Data.email, TitanGraphConfig.Graph, properties);
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(story.Data.email, TitanGraphConfig.Graph, properties, hashtSet, hashtSet, hashtSet);
 
            
             properties = new Dictionary<string, string>();
@@ -90,7 +95,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail, TitanGraphConfig.Graph, properties);
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail, TitanGraphConfig.Graph, properties,null,null,null);
 
             return addVertexResponse;
         }
@@ -105,7 +110,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[VertexPropertyEnum.CreatedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail, TitanGraphConfig.Graph, properties);//new GraphVertexOperations().AddVertex(adminEmail, url, companyName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+            Dictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(adminEmail, TitanGraphConfig.Graph, properties,null,null,null);//new GraphVertexOperations().AddVertex(adminEmail, url, companyName, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             return addVertexResponse;
         }

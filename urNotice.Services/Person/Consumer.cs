@@ -229,8 +229,19 @@ namespace urNotice.Services.Person
             properties[VertexPropertyEnum.PostedTimeLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
             properties[VertexPropertyEnum.PostImage.ToString()] = image;
 
+            
+            var canEdit = new HashSet<String>() { session.UserVertexId};
+            
+            var canDelete = new HashSet<String>();
+            canDelete.Add(session.UserVertexId);            
+            canDelete.Add(userWallVertexId);
+
+            var sendNotificationToUsers = new HashSet<String>();
+            sendNotificationToUsers.Add(session.UserVertexId);
+            sendNotificationToUsers.Add(userWallVertexId);
+
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties);
+            IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, canEdit, canDelete, sendNotificationToUsers);
             
             properties = new Dictionary<string, string>();
             properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;

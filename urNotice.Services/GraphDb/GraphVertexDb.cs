@@ -17,7 +17,7 @@ namespace urNotice.Services.GraphDb
 {
     public class GraphVertexDb : IGraphVertexDb
     {
-        public Dictionary<string, string> AddVertex(string email, string graphName, Dictionary<string, string> properties)
+        public Dictionary<string, string> AddVertex(string email, string graphName, Dictionary<string, string> properties, HashSet<string> canEdit, HashSet<string> canDelete, HashSet<string> sendNotificationToUsers)
         {
             string url = TitanGraphConfig.Server;
             var response = CreateVertex(graphName, properties, url);            
@@ -30,7 +30,7 @@ namespace urNotice.Services.GraphDb
             };
 
             IDynamoDb dynamoDbModel = new DynamoDb();
-            dynamoDbModel.UpsertOrbitPageVertexDetail(orbitPageVertexDetail, email);
+            dynamoDbModel.UpsertOrbitPageVertexDetail(orbitPageVertexDetail, email,canEdit, canDelete, sendNotificationToUsers);
             
             return response;
         }
@@ -38,8 +38,9 @@ namespace urNotice.Services.GraphDb
         public Dictionary<string, string> UpdateVertex(string vertexId,string email, string graphName, Dictionary<string, string> properties)
         {
             string url = TitanGraphConfig.Server;
+            var orbitPageCompanyUserWorkgraphyTable = GetVertexDetails(vertexId);
 
-            var response = UpdateGraphVertex(vertexId,graphName, properties, url);
+            var response = UpdateGraphVertex(vertexId, graphName, properties, url, orbitPageCompanyUserWorkgraphyTable);
             var orbitPageVertexDetail = new OrbitPageVertexDetail
             {
                 url = url,
@@ -48,17 +49,22 @@ namespace urNotice.Services.GraphDb
                 properties = response
             };
 
+            orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail = orbitPageVertexDetail;
             IDynamoDb dynamoDbModel = new DynamoDb();
-            dynamoDbModel.UpsertOrbitPageVertexDetail(orbitPageVertexDetail, email);
+            dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(orbitPageCompanyUserWorkgraphyTable);
 
             return response;
         }
 
-        private Dictionary<String, String> UpdateGraphVertex(string vertexId, string graphName, Dictionary<string, string> properties, string url)
+        private Dictionary<String, String> UpdateGraphVertex(string vertexId, string graphName, Dictionary<string, string> properties, string url, OrbitPageCompanyUserWorkgraphyTable orbitPageCompanyUserWorkgraphyTable)
         {
             var uri = new StringBuilder("/graphs/" + graphName + "/vertices/"+vertexId+"?");
 
-            var oldProperties = GetVertexDetails(vertexId);
+            var oldProperties = new Dictionary<string, string>();
+            
+            if (orbitPageCompanyUserWorkgraphyTable != null && orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail != null)
+                oldProperties =  orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail.properties;
+
             var newProperties = new Dictionary<String, String>();
 
             if (oldProperties == null)
@@ -121,16 +127,16 @@ namespace urNotice.Services.GraphDb
             return newProperties;
         }
 
-        private Dictionary<string, string> GetVertexDetails(string vertexId)
+        private OrbitPageCompanyUserWorkgraphyTable GetVertexDetails(string vertexId)
         {
             IDynamoDb dynamoDbModel = new DynamoDb();
             var orbitPageCompanyUserWorkgraphyTable = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(DynamoDbHashKeyDataType.VertexDetail.ToString(),
                 vertexId, null);
 
-            if (orbitPageCompanyUserWorkgraphyTable != null && orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail != null)
-                return orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail.properties;
+            //if (orbitPageCompanyUserWorkgraphyTable != null && orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail != null)
+            //    return orbitPageCompanyUserWorkgraphyTable.OrbitPageVertexDetail.properties;
 
-            return null;
+            return orbitPageCompanyUserWorkgraphyTable;
         }
         private Dictionary<String, String> CreateVertex(string graphName, Dictionary<string, string> properties, string url)
         {

@@ -74,5 +74,14 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb
         [DynamoDBProperty]
         public long? LastNotificationSeenTimeStamp { get; set; }
 
+        [DynamoDBProperty]
+        public HashSet<String> CanEdit { get; set; }
+
+        [DynamoDBProperty]
+        public HashSet<String> CanDelete { get; set; }
+
+        [DynamoDBProperty]
+        public HashSet<String> SendNotificationToUserList { get; set; }
+
     }
 }

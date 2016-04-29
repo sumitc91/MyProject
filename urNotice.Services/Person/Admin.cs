@@ -131,8 +131,13 @@ namespace urNotice.Services.Person
             properties[VertexPropertyEnum.JobFromYear.ToString()] = jobFromYear;
             properties[VertexPropertyEnum.JobToYear.ToString()] = jobToYear;
 
+            var hashSet = new HashSet<String>() { session.UserVertexId };
+            //var canEdit = new HashSet<String>() { session.UserVertexId};
+            //var canDelete = new HashSet<String>() { session.UserVertexId };
+            //var sendNotificationToUsers = new HashSet<String>() { session.UserVertexId };
+
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties);
+            IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, hashSet, hashSet, hashSet);
 
             properties = new Dictionary<string, string>();
             properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
