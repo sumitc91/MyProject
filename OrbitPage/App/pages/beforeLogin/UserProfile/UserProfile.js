@@ -445,12 +445,9 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
 
+            
             if ($rootScope.isUserLoggedIn) {
-                //startBlockUI('wait..', 3);
-                //$scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = false;
-                //$scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount - 1;
-                //$scope.UserPostList[postIndex].likeInfoCount = $scope.UserPostList[postIndex].likeInfoCount - 1;
-
+                spliceCommentOnUserPost(postIndex, commentIndex);
                 $http({
                     url: url,
                     method: "POST",
@@ -473,6 +470,18 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        function spliceCommentOnUserPost(postIndex, commentIndex) {
+            console.log("splice PostIndex : " + postIndex);
+            console.log("splice commentIndex : " + commentIndex);
+            //var index = $scope.UserPostList[postIndex].commentsInfo.indexOf(commentIndex);
+            //console.log("splice index : " + index);
+
+            $scope.UserPostList[postIndex].commentsInfo.splice(commentIndex, 1);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("splice index : end ");
+        };
         function createNewMessageOnUserPost(postIndex) {
 
             

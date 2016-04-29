@@ -190,5 +190,52 @@ namespace urNotice.Services.GraphDb
             var content = res.Content; // raw content as string 
             return content;
         }
+
+
+        public Dictionary<string, string> DeleteVertex(string vertexId, string userVertexId, string label)
+        {
+            string url = TitanGraphConfig.Server;
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var vertexInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(DynamoDbHashKeyDataType.VertexDetail.ToString(),vertexId,null);
+            if (vertexInfo == null)
+                return null;
+
+            //Get all inEdges to delete
+            var allInEdgesInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInEdges(vertexId);
+
+            //Get all outEdges to delete
+            var allOutEdgesInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingOutEdges(vertexId);
+
+            var response = DeleteVertexNative(TitanGraphConfig.Graph, vertexId, url);
+            dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(vertexInfo);
+            dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(allInEdgesInfo);
+            dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(allOutEdgesInfo);
+
+            return response;
+        }
+
+        private Dictionary<String, String> DeleteVertexNative(string graphName, string vertexId, string url)
+        {
+            var uri = new StringBuilder(url + "/graphs/" + graphName + "/vertices/" + vertexId);
+
+            //graphs/<graph>/edges/3
+
+            var client = new RestClient(uri.ToString());
+            var request = new RestRequest();
+
+            request.Method = Method.DELETE;
+            request.AddHeader("Accept", "application/json");
+            request.Parameters.Clear();
+            request.AddParameter("application/json", "", ParameterType.RequestBody);
+
+            var res = client.Execute(request);
+            var content = res.Content; // raw content as string 
+
+            //dynamic jsonResponse = JsonConvert.DeserializeObject(content);
+            var response = new Dictionary<String, String>();
+            response["status"] = "200";
+            return response;
+        }
     }
 }

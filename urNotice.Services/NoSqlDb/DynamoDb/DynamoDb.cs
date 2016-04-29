@@ -88,9 +88,29 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                 new ScanCondition("InV", ScanOperator.Equal, inV),
                 new ScanCondition("OutV", ScanOperator.Equal, outV)
                   );
-
             return res.FirstOrDefault();
+        }
 
+        public IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableUsingOutEdges(string outV)
+        {
+            var context = GetDynamoDbContext();
+
+            IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
+                new ScanCondition("DataType", ScanOperator.Equal, DynamoDbHashKeyDataType.EdgeDetail.ToString()),                               
+                new ScanCondition("OutV", ScanOperator.Equal, outV)
+                  );
+            return res;
+        }
+
+        public IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableUsingInEdges(string inV)
+        {
+            var context = GetDynamoDbContext();
+
+            IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
+                new ScanCondition("DataType", ScanOperator.Equal, DynamoDbHashKeyDataType.EdgeDetail.ToString()),                
+                new ScanCondition("InV", ScanOperator.Equal, inV)
+                  );
+            return res;
         }
 
         public long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName)
@@ -118,6 +138,15 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             context.Delete(res);
             return true;
 
+        }
+
+        public bool DeleteOrbitPageCompanyUserWorkgraphyTable(IEnumerable<OrbitPageCompanyUserWorkgraphyTable> resList)
+        {
+            //TODO:delete multiple items from dynamodb.
+            //var context = GetDynamoDbContext();
+            //context.Delete(resList);
+            
+            return true;
         }
 
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,long timeStamp)

@@ -24,6 +24,12 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(string dataType,string facebookId);
         long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName);
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(string inV,string outV,string label);
+
+        IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableUsingOutEdges(string outV);
+
+        IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableUsingInEdges(string inV);
         bool DeleteOrbitPageCompanyUserWorkgraphyTable(OrbitPageCompanyUserWorkgraphyTable res);
+
+        bool DeleteOrbitPageCompanyUserWorkgraphyTable(IEnumerable<OrbitPageCompanyUserWorkgraphyTable> resList);
     }
 }
