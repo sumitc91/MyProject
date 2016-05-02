@@ -27,185 +27,7 @@ namespace urNotice.Services.UserService
     public class UserService
     {
         private static readonly ILogger Logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));        
-        //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
-
-        //public ResponseModel<ClientDetailsModel> GetClientDetails(string username,string accessKey,string secretKey)
-        //{
-        //    var response = new ResponseModel<ClientDetailsModel>();
-
-        //    try
-        //    {
-        //        //var clientDetailDbResult = _db.Users.SingleOrDefault(x => x.username == username);
-        //        IDynamoDb dynamoDbModel = new DynamoDb();
-        //        var userInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-        //            DynamoDbHashKeyDataType.OrbitPageUser.ToString(),
-        //            username,
-        //            null
-        //            );
-
-        //        if (userInfo != null)
-        //        {
-        //            var createClientDetailResponse = new ClientDetailsModel
-        //            {
-        //                FirstName = userInfo.OrbitPageUser.firstName,
-        //                LastName = userInfo.OrbitPageUser.lastName,
-        //                Username = userInfo.OrbitPageUser.email,
-        //                imageUrl = userInfo.OrbitPageUser.imageUrl == CommonConstants.NA ? CommonConstants.clientImageUrl : userInfo.OrbitPageUser.imageUrl,
-        //                gender = userInfo.OrbitPageUser.gender,
-        //                isLocked = userInfo.OrbitPageUser.locked
-        //            };
-
-        //            response.Status = 200;
-        //            response.Message = "success";
-        //            response.Payload = createClientDetailResponse;
-
-        //        }
-        //        else
-        //        {
-        //            response.Status = 404;
-        //            response.Message = "username not found";
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        response.Status = 500;
-        //        response.Message = "exception occured !!!";
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out Dictionary<string, string> sendNotificationResponse)
-        //{
-        //    var response = new ResponseModel<UserPostVertexModel>();
-            
-        //    var properties = new Dictionary<string, string>();
-
-        //    properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Post.ToString();
-        //    properties[VertexPropertyEnum.PostMessage.ToString()] = message;
-        //    properties[VertexPropertyEnum.PostedByUser.ToString()] = session.UserName;
-        //    properties[VertexPropertyEnum.PostedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
-        //    properties[VertexPropertyEnum.PostImage.ToString()] = image;
-
-        //    IGraphVertexDb graphVertexDb = new GraphVertexDb();
-        //    IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName,TitanGraphConfig.Graph,properties);//new GraphVertexOperations().AddVertex(session.UserName, TitanGraphConfig.Server, userWallVertexId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-
-        //    string edgeId = session.UserName + "_" + DateTime.Now.Ticks;
-        //    properties = new Dictionary<string, string>();
-        //    properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
-        //    properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-        //    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Created.ToString();
-
-        //    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-        //    IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-            
-        //    //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
-        //    edgeId = session.UserName + "_" + DateTime.Now.Ticks;
-        //    properties = new Dictionary<string, string>();
-
-        //    if (userWallVertexId != null && userWallVertexId != session.UserVertexId)
-        //    {
-        //        properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-        //        properties[EdgePropertyEnum._inV.ToString()] = userWallVertexId;
-        //        properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
-        //        //if (response.ContainsKey(CommonConstants.PushNotificationArray))
-        //        //    response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] + CommonConstants.CommaDelimeter + userWallVertexId;
-        //        //else
-        //        //    response[CommonConstants.PushNotificationArray] = userWallVertexId;
-        //    }
-        //    else
-        //    {
-        //        properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-        //        properties[EdgePropertyEnum._inV.ToString()] = session.UserVertexId;
-        //        properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
-        //    }
-            
-            
-        //    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
-        //    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-        //    properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
-
-        //    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-
-        //    sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],null, EdgeLabelEnum.WallPostNotification.ToString());
-        //    var userPostVertexModel = new UserPostVertexModel();
-        //    userPostVertexModel.postInfo = new WallPostVertexModel()
-        //    {
-        //        _id = addVertexResponse[TitanGraphConstants.Id],
-        //        PostedByUser = session.UserName,
-        //        PostedTime = DateTimeUtil.GetUtcTimeString(),
-        //        PostImage = image,
-        //        PostMessage = message
-        //    };
-
-        //    userPostVertexModel.userInfo = new List<UserVertexModel>();
-        //    var userVertexModel = new UserVertexModel()
-        //    {
-        //        FirstName = session.UserName,//TODO: to fetch first name of user
-        //        LastName = "",
-        //        Username = session.UserName,
-        //        CreatedTime = DateTimeUtil.GetUtcTimeString(),
-        //        _id = userWallVertexId
-        //    };
-
-        //    userPostVertexModel.userInfo.Add(userVertexModel);
-
-        //    return response;
-        //}
-
-        //public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation, string salary,string jobFromYear,string jobToYear,string companyVertexId)
-        //{
-            
-        //    var properties = new Dictionary<string, string>();
-
-        //    properties[VertexPropertyEnum.Type.ToString()] = VertexLabelEnum.Salary.ToString();
-        //    properties[VertexPropertyEnum.DesignationName.ToString()] = designation;
-        //    properties[VertexPropertyEnum.Salary.ToString()] = salary;
-        //    properties[VertexPropertyEnum.PostedTime.ToString()] = DateTimeUtil.GetUtcTimeString();
-        //    properties[VertexPropertyEnum.JobFromYear.ToString()] = jobFromYear;
-        //    properties[VertexPropertyEnum.JobToYear.ToString()] = jobToYear;
-
-        //    IGraphVertexDb graphVertexDb = new GraphVertexDb();
-        //    IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties);//new GraphVertexOperations().AddVertex(session.UserName, TitanGraphConfig.Server, userWallVertexId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-
-        //    properties = new Dictionary<string, string>();
-        //    properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
-        //    properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-        //    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Salary.ToString();
-
-        //    IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
-        //    IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-
-        //    //_outV=<id>&_label=friend&_inV=2&<key>=<key'>
-        //    properties = new Dictionary<string, string>();
-
-            
-        //    properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
-        //    properties[EdgePropertyEnum._inV.ToString()] = companyVertexId;
-        //    properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
-            
-
-
-        //    properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
-        //    properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-        //    properties[EdgePropertyEnum.EdgeMessage.ToString()] = "";
-
-        //    IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
-
-        //    //var sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString(), accessKey, secretKey);
-
-        //    //foreach (var kvp in sendNotificationResponse)
-        //    //{
-        //    //    if (response.ContainsKey(CommonConstants.PushNotificationArray))
-        //    //        response[CommonConstants.PushNotificationArray] = response[CommonConstants.PushNotificationArray] +
-        //    //                                                          CommonConstants.CommaDelimeter + kvp.Value;
-        //    //}
-
-
-        //    //sendNotificationResponse["status"] = "200";
-        //    //return sendNotificationResponse;
-        //    return null;
-        //}
-
+        
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
             string url = TitanGraphConfig.Server;
@@ -223,13 +45,13 @@ namespace urNotice.Services.UserService
             return response;
         }
 
-        public string GetUserPostMessages(string userVertexId, string @from, string to)
+        public string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail)
         {
             string url = TitanGraphConfig.Server;
             string graphName = TitanGraphConfig.Graph;
 
-            
-            string gremlinQuery = "g.v(" + userVertexId + ").in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()["+from+".."+to+"].transform{[commentInfo:it, commentedBy: it.in('Created')]}";
+
+            string gremlinQuery = "g.v(" + userVertexId + ").in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[commentInfo:it, commentedBy: it.in('Created'),,likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]}";
             //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();

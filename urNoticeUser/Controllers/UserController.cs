@@ -288,7 +288,7 @@ namespace urNoticeUser.Controllers
                 
                 if (!String.IsNullOrWhiteSpace(vertexId) && !vertexId.Equals("undefined"))
                 {
-                    var getUserPostMessagesResponse = new UserService().GetUserPostMessages(vertexId, from, to);
+                    var getUserPostMessagesResponse = new UserService().GetUserPostMessages(vertexId, from, to, userEmail);
                     var getUserPostMessagesResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostMessagesVertexModelResponse>(getUserPostMessagesResponse);
 

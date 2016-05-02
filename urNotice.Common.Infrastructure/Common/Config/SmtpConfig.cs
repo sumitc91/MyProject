@@ -8,8 +8,8 @@ namespace urNotice.Common.Infrastructure.Common.Config
 {
     public class SmtpConfig
     {
-        public const string SmtpEmail = "sumitchourasia91@gmail.com";
-        public const string SmtpPassword = "F6WWebKEZNKZMWHTPfQUkg";
+        public const string SmtpEmail = "OrbitPage";
+        public const string SmtpPassword = "E31wApla1AJ5_Khl9v3Ocw";
         public const string SmtpPort = "587";
         public const string SmtpHost = "smtp.mandrillapp.com";
         public const string SmtpEnableSsl = "true";
