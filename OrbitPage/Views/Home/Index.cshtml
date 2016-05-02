@@ -241,7 +241,7 @@ div.middle-div-mobile {
                                             @*<ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>*@
                                                 <ul id="userNotificationDivId" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
                                                     <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientNotificationDetailResponse">
-                                                        <div class="row" ng-click="showPost(notification.postInfo[0]._id)">
+                                                        <div class="row" ng-click="showPost(notification.notificationInfo.ParentPostId)">
                                                             <div class="col-sm-1 col-md-1"></div>
                                                             <div class="col-sm-2 col-md-2">
                                                                 <a href="#/userprofile/{{notification.notificationByUser._id}}">
@@ -249,7 +249,7 @@ div.middle-div-mobile {
                                                                 </a>
                                                             </div>
                                                             <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">post</a>.
+                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">post</a>.
                                                                 <br />
                                                                 " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
                                                                 <br />
@@ -258,7 +258,7 @@ div.middle-div-mobile {
                                                                 </span>
                                                             </div>
                                                             <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">Post</a> on your Wall.
+                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a> on your Wall.
                                                                 <br />
                                                                 " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
                                                                 <br />
@@ -267,7 +267,7 @@ div.middle-div-mobile {
                                                                 </span>
                                                             </div>
                                                             <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='UserReaction'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}">Post</a>.
+                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a>.
                                                                 <br />
                                                                 " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
                                                                 <br />

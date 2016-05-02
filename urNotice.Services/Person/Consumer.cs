@@ -274,7 +274,7 @@ namespace urNotice.Services.Person
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
-            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString());
+            sendNotificationResponse = SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id],addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString());
             var userPostVertexModel = new UserPostVertexModel();
             userPostVertexModel.postInfo = new WallPostVertexModel()
             {
@@ -580,109 +580,161 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string postPostedByVertexId, string notificationType)
+        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId, string postPostedByVertexId, string notificationType)
         {            
             var userPushNotificationListWrapper = new UserPushNotificationListWrapper();
             userPushNotificationListWrapper.UserNotificationGraphModelList = new List<UserNotificationGraphModel>();
             userPushNotificationListWrapper.SignalRNotificationIds = new HashSet<string>();
+            var orbitPageCompanyUserWorkgraphyTable = new OrbitPageCompanyUserWorkgraphyTable();
+            var usersToBeNotified = new HashSet<string>();
+            var usersToBeIgnored = new HashSet<string>();
 
-            var notificationModel = new UserNotificationGraphModel();            
+            var finalSendNotificationsToUser = new HashSet<string>();
+
+            var notificationModel = new UserNotificationGraphModel();
 
             if (notificationType.Equals(EdgeLabelEnum.WallPostNotification.ToString()))
             {
-                if (userWallVertexId != session.UserVertexId)
+                orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
+                if (orbitPageCompanyUserWorkgraphyTable != null &&
+                    orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList != null)
+                    usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
+
+                finalSendNotificationsToUser = usersToBeNotified;
+                if (userWallVertexId == session.UserVertexId)
+                {
+                    usersToBeIgnored.Add(userWallVertexId);
+                }
+
+                if (usersToBeNotified.Contains(session.UserVertexId))
+                {
+                    usersToBeIgnored.Add(session.UserVertexId);
+                }
+
+                finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
+
+                foreach (var userIds in finalSendNotificationsToUser)
                 {
                     notificationModel = new UserNotificationGraphModel
                     {
-                        _outV = userWallVertexId,
+                        _outV = userIds,
                         _inV = postVertexId,
                         _label = EdgeLabelEnum.Notification.ToString(),
-                        NotificationInitiatedByVertexId=session.UserVertexId,
+                        NotificationInitiatedByVertexId = session.UserVertexId,
                         Type = EdgeLabelEnum.WallPostNotification.ToString(),
-                        UserName = session.UserName
+                        UserName = session.UserName,
+                        parentPostId = postVertexId
                     };
                     userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userWallVertexId);
+                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds);
                 }
 
             }
             else if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
             {
-                if (userWallVertexId != session.UserVertexId)
+                orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
+                if (orbitPageCompanyUserWorkgraphyTable != null &&
+                    orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList != null)
+                    usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
+
+                finalSendNotificationsToUser = usersToBeNotified;
+                if (userWallVertexId == session.UserVertexId)
                 {
-                    if (userWallVertexId != session.UserVertexId)
-                    {
-                        notificationModel = new UserNotificationGraphModel
-                        {
-                            _outV = userWallVertexId,
-                            _inV = postVertexId,
-                            _label = EdgeLabelEnum.Notification.ToString(),
-                            NotificationInitiatedByVertexId = session.UserVertexId,
-                            Type = EdgeLabelEnum.CommentedOnPostNotification.ToString(),
-                            UserName = session.UserName
-                        };
-                        userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                        userPushNotificationListWrapper.SignalRNotificationIds.Add(userWallVertexId);
-                    }  
+                    usersToBeIgnored.Add(userWallVertexId);
                 }
 
+                if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
+                {
+                    usersToBeIgnored.Add(userWallVertexId);
+                }
 
-                if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
+                if (usersToBeNotified.Contains(session.UserVertexId))
+                {
+                    usersToBeIgnored.Add(session.UserVertexId);
+                }
+
+                finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
+                foreach (var userIds in finalSendNotificationsToUser)
                 {
                     notificationModel = new UserNotificationGraphModel
                     {
-                        _outV = postPostedByVertexId,
-                        _inV = postVertexId,
+                        _outV = userIds,
+                        _inV = commentVertexId,
                         _label = EdgeLabelEnum.Notification.ToString(),
                         NotificationInitiatedByVertexId = session.UserVertexId,
                         Type = EdgeLabelEnum.CommentedOnPostNotification.ToString(),
-                        UserName = session.UserName
+                        UserName = session.UserName,
+                        parentPostId = postVertexId
                     };
                     userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    userPushNotificationListWrapper.SignalRNotificationIds.Add(postPostedByVertexId);
+                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds);
                 }
 
             }
             else if (notificationType.Equals(EdgeLabelEnum.UserReaction.ToString()))
             {
-                if (userWallVertexId != session.UserVertexId)
+                orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(commentVertexId);
+                if (orbitPageCompanyUserWorkgraphyTable != null &&
+                    orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList != null)
+                    usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
+
+                finalSendNotificationsToUser = usersToBeNotified;
+                if (userWallVertexId == session.UserVertexId)
+                {
+                    usersToBeIgnored.Add(userWallVertexId);
+                }
+
+                if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
+                {
+                    usersToBeIgnored.Add(userWallVertexId);
+                }
+
+                if (usersToBeNotified.Contains(session.UserVertexId))
+                {
+                    usersToBeIgnored.Add(session.UserVertexId);
+                }
+
+                finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
+                foreach (var userIds in finalSendNotificationsToUser)
                 {
                     notificationModel = new UserNotificationGraphModel
                     {
-                        _outV = userWallVertexId,
-                        _inV = postVertexId,
+                        _outV = userIds,
+                        _inV = commentVertexId,
                         _label = EdgeLabelEnum.Notification.ToString(),
                         NotificationInitiatedByVertexId = session.UserVertexId,
                         Type = EdgeLabelEnum.UserReaction.ToString(),
-                        UserName = session.UserName
+                        UserName = session.UserName,
+                        parentPostId = postVertexId
                     };
                     userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userWallVertexId);
+                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds);
                 }
-
-
-                if (userWallVertexId != postPostedByVertexId && session.UserVertexId != postPostedByVertexId)
-                {
-                    notificationModel = new UserNotificationGraphModel
-                    {
-                        _outV = postPostedByVertexId,
-                        _inV = postVertexId,
-                        _label = EdgeLabelEnum.Notification.ToString(),
-                        NotificationInitiatedByVertexId = session.UserVertexId,
-                        Type = EdgeLabelEnum.UserReaction.ToString(),
-                        UserName = session.UserName
-                    };
-                    userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    userPushNotificationListWrapper.SignalRNotificationIds.Add(postPostedByVertexId);
-                }
-
             }
 
             SendNotificationListToUsers(userPushNotificationListWrapper);
 
+            if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
+            {
+                if (orbitPageCompanyUserWorkgraphyTable != null && orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList.Add(session.UserVertexId))
+                {
+                    IDynamoDb dynamoDbModel = new DynamoDb();
+                    dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(orbitPageCompanyUserWorkgraphyTable);
+                }
+            }
+
             return userPushNotificationListWrapper.SignalRNotificationIds;
         }
 
+        private OrbitPageCompanyUserWorkgraphyTable GetUsersToBeNotifiedForVertex(string vertexId)
+        {
+            IDynamoDb dynamoDbModel =new  DynamoDb();
+            var orbitPageCompanyUserWorkgraphyTable = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(DynamoDbHashKeyDataType.VertexDetail.ToString(), vertexId, null);
+            if (orbitPageCompanyUserWorkgraphyTable != null)
+                return orbitPageCompanyUserWorkgraphyTable;
+
+            return null;
+        }
 
         private void SendNotificationListToUsers(UserPushNotificationListWrapper userPushNotificationListWrapper)
         {
@@ -694,6 +746,7 @@ namespace urNotice.Services.Person
 
                 properties[EdgePropertyEnum._label.ToString()] = userNotificationGraphModel._label;
                 properties[EdgePropertyEnum.NotificationInitiatedByVertexId.ToString()] = userNotificationGraphModel.NotificationInitiatedByVertexId;
+                properties[EdgePropertyEnum.ParentPostId.ToString()] = userNotificationGraphModel.parentPostId;
                 properties[EdgePropertyEnum.Type.ToString()] = userNotificationGraphModel.Type;
                 properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
                 properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();

@@ -16,6 +16,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         PostedDateLong,
         EdgeMessage,
         Type,
+        ParentPostId,
         NotificationInitiatedByVertexId,
         SalaryAmount,
         RangeValue,

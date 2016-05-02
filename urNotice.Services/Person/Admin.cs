@@ -82,7 +82,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,
+        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId,
             string postPostedByVertexId, string notificationType)
         {
             throw new NotImplementedException();

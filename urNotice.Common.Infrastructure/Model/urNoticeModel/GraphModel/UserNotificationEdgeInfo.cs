@@ -16,5 +16,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
         public string _outV {get;set;}
         public string _inV {get;set;}
         public string _label { get; set; }
+        public string ParentPostId { get; set; }
+
     }
 }

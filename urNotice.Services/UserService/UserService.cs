@@ -125,7 +125,7 @@ namespace urNotice.Services.UserService
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName,TitanGraphConfig.Graph,properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             IPerson consumerModel = new Consumer();
-            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId, postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId,addVertexResponse[TitanGraphConstants.Id], postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
 
             var userPostCommentModel = new UserPostCommentModel();
             userPostCommentModel.commentedBy = new List<UserVertexModel>();
@@ -186,7 +186,7 @@ namespace urNotice.Services.UserService
                 vertexId = userNewReactionRequest.ParentVertexId;
 
             IPerson consumerModel = new Consumer();
-            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId,userNewReactionRequest.VertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());
 
             var userLikeInfo = new UserVertexModel()
             {

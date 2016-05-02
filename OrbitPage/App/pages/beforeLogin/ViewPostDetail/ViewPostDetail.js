@@ -177,6 +177,7 @@ define([appLocation.preLogin], function (app) {
                 WallVertexId: $scope.UserPostList[postIndex].postedToUser[0]._id,
                 PostPostedByVertexId: $scope.UserPostList[postIndex].userInfo[0]._id,
                 IsParentPost: true,
+                ParentVertexId: $scope.UserPostList[postIndex].postInfo._id
             };
 
             var url = ServerContextPath.empty + '/User/UserReactionOnPost';
