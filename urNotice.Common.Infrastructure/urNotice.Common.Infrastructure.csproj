@@ -134,6 +134,7 @@
     <Compile Include="Common\Config\AwsConfig.cs" />
     <Compile Include="Common\Config\GaConfig.cs" />
     <Compile Include="Common\Config\ImgurConfig.cs" />
+    <Compile Include="Common\Config\LoggerConfig.cs" />
     <Compile Include="Common\Config\OrbitPageConfig.cs" />
     <Compile Include="Common\Config\SmtpConfig.cs" />
     <Compile Include="Common\Config\TitanGraphConfig.cs" />

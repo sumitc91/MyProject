@@ -62,8 +62,7 @@ namespace urNotice.Services.Email.EmailFromMandrill
                 _mail.AlternateViews.Add(alternateView1);
             }
             _mail.IsBodyHtml = true;
-            _mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-            //mail.ReplyToList = new MailAddress(ConfigurationManager.AppSettings["SmtpEmail"].ToString());
+            _mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;            
             smtpServer.Send(_mail);
 
             return OrbitPageResponseModel.SetOk("Email sent successfully.",String.Empty);

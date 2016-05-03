@@ -14,6 +14,7 @@ using System.Xml;
 using Facebook;
 using Newtonsoft.Json;
 using SolrNet.Impl;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
 using urNotice.Common.Infrastructure.commonMethods;
@@ -49,9 +50,9 @@ namespace OrbitPage.Controllers
         //private readonly urnoticeAuthEntities _db = new urnoticeAuthEntities();
         //private readonly urnoticeAnalyticsEntities _dbAnalytics = new urnoticeAnalyticsEntities();
 
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-        private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
 
         private oAuthLinkedIn _oauth = new oAuthLinkedIn();
         //string fb_scope = "email,user_friends";
@@ -139,13 +140,13 @@ namespace OrbitPage.Controllers
 
             if (Request.Url.Authority.Contains("localhost"))
             {
-                app_id = ConfigurationManager.AppSettings["googleAppID"].ToString();
-                app_secret = ConfigurationManager.AppSettings["googleAppSecret"].ToString();
+                app_id = ServerConfig.googleAppID;
+                app_secret = ServerConfig.googleAppSecret;
             }
             else
             {
-                app_id = ConfigurationManager.AppSettings["googleAppIDCautom"].ToString();
-                app_secret = ConfigurationManager.AppSettings["googleAppSecretCautom"].ToString();
+                app_id = ServerConfig.googleAppIDCautom;
+                app_secret = ServerConfig.googleAppSecretCautom;
             }
 
             string returnUrl = "http://" + Request.Url.Authority + "/SocialAuth/GoogleLogin";
@@ -208,13 +209,13 @@ namespace OrbitPage.Controllers
 
             if (Request.Url.Authority.Contains("localhost"))
             {
-                app_id = ConfigurationManager.AppSettings["googleAppID"].ToString();
-                app_secret = ConfigurationManager.AppSettings["googleAppSecret"].ToString();
+                app_id = ServerConfig.googleAppID;
+                app_secret = ServerConfig.googleAppSecret;
             }
             else
             {
-                app_id = ConfigurationManager.AppSettings["googleAppIDCautom"].ToString();
-                app_secret = ConfigurationManager.AppSettings["googleAppSecretCautom"].ToString();
+                app_id = ServerConfig.googleAppIDCautom;
+                app_secret = ServerConfig.googleAppSecretCautom;
             }
 
 
@@ -676,13 +677,13 @@ namespace OrbitPage.Controllers
             string returnUrl = "http://" + Request.Url.Authority + "/SocialAuth/FBLogin/facebook/";
             if (Request.Url.Authority.Contains("localhost"))
             {
-                app_id = ConfigurationManager.AppSettings["FacebookAppID"].ToString();
-                app_secret = ConfigurationManager.AppSettings["FacebookAppSecret"].ToString();
+                app_id = ServerConfig.FacebookAppID;
+                app_secret = ServerConfig.FacebookAppSecret;
             }
             else
             {
-                app_id = ConfigurationManager.AppSettings["FacebookAppIDCautom"].ToString();
-                app_secret = ConfigurationManager.AppSettings["FacebookAppSecretCautom"].ToString();
+                app_id = ServerConfig.FacebookAppIDCautom;
+                app_secret = ServerConfig.FacebookAppSecretCautom;
             }
 
             if (code == null)
@@ -708,13 +709,13 @@ namespace OrbitPage.Controllers
             string returnUrl = "http://" + Request.Url.Authority + "/SocialAuth/FBLogin/facebook/";
             if (Request.Url.Authority.Contains("localhost"))
             {
-                app_id = ConfigurationManager.AppSettings["FacebookAppID"].ToString();
-                app_secret = ConfigurationManager.AppSettings["FacebookAppSecret"].ToString();
+                app_id = ServerConfig.FacebookAppID;
+                app_secret = ServerConfig.FacebookAppSecret;
             }
             else
             {
-                app_id = ConfigurationManager.AppSettings["FacebookAppIDCautom"].ToString();
-                app_secret = ConfigurationManager.AppSettings["FacebookAppSecretCautom"].ToString();
+                app_id = ServerConfig.FacebookAppIDCautom;
+                app_secret = ServerConfig.FacebookAppSecretCautom;
             }
 
             

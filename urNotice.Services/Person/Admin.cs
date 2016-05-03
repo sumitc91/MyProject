@@ -77,6 +77,28 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId,
+            string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> DeleteCommentOnPost(urNoticeSession session, string vertexId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest,
+            out HashSet<string> sendNotificationResponse)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseModel<string> RemoveReactionOnUserPost(urNoticeSession session, string vertexId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResponseModel<string> SeenNotification(string userName)
         {
             throw new NotImplementedException();
@@ -89,6 +111,36 @@ namespace urNotice.Services.Person
         }
 
         public SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserNotification(urNoticeSession session, string @from, string to, string accessKey, string secretKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserPostLikes(string userVertexId, string @from, string to)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetPostByVertexId(string vertexId, string userEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetUserUnreadNotificationCount(urNoticeSession session)
         {
             throw new NotImplementedException();
         }

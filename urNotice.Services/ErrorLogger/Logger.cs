@@ -53,7 +53,7 @@ namespace urNotice.Services.ErrorLogger
             try
             {
                 SendExceptionEmail.SendExceptionEmailMessage(
-                    OrbitPageConfig.ExceptionsSendToEmail, message+" : "+ex.Message);
+                    LoggerConfig.ExceptionsSendToEmail, message+" : "+ex.Message);
             }
             catch (Exception)
             {

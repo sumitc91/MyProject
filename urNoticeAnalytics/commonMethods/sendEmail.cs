@@ -58,8 +58,7 @@ namespace urNoticeAnalytics.commonMethods
                     _mail.AlternateViews.Add(alternateView1);
                 }
                 _mail.IsBodyHtml = true;
-                _mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                //mail.ReplyToList = new MailAddress(ConfigurationManager.AppSettings["SmtpEmail"].ToString());
+                _mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;                
                 smtpServer.Send(_mail);                
             }
             catch (Exception ex)

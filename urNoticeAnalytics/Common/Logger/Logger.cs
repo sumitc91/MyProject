@@ -6,6 +6,7 @@ using GaDotNet.Common.Data;
 using GaDotNet.Common.Helpers;
 using log4net;
 using log4net.Config;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNoticeAnalytics.commonMethods;
 
 namespace urNoticeAnalytics.Common.Logger
@@ -18,7 +19,7 @@ namespace urNoticeAnalytics.Common.Logger
         public Logger(string currentClassName)
         {
             this._currentClassName = currentClassName;
-            GALoggin = Convert.ToBoolean(ConfigurationManager.AppSettings["GALogging"]);
+            GALoggin = Convert.ToBoolean(GaConfig.GALogging);
 
             logger = LogManager.GetLogger(_currentClassName);
             BasicConfigurator.Configure();
@@ -29,7 +30,7 @@ namespace urNoticeAnalytics.Common.Logger
 
         public void Info(string message)
         {
-            if (GALoggin && Convert.ToBoolean(ConfigurationManager.AppSettings["GAInfoLogging"]))
+            if (GALoggin && Convert.ToBoolean(GaConfig.GAInfoLogging))
             {
                 TrackGoogleEvents("Logger-Info", "Info", message);
             }
@@ -52,7 +53,7 @@ namespace urNoticeAnalytics.Common.Logger
             try
             {
                 SendAccountCreationValidationEmail.SendExceptionEmailMessage(
-                    ConfigurationManager.AppSettings["ExceptionsSendToEmail"].ToString(CultureInfo.InvariantCulture), ex.Message);
+                    LoggerConfig.ExceptionsSendToEmail, ex.Message);
             }
             catch (Exception)
             {

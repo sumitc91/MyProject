@@ -9,13 +9,14 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Runtime;
+using urNotice.Common.Infrastructure.Common.Config;
 
 namespace urNoticeDynamoDb.Models
 {
     class HighLevelQueryAndScan
     {
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
 
         private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(accessKey, secretKey, RegionEndpoint.USWest2);
 

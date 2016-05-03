@@ -49,7 +49,7 @@ define([appLocation.preLogin], function (app) {
                        when("/editpage", { templateUrl: "../../App/pages/beforeLogin/EditPage/EditPage.html" }).
                        when("/userprofile", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
                        when("/userprofile2", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
-                       when("/userprofile/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
+                       when("/userprofile/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).
                        when("/userprofile2/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
                        when("/viewpostdetail/:vertexId", { templateUrl: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail.html" }).
                        otherwise({ templateUrl: "../../App/pages/beforeLogin/404/404.html" });

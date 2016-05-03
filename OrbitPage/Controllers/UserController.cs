@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using OrbitPage.Hubs;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
@@ -17,15 +18,14 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.Person;
 using urNotice.Services.SessionService;
-using urNotice.Services.UserService;
 
 namespace OrbitPage.Controllers
 {
     public class UserController : Controller
     {
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-        private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
 
         [System.Web.Mvc.HttpPost]
         public JsonResult UserPost(UserNewPostRequest userPostData)
@@ -66,12 +66,12 @@ namespace OrbitPage.Controllers
         [System.Web.Mvc.HttpPost]
         public JsonResult UserCommentOnPost(UserNewCommentOnPostRequest userNewCommentOnPostRequest)
         {
-            var message = userNewCommentOnPostRequest.Message;//Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
-            var image = userNewCommentOnPostRequest.Image;//Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
-            var postVertexId = userNewCommentOnPostRequest.VertexId;//Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var message = userNewCommentOnPostRequest.Message;
+            var image = userNewCommentOnPostRequest.Image;
+            var postVertexId = userNewCommentOnPostRequest.VertexId;
 
-            var userWallVertexId = userNewCommentOnPostRequest.WallVertexId;//Request.QueryString["wallVertexId"].ToString(CultureInfo.InvariantCulture);
-            var postPostedByVertexId = userNewCommentOnPostRequest.PostPostedByVertexId;//Request.QueryString["postPostedByVertexId"].ToString(CultureInfo.InvariantCulture);
+            var userWallVertexId = userNewCommentOnPostRequest.WallVertexId;
+            var postPostedByVertexId = userNewCommentOnPostRequest.PostPostedByVertexId;
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
@@ -84,7 +84,10 @@ namespace OrbitPage.Controllers
                     image = String.Empty;
                 }
                 HashSet<string> sendNotificationHashSetResponse = null;
-                var newUserPostCommentResponse = new UserService().CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationHashSetResponse);
+
+                IPerson clientModel = new Consumer();
+                var newUserPostCommentResponse = clientModel.CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationHashSetResponse);
+                
                 if (sendNotificationHashSetResponse.Count>0)
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
@@ -113,7 +116,8 @@ namespace OrbitPage.Controllers
             if (isValidToken)
             {                
                 HashSet<string> sendNotificationHashSetResponse = null;
-                var newUserPostCommentResponse = new UserService().CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationHashSetResponse);
+                IPerson clientModel = new Consumer();
+                var newUserPostCommentResponse = clientModel.CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationHashSetResponse);
                 if (sendNotificationHashSetResponse.Count>0)
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
@@ -140,8 +144,9 @@ namespace OrbitPage.Controllers
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
-            {                
-                var newUserPostCommentResponse = new UserService().RemoveReactionOnUserPost(session, vertexId);                
+            {
+                IPerson clientModel = new Consumer();
+                var newUserPostCommentResponse = clientModel.RemoveReactionOnUserPost(session, vertexId);                
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }
             else
@@ -218,7 +223,8 @@ namespace OrbitPage.Controllers
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {
-                var newUserPostCommentResponse = new UserService().DeleteCommentOnPost(session, vertexId);
+                IPerson clientModel = new Consumer();
+                var newUserPostCommentResponse = clientModel.DeleteCommentOnPost(session, vertexId);
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }
             else

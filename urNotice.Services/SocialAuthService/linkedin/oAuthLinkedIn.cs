@@ -27,8 +27,7 @@ namespace urNotice.Services.SocialAuthService.linkedin
             {
                 if (_consumerKey.Length == 0)
                 {
-                    _consumerKey = ServerConfig.linkedinAppID;
-                    //_consumerKey = ConfigurationManager.AppSettings["linkedinAppIDZestork"];
+                    _consumerKey = ServerConfig.linkedinAppID;                    
                 }
                 return _consumerKey;
             }
@@ -41,8 +40,7 @@ namespace urNotice.Services.SocialAuthService.linkedin
             {
                 if (_consumerSecret.Length == 0)
                 {
-                    _consumerSecret = ServerConfig.linkedinAppSecret;
-                    //_consumerSecret = ConfigurationManager.AppSettings["linkedinAppSecretZestork"];
+                    _consumerSecret = ServerConfig.linkedinAppSecret;                    
                 }
                 return _consumerSecret;
             }

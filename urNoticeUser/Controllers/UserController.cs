@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
@@ -17,7 +18,6 @@ using urNotice.Services.ErrorLogger;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.Person;
 using urNotice.Services.SessionService;
-using urNotice.Services.UserService;
 
 namespace urNoticeUser.Controllers
 {
@@ -25,9 +25,9 @@ namespace urNoticeUser.Controllers
     {
         //
         // GET: /User/
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-        private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
 
         private ILogger _logger = new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
 
@@ -86,11 +86,12 @@ namespace urNoticeUser.Controllers
             {
                 try
                 {
-                    var clientNotificationDetailResponse = new UserService().GetUserNotification(session, from, to, accessKey, secretKey);
+                    IPerson clientModel = new Consumer();
+                    var clientNotificationDetailResponse = clientModel.GetUserNotification(session, from, to, accessKey, secretKey);
                     var clientNotificationDetailResponseDeserialized =
                             JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
                     if (clientNotificationDetailResponseDeserialized != null)
-                        clientNotificationDetailResponseDeserialized.unread = new UserService().GetUserUnreadNotificationCount(session);
+                        clientNotificationDetailResponseDeserialized.unread = clientModel.GetUserUnreadNotificationCount(session);
                     return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -247,7 +248,8 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    var getUserPostResponse = new UserService().GetUserPost(vertexId, from, to, userEmail);
+                    IPerson clientModel = new Consumer();
+                    var getUserPostResponse = clientModel.GetUserPost(vertexId, from, to, userEmail);
                     var getUserPostResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
 
@@ -288,7 +290,8 @@ namespace urNoticeUser.Controllers
                 
                 if (!String.IsNullOrWhiteSpace(vertexId) && !vertexId.Equals("undefined"))
                 {
-                    var getUserPostMessagesResponse = new UserService().GetUserPostMessages(vertexId, from, to, userEmail);
+                    IPerson clientModel = new Consumer();
+                    var getUserPostMessagesResponse = clientModel.GetUserPostMessages(vertexId, from, to, userEmail);
                     var getUserPostMessagesResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostMessagesVertexModelResponse>(getUserPostMessagesResponse);
 
@@ -329,7 +332,8 @@ namespace urNoticeUser.Controllers
 
                 if (!String.IsNullOrWhiteSpace(vertexId) && !vertexId.Equals("undefined"))
                 {
-                    var getUserPostMessagesResponse = new UserService().GetUserPostLikes(vertexId, from, to);
+                    IPerson clientModel = new Consumer();
+                    var getUserPostMessagesResponse = clientModel.GetUserPostLikes(vertexId, from, to);
                     var getUserPostMessagesResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostLikesVertexModelResponse>(getUserPostMessagesResponse);
 
@@ -512,7 +516,8 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    var getUserPostResponse = new UserService().GetPostByVertexId(vertexId, userEmail);
+                    IPerson clientModel = new Consumer();
+                    var getUserPostResponse = clientModel.GetPostByVertexId(vertexId, userEmail);
                     var getUserPostResponseDeserialized =
                         JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
                     return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);

@@ -26,10 +26,21 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
         ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq);
         ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse);
+        ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse);
+        ResponseModel<String> DeleteCommentOnPost(urNoticeSession session, string vertexId);
+        ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session,UserNewReactionRequest userNewReactionRequest, out HashSet<string> sendNotificationResponse);
+        ResponseModel<String> RemoveReactionOnUserPost(urNoticeSession session, string vertexId);
         ResponseModel<string> SeenNotification(string userName);
         HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId, string postPostedByVertexId, string notificationType);
 
         SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid);
+
+        string GetUserNotification(urNoticeSession session, string from, string to, string accessKey, string secretKey);
+        string GetUserPost(string userVertexId, string @from, string to, string userEmail);
+        string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail);
+        string GetUserPostLikes(string userVertexId, string @from, string to);
+        string GetPostByVertexId(string vertexId, string userEmail);
+        long GetUserUnreadNotificationCount(urNoticeSession session);
 
         //anonymous services
         ResponseModel<String> ValidateAccountService(ValidateAccountRequest req);

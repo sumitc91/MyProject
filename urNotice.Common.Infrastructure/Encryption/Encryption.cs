@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
+using urNotice.Common.Infrastructure.Common.Config;
 
 namespace urNotice.Common.Infrastructure.Encryption
 {
@@ -40,7 +41,7 @@ namespace urNotice.Common.Infrastructure.Encryption
         public static Dictionary<string, string> EncryptUserRegistrationDetails(Dictionary<string, string> data)
         {
             var encryptedData = new Dictionary<string, string>();
-            string Authkey = ConfigurationManager.AppSettings["AuthKey"];
+            string Authkey = OrbitPageConfig.AuthKey;
             encryptedData["EMAIL"] = EncryptionClass.GetEncryptionKey(data["EMAIL"], Authkey);
             encryptedData["KEY"] = EncryptionClass.GetEncryptionKey(data["KEY"], Authkey);
             return encryptedData;
@@ -49,7 +50,7 @@ namespace urNotice.Common.Infrastructure.Encryption
         public static Dictionary<string, string> encryptUserDetails(Dictionary<string, string> data)
         {
             var encryptedData = new Dictionary<string, string>();
-            string Authkey = ConfigurationManager.AppSettings["AuthKey"];
+            string Authkey = OrbitPageConfig.AuthKey;
             encryptedData["UTMZK"] = EncryptionClass.GetEncryptionKey(data["Username"], Authkey);
             encryptedData["UTMZV"] = EncryptionClass.GetEncryptionKey(data["Password"], data["userGuid"]);
             return encryptedData;
@@ -64,7 +65,7 @@ namespace urNotice.Common.Infrastructure.Encryption
 
         public static string decryptRefKey(string username)
         {
-            string Authkey = ConfigurationManager.AppSettings["AuthKey"];
+            string Authkey = OrbitPageConfig.AuthKey;
             string decryptedData = EncryptionClass.GetDecryptionValue(username, Authkey);
             return decryptedData;
         }

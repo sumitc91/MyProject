@@ -19,9 +19,9 @@ namespace OrbitPage.Controllers
         //
         // GET: /Story/
 
-        private static string accessKey = AwsConfig._awsAccessKey;// ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = AwsConfig._awsSecretKey;//ConfigurationManager.AppSettings["AWSSecretKey"];
-        private static string authKey = OrbitPageConfig.AuthKey;//ConfigurationManager.AppSettings["AuthKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
 
         public ActionResult Index()
         {

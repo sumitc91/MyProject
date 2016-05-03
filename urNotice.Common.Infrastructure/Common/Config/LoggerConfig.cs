@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace urNotice.Common.Infrastructure.Common.Config
 {
-    public class OrbitPageConfig
-    {                
-        public const string AuthKey = "cb607bec-83d8-404f-8bb4-dc246e68be60";
+    public class LoggerConfig
+    {
+        public const string ExceptionsSendToEmail = "sumitchourasia91@gmail.com";
     }
 }

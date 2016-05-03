@@ -164,7 +164,6 @@
     <Compile Include="SyncService\SyncService.cs" />
     <Compile Include="UploadImageService\imgurService.cs" />
     <Compile Include="UploadImageService\S3ImageUploadServices.cs" />
-    <Compile Include="UserService\UserService.cs" />
     <Compile Include="Workgraphy\IWorkgraphyService.cs" />
     <Compile Include="Workgraphy\WorkgraphyService.cs" />
   </ItemGroup>

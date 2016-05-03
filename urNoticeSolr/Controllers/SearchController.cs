@@ -10,6 +10,7 @@ using Microsoft.Practices.ServiceLocation;
 using SolrNet;
 using System.Web.Mvc;
 using SolrNet.Commands.Parameters;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
@@ -35,9 +36,9 @@ namespace urNoticeSolr.Controllers
         private static readonly ILogger Logger =
             new Logger(Convert.ToString(MethodBase.GetCurrentMethod().DeclaringType));
 
-        private static string accessKey = ConfigurationManager.AppSettings["AWSAccessKey"];
-        private static string secretKey = ConfigurationManager.AppSettings["AWSSecretKey"];
-        private static string authKey = ConfigurationManager.AppSettings["AuthKey"];
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
 
         public ActionResult Index()
         {
