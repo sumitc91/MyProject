@@ -159,15 +159,16 @@ namespace urNotice.Services.Management.PostManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                if (userWallVertexId == session.UserVertexId)
-                {
-                    usersToBeIgnored.Add(userWallVertexId);
-                }
+                //if (userWallVertexId == session.UserVertexId)
+                //{
+                //    usersToBeIgnored.Add(userWallVertexId);
+                //}
 
-                if (usersToBeNotified.Contains(session.UserVertexId))
-                {
-                    usersToBeIgnored.Add(session.UserVertexId);
-                }
+                //if (usersToBeNotified.Contains(session.UserVertexId))
+                //{
+                //    usersToBeIgnored.Add(session.UserVertexId);
+                //}
+                usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
 
@@ -196,20 +197,22 @@ namespace urNotice.Services.Management.PostManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                if (userWallVertexId == session.UserVertexId)
-                {
-                    usersToBeIgnored.Add(userWallVertexId);
-                }
+                //if (userWallVertexId == session.UserVertexId)
+                //{
+                //    usersToBeIgnored.Add(userWallVertexId);
+                //}
 
-                if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
-                {
-                    usersToBeIgnored.Add(userWallVertexId);
-                }
+                //if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
+                //{
+                //    usersToBeIgnored.Add(userWallVertexId);
+                //}
 
-                if (usersToBeNotified.Contains(session.UserVertexId))
-                {
-                    usersToBeIgnored.Add(session.UserVertexId);
-                }
+                //if (usersToBeNotified.Contains(session.UserVertexId))
+                //{
+                //    usersToBeIgnored.Add(session.UserVertexId);
+                //}
+
+                usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
                 foreach (var userIds in finalSendNotificationsToUser)
@@ -237,20 +240,22 @@ namespace urNotice.Services.Management.PostManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                if (userWallVertexId == session.UserVertexId)
-                {
-                    usersToBeIgnored.Add(userWallVertexId);
-                }
+                //if (userWallVertexId == session.UserVertexId)
+                //{
+                //    usersToBeIgnored.Add(userWallVertexId);
+                //}
 
-                if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
-                {
-                    usersToBeIgnored.Add(userWallVertexId);
-                }
+                //if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
+                //{
+                //    usersToBeIgnored.Add(userWallVertexId);
+                //}
 
-                if (usersToBeNotified.Contains(session.UserVertexId))
-                {
-                    usersToBeIgnored.Add(session.UserVertexId);
-                }
+                //if (usersToBeNotified.Contains(session.UserVertexId))
+                //{
+                //    usersToBeIgnored.Add(session.UserVertexId);
+                //}
+
+                usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
                 foreach (var userIds in finalSendNotificationsToUser)
