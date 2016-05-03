@@ -22,7 +22,6 @@ using urNotice.Services.DataImport.ImportCompanyDesignationSalaries;
 using urNotice.Services.DataImport.ImportDesignations;
 using urNotice.Services.DataImport.ImportNoticePeriods;
 using urNotice.Services.ErrorLogger;
-using urNotice.Services.ImageService;
 using urNotice.Services.Person;
 using urNoticeAuth.App_Start;
 

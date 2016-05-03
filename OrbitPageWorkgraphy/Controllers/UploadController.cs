@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Services.UploadImageService;
-using S3ImageUploadServices = urNotice.Services.ImageService.S3ImageUploadServices;
 
 namespace OrbitPageWorkgraphy.Controllers
 {

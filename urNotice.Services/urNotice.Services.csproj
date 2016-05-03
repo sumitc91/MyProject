@@ -111,6 +111,12 @@
     <Compile Include="DataImport\ImportDesignations\ImportDesinationsFromCsv.cs" />
     <Compile Include="DataImport\ImportNoticePeriods\IImportNoticePeriods.cs" />
     <Compile Include="DataImport\ImportNoticePeriods\ImportNoticePeriods.cs" />
+    <Compile Include="Management\AccountManagement\AccountManagement.cs" />
+    <Compile Include="Management\AccountManagement\IAccountManagement.cs" />
+    <Compile Include="Management\CompanyManagement\CompanyManagement.cs" />
+    <Compile Include="Management\CompanyManagement\ICompanyManagement.cs" />
+    <Compile Include="Management\PostManagement\IPostManagement.cs" />
+    <Compile Include="Management\PostManagement\PostManagement.cs" />
     <Compile Include="Person\Admin.cs" />
     <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />
     <Compile Include="Email\EmailFromMandrill\EmailFromMandrill.cs" />
@@ -125,7 +131,6 @@
     <Compile Include="GraphDb\GraphVertexDb.cs" />
     <Compile Include="GraphDb\IGraphEdgeDb.cs" />
     <Compile Include="GraphDb\IGraphVertexDb.cs" />
-    <Compile Include="ImageService\S3ImageUploadServices.cs" />
     <Compile Include="ErrorLogger\ILogger.cs" />
     <Compile Include="ErrorLogger\Logger.cs" />
     <Compile Include="NoSqlDb\DynamoDb\DynamoDb.cs" />
@@ -137,7 +142,6 @@
     <Compile Include="Person\PersonContract\RegistrationOperation\OrbitPagePersonRegistration.cs" />
     <Compile Include="Person\PersonContract\RegistrationOperation\OrbitPagePersonRegistrationTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RatingService\RatingService.cs" />
     <Compile Include="SessionService\SessionService.cs" />
     <Compile Include="SocialAuthService\Facebook\FacebookService.cs" />
     <Compile Include="SocialAuthService\google\googleService.cs" />

@@ -35,7 +35,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
 
         SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid);
 
-        string GetUserNotification(urNoticeSession session, string from, string to, string accessKey, string secretKey);
+        string GetUserNotification(urNoticeSession session, string from, string to);
         string GetUserPost(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostLikes(string userVertexId, string @from, string to);

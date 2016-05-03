@@ -87,7 +87,7 @@ namespace urNoticeUser.Controllers
                 try
                 {
                     IPerson clientModel = new Consumer();
-                    var clientNotificationDetailResponse = clientModel.GetUserNotification(session, from, to, accessKey, secretKey);
+                    var clientNotificationDetailResponse = clientModel.GetUserNotification(session, from, to);
                     var clientNotificationDetailResponseDeserialized =
                             JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
                     if (clientNotificationDetailResponseDeserialized != null)

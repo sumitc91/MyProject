@@ -9,7 +9,6 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeRatingContext;
 using urNotice.Common.Infrastructure.Session;
-using urNotice.Services.RatingService;
 
 namespace urNoticeUser.Controllers
 {

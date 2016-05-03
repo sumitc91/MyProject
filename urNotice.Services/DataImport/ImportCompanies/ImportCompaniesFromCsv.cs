@@ -8,8 +8,8 @@ using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
-using urNotice.Services.ImageService;
 using urNotice.Services.Person;
+using urNotice.Services.UploadImageService;
 
 namespace urNotice.Services.DataImport.ImportCompanies
 {
