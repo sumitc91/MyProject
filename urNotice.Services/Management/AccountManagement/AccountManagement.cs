@@ -439,7 +439,7 @@ namespace urNotice.Services.Management.AccountManagement
         {
             var response = new ResponseModel<string>();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            dynamoDbModel.UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(userName, DateTimeUtil.GetUtcTime().Ticks);
+            dynamoDbModel.UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(userName,DynamoDbHashKeyDataType.LastSeenNotification.ToString(), DateTimeUtil.GetUtcTime().Ticks);
             response.Status = 200;
             response.Message = "success";
             return response;
@@ -457,6 +457,16 @@ namespace urNotice.Services.Management.AccountManagement
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
+
+        public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
+        {         
+            string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);
+            return response;
+        }
+
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
             string url = TitanGraphConfig.Server;
@@ -518,8 +528,32 @@ namespace urNotice.Services.Management.AccountManagement
         {
             IDynamoDb dynamoDbModel = new DynamoDb();
             long? lastNotificationSeenTimeStamp =
-                dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(session.UserName);
+                dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(session.UserName, NotificationEnum.Notifications.ToString());
+
+            if (lastNotificationSeenTimeStamp == null)
+                lastNotificationSeenTimeStamp = 0;
+
             string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+
+            var getUserUnreadNotificationsDeserialized =
+                        JsonConvert.DeserializeObject<UserPostUnreadNotificationsResponse>(response);
+
+            return getUserUnreadNotificationsDeserialized.results[0];
+        }
+
+        public long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session)
+        {
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            long? lastNotificationSeenTimeStamp =
+                dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(session.UserName, NotificationEnum.FriendRequests.ToString());
+            
+            if (lastNotificationSeenTimeStamp == null)
+                lastNotificationSeenTimeStamp = 0;
+
+            string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);

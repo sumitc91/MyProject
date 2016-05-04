@@ -116,12 +116,28 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             return res;
         }
 
-        public long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName)
+        public long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName,string notificationType)
         {
             var context = GetDynamoDbContext();
+            string dataType = string.Empty;
+            
+            if (notificationType == NotificationEnum.Notifications.ToString())
+            {
+                dataType = DynamoDbHashKeyDataType.LastSeenNotification.ToString();
+            }
+
+            if (notificationType == NotificationEnum.FriendRequests.ToString())
+            {
+                dataType = DynamoDbHashKeyDataType.LastSeenFriendRequestNotification.ToString();
+            }
+
+            if (notificationType == NotificationEnum.Messages.ToString())
+            {
+                dataType = DynamoDbHashKeyDataType.LastSeenMessageNotification.ToString();
+            }
 
             IEnumerable<OrbitPageCompanyUserWorkgraphyTable> res = context.Scan<OrbitPageCompanyUserWorkgraphyTable>(
-                new ScanCondition("DataType", ScanOperator.Equal, DynamoDbHashKeyDataType.LastSeenNotification.ToString()),
+                new ScanCondition("DataType", ScanOperator.Equal, dataType),
                 new ScanCondition("ObjectId", ScanOperator.Equal, userName)                
                   );
 
@@ -129,7 +145,9 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             {
                 var result = res.FirstOrDefault();
                 if (result != null)
-                    return result.LastNotificationSeenTimeStamp;
+                {                    
+                     return result.LastNotificationSeenTimeStamp;                    
+                }
             }
 
             return null;
@@ -152,10 +170,10 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
             return true;
         }
 
-        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,long timeStamp)
+        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,String dataType,long timeStamp)
         {
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
-                    DynamoDbHashKeyDataType.LastSeenNotification.ToString(),
+                    dataType,
                     userName,
                     null,
                     null,

@@ -96,7 +96,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        public ResponseModel<IDictionary<string,string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
         {
             throw new NotImplementedException();
         }
@@ -113,6 +113,11 @@ namespace urNotice.Services.Person
         }
 
         public string GetUserNotification(urNoticeSession session, string @from, string to)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserFriendRequestNotification(urNoticeSession session, string @from, string to)
         {
             throw new NotImplementedException();
         }
@@ -138,6 +143,11 @@ namespace urNotice.Services.Person
         }
 
         public long GetUserUnreadNotificationCount(urNoticeSession session)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session)
         {
             throw new NotImplementedException();
         }

@@ -111,6 +111,44 @@ namespace urNoticeUser.Controllers
 
         }
 
+        public JsonResult GetFriendRequestNotificationDetails()
+        {
+            var headers = new HeaderManager(Request);
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                try
+                {
+                    IPerson clientModel = new Consumer();
+                    var clientFriendRequestNotificationDetailResponse = clientModel.GetUserFriendRequestNotification(session, from, to);
+                    var clientFriendRequestNotificationDetailResponseDeserialized =
+                            JsonConvert.DeserializeObject<UserFriendRequestNotificationVertexModelResponse>(clientFriendRequestNotificationDetailResponse);
+                    if (clientFriendRequestNotificationDetailResponseDeserialized != null)
+                        clientFriendRequestNotificationDetailResponseDeserialized.unread = clientModel.GetUserUnreadFriendRequestNotificationCount(session);
+                    return Json(clientFriendRequestNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("Graph Db Exception", ex);
+                    return Json("Exception Occured.", JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public JsonResult SeenNotification()
         {
             var headers = new HeaderManager(Request);            

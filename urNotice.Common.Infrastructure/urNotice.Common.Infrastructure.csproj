@@ -156,6 +156,7 @@
     <Compile Include="Common\Enum\EdgeLabelEnum.cs" />
     <Compile Include="Common\Enum\EdgePropertyEnum.cs" />
     <Compile Include="Common\Enum\NoticePeriodRangeEnum.cs" />
+    <Compile Include="Common\Enum\NotificationEnum.cs" />
     <Compile Include="Common\Enum\OrbitPageEnum.cs" />
     <Compile Include="Common\Enum\UserReactionEnum.cs" />
     <Compile Include="Common\Enum\VertexLabelEnum.cs" />
@@ -227,6 +228,9 @@
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyWorkgraphyInfoVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyWorkgraphyVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyWorkgraphyVertexModelResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\FriendRequestEdgeModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserFriendRequestNotificationVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserFriendRequestNotificationVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationEdgeInfo.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationVertexModelResponse.cs" />

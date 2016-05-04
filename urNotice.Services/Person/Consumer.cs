@@ -75,6 +75,13 @@ namespace urNotice.Services.Person
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetUserNotification(session, from, to);
         }
+
+        public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.GetUserFriendRequestNotification(session, from, to);
+        }
+
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
             IAccountManagement accountManagementModel = new AccountManagement();
@@ -99,6 +106,11 @@ namespace urNotice.Services.Person
         {
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetUserUnreadNotificationCount(session);
+        }
+        public long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.GetUserUnreadFriendRequestNotificationCount(session);
         }
         public ResponseModel<IDictionary<string,string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
         {

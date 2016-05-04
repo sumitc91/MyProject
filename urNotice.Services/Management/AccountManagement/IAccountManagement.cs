@@ -34,10 +34,12 @@ namespace urNotice.Services.Management.AccountManagement
 
         //for Gremlin
         string GetUserNotification(urNoticeSession session, string from, string to);
+        string GetUserFriendRequestNotification(urNoticeSession session, string from, string to);
         string GetUserPost(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostLikes(string userVertexId, string @from, string to);
         string GetPostByVertexId(string vertexId, string userEmail);
         long GetUserUnreadNotificationCount(urNoticeSession session);
+        long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session);
     }
 }

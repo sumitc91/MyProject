@@ -205,6 +205,11 @@ define([appLocation.preLogin], function (app) {
             after: 0,
             itemPerPage:6
         };
+        $rootScope.clientFriendRequestNotificationDetailResponseInfo = {
+            busy: false,
+            after: 0,
+            itemPerPage: 6
+        };
 
         $rootScope.chatBox = {
             show: false
@@ -253,10 +258,24 @@ define([appLocation.preLogin], function (app) {
             $rootScope.clientNotificationDetailResponseInfo.after = $rootScope.clientNotificationDetailResponseInfo.after + $rootScope.clientNotificationDetailResponseInfo.itemPerPage+1;
         };
 
+        $scope.clientFriendRequestNotificationDetailResponseInfo.nextPage = function () {
+            
+            if ($rootScope.clientFriendRequestNotificationDetailResponseInfo.busy) return;
+            $rootScope.clientFriendRequestNotificationDetailResponseInfo.busy = true;            
+            loadClientFriendRequestNotificationDetails($rootScope.clientFriendRequestNotificationDetailResponseInfo.after, $rootScope.clientFriendRequestNotificationDetailResponseInfo.after + $rootScope.clientFriendRequestNotificationDetailResponseInfo.itemPerPage, false);
+            $rootScope.clientFriendRequestNotificationDetailResponseInfo.after = $rootScope.clientFriendRequestNotificationDetailResponseInfo.after + $rootScope.clientFriendRequestNotificationDetailResponseInfo.itemPerPage + 1;
+        };
+
         $scope.clientNotificationDetailResponseInfoUpdateFromPushNotification = function () {
             //alert("working");                             
             loadClientNotificationDetails(0, $rootScope.clientNotificationDetailResponseInfo.after+1,true);
             
+        };
+
+        $scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification = function () {
+            //alert("working");                             
+            loadClientFriendRequestNotificationDetails(0, $rootScope.clientFriendRequestNotificationDetailResponseInfo.after + 1, true);
+
         };
 
         if (CookieUtil.getUTMZT() != null && CookieUtil.getUTMZT() != '' && CookieUtil.getUTMZT() != "") {
@@ -271,6 +290,7 @@ define([appLocation.preLogin], function (app) {
             
             loadClientDetails();
             $scope.clientNotificationDetailResponseInfo.nextPage();
+            $scope.clientFriendRequestNotificationDetailResponseInfo.nextPage();
         } else {
             console.log("cookie not available.");
         };
@@ -403,6 +423,67 @@ define([appLocation.preLogin], function (app) {
                 $scope.loadingNotificationDetails = false;
                 $rootScope.clientNotificationDetailResponseInfo.busy = false;
                 showToastMessage("Error", "Internal Server Error Occured.");                
+            });
+        }
+
+
+        function loadClientFriendRequestNotificationDetails(from, to, isFromPushNotification) {
+            var url = ServerContextPath.userServer + '/User/GetFriendRequestNotificationDetails?from=' + from + '&to=' + to;            
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': CookieUtil.getUTMZT(),
+                'UTMZK': CookieUtil.getUTMZK(),
+                'UTMZV': CookieUtil.getUTMZV()
+            };
+            
+            $rootScope.clientFriendRequestNotificationDetailResponseInfo.busy = true;
+            $scope.loadingFriendRequestNotificationDetails = true;
+            
+            $http({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).success(function (data, status, headers, config) {
+                
+                $scope.loadingFriendRequestNotificationDetails = false;
+                $rootScope.clientFriendRequestNotificationDetailResponseInfo.busy = false;
+                $rootScope.clientFriendRequestNotificationDetailResponseInfo.count = data.unread;
+
+
+                if (isFromPushNotification || from == 0) {
+                    $rootScope.clientFriendRequestNotificationDetailResponse = [];
+                }
+
+                if (data != null && data.results != null && data.results.length > 0) {
+                    for (var i = 0; i < data.results.length; i++) {
+                        if ((from + i) < data.unread) {
+                            data.results[i].class = "unread_notification";
+                        }
+                        $rootScope.clientFriendRequestNotificationDetailResponse.push(data.results[i]);
+                    }
+                }
+
+                if (isFromPushNotification) {
+                    var mssg = "";
+                    
+                    showToastMessage("Success", mssg);
+                }
+
+                
+                //console.log($rootScope.clientNotificationDetailResponse);
+                if (data.Status == "500") {
+
+                    alert("Internal Server Error Occured");
+                }
+                else if (data.Status == "401") {
+                    $rootScope.isUserLoggedIn = false;
+                    removeAllCookies(ServerContextPath.cookieDomain);
+                }
+            }).error(function (data, status, headers, config) {
+                //stopBlockUI();
+                $scope.loadingNotificationDetails = false;
+                $rootScope.clientNotificationDetailResponseInfo.busy = false;
+                showToastMessage("Error", "Internal Server Error Occured.");
             });
         }
 

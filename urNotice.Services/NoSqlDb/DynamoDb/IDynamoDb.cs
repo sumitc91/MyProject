@@ -13,7 +13,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
     {
         OrbitPageCompanyUserWorkgraphyTable CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(OrbitPageCompanyUserWorkgraphyTable orbitPageCompanyUserWorkgraphyTable);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUser(OrbitPageUser orbitPageUser,String accessToken);
-        OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,long timeStamp);
+        OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageUpdateLastNotificationSeenTimeStamp(String userName,String dataType,long timeStamp);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageWorkgraphy(OrbitPageWorkgraphy orbitPageWorkgraphy);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageDesignation(String designationName,String designationVertexId);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageCompany(OrbitPageCompany company, string companyVertexId);
@@ -22,7 +22,7 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageGoogleApiContacts(List<VirtualFriendList> orbitPageGoogleApiContact, String userName, String startIndex);
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTable(string dataType, string objectId,string compareId);
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingFacebookId(string dataType,string facebookId);
-        long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName);
+        long? GetOrbitPageCompanyUserWorkgraphyTableLastSeenNotifiationTimeStamp(string userName, string notificationType);
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(string inV,string outV,string label);
 
         IEnumerable<OrbitPageCompanyUserWorkgraphyTable> GetOrbitPageCompanyUserWorkgraphyTableUsingOutEdges(string outV);

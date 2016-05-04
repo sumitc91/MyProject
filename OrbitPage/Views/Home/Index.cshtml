@@ -307,53 +307,61 @@ div.middle-div-mobile {
                                 </li>
                                 
                                 <li class="dropdown hover-line" ng-show="isUserLoggedIn">
-                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="true">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false" ng-click="seenFriendRequestNotification()">
                                         <i class="fa-users"></i>
-                                        <span class="badge badge-green">15</span>
+                                        <span ng-show="clientFriendRequestNotificationDetailResponseInfo.count>0" class="badge badge-green" ng-bind="clientFriendRequestNotificationDetailResponseInfo.count"></span>
                                     </a>
 
-                                    <ul class="dropdown-menu messages">
+                                    <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
+                                        <li class="top">
+                                            <p class="small">
+                                                <a class="pull-right" href="#">Mark all Read</a>
+                                                You have <strong ng-bind="clientFriendRequestNotificationDetailResponseInfo.count"></strong> new friend Request.
+                                            </p>
+                                        </li>
+
                                         <li>
-
-                                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
-
-                                                <li class="active">
-                                                    <!-- "active" class means message is unread -->
-                                                    <a href="#">
-                                                        <span class="line">
-                                                            <strong>Luc Chartier</strong>
-                                                            <span class="light small">- yesterday</span>
-                                                        </span>
-
-                                                        <span class="line desc small">
-                                                            This ain’t our first item, it is the best of the rest.
-                                                        </span>
-                                                    </a>
+                                            @*<ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>*@
+                                            <ul id="userFriendRequestNotificationDivId" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+                                                <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientFriendRequestNotificationDetailResponse">
+                                                    <div class="row">
+                                                        <div class="col-sm-1 col-md-1"></div>
+                                                        <div class="col-sm-2 col-md-2">
+                                                            <a href="#/userprofile/{{notification.requestedBy[0]._id}}">
+                                                                <img ng-src="{{notification.requestedBy[0].ImageUrl}}" height="50px" width="50px">
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-sm-7 col-md-7">
+                                                            <a href="#/userprofile/{{notification.requestedBy[0]._id}}"> <span ng-bind="notification.requestedBy[0].FirstName"></span> &nbsp;<span ng-bind="notification.requestedBy[0].LastName"></span></a> &nbsp; Sent Friend Request.
+                                                            
+                                                            <span class="line small time">
+                                                                {{notification.requestInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2">
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </li>
 
-                                                <li class="active">
-                                                    <a href="#">
-                                                        <span class="line">
-                                                            <strong>Salma Nyberg</strong>
-                                                            <span class="light small">- 2 days ago</span>
-                                                        </span>
-
-                                                        <span class="line desc small">
-                                                            Oh he decisively impression attachment friendship so if everything.
-                                                        </span>
-                                                    </a>
-                                                </li>
-
-
-                                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
-                                                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 300px;"><div class="ps-scrollbar-y" style="top: 0px; height: 150px;"></div></div>
                                             </ul>
 
                                         </li>
+                                        <li class="external">
+
+                                            <div ng-show='loadingFriendRequestNotificationDetails'>Loading data... <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></div>
+
+                                        </li>
+                                        <li class="external" ng-show='!clientFriendRequestNotificationDetailResponse.busy'>
+                                            <a ng-click="clientFriendRequestNotificationDetailResponseInfo.nextPage()">
+                                                <div>Load more...</div>
+                                                <i class="fa-link-ext"></i>
+                                            </a>
+                                        </li>
 
                                         <li class="external">
-                                            <a href="mailbox-main.html">
-                                                <span>All Messages</span>
+                                            <a href="#">
+                                                <span>View all Friend Requests</span>
                                                 <i class="fa-link-ext"></i>
                                             </a>
                                         </li>

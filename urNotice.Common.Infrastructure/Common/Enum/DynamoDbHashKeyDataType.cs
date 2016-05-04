@@ -20,6 +20,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Designation,
         Company,
         OrbitPageWorkgraphy,
-        LastSeenNotification
+        LastSeenNotification,
+        LastSeenFriendRequestNotification,
+        LastSeenMessageNotification
     }
 }
