@@ -172,6 +172,43 @@ namespace urNotice.Services.Management.AccountManagement
 
             return response;
         }
+        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+            var response = new ResponseModel<IDictionary<string, string>>();
+            if (session.UserVertexId == userConnectionRequestModel.UserVertexId)
+            {
+                response.Status = 201;
+                response.Message = "You cann't associate you with yourself.";
+                return response;
+            }
+
+            if (userConnectionRequestModel.ConnectingBody == CommonConstants.AssociateUsers)
+            {
+                switch (userConnectionRequestModel.ConnectionType)
+                {
+                    case CommonConstants.AssociateRequest:
+                        // Create Associate Request and follow the user by default.
+                        response.Payload = CreateNewAssociateRequest(session, userConnectionRequestModel);
+                        response.Payload.ToList().ForEach(x => CreateNewFollowRequest(session, userConnectionRequestModel).Add(x.Key, x.Value));                        
+                        break;
+                    case CommonConstants.AssociateAccept:
+                        response.Payload = CreateNewFriend(session, userConnectionRequestModel);
+                        response.Payload.ToList().ForEach(x => RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Add(x.Key, x.Value));
+                        break;
+                    case CommonConstants.AssociateFollow:
+                        response.Payload = CreateNewFollowRequest(session, userConnectionRequestModel);
+                        break;
+                    case CommonConstants.AssociateReject:
+                        response.Payload = RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId);
+                        break;
+                    case CommonConstants.RemoveFollow:
+                        response.Payload = RemoveFollowEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId);
+                        break;
+                }
+            }
+            return response;
+        }
+
 
 
         public ResponseModel<string> ValidateAccountService(ValidateAccountRequest req)
@@ -410,6 +447,7 @@ namespace urNotice.Services.Management.AccountManagement
 
 
         //For Gremling Query
+
         public string GetUserNotification(urNoticeSession session, string from, string to)
         {
 
@@ -503,6 +541,111 @@ namespace urNotice.Services.Management.AccountManagement
             orbitPageCompanyUserWorkgraphyTable.OrbitPageUser.lastUpdatedDate = DateTimeUtil.GetUtcTime();
 
             return orbitPageCompanyUserWorkgraphyTable;
+        }
+
+        private IDictionary<string, string> CreateNewAssociateRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
+                        userConnectionRequestModel.UserVertexId,
+                        session.UserVertexId,
+                        EdgeLabelEnum.AssociateRequest.ToString());
+            if (edgeInfo != null)
+            {
+                var response = new Dictionary<string, string>();
+                response.Add("AssociateRequest", "AssociateRequest is already sent to this user.");
+                return response;
+            }
+
+            var properties = new Dictionary<string, string>();
+
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = userConnectionRequestModel.UserVertexId;
+
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.AssociateRequest.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            return addEdgeResponse;
+        }
+        private IDictionary<string, string> CreateNewFriend(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
+                        userConnectionRequestModel.UserVertexId,
+                        session.UserVertexId,
+                        EdgeLabelEnum.Friend.ToString());
+            if (edgeInfo != null)
+            {
+                var response = new Dictionary<string, string>();
+                response.Add("Friend", "Friend is already friend to this user.");
+                return response;
+            }
+
+            var properties = new Dictionary<string, string>();
+
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = userConnectionRequestModel.UserVertexId;
+
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Friend.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+
+
+            properties = new Dictionary<string, string>();
+
+            properties[EdgePropertyEnum._outV.ToString()] = userConnectionRequestModel.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = session.UserVertexId;
+
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Friend.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+
+            addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            return addEdgeResponse;
+        }
+        private IDictionary<string, string> RemoveAssociateRequestEdge(string inV, string outV)
+        {
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.AssociateRequest.ToString());
+        }
+        private IDictionary<string, string> RemoveFollowEdge(string inV, string outV)
+        {
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.Follow.ToString());
+        }
+        private IDictionary<string, string> CreateNewFollowRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+
+            IDynamoDb dynamoDbModel = new DynamoDb();
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
+                        userConnectionRequestModel.UserVertexId,
+                        session.UserVertexId,
+                        EdgeLabelEnum.AssociateRequest.ToString());
+            if (edgeInfo != null)
+            {
+                var response = new Dictionary<string, string>();
+                response.Add("Follow", "Follow is already sent to this user.");
+                return response;
+            }
+
+            var properties = new Dictionary<string, string>();
+
+            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
+            properties[EdgePropertyEnum._inV.ToString()] = userConnectionRequestModel.UserVertexId;
+
+            properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Follow.ToString();
+            properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            return addEdgeResponse;
         }
     }
 }

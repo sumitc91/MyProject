@@ -108,8 +108,8 @@
                 </div>
                 <a href="#" class="fb-user-mail" ng-bind="CurrentUserDetails.Email"></a>
                 <div style="float:right">
-                    <button type="button" class="btn btn-info">Associate</button>
-                    <button type="button" class="btn btn-warning">Follow</button>
+                    <button type="button" class="btn btn-info" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>
+                    <button type="button" class="btn btn-warning" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow</button>
                 </div>
                 
             </div>

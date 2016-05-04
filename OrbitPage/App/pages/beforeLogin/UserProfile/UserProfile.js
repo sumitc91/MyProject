@@ -119,6 +119,10 @@ define([appLocation.preLogin], function (app) {
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
         };
 
+        $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType) {
+            makeConnectionRequest(userVertexId,connectingBody, connectionType);
+        };
+
         $scope.removeUploadedPostImage = function() {
             $timeout(function () {
                 $scope.NewPostImageUrl = {};
@@ -254,6 +258,47 @@ define([appLocation.preLogin], function (app) {
                 showToastMessage("Warning", "Please Login to create a post.");
             }
             
+        };
+
+        function makeConnectionRequest(userVertexId,connectingBody, connectionType) {
+
+            var userNewConnectionData = {
+                UserVertexId: userVertexId,
+                ConnectionType: connectionType,
+                ConnectingBody:connectingBody
+            };
+
+            var url = ServerContextPath.empty + '/User/UserConnectionRequest';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+                
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userNewConnectionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();                    
+                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
+                    //$timeout(function() {
+                    //    $scope.NewPostImageUrl.link_s = "";
+                    //});
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make a connection.");
+            }
+
         };
 
         function createNewReactionOnUserPost(postIndex) {

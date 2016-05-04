@@ -24,6 +24,9 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail);
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
         ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
+        ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel);
+
+
         ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq);
         ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse);
         ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse);
@@ -31,6 +34,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session,UserNewReactionRequest userNewReactionRequest, out HashSet<string> sendNotificationResponse);
         ResponseModel<String> RemoveReactionOnUserPost(urNoticeSession session, string vertexId);
         ResponseModel<string> SeenNotification(string userName);
+
         HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId, string postPostedByVertexId, string notificationType);
 
         SolrQueryResults<UnCompanySolr> CompanyDetailsById(string userVertexId, string cid);

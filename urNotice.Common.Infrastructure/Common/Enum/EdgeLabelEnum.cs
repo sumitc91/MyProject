@@ -21,6 +21,10 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         PublishedBy,
         WorkgraphyStory,
         WorkgraphyDesignationStory,
-        Visited
+        Visited,
+
+        AssociateRequest,
+        Follow,
+        Friend
     }
 }

@@ -160,6 +160,30 @@ namespace OrbitPage.Controllers
         }
 
         [System.Web.Mvc.HttpPost]
+        public JsonResult UserConnectionRequest(UserConnectionRequestModel userConnectionRequestModel)
+        {
+            
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                IPerson clientModel = new Consumer();
+                var userNewConnectionResponse = clientModel.UserConnectionRequest(session, userConnectionRequestModel);
+                return Json(userNewConnectionResponse, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [System.Web.Mvc.HttpPost]
         public JsonResult EditPersonDetails(EditPersonModel editPersonModel)
         {
             

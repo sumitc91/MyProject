@@ -100,6 +100,11 @@ namespace urNotice.Services.Person
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetUserUnreadNotificationCount(session);
         }
+        public ResponseModel<IDictionary<string,string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.UserConnectionRequest(session, userConnectionRequestModel);
+        }
 
         //Post Management.
         public ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq)
@@ -112,6 +117,8 @@ namespace urNotice.Services.Person
             IPostManagement postManagementModel = new PostManagement();
             return postManagementModel.CreateNewUserPost(session,message,image,userWallVertexId,out sendNotificationResponse);  
         }
+
+
         public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType)
         {
             IPostManagement postManagementModel = new PostManagement();
@@ -177,32 +184,24 @@ namespace urNotice.Services.Person
             ICompanyManagement companyManagementModel = new CompanyManagement();
             return companyManagementModel.CompanyDetailsById(userVertexId, cid);
         }
-
-
-
-
         public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation, string salary,
             string jobFromYear, string jobToYear, string companyVertexId)
         {
             throw new NotImplementedException();
         }
-
         public bool CreateNewDesignation(string designationName, string createdBy)
         {
             throw new NotImplementedException();
         }
-
         public bool CreateNewCompanyDesignationSalary(string companyName, string designationName, string salary, string createdBy)
         {
             throw new NotImplementedException();
         }
-
         public bool CreateNewCompanyDesignationNoticePeriod(string companyName, string designationName, string noticePeriodRange,
             string createdBy)
         {
             throw new NotImplementedException();
         }
-
         public bool CreateNewCompany(OrbitPageCompany company, string createdBy)
         {
             throw new NotImplementedException();

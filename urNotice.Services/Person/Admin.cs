@@ -96,6 +96,11 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId,
             string postPostedByVertexId, string notificationType)
         {
@@ -171,7 +176,6 @@ namespace urNotice.Services.Person
             ICompanyManagement companyManagementModel = new CompanyManagement();
             return companyManagementModel.CreateNewCompanyDesignationEdge(session,designation,salary,jobFromYear,jobToYear,companyVertexId);
         }
-
         public bool CreateNewDesignation(string designationName, string createdBy)
         {
             ICompanyManagement companyManagementModel = new CompanyManagement();

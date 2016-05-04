@@ -50,5 +50,14 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public static string CommaDelimeter = ",";
         public static string Facebook = "facebook";
         public static string WorkgraphyIconImage = "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/User/Sumit/WallPost/3033020a-4a44-4d31-aadc-a7ec8928e94f.jpg";
+        
+        public static string AssociateUsers = "1";
+        public static string AssociateCompany = "2";
+
+        public const string AssociateRequest = "1";
+        public const string AssociateFollow = "2";
+        public const string AssociateAccept = "3";
+        public const string AssociateReject = "4";
+        public const string RemoveFollow = "5";
     }
 }

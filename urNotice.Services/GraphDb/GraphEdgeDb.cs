@@ -87,6 +87,7 @@ namespace urNotice.Services.GraphDb
             dynamic jsonResponse = JsonConvert.DeserializeObject(content);
             var response = new Dictionary<String, String>();
             response["status"] = "200";
+            response["CreateEdgeStatus"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.results._id;
 
             return response;
