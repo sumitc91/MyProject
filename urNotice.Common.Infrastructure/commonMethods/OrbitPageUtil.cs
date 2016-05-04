@@ -23,5 +23,10 @@ namespace urNotice.Common.Infrastructure.commonMethods
         {
             return "(long," + Convert.ToString(DateTimeUtil.GetUtcTime().Ticks) + ")";
         }
+
+        public static string GenerateUniqueKeyForEdgeQuery(string inV, string label, string outV)
+        {
+            return inV + "-" + label + "-" + outV;
+        }
     }
 }

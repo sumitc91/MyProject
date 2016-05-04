@@ -255,6 +255,34 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
                     );
         }
 
+        public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageEdgeForQueryDetail(OrbitPageEdgeDetail orbitPageEdgeDetail, String userName, String inV, String outV)
+        {            
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, orbitPageEdgeDetail.properties[EdgePropertyEnum._label.ToString()],outV);
+            return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(
+                    DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                    uniqueKey,
+                    orbitPageEdgeDetail.edgeId,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    null,
+                    null,
+                    null,
+                    null
+                    );
+        }
+
         public OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageDesignation(String designationName, string designationVertexId)
         {
             return CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(

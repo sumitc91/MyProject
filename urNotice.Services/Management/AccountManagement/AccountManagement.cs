@@ -189,11 +189,13 @@ namespace urNotice.Services.Management.AccountManagement
                     case CommonConstants.AssociateRequest:
                         // Create Associate Request and follow the user by default.
                         response.Payload = CreateNewAssociateRequest(session, userConnectionRequestModel);
-                        response.Payload.ToList().ForEach(x => CreateNewFollowRequest(session, userConnectionRequestModel).Add(x.Key, x.Value));                        
+                        response.Payload.Concat(CreateNewFollowRequest(session, userConnectionRequestModel).Where( x=> !response.Payload.Keys.Contains(x.Key)));
+                        //response.Payload.ToList().ForEach(x => CreateNewFollowRequest(session, userConnectionRequestModel).Add(x.Key, x.Value));                        
                         break;
                     case CommonConstants.AssociateAccept:
                         response.Payload = CreateNewFriend(session, userConnectionRequestModel);
-                        response.Payload.ToList().ForEach(x => RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Add(x.Key, x.Value));
+                        response.Payload.Concat(RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Where(x => !response.Payload.Keys.Contains(x.Key)));
+                        //response.Payload.ToList().ForEach(x => RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Add(x.Key, x.Value));
                         break;
                     case CommonConstants.AssociateFollow:
                         response.Payload = CreateNewFollowRequest(session, userConnectionRequestModel);
@@ -580,10 +582,13 @@ namespace urNotice.Services.Management.AccountManagement
         private IDictionary<string, string> CreateNewAssociateRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
         {
             IDynamoDb dynamoDbModel = new DynamoDb();
-            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
-                        userConnectionRequestModel.UserVertexId,
-                        session.UserVertexId,
-                        EdgeLabelEnum.AssociateRequest.ToString());
+            
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.AssociateRequest.ToString(), session.UserVertexId);
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        uniqueKey,
+                        null);
+
             if (edgeInfo != null)
             {
                 var response = new Dictionary<string, string>();
@@ -607,10 +612,13 @@ namespace urNotice.Services.Management.AccountManagement
         private IDictionary<string, string> CreateNewFriend(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
         {
             IDynamoDb dynamoDbModel = new DynamoDb();
-            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
-                        userConnectionRequestModel.UserVertexId,
-                        session.UserVertexId,
-                        EdgeLabelEnum.Friend.ToString());
+            
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.Friend.ToString(), session.UserVertexId);
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        uniqueKey,
+                        null);
+
             if (edgeInfo != null)
             {
                 var response = new Dictionary<string, string>();
@@ -657,10 +665,13 @@ namespace urNotice.Services.Management.AccountManagement
         {
 
             IDynamoDb dynamoDbModel = new DynamoDb();
-            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(
-                        userConnectionRequestModel.UserVertexId,
-                        session.UserVertexId,
-                        EdgeLabelEnum.AssociateRequest.ToString());
+            
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.Follow.ToString(), session.UserVertexId);
+            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        uniqueKey,
+                        null);
+
             if (edgeInfo != null)
             {
                 var response = new Dictionary<string, string>();

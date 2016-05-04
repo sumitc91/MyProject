@@ -9,6 +9,7 @@ using RestSharp;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Services.NoSqlDb.DynamoDb;
 
@@ -34,6 +35,9 @@ namespace urNotice.Services.GraphDb
 
             IDynamoDb dynamoDbModel = new DynamoDb();
             dynamoDbModel.UpsertOrbitPageEdgeDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()],properties[EdgePropertyEnum._outV.ToString()]);
+
+            //Adding edgeDetail for faster query.
+            dynamoDbModel.UpsertOrbitPageEdgeForQueryDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()], properties[EdgePropertyEnum._outV.ToString()]);
             
             return response;
         }
@@ -47,11 +51,23 @@ namespace urNotice.Services.GraphDb
                         inV,
                         outV,
                         label);
+
             if (edgeInfo == null)
                 return null;
 
             var response = DeleteEdgeNative(TitanGraphConfig.Graph, edgeInfo.ObjectId, url);
             dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
+
+            //Deleting Edge detail creating for only query purpose.
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, label, outV);
+            edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        uniqueKey,
+                        null);
+
+            if(edgeInfo!=null)
+                dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
+
             return response;
         }
 
