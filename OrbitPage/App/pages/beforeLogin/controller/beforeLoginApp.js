@@ -272,6 +272,10 @@ define([appLocation.preLogin], function (app) {
             
         };
 
+        $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType) {
+            makeConnectionRequest(userVertexId, connectingBody, connectionType);
+        };
+
         $scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification = function () {
             //alert("working");                             
             loadClientFriendRequestNotificationDetails(0, $rootScope.clientFriendRequestNotificationDetailResponseInfo.after + 1, true);
@@ -295,6 +299,42 @@ define([appLocation.preLogin], function (app) {
             console.log("cookie not available.");
         };
         
+        function makeConnectionRequest(userVertexId, connectingBody, connectionType) {
+
+            var userNewConnectionData = {
+                UserVertexId: userVertexId,
+                ConnectionType: connectionType,
+                ConnectingBody: connectingBody
+            };
+
+            var url = ServerContextPath.empty + '/User/UserConnectionRequest';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userNewConnectionData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to Make a connection.");
+            }
+
+        };
 
         function loadClientDetails() {
             var url = ServerContextPath.solrServer + '/Search/GetDetails?userType=user';

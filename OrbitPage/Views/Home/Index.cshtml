@@ -332,8 +332,9 @@ div.middle-div-mobile {
                                                             </a>
                                                         </div>
                                                         <div class="col-sm-7 col-md-7">
-                                                            <a href="#/userprofile/{{notification.requestedBy[0]._id}}"> <span ng-bind="notification.requestedBy[0].FirstName"></span> &nbsp;<span ng-bind="notification.requestedBy[0].LastName"></span></a> &nbsp; Sent Friend Request.
-                                                            
+                                                            <a href="#/userprofile/{{notification.requestedBy[0]._id}}"> <span ng-bind="notification.requestedBy[0].FirstName+' '+notification.requestedBy[0].LastName"></span> &nbsp; Sent Friend Request.</a>
+                                                            <button type="button" class="btn btn-success" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,1,3)">Accept</button>
+                                                            <button type="button" class="btn btn-danger" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,1,4)">Reject</button>
                                                             <span class="line small time">
                                                                 {{notification.requestInfo.PostedDate | timeago}}
                                                             </span>
