@@ -107,7 +107,7 @@
                     <img alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" height="140">
                 </div>
                 <a href="#" class="fb-user-mail" ng-bind="CurrentUserDetails.Email"></a>
-                <div style="float:right" ng-show="!UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded">
+                <div style="float:right" ng-show="!UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded && visitedUserVertexId != clientDetailResponse.VertexId">
                     <img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
                 </div>
                 <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded">
