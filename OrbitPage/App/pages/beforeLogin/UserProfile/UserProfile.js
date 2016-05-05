@@ -186,7 +186,7 @@ define([appLocation.preLogin], function (app) {
                 'UTMZV': $.cookie('utmzv'),
             };
 
-            if ($rootScope.isUserLoggedIn) {
+            if (!$rootScope.isUserLoggedIn || $scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
                 //only fetch this info if user is logged in.
                 return;
             }
