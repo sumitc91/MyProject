@@ -192,7 +192,7 @@ define([appLocation.preLogin], function (app) {
             }
 
             //startBlockUI('wait..', 3);
-            //$scope.UserPostList[postIndex].loadingIcon = true;
+            $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = true;
             $.ajax({
                 url: url,
                 method: "GET",
@@ -200,7 +200,7 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 //stopBlockUI();
                 //console.log(data.results);
-                //$scope.UserPostList[postIndex].loadingIcon = false;
+                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = false;
                 $scope.$apply(function () {
                     if (data.results != null && data.results.length > 0) {
 
