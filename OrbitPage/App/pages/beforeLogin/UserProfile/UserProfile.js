@@ -188,7 +188,6 @@ define([appLocation.preLogin], function (app) {
 
             if (!$rootScope.isUserLoggedIn || $scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
                 //only fetch this info if user is logged in.
-                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded = true;
                 return;
             }
 
