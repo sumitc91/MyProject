@@ -19,7 +19,6 @@ namespace urNotice.Services.NoSqlDb.DynamoDb
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageCompany(OrbitPageCompany company, string companyVertexId);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageEdgeDetail(OrbitPageEdgeDetail orbitPageEdgeDetail, String userName,String inV,String outV);
 
-        OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageEdgeForQueryDetail(OrbitPageEdgeDetail orbitPageEdgeDetail,String userName, String inV, String outV);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageVertexDetail(OrbitPageVertexDetail orbitPageVertexDetail, String userName, HashSet<string> canEdit, HashSet<string> canDelete, HashSet<string> sendNotificationToUsers);
         OrbitPageCompanyUserWorkgraphyTable UpsertOrbitPageGoogleApiContacts(List<VirtualFriendList> orbitPageGoogleApiContact, String userName, String startIndex);
         OrbitPageCompanyUserWorkgraphyTable GetOrbitPageCompanyUserWorkgraphyTable(string dataType, string objectId,string compareId);

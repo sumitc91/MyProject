@@ -37,7 +37,7 @@ namespace urNotice.Services.GraphDb
             dynamoDbModel.UpsertOrbitPageEdgeDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()],properties[EdgePropertyEnum._outV.ToString()]);
 
             //Adding edgeDetail for faster query.
-            dynamoDbModel.UpsertOrbitPageEdgeForQueryDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()], properties[EdgePropertyEnum._outV.ToString()]);
+            //dynamoDbModel.UpsertOrbitPageEdgeForQueryDetail(edgeDetail, userName, properties[EdgePropertyEnum._inV.ToString()], properties[EdgePropertyEnum._outV.ToString()]);
             
             return response;
         }
@@ -47,26 +47,27 @@ namespace urNotice.Services.GraphDb
             string url = TitanGraphConfig.Server;
             
             IDynamoDb dynamoDbModel = new DynamoDb();
-            var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTableUsingInOutVertex(                        
-                        inV,
-                        outV,
-                        label);
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, label, outV);
+             var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+                        DynamoDbHashKeyDataType.EdgeDetail.ToString(),
+                        uniqueKey,
+                        null);
 
             if (edgeInfo == null)
                 return null;
 
-            var response = DeleteEdgeNative(TitanGraphConfig.Graph, edgeInfo.ObjectId, url);
+            var response = DeleteEdgeNative(TitanGraphConfig.Graph, edgeInfo.CompareId, url);
             dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
 
             //Deleting Edge detail creating for only query purpose.
-            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, label, outV);
-            edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
-                        uniqueKey,
-                        null);
+            //string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, label, outV);
+            //edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
+            //            DynamoDbHashKeyDataType.EdgeDetail.ToString(),
+            //            uniqueKey,
+            //            null);
 
-            if(edgeInfo!=null)
-                dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
+            //if(edgeInfo!=null)
+            //    dynamoDbModel.DeleteOrbitPageCompanyUserWorkgraphyTable(edgeInfo);
 
             return response;
         }

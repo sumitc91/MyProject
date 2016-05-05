@@ -321,6 +321,7 @@ define([appLocation.preLogin], function (app) {
                 ConnectingBody:connectingBody
             };
 
+           
             var url = ServerContextPath.empty + '/User/UserConnectionRequest';
             var headers = {
                 'Content-Type': 'application/json',
@@ -330,8 +331,8 @@ define([appLocation.preLogin], function (app) {
             };
 
             if ($rootScope.isUserLoggedIn) {
-                startBlockUI('wait..', 3);
-                
+                //startBlockUI('wait..', 3);
+                $scope.makeConnectionRequestLoading = true;
                 $http({
                     url: url,
                     method: "POST",
@@ -339,12 +340,21 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();                    
+                    $scope.makeConnectionRequestLoading = false;
+                    //stopBlockUI();                    
                     if (connectingBody == 1) {
                         if (connectionType == 1) {
                             //friend request sent
                             $scope.UserNetworkDetailHelper.isFriendRequestSent = true;
                             $scope.UserNetworkDetailHelper.isFollowing = true;
+                        }
+                        else if (connectionType == 2) {
+                            //follow
+                            $scope.UserNetworkDetailHelper.isFollowing = true;
+                        }
+                        else if (connectionType == 5) {
+                            //unfollow
+                            $scope.UserNetworkDetailHelper.isFollowing = false;
                         }
                     }
 

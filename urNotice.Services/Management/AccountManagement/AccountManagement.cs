@@ -194,17 +194,17 @@ namespace urNotice.Services.Management.AccountManagement
                         break;
                     case CommonConstants.AssociateAccept:
                         response.Payload = CreateNewFriend(session, userConnectionRequestModel);
-                        response.Payload.Concat(RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Where(x => !response.Payload.Keys.Contains(x.Key)));
+                        response.Payload.Concat(RemoveAssociateRequestEdge(userConnectionRequestModel.UserVertexId,session.UserVertexId).Where(x => !response.Payload.Keys.Contains(x.Key)));
                         //response.Payload.ToList().ForEach(x => RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Add(x.Key, x.Value));
                         break;
                     case CommonConstants.AssociateFollow:
                         response.Payload = CreateNewFollowRequest(session, userConnectionRequestModel);
                         break;
                     case CommonConstants.AssociateReject:
-                        response.Payload = RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId);
+                        response.Payload = RemoveAssociateRequestEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
                         break;
                     case CommonConstants.RemoveFollow:
-                        response.Payload = RemoveFollowEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId);
+                        response.Payload = RemoveFollowEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
                         break;
                 }
             }
@@ -591,7 +591,7 @@ namespace urNotice.Services.Management.AccountManagement
             
             string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.AssociateRequest.ToString(), session.UserVertexId);
             var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        DynamoDbHashKeyDataType.EdgeDetail.ToString(),
                         uniqueKey,
                         null);
 
@@ -621,7 +621,7 @@ namespace urNotice.Services.Management.AccountManagement
             
             string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.Friend.ToString(), session.UserVertexId);
             var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        DynamoDbHashKeyDataType.EdgeDetail.ToString(),
                         uniqueKey,
                         null);
 
@@ -674,7 +674,7 @@ namespace urNotice.Services.Management.AccountManagement
             
             string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.Follow.ToString(), session.UserVertexId);
             var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
-                        DynamoDbHashKeyDataType.EdgeForQueryDetail.ToString(),
+                        DynamoDbHashKeyDataType.EdgeDetail.ToString(),
                         uniqueKey,
                         null);
 

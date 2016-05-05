@@ -16,7 +16,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         GmailFriends,
         VertexDetail,
         EdgeDetail,
-        EdgeForQueryDetail,
+        //EdgeForQueryDetail,
         Notification,
         Designation,
         Company,
