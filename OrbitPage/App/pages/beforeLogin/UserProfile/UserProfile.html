@@ -107,8 +107,8 @@
                     <img alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" height="140">
                 </div>
                 <a href="#" class="fb-user-mail" ng-bind="CurrentUserDetails.Email"></a>
-                <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading">
-                    <img src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
+                <div style="float:right" ng-show="!UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded">
+                    <img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
                 </div>
                 <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded">
                     <button type="button" class="btn btn-info" ng-show="!UserNetworkDetailHelper.isFriendRequestSent && !UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>

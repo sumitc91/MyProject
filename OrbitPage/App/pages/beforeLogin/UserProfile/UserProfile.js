@@ -188,11 +188,12 @@ define([appLocation.preLogin], function (app) {
 
             if (!$rootScope.isUserLoggedIn || $scope.visitedUserVertexId == $rootScope.clientDetailResponse.VertexId) {
                 //only fetch this info if user is logged in.
+                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded = true;
                 return;
             }
 
             //startBlockUI('wait..', 3);
-            $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = true;
+            //$scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = true;
             $.ajax({
                 url: url,
                 method: "GET",
@@ -200,7 +201,9 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 //stopBlockUI();
                 //console.log(data.results);
-                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = false;
+                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded = true;
+                //$scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoading = false;
+
                 $scope.$apply(function () {
                     if (data.results != null && data.results.length > 0) {
 
@@ -216,7 +219,7 @@ define([appLocation.preLogin], function (app) {
                     }                    
                 });
 
-                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded = true;
+                
 
             });
         };
