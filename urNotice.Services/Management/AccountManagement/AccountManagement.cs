@@ -459,7 +459,6 @@ namespace urNotice.Services.Management.AccountManagement
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
-
         public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
         {         
             string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";
@@ -468,7 +467,6 @@ namespace urNotice.Services.Management.AccountManagement
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);
             return response;
         }
-
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
             string url = TitanGraphConfig.Server;
@@ -525,7 +523,15 @@ namespace urNotice.Services.Management.AccountManagement
 
             return response;
         }
+        public string GetUserNetworkDetail(urNoticeSession session, string userVertexId, string from, string to)
+        {
 
+            //string gremlinQuery = "g.v(" + userVertexId + ").inE('AssociateRequest').order{it.b.PostedDate <=> it.a.PostedDate}[" + from + ".." + to + "].transform{ [notificationInfo:it,postInfo:it.inV,notificationByUser:g.v(it.NotificationInitiatedByVertexId)]}";
+            string gremlinQuery = "g.v(" + userVertexId + ").transform{[associateRequestSent:it.in('AssociateRequest').has('Username','" + session.UserName + "'),associateRequestReceived:it.out('AssociateRequest').has('Username','" + session.UserName + "'),followRequestSent:it.in('Follow').has('Username','" + session.UserName + "')]}";
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            return response;
+        }
         public long GetUserUnreadNotificationCount(urNoticeSession session)
         {
             IDynamoDb dynamoDbModel = new DynamoDb();

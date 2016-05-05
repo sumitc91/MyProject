@@ -107,9 +107,13 @@
                     <img alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" height="140">
                 </div>
                 <a href="#" class="fb-user-mail" ng-bind="CurrentUserDetails.Email"></a>
-                <div style="float:right">
-                    <button type="button" class="btn btn-info" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>
-                    <button type="button" class="btn btn-warning" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow</button>
+                <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded">
+                    <button type="button" class="btn btn-info" ng-show="!UserNetworkDetailHelper.isFriendRequestSent && !UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>
+                    <button type="button" class="btn btn-info" ng-show="UserNetworkDetailHelper.isFriendRequestSent" disabled>Request Already Sent</button>
+                    <button type="button" class="btn btn-success" ng-show="UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,3)">Accept</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,4)">Reject</button>
+                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,5)">Unfollow</button>
                 </div>
                 
             </div>

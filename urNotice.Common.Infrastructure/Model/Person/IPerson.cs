@@ -45,6 +45,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
         string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostLikes(string userVertexId, string @from, string to);
         string GetPostByVertexId(string vertexId, string userEmail);
+        string GetUserNetworkDetail(urNoticeSession session, string vertexId, string @from, string to);
         long GetUserUnreadNotificationCount(urNoticeSession session);
         long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session);
 

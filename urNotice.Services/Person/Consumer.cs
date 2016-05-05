@@ -102,6 +102,13 @@ namespace urNotice.Services.Person
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetPostByVertexId(vertexId, userEmail);
         }
+
+        public string GetUserNetworkDetail(urNoticeSession session,string vertexId, string @from, string to)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.GetUserNetworkDetail(session, vertexId, from, to);
+        }
+
         public long GetUserUnreadNotificationCount(urNoticeSession session)
         {
             IAccountManagement accountManagementModel = new AccountManagement();

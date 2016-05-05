@@ -142,6 +142,11 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public string GetUserNetworkDetail(urNoticeSession session, string vertexId, string @from, string to)
+        {
+            throw new NotImplementedException();
+        }
+
         public long GetUserUnreadNotificationCount(urNoticeSession session)
         {
             throw new NotImplementedException();

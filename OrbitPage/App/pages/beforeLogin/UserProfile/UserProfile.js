@@ -22,6 +22,13 @@ define([appLocation.preLogin], function (app) {
             itemPerPage: 2
         };
 
+        $scope.UserNetworkDetailHelper = {
+            isFriendRequestSent: false,
+            isFriendRequestReceived: false,
+            isFollowing: false,
+            UserNetworkDetailHelperDataLoaded: false
+        };
+
         getUserInformation();
         //getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
 
@@ -170,6 +177,50 @@ define([appLocation.preLogin], function (app) {
             });
         };
 
+        function loadUserNetworkDetail(vertexId, from, to) {
+            var url = ServerContextPath.userServer + '/User/GetUserNetworkDetail?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            if ($rootScope.isUserLoggedIn) {
+                //only fetch this info if user is logged in.
+                return;
+            }
+
+            //startBlockUI('wait..', 3);
+            //$scope.UserPostList[postIndex].loadingIcon = true;
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                //console.log(data.results);
+                //$scope.UserPostList[postIndex].loadingIcon = false;
+                $scope.$apply(function () {
+                    if (data.results != null && data.results.length > 0) {
+
+                        if (data.results[0].associateRequestSent != null && data.results[0].associateRequestSent.length > 0) {
+                            $scope.UserNetworkDetailHelper.isFriendRequestSent = true;
+                        }
+                        if (data.results[0].associateRequestReceived != null && data.results[0].associateRequestReceived.length > 0) {
+                            $scope.UserNetworkDetailHelper.isFriendRequestReceived = true;
+                        }
+                        if (data.results[0].followRequestSent != null && data.results[0].followRequestSent.length > 0) {
+                            $scope.UserNetworkDetailHelper.isFollowing = true;
+                        }
+                    }                    
+                });
+
+                $scope.UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded = true;
+
+            });
+        };
+
         function loadMoreMessage(vertexId, postIndex,from, to) {
             var url = ServerContextPath.userServer + '/User/GetUserPostMessages?from=' + from + '&to=' + to + '&vertexId=' + vertexId;
             var headers = {
@@ -287,10 +338,13 @@ define([appLocation.preLogin], function (app) {
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                     stopBlockUI();                    
-                    //$scope.UserPostList[postIndex].likeInfoHtml = appentToCommentLikeString($scope.UserPostList[postIndex].likeInfoHtml);
-                    //$timeout(function() {
-                    //    $scope.NewPostImageUrl.link_s = "";
-                    //});
+                    if (connectingBody == 1) {
+                        if (connectionType == 1) {
+                            //friend request sent
+                            $scope.UserNetworkDetailHelper.isFriendRequestSent = true;
+                            $scope.UserNetworkDetailHelper.isFollowing = true;
+                        }
+                    }
 
                 }).error(function (data, status, headers, config) {
 
@@ -797,7 +851,8 @@ define([appLocation.preLogin], function (app) {
             }).done(function (data, status) {
                 stopBlockUI();
                 $scope.$apply(function () {
-                    $scope.CurrentUserDetails = data.Payload[0];                    
+                    $scope.CurrentUserDetails = data.Payload[0];
+                    loadUserNetworkDetail($scope.visitedUserVertexId, 0, 1);
                     //console.log($scope.CurrentUserDetails);
                 });
                 
