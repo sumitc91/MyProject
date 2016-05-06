@@ -346,24 +346,37 @@ define([appLocation.preLogin], function (app) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
                     $scope.makeConnectionRequestLoading = false;
                     //stopBlockUI();                    
-                    if (connectingBody == 1) {
-                        if (connectionType == 1) {
+                    if (connectingBody == UserConnectionRequestModel.AssociateUsers) {
+                        if (connectionType == UserConnectionRequestModel.AssociateRequest) {
                             //friend request sent
                             $scope.UserNetworkDetailHelper.isFriendRequestSent = true;
                             $scope.UserNetworkDetailHelper.isFollowing = true;
                         }
-                        else if (connectionType == 2) {
+                        else if (connectionType == UserConnectionRequestModel.AssociateFollow) {
                             //follow
                             $scope.UserNetworkDetailHelper.isFollowing = true;
                         }
-                        else if (connectionType == 3) {
+                        else if (connectionType == UserConnectionRequestModel.AssociateAccept) {
                             //friend req accept
                             $scope.UserNetworkDetailHelper.isFriend = true;
                             $scope.UserNetworkDetailHelper.isFollowing = false;
                         }
-                        else if (connectionType == 5) {
+                        else if (connectionType == UserConnectionRequestModel.AssociateReject) {
+                            //reject
+                            $scope.UserNetworkDetailHelper.isFriendRequestReceived = false;
+                        }
+                        else if (connectionType == UserConnectionRequestModel.RemoveFollow) {
                             //unfollow
                             $scope.UserNetworkDetailHelper.isFollowing = false;
+                        }
+                        else if (connectionType == UserConnectionRequestModel.Deassociate) {
+                            //Deassociate
+                            $scope.UserNetworkDetailHelper.isFriend = false;
+                            $scope.UserNetworkDetailHelper.isFollowing = false;
+                        }
+                        else if (connectionType == UserConnectionRequestModel.AssociateRequestCancel) {
+                            //Deassociate
+                            $scope.UserNetworkDetailHelper.isFriendRequestSent = false;
                         }
                     }
 

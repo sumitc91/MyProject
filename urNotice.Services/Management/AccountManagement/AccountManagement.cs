@@ -209,6 +209,13 @@ namespace urNotice.Services.Management.AccountManagement
                     case CommonConstants.RemoveFollow:
                         response.Payload = RemoveFollowEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
                         break;
+                    case CommonConstants.AssociateRequestCancel:
+                        response.Payload = RemoveAssociateRequestEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
+                        break;
+                    case CommonConstants.Deassociate:
+                        RemoveFriendEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
+                        response.Payload = RemoveFollowEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
+                        break;
                 }
             }
             return response;
@@ -665,6 +672,14 @@ namespace urNotice.Services.Management.AccountManagement
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
             return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.AssociateRequest.ToString());
         }
+
+        private IDictionary<string, string> RemoveFriendEdge(string inV, string outV)
+        {
+            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            graphEdgeDbModel.DeleteEdge(outV,inV, EdgeLabelEnum.Friend.ToString());
+            return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.Friend.ToString());
+        }
+
         private IDictionary<string, string> RemoveFollowEdge(string inV, string outV)
         {
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();

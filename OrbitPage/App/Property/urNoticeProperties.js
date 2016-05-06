@@ -56,6 +56,19 @@ var ServerContextPath = {
     //cookieDomain: "localhost",
 };
 
+var UserConnectionRequestModel = {
+    AssociateUsers: 1,
+    AssociateCompany: 2,
+
+    AssociateRequest: 1,
+    AssociateFollow: 2,
+    AssociateAccept: 3,
+    AssociateReject: 4,
+    RemoveFollow: 5,
+    Deassociate: 6,
+    AssociateRequestCancel:7
+};
+
 var appLocation = {
     'common': '../../App/CommonInit',
     'preLogin': '../../App/Pages/PreLoginInit',
