@@ -189,19 +189,22 @@ namespace urNotice.Services.Management.AccountManagement
                     case CommonConstants.AssociateRequest:
                         // Create Associate Request and follow the user by default.
                         response.Payload = CreateNewAssociateRequest(session, userConnectionRequestModel);
-                        response.Payload.Concat(CreateNewFollowRequest(session, userConnectionRequestModel).Where( x=> !response.Payload.Keys.Contains(x.Key)));
+                        CreateNewFollowRequest(session, userConnectionRequestModel.UserVertexId,session.UserVertexId, userConnectionRequestModel);
+                        //response.Payload.Concat(CreateNewFollowRequest(session, userConnectionRequestModel).Where( x=> !response.Payload.Keys.Contains(x.Key)));
                         //response.Payload.ToList().ForEach(x => CreateNewFollowRequest(session, userConnectionRequestModel).Add(x.Key, x.Value));                        
                         break;
                     case CommonConstants.AssociateAccept:
                         response.Payload = CreateNewFriend(session, userConnectionRequestModel);
-                        response.Payload.Concat(RemoveAssociateRequestEdge(userConnectionRequestModel.UserVertexId,session.UserVertexId).Where(x => !response.Payload.Keys.Contains(x.Key)));
+                        CreateNewFollowRequest(session, userConnectionRequestModel.UserVertexId, session.UserVertexId, userConnectionRequestModel);
+                        RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId);
+                        //response.Payload.Concat(RemoveAssociateRequestEdge(session.UserVertexId,userConnectionRequestModel.UserVertexId).Where(x => !response.Payload.Keys.Contains(x.Key)));
                         //response.Payload.ToList().ForEach(x => RemoveAssociateRequestEdge(session.UserVertexId, userConnectionRequestModel.UserVertexId).Add(x.Key, x.Value));
                         break;
                     case CommonConstants.AssociateFollow:
-                        response.Payload = CreateNewFollowRequest(session, userConnectionRequestModel);
+                        response.Payload = CreateNewFollowRequest(session,userConnectionRequestModel.UserVertexId,session.UserVertexId, userConnectionRequestModel);
                         break;
                     case CommonConstants.AssociateReject:
-                        response.Payload = RemoveAssociateRequestEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
+                        response.Payload = RemoveAssociateRequestEdge(session.UserVertexId,userConnectionRequestModel.UserVertexId);
                         break;
                     case CommonConstants.RemoveFollow:
                         response.Payload = RemoveFollowEdge(userConnectionRequestModel.UserVertexId, session.UserVertexId);
@@ -527,7 +530,7 @@ namespace urNotice.Services.Management.AccountManagement
         {
 
             //string gremlinQuery = "g.v(" + userVertexId + ").inE('AssociateRequest').order{it.b.PostedDate <=> it.a.PostedDate}[" + from + ".." + to + "].transform{ [notificationInfo:it,postInfo:it.inV,notificationByUser:g.v(it.NotificationInitiatedByVertexId)]}";
-            string gremlinQuery = "g.v(" + userVertexId + ").transform{[associateRequestSent:it.in('AssociateRequest').has('Username','" + session.UserName + "'),associateRequestReceived:it.out('AssociateRequest').has('Username','" + session.UserName + "'),followRequestSent:it.in('Follow').has('Username','" + session.UserName + "')]}";
+            string gremlinQuery = "g.v(" + userVertexId + ").transform{[associateRequestSent:it.in('AssociateRequest').has('Username','" + session.UserName + "'),associateRequestReceived:it.out('AssociateRequest').has('Username','" + session.UserName + "'),followRequestSent:it.in('Follow').has('Username','" + session.UserName + "'),isFriend:it.in('Friend').has('Username','" + session.UserName + "')]}";
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
@@ -667,12 +670,12 @@ namespace urNotice.Services.Management.AccountManagement
             IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
             return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.Follow.ToString());
         }
-        private IDictionary<string, string> CreateNewFollowRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        private IDictionary<string, string> CreateNewFollowRequest(urNoticeSession session,string inV,string outV, UserConnectionRequestModel userConnectionRequestModel)
         {
 
             IDynamoDb dynamoDbModel = new DynamoDb();
-            
-            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(userConnectionRequestModel.UserVertexId, EdgeLabelEnum.Follow.ToString(), session.UserVertexId);
+
+            string uniqueKey = OrbitPageUtil.GenerateUniqueKeyForEdgeQuery(inV, EdgeLabelEnum.Follow.ToString(), outV);
             var edgeInfo = dynamoDbModel.GetOrbitPageCompanyUserWorkgraphyTable(
                         DynamoDbHashKeyDataType.EdgeDetail.ToString(),
                         uniqueKey,
@@ -687,8 +690,8 @@ namespace urNotice.Services.Management.AccountManagement
 
             var properties = new Dictionary<string, string>();
 
-            properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
-            properties[EdgePropertyEnum._inV.ToString()] = userConnectionRequestModel.UserVertexId;
+            properties[EdgePropertyEnum._outV.ToString()] = outV;
+            properties[EdgePropertyEnum._inV.ToString()] = inV;
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Follow.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();

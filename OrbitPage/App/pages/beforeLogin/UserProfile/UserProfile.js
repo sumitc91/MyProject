@@ -26,6 +26,7 @@ define([appLocation.preLogin], function (app) {
             isFriendRequestSent: false,
             isFriendRequestReceived: false,
             isFollowing: false,
+            isFriend:false,
             UserNetworkDetailHelperDataLoaded: false
         };
 
@@ -215,6 +216,9 @@ define([appLocation.preLogin], function (app) {
                         if (data.results[0].followRequestSent != null && data.results[0].followRequestSent.length > 0) {
                             $scope.UserNetworkDetailHelper.isFollowing = true;
                         }
+                        if (data.results[0].isFriend != null && data.results[0].isFriend.length > 0) {
+                            $scope.UserNetworkDetailHelper.isFriend = true;
+                        }
                     }                    
                 });
 
@@ -351,6 +355,11 @@ define([appLocation.preLogin], function (app) {
                         else if (connectionType == 2) {
                             //follow
                             $scope.UserNetworkDetailHelper.isFollowing = true;
+                        }
+                        else if (connectionType == 3) {
+                            //friend req accept
+                            $scope.UserNetworkDetailHelper.isFriend = true;
+                            $scope.UserNetworkDetailHelper.isFollowing = false;
                         }
                         else if (connectionType == 5) {
                             //unfollow

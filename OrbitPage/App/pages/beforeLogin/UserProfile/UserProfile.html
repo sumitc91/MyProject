@@ -111,12 +111,13 @@
                     <img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
                 </div>
                 <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded" ng-cloak>
-                    <button type="button" class="btn btn-info" ng-show="!UserNetworkDetailHelper.isFriendRequestSent && !UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>
-                    <button type="button" class="btn btn-info" ng-show="UserNetworkDetailHelper.isFriendRequestSent" disabled>Request Already Sent</button>
-                    <button type="button" class="btn btn-success" ng-show="UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,3)">Accept</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestReceived" ng-click="makeConnectionRequest(visitedUserVertexId,1,4)">Reject</button>
-                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,5)">Unfollow</button>
+                    <button type="button" class="btn btn-info" ng-show="!UserNetworkDetailHelper.isFriendRequestSent && !UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,1)">Associate</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestSent" ng-click="makeConnectionRequest(visitedUserVertexId,1,7)">Remove Associate Request</button>
+                    <button type="button" class="btn btn-success" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,3)">Accept</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,4)">Reject</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,6)">Deassociate</button>
+                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow<img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" /></button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,5)">Unfollow<img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" /></button>
                 </div>
                 
             </div>
