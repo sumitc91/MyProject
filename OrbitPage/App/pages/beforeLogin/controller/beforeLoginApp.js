@@ -216,12 +216,19 @@ define([appLocation.preLogin], function (app) {
             AssociateCompany: UserConnectionRequestModel.AssociateCompany,
 
             AssociateRequest: UserConnectionRequestModel.AssociateRequest,
+            AssociateRequestLoading : false,
             AssociateFollow: UserConnectionRequestModel.AssociateFollow,
+            AssociateFollowLoading : false,
             AssociateAccept: UserConnectionRequestModel.AssociateAccept,
+            AssociateAcceptLoading : false,
             AssociateReject: UserConnectionRequestModel.AssociateReject,
+            AssociateRejectLoading : false,
             RemoveFollow: UserConnectionRequestModel.RemoveFollow,
+            RemoveFollowLoading : false,
             Deassociate: UserConnectionRequestModel.Deassociate,
-            AssociateRequestCancel: UserConnectionRequestModel.AssociateRequestCancel
+            DeassociateLoading : false,
+            AssociateRequestCancel: UserConnectionRequestModel.AssociateRequestCancel,
+            AssociateRequestCancelLoading : false
         };
 
         $rootScope.chatBox = {

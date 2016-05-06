@@ -336,7 +336,8 @@ define([appLocation.preLogin], function (app) {
 
             if ($rootScope.isUserLoggedIn) {
                 //startBlockUI('wait..', 3);
-                $scope.makeConnectionRequestLoading = true;
+                //$scope.makeConnectionRequestLoading = true;
+                showHideConnectionRequestLoadingOnButton(connectionType, true);
                 $http({
                     url: url,
                     method: "POST",
@@ -344,7 +345,8 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    $scope.makeConnectionRequestLoading = false;
+                    //$scope.makeConnectionRequestLoading = false;
+                    showHideConnectionRequestLoadingOnButton(connectionType, false);
                     //stopBlockUI();                    
                     if (connectingBody == UserConnectionRequestModel.AssociateUsers) {
                         if (connectionType == UserConnectionRequestModel.AssociateRequest) {
@@ -388,6 +390,37 @@ define([appLocation.preLogin], function (app) {
             }
 
         };
+
+        function showHideConnectionRequestLoadingOnButton(connectionType,show) {
+            if (connectionType == UserConnectionRequestModel.AssociateRequest) {
+                //friend request sent
+                $scope.UserConnectionRequestModel.AssociateRequestLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateFollow) {
+                //follow
+                $scope.UserConnectionRequestModel.AssociateFollowLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateAccept) {
+                //friend req accept
+                $scope.UserConnectionRequestModel.AssociateAcceptLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateReject) {
+                //reject
+                $scope.UserConnectionRequestModel.AssociateRejectLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.RemoveFollow) {
+                //unfollow
+                $scope.UserConnectionRequestModel.RemoveFollowLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.Deassociate) {
+                //Deassociate
+                $scope.UserConnectionRequestModel.DeassociateLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateRequestCancel) {
+                //Deassociate
+                $scope.UserConnectionRequestModel.AssociateRequestCancelLoading = show;
+            }
+        }
 
         function createNewReactionOnUserPost(postIndex) {
 
