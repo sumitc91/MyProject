@@ -359,7 +359,7 @@ define([appLocation.preLogin], function (app) {
                         else if (connectionType == UserConnectionRequestModel.AssociateAccept) {
                             //friend req accept
                             $scope.UserNetworkDetailHelper.isFriend = true;
-                            $scope.UserNetworkDetailHelper.isFollowing = false;
+                            $scope.UserNetworkDetailHelper.isFollowing = true;
                         }
                         else if (connectionType == UserConnectionRequestModel.AssociateReject) {
                             //reject
