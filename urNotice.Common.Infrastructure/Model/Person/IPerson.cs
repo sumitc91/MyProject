@@ -24,7 +24,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail);
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
         ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
-        ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel);
+        ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel,out HashSet<string> sendNotificationHashSetResponse);
 
 
         ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq);

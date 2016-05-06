@@ -119,7 +119,7 @@ namespace OrbitPage.Controllers
                 IPerson clientModel = new Consumer();
                 var newUserPostCommentResponse = clientModel.CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationHashSetResponse);
                 if (sendNotificationHashSetResponse.Count>0)
-                {
+                {                    
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
@@ -170,7 +170,12 @@ namespace OrbitPage.Controllers
             if (isValidToken)
             {
                 IPerson clientModel = new Consumer();
-                var userNewConnectionResponse = clientModel.UserConnectionRequest(session, userConnectionRequestModel);
+                HashSet<string> sendNotificationHashSetResponse = null;
+                var userNewConnectionResponse = clientModel.UserConnectionRequest(session, userConnectionRequestModel, out sendNotificationHashSetResponse);
+                if (sendNotificationHashSetResponse.Count > 0)
+                {                    
+                    new SignalRNotification().SendNewConnectionRequestNotification(sendNotificationHashSetResponse);
+                }
                 return Json(userNewConnectionResponse, JsonRequestBehavior.AllowGet);
             }
             else

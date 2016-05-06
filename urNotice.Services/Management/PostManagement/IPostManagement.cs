@@ -13,8 +13,7 @@ namespace urNotice.Services.Management.PostManagement
     public interface IPostManagement
     {
         ResponseModel<string> EditMessageDetails(urNoticeSession session, EditMessageRequest messageReq);
-        ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse);
-        HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType);
+        ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse);        
         ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse);
         ResponseModel<String> DeleteCommentOnPost(urNoticeSession session, string vertexId);
         ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session,UserNewReactionRequest userNewReactionRequest, out HashSet<string> sendNotificationResponse);

@@ -25,6 +25,7 @@ using urNotice.Services.GraphDb;
 using urNotice.Services.GraphDb.GraphDbContract;
 using urNotice.Services.Management.AccountManagement;
 using urNotice.Services.Management.CompanyManagement;
+using urNotice.Services.Management.NotificationManagement;
 using urNotice.Services.Management.PostManagement;
 using urNotice.Services.NoSqlDb.DynamoDb;
 using urNotice.Services.Person.PersonContract.LoginOperation;
@@ -119,10 +120,10 @@ namespace urNotice.Services.Person
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetUserUnreadFriendRequestNotificationCount(session);
         }
-        public ResponseModel<IDictionary<string,string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel, out HashSet<string> sendNotificationHashSetResponse)
         {
             IAccountManagement accountManagementModel = new AccountManagement();
-            return accountManagementModel.UserConnectionRequest(session, userConnectionRequestModel);
+            return accountManagementModel.UserConnectionRequest(session, userConnectionRequestModel, out sendNotificationHashSetResponse);
         }
 
         //Post Management.
@@ -140,8 +141,8 @@ namespace urNotice.Services.Person
 
         public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType)
         {
-            IPostManagement postManagementModel = new PostManagement();
-            return postManagementModel.SendNotificationToUser(session,userWallVertexId,postVertexId,commentVertexId,postPostedByVertexId,notificationType);
+            INotificationManagement notificationManagement = new NotificationManagement();
+            return notificationManagement.SendNotificationToUser(session, userWallVertexId, postVertexId, commentVertexId, postPostedByVertexId, notificationType);
         }
         public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
         {

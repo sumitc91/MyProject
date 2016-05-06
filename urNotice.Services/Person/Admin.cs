@@ -96,7 +96,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public ResponseModel<IDictionary<string,string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel, out HashSet<string> sendNotificationHashSetResponse)
         {
             throw new NotImplementedException();
         }

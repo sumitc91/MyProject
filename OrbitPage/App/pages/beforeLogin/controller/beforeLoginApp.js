@@ -299,7 +299,7 @@ define([appLocation.preLogin], function (app) {
         $scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification = function () {
             //alert("working");                             
             loadClientFriendRequestNotificationDetails(0, $rootScope.clientFriendRequestNotificationDetailResponseInfo.after + 1, true);
-
+            //showToastMessage("Warning", "clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification");
         };
 
         if (CookieUtil.getUTMZT() != null && CookieUtil.getUTMZT() != '' && CookieUtil.getUTMZT() != "") {
@@ -524,8 +524,7 @@ define([appLocation.preLogin], function (app) {
                 }
 
                 if (isFromPushNotification) {
-                    var mssg = "";
-                    
+                    var mssg = "New Friend Request.";                    
                     showToastMessage("Success", mssg);
                 }
 

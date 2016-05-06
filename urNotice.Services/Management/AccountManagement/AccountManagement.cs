@@ -172,9 +172,11 @@ namespace urNotice.Services.Management.AccountManagement
 
             return response;
         }
-        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel)
+        public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel, out HashSet<string> sendNotificationHashSetResponse)
         {
             var response = new ResponseModel<IDictionary<string, string>>();
+            sendNotificationHashSetResponse = new HashSet<string>();
+
             if (session.UserVertexId == userConnectionRequestModel.UserVertexId)
             {
                 response.Status = 201;
@@ -188,6 +190,7 @@ namespace urNotice.Services.Management.AccountManagement
                 {
                     case CommonConstants.AssociateRequest:
                         // Create Associate Request and follow the user by default.
+                        sendNotificationHashSetResponse.Add(userConnectionRequestModel.UserVertexId);
                         response.Payload = CreateNewAssociateRequest(session, userConnectionRequestModel);
                         CreateNewFollowRequest(session, userConnectionRequestModel.UserVertexId,session.UserVertexId, userConnectionRequestModel);
                         //response.Payload.Concat(CreateNewFollowRequest(session, userConnectionRequestModel).Where( x=> !response.Payload.Keys.Contains(x.Key)));

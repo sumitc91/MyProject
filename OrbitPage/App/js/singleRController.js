@@ -27,10 +27,19 @@ function ConnectWithSignalRPushNotification() {
     };
 
     chatProxy.client.addNotificationMessage = function (code,message) {
-        console.log(message);
+        console.log(code);
         var scope = angular.element(document.getElementById("main")).scope();
         scope.$apply(function () {
-            scope.clientNotificationDetailResponseInfoUpdateFromPushNotification();
+            if (code == 1) {
+                console.log("1 : "+code);
+                scope.clientNotificationDetailResponseInfoUpdateFromPushNotification();
+            }
+            else if (code == 2) {
+                console.log("2 : " + code);
+                scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification(message);
+            } else {
+                console.log("push notification logic failed.");
+            }
         });
     };
 
