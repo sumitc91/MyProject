@@ -116,8 +116,8 @@
                     <button type="button" class="btn btn-success" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,3)">Accept</button>
                     <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,4)">Reject</button>
                     <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,1,6)">Deassociate</button>
-                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow<img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" /></button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,5)">Unfollow<img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" /></button>
+                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,2)">Follow</button>
+                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,1,5)">Unfollow</button>
                 </div>
                 
             </div>
