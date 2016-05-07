@@ -1236,6 +1236,7 @@ define([appLocation.preLogin], function (app) {
             //console.log("UserPostListInfo.nextPage called.");
 
         };
+
     });
 
     

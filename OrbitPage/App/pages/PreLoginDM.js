@@ -116,9 +116,9 @@ appRequire = require
             googleChartLoader: {
                 deps: ["jquery"]
             },
-            //jquery_particleground: {
-            //    deps: ["jquery"]
-            //},
+            jquery_totemticker: {
+                deps: ["jquery"]
+            },
             angularjs_fileUpload_shim: {//new
                 deps: ["angular", "jquery"]
             },
@@ -168,7 +168,7 @@ appRequire = require
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker"]
             },
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
@@ -241,6 +241,7 @@ appRequire = require
             filedrop: "../../App/third-Party/html5-file-upload/assets/js/jquery.filedrop",
             fileDropScript: "../../App/third-Party/html5-file-upload/assets/js/script",
             googleChartLoader: "https://www.gstatic.com/charts/loader",
+            jquery_totemticker: "../../App/js/jquery.totemticker",
             //==============================================================================================================
             // Application Related JS
             //==============================================================================================================
@@ -286,7 +287,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
     "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog", "beforeLoginAllBlogs",
-    "beforeLoginSingleWorkgraphy"
+    "beforeLoginSingleWorkgraphy", "jquery_totemticker"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

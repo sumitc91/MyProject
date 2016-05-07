@@ -320,7 +320,20 @@
                     Chat
                     <span class="badge badge-success">3</span>
                 </h2>
-                <div id="group-1" class="chat-group"> <strong>Favorites</strong>      <a data-conversation-history="#sample_history" id="sample-user-123" href="#"><span class="user-status is-online"></span> <em>Catherine J. Watkins</em><span class="badge badge-info">1</span></a><a href="#" id="ui-id-1"><span class="user-status is-online"></span> <em>Nicholas R. Walker</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-2"><span class="user-status is-busy"></span> <em>Susan J. Best</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-4"><span class="user-status is-idle"></span> <em>Fernando G. Olson</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-3"><span class="user-status is-offline"></span> <em>Brandon S. Young</em><span class="badge badge-info is-hidden">0</span></a></div>
+                <div id="group-1" class="chat-group">
+                    <strong>Favorites</strong>      
+                    <ul id="vertical-ticker">
+                        <li>One Time</li>
+                        <li>Baby</li>
+                        <li>One Less Lonely Girl</li>
+                        <li>Somebody to Love</li>
+                        <li>Eenie Meenie</li>
+                        <li>Never Say Never</li>
+                        <li>U Smile</li>
+                    </ul>
+                    <p><a href="#" id="ticker-previous">Previous</a> / <a href="#" id="ticker-next">Next</a> / <a id="stop" href="#">Stop</a> / <a id="start" href="#">Start</a></p>
+                    <p>Roll over the ticker to stop scrolling</p>
+                </div>
                 <div id="group-2" class="chat-group"> <strong>Work</strong>    <a href="#" id="ui-id-7" class=""><span class="user-status is-busy"></span> <em>Rodrigo E. Lozano</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-5"><span class="user-status is-offline"></span> <em>Robert J. Garcia</em><span class="badge badge-info is-hidden">0</span></a><a data-conversation-history="#sample_history_2" href="#" id="ui-id-6"><span class="user-status is-offline"></span> <em>Daniel A. Pena</em><span class="badge badge-info">2</span></a></div>
                 <div id="group-3" class="chat-group"> <strong>Social</strong>     <a href="#" id="ui-id-10"><span class="user-status is-online"></span> <em>Kathleen M. Canales</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-8"><span class="user-status is-busy"></span> <em>Velma G. Pearson</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-9"><span class="user-status is-offline"></span> <em>Margaret R. Dedmon</em><span class="badge badge-info is-hidden">0</span></a><a href="#" id="ui-id-11"><span class="user-status is-offline"></span> <em>Tracy J. Rodriguez</em><span class="badge badge-info is-hidden">0</span></a></div>
             </div>
@@ -349,10 +362,44 @@
                 }
             }
         });
+
+        $('#vertical-ticker').totemticker({
+            row_height: '100px',
+            next: '#ticker-next',
+            previous: '#ticker-previous',
+            stop: '#stop',
+            start: '#start',
+            mousestop: true,
+            direction: 'up'
+        });
     });
 
     document.getElementById('get_file').onclick = function () {
         document.getElementById('my_file').click();
     };
 
+   
 </script>
+
+<style type="text/css">
+   
+   #vertical-ticker {
+height: 400px;
+overflow: hidden;
+margin: 0;
+padding: 0;
+-webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
+list-style: none;
+}
+#vertical-ticker li {
+padding: 35px 20px;
+display: block;
+background: #efefef;
+color: #333;
+border-bottom: 1px solid #ddd;
+text-align: center;
+font-size: 25px;
+font-weight: bold;
+font-family: Helvetica Neue, times, serif;
+}
+</style>
