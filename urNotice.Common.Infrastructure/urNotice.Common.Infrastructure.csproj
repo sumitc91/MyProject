@@ -149,7 +149,7 @@
     <Compile Include="Common\Constants\OrbitPageResponseModel.cs" />
     <Compile Include="Common\Constants\PriviledgeLevel.cs" />
     <Compile Include="Common\Constants\RegistrationConstants.cs" />
-    <Compile Include="Common\Constants\ServerConfig.cs" />
+    <Compile Include="Common\Config\ServerConfig.cs" />
     <Compile Include="Common\Constants\EmailConstants\SmptCreateAccountConstants.cs" />
     <Compile Include="Common\Constants\TitanGraphConstants.cs" />
     <Compile Include="Common\Enum\DynamoDbHashKeyDataType.cs" />

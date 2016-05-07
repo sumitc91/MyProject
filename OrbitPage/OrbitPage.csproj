@@ -320,6 +320,7 @@
     <Content Include="App\js\jquery.signalR-1.0.1.min.js" />
     <Content Include="App\js\jquery.signalR-2.1.1.js" />
     <Content Include="App\js\jquery.signalR-2.1.1.min.js" />
+    <Content Include="App\js\jquery.totemticker.js" />
     <Content Include="App\js\jquery.ui.touch-punch.min.js" />
     <Content Include="App\js\angular\ng-infinite-scroll.min.js" />
     <Content Include="App\js\slideout\slideout.js" />
