@@ -52,6 +52,7 @@ define([appLocation.preLogin], function (app) {
                        when("/userprofile/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).
                        when("/userprofile2/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
                        when("/viewpostdetail/:vertexId", { templateUrl: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail.html" }).
+                       when("/viewpostdetail/:vertexId/:ts", { templateUrl: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail.html" }).
                        otherwise({ templateUrl: "../../App/pages/beforeLogin/404/404.html" });
 
 
@@ -205,6 +206,8 @@ define([appLocation.preLogin], function (app) {
             after: 0,
             itemPerPage:6
         };
+
+        $rootScope.clientFriendRequestNotificationDetailResponse = [];
         $rootScope.clientFriendRequestNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
@@ -229,6 +232,14 @@ define([appLocation.preLogin], function (app) {
             DeassociateLoading : false,
             AssociateRequestCancel: UserConnectionRequestModel.AssociateRequestCancel,
             AssociateRequestCancelLoading : false
+        };
+
+        $scope.UserNetworkDetailHelper = {
+            isFriendRequestSent: false,
+            isFriendRequestReceived: false,
+            isFollowing: false,
+            isFriend: false,
+            UserNetworkDetailHelperDataLoaded: false
         };
 
         $rootScope.chatBox = {
@@ -265,7 +276,11 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.showPost = function (postId) {
-            $location.url('/viewpostdetail/' + postId);
+            $location.url('/viewpostdetail/' + postId + '/' + new Date().getTime());
+        };
+
+        $scope.navigateToUserProfile = function (userId) {
+            $location.url('/userprofile/' + userId);
         };
 
         $scope.clientNotificationDetailResponseInfo.nextPage = function () {
@@ -292,8 +307,8 @@ define([appLocation.preLogin], function (app) {
             
         };
 
-        $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType) {
-            makeConnectionRequest(userVertexId, connectingBody, connectionType);
+        $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType,index) {
+            makeConnectionRequest(userVertexId, connectingBody, connectionType,index);
         };
 
         $scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification = function () {
@@ -319,13 +334,14 @@ define([appLocation.preLogin], function (app) {
             console.log("cookie not available.");
         };
         
-        function makeConnectionRequest(userVertexId, connectingBody, connectionType) {
+        function makeConnectionRequest(userVertexId, connectingBody, connectionType,index) {
 
             var userNewConnectionData = {
                 UserVertexId: userVertexId,
                 ConnectionType: connectionType,
                 ConnectingBody: connectingBody
             };
+
 
             var url = ServerContextPath.empty + '/User/UserConnectionRequest';
             var headers = {
@@ -336,8 +352,9 @@ define([appLocation.preLogin], function (app) {
             };
 
             if ($rootScope.isUserLoggedIn) {
-                startBlockUI('wait..', 3);
-
+                //startBlockUI('wait..', 3);
+                //$scope.makeConnectionRequestLoading = true;
+                showHideConnectionRequestLoadingOnButton(connectionType, true,index);
                 $http({
                     url: url,
                     method: "POST",
@@ -345,8 +362,12 @@ define([appLocation.preLogin], function (app) {
                     headers: headers
                 }).success(function (data, status, headers, config) {
                     //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
-                    stopBlockUI();
-                    
+                    //$scope.makeConnectionRequestLoading = false;
+                    showHideConnectionRequestLoadingOnButton(connectionType, false, index);
+                    spliceFriendRequestFromNotification(index);
+                    //stopBlockUI();                    
+
+
                 }).error(function (data, status, headers, config) {
 
                 });
@@ -355,6 +376,46 @@ define([appLocation.preLogin], function (app) {
             }
 
         };
+
+        function spliceFriendRequestFromNotification(index) {
+
+            $rootScope.clientFriendRequestNotificationDetailResponse.splice(index, 1);
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+        };
+
+        function showHideConnectionRequestLoadingOnButton(connectionType, show, index) {
+            
+            if (connectionType == UserConnectionRequestModel.AssociateRequest) {
+                //friend request sent
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].AssociateRequestLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateFollow) {
+                //follow
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].AssociateFollowLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateAccept) {
+                //friend req accept
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].AssociateAcceptLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateReject) {
+                //reject
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].AssociateRejectLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.RemoveFollow) {
+                //unfollow
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].RemoveFollowLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.Deassociate) {
+                //Deassociate
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].DeassociateLoading = show;
+            }
+            else if (connectionType == UserConnectionRequestModel.AssociateRequestCancel) {
+                //Deassociate
+                $rootScope.clientFriendRequestNotificationDetailResponse[index].AssociateRequestCancelLoading = show;
+            }
+        }
 
         function loadClientDetails() {
             var url = ServerContextPath.solrServer + '/Search/GetDetails?userType=user';
@@ -519,6 +580,8 @@ define([appLocation.preLogin], function (app) {
                         if ((from + i) < data.unread) {
                             data.results[i].class = "unread_notification";
                         }
+                        data.results[i].AssociateAcceptLoading = false;
+                        data.results[i].AssociateRejectLoading = false;
                         $rootScope.clientFriendRequestNotificationDetailResponse.push(data.results[i]);
                     }
                 }

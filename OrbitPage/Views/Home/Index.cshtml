@@ -141,7 +141,7 @@ div.middle-div-mobile {
                             <a href="/#/"><img alt="" ng-src="{{logourl}}" height="50" ng-cloak></a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">                            
+                        <div style="float: right;">                            
                             <ul class="nav navbar-nav">
                                 <li>
                                     <a href="/#/">OrbitPage</a>
@@ -169,13 +169,13 @@ div.middle-div-mobile {
                                     <a href="#/login">Login</a>
                                 </li>
 
-                                <li class="dropdown hover-line" ng-show="isUserLoggedIn">
+                                <li class="dropdown mega-dropdown" ng-show="isUserLoggedIn">
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="true">
                                         <i class="fa-envelope-o"></i>
                                         <span class="badge badge-green">15</span>
                                     </a>
 
-                                    <ul class="dropdown-menu messages">
+                                    <ul class="dropdown-menu mega-dropdown-menu messages">
                                         <li>
 
                                             <ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
@@ -207,7 +207,7 @@ div.middle-div-mobile {
                                                     </a>
                                                 </li>
 
-                                                
+
                                                 <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div>
                                                 <div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 300px;"><div class="ps-scrollbar-y" style="top: 0px; height: 150px;"></div></div>
                                             </ul>
@@ -223,13 +223,13 @@ div.middle-div-mobile {
                                     </ul>
                                 </li>
 
-                                <li class="dropdown hover-line" ng-show="isUserLoggedIn">
+                                <li class="dropdown mega-dropdown" ng-show="isUserLoggedIn">
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false" ng-click="seenNotification()">
-                                        <i class="fa-bell-o"></i>                                        
+                                        <i class="fa-bell-o"></i>
                                         <span ng-show="clientNotificationDetailResponseInfo.count>0" class="badge badge-purple" ng-bind="clientNotificationDetailResponseInfo.count"></span>
                                     </a>
 
-                                    <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
+                                    <ul class="dropdown-menu mega-dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
                                         <li class="top">
                                             <p class="small">
                                                 <a class="pull-right" href="#">Mark all Read</a>
@@ -239,50 +239,50 @@ div.middle-div-mobile {
 
                                         <li>
                                             @*<ul class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y" infinite-scroll='clientNotificationDetailResponseInfo.nextPage()' infinite-scroll-disabled='clientNotificationDetailResponse.busy' infinite-scroll-distance='1'>*@
-                                                <ul id="userNotificationDivId" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
-                                                    <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientNotificationDetailResponse">
-                                                        <div class="row" ng-click="showPost(notification.notificationInfo.ParentPostId)">
-                                                            <div class="col-sm-1 col-md-1"></div>
-                                                            <div class="col-sm-2 col-md-2">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}">
-                                                                    <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="50px" width="50px">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">post</a>.
-                                                                <br />
-                                                                " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
-                                                                <br />
-                                                                <span class="line small time">
-                                                                    {{notification.notificationInfo.PostedDate | timeago}}
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a> on your Wall.
-                                                                <br />
-                                                                " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
-                                                                <br />
-                                                                <span class="line small time">
-                                                                    {{notification.notificationInfo.PostedDate | timeago}}
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='UserReaction'">
-                                                                <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a>.
-                                                                <br />
-                                                                " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
-                                                                <br />
-                                                                <span class="line small time">
-                                                                    {{notification.notificationInfo.PostedDate | timeago}}
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2">
-                                                                <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}"><img ng-show="notification.postInfo[0].PostImage" ng-src="{{notification.postInfo[0].PostImage}}" height="50px" width="50px"></a>
-
-                                                            </div>
+                                            <ul id="userNotificationDivId" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container ps-active-y">
+                                                <li class="active notification-success borderlist {{notification.class}}" ng-repeat="notification in clientNotificationDetailResponse">
+                                                    <div class="row" ng-click="showPost(notification.notificationInfo.ParentPostId)">
+                                                        <div class="col-sm-1 col-md-1"></div>
+                                                        <div class="col-sm-2 col-md-2">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}">
+                                                                <img ng-src="{{notification.notificationByUser.ImageUrl}}" height="50px" width="50px">
+                                                            </a>
                                                         </div>
-                                                    </li>
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">post</a>.
+                                                            <br />
+                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a> on your Wall.
+                                                            <br />
+                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='UserReaction'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a>.
+                                                            <br />
+                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2">
+                                                            <a href="#/viewpostdetail/{{notification.postInfo[0]._id}}"><img ng-show="notification.postInfo[0].PostImage" ng-src="{{notification.postInfo[0].PostImage}}" height="50px" width="50px"></a>
 
-                                                </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
 
                                         </li>
                                         <li class="external">
@@ -296,9 +296,9 @@ div.middle-div-mobile {
                                                 <i class="fa-link-ext"></i>
                                             </a>
                                         </li>
-                                        
+
                                         <li class="external">
-                                            <a href="#">                                                                                               
+                                            <a href="#">
                                                 <span>View all notifications</span>
                                                 <i class="fa-link-ext"></i>
                                             </a>
@@ -306,13 +306,13 @@ div.middle-div-mobile {
                                     </ul>
                                 </li>
                                 
-                                <li class="dropdown hover-line" ng-show="isUserLoggedIn">
-                                    <a data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false" ng-click="seenFriendRequestNotification()">
+                                <li class="dropdown mega-dropdown" ng-show="isUserLoggedIn">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;" aria-expanded="false" ng-click="seenFriendRequestNotification()">
                                         <i class="fa-users"></i>
                                         <span ng-show="clientFriendRequestNotificationDetailResponseInfo.count>0" class="badge badge-pink" ng-bind="clientFriendRequestNotificationDetailResponseInfo.count"></span>
                                     </a>
 
-                                    <ul class="dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
+                                    <ul class="dropdown-menu mega-dropdown-menu notifications" style="width: 450px; height: 450px; overflow-y: auto; overflow-x: hidden;">
                                         <li class="top">
                                             <p class="small">
                                                 <a class="pull-right" href="#">Mark all Read</a>
@@ -332,17 +332,17 @@ div.middle-div-mobile {
                                                             </a>
                                                         </div>
                                                         <div class="col-sm-7 col-md-7">
-                                                            <a href="#/userprofile/{{notification.requestedBy[0]._id}}"> <span ng-bind="notification.requestedBy[0].FirstName+' '+notification.requestedBy[0].LastName"></span> &nbsp; Sent Friend Request.</a>
+                                                            <a ng-click="navigateToUserProfile(notification.requestedBy[0]._id)"> <span ng-bind="notification.requestedBy[0].FirstName+' '+notification.requestedBy[0].LastName"></span> &nbsp; Sent Friend Request.</a>
                                                             <br />
-                                                            <button type="button" class="btn btn-success" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,1,3)">Accept</button>
-                                                            <button type="button" class="btn btn-danger" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,1,4)">Reject</button>
+                                                            <button type="button" class="btn btn-success" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateAccept,$index)"><i ng-show="notification.AssociateAcceptLoading" class='fa fa-spinner fa-spin'></i> Accept</button>
+                                                            <button type="button" class="btn btn-danger" ng-click="makeConnectionRequest(notification.requestedBy[0]._id,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateReject,$index)"><i ng-show="notification.AssociateRejectLoading" class='fa fa-spinner fa-spin'></i> Reject</button>
                                                             <br />
                                                             <span class="line small time">
                                                                 {{notification.requestInfo.PostedDate | timeago}}
                                                             </span>
                                                         </div>
                                                         <div class="col-sm-2 col-md-2">
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </li>
@@ -369,8 +369,8 @@ div.middle-div-mobile {
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
-
+                                </li>    
+                                                          
                                 <li class="ng-cloak" ng-show="isUserLoggedIn">
                                     <div class="btn-group" uib-dropdown is-open="status.isopen">
                                         <button id="single-button" type="button" class="btn btn-theme" uib-dropdown-toggle ng-disabled="disabled">
@@ -663,15 +663,15 @@ div.middle-div-mobile {
    
         <script src="../../App/js/chat_index.js"></script>
         <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-72255297-1', 'auto');
-    ga('send', 'pageview');
+            ga('create', 'UA-72255297-1', 'auto');
+            ga('send', 'pageview');
 
         </script>
 
@@ -703,6 +703,16 @@ div.middle-div-mobile {
                 
                 window.madetoearn.i18nLocalizePage();
                 
+            });
+
+            
+            $('li.dropdown.mega-dropdown a').on('click', function (event) {                
+                $(this).addClass("open");
+            });
+
+            $('.mega-dropdown-menu').on('click', function (e) {
+                //console.log("dropdown-menu mega-dropdown-menu clicked ");
+                e.stopPropagation();
             });
 
             jQuery(document).ready(function () {
