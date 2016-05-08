@@ -42,6 +42,7 @@ define([appLocation.preLogin], function (app) {
                        when("/forgetpassword", { templateUrl: "../../App/pages/beforeLogin/ForgetPassword/ForgetPassword.html" }).
                        when("/resetpassword/:userName/:guid", { templateUrl: "../../App/pages/beforeLogin/ResetPassword/resetpassword.html" }).
                        when("/companydetails/:companyName/:companyid/", { templateUrl: "../../App/pages/beforeLogin/CompanyDetails/CompanyDetails.html" }).
+                       when("/companydetails/:companyName/:companyid/:tabid", { templateUrl: "../../App/pages/beforeLogin/CompanyDetails/CompanyDetails.html" }).
                        when("/userdetails/:userid/:source", { templateUrl: "../../App/pages/beforeLogin/UserDetails/UserDetails.html" }).
                        when("/AccepterDetails", { templateUrl: "../../App/Pages/BeforeLogin/UserMoreInfo/UserMoreInfo.html" }).
                        when("/RequesterDetails", { templateUrl: "../../App/Pages/BeforeLogin/ClientMoreInfo/ClientMoreInfo.html" }).
@@ -276,10 +277,12 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.showPost = function (postId) {
+            //$('.mega-dropdown-menu').removeClass("open");
             $location.url('/viewpostdetail/' + postId + '/' + new Date().getTime());
         };
 
         $scope.navigateToUserProfile = function (userId) {
+            //$('.mega-dropdown-menu').removeClass("open");
             $location.url('/userprofile/' + userId);
         };
 

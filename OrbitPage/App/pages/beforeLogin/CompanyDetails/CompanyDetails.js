@@ -24,6 +24,22 @@ define([appLocation.preLogin], function (app) {
 
     google.charts.load('current', { packages: ['corechart', 'bar'] });
 
+    app.run([
+        '$route', '$rootScope', '$location', function($route, $rootScope, $location) {
+            var original = $location.path;
+            $location.path = function(path, reload) {
+                if (reload === false) {
+                    var lastRoute = $route.current;
+                    var un = $rootScope.$on('$locationChangeSuccess', function() {
+                        $route.current = lastRoute;
+                        un();
+                    });
+                }
+                return original.apply($location, [path]);
+            };
+        }
+    ]);
+
     app.controller('beforeLoginCompanyDetails', function ($scope, $http, $route,$uibModal,$log, $rootScope, $routeParams, $location, $timeout, CookieUtil) {
         $('title').html("indexcd"); //TODO: change the title so cann't be tracked in log
         
@@ -35,9 +51,35 @@ define([appLocation.preLogin], function (app) {
         $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
         $scope.ratingCount = 0;
         $scope.companyid = $routeParams.companyid;
+        $scope.tabid = $routeParams.tabid;
         $scope.companyDetails = {
             
         };
+
+        $scope.companyActiveTab = {
+            Profile: true,
+            Salary: false,
+            NoticePeriod: false,
+            Workgraphy: false
+        };
+
+        if (isNullOrEmpty($scope.tabid)) {
+            $scope.companyActiveTab.Profile=true;
+        } else {
+            if ($scope.tabid == "Profile") {
+                $scope.companyActiveTab.Profile=true;
+            }
+            else if ($scope.tabid == "Salary") {
+                $scope.companyActiveTab.Salary = true;
+            }
+            else if ($scope.tabid == "NoticePeriod") {
+                $scope.companyActiveTab.NoticePeriod = true;
+            }
+            else if ($scope.tabid == "Workgraphy") {
+                $scope.companyActiveTab.Workgraphy = true;
+            }
+        }
+
         $scope.competitorDetails = [{}];
         CompanyDetailsById();
 
@@ -226,6 +268,12 @@ define([appLocation.preLogin], function (app) {
                 }
             });
         }
+
+        $scope.changeBrowserUrl = function (tabType) {
+            
+            $location.path('companydetails/' + $routeParams.companyName + '/' + $routeParams.companyid + '/' + tabType, false);            
+            //console.log(tabType);
+        };
 
         $scope.myFunct = function(keyEvent) {
             if (keyEvent.which === 13) {
