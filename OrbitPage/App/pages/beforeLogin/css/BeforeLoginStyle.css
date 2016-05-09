@@ -7246,3 +7246,7 @@ input:focus ~ .bar:after {
 }
 }
 
+@media screen and (min-width: 0px) and (max-width: 750px) {
+  #facebook { display: none; }
+  .mobile-hide{ display: none; }
+}
