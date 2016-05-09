@@ -143,13 +143,13 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.selectCompany = function (selected) {
-            console.log(selected);
+            //console.log(selected);
             location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
             
         };
 
         $scope.selectUser = function (selected) {
-            console.log(selected);
+            //console.log(selected);
             location.href = "/#userprofile/" + selected.originalObject.VertexId;
 
         };

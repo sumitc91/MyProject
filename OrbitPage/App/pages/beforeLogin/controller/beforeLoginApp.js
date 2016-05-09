@@ -308,6 +308,17 @@ define([appLocation.preLogin], function (app) {
             $location.url('/viewpostdetail/' + postId + '/' + new Date().getTime());
         };
 
+        $rootScope.selectAllTitleBarQuery = function (selected) {
+            //console.log(selected);
+            if (selected.originalObject.type == 1 || selected.originalObject.type == "1") {
+                location.href = "/#userprofile/" + selected.originalObject.vertexId;
+            }
+            else if (selected.originalObject.type == 2 || selected.originalObject.type == "2") {
+                location.href = "/#companydetails/" + selected.originalObject.name.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.vertexId;
+            };
+            
+        };
+
         $scope.navigateToUserProfile = function (userId) {
             //$('.mega-dropdown-menu').removeClass("open");
             $location.url('/userprofile/' + userId);
