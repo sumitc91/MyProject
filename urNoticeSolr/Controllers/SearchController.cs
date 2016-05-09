@@ -157,12 +157,16 @@ namespace urNoticeSolr.Controllers
 
         public JsonResult SearchAll()
         {
-            var response = new ResponseModel<SearchAllResponseModel>();
+            var response = new ResponseModel<List<SearchAllResponseModel>>();
+            response.Payload = new List<SearchAllResponseModel>();
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
             try
             {
                 ISolrUser solrUserModel = new SolrUser();
-                response.Payload = solrUserModel.SearchAllAutocomplete(queryText);
+                response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
+
+                ISolrCompany solrCompanyModel = new SolrCompany();
+                response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText));                
             }
             catch (Exception ex)
             {

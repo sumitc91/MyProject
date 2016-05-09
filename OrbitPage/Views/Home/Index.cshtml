@@ -146,7 +146,22 @@ div.middle-div-mobile {
 
                                 <li style="max-width:300px">
                                     <div class="input-group col-sm-12" style="margin: 10px 0px 0px 2px;">
-                                        <input class="form-control" type="text" value="" placeholder="Search" name="q">
+                                        @*<input class="form-control" type="text" value="" placeholder="Search" name="q">*@
+                                        <div angucomplete-alt
+                                             id="topSearchBar"
+                                             placeholder="{{searchBoxUserText}}"
+                                             pause="500"
+                                             selected-object="selectUser"
+                                             remote-url="{{sitehosturl}}/search/SearchAll?q="
+                                             remote-url-request-formatter="remoteUrlRequestFn"
+                                             remote-url-data-field="Payload"
+                                             title-field="name"
+                                             minlength="2"
+                                             input-class="form-control form-control-small"
+                                             ng-model="userName"
+                                             image-field="icon"
+                                             match-class="highlight" ng-keypress="myFunct($event)"></div>
+
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span ng-bind="searchOptions.selected"></span> <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
@@ -768,6 +783,11 @@ div.middle-div-mobile {
                 padding: 0px 0px !important;           
                 
             }
+
+            #topSearchBar_dropdown {
+                margin: 29px 0px;
+            }
+
             /*MEDIA QUERY*/
         </style>
     </body>

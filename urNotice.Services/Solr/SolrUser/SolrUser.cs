@@ -46,9 +46,34 @@ namespace urNotice.Services.Solr.SolrUser
             return solrQueryExecute;
         }
 
-        public SearchAllResponseModel SearchAllAutocomplete(string queryText)
+        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText)
         {
-            throw new NotImplementedException();
+            queryText = queryText.Replace(" ", "*");
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
+            var searchResultList =new List<SearchAllResponseModel>();
+
+            String solrQueryString = "(name:" + queryText + "*) || (lastname:" + queryText + "*) || (email:" + queryText + ") || (username:" + queryText + ") || (phone:" + queryText + ")";
+            var solrQuery = new SolrQuery(solrQueryString);
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 3,
+                Start = 0,
+                Fields = new[] { "email", "name", "profilepic", "vertexId" }
+            });
+
+            foreach (var res in solrQueryExecute)
+            {
+                var searchResult = new SearchAllResponseModel()
+                {
+                    icon = res.Profilepic,
+                    name = res.Name,
+                    type = "1",
+                    vertexId = res.VertexId
+                };
+                searchResultList.Add(searchResult);
+            }
+
+            return searchResultList;
         }
 
         public SolrQueryResults<UnUserSolr> UserDetailsById(string uid)

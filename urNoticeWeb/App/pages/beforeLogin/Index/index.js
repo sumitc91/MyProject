@@ -4,11 +4,7 @@ define([appLocation.preLogin], function (app) {
         $('title').html("index"); //TODO: change the title so cann't be tracked in log
         
         //detectIfUserLoggedIn();
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
-
+        
         $scope.projectDetailsDivShow = false;
         $scope.totalProjects = "124";
         $scope.successRate = "91";

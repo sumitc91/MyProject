@@ -8,6 +8,7 @@ using Microsoft.Practices.ServiceLocation;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
 namespace urNotice.Services.Solr.SolrCompany
@@ -183,6 +184,36 @@ namespace urNotice.Services.Solr.SolrCompany
                 });
             }
             return solrQueryExecute;
+        }
+
+        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText)
+        {
+            queryText = queryText.Replace(" ", "*");
+            //queryText = queryText.ToLower();
+            var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnCompanySolr>>();
+            var searchResultList = new List<SearchAllResponseModel>();
+
+            var solrQuery = new SolrQuery("companyname:" + queryText + "*");
+            var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
+            {
+                Rows = 15,
+                Start = 0,
+                Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl", "logourl" }
+            });
+
+            foreach (var res in solrQueryExecute)
+            {
+                var searchResult = new SearchAllResponseModel()
+                {
+                    icon = res.logourl,
+                    name = res.companyname,
+                    type = "2",
+                    vertexId = res.guid
+                };
+                searchResultList.Add(searchResult);
+            }
+
+            return searchResultList;
         }
 
         private String CompanyCompetitorQueryBuilder(String size, String rating, String speciality)

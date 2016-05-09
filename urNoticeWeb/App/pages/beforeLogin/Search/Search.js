@@ -3,11 +3,6 @@ define([appLocation.preLogin], function (app) {
     app.controller('beforeLoginSearch', function ($scope, $http, $rootScope,$routeParams,$location, Restangular, CookieUtil) {
         $('title').html("indexsea"); //TODO: change the title so cann't be tracked in log
         
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
-
         $scope.queryParam = {
             q: "",
             currentPage: "",

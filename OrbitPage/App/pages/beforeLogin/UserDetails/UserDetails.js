@@ -24,12 +24,7 @@ define([appLocation.preLogin], function (app) {
     app.controller('beforeLoginUserDetails', function ($scope, $http, $route, $uibModal, $log, $rootScope, $routeParams, $location, $timeout, CookieUtil) {
         $('title').html("indexcd"); //TODO: change the title so cann't be tracked in log
         
-        //$rootScope.sitehosturl = $location.host();//"localhost:40287";
-        //if ($location.host() == "localhost") {
-        //    $rootScope.sitehosturl = "localhost:40287";
-        //}
-
-        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
+        
         $scope.ratingCount = 0;
         $scope.userid = $routeParams.userid;
         $scope.companyDetails = {

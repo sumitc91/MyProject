@@ -5,11 +5,6 @@ define([appLocation.preLogin], function (app) {
         $('title').html("index-1"); //TODO: change the title so cann't be tracked in log
         
         
-        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
-        //if ($location.host() == "localhost") {
-        //    $rootScope.sitehosturl = "localhost:28308";
-        //}
-
         $scope.selectCompany = function (selected) {
             console.log(selected);
             //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;

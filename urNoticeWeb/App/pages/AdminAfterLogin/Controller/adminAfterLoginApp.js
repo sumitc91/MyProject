@@ -75,11 +75,7 @@ define([appLocation.adminPostLogin], function (app) {
 
         _.defer(function () { $scope.$apply(); });
         $rootScope.IsMobileDevice = (mobileDevice || isAndroidDevice) ? true : false;
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
-
+        
         $scope.signOut = function() {
             logout();
         };

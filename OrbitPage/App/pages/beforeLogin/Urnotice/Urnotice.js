@@ -4,13 +4,6 @@ define([appLocation.preLogin], function (app) {
 
         $('title').html(window.madetoearn.i18n.beforeLoginOrbitPageCompanyTitle);
         
-        //detectIfUserLoggedIn();
-        /*$rootScope.sitehosturl = $location.host();//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:28308";
-        }*/
-        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
-
         $scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
         $scope.beforeLoginIndexLatestWorkgraphy = window.madetoearn.i18n.beforeLoginIndexLatestWorkgraphy;
         $scope.beforeLoginIndexTopCompanies = window.madetoearn.i18n.beforeLoginIndexTopCompanies;

@@ -192,6 +192,8 @@ define([appLocation.preLogin], function (app) {
         $rootScope.IsMobileDevice = (mobileDevice || isAndroidDevice) ? true : false;
         $rootScope.logoImage = { url: logoImage };
         $rootScope.isUserLoggedIn = false;
+        $rootScope.sitehosturl = ServerContextPath.solrServer;//"www.orbitpage.com/searchapi";
+
         $rootScope.profileDropDownCss = "hideFromCss";
 
         $rootScope.logourl = "https://s3-ap-southeast-1.amazonaws.com/urnotice/landing_page_logo/logo_final_with_text_732x12.png";

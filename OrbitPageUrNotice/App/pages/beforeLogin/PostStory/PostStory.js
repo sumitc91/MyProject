@@ -6,10 +6,7 @@ define([appLocation.preLogin], function (app) {
         //detectIfUserLoggedIn();
         //$('.textarea').wysihtml5();
         $scope.designationsAutoComplete = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
+        
         $scope.details = '';
         $scope.projectDetailsDivShow = false;
         $scope.totalProjects = "124";

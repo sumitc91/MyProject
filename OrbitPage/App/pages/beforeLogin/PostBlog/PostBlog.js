@@ -7,7 +7,6 @@ define([appLocation.preLogin], function (app) {
         //$('.textarea').wysihtml5();
         $scope.designationsAutoComplete = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
         
-        $rootScope.sitehosturl = "www.orbitpage.com/searchapi";
         $scope.details = '';
         $scope.projectDetailsDivShow = false;
         $scope.totalProjects = "124";

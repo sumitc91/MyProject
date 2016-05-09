@@ -3,10 +3,6 @@ define([appLocation.adminPostLogin], function (app) {
     app.controller('adminAfterLoginCompanyDetails', function ($scope, $http, $route, $rootScope, $routeParams, $location, $timeout, CookieUtil) {
         $('title').html("indexcd"); //TODO: change the title so cann't be tracked in log
         
-        $rootScope.sitehosturl = "urnotice.com";//"localhost:40287";
-        if ($location.host() == "localhost") {
-            $rootScope.sitehosturl = "localhost:40287";
-        }
         $scope.isSolrUpdated = true;
         $scope.companyid = $routeParams.companyid;
         $scope.companyDetails = {
