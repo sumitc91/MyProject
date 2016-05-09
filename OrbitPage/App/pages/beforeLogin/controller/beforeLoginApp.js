@@ -208,6 +208,31 @@ define([appLocation.preLogin], function (app) {
             itemPerPage:6
         };
 
+        $rootScope.searchOptions = {
+            selected:"All",
+            options: [
+                {
+                    name: "All",
+                    searchUrl:""
+                },
+                {
+                    name: "Company",
+                    searchUrl: ""
+                },
+                {
+                    name: "Users",
+                    searchUrl: ""
+                },
+                {
+                    name: "Workgraphy",
+                    searchUrl: ""
+                }
+            ],
+        };
+        $rootScope.searchOptions.selectOption = function(optionName) {
+            $rootScope.searchOptions.selected = optionName;
+        };
+
         $rootScope.clientFriendRequestNotificationDetailResponse = [];
         $rootScope.clientFriendRequestNotificationDetailResponseInfo = {
             busy: false,
