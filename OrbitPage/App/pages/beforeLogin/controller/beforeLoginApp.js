@@ -193,6 +193,7 @@ define([appLocation.preLogin], function (app) {
         $rootScope.logoImage = { url: logoImage };
         $rootScope.isUserLoggedIn = false;
         $rootScope.sitehosturl = ServerContextPath.solrServer;//"www.orbitpage.com/searchapi";
+        
 
         $rootScope.profileDropDownCss = "hideFromCss";
 
@@ -232,7 +233,7 @@ define([appLocation.preLogin], function (app) {
             ],
         };
         $rootScope.searchOptions.selectOption = function(optionName) {
-            $rootScope.searchOptions.selected = optionName;
+            $rootScope.searchOptions.selected = optionName;            
         };
 
         $rootScope.clientFriendRequestNotificationDetailResponse = [];

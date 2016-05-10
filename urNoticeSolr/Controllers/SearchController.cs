@@ -160,13 +160,29 @@ namespace urNoticeSolr.Controllers
             var response = new ResponseModel<List<SearchAllResponseModel>>();
             response.Payload = new List<SearchAllResponseModel>();
             var queryText = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
+            var queryType = Request.QueryString["type"].ToString(CultureInfo.InvariantCulture);
+
+            ISolrUser solrUserModel = new SolrUser();
+            ISolrCompany solrCompanyModel = new SolrCompany();
             try
             {
-                ISolrUser solrUserModel = new SolrUser();
-                response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
-
-                ISolrCompany solrCompanyModel = new SolrCompany();
-                response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText));                
+                switch (queryType)
+                {
+                    case CommonConstants.All:                        
+                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
+                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText));  
+                        break;
+                    case CommonConstants.Users:                        
+                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
+                        break;
+                    case CommonConstants.Company:
+                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText)); 
+                        break;
+                    case CommonConstants.Workgraphy:
+                        break;
+                        
+                }
+                              
             }
             catch (Exception ex)
             {

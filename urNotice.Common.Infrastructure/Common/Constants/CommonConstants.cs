@@ -61,5 +61,10 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         public const string RemoveFollow = "5";
         public const string Deassociate = "6";
         public const string AssociateRequestCancel = "7";
+
+        public const string All = "All";
+        public const string Company = "Company";
+        public const string Users = "Users";
+        public const string Workgraphy = "Workgraphy";        
     }
 }

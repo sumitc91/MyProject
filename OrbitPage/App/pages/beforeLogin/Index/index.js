@@ -6,12 +6,6 @@ define([appLocation.preLogin], function (app) {
         
         $scope.searchTypeModel = 'Company';
 
-        //$scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
-        $scope.searchBoxCompanyText = "Search Company";
-        $scope.searchBoxUserText = "Search User";
-        $scope.searchBoxWorkgraphyText = "Search Workgraphy NOT IMPLEMENTED YET !!!";
-        $scope.searchBoxAllText = "All Search NOT IMPLEMENTED YET !!!";
-
 
         $scope.beforeLoginIndexLatestWorkgraphy = window.madetoearn.i18n.beforeLoginIndexLatestWorkgraphy;
         $scope.beforeLoginIndexTopCompanies = window.madetoearn.i18n.beforeLoginIndexTopCompanies;
@@ -140,18 +134,6 @@ define([appLocation.preLogin], function (app) {
 
         $scope.searchCompany = function() {
             location.href = "/#search/?q=" + $("#companyName_value").val() + "&page=1&perpage=10";
-        };
-
-        $scope.selectCompany = function (selected) {
-            //console.log(selected);
-            location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
-            
-        };
-
-        $scope.selectUser = function (selected) {
-            //console.log(selected);
-            location.href = "/#userprofile/" + selected.originalObject.VertexId;
-
         };
 
         $scope.imageIndex = 2;
