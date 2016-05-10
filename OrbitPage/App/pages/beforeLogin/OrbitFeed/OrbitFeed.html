@@ -142,12 +142,12 @@
                         <a title="Posted To" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName"></a>'s Wall
                     </div>
                 </div>
-                <div class="panel-body">
+                <div class="fb-status-container fb-border fb-lightgray-bg">
                     <div class="fb-user-thumb">
                         <img ng-src="{{post.userInfo[0].ImageUrl}}" alt="">
                     </div>
                     <div class="fb-user-details hover_div">
-                        <h3><a href="#/userprofile/{{post.userInfo[0]._id}}" user_name="{{post.userInfo[0].Username}}" class="show_hovercard" name="{{post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName}}" profile_pic="{{post.userInfo[0].ImageUrl}}" cover_pic="{{post.userInfo[0].CoverImageUrl}}" ng-bind="post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName"></a></h3>
+                        <h4><a href="#/userprofile/{{post.userInfo[0]._id}}" user_name="{{post.userInfo[0].Username}}" class="show_hovercard" name="{{post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName}}" profile_pic="{{post.userInfo[0].ImageUrl}}" cover_pic="{{post.userInfo[0].CoverImageUrl}}" ng-bind="post.userInfo[0].FirstName +' ' + post.userInfo[0].LastName"></a></h4>
                         <p>{{post.postInfo.PostedTime| timeago}} near Alaska, USA</p>
                         <div class="floatRight">
                             <!-- Single button using append-to-body -->

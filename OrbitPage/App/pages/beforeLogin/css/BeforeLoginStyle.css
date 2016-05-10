@@ -6890,6 +6890,10 @@ input:focus ~ .bar:after {
     background: #f6f6f6;
 }
 
+.fb-lightgray-bg {
+    background: #fcfcfc none repeat scroll 0 0;
+}
+
 .fb-comments li {
     border-top:1px solid #ebeef5;
     padding: 15px;
