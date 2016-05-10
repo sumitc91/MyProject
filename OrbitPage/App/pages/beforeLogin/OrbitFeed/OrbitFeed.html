@@ -135,11 +135,11 @@
                     <div class="fb-time-action">
 
                         <img ng-src="{{post.userInfo[0].ImageUrl}}" alt="" style="height:40px">
-                        <a title="Posted By" ng-bind="post.userInfo[0].FirstName+' '+post.userInfo[0].LastName+' '"></a>
+                        <a title="Posted By" href="#/userprofile/{{post.userInfo[0]._id}}" ng-bind="post.userInfo[0].FirstName+' '+post.userInfo[0].LastName+' '"></a>
                         Posted on
 
                         <img ng-src="{{post.postedOn[0].ImageUrl}}" alt="" style="height:40px">
-                        <a title="Posted To" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName"></a>'s Wall
+                        <a title="Posted To" href="#/userprofile/{{post.postedOn[0]._id}}" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName"></a>'s Wall
                     </div>
                 </div>
                 <div class="fb-status-container fb-border fb-lightgray-bg">
