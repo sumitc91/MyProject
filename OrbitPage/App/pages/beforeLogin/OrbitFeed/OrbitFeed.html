@@ -1,5 +1,5 @@
 ﻿<div class="row" style="min-height: 65px;"></div>
-<div class="row" ng-controller="beforeLoginUserProfile">
+<div class="row" ng-controller="beforeLoginOrbitFeed">
     <div class="col-md-2">
         <div class="row">
             <div class="col-md-12">
@@ -93,35 +93,7 @@
         </div>
     </div>
     <div class="col-md-8">
-        <section class="panel" style="padding: 0px 30px;">
-            <div class="cover-photo">
-                <div class="fb-timeline-img">
-                    <img height="287" alt="Cover Pic not available." ng-src="{{CurrentUserDetails.Coverpic}}">
-                </div>
-                <div class="fb-name">
-                    <h2><a href="#" ng-bind="CurrentUserDetails.Firstname+' '+CurrentUserDetails.Lastname"></a></h2>
-                </div>
-            </div>
-            <div class="panel-body">
-                <div class="profile-thumb">
-                    <img alt="people" ng-src="{{CurrentUserDetails.Profilepic}}" height="140">
-                </div>
-                <a href="#" class="fb-user-mail" ng-bind="CurrentUserDetails.Email"></a>
-                <div style="float:right" ng-show="(!UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded && visitedUserVertexId != clientDetailResponse.VertexId)">
-                    <img src="../../App/img/loading/loading123.gif" style="height: 30px; float: right; margin: 10px 0px 0px;" />
-                </div>
-                <div style="float:right" ng-show="UserNetworkDetailHelper.UserNetworkDetailHelperDataLoaded" ng-cloak>
-                    <button type="button" class="btn btn-info" ng-show="!UserNetworkDetailHelper.isFriendRequestSent && !UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateRequest)"><i ng-show="UserConnectionRequestModel.AssociateRequestLoading" class='fa fa-spinner fa-spin'></i> Associate</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestSent" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateRequestCancel)"><i ng-show="UserConnectionRequestModel.AssociateRequestCancelLoading" class='fa fa-spinner fa-spin'></i> Remove Associate Request</button>
-                    <button type="button" class="btn btn-success" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateAccept)"><i ng-show="UserConnectionRequestModel.AssociateAcceptLoading" class='fa fa-spinner fa-spin'></i> Accept</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriendRequestReceived && !UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateReject)"><i ng-show="UserConnectionRequestModel.AssociateRejectLoading" class='fa fa-spinner fa-spin'></i> Reject</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFriend" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.Deassociate)"><i ng-show="UserConnectionRequestModel.DeassociateLoading" class='fa fa-spinner fa-spin'></i> Deassociate</button>
-                    <button type="button" class="btn btn-warning" ng-show="!UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.AssociateFollow)"><i ng-show="UserConnectionRequestModel.AssociateFollowLoading" class='fa fa-spinner fa-spin'></i>Follow</button>
-                    <button type="button" class="btn btn-danger" ng-show="UserNetworkDetailHelper.isFollowing" ng-click="makeConnectionRequest(visitedUserVertexId,UserConnectionRequestModel.AssociateUsers,UserConnectionRequestModel.RemoveFollow)"><i ng-show="UserConnectionRequestModel.RemoveFollowLoading" class='fa fa-spinner fa-spin'></i>Unfollow</button>
-                </div>
-                
-            </div>
-        </section>
+        
         <section class="panel profile-info">
             <form>
                 <textarea class="form-control input-lg p-text-area" rows="2" ng-model="UserPostMessage" placeholder="Whats in your mind today?"></textarea>
@@ -153,14 +125,24 @@
                 </ul>
             </div>
         </section>
-        
+
         <!-- posts -->
         <div infinite-scroll='UserPostListInfo.nextPage()' infinite-scroll-disabled='UserPostListInfo.busy' infinite-scroll-distance='1'>
             <input type="file" style="display:none" id="my_comment_file" ng-file-select="onCommentImageFileUpload($files,currentUploadingPostIndex)">
-            
+
             <section class="panel" ng-repeat="post in UserPostList">
+                <div class="fb-status-container fb-border fb-gray-bg">
+                    <div class="fb-time-action">
+                        
+                        <img ng-src="{{post.userInfo[0].ImageUrl}}" alt="" style="height:40px">                        
+                        <a title="Posted By" ng-bind="post.userInfo[0].FirstName+' '+post.userInfo[0].LastName+' '"></a>
+                        Posted on
+                        
+                        <img ng-src="{{post.postedOn[0].ImageUrl}}" alt="" style="height:40px">                        
+                        <a title="Posted To" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName"></a>'s Wall
+                    </div>
+                </div>
                 <div class="panel-body">
-                    
                     <div class="fb-user-thumb">
                         <img ng-src="{{post.userInfo[0].ImageUrl}}" alt="">
                     </div>
@@ -200,7 +182,7 @@
                     <div class="fb-status-container fb-border">
                         <div class="fb-time-action">
                             <a title="Like this" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
-                            <a title="Unlike this" ng-show="post.alreadyLiked" ng-click="removeReactionOnUserPost($index)">Unlike</a>                            
+                            <a title="Unlike this" ng-show="post.alreadyLiked" ng-click="removeReactionOnUserPost($index)">Unlike</a>
                             <span>-</span>
                             <a href="#" title="Leave a comment">Comments</a>
                             <span>-</span>
@@ -215,7 +197,7 @@
                         <ul class="fb-comments">
                             <li ng-show="(post.messageToIndex+1)<post.commentsCount">
                                 <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load Previous Messages.. ( Showing <span ng-bind="post.messageToIndex+1"></span> of <span ng-bind="post.commentsCount"></span>)<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
-                            </li> 
+                            </li>
                             <li ng-repeat="comment in post.commentsInfo">
                                 <a href="#/userprofile/{{comment.commentedBy[0]._id}}" class="cmt-thumb">
                                     <img ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="">
@@ -235,32 +217,33 @@
                                         <img class="image" ng-show="comment.commentInfo.PostImage" ng-src="{{comment.commentInfo.PostImage}}" alt="" style="max-height:200px" />
                                         <input type="button" value="delete" ng-show="comment.commentInfo.PostImage" ng-click="removeImageOnUserPostComment($parent.$index,$index)" />
                                         <input type="file" ng-file-select="onEditFileSelectLogoUrlForComments($files,$parent.$index,$index)">
-                                    </div>                                    
-                                    
+                                    </div>
+
                                     <p ng-show="!comment.loadingIcon">
-                                        {{comment.commentInfo.PostedTime | timeago}} -                                        
+                                        {{comment.commentInfo.PostedTime | timeago}} -
                                         <a class="like-link" title="Like this" ng-show="!comment.alreadyLiked" ng-click="reactionOnUserPostComment($parent.$index,$index)">Like</a>
                                         <a class="like-link" title="Unlike this" ng-show="comment.alreadyLiked" ng-click="removeReactionOnUserPostComment($parent.$index,$index)">Unlike</a>
                                         <a class="like-link" title="Likes Count"> <span class="hover_div"><span class="like-summary" ng-click="showLikedByUsers(comment.commentInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal">(<span ng-bind="comment.likeCount"></span>)</span></span> </a>
-                                        
+
                                         &nbsp;
                                         <a ng-click="enableEditcommentOnUserPost($parent.$index,$index)" ng-show="!comment.editableMode && comment.isAuthenticToEdit" class="like-link">Edit</a> &nbsp;
                                         <a class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall" confirmed-click="deleteOnUserPostComment($parent.$index,$index)" ng-confirm-click="Would you like to delete this comment?">Delete</a>
                                         <!--<a class="like-link" ng-show="comment.isAuthenticToEdit || comment.isLoggedInUserWall" ng-click="deleteOnUserPostComment($parent.$index,$index)">Delete</a>-->
                                     </p>
                                 </div>
-                            </li>                                                       
+                            </li>
                             <li>
                                 <a class="cmt-thumb">
                                     <img ng-src="{{clientDetailResponse.Profilepic}}" alt="">
                                 </a>
                                 <div class="cmt-form">
-                                    <div class="input-group"><input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox"> 
+                                    <div class="input-group">
+                                        <input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox">
                                         <span class="input-group-addon">
-                                            <a ng-click="uploadImageOncomment($index)"><i class="fa fa-camera"></i></a>                                       
-                                            <a ng-click="commentOnUserPost($index)">                                            
-                                                <i class="fa fa-edit"></i>                                        
-                                            </a>                                    
+                                            <a ng-click="uploadImageOncomment($index)"><i class="fa fa-camera"></i></a>
+                                            <a ng-click="commentOnUserPost($index)">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         </span>
                                     </div>
                                 </div>
@@ -309,7 +292,7 @@
                     </div>
 
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
     <div class="col-md-2">
@@ -351,7 +334,7 @@
                 <div class="chat-textarea"> <textarea placeholder="Type your message" class="form-control autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea> </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
 <script type="text/javascript">

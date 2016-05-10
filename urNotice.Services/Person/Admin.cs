@@ -127,6 +127,11 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
+        public string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail)
         {
             throw new NotImplementedException();

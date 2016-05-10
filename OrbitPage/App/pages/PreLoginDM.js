@@ -170,6 +170,9 @@ appRequire = require
             beforeLoginUserProfile: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker"]
             },
+            beforeLoginOrbitFeed: {
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker"]
+            },
             beforeLoginViewPostDetail: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago"]
             },
@@ -261,6 +264,7 @@ appRequire = require
             beforeLoginUserDetails: "../../App/pages/beforeLogin/UserDetails/UserDetails",
             beforeLoginSearch: "../../App/pages/beforeLogin/Search/Search",
             beforeLoginUserProfile: "../../App/pages/beforeLogin/UserProfile/UserProfile",
+            beforeLoginOrbitFeed: "../../App/pages/beforeLogin/OrbitFeed/OrbitFeed",
             beforeLoginViewPostDetail: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail",
             beforeLoginPostStory: "../../App/pages/beforeLogin/PostStory/PostStory",
             beforeLoginPostBlog: "../../App/pages/beforeLogin/PostBlog/PostBlog",
@@ -287,7 +291,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
     "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog", "beforeLoginAllBlogs",
-    "beforeLoginSingleWorkgraphy", "jquery_totemticker"
+    "beforeLoginSingleWorkgraphy", "jquery_totemticker", "beforeLoginOrbitFeed"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

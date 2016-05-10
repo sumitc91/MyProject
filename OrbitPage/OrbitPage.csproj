@@ -398,6 +398,8 @@
     <Content Include="App\pages\beforeLogin\SingleBlog\SingleBlog.js" />
     <Content Include="App\pages\beforeLogin\TnC\TnC.html" />
     <Content Include="App\pages\beforeLogin\TnC\TnC.js" />
+    <Content Include="App\pages\beforeLogin\OrbitFeed\OrbitFeed.html" />
+    <Content Include="App\pages\beforeLogin\OrbitFeed\OrbitFeed.js" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile - Copy.js" />
     <Content Include="App\pages\beforeLogin\UserProfile\UserProfile.html" />
     <Content Include="App\pages\beforeLogin\ViewPostDetail\ViewPostDetail2.js" />

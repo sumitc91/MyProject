@@ -489,7 +489,24 @@ namespace urNotice.Services.Management.AccountManagement
 
             if (userEmail == null) userEmail = string.Empty;
 
-            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
+            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},commentsCount: it.in('Comment').count(),userInfo:it.in('Created')] }";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);
+
+            return response;
+        }
+
+        public string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail)
+        {
+            string url = TitanGraphConfig.Server;
+            string graphName = TitanGraphConfig.Graph;
+            int messageStartIndex = 0;
+            int messageEndIndex = 4;
+
+            if (userEmail == null) userEmail = string.Empty;
+
+            string gremlinQuery = "g.v(" + userVertexId + ").out('Follow').in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},commentsCount: it.in('Comment').count(),userInfo:it.in('Created'),postedOn:it.out('WallPost')] }";
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);

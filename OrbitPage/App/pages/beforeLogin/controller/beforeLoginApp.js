@@ -48,10 +48,9 @@ define([appLocation.preLogin], function (app) {
                        when("/RequesterDetails", { templateUrl: "../../App/Pages/BeforeLogin/ClientMoreInfo/ClientMoreInfo.html" }).
                        when("/career", { templateUrl: "../../App/pages/beforeLogin/Career/Career.html" }).
                        when("/editpage", { templateUrl: "../../App/pages/beforeLogin/EditPage/EditPage.html" }).
-                       when("/userprofile", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
-                       when("/userprofile2", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
+                       when("/userprofile", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).                       
                        when("/userprofile/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile.html" }).
-                       when("/userprofile2/:vertexId", { templateUrl: "../../App/pages/beforeLogin/UserProfile/UserProfile2.html" }).
+                       when("/orbitfeed", { templateUrl: "../../App/pages/beforeLogin/OrbitFeed/OrbitFeed.html" }).
                        when("/viewpostdetail/:vertexId", { templateUrl: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail.html" }).
                        when("/viewpostdetail/:vertexId/:ts", { templateUrl: "../../App/pages/beforeLogin/ViewPostDetail/ViewPostDetail.html" }).
                        otherwise({ templateUrl: "../../App/pages/beforeLogin/404/404.html" });

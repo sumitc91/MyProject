@@ -309,6 +309,56 @@ namespace urNoticeUser.Controllers
 
         }
 
+        public JsonResult GetUserOrbitFeedPost()
+        {
+            var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);
+            var to = Request.QueryString["to"].ToString(CultureInfo.InvariantCulture);
+            var vertexId = Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var userEmail = string.Empty;
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            if (session != null)
+                userEmail = session.UserName;
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            isValidToken = true;//TODO: currently hard coded.
+            if (isValidToken)
+            {
+                Boolean isRequestValid = true;
+                if (String.IsNullOrWhiteSpace(vertexId) || vertexId.Equals("undefined"))
+                {
+                    if (session != null)
+                        vertexId = session.UserVertexId;
+                    else
+                        isRequestValid = false;
+                }
+
+                if (isRequestValid)
+                {
+                    IPerson clientModel = new Consumer();
+                    var getUserPostResponse = clientModel.GetUserOrbitFeedPost(vertexId, from, to, userEmail);
+                    var getUserPostResponseDeserialized =
+                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+
+
+                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("not a valid request", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public JsonResult GetUserPostMessages()
         {
             var from = Request.QueryString["from"].ToString(CultureInfo.InvariantCulture);

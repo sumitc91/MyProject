@@ -88,6 +88,11 @@ namespace urNotice.Services.Person
             IAccountManagement accountManagementModel = new AccountManagement();
             return accountManagementModel.GetUserPost(userVertexId, from, to, userEmail);
         }
+        public string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.GetUserOrbitFeedPost(userVertexId, from, to, userEmail);
+        }
         public string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail)
         {
             IAccountManagement accountManagementModel = new AccountManagement();

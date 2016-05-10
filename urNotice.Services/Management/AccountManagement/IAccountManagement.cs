@@ -36,6 +36,7 @@ namespace urNotice.Services.Management.AccountManagement
         string GetUserNotification(urNoticeSession session, string from, string to);
         string GetUserFriendRequestNotification(urNoticeSession session, string from, string to);
         string GetUserPost(string userVertexId, string @from, string to, string userEmail);
+        string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail);
         string GetUserPostLikes(string userVertexId, string @from, string to);
         string GetPostByVertexId(string vertexId, string userEmail);
