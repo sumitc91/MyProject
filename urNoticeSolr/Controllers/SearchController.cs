@@ -164,19 +164,23 @@ namespace urNoticeSolr.Controllers
 
             ISolrUser solrUserModel = new SolrUser();
             ISolrCompany solrCompanyModel = new SolrCompany();
+            int from = 0;
+            int to = 3;
             try
             {
                 switch (queryType)
                 {
                     case CommonConstants.All:                        
-                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
-                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText));  
+                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText, from,to));
+                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText,from,to));  
                         break;
-                    case CommonConstants.Users:                        
-                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText));
+                    case CommonConstants.Users:
+                        to = 10;
+                        response.Payload.AddRange(solrUserModel.SearchAllAutocomplete(queryText,from,to));
                         break;
                     case CommonConstants.Company:
-                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText)); 
+                        to = 10;
+                        response.Payload.AddRange(solrCompanyModel.SearchAllAutocomplete(queryText,from,to)); 
                         break;
                     case CommonConstants.Workgraphy:
                         break;

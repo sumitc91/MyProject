@@ -12,7 +12,7 @@ namespace urNotice.Services.Solr.SolrUser
         UnUserSolr GetPersonData(String email, String username, String phone, String fid,Boolean isFullDetails);
         Dictionary<String, String> InsertNewUserToSolr(UnUserSolr solrUser, Boolean toBeOptimized);
         SolrQueryResults<UnUserSolr> GetUserDetailsAutocomplete(String queryText);
-        List<SearchAllResponseModel> SearchAllAutocomplete(String queryText);
+        List<SearchAllResponseModel> SearchAllAutocomplete(String queryText,int from, int to);
         SolrQueryResults<UnUserSolr> UserDetailsById(String uid);
 
     }

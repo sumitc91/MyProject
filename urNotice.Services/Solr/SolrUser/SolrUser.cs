@@ -46,7 +46,7 @@ namespace urNotice.Services.Solr.SolrUser
             return solrQueryExecute;
         }
 
-        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText)
+        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText,int from, int to)
         {
             queryText = queryText.Replace(" ", "*");
             var solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<UnUserSolr>>();
@@ -56,8 +56,8 @@ namespace urNotice.Services.Solr.SolrUser
             var solrQuery = new SolrQuery(solrQueryString);
             var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
             {
-                Rows = 3,
-                Start = 0,
+                Rows = to,
+                Start = from,
                 Fields = new[] { "email", "name", "profilepic", "vertexId" }
             });
 

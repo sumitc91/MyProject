@@ -186,7 +186,7 @@ namespace urNotice.Services.Solr.SolrCompany
             return solrQueryExecute;
         }
 
-        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText)
+        public List<SearchAllResponseModel> SearchAllAutocomplete(string queryText,int from,int to)
         {
             queryText = queryText.Replace(" ", "*");
             //queryText = queryText.ToLower();
@@ -196,8 +196,8 @@ namespace urNotice.Services.Solr.SolrCompany
             var solrQuery = new SolrQuery("companyname:" + queryText + "*");
             var solrQueryExecute = solr.Query(solrQuery, new QueryOptions
             {
-                Rows = 15,
-                Start = 0,
+                Rows = to,
+                Start = from,
                 Fields = new[] { "guid", "companyname", "companyid", "isprimary", "squarelogourl", "logourl" }
             });
 
