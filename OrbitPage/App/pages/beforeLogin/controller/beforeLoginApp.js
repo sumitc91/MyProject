@@ -3,8 +3,9 @@
 define([appLocation.preLogin], function (app) {
 
     app.config(function ($routeProvider, $httpProvider) {
-
-        $routeProvider.when("/", { templateUrl: "../../App/pages/beforeLogin/Index/Index.html" }).
+        
+        console.log("route isUserCookieAvailable: " + isUserCookieAvailable);
+        $routeProvider.when("/", { templateUrl: isUserCookieAvailable ? "../../App/pages/beforeLogin/OrbitFeed/OrbitFeed.html" : "../../App/pages/beforeLogin/Index/Index.html" }).
                        when("/index", { templateUrl: "../../App/pages/beforeLogin/Index/Index.html" }).
                        when("/signup/user/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpUser/SignUpUser.html" }).
                        when("/signup/client/:ref", { templateUrl: "../../App/Pages/BeforeLogin/SignUpClient/SignUpClient.html" }).

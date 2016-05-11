@@ -158,6 +158,8 @@ function redirectAfterLogin() {
     
 }
 
+var isUserCookieAvailable = ($.cookie('utmzt') != null && $.cookie('utmzt') != "" && $.cookie('loginType') != null && $.cookie('loginType') != "");
+
 function detectIfUserLoggedIn(){
         var headers = {
                         'Content-Type': 'application/json',
@@ -176,7 +178,10 @@ function detectIfUserLoggedIn(){
 							console.log(data);
                      if (data == true) {
                          //location.href = "/" + $.cookie('loginType');
+                         //console.log("in true");
+                         return true;
                      } else {
+                         //console.log("in false");
                          removeAllCookies(ServerContextPath.cookieDomain);
                          // will first fade out the loading animation
                          jQuery("#status").fadeOut();
@@ -193,7 +198,7 @@ function detectIfUserLoggedIn(){
                 // will fade out the whole DIV that covers the website.
                 jQuery("#preloader").delay(1000).fadeOut("medium");
          }
-					
+         return false;
 }
 
 function removeAllCookies(cookieDomain) {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
@@ -23,6 +24,7 @@ using urNotice.Services.DataImport.ImportDesignations;
 using urNotice.Services.DataImport.ImportNoticePeriods;
 using urNotice.Services.ErrorLogger;
 using urNotice.Services.Person;
+using urNotice.Services.SessionService;
 using urNoticeAuth.App_Start;
 
 namespace urNoticeAuth.Controllers
@@ -34,7 +36,10 @@ namespace urNoticeAuth.Controllers
     {
         //
         // GET: /Auth/
-       
+        private static string accessKey = AwsConfig._awsAccessKey;
+        private static string secretKey = AwsConfig._awsSecretKey;
+        private static string authKey = OrbitPageConfig.AuthKey;
+
         public delegate void LogoutDelegate(HttpRequestBase requestData);
         
         public ActionResult Index()
@@ -84,8 +89,8 @@ namespace urNoticeAuth.Controllers
         [HttpPost]
         public JsonResult IsValidSession()
         {
-            var headers = new HeaderManager(Request);
-            new TokenManager().getSessionInfo(headers.AuthToken, headers);
+            var headers = new HeaderManager(Request);                        
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             return Json(isValidToken);
         }

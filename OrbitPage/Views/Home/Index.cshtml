@@ -126,7 +126,7 @@ div.middle-div-mobile {
         <div id="main-wrapper">
             <div>
                 <!-- Navigation -->
-                <nav class="navbar navbar-inverse-header navbar-fixed-top" role="navigation">
+                <nav class="navbar navbar-inverse-header navbar-fixed-top" role="navigation" id="masterPageNavBarId" style="display:none">
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
@@ -138,7 +138,7 @@ div.middle-div-mobile {
                             </button> 
                             
 
-                            <a href="/#/"><img alt="" ng-src="{{logourl}}" height="50" ng-cloak></a>
+                            <a href="/#/index"><img alt="" ng-src="{{logourl}}" height="50" ng-cloak></a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="mobile-hide" style="float: right;">
@@ -700,21 +700,22 @@ div.middle-div-mobile {
 
             // makes sure the whole site is loaded
             
-            $(document).ready(function () {
-                // will first fade out the loading animation
-                jQuery("#status").fadeOut();
-                // will fade out the whole DIV that covers the website.
-                jQuery("#preloader").delay(1000).fadeOut("medium");
-
-            });
-
-            // makes sure the whole site is loaded
-            //jQuery(window).load(function() {
+            //$(document).ready(function () {
             //    // will first fade out the loading animation
             //    jQuery("#status").fadeOut();
             //    // will fade out the whole DIV that covers the website.
             //    jQuery("#preloader").delay(1000).fadeOut("medium");
+
             //});
+
+             //makes sure the whole site is loaded
+            jQuery(window).load(function() {
+                // will first fade out the loading animation
+                jQuery("#status").fadeOut();                
+                // will fade out the whole DIV that covers the website.
+                jQuery("#preloader").delay(1000).fadeOut("medium");
+                jQuery("#masterPageNavBarId").show();
+            });
 
             $(function () {
                 
@@ -763,6 +764,7 @@ div.middle-div-mobile {
                 background-repeat: no-repeat;
                 background-position: center;
                 margin: -100px 0 0 -100px;
+                z-index:2000
             }
 
             #nav_mobi {
