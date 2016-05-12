@@ -685,13 +685,9 @@ div.middle-div-mobile {
                         <ul id="vertical-ticker" class="vertical-ticker">
                             <li ng-repeat="userOrbitFeed in userOrbitFeedList">
                                 <div class="row">
-                                    <div class="col-sm-2 col-md-2">
-                                        <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}">
-                                            <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" style="width: 100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-10 col-md-10">
-                                        <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>Created New <a href="#/viewpostdetail/{{userOrbitFeed.postInfo._id}}">Post</a> on
+                                    
+                                    <div class="col-sm-12 col-md-12">
+                                        <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" height="50" width="50"> <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>Created New <a href="#/viewpostdetail/{{userOrbitFeed.postInfo._id}}">Post</a> on
                                         <a href="#/userprofile/{{userOrbitFeed.postedToUser[0]._id}}"> <span ng-bind="userOrbitFeed.postedToUser[0].FirstName+' '+userOrbitFeed.postedToUser[0].LastName"></span></a>'s Wall
                                         <br />
                                         " <span ng-bind="userOrbitFeed.postInfo.PostMessage" style="color: olive;"> </span> "
@@ -786,7 +782,15 @@ div.middle-div-mobile {
                 
             });
 
-            
+            $('#vertical-ticker').totemticker({
+                row_height: '100px',
+                next: '#ticker-next',
+                previous: '#ticker-previous',
+                stop: '#stop',
+                start: '#start',
+                mousestop: true,
+                direction: 'up'
+            });
             
         </script>
 
