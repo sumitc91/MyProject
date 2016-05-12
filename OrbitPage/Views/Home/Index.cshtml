@@ -422,7 +422,7 @@ div.middle-div-mobile {
                 </header> <!-- end #header -->
             </div>
             
-        <style id="dynamic-styles"></style>
+            <style id="dynamic-styles"></style>
             <div id="hangout" style="display:none" ng-cloak>
                 <div id="head" class="style-bg">
                     <i class="mdi mdi-arrow-left"></i> <i class="mdi mdi-fullscreen-exit"></i> <i class="mdi mdi-menu"></i>
@@ -674,8 +674,56 @@ div.middle-div-mobile {
                         </ul>
                     </div>
                 </div>
+            
             </footer> <!-- end #footer -->
             <div class="row" style="min-height: 55px; background-color: rgb(51, 51, 51);"></div>
+        
+            <div id="topRight" style="max-width: 20%;" class="fixed mobile-hide" ng-show="!IsMobileDevice && userOrbitFeedList.show">
+                <div class="chat-inner" tabindex="5000">
+                    <div id="group-1" class="chat-group">
+                        <strong>Orbit Feed</strong>
+                        <ul id="vertical-ticker" class="vertical-ticker">
+                            <li ng-repeat="userOrbitFeed in userOrbitFeedList">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2">
+                                        <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}">
+                                            <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" height="50px" width="50px">
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-10 col-md-10">
+                                        <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>Created New <a href="#/viewpostdetail/{{userOrbitFeed.postInfo._id}}">Post</a> on
+                                        <a href="#/userprofile/{{userOrbitFeed.postedToUser[0]._id}}"> <span ng-bind="userOrbitFeed.postedToUser[0].FirstName+' '+userOrbitFeed.postedToUser[0].LastName"></span></a>'s Wall
+                                        <br />
+                                        " <span ng-bind="userOrbitFeed.postInfo.PostMessage" style="color: olive;"> </span> "
+                                        <br />
+                                        <span class="line small time">
+                                            {{userOrbitFeed.postInfo.PostedTime | timeago}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+                        <p><a href="#" id="ticker-previous">Previous</a> / <a href="#" id="ticker-next">Next</a> / <a id="stop" href="#">Stop</a> / <a id="start" href="#">Start</a></p>
+                        <p>Roll over the ticker to stop scrolling</p>
+                    </div>
+
+
+                </div>
+                <!-- conversation template -->
+                <div class="chat-conversation" style="display: none; top: 0px; opacity: 0;">
+                    <div class="conversation-header"> <a class="conversation-close" href="#"><i class="entypo-cancel"></i></a> <span class="user-status is-busy"></span> <span class="display-name">Rodrigo E. Lozano</span> <small>Busy</small> </div>
+                    <ul class="conversation-body">
+                        <li>
+                            <span class="user">Art Ramadani</span>
+                            <p>hi</p>
+                            <span class="time">23:39</span>
+                        </li>
+                    </ul>
+                    <div class="chat-textarea"> <textarea placeholder="Type your message" class="form-control autogrow" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea> </div>
+                </div>
+            </div>
         </div> <!-- end #main-wrapper -->
    
         <script src="../../App/js/chat_index.js"></script>

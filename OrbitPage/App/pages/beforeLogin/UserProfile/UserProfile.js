@@ -4,6 +4,7 @@ define([appLocation.preLogin], function (app) {
     app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
+        $rootScope.userOrbitFeedList.show = true;
         _.defer(function () { $scope.$apply(); });
         $scope.visitedUserVertexId = $routeParams.vertexId;
        

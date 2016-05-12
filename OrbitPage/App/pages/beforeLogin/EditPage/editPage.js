@@ -4,7 +4,7 @@ define([appLocation.preLogin], function (app) {
     app.controller('beforeLoginEditPage', function ($scope, $http,$upload, $timeout, $rootScope, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
         
-
+        $rootScope.userOrbitFeedList.show = true;
         $scope.loadingUserDetails = false;
         $rootScope.clientDetailResponse = {};
         $scope.disabledEmailModel = "";

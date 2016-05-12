@@ -2,6 +2,7 @@
 define([appLocation.preLogin], function (app) {
     app.controller('beforeLoginIndex', function ($scope,$interval, $http,$routeParams, $rootScope, $location, Restangular, CookieUtil, SolrServiceUtil) {
 
+        $rootScope.userOrbitFeedList.show = false;
         $('title').html(window.madetoearn.i18n.beforeLoginOrbitPageCompanyTitle);
         
         $scope.searchTypeModel = 'Company';

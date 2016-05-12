@@ -206,7 +206,7 @@ define([appLocation.preLogin], function (app) {
         $scope.loadingUserDetails = false;
         $rootScope.clientDetailResponse = {};
         $rootScope.userOrbitFeedList = [];
-
+        
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
