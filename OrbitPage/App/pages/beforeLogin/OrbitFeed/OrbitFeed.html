@@ -301,19 +301,27 @@
                 <div id="group-1" class="chat-group">
                     <strong>Orbit Feed</strong>
                     <ul id="vertical-ticker" class="vertical-ticker">
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/1.png" width="60" class="img-circle" />One Time</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/2.png" width="60" class="img-circle" />Baby</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/3.png" width="60" class="img-circle" />One Less Lonely Girl</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/4.png" width="60" class="img-circle" />Somebody to Love</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/5.png" width="60" class="img-circle" />Eenie Meenie</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/6.png" width="60" class="img-circle" />Never Say Never</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/7.png" width="60" class="img-circle" />U Smile</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/1.png" width="60" class="img-circle" />One Time</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/2.png" width="60" class="img-circle" />Baby</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/3.png" width="60" class="img-circle" />One Less Lonely Girl</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/4.png" width="60" class="img-circle" />Somebody to Love</li>
-                        <li><img src="http://www.jqueryscript.net/demo/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/5.png" width="60" class="img-circle" />Eenie Meenie</li>
-
+                        <li ng-repeat="userOrbitFeed in userOrbitFeedList">
+                            <div class="row">                                
+                                <div class="col-sm-2 col-md-2">
+                                    <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}">
+                                        <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" height="50px" width="50px">
+                                    </a>
+                                </div>
+                                <div class="col-sm-10 col-md-10">
+                                    <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>Created New <a href="#/viewpostdetail/{{userOrbitFeed.postInfo._id}}">Post</a> on
+                                    <a href="#/userprofile/{{userOrbitFeed.postedToUser[0]._id}}"> <span ng-bind="userOrbitFeed.postedToUser[0].FirstName+' '+userOrbitFeed.postedToUser[0].LastName"></span></a>'s Wall
+                                    <br />
+                                    " <span ng-bind="userOrbitFeed.postInfo.PostMessage" style="color: olive;"> </span> "
+                                    <br />
+                                    <span class="line small time">
+                                        {{userOrbitFeed.postInfo.PostedTime | timeago}}
+                                    </span>
+                                </div>                                
+                            </div>
+                        
+                        </li>
+                        
                     </ul>
                     <p><a href="#" id="ticker-previous">Previous</a> / <a href="#" id="ticker-next">Next</a> / <a id="stop" href="#">Stop</a> / <a id="start" href="#">Start</a></p>
                     <p>Roll over the ticker to stop scrolling</p>

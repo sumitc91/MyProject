@@ -34,6 +34,7 @@ namespace urNotice.Services.Management.AccountManagement
 
         //for Gremlin
         string GetUserNotification(urNoticeSession session, string from, string to);
+        string GetAllFollowers(string vertexId);
         string GetUserFriendRequestNotification(urNoticeSession session, string from, string to);
         string GetUserPost(string userVertexId, string @from, string to, string userEmail);
         string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail);

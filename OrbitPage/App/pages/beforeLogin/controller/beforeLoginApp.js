@@ -204,7 +204,9 @@ define([appLocation.preLogin], function (app) {
 
         $scope.searchBoxText = window.madetoearn.i18n.beforeLoginIndexSearchBoxText;
         $scope.loadingUserDetails = false;
-        $rootScope.clientDetailResponse = {};        
+        $rootScope.clientDetailResponse = {};
+        $rootScope.userOrbitFeedList = [];
+
         $rootScope.clientNotificationDetailResponseInfo = {
             busy: false,
             after: 0,
@@ -347,6 +349,15 @@ define([appLocation.preLogin], function (app) {
             //alert("working");                             
             loadClientNotificationDetails(0, $rootScope.clientNotificationDetailResponseInfo.after+1,true);
             
+        };
+
+        $scope.clientOrbitFeedNotificationDetailResponseInfoUpdateFromPushNotification = function (message) {
+            //alert("working");
+            var res = message.split(";");
+            if (res[0] == 1 || res[0] == "1") {
+                getPostByVertexId(res[1]);
+            }
+
         };
 
         $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType,index) {
@@ -511,7 +522,36 @@ define([appLocation.preLogin], function (app) {
             });
         }
 
-        
+        function getPostByVertexId(postVertexId) {
+            var url = ServerContextPath.userServer + '/User/GetPostByVertexId?vertexId=' + postVertexId;
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            //startBlockUI('wait..', 3);
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: headers
+            }).done(function (data, status) {
+                //stopBlockUI();
+                $scope.$apply(function () {
+                    //$scope.UserPostList = data.results;                    
+                    if (data.results.length > 0) {
+                        var absoluteIndex = 0; // only 1 post available.
+                        data.results[absoluteIndex].type = 1;
+                        $rootScope.userOrbitFeedList.push(data.results[absoluteIndex]);
+
+                        //console.log($scope.UserPostList);
+                    } else {
+                        showToastMessage("Warning", "Post Not found.");
+                    }
+                });
+
+            });
+        };
 
         function loadClientNotificationDetails(from, to, isFromPushNotification) {
             var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from='+from+'&to='+to;

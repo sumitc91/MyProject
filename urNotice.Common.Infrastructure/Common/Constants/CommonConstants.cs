@@ -53,6 +53,7 @@ namespace urNotice.Common.Infrastructure.Common.Constants
         
         public static string AssociateUsers = "1";
         public static string AssociateCompany = "2";
+        public static string vertex = "vertex";
 
         public const string AssociateRequest = "1";
         public const string AssociateFollow = "2";

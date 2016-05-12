@@ -7,11 +7,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OrbitPage.Hubs;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
@@ -49,8 +51,24 @@ namespace OrbitPage.Controllers
                 var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationHashSetResponse);
                 if (sendNotificationHashSetResponse.Count > 0)
                 {
-                    new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);                     
+                    new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);                    
                 }
+
+                var userFollowers = clientModel.GetAllFollowers(session.UserVertexId);
+               
+                if (userFollowers != null)
+                {
+                    var userFollowersDeserialized =
+                   JsonConvert.DeserializeObject<UserFollowersVertexModelResponse>(userFollowers);
+                    if (newUserPostResponse != null && newUserPostResponse.Payload != null &&
+                        newUserPostResponse.Payload.postInfo != null && newUserPostResponse.Payload.postInfo._id != null)
+                    {
+                        string feedInfoSemiColonSeparated = "1" + ";" + newUserPostResponse.Payload.postInfo._id;
+                        new SignalRNotification().SendNewFeedNotificationToUsers(userFollowersDeserialized, feedInfoSemiColonSeparated);
+                    }
+                }
+                
+
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else

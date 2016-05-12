@@ -229,6 +229,7 @@
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyWorkgraphyVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\CompanyWorkgraphyVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\FriendRequestEdgeModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\UserFollowersVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserFriendRequestNotificationVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserFriendRequestNotificationVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserNotificationEdgeInfo.cs" />

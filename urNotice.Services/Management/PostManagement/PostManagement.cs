@@ -82,6 +82,13 @@ namespace urNotice.Services.Management.PostManagement
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, canEdit, canDelete, sendNotificationToUsers);
 
+            response.Payload = new UserPostVertexModel();
+            response.Payload.postInfo = new WallPostVertexModel()
+            {
+                _id = addVertexResponse[TitanGraphConstants.Id]
+            };
+
+
             properties = new Dictionary<string, string>();
             properties[EdgePropertyEnum._outV.ToString()] = session.UserVertexId;
             properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
@@ -138,6 +145,7 @@ namespace urNotice.Services.Management.PostManagement
 
             userPostVertexModel.userInfo.Add(userVertexModel);
 
+            
             return response;
         }
 

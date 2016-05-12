@@ -37,6 +37,10 @@ function ConnectWithSignalRPushNotification() {
             else if (code == 2) {
                 console.log("2 : " + code);
                 scope.clientFriendRequestNotificationDetailResponseInfoUpdateFromPushNotification(message);
+            }
+            else if (code == 3) {
+                console.log("3 : " + message);
+                scope.clientOrbitFeedNotificationDetailResponseInfoUpdateFromPushNotification(message);
             } else {
                 console.log("push notification logic failed.");
             }

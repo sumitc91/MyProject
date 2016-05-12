@@ -472,6 +472,17 @@ namespace urNotice.Services.Management.AccountManagement
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
+
+        public string GetAllFollowers(string vertexId)
+        {
+
+            string gremlinQuery = "g.v(" + vertexId + ").in('Follow')";
+
+            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            string response = graphVertexDb.GetVertexDetail(gremlinQuery, vertexId, TitanGraphConfig.Graph, null);
+            return response;
+        }
+
         public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
         {         
             string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";

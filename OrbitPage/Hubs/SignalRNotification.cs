@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 
 namespace OrbitPage.Hubs
 {
@@ -30,6 +31,22 @@ namespace OrbitPage.Hubs
             {
                 if(!string.IsNullOrWhiteSpace(vertexId))
                     new ChatHub().AddNotificationMessage("2",vertexId + " Sent Friend Request", vertexId);
+            }
+
+            return null;
+        }
+
+        public string SendNewFeedNotificationToUsers(UserFollowersVertexModelResponse userFollowersDeserialized, string messagePushNotification)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+
+            if (userFollowersDeserialized == null || userFollowersDeserialized.results==null)
+                return null;
+
+            foreach (var user in userFollowersDeserialized.results)
+            {
+                if (!string.IsNullOrWhiteSpace(user._id))
+                    new ChatHub().AddNotificationMessage("3", messagePushNotification, user._id);
             }
 
             return null;

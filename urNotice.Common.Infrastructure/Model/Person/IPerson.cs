@@ -22,6 +22,7 @@ namespace urNotice.Common.Infrastructure.Model.Person
         ResponseModel<LoginResponse> SocialRegisterMe(RegisterationRequest req, HttpRequestBase request);
         ResponseModel<LoginResponse> Login(string userName, string password,bool decryptPassword);
         ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail);
+        string GetAllFollowers(string vertexId);
         ResponseModel<ClientDetailsModel> GetPersonDetails(string username);
         ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel);
         ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel,out HashSet<string> sendNotificationHashSetResponse);

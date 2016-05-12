@@ -77,6 +77,12 @@ namespace urNotice.Services.Person
             return accountManagementModel.GetUserNotification(session, from, to);
         }
 
+        public string GetAllFollowers(string vertexId)
+        {
+            IAccountManagement accountManagementModel = new AccountManagement();
+            return accountManagementModel.GetAllFollowers(vertexId);
+        }
+
         public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
         {
             IAccountManagement accountManagementModel = new AccountManagement();

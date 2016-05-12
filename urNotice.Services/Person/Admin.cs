@@ -48,6 +48,11 @@ namespace urNotice.Services.Person
             return accountManagementModel.GetFullUserDetail(userEmail);
         }
 
+        public string GetAllFollowers(string vertexId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResponseModel<ClientDetailsModel> GetPersonDetails(string username)
         {
             throw new NotImplementedException();
