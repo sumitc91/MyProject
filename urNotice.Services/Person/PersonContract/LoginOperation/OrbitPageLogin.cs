@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
@@ -96,7 +97,8 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
             userData.imageUrl = userInfo.imageUrl;
             userData.VertexId = userInfo.vertexId;
 
-            var session = new urNoticeSession(userInfo.email, userInfo.vertexId);
+            string displayName = OrbitPageUtil.GetDisplayName(userInfo); 
+            var session = new urNoticeSession(userInfo.email,displayName, userInfo.vertexId);
             TokenManager.CreateSession(session);
 
             userData.UTMZT = session.SessionId;

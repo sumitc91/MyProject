@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SolrNet;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
@@ -197,12 +198,13 @@ namespace urNotice.Services.Workgraphy
             urNoticeSession response;
             
             if (solrUserEmail != null)
-            {                
-                response = new urNoticeSession(solrUserEmail.Email, solrUserEmail.VertexId);
+            {
+                string displayName = OrbitPageUtil.GetDisplayName(solrUserEmail); 
+                response = new urNoticeSession(solrUserEmail.Email,displayName, solrUserEmail.VertexId);
             }
             else
             {                
-                response = new urNoticeSession(req.Data.email, CommonConstants.AnonymousUserVertex); // TODO: use anonymous user vertex.
+                response = new urNoticeSession(req.Data.email,"Anonymous", CommonConstants.AnonymousUserVertex); // TODO: use anonymous user vertex.
             }
             return response;
         }

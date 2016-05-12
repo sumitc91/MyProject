@@ -295,7 +295,8 @@ namespace OrbitPage.Controllers
 
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
                             
-                            var session = new urNoticeSession(userInfo.OrbitPageUser.email, userInfo.OrbitPageUser.vertexId);
+                            string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
+                            var session = new urNoticeSession(userInfo.OrbitPageUser.email,displayName, userInfo.OrbitPageUser.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             ViewBag.umtzt = response.Payload.UTMZT;
@@ -405,7 +406,8 @@ namespace OrbitPage.Controllers
                         response.Message = "user Login via google";
                         try
                         {
-                            var session = new urNoticeSession(user.email,user.vertexId);
+                            string displayName = OrbitPageUtil.GetDisplayName(user); 
+                            var session = new urNoticeSession(user.email,displayName,user.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
 

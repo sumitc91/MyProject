@@ -353,11 +353,21 @@ define([appLocation.preLogin], function (app) {
 
         $scope.clientOrbitFeedNotificationDetailResponseInfoUpdateFromPushNotification = function (message) {
             //alert("working");
+            //res[0] type
+            //res[1] parentVertexId
+            //res[2] commentVertexId
+            //res[3] DisplayName
+            //res[4] userVertexId
             var res = message.split(";");
             if (res[0] == 1 || res[0] == "1") {
-                getPostByVertexId(res[1]);
+                getPostByVertexId(res[1],"",res[0],"","");
             }
-
+            else if (res[0] == 2 || res[0] == "2") {
+                getPostByVertexId(res[1], res[2], res[0],"","");
+            }
+            else if (res[0] == 3 || res[0] == "3") {
+                getPostByVertexId(res[1], res[2], res[0],res[3],res[4]);
+            }
         };
 
         $scope.makeConnectionRequest = function (userVertexId, connectingBody, connectionType,index) {
@@ -522,8 +532,11 @@ define([appLocation.preLogin], function (app) {
             });
         }
 
-        function getPostByVertexId(postVertexId) {
-            var url = ServerContextPath.userServer + '/User/GetPostByVertexId?vertexId=' + postVertexId;
+        function getPostByVertexId(postVertexId,commentVertexId,type,displayName,userVertex) {
+            var vertexId = postVertexId;
+            if (type != 1 || type != "1")
+                vertexId = commentVertexId;
+            var url = ServerContextPath.userServer + '/User/GetPostByVertexId?vertexId=' + vertexId;
             var headers = {
                 'Content-Type': 'application/json',
                 'UTMZT': $.cookie('utmzt'),
@@ -541,7 +554,10 @@ define([appLocation.preLogin], function (app) {
                     //$scope.UserPostList = data.results;                    
                     if (data.results.length > 0) {
                         var absoluteIndex = 0; // only 1 post available.
-                        data.results[absoluteIndex].type = 1;
+                        data.results[absoluteIndex].type = type;
+                        data.results[absoluteIndex].displayName = displayName;
+                        data.results[absoluteIndex].userVertex = userVertex;
+                        data.results[absoluteIndex].postVertexId = postVertexId;
                         $rootScope.userOrbitFeedList.push(data.results[absoluteIndex]);
 
                         //console.log($scope.UserPostList);

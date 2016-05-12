@@ -72,8 +72,9 @@ namespace urNotice.Services.SocialAuthService
                             userInfo.OrbitPageUser.locked = CommonConstants.FALSE;
                             
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
-                            
-                            var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
+
+                            string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -141,8 +142,8 @@ namespace urNotice.Services.SocialAuthService
 
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
 
-                            
-                            var session = new urNoticeSession(userInfo.ObjectId, userSolr.VertexId);
+                            string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -227,7 +228,8 @@ namespace urNotice.Services.SocialAuthService
                         response.Message = "user Login via facebook";
                         try
                         {
-                            var session = new urNoticeSession(userInfo.ObjectId, user.vertexId);
+                            string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, user.vertexId);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                         }

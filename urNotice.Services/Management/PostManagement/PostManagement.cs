@@ -153,6 +153,7 @@ namespace urNotice.Services.Management.PostManagement
         public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostCommentModel>();
+            response.Payload = new UserPostCommentModel();
             //string url = TitanGraphConfig.Server;
             //string graphName = TitanGraphConfig.Graph;
 
@@ -175,6 +176,11 @@ namespace urNotice.Services.Management.PostManagement
 
             IGraphVertexDb graphVertexDb = new GraphVertexDb();
             IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, canEdit, canDelete, sendNotificationToUsers);//new GraphVertexOperations().AddVertex(session.UserName, TitanGraphConfig.Server, postVertexId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
+            
+            response.Payload.commentInfo = new WallPostVertexModel()
+            {
+                _id = addVertexResponse[TitanGraphConstants.Id]
+            };
 
             string edgeId = session.UserName + "_" + DateTime.Now.Ticks;
             properties = new Dictionary<string, string>();

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
 
 namespace urNotice.Common.Infrastructure.commonMethods
 {
@@ -27,6 +29,16 @@ namespace urNotice.Common.Infrastructure.commonMethods
         public static string GenerateUniqueKeyForEdgeQuery(string inV, string label, string outV)
         {
             return inV + "-" + label + "-" + outV;
+        }
+
+        public static string GetDisplayName(OrbitPageUser userInfo)
+        {
+            return userInfo.firstName + " " + userInfo.lastName;
+        }
+
+        public static string GetDisplayName(UnUserSolr solrUserEmail)
+        {
+            return solrUserEmail.Firstname + " " + solrUserEmail.Lastname;
         }
     }
 }

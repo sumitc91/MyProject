@@ -2,6 +2,7 @@
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
 using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.Workgraphy.Model;
 using urNotice.Common.Infrastructure.Session;
@@ -43,7 +44,8 @@ namespace OrbitPage.Controllers
 
             if (session == null)
             {
-                session = new urNoticeSession(req.Data.email, CommonConstants.NA);
+                string displayName = req.Data.name;
+                session = new urNoticeSession(req.Data.email,displayName, CommonConstants.NA);
             }
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
 
@@ -68,7 +70,8 @@ namespace OrbitPage.Controllers
 
             if (session == null)
             {
-                session = new urNoticeSession(req.Data.email, CommonConstants.NA);
+                string displayName = req.Data.name;
+                session = new urNoticeSession(req.Data.email,displayName, CommonConstants.NA);
             }
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
 

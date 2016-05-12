@@ -53,22 +53,12 @@ namespace OrbitPage.Controllers
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);                    
                 }
-
-                var userFollowers = clientModel.GetAllFollowers(session.UserVertexId);
-               
-                if (userFollowers != null)
+                if (newUserPostResponse != null && newUserPostResponse.Payload != null &&
+                    newUserPostResponse.Payload.postInfo != null && newUserPostResponse.Payload.postInfo._id != null)
                 {
-                    var userFollowersDeserialized =
-                   JsonConvert.DeserializeObject<UserFollowersVertexModelResponse>(userFollowers);
-                    if (newUserPostResponse != null && newUserPostResponse.Payload != null &&
-                        newUserPostResponse.Payload.postInfo != null && newUserPostResponse.Payload.postInfo._id != null)
-                    {
-                        string feedInfoSemiColonSeparated = "1" + ";" + newUserPostResponse.Payload.postInfo._id;
-                        new SignalRNotification().SendNewFeedNotificationToUsers(userFollowersDeserialized, feedInfoSemiColonSeparated);
-                    }
+                    GetAllFollowersAndSendNewsFeed(session.UserVertexId, newUserPostResponse.Payload.postInfo._id,"","1","","");                    
                 }
                 
-
                 return Json(newUserPostResponse, JsonRequestBehavior.AllowGet);
             }
             else
@@ -81,6 +71,21 @@ namespace OrbitPage.Controllers
 
         }
 
+        private void GetAllFollowersAndSendNewsFeed(string vertexId, string postId,string commentId,string type,string postedByName,string postedById)
+        {
+            IPerson clientModel = new Consumer();
+            var userFollowers = clientModel.GetAllFollowers(vertexId);
+
+            if (userFollowers != null)
+            {
+                var userFollowersDeserialized =
+               JsonConvert.DeserializeObject<UserFollowersVertexModelResponse>(userFollowers);
+
+                string feedInfoSemiColonSeparated = type + ";" + postId + ";" + commentId + ";" + postedByName+";"+postedById;
+               new SignalRNotification().SendNewFeedNotificationToUsers(userFollowersDeserialized, feedInfoSemiColonSeparated);
+                
+            }
+        }
         [System.Web.Mvc.HttpPost]
         public JsonResult UserCommentOnPost(UserNewCommentOnPostRequest userNewCommentOnPostRequest)
         {
@@ -110,6 +115,13 @@ namespace OrbitPage.Controllers
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
                 }
+
+                if (newUserPostCommentResponse != null && newUserPostCommentResponse.Payload != null &&
+                    newUserPostCommentResponse.Payload.commentInfo != null && newUserPostCommentResponse.Payload.commentInfo._id != null)
+                {
+                    GetAllFollowersAndSendNewsFeed(session.UserVertexId,postVertexId, newUserPostCommentResponse.Payload.commentInfo._id, "2","","");
+                }
+
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }
             else
@@ -139,6 +151,15 @@ namespace OrbitPage.Controllers
                 if (sendNotificationHashSetResponse.Count>0)
                 {                    
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);
+                }
+
+                if (userNewReactionRequest != null && userNewReactionRequest.VertexId != null)
+                {
+                    string parentVertexId = userNewReactionRequest.VertexId;
+                    if (!string.IsNullOrEmpty(userNewReactionRequest.ParentVertexId))
+                        parentVertexId = userNewReactionRequest.ParentVertexId;
+
+                    GetAllFollowersAndSendNewsFeed(session.UserVertexId, parentVertexId, userNewReactionRequest.VertexId, "3", session.DisplayName, session.UserVertexId);
                 }
                 return Json(newUserPostCommentResponse, JsonRequestBehavior.AllowGet);
             }
