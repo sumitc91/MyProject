@@ -759,6 +759,17 @@ div.middle-div-mobile {
                 // will fade out the whole DIV that covers the website.
                 jQuery("#preloader").delay(1000).fadeOut("medium");
                 jQuery("#masterPageNavBarId").show();
+
+                $('#vertical-ticker').totemticker({
+                    row_height: '100px',
+                    next: '#ticker-next',
+                    previous: '#ticker-previous',
+                    stop: '#stop',
+                    start: '#start',
+                    mousestop: true,
+                    direction: 'up'
+                });
+
             });
 
             $(function () {
@@ -782,16 +793,6 @@ div.middle-div-mobile {
                 
             });
 
-            $('#vertical-ticker').totemticker({
-                row_height: '100px',
-                next: '#ticker-next',
-                previous: '#ticker-previous',
-                stop: '#stop',
-                start: '#start',
-                mousestop: true,
-                direction: 'up'
-            });
-            
         </script>
 
         <style type="text/css">
