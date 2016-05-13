@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using urNotice.Common.Infrastructure.Common.Enum;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.NoSqlDb.DynamoDb;
@@ -49,7 +50,8 @@ namespace urNotice.Services.SessionService
 
                         if (userInfo.OrbitPageUser.keepMeSignedIn == "true" && userInfo.OrbitPageUser.password == decryptedData["UTMZV"])
                         {
-                            var NewSession = new urNoticeSession(username, headers.AuthToken,userInfo.OrbitPageUser.vertexId);
+                            string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser);
+                            var NewSession = new urNoticeSession(username,displayName, headers.AuthToken,userInfo.OrbitPageUser.vertexId);
                             TokenManager.CreateSession(NewSession);
                             return new TokenManager().getSessionInfo(headers.AuthToken, headers);
                         }
