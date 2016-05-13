@@ -682,10 +682,10 @@ div.middle-div-mobile {
                 <div class="chat-inner" tabindex="5000">
                     <div id="group-1" class="chat-group">
                         <strong>Orbit Feed</strong>
-                        <ul id="vertical-ticker" class="vertical-ticker">
-                            <li ng-repeat="userOrbitFeed in userOrbitFeedList">
+                        <ul id="vertical-ticker" class="vertical-ticker event-list">
+                            @*<li ng-repeat="userOrbitFeed in userOrbitFeedList">
                                 <div class="row">
-                                    
+
                                     <div class="col-sm-12 col-md-12">
                                         <span ng-show="userOrbitFeed.type==1 || userOrbitFeed.type==2">
                                             <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" height="50" width="50"> <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>
@@ -693,13 +693,13 @@ div.middle-div-mobile {
                                         <span ng-show="userOrbitFeed.type==3">
                                             <a href="#/userprofile/{{userOrbitFeed.userVertex}}"> <span ng-bind="userOrbitFeed.displayName"></span> &nbsp;</a>
                                         </span>
-                                        
+
                                         <span ng-show="userOrbitFeed.type==1">Created New </span>
                                         <span ng-show="userOrbitFeed.type==2">Commented On </span>
                                         <span ng-show="userOrbitFeed.type==3">Reacted On <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>'s </span>
-                                        <a ng-click="showPost(userOrbitFeed.postVertexId)">Post</a> 
+                                        <a ng-click="showPost(userOrbitFeed.postVertexId)">Post</a>
                                         <span ng-show="userOrbitFeed.type==1">on <a href="#/userprofile/{{userOrbitFeed.postedToUser[0]._id}}"> <span ng-bind="userOrbitFeed.postedToUser[0].FirstName+' '+userOrbitFeed.postedToUser[0].LastName"></span></a>'s Wall</span>
-                                        
+
                                         <br />
                                         " <span ng-bind="userOrbitFeed.postInfo.PostMessage" style="color: olive;"> </span> "
                                         <br />
@@ -709,8 +709,38 @@ div.middle-div-mobile {
                                     </div>
                                 </div>
 
-                            </li>
+                            </li>*@
+                            <li ng-repeat="userOrbitFeed in userOrbitFeedList">
+                                
+                                <div class="info">
+                                    <span ng-show="userOrbitFeed.type==1 || userOrbitFeed.type==2">
+                                        <img ng-src="{{userOrbitFeed.userInfo[0].ImageUrl}}" height="50" width="50">
+                                    </span>
+                                    <span ng-show="userOrbitFeed.type==1 || userOrbitFeed.type==2">
+                                        <img ng-src="{{userOrbitFeed.postedToUser[0].ImageUrl}}" height="50" width="50">
+                                    </span>
+                                    <br />
+                                    <span ng-show="userOrbitFeed.type==1 || userOrbitFeed.type==2">
+                                        <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>
+                                    </span>
+                                    <span ng-show="userOrbitFeed.type==3">
+                                        <a href="#/userprofile/{{userOrbitFeed.userVertex}}"> <span ng-bind="userOrbitFeed.displayName"></span> &nbsp;</a>
+                                    </span>
 
+                                    <span ng-show="userOrbitFeed.type==1">Created New </span>
+                                    <span ng-show="userOrbitFeed.type==2">Commented On </span>
+                                    <span ng-show="userOrbitFeed.type==3">Reacted On <a href="#/userprofile/{{userOrbitFeed.userInfo[0]._id}}"> <span ng-bind="userOrbitFeed.userInfo[0].FirstName+' '+userOrbitFeed.userInfo[0].LastName"></span> &nbsp;</a>'s </span>
+                                    <a ng-click="showPost(userOrbitFeed.postVertexId)">Post</a>
+                                    <span ng-show="userOrbitFeed.type==1">on <a href="#/userprofile/{{userOrbitFeed.postedToUser[0]._id}}"> <span ng-bind="userOrbitFeed.postedToUser[0].FirstName+' '+userOrbitFeed.postedToUser[0].LastName"></span></a>'s Wall</span>
+
+                                    <br />
+                                    " <span ng-bind="userOrbitFeed.postInfo.PostMessage" style="color: olive;"> </span> "
+                                    <br />
+                                    <span class="line small time">
+                                        {{userOrbitFeed.postInfo.PostedTime | timeago}}
+                                    </span>
+                                </div>
+                            </li>
                         </ul>
                         <p><a id="ticker-previous">Previous</a> / <a id="ticker-next">Next</a> / <a id="stop">Stop</a> / <a id="start">Start</a></p>
                         <p>Roll over the ticker to stop scrolling</p>
