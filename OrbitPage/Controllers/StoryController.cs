@@ -35,8 +35,8 @@ namespace OrbitPage.Controllers
             ISolrUser solrUserModel = new SolrUser();
             ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
-
+            //IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
             var response = new ResponseModel<StoryPostResponse>();
 
             var headers = new HeaderManager(Request);
@@ -61,8 +61,8 @@ namespace OrbitPage.Controllers
             ISolrUser solrUserModel = new SolrUser();
             ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
-
+            //IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
             var response = new ResponseModel<StoryPostResponse>();
 
             var headers = new HeaderManager(Request);

@@ -128,6 +128,7 @@
     <Compile Include="Adapter\Facebook\FacebookAuthAdapter.cs" />
     <Compile Include="commonMethods\CsvReader.cs" />
     <Compile Include="commonMethods\DateTimeUtil.cs" />
+    <Compile Include="commonMethods\ModelAdapterUtil.cs" />
     <Compile Include="commonMethods\MyWebRequest.cs" />
     <Compile Include="commonMethods\OrbitPageUtil.cs" />
     <Compile Include="commonMethods\UserNotificationText.cs" />
@@ -245,6 +246,15 @@
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserPostVertexModelResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\UserVertexModel.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanyNoticePeriodVertexModelV1Response.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanyNoticePeriodVertexModelV1ResultDataResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanyNoticePeriodVertexModelV1ResultResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanySalaryVertexModelV1Response.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanySalaryVertexModelV1ResultDataResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\CompanySalaryVertexModelV1ResultResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\EdgeModelV1.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\VertexModelV1.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\VertexPropertiesModelV1.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\WallPostVertexModel.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ContactUsRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\CreateStoryRequest.cs" />

@@ -652,7 +652,7 @@ namespace urNotice.Services.Management.AccountManagement
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
             properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
 
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
             return addEdgeResponse;
         }
@@ -682,7 +682,7 @@ namespace urNotice.Services.Management.AccountManagement
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
             properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
 
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
 
 
@@ -700,20 +700,20 @@ namespace urNotice.Services.Management.AccountManagement
         }
         private IDictionary<string, string> RemoveAssociateRequestEdge(string inV, string outV)
         {
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.AssociateRequest.ToString());
         }
 
         private IDictionary<string, string> RemoveFriendEdge(string inV, string outV)
         {
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             graphEdgeDbModel.DeleteEdge(outV, inV, EdgeLabelEnum.Friend.ToString());
             return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.Friend.ToString());
         }
 
         private IDictionary<string, string> RemoveFollowEdge(string inV, string outV)
         {
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             return graphEdgeDbModel.DeleteEdge(inV, outV, EdgeLabelEnum.Follow.ToString());
         }
         private IDictionary<string, string> CreateNewFollowRequest(urNoticeSession session, string inV, string outV, UserConnectionRequestModel userConnectionRequestModel)
@@ -743,7 +743,7 @@ namespace urNotice.Services.Management.AccountManagement
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
             properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
 
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
             return addEdgeResponse;
         }

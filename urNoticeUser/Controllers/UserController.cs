@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.ErrorLogger;
@@ -467,11 +469,14 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    IGraphDbContract graphDbContract = new GraphDbContract();
-                    var getCompanySalaryInfoResponse = graphDbContract.CompanySalaryInfo(vertexId,from,to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    //IGraphDbContract graphDbContract = new GraphDbContract();
+                    IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
+                    var getCompanySalaryInfoResponse = graphDbContractModel.CompanySalaryInfo(vertexId,from,to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
                     var getCompanySalaryInfoResponseDeserialized =
-                        JsonConvert.DeserializeObject<CompanySalaryVertexModelResponse>(getCompanySalaryInfoResponse);
-                    return Json(getCompanySalaryInfoResponseDeserialized, JsonRequestBehavior.AllowGet);
+                        JsonConvert.DeserializeObject<CompanySalaryVertexModelV1Response>(getCompanySalaryInfoResponse);
+
+                    CompanySalaryVertexModelResponse response = ModelAdapterUtil.GetCompanySalaryInfoResponse(getCompanySalaryInfoResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -522,8 +527,10 @@ namespace urNoticeUser.Controllers
                     var getCompanyNoticePeriodInfoResponse = graphDbContract.CompanyNoticePeriodInfo(vertexId, from, to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
                     
                     var getCompanyNoticePeriodInfoResponseDeserialized =
-                        JsonConvert.DeserializeObject<CompanyNoticePeriodVertexModelResponse>(getCompanyNoticePeriodInfoResponse);
-                    return Json(getCompanyNoticePeriodInfoResponseDeserialized, JsonRequestBehavior.AllowGet);
+                        JsonConvert.DeserializeObject<CompanyNoticePeriodVertexModelV1Response>(getCompanyNoticePeriodInfoResponse);
+                    
+                    CompanyNoticePeriodVertexModelResponse response = ModelAdapterUtil.GetCompanyNoticePeriodInfoResponse(getCompanyNoticePeriodInfoResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -566,8 +573,9 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    IGraphDbContract graphDbContract = new GraphDbContract();
-                    var getCompanyWorkgraphyInfoResponse = graphDbContract.CompanyWorkgraphyInfo(vertexId,username, from, to);
+                    //IGraphDbContract graphDbContract = new GraphDbContract();
+                    IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
+                    var getCompanyWorkgraphyInfoResponse = graphDbContractModel.CompanyWorkgraphyInfo(vertexId,username, from, to);
                     var getCompanyWorkgraphyInfoResponseDeserialized =
                         JsonConvert.DeserializeObject<CompanyWorkgraphyVertexModelResponse>(getCompanyWorkgraphyInfoResponse);
                     return Json(getCompanyWorkgraphyInfoResponseDeserialized, JsonRequestBehavior.AllowGet);

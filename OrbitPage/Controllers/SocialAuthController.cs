@@ -348,7 +348,8 @@ namespace OrbitPage.Controllers
                     };
 
 
-                    IGraphDbContract graphDbContract = new GraphDbContract();
+                    //IGraphDbContract graphDbContract = new GraphDbContract();
+                    IGraphDbContract graphDbContract = new GremlinServerGraphDbContract();
                     var userVertexIdInfo = graphDbContract.InsertNewUserInGraphDb(user);
                     user.vertexId = userVertexIdInfo[TitanGraphConstants.Id];
                     

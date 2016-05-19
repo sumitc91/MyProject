@@ -212,7 +212,8 @@ namespace urNoticeSolr.Controllers
                 response.Payload = solrCompanyModel.CompanyDetailsById(cid);
                 if (isValidToken && response.Payload != null && response.Payload.Count>0)
                 {
-                    IGraphDbContract graphDbContractModel = new GraphDbContract();
+                    //IGraphDbContract graphDbContractModel = new GraphDbContract();
+                    IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
                     graphDbContractModel.PersonVisitedCompanyAddEdgeGraphDbAsync(session.UserName, session.UserVertexId,
                         response.Payload[0].companyid);
                 }
@@ -339,7 +340,8 @@ namespace urNoticeSolr.Controllers
             ISolrUser solrUserModel = new SolrUser();
             ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
+            //IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
 
             var queryResponse = new Dictionary<String, Object>();
             //var q = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
@@ -378,7 +380,8 @@ namespace urNoticeSolr.Controllers
             ISolrUser solrUserModel = new SolrUser();
             ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
+            //IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
 
             var queryResponse = new Dictionary<String, Object>();
             //var q = Request.QueryString["q"].ToString(CultureInfo.InvariantCulture);
@@ -417,7 +420,8 @@ namespace urNoticeSolr.Controllers
             ISolrUser solrUserModel = new SolrUser();
             ISolrWorkgraphy solrWorkgraphyModel = new SolrWorkgraphy();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
+            //IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
 
             var queryResponse = new Dictionary<String, Object>();
             var vertexId = Convert.ToInt32(Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture));

@@ -197,6 +197,11 @@ namespace urNotice.Services.GraphDb
             return content;
         }
 
+        public string ExecuteGremlinQuery(string gremlinQuery)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public Dictionary<string, string> DeleteVertex(string vertexId, string userVertexId, string label)
         {

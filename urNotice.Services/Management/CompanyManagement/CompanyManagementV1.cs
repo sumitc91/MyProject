@@ -28,7 +28,7 @@ namespace urNotice.Services.Management.CompanyManagement
 
             if (userVertexId != null)
             {
-                IGraphDbContract graphDbContractModel = new GraphDbContract();
+                IGraphDbContract graphDbContractModel = new GremlinServerGraphDbContract();
                 //graphDbContractModel.
             }
 

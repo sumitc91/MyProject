@@ -13,6 +13,7 @@ namespace urNotice.Services.GraphDb
 
         Dictionary<string, string> UpdateVertex(string vertexId, string email, string graphName, Dictionary<string, string> properties);
         String GetVertexDetail(string gremlinQuery, string vertexId, string graphName, Dictionary<string, string> properties);
+        string ExecuteGremlinQuery(string gremlinQuery);
         Dictionary<string, string> DeleteVertex(string vertexId, string userVertexId, string label);
     }
 }

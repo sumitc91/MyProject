@@ -59,7 +59,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.PublishedBy.ToString();
 
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
 
             if (!string.IsNullOrEmpty(story.Data.companyVertexId))
@@ -69,7 +69,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
                 properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
                 properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyStory.ToString();
 
-                graphEdgeDbModel = new GraphEdgeDb();
+                //graphEdgeDbModel = new GraphEdgeDb();
                 addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
             }
 
@@ -80,7 +80,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
                 properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
                 properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WorkgraphyDesignationStory.ToString();
 
-                graphEdgeDbModel = new GraphEdgeDb();
+                //graphEdgeDbModel = new GraphEdgeDb();
                 addCreatedByEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
             }
 
@@ -119,10 +119,12 @@ namespace urNotice.Services.GraphDb.GraphDbContract
         {
             
             //TODO: Query need to be changed.
-            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[salaryInfo:it.outE('Salary'),designationInfo:it.out('Salary')]}";
+            //string gremlinQuery = "g.v(" + companyVertexId + ").transform{[salaryInfo:it.outE('Salary'),designationInfo:it.out('Salary')]}";
+
+            string gremlinQuery = "g.V(" + companyVertexId + ").as('company').outE('Salary').as('salaryInfo').select('company').out('Salary').as('designationInfo').select('designationInfo','salaryInfo');";
 
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, companyVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery); //graphVertexDb.GetVertexDetail(gremlinQuery, companyVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
         }
@@ -130,10 +132,10 @@ namespace urNotice.Services.GraphDb.GraphDbContract
         public string CompanyNoticePeriodInfo(string companyVertexId, string @from, string to)
         {           
             //TODO: Query need to be changed.
-            string gremlinQuery = "g.v(" + companyVertexId + ").transform{[range:it.outE('NoticePeriodRange'),designationInfo:it.out('NoticePeriodRange')]}";
-
+            //string gremlinQuery = "g.v(" + companyVertexId + ").transform{[range:it.outE('NoticePeriodRange'),designationInfo:it.out('NoticePeriodRange')]}";
+            string gremlinQuery = "g.V(" + companyVertexId + ").as('company').outE('NoticePeriodRange').as('range').select('company').out('NoticePeriodRange').as('designationInfo').select('designationInfo','range');";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, companyVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
         }
@@ -165,7 +167,7 @@ namespace urNotice.Services.GraphDb.GraphDbContract
             properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
             properties[EdgePropertyEnum._label.ToString()] = label;
 
-            IGraphEdgeDb graphEdgeDbModel = new GraphEdgeDb();
+            IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             Dictionary<string, string> addCreatedByEdgeResponse = graphEdgeDbModel.AddEdgeAsync(username, TitanGraphConfig.Graph, properties);
 
             return addCreatedByEdgeResponse;
