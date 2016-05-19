@@ -17,7 +17,7 @@ namespace urNotice.Services.DataImport.ImportNoticePeriods
             var reader = new StreamReader(System.IO.File.OpenRead(@"C:\code\svn\OrbitPage\salary.csv"));
             IPerson adminModel = new Admin();
             double salary = 0.0;
-
+            var companyName = string.Empty;
             while (!reader.EndOfStream)
             {
                 var readLine = reader.ReadLine();
@@ -68,7 +68,8 @@ namespace urNotice.Services.DataImport.ImportNoticePeriods
                         noticePeriodRange = NoticePeriodRangeEnum.SeventyfiveToNinety.ToString();
                     }
 
-                    adminModel.CreateNewCompanyDesignationNoticePeriod(line[1], line[0], noticePeriodRange, "orbitpage@gmail.com");
+                    companyName = line[1].Replace("&", "And");
+                    adminModel.CreateNewCompanyDesignationNoticePeriod(companyName, line[0], noticePeriodRange, "orbitpage@gmail.com");
                 }
             }
 

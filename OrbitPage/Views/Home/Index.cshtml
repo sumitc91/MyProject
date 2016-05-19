@@ -738,7 +738,7 @@ div.middle-div-mobile {
                                     <br />
                                     <span class="line small time">
                                         {{userOrbitFeed.postInfo.PostedTime | timeago}}
-                                    </span>
+                                    </span>                                    
                                 </div>
                             </li>
                         </ul>
@@ -763,6 +763,85 @@ div.middle-div-mobile {
             </div>
         </div> <!-- end #main-wrapper -->
    
+        <div class="footer-sticked-chat">
+            <script type="text/javascript">
+                function toggleSampleChatWindow() {
+                    var $chat_win = jQuery("#sample-chat-window");
+                    $chat_win.toggleClass('open');
+                    if ($chat_win.hasClass('open')) {
+                        var $messages = $chat_win.find('.ps-scrollbar');
+                        if ($.isFunction($.fn.perfectScrollbar)) {
+                            $messages.perfectScrollbar('destroy');
+                            setTimeout(function () {
+                                $messages.perfectScrollbar();
+                                $chat_win.find('.form-control').focus();
+                            }, 300);
+                        }
+                    }
+                    jQuery("#sample-chat-window form").on('submit', function (ev) {
+                        ev.preventDefault();
+                    });
+                }
+                jQuery(document).ready(function ($) {
+                    $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev) {
+                        ev.preventDefault();
+                        toggleSampleChatWindow();
+                    });
+                    $(".mobile-chat-toggle").on('click', function (ev) {
+                        ev.preventDefault();
+                        $(".footer-sticked-chat").toggleClass('mobile-is-visible');
+                    });
+                });
+            </script>
+
+            <ul class="chat-conversations list-unstyled">
+                <li class="browse-more">
+                    <a class="chat-user" href="#"> <i class="linecons-comment"></i> <span>3</span> </a> <ul class="other-conversations-list">
+                        <li>
+                            <a href="#">
+                                Catherine J. Watkins
+                                <span>×</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Nicholas R. Walker
+                                <span>×</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Susan J. Best
+                                <span>×</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="sample-chat-window">
+                    <a class="chat-user" href="#">
+                        <span class="user-status is-online"></span>
+                        Art Ramadani
+                    </a> <span class="badge badge-purple">4</span> <div class="conversation-window">
+                        <a class="chat-user" href="#">
+                            <span class="close">×</span> <span class="user-status is-online"></span>
+                            Art Ramadani
+                        </a> <ul class="conversation-messages ps-scrollbar ps-scroll-down ps-container ps-active-y"> <li class="time">Saturday 14, May '16</li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p> </div> </li> <li class="me"><div class="message-entry"> <p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper.</p> <p>Timed voice share led his widen noisy young.</p> <p>His six detract besides add moonlight newspaper.</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="time">Today 10:05</li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -493px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 496px; height: 248px; right: 2px;"><div class="ps-scrollbar-y" style="top: 166px; height: 82px;"></div></div></ul> <form class="chat-form" method="post"> <input type="text" placeholder="Enter your message..." class="form-control"> </form>
+                    </div>
+                </li>
+                <li>
+                    <a class="chat-user" href="#">
+                        <span class="user-status is-idle"></span>
+                        Ylli Pylla
+                    </a>
+                </li>
+                <li>
+                    <a class="chat-user" href="#">
+                        <span class="user-status is-busy"></span>
+                        Arlind Nushi
+                    </a>
+                </li>
+            </ul> <a class="mobile-chat-toggle" href="#"> <i class="linecons-comment"></i> <span class="num">6</span> <span class="badge badge-purple">4</span> </a>
+        </div>
         <script src="../../App/js/chat_index.js"></script>
         <script>
             (function (i, s, o, g, r, a, m) {

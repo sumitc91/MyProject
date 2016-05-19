@@ -157,7 +157,7 @@
                                 </button>
                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
                                     <li role="menuitem" ng-show="post.userInfo[0]._id == clientDetailResponse.VertexId"><a ng-click="enableEditOnUserPost($index)">Edit</a></li>
-                                    <li role="menuitem" ng-show="visitedUserVertexId == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a confirmed-click="deleteUserPost($index)" ng-confirm-click="Would you like to delete this comment?">Delete</a></li>
+                                    <li role="menuitem" ng-show="post.postedOn[0]._id == clientDetailResponse.VertexId || post.userInfo[0]._id == clientDetailResponse.VertexId"><a confirmed-click="deleteUserPost($index)" ng-confirm-click="Would you like to delete this comment?">Delete</a></li>
                                     <!--<li class="divider"></li>-->
                                     <li role="menuitem"><a href="">Mark Spam</a></li>
                                 </ul>

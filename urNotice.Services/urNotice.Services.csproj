@@ -111,9 +111,14 @@
     <Compile Include="DataImport\ImportDesignations\ImportDesinationsFromCsv.cs" />
     <Compile Include="DataImport\ImportNoticePeriods\IImportNoticePeriods.cs" />
     <Compile Include="DataImport\ImportNoticePeriods\ImportNoticePeriods.cs" />
+    <Compile Include="GraphDb\GraphDbContract\GremlinServerGraphDbContract.cs" />
+    <Compile Include="GraphDb\GremlinServerGraphEdgeDb.cs" />
+    <Compile Include="GraphDb\GremlinServerGraphVertexDb.cs" />
     <Compile Include="Management\AccountManagement\AccountManagement.cs" />
+    <Compile Include="Management\AccountManagement\AccountManagementV1.cs" />
     <Compile Include="Management\AccountManagement\IAccountManagement.cs" />
     <Compile Include="Management\CompanyManagement\CompanyManagement.cs" />
+    <Compile Include="Management\CompanyManagement\CompanyManagementV1.cs" />
     <Compile Include="Management\CompanyManagement\ICompanyManagement.cs" />
     <Compile Include="Management\NotificationManagement\INotificationManagement.cs" />
     <Compile Include="Management\NotificationManagement\NotificationManagement.cs" />
@@ -184,7 +189,9 @@
       <Name>urNotice.Common.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Management\NewFolder1\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="changelog.txt" />
   </ItemGroup>

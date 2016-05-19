@@ -44,7 +44,7 @@ namespace urNotice.Services.Person
 
         public ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetFullUserDetail(userEmail);
         }
 
@@ -198,29 +198,29 @@ namespace urNotice.Services.Person
         public Dictionary<string, string> CreateNewCompanyDesignationEdge(urNoticeSession session, string designation,
             string salary, string jobFromYear, string jobToYear, string companyVertexId)
         {
-            ICompanyManagement companyManagementModel = new CompanyManagement();
+            ICompanyManagement companyManagementModel = new CompanyManagementV1();
             return companyManagementModel.CreateNewCompanyDesignationEdge(session,designation,salary,jobFromYear,jobToYear,companyVertexId);
         }
         public bool CreateNewDesignation(string designationName, string createdBy)
         {
-            ICompanyManagement companyManagementModel = new CompanyManagement();
+            ICompanyManagement companyManagementModel = new CompanyManagementV1();
             return companyManagementModel.CreateNewDesignation(designationName,createdBy);
         }
         public bool CreateNewCompanyDesignationSalary(string companyName, string designationName, string salary,
             string createdBy)
         {
-            ICompanyManagement companyManagementModel = new CompanyManagement();
+            ICompanyManagement companyManagementModel = new CompanyManagementV1();
             return companyManagementModel.CreateNewCompanyDesignationSalary(companyName,designationName,salary,createdBy);
         }
         public bool CreateNewCompanyDesignationNoticePeriod(string companyName, string designationName, string noticePeriodRange,
             string createdBy)
         {
-            ICompanyManagement companyManagementModel = new CompanyManagement();
+            ICompanyManagement companyManagementModel = new CompanyManagementV1();
             return companyManagementModel.CreateNewCompanyDesignationNoticePeriod(companyName,designationName,noticePeriodRange,createdBy);
         }
         public bool CreateNewCompany(OrbitPageCompany company, string createdBy)
         {
-            ICompanyManagement companyManagementModel = new CompanyManagement();
+            ICompanyManagement companyManagementModel = new CompanyManagementV1();
             return companyManagementModel.CreateNewCompany(company,createdBy);
         }
     }

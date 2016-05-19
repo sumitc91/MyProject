@@ -512,8 +512,15 @@ namespace urNoticeUser.Controllers
 
                 if (isRequestValid)
                 {
-                    IGraphDbContract graphDbContract = new GraphDbContract();
+                    //IGraphDbContract graphDbContract = new GraphDbContract();
+                    //var getCompanyNoticePeriodInfoResponse = graphDbContract.CompanyNoticePeriodInfo(vertexId, from, to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    //var getCompanyNoticePeriodInfoResponseDeserialized =
+                    //    JsonConvert.DeserializeObject<CompanyNoticePeriodVertexModelResponse>(getCompanyNoticePeriodInfoResponse);
+                    //return Json(getCompanyNoticePeriodInfoResponseDeserialized, JsonRequestBehavior.AllowGet);
+
+                    IGraphDbContract graphDbContract = new GremlinServerGraphDbContract();
                     var getCompanyNoticePeriodInfoResponse = graphDbContract.CompanyNoticePeriodInfo(vertexId, from, to);//new UserService().GetUserPost(vertexId, from, to, accessKey, secretKey);
+                    
                     var getCompanyNoticePeriodInfoResponseDeserialized =
                         JsonConvert.DeserializeObject<CompanyNoticePeriodVertexModelResponse>(getCompanyNoticePeriodInfoResponse);
                     return Json(getCompanyNoticePeriodInfoResponseDeserialized, JsonRequestBehavior.AllowGet);

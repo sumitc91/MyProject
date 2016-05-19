@@ -14,7 +14,12 @@ namespace urNotice.Services.DataImport.ImportDesignations
             {
                 var designationName = reader.ReadLine();
                 IPerson adminModel = new Admin();
-                adminModel.CreateNewDesignation(designationName, "orbitpage@gmail.com");
+
+                if (designationName != null)
+                {
+                    designationName = designationName.Replace("&","And");
+                    adminModel.CreateNewDesignation(designationName, "orbitpage@gmail.com");
+                }
             }
 
             return true;

@@ -23,18 +23,18 @@ namespace urNotice.Services.DataImport.ImportCompanies
                 foreach (string[] values in reader.RowEnumerator)
                 {
                     if (values[0] == "Id") continue;
-                    if (values[1] == "ISGN")
-                    {
-                        flag = 1;
-                    }
-                    if (flag == 0) continue;
+                    //if (values[1] == "ISGN")
+                    //{
+                    //    flag = 1;
+                    //}
+                    //if (flag == 0) continue;
 
                     string imageUrl = @values[3];
                     string saveLocation = serverMapPath + values[1].Replace(" ", "_") + "_image.png";
                     S3ImageUploadServices.SaveImageOnServer(imageUrl, saveLocation);
                     //S3ImageUploadServices.UploadSingleImageToS3FromPath(saveLocation,"company","png");
 
-                    ImgurImageResponse img = S3ImageUploadServices.UploadSingleImageToS3FromPath(saveLocation, "OrbitPageCompanies", values[1]);
+                    ImgurImageResponse img = S3ImageUploadServices.UploadSingleImageToS3FromPath(saveLocation, "OrbitPageCompanies", values[1].Replace(" ", "_") + "_image.png");
 
                     OrbitPageCompany newCompany = new OrbitPageCompany
                     {

@@ -35,7 +35,7 @@ namespace urNotice.Services.Management.AccountManagement
         {
             ISolrUser solrUserModel = new SolrUser();
             IDynamoDb dynamoDbModel = new DynamoDb();
-            IGraphDbContract graphDbContractModel = new GraphDbContract();
+            IGraphDbContract graphDbContractModel = new GraphDbContract();            
 
             IOrbitPageRegistration orbitPageRegistration = new OrbitPagePersonRegistration(solrUserModel, dynamoDbModel, graphDbContractModel);
             orbitPageRegistration.SetIsValidationEmailRequired(true); //email validation is required.

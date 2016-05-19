@@ -14,7 +14,7 @@ namespace urNotice.Services.DataImport.ImportCompanyDesignationSalaries
         public bool ImportCompanyDesignationAllSalaries()
         {
             var reader = new StreamReader(System.IO.File.OpenRead(@"C:\code\svn\salary.csv"));
-
+            var companyName = string.Empty;
             while (!reader.EndOfStream)
             {
                 var readLine = reader.ReadLine();
@@ -22,7 +22,8 @@ namespace urNotice.Services.DataImport.ImportCompanyDesignationSalaries
                 {
                     string[] line = readLine.Split(',');
                     IPerson adminModel = new Admin();
-                    adminModel.CreateNewCompanyDesignationSalary(line[1], line[0], line[2], "orbitpage@gmail.com");
+                    companyName = line[1].Replace("&", "And");
+                    adminModel.CreateNewCompanyDesignationSalary(companyName, line[0], line[2], "orbitpage@gmail.com");
                 }
             }
 

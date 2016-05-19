@@ -42,17 +42,17 @@ namespace urNotice.Services.Person
         //Account Management.
         public ResponseModel<LoginResponse> RegisterMe(RegisterationRequest req, HttpRequestBase request)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.RegisterMe(req,request);
         }
         public ResponseModel<LoginResponse> SocialRegisterMe(RegisterationRequest req, HttpRequestBase request)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.SocialRegisterMe(req,request);
         }
         public ResponseModel<LoginResponse> Login(string userName, string password, bool isSocialLogin)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.Login(userName, password, isSocialLogin);            
         }
         public ResponseModel<OrbitPageUser> GetFullUserDetail(string userEmail)
@@ -61,79 +61,79 @@ namespace urNotice.Services.Person
         }
         public ResponseModel<ClientDetailsModel> GetPersonDetails(string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetPersonDetails(userEmail);
         }
         public ResponseModel<EditPersonModel> EditPersonDetails(urNoticeSession session, EditPersonModel editPersonModel)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.EditPersonDetails(session,editPersonModel);
         }
 
         // Account Management - For Gremling Query
         public string GetUserNotification(urNoticeSession session, string from, string to)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserNotification(session, from, to);
         }
 
         public string GetAllFollowers(string vertexId)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetAllFollowers(vertexId);
         }
 
         public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserFriendRequestNotification(session, from, to);
         }
 
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserPost(userVertexId, from, to, userEmail);
         }
         public string GetUserOrbitFeedPost(string userVertexId, string @from, string to, string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserOrbitFeedPost(userVertexId, from, to, userEmail);
         }
         public string GetUserPostMessages(string userVertexId, string @from, string to, string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserPostMessages(userVertexId, from, to, userEmail);
         }
         public string GetUserPostLikes(string userVertexId, string @from, string to)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserPostLikes(userVertexId, from, to);
         }
         public string GetPostByVertexId(string vertexId, string userEmail)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetPostByVertexId(vertexId, userEmail);
         }
 
         public string GetUserNetworkDetail(urNoticeSession session,string vertexId, string @from, string to)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserNetworkDetail(session, vertexId, from, to);
         }
 
         public long GetUserUnreadNotificationCount(urNoticeSession session)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserUnreadNotificationCount(session);
         }
         public long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.GetUserUnreadFriendRequestNotificationCount(session);
         }
         public ResponseModel<IDictionary<string, string>> UserConnectionRequest(urNoticeSession session, UserConnectionRequestModel userConnectionRequestModel, out HashSet<string> sendNotificationHashSetResponse)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.UserConnectionRequest(session, userConnectionRequestModel, out sendNotificationHashSetResponse);
         }
 
@@ -179,32 +179,32 @@ namespace urNotice.Services.Person
 
         public ResponseModel<string> ValidateAccountService(ValidateAccountRequest req)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.ValidateAccountService(req);
         }
         public ResponseModel<string> ResendValidationCodeService(ValidateAccountRequest req, HttpRequestBase request)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.ResendValidationCodeService(req,request);
         }
         public ResponseModel<string> ForgetPasswordService(string id, HttpRequestBase request)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.ForgetPasswordService(id,request);
         }
         public ResponseModel<string> ResetPasswordService(ResetPasswordRequest req)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.ResetPasswordService(req);
         }
         public ResponseModel<string> ContactUsService(ContactUsRequest req)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.ContactUsService(req);
         }
         public ResponseModel<string> SeenNotification(string userName)
         {
-            IAccountManagement accountManagementModel = new AccountManagement();
+            IAccountManagement accountManagementModel = new AccountManagementV1();
             return accountManagementModel.SeenNotification(userName);
         }
 

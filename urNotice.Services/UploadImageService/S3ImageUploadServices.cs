@@ -198,17 +198,18 @@ namespace urNotice.Services.UploadImageService
             return newSize;
         }
 
-        public static ImgurImageResponse UploadSingleImageToS3FromPath(String imagePath, string albumid,String imageType)
+        public static ImgurImageResponse UploadSingleImageToS3FromPath(String imagePath, string albumid,String fileName)
         {
 
 
-            var fileName = Guid.NewGuid().ToString();
+            //var fileName = values[1].Replace(" ", "_") + "_image.png";
             var path = albumid + "/" + fileName;
             var imgurImage = new ImgurImageResponse();
 
             try
             {
-                path = path + "." + imageType;
+                //path = path + "." + imageType;
+                
                 byte[] photo = File.ReadAllBytes(imagePath);
                 IAmazonS3 client;                
                 using (client = Amazon.AWSClientFactory.CreateAmazonS3Client(_awsAccessKey, _awsSecretKey, Amazon.RegionEndpoint.APSoutheast1))
