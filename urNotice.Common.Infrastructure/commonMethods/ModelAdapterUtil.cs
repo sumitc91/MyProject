@@ -81,7 +81,7 @@ namespace urNotice.Common.Infrastructure.commonMethods
                 userPostVertexModel.likeInfo = ParseUserListVertex(userPost.likeInfo);
                 userPostVertexModel.likeInfoCount = userPost.likeInfoCount.ToString(CultureInfo.InvariantCulture);
 
-                userPostVertexModel.postedToUser = ParseUserListVertex(userPost.postedByUser);
+                userPostVertexModel.postedToUser = ParseUserListVertex(userPost.postedOn);
                 userPostVertexModel.commentsCount = userPost.commentsCount.ToString(CultureInfo.InvariantCulture);
                 userPostVertexModel.commentsInfo = ParsePostListInfo(userPost.commentsInfo);
                 response.results.Add(userPostVertexModel);

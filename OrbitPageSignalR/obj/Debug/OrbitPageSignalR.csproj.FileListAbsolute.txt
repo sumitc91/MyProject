@@ -36,4 +36,3 @@ C:\code\svn\OrbitPage\OrbitPageSignalR\bin\System.Web.WebPages.Deployment.xml
 C:\code\svn\OrbitPage\OrbitPageSignalR\bin\System.Web.WebPages.Razor.xml
 C:\code\svn\OrbitPage\OrbitPageSignalR\obj\Debug\OrbitPageSignalR.dll
 C:\code\svn\OrbitPage\OrbitPageSignalR\obj\Debug\OrbitPageSignalR.pdb
-C:\code\svn\OrbitPage\OrbitPageSignalR\obj\Debug\OrbitPageSignalR.csprojResolveAssemblyReference.cache

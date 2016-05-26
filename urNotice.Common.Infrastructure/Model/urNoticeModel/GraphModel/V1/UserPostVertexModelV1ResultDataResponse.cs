@@ -11,8 +11,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1
         public VertexModelV1 wallpostinfo { get; set; }
         public VertexModelV1 userInfo { get; set; }
         public List<VertexModelV1> postedOn { get; set; }
-        public List<VertexModelV1> postedByUser { get; set; }
-
+        
         public List<VertexModelV1> likeInfo { get; set; }
         public List<VertexModelV1> isLiked { get; set; }
 
