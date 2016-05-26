@@ -604,7 +604,7 @@ namespace urNotice.Services.Management.AccountManagement
             string gremlinQuery = string.Empty;
             gremlinQuery += "g.V(" + vertexId + ").as('wallpostinfo').match(";
             gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
-            gremlinQuery += "__.as('wallpostinfo').out('PostedByUser').fold().as('postedByUser'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Created').fold().as('postedByUser'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').range(0,2).fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').count().as('likeInfoCount'),";
