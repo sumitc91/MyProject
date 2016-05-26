@@ -11,9 +11,11 @@ using Newtonsoft.Json;
 using OrbitPage.Hubs;
 using urNotice.Common.Infrastructure.Common.Config;
 using urNotice.Common.Infrastructure.Common.Constants;
+using urNotice.Common.Infrastructure.commonMethods;
 using urNotice.Common.Infrastructure.Model.Person;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
@@ -79,10 +81,11 @@ namespace OrbitPage.Controllers
             if (userFollowers != null)
             {
                 var userFollowersDeserialized =
-               JsonConvert.DeserializeObject<UserFollowersVertexModelResponse>(userFollowers);
+               JsonConvert.DeserializeObject<UserPostLikesVertexModelV1Response>(userFollowers);
 
+                UserFollowersVertexModelResponse response = ModelAdapterUtil.GetUserFollowersVertexModelResponse(userFollowersDeserialized);
                 string feedInfoSemiColonSeparated = type + ";" + postId + ";" + commentId + ";" + postedByName+";"+postedById;
-               new SignalRNotification().SendNewFeedNotificationToUsers(userFollowersDeserialized, feedInfoSemiColonSeparated);
+                new SignalRNotification().SendNewFeedNotificationToUsers(response, feedInfoSemiColonSeparated);
                 
             }
         }

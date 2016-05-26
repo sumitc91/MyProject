@@ -44,16 +44,16 @@ var userConstants = {
 var ServerContextPath = {
     empty: "",
     
-    //authServer: "http://www.orbitpage.com/authapi",
-    //solrServer: "http://www.orbitpage.com/searchapi",
-    //userServer: "http://www.orbitpage.com/userapi",
-    //cookieDomain: ".orbitpage.com"
+    authServer: "http://www.orbitpage.com/authapi",
+    solrServer: "http://www.orbitpage.com/searchapi",
+    userServer: "http://www.orbitpage.com/userapi",
+    cookieDomain: ".orbitpage.com"
 
 
-    authServer: "http://localhost:31959",
-    solrServer: "http://localhost:28308",
-    userServer: "http://localhost:6368",
-    cookieDomain: "localhost",
+    //authServer: "http://localhost:31959",
+    //solrServer: "http://localhost:28308",
+    //userServer: "http://localhost:6368",
+    //cookieDomain: "localhost",
 };
 
 var UserConnectionRequestModel = {
