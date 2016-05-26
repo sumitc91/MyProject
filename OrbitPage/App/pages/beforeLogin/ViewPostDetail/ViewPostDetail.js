@@ -100,7 +100,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.showMoreLikedByUsers = function () {
 
-            $scope.UserPostLikesFrom = $scope.UserPostLikesTo + 1;
+            $scope.UserPostLikesFrom = $scope.UserPostLikesTo;
             $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
             showLikedByUsersOnUserPost($scope.UserPostLikesCurrentPostVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
 
@@ -108,7 +108,7 @@ define([appLocation.preLogin], function (app) {
 
         $scope.loadMoreMessage = function (postVerexId, postIndex) {
             
-            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
+            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
 
             loadMoreMessage(postVerexId, postIndex, $scope.UserPostList[postIndex].messageFromIndex, $scope.UserPostList[postIndex].messageToIndex);            
@@ -240,7 +240,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = true;
-                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount + 1;
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount;
                 $http({
                     url: url,
                     method: "POST",

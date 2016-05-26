@@ -122,8 +122,10 @@
     <Compile Include="Management\CompanyManagement\ICompanyManagement.cs" />
     <Compile Include="Management\NotificationManagement\INotificationManagement.cs" />
     <Compile Include="Management\NotificationManagement\NotificationManagement.cs" />
+    <Compile Include="Management\NotificationManagement\NotificationManagementV1.cs" />
     <Compile Include="Management\PostManagement\IPostManagement.cs" />
     <Compile Include="Management\PostManagement\PostManagement.cs" />
+    <Compile Include="Management\PostManagement\PostManagementV1.cs" />
     <Compile Include="Person\Admin.cs" />
     <Compile Include="Email\EmailFromGmail\EmailFromGmail.cs" />
     <Compile Include="Email\EmailFromMandrill\EmailFromMandrill.cs" />

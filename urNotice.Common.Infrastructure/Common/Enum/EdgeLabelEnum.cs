@@ -25,6 +25,10 @@ namespace urNotice.Common.Infrastructure.Common.Enum
 
         AssociateRequest,
         Follow,
-        Friend
+        Friend,
+
+        CreatedNotification,
+        NotificationSent,
+        RelatedPost
     }
 }

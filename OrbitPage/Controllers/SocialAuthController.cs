@@ -39,6 +39,7 @@ using urNotice.Services.SocialAuthService.Facebook;
 using urNotice.Services.SocialAuthService.google;
 using urNotice.Services.SocialAuthService.linkedin;
 using urNotice.Services.Solr.SolrUser;
+using urNotice.Services.UploadImageService;
 
 namespace OrbitPage.Controllers
 {
@@ -741,7 +742,7 @@ namespace OrbitPage.Controllers
                     //            new { q = "SELECT uid, name, first_name, middle_name, last_name, sex, locale, pic_small_with_logo, pic_big_with_logo, pic_square_with_logo, pic_with_logo, username FROM user WHERE uid=me()" });
 
                     dynamic result = fb.Get("me?fields=id,first_name,last_name,gender,picture{url},email");
-                    var email = result.email ?? result.id + "@facebook.com";
+                    String email = result.email ?? result.id + "@facebook.com";
 
                     var FacebookAuthData = new FacebookAuth();
                     FacebookAuthData.username = CommonConstants.NA;
@@ -787,12 +788,24 @@ namespace OrbitPage.Controllers
 
                     }
 
+                string serverMapPath = @Server.MapPath("~/Downloads/");
+                ImgurImageResponse img = new ImgurImageResponse();
+                img.data = new imgurData();
+                img.data.link_m = string.Empty;
+                if (result.picture.data.url != null)
+                {
+                    string imageUrl = result.picture.data.url;
+                    string saveLocation = serverMapPath + email.Replace('@','_').Replace('.','_') + "_image.png";
+                    S3ImageUploadServices.SaveImageOnServer(imageUrl, saveLocation);
+                    img = S3ImageUploadServices.UploadSingleImageToS3FromPath(saveLocation, "OrbitPageUsers", email.Replace('@', '_').Replace('.', '_') + "_image.png");
+                }
+                     
                 RegisterationRequest req = new RegisterationRequest()
                 {
                     EmailId = email,
                     FirstName = result.first_name,
                     Gender = result.gender,
-                    ImageUrl = result.picture.data.url,
+                    ImageUrl = img.data.link_m,
                     LastName = result.last_name,
                     Password = EncryptionClass.Md5Hash(Guid.NewGuid().ToString()),
                     Referral = CommonConstants.NA,

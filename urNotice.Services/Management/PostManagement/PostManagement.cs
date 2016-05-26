@@ -55,7 +55,6 @@ namespace urNotice.Services.Management.PostManagement
 
             return response;
         }
-
         public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostVertexModel>();
@@ -148,8 +147,6 @@ namespace urNotice.Services.Management.PostManagement
             
             return response;
         }
-
-        
         public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostCommentModel>();

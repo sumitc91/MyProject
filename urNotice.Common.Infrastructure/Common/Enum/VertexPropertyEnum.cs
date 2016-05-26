@@ -34,6 +34,8 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         JobToYear,
 
         Heading,
-        IsVerified
+        IsVerified,
+
+        ParentPostId
     }
 }

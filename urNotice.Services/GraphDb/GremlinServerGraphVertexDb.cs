@@ -164,10 +164,13 @@ namespace urNotice.Services.GraphDb
                 }
                 else
                 {
-                    if (property.Key == VertexPropertyEnum.CreatedTimeLong.ToString() || property.Key == VertexPropertyEnum.PostedTimeLong.ToString())
-                        graphProperties += "'"+property.Key+"', " + property.Value + " ,";
+                    if (property.Key == VertexPropertyEnum.CreatedTimeLong.ToString() ||
+                        property.Key == VertexPropertyEnum.PostedTimeLong.ToString())
+                        graphProperties += "'" + property.Key + "', " + property.Value + " ,";
                     else
+                    {
                         graphProperties += "'" + property.Key + "', '" + property.Value + "' ,";
+                    }
                 }                
             }
 

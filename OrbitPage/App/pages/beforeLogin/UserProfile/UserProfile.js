@@ -20,7 +20,7 @@ define([appLocation.preLogin], function (app) {
         $scope.UserPostListInfoAngular = {
             busy: false,
             after: 0,
-            itemPerPage: 2
+            itemPerPage: 3
         };
 
         $scope.UserNetworkDetailHelper = {
@@ -113,14 +113,14 @@ define([appLocation.preLogin], function (app) {
 
         $scope.showMoreLikedByUsers = function () {
 
-            $scope.UserPostLikesFrom = $scope.UserPostLikesTo+1;
+            $scope.UserPostLikesFrom = $scope.UserPostLikesTo;
             $scope.UserPostLikesTo = $scope.UserPostLikesFrom + $scope.UserPostLikesPerCall - 1;
             showLikedByUsersOnUserPost($scope.UserPostLikesCurrentPostVertexId, $scope.UserPostLikesFrom, $scope.UserPostLikesTo);
 
         };
 
         $scope.loadMoreMessage = function (postVerexId, postIndex) {            
-            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex + 1;
+            $scope.UserPostList[postIndex].messageFromIndex = $scope.UserPostList[postIndex].messageToIndex;
             $scope.UserPostList[postIndex].messageToIndex = $scope.UserPostList[postIndex].messageFromIndex + messagesPerCall - 1;
 
             console.log("$scope.UserPostList[postIndex].messageFromIndex : " + $scope.UserPostList[postIndex].messageFromIndex);
@@ -303,7 +303,8 @@ define([appLocation.preLogin], function (app) {
                     });
 
                     getUserPost(0, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-                    $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage + 1;
+                    $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage;
+                    $scope.UserPostListLastPageReached = false;
                     //$scope.UserPostList.push(data.Payload);
                     $scope.UserPostMessage = "";
 
@@ -490,7 +491,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = true;
-                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount + 1;
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount;
                 $http({
                     url: url,
                     method: "POST",
@@ -958,7 +959,8 @@ define([appLocation.preLogin], function (app) {
                             $scope.UserPostList.push(data.results[i]);
                             //console.log("commentinfo2 new : " + $scope.UserPostList[0].commentsInfo[0].editableMode);
                             absoluteIndex = from + i;
-                            //console.log("absoluteIndex : "+absoluteIndex);
+                            //console.log("$scope.UserPostList : " + $scope.UserPostList);
+                            //console.log("Ln 962: absoluteIndex : "+absoluteIndex);
                             $scope.UserPostList[absoluteIndex].likeInfoHtml = parseCommentLikeString($scope.UserPostList[absoluteIndex].likeInfo,$scope.UserPostList[absoluteIndex].likeInfoCount);
                             $scope.UserPostList[absoluteIndex].messageFromIndex = 0;
                             $scope.UserPostList[absoluteIndex].messageToIndex = $scope.UserPostList[absoluteIndex].messageFromIndex + messagesPerCall - 1;
@@ -1233,7 +1235,7 @@ define([appLocation.preLogin], function (app) {
             if ($scope.UserPostListInfoAngular.busy || $scope.UserPostListLastPageReached) return;
             $scope.UserPostListInfoAngular.busy = true;
             getUserPost($scope.UserPostListInfoAngular.after, $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage);
-            $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage+1;
+            $scope.UserPostListInfoAngular.after = $scope.UserPostListInfoAngular.after + $scope.UserPostListInfoAngular.itemPerPage;
             //console.log("UserPostListInfo.nextPage called.");
 
         };

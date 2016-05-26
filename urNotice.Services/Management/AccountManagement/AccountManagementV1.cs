@@ -466,10 +466,14 @@ namespace urNotice.Services.Management.AccountManagement
         public string GetUserNotification(urNoticeSession session, string from, string to)
         {
 
-            string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').order{it.b.PostedDate <=> it.a.PostedDate}[" + from + ".." + to + "].transform{ [notificationInfo:it,postInfo:it.inV,notificationByUser:g.v(it.NotificationInitiatedByVertexId)]}";
-
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            //string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').order{it.b.PostedDate <=> it.a.PostedDate}[" + from + ".." + to + "].transform{ [notificationInfo:it,postInfo:it.inV,notificationByUser:g.v(it.NotificationInitiatedByVertexId)]}";
+            string gremlinQuery = string.Empty;
+            gremlinQuery += "g.V(" + session.UserVertexId + ").in('NotificationSent').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('notificationInfo').match(";
+            gremlinQuery += "__.as('notificationInfo').in('RelatedPost').as('postInfo'),";
+            gremlinQuery += "__.as('notificationInfo').in('CreatedNotification').as('notificationByUser'),";
+            gremlinQuery +=").select('notificationInfo','postInfo','notificationByUser')";
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
 
@@ -478,17 +482,20 @@ namespace urNotice.Services.Management.AccountManagement
 
             string gremlinQuery = "g.v(" + vertexId + ").in('Follow')";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, vertexId, TitanGraphConfig.Graph, null);
             return response;
         }
 
         public string GetUserFriendRequestNotification(urNoticeSession session, string from, string to)
         {
-            string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";
-
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);
+            //string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";
+            string gremlinQuery = string.Empty;
+            gremlinQuery += "g.V(" + session.UserVertexId + ").inE('AssociateRequest').order().by('PostedDateLong', decr).range(" + from + "," + to + ").as('requestInfo').match(";
+            gremlinQuery += "__.as('requestInfo').inV().as('requestedBy'),";
+            gremlinQuery+=").select('requestInfo','requestedBy')";
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
             return response;
         }
         public string GetUserPost(string userVertexId, string @from, string to, string userEmail)
@@ -500,10 +507,27 @@ namespace urNotice.Services.Management.AccountManagement
 
             if (userEmail == null) userEmail = string.Empty;
 
-            string gremlinQuery = "g.v(" + userVertexId + ").in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},commentsCount: it.in('Comment').count(),userInfo:it.in('Created')] }";
+            //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked').select('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked').by().by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost')).by(__.in('Like').fold()).by(__.in('Like').has('Username','" + userEmail + "').fold())";
+            //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').select('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').by().by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost')).by(__.in('Like').fold()).by(__.in('Like').has('Username','" + userEmail + "').fold()).by(__.in('Comment').count()).by(__.in('Comment').fold())";
+            string gremlinQuery = string.Empty;
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);
+            gremlinQuery += "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery +="__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
+            gremlinQuery +="__.as('wallpostinfo').in('Created').as('userInfo'),";
+            gremlinQuery +="__.as('wallpostinfo').out('WallPost').as('postedOn'),";
+            gremlinQuery +="__.as('wallpostinfo').in('Like').fold().as('likeInfo'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
+            gremlinQuery +="__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Comment').order().by('PostedTime', decr).range(" + messageStartIndex + "," + messageEndIndex + ").as('commentData').match(";
+            gremlinQuery +="__.as('commentData').in('Created').as('commentedBy'),";
+            gremlinQuery +="__.as('commentData').in('Like').count().as('likeCount'),";
+            gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
+            gremlinQuery += ").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+
+            
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
 
             return response;
         }
@@ -517,10 +541,25 @@ namespace urNotice.Services.Management.AccountManagement
 
             if (userEmail == null) userEmail = string.Empty;
 
-            string gremlinQuery = "g.v(" + userVertexId + ").out('Follow').in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},commentsCount: it.in('Comment').count(),userInfo:it.in('Created'),postedOn:it.out('WallPost')] }";
+            //string gremlinQuery = "g.v(" + userVertexId + ").out('Follow').in('WallPost').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{ [postInfo : it,likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},commentsCount: it.in('Comment').count(),userInfo:it.in('Created'),postedOn:it.out('WallPost')] }";
+            //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').select('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').by().by(__.in('Like')).by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost'))";
+            string gremlinQuery = string.Empty;
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);
+            gremlinQuery += "g.V(" + userVertexId + ").out('Follow').in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').fold().as('likeInfo'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Comment').order().by('PostedTime', decr).range(" + messageStartIndex + "," + messageEndIndex + ").as('commentData').match(";
+            gremlinQuery += "__.as('commentData').in('Created').as('commentedBy'),";
+            gremlinQuery += "__.as('commentData').in('Like').count().as('likeCount'),";
+            gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
+            gremlinQuery += ").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
 
             return response;
         }
@@ -530,11 +569,16 @@ namespace urNotice.Services.Management.AccountManagement
             string graphName = TitanGraphConfig.Graph;
 
 
-            string gremlinQuery = "g.v(" + userVertexId + ").in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[commentInfo:it, commentedBy: it.in('Created'),,likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]}";
-            //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+            //string gremlinQuery = "g.v(" + userVertexId + ").in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[commentInfo:it, commentedBy: it.in('Created'),,likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]}";
+            string gremlinQuery = string.Empty;
+            gremlinQuery += "g.V(" + userVertexId + ").in('Comment').order().by('PostedTime', decr).range(" + from + "," + to + ").as('commentInfo').match(";
+            gremlinQuery += "__.as('commentInfo').in('Created').as('commentedBy'),";
+            gremlinQuery += "__.as('commentInfo').in('Like').count().as('likeCount'),";
+            gremlinQuery += "__.as('commentInfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
+            gremlinQuery += ").select('commentInfo','commentedBy','likeCount','isLiked')";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
         }
@@ -544,33 +588,52 @@ namespace urNotice.Services.Management.AccountManagement
             string graphName = TitanGraphConfig.Graph;
 
 
-            string gremlinQuery = "g.v(" + userVertexId + ").in('Like').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[likeInfo:it]}";
-            //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+            //string gremlinQuery = "g.v(" + userVertexId + ").in('Like').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[likeInfo:it]}";
+            string gremlinQuery = "g.V(" + userVertexId + ").in('Like').order().by('PostedTime', decr).range(" + from + "," + to + ")";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, userVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             return response;
         }
         public string GetPostByVertexId(string vertexId, string userEmail)
         {
             int messageStartIndex = 0;
-            int messageEndIndex = 4;
-            string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'),likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
-            //string gremlinQuery = "g.v(" + userVertexId + ").in('_label','WallPost').sort{it.PostedTime}.reverse()._().as('postInfo')[" + from + ".." + to + "].in('_label','Created').as('userInfo').select{it}{it}";
+            int messageEndIndex = 5;
+            //string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'),likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
+            string gremlinQuery = string.Empty;
+            gremlinQuery += "g.V(" + vertexId + ").as('wallpostinfo').match(";
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').range(0,2).fold().as('likeInfo'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').count().as('likeInfoCount'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
+            gremlinQuery += "__.as('wallpostinfo').in('Comment').order().by('PostedTime', decr).range(" + messageStartIndex + "," + messageEndIndex + ").as('commentData').match(";
+            gremlinQuery += "__.as('commentData').in('Created').as('commentedBy'),";
+            gremlinQuery += "__.as('commentData').in('Like').count().as('likeCount'),";
+            gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
+            gremlinQuery +=").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, vertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);
 
             return response;
         }
         public string GetUserNetworkDetail(urNoticeSession session, string userVertexId, string from, string to)
         {
 
-            //string gremlinQuery = "g.v(" + userVertexId + ").inE('AssociateRequest').order{it.b.PostedDate <=> it.a.PostedDate}[" + from + ".." + to + "].transform{ [notificationInfo:it,postInfo:it.inV,notificationByUser:g.v(it.NotificationInitiatedByVertexId)]}";
-            string gremlinQuery = "g.v(" + userVertexId + ").transform{[associateRequestSent:it.in('AssociateRequest').has('Username','" + session.UserName + "'),associateRequestReceived:it.out('AssociateRequest').has('Username','" + session.UserName + "'),followRequestSent:it.in('Follow').has('Username','" + session.UserName + "'),isFriend:it.in('Friend').has('Username','" + session.UserName + "')]}";
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            string gremlinQuery = string.Empty;
+            gremlinQuery += "g.V(" + userVertexId + ").as('userInfo').match(";
+            gremlinQuery += "__.as('userInfo').in('AssociateRequest').has('Username','" + session.UserName + "').fold().as('associateRequestSent'),";
+            gremlinQuery += "__.as('userInfo').out('AssociateRequest').has('Username','" + session.UserName + "').fold().as('associateRequestReceived'),";
+            gremlinQuery += "__.as('userInfo').in('Follow').has('Username','" + session.UserName + "').fold().as('followRequestSent'),";
+            gremlinQuery += "__.as('userInfo').in('Friend').has('Username','" + session.UserName + "').fold().as('isFriend'),";
+            gremlinQuery += ").select('associateRequestSent','associateRequestReceived','followRequestSent','isFriend')";
+            //string gremlinQuery = "g.v(" + userVertexId + ").transform{[associateRequestSent:it.in('AssociateRequest').has('Username','" + session.UserName + "'),associateRequestReceived:it.out('AssociateRequest').has('Username','" + session.UserName + "'),followRequestSent:it.in('Follow').has('Username','" + session.UserName + "'),isFriend:it.in('Friend').has('Username','" + session.UserName + "')]}";
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
             return response;
         }
         public long GetUserUnreadNotificationCount(urNoticeSession session)
@@ -584,7 +647,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             var getUserUnreadNotificationsDeserialized =
@@ -604,7 +667,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
 
-            IGraphVertexDb graphVertexDb = new GraphVertexDb();
+            IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             var getUserUnreadNotificationsDeserialized =
@@ -650,7 +713,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.AssociateRequest.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
 
             IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
@@ -680,7 +743,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Friend.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
 
             IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
@@ -693,7 +756,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Friend.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
 
             addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
             return addEdgeResponse;
@@ -741,7 +804,7 @@ namespace urNotice.Services.Management.AccountManagement
 
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Follow.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
-            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDb();
+            properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
 
             IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);

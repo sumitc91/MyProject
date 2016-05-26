@@ -91,10 +91,13 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var clientNotificationDetailResponse = clientModel.GetUserNotification(session, from, to);
                     var clientNotificationDetailResponseDeserialized =
-                            JsonConvert.DeserializeObject<UserNotificationVertexModelResponse>(clientNotificationDetailResponse);
-                    if (clientNotificationDetailResponseDeserialized != null)
-                        clientNotificationDetailResponseDeserialized.unread = clientModel.GetUserUnreadNotificationCount(session);
-                    return Json(clientNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                            JsonConvert.DeserializeObject<UserNotificationVertexV1ModelResponse>(clientNotificationDetailResponse);
+                    UserNotificationVertexModelResponse response = ModelAdapterUtil.GetUserNotificationVertexModelResponse(clientNotificationDetailResponseDeserialized);
+
+                    //TODO: need to write gremlin query.
+                    //if (response != null)
+                    //    response.unread = clientModel.GetUserUnreadNotificationCount(session);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
@@ -129,10 +132,13 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var clientFriendRequestNotificationDetailResponse = clientModel.GetUserFriendRequestNotification(session, from, to);
                     var clientFriendRequestNotificationDetailResponseDeserialized =
-                            JsonConvert.DeserializeObject<UserFriendRequestNotificationVertexModelResponse>(clientFriendRequestNotificationDetailResponse);
-                    if (clientFriendRequestNotificationDetailResponseDeserialized != null)
-                        clientFriendRequestNotificationDetailResponseDeserialized.unread = clientModel.GetUserUnreadFriendRequestNotificationCount(session);
-                    return Json(clientFriendRequestNotificationDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                            JsonConvert.DeserializeObject<UserFriendRequestNotificationVertexV1ModelResponse>(clientFriendRequestNotificationDetailResponse);
+                    UserFriendRequestNotificationVertexModelResponse response = ModelAdapterUtil.GetUserFriendRequestNotificationVertexModelResponse(clientFriendRequestNotificationDetailResponseDeserialized);
+
+
+                    //if (response != null)
+                    //    response.unread = clientModel.GetUserUnreadFriendRequestNotificationCount(session);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
@@ -291,10 +297,13 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserPostResponse = clientModel.GetUserPost(vertexId, from, to, userEmail);
                     var getUserPostResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+                        JsonConvert.DeserializeObject<UserPostVertexModelV1Response>(getUserPostResponse);
 
-                    
-                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                    //var getCompanySalaryInfoResponseDeserialized =
+                    //    JsonConvert.DeserializeObject<CompanySalaryVertexModelV1Response>(getCompanySalaryInfoResponse);
+
+                    UserPostVertexModelResponse response = ModelAdapterUtil.GetUserPostInfoResponse(getUserPostResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {                    
@@ -341,10 +350,10 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserPostResponse = clientModel.GetUserOrbitFeedPost(vertexId, from, to, userEmail);
                     var getUserPostResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
+                        JsonConvert.DeserializeObject<UserPostVertexModelV1Response>(getUserPostResponse);
 
-
-                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                    UserPostVertexModelResponse response = ModelAdapterUtil.GetUserPostInfoResponse(getUserPostResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -383,10 +392,10 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserPostMessagesResponse = clientModel.GetUserPostMessages(vertexId, from, to, userEmail);
                     var getUserPostMessagesResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostMessagesVertexModelResponse>(getUserPostMessagesResponse);
+                        JsonConvert.DeserializeObject<UserPostMessagesVertexModelV1Response>(getUserPostMessagesResponse);
 
-
-                    return Json(getUserPostMessagesResponseDeserialized, JsonRequestBehavior.AllowGet);
+                    UserPostMessagesVertexModelResponse response = ModelAdapterUtil.GetUserPostMessagesVertexModelResponse(getUserPostMessagesResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -425,10 +434,10 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserPostMessagesResponse = clientModel.GetUserPostLikes(vertexId, from, to);
                     var getUserPostMessagesResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostLikesVertexModelResponse>(getUserPostMessagesResponse);
+                        JsonConvert.DeserializeObject<UserPostLikesVertexModelV1Response>(getUserPostMessagesResponse);
 
-
-                    return Json(getUserPostMessagesResponseDeserialized, JsonRequestBehavior.AllowGet);
+                    UserPostLikesVertexModelResponse response = ModelAdapterUtil.GetUserPostLikesVertexModelResponse(getUserPostMessagesResponseDeserialized);
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -622,8 +631,10 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserPostResponse = clientModel.GetPostByVertexId(vertexId, userEmail);
                     var getUserPostResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostVertexModelResponse>(getUserPostResponse);
-                    return Json(getUserPostResponseDeserialized, JsonRequestBehavior.AllowGet);
+                        JsonConvert.DeserializeObject<UserPostVertexModelV1Response>(getUserPostResponse);
+                    UserPostVertexModelResponse response = ModelAdapterUtil.GetUserPostInfoResponse(getUserPostResponseDeserialized);
+
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -669,8 +680,11 @@ namespace urNoticeUser.Controllers
                     IPerson clientModel = new Consumer();
                     var getUserNetworkDetailResponse = clientModel.GetUserNetworkDetail(session,vertexId, from,to);
                     var getUserNetworkDetailResponseDeserialized =
-                        JsonConvert.DeserializeObject<UserPostNetworkDetailModelResponse>(getUserNetworkDetailResponse);
-                    return Json(getUserNetworkDetailResponseDeserialized, JsonRequestBehavior.AllowGet);
+                        JsonConvert.DeserializeObject<UserPostNetworkDetailModelV1Response>(getUserNetworkDetailResponse);
+                    UserPostNetworkDetailModelResponse response = ModelAdapterUtil.UserPostNetworkDetailModelResponse(getUserNetworkDetailResponseDeserialized);
+
+
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {

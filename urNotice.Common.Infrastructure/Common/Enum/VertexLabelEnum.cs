@@ -15,6 +15,7 @@ namespace urNotice.Common.Infrastructure.Common.Enum
         Designation,
         Company,
         Salary,
-        Workgraphy
+        Workgraphy,
+
     }
 }
