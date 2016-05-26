@@ -534,7 +534,7 @@ define([appLocation.preLogin], function (app) {
 
         function getPostByVertexId(postVertexId,commentVertexId,type,displayName,userVertex) {
             var vertexId = postVertexId;
-            if (type != 1 || type != "1")
+            if (type != 1 && type != "1")
                 vertexId = commentVertexId;
             var url = ServerContextPath.userServer + '/User/GetPostByVertexId?vertexId=' + vertexId;
             var headers = {
