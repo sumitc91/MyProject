@@ -603,7 +603,8 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'),likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
             string gremlinQuery = string.Empty;
             gremlinQuery += "g.V(" + vertexId + ").as('wallpostinfo').match(";
-            gremlinQuery += "__.as('wallpostinfo').out('WallPost').as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').out('PostedByUser').fold().as('postedByUser'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').range(0,2).fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').count().as('likeInfoCount'),";
@@ -614,7 +615,7 @@ namespace urNotice.Services.Management.AccountManagement
             gremlinQuery += "__.as('commentData').in('Like').count().as('likeCount'),";
             gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
             gremlinQuery +=").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
-            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','postedByUser','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
 
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);
