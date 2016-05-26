@@ -205,6 +205,28 @@ namespace urNotice.Common.Infrastructure.commonMethods
             return response;
         }
 
+        public static UserFollowersVertexModelResponse GetUserFollowersVertexModelResponse(UserPostLikesVertexModelV1Response userFollowersDeserialized)
+        {
+            var response = new UserFollowersVertexModelResponse();
+            response.success = false;
+            response.results = new List<UserVertexModel>();
+
+            if (userFollowersDeserialized == null ||
+                userFollowersDeserialized.result == null ||
+                userFollowersDeserialized.result.data == null)
+                return response;
+
+            response.success = true;
+            foreach (var userFollower in userFollowersDeserialized.result.data)
+            {
+                var userVertexModel = new UserVertexModel();
+                userVertexModel = ParseUserListVertexToSingleObject(userFollower);
+                response.results.Add(userVertexModel);
+            }
+
+            return response;
+        }
+
         private static EdgeModel ParseFriendRequestVertex(EdgeModelV1 requestInfo)
         {
             var edgeModel = new EdgeModel();
@@ -420,6 +442,5 @@ namespace urNotice.Common.Infrastructure.commonMethods
             return companyDesignationInfoVertexModelList;
         }
 
-        
     }
 }

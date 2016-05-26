@@ -480,10 +480,10 @@ namespace urNotice.Services.Management.AccountManagement
         public string GetAllFollowers(string vertexId)
         {
 
-            string gremlinQuery = "g.v(" + vertexId + ").in('Follow')";
+            string gremlinQuery = "g.V(" + vertexId + ").in('Follow')";
 
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, vertexId, TitanGraphConfig.Graph, null);
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
             return response;
         }
 
