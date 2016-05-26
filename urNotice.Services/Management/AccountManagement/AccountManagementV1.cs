@@ -492,7 +492,7 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').order{it.b.PostedDateLong <=> it.a.PostedDateLong}[" + from + ".." + to + "].transform{ [requestInfo:it,requestedBy:it.outV]}";
             string gremlinQuery = string.Empty;
             gremlinQuery += "g.V(" + session.UserVertexId + ").inE('AssociateRequest').order().by('PostedDateLong', decr).range(" + from + "," + to + ").as('requestInfo').match(";
-            gremlinQuery += "__.as('requestInfo').inV().as('requestedBy'),";
+            gremlinQuery += "__.as('requestInfo').outV().as('requestedBy'),";
             gremlinQuery+=").select('requestInfo','requestedBy')";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
