@@ -514,7 +514,7 @@ namespace urNotice.Services.Management.AccountManagement
             gremlinQuery += "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
             gremlinQuery +="__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
             gremlinQuery +="__.as('wallpostinfo').in('Created').as('userInfo'),";
-            gremlinQuery +="__.as('wallpostinfo').out('WallPost').as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
             gremlinQuery +="__.as('wallpostinfo').in('Like').fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
             gremlinQuery +="__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
