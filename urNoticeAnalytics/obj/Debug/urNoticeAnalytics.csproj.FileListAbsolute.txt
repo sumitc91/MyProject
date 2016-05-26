@@ -101,3 +101,7 @@ C:\code\svn\OrbitPage\urNoticeAnalytics\bin\RestSharp.xml
 C:\code\svn\OrbitPage\urNoticeAnalytics\obj\Debug\urNoticeAnalytics.csprojResolveAssemblyReference.cache
 C:\code\svn\OrbitPage\urNoticeAnalytics\obj\Debug\urNoticeAnalytics.dll
 C:\code\svn\OrbitPage\urNoticeAnalytics\obj\Debug\urNoticeAnalytics.pdb
+C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Owin.dll
+C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Microsoft.Owin.Security.dll
+C:\code\svn\OrbitPage\urNoticeAnalytics\bin\Owin.dll
