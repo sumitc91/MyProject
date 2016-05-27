@@ -209,21 +209,21 @@ namespace urNotice.Services.Management.NotificationManagement
                 properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.CreatedNotification.ToString();                                                
                 
                 IGraphEdgeDb graphEdgeDbModel = new GremlinServerGraphEdgeDb();
-                IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdgeAsync(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
+                IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
 
                 properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id]; // created notification vertex
                 properties[EdgePropertyEnum._inV.ToString()] = userNotificationGraphModel._outV; // to whom we need to notify.
                 properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.NotificationSent.ToString();
                 
                 graphEdgeDbModel = new GremlinServerGraphEdgeDb();
-                addEdgeResponse = graphEdgeDbModel.AddEdgeAsync(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
+                addEdgeResponse = graphEdgeDbModel.AddEdge(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
 
                 properties[EdgePropertyEnum._outV.ToString()] = userNotificationGraphModel._inV; // post vertex
                 properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id]; // to created notification vertex.
                 properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.RelatedPost.ToString();
 
                 graphEdgeDbModel = new GremlinServerGraphEdgeDb();
-                addEdgeResponse = graphEdgeDbModel.AddEdgeAsync(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
+                addEdgeResponse = graphEdgeDbModel.AddEdge(userNotificationGraphModel.UserName, TitanGraphConfig.Graph, properties);
             }
         }
     }
