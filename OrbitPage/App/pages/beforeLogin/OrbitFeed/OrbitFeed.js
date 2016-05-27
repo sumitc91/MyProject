@@ -490,7 +490,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                 //startBlockUI('wait..', 3);
                 $scope.UserPostList[postIndex].commentsInfo[commentIndex].alreadyLiked = true;
-                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount;
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount = $scope.UserPostList[postIndex].commentsInfo[commentIndex].likeCount+1;
                 $http({
                     url: url,
                     method: "POST",
