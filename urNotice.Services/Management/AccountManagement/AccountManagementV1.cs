@@ -14,6 +14,7 @@ using urNotice.Common.Infrastructure.Encryption;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.AssetClass;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
@@ -645,15 +646,15 @@ namespace urNotice.Services.Management.AccountManagement
             if (lastNotificationSeenTimeStamp == null)
                 lastNotificationSeenTimeStamp = 0;
 
-            string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
-
+            //string gremlinQuery = "g.v(" + session.UserVertexId + ").outE('Notification').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
+            string gremlinQuery = "g.V(" + session.UserVertexId + ").in('NotificationSent').values('PostedTimeLong').is(gte(" + lastNotificationSeenTimeStamp + ")).count()";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             var getUserUnreadNotificationsDeserialized =
-                        JsonConvert.DeserializeObject<UserPostUnreadNotificationsResponse>(response);
+                        JsonConvert.DeserializeObject<UserPostUnreadNotificationsModelV1Response>(response);
 
-            return getUserUnreadNotificationsDeserialized.results[0];
+            return getUserUnreadNotificationsDeserialized.result.data[0];
         }
 
         public long GetUserUnreadFriendRequestNotificationCount(urNoticeSession session)
@@ -665,15 +666,15 @@ namespace urNotice.Services.Management.AccountManagement
             if (lastNotificationSeenTimeStamp == null)
                 lastNotificationSeenTimeStamp = 0;
 
-            string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
-
+            //string gremlinQuery = "g.v(" + session.UserVertexId + ").inE('AssociateRequest').has('PostedDateLong',T.gte," + lastNotificationSeenTimeStamp + ").count()";
+            string gremlinQuery = "g.V(" + session.UserVertexId + ").inE('AssociateRequest').values('PostedDateLong').is(gte(" + lastNotificationSeenTimeStamp + ")).count()";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
-            string response = graphVertexDb.GetVertexDetail(gremlinQuery, session.UserVertexId, TitanGraphConfig.Graph, null);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
+            string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
             var getUserUnreadNotificationsDeserialized =
-                        JsonConvert.DeserializeObject<UserPostUnreadNotificationsResponse>(response);
+                        JsonConvert.DeserializeObject<UserPostUnreadNotificationsModelV1Response>(response);
 
-            return getUserUnreadNotificationsDeserialized.results[0];
+            return getUserUnreadNotificationsDeserialized.result.data[0];
         }
 
         private OrbitPageCompanyUserWorkgraphyTable GenerateOrbitPageUserObject(

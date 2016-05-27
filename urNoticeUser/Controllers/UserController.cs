@@ -95,8 +95,8 @@ namespace urNoticeUser.Controllers
                     UserNotificationVertexModelResponse response = ModelAdapterUtil.GetUserNotificationVertexModelResponse(clientNotificationDetailResponseDeserialized);
 
                     //TODO: need to write gremlin query.
-                    //if (response != null)
-                    //    response.unread = clientModel.GetUserUnreadNotificationCount(session);
+                    if (response != null)
+                        response.unread = clientModel.GetUserUnreadNotificationCount(session);
                     return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -136,8 +136,8 @@ namespace urNoticeUser.Controllers
                     UserFriendRequestNotificationVertexModelResponse response = ModelAdapterUtil.GetUserFriendRequestNotificationVertexModelResponse(clientFriendRequestNotificationDetailResponseDeserialized);
 
 
-                    //if (response != null)
-                    //    response.unread = clientModel.GetUserUnreadFriendRequestNotificationCount(session);
+                    if (response != null)
+                        response.unread = clientModel.GetUserUnreadFriendRequestNotificationCount(session);
                     return Json(response, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)

@@ -268,6 +268,8 @@
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostNetworkDetailModelV1Response.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostNetworkDetailModelV1ResultDataResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostNetworkDetailModelV1ResultResponse.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostUnreadNotificationsModelV1Response.cs" />
+    <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostUnreadNotificationsModelV1ResultResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostVertexModelV1Response.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostVertexModelV1ResultDataResponse.cs" />
     <Compile Include="Model\urNoticeModel\GraphModel\V1\UserPostVertexModelV1ResultResponse.cs" />
