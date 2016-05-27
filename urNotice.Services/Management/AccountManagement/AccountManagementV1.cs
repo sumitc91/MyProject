@@ -589,8 +589,8 @@ namespace urNotice.Services.Management.AccountManagement
 
 
             //string gremlinQuery = "g.v(" + userVertexId + ").in('Like').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + from + ".." + to + "].transform{[likeInfo:it]}";
-            string gremlinQuery = "g.V(" + userVertexId + ").in('Like').order().by('PostedTime', decr).range(" + from + "," + to + ")";
-
+            //string gremlinQuery = "g.V(" + userVertexId + ").in('Like').order().by('PostedTime', decr).range(" + from + "," + to + ")";
+            string gremlinQuery = "g.V(" + userVertexId + ").inE('Like').order().by('PostedDate', decr).range(" + from + "," + to + ").as('likeInfo').match(__.as('likeInfo').outV().as('likedBy'),).select('likedBy')";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, userVertexId, graphName, null);
 
