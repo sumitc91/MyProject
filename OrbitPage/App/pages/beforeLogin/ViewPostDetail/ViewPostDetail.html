@@ -70,9 +70,9 @@
                                             <span class="hover_div"><a class="like-summary" ng-click="showLikedByUsers(post.postInfo._id)" data-toggle="modal" data-target="#showLikedByUsersModal" ng-bind-html="post.likeInfoHtml | html"></a></span>
                                         </div>
                                         <ul class="fb-comments">
-                                            <li>
-                                                <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load Previous Messages..<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
-                                            </li>
+                                            <li ng-show="(post.messageToIndex+1)<post.commentsCount">
+                                                <div class="input-group"> <a ng-click="loadMoreMessage(post.postInfo._id,$index)">Load Previous Messages.. ( Showing <span ng-bind="post.messageToIndex+1"></span> of <span ng-bind="post.commentsCount"></span>)<span ng-show='post.loadingIcon'> <img src="../../App/img/loading/loading123.gif" style="height: 30px; margin: 10px 0px 0px;" /></span></a></div>
+                                            </li> 
                                             <li ng-repeat="comment in post.commentsInfo">
                                                 <a href="#/userprofile/{{comment.commentedBy[0]._id}}" class="cmt-thumb">
                                                     <img ng-src="{{comment.commentedBy[0].ImageUrl}}" alt="">

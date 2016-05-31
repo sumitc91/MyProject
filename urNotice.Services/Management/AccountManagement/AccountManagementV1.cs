@@ -600,7 +600,7 @@ namespace urNotice.Services.Management.AccountManagement
         public string GetPostByVertexId(string vertexId, string userEmail)
         {
             int messageStartIndex = 0;
-            int messageEndIndex = 5;
+            int messageEndIndex = 4;
             //string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'),likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
             string gremlinQuery = string.Empty;
             gremlinQuery += "g.V(" + vertexId + ").as('wallpostinfo').match(";

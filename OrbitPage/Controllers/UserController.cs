@@ -48,6 +48,11 @@ namespace OrbitPage.Controllers
                     image = String.Empty;
                 }
 
+                if (String.IsNullOrWhiteSpace(message) || message == CommonConstants.undefined)
+                {
+                    message = String.Empty;
+                }
+
                 HashSet<string> sendNotificationHashSetResponse = null;
                 IPerson clientModel = new Consumer();
                 var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationHashSetResponse);
