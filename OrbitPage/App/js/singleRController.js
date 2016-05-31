@@ -23,7 +23,9 @@ function ConnectWithSignalRPushNotification() {
 
     chatProxy.client.addMessage = function (message) {
         console.log(message);
-        
+        scope.$apply(function () {
+            scope.UpdateUserOnlineStatusFromPushNotification(message);
+        });
     };
 
     //sendChatMessage

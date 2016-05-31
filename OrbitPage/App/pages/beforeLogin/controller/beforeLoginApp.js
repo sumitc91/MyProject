@@ -193,7 +193,7 @@ define([appLocation.preLogin], function (app) {
         $rootScope.logoImage = { url: logoImage };
         $rootScope.isUserLoggedIn = false;
         $rootScope.sitehosturl = ServerContextPath.solrServer;//"www.orbitpage.com/searchapi";
-        
+        $scope.chatListUserRegisteredOnline = false;
 
         $rootScope.profileDropDownCss = "hideFromCss";
 
@@ -842,7 +842,7 @@ define([appLocation.preLogin], function (app) {
 
 
         };
-
+        
         $scope.UpdateChatMessageFromPushNotification = function (displayName, userVertexId, imageUrl, msg, messageImage) {
 
             if (userVertexId == $rootScope.clientDetailResponse.VertexId)
@@ -857,6 +857,10 @@ define([appLocation.preLogin], function (app) {
             };
             $scope.chatList[0].unreadCount = $scope.chatList[0].unreadCount + 1;
             $scope.chatList[0].messages.push(newChatMessage);
+        };
+        //$scope.chatListUserRegisteredOnline
+        $scope.UpdateUserOnlineStatusFromPushNotification = function (message) {
+            $scope.chatListUserRegisteredOnline = true;
         };
 
         $scope.toggleProfileDropDownCss = function () {
