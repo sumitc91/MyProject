@@ -23,6 +23,7 @@ function ConnectWithSignalRPushNotification() {
 
     chatProxy.client.addMessage = function (message) {
         console.log(message);
+        var scope = angular.element(document.getElementById("main")).scope();
         scope.$apply(function () {
             scope.UpdateUserOnlineStatusFromPushNotification(message);
         });

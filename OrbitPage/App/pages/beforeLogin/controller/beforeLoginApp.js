@@ -860,7 +860,7 @@ define([appLocation.preLogin], function (app) {
         };
         //$scope.chatListUserRegisteredOnline
         $scope.UpdateUserOnlineStatusFromPushNotification = function (message) {
-            console.log("UpdateUserOnlineStatusFromPushNotification : "+message);
+            //console.log("UpdateUserOnlineStatusFromPushNotification : "+message);
             $scope.chatListUserRegisteredOnline = true;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
