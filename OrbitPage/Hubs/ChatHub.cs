@@ -54,6 +54,24 @@ namespace OrbitPage.Hubs
             }
         }
 
+        public void SendChatMessage(string displayName,string userVertexId,string imageUrl, string msg,string messageImage, string toUser)
+        {
+            lock (connectedClients)
+            {
+
+                foreach (var client in connectedClients)
+                {
+                    client.Value.sendChatMessage(displayName, userVertexId, imageUrl, msg, messageImage);   
+                }
+                //if (connectedClients.ContainsKey(toUser))
+                //{
+                //    dynamic client = connectedClients[toUser];
+                //    client.sendChatMessage(displayName, userVertexId, imageUrl, msg, messageImage);
+                //}
+            }
+            //Clients.All.sendChatMessage(displayName, userVertexId, imageUrl, msg, messageImage);
+        }
+
         public void Send(string name, string message)
         {
             Clients.All.sendMessage(name, message);

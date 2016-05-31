@@ -820,12 +820,28 @@ div.middle-div-mobile {
                 <li id="sample-chat-window">
                     <a class="chat-user" href="#">
                         <span class="user-status is-online"></span>
-                        Art Ramadani
+                        <span ng-bind="chatList[0].toUser"></span>
                     </a> <span class="badge badge-purple">4</span> <div class="conversation-window">
                         <a class="chat-user" href="#">
                             <span class="close">×</span> <span class="user-status is-online"></span>
-                            Art Ramadani
-                        </a> <ul class="conversation-messages ps-scrollbar ps-scroll-down ps-container ps-active-y"> <li class="time">Saturday 14, May '16</li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p> </div> </li> <li class="me"><div class="message-entry"> <p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper.</p> <p>Timed voice share led his widen noisy young.</p> <p>His six detract besides add moonlight newspaper.</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <li> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-1.png"> </a> </div> <div class="message-entry"> <p>Hello John, how are you?</p> </div> </li> <li class="time">Today 10:05</li> <li class="me"><div class="message-entry"> <p>Hi Art, I am fine :) How about you?</p> </div> <div class="user-info"> <a href="#"> <img width="30" height="30" alt="user-image" src="http://themes.laborator.co/xenon/assets/images/user-4.png"> </a> </div> </li> <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -493px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 496px; height: 248px; right: 2px;"><div class="ps-scrollbar-y" style="top: 166px; height: 82px;"></div></div></ul> <form class="chat-form" method="post"> <input type="text" placeholder="Enter your message..." class="form-control"> </form>
+                            <span ng-bind="chatList[0].toUser"></span>
+                        </a>
+                        <ul class="conversation-messages ps-scrollbar ps-scroll-down ps-container ps-active-y">
+                            @*<li ng-show="isTimeBlock" class="time" ng-repeat="chatMessage in chatList[0].messages"><span ng-bind="Message"></span></li>*@
+                            <li ng-show="!isTimeBlock" ng-class="{true:'me', false:''}[chatMessage.VertexId==clientDetailResponse.VertexId]" ng-repeat="chatMessage in chatList[0].messages">
+                                <div class="col-md-3">
+                                    <a href="#"> <img width="30" height="30" alt="user-image" ng-src="{{chatMessage.ProfilePic}}"> </a>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="message-entry"> <p ng-bind="chatMessage.Message"></p> </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <form class="chat-form" method="post">
+                            @*<input type="text" placeholder="Enter your message..." class="form-control">*@
+                            <input class="form-control" ng-model="chatList[0].userMessage" ng-keyup="$event.keyCode == 13 && messageToUserPost($index)" placeholder="Enter your message..." type="text">
+                        </form>
                     </div>
                 </li>
                 <li>

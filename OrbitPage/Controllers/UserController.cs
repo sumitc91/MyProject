@@ -78,6 +78,52 @@ namespace OrbitPage.Controllers
 
         }
 
+        public JsonResult SendMessage(UserNewPostRequest userPostData)
+        {
+            var message = userPostData.Message;//Request.QueryString["message"].ToString(CultureInfo.InvariantCulture);
+            var image = userPostData.Image;//Request.QueryString["image"].ToString(CultureInfo.InvariantCulture);
+            var toUserVertexId = userPostData.VertexId;//Request.QueryString["vertexId"].ToString(CultureInfo.InvariantCulture);
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+                if (String.IsNullOrWhiteSpace(image) || image == CommonConstants.undefined)
+                {
+                    image = String.Empty;
+                }
+
+                if (String.IsNullOrWhiteSpace(message) || message == CommonConstants.undefined)
+                {
+                    message = String.Empty;
+                }
+
+                HashSet<string> sendNotificationHashSetResponse = null;
+                IPerson clientModel = new Consumer();
+                //var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationHashSetResponse);
+                //if (sendNotificationHashSetResponse.Count > 0)
+                //{
+                //    new SignalRNotification().SendNewMessageToUsers(session, message,image, toUserVertexId);
+                //}
+                //if (newUserPostResponse != null && newUserPostResponse.Payload != null &&
+                //    newUserPostResponse.Payload.postInfo != null && newUserPostResponse.Payload.postInfo._id != null)
+                //{
+                //    GetAllFollowersAndSendNewsFeed(session.UserVertexId, newUserPostResponse.Payload.postInfo._id, "", "1", "", "");
+                //}
+                new SignalRNotification().SendNewMessageToUsers(session, message, image, toUserVertexId);
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         private void GetAllFollowersAndSendNewsFeed(string vertexId, string postId,string commentId,string type,string postedByName,string postedById)
         {
             IPerson clientModel = new Consumer();

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.DynamoDb;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
+using urNotice.Common.Infrastructure.Session;
 
 namespace OrbitPage.Hubs
 {
@@ -49,6 +51,16 @@ namespace OrbitPage.Hubs
                     new ChatHub().AddNotificationMessage("3", messagePushNotification, user._id);
             }
 
+            return null;
+        }
+        //SendChatMessage
+        public string SendNewMessageToUsers(urNoticeSession session, string message,string messageImage,string toUserVertexId)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+            string userInfo = session.DisplayName + ";" + session.UserVertexId + ";"+ session.ImageUrl;
+            if (!string.IsNullOrWhiteSpace(toUserVertexId))
+                new ChatHub().SendChatMessage(session.DisplayName, session.UserVertexId, session.ImageUrl, message,messageImage, toUserVertexId);
+           
             return null;
         }
     }

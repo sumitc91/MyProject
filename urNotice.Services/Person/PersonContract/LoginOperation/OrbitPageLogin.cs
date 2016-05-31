@@ -98,7 +98,7 @@ namespace urNotice.Services.Person.PersonContract.LoginOperation
             userData.VertexId = userInfo.vertexId;
 
             string displayName = OrbitPageUtil.GetDisplayName(userInfo); 
-            var session = new urNoticeSession(userInfo.email,displayName, userInfo.vertexId);
+            var session = new urNoticeSession(userInfo.email,displayName, userInfo.vertexId,userInfo.imageUrl);
             TokenManager.CreateSession(session);
 
             userData.UTMZT = session.SessionId;

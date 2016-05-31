@@ -200,11 +200,11 @@ namespace urNotice.Services.Workgraphy
             if (solrUserEmail != null)
             {
                 string displayName = OrbitPageUtil.GetDisplayName(solrUserEmail); 
-                response = new urNoticeSession(solrUserEmail.Email,displayName, solrUserEmail.VertexId);
+                response = new urNoticeSession(solrUserEmail.Email,displayName, solrUserEmail.VertexId,solrUserEmail.Profilepic);
             }
             else
             {                
-                response = new urNoticeSession(req.Data.email,"Anonymous", CommonConstants.AnonymousUserVertex); // TODO: use anonymous user vertex.
+                response = new urNoticeSession(req.Data.email,"Anonymous", CommonConstants.AnonymousUserVertex,"NA"); // TODO: use anonymous user vertex.
             }
             return response;
         }

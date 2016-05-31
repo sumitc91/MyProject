@@ -297,7 +297,7 @@ namespace OrbitPage.Controllers
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
                             
                             string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
-                            var session = new urNoticeSession(userInfo.OrbitPageUser.email,displayName, userInfo.OrbitPageUser.vertexId);
+                            var session = new urNoticeSession(userInfo.OrbitPageUser.email,displayName, userInfo.OrbitPageUser.vertexId,userInfo.OrbitPageUser.imageUrl);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             ViewBag.umtzt = response.Payload.UTMZT;
@@ -409,7 +409,7 @@ namespace OrbitPage.Controllers
                         try
                         {
                             string displayName = OrbitPageUtil.GetDisplayName(user); 
-                            var session = new urNoticeSession(user.email,displayName,user.vertexId);
+                            var session = new urNoticeSession(user.email,displayName,user.vertexId,user.imageUrl);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
 

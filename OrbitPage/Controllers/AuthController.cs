@@ -36,7 +36,7 @@ namespace OrbitPage.Controllers
             if (response.Payload.Code == "200")
             {
                 string displayName = response.Payload.FirstName + " " + response.Payload.LastName; 
-                var session = new urNoticeSession(req.UserName,displayName, response.Payload.VertexId);
+                var session = new urNoticeSession(req.UserName,displayName, response.Payload.VertexId,response.Payload.imageUrl);
                 TokenManager.CreateSession(session);
                 response.Payload.UTMZT = session.SessionId;
             }

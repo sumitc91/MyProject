@@ -51,7 +51,7 @@ namespace urNotice.Services.SessionService
                         if (userInfo.OrbitPageUser.keepMeSignedIn == "true" && userInfo.OrbitPageUser.password == decryptedData["UTMZV"])
                         {
                             string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser);
-                            var NewSession = new urNoticeSession(username,displayName, headers.AuthToken,userInfo.OrbitPageUser.vertexId);
+                            var NewSession = new urNoticeSession(username, displayName, headers.AuthToken, userInfo.OrbitPageUser.vertexId, userInfo.OrbitPageUser.imageUrl);
                             TokenManager.CreateSession(NewSession);
                             return new TokenManager().getSessionInfo(headers.AuthToken, headers);
                         }

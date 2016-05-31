@@ -45,7 +45,7 @@ namespace OrbitPage.Controllers
             if (session == null)
             {
                 string displayName = req.Data.name;
-                session = new urNoticeSession(req.Data.email,displayName, CommonConstants.NA);
+                session = new urNoticeSession(req.Data.email, displayName, CommonConstants.NA, CommonConstants.NA);
             }
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
 
@@ -71,7 +71,7 @@ namespace OrbitPage.Controllers
             if (session == null)
             {
                 string displayName = req.Data.name;
-                session = new urNoticeSession(req.Data.email,displayName, CommonConstants.NA);
+                session = new urNoticeSession(req.Data.email, displayName, CommonConstants.NA, CommonConstants.NA);
             }
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
 

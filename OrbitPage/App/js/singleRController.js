@@ -26,6 +26,17 @@ function ConnectWithSignalRPushNotification() {
         
     };
 
+    //sendChatMessage
+    chatProxy.client.sendChatMessage = function (displayName, userVertexId, imageUrl, msg, messageImage) {
+        console.log(displayName + " --> "+msg);
+        var scope = angular.element(document.getElementById("main")).scope();
+        scope.$apply(function () {
+            
+            scope.UpdateChatMessageFromPushNotification(displayName, userVertexId, imageUrl, msg, messageImage);
+           
+        });
+    };
+
     chatProxy.client.addNotificationMessage = function (code,message) {
         console.log(code);
         var scope = angular.element(document.getElementById("main")).scope();

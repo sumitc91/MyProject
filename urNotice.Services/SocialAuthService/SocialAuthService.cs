@@ -74,7 +74,7 @@ namespace urNotice.Services.SocialAuthService
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
 
                             string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
-                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId);
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId,userSolr.Profilepic);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -143,7 +143,7 @@ namespace urNotice.Services.SocialAuthService
                             dynamoDbModel.CreateOrUpdateOrbitPageCompanyUserWorkgraphyTable(userInfo);
 
                             string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
-                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId);
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, userSolr.VertexId,userSolr.Profilepic);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                             return response;
@@ -230,7 +230,7 @@ namespace urNotice.Services.SocialAuthService
                         try
                         {
                             string displayName = OrbitPageUtil.GetDisplayName(userInfo.OrbitPageUser); 
-                            var session = new urNoticeSession(userInfo.ObjectId,displayName, user.vertexId);
+                            var session = new urNoticeSession(userInfo.ObjectId,displayName, user.vertexId,user.imageUrl);
                             TokenManager.CreateSession(session);
                             response.Payload.UTMZT = session.SessionId;
                         }

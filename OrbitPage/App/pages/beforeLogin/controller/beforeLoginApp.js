@@ -760,7 +760,104 @@ define([appLocation.preLogin], function (app) {
             //showToastMessage("Success","Message");
         };
 
-        
+        $scope.chatList = [
+        {
+            toUser: "Orbit Page",
+            messages: [
+                //{
+                //    isTimeBlock: true,                    
+                //    Message: "Saturday 14, May '16"
+                //},
+                {
+                    isTimeBlock: false,
+                    Message: "Hello John, how are you?",
+                    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
+                    DisplayName: "Orbit Page",
+                    VertexId: "1540312"
+
+                },
+                {
+                    isTimeBlock: false,
+                    Message: "Hello John, how are you?",
+                    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
+                    DisplayName: "Orbit Page",
+                    VertexId: "741440"
+
+                }
+            ]
+        }
+        ];
+
+        $scope.messageToUserPost = function (postIndex) {
+
+
+            var userPostCommentData = {
+                Message: $scope.chatList[0].userMessage,
+                Image: "",
+                VertexId: "741440",
+                WallVertexId: "1234",
+                PostPostedByVertexId: "12345"
+            };
+
+            var newChatMessage = {
+                isTimeBlock: false,
+                Message: $scope.chatList[0].userMessage,
+                ProfilePic: $rootScope.clientDetailResponse.Profilepic,
+                DisplayName: $rootScope.clientDetailResponse.Firstname+' '+$rootScope.clientDetailResponse.LastName,
+                VertexId: "123" //touservertex
+
+            };
+
+            if (isNullOrEmpty($scope.chatList[0].userMessage)) {
+                showToastMessage("Warning", "You cannot submit empty message.");
+                return;
+            }
+            
+            var url = ServerContextPath.empty + '/User/SendMessage';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+            if ($rootScope.isUserLoggedIn) {
+               
+                $scope.chatList[0].messages.push(newChatMessage);
+                //startBlockUI('wait..', 3);
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: userPostCommentData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                   
+                }).error(function (data, status, headers, config) {
+
+                });
+            }
+            else {
+                showToastMessage("Warning", "Please Login to reply on post.");
+            }
+
+
+        };
+
+        $scope.UpdateChatMessageFromPushNotification = function (displayName, userVertexId, imageUrl, msg, messageImage) {
+
+            if (userVertexId == $rootScope.clientDetailResponse.VertexId)
+                return;
+
+            var newChatMessage = {
+                isTimeBlock: false,
+                Message: msg,
+                ProfilePic: imageUrl,
+                DisplayName: displayName,
+                VertexId: "123" //touservertex
+            };
+
+            $scope.chatList[0].messages.push(newChatMessage);
+        };
+
         $scope.toggleProfileDropDownCss = function () {
             
             if ($rootScope.profileDropDownCss == 'hideFromCss') {
