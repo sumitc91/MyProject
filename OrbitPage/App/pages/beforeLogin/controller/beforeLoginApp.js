@@ -824,6 +824,7 @@ define([appLocation.preLogin], function (app) {
             if ($rootScope.isUserLoggedIn) {
                
                 $scope.chatList[0].messages.push(newChatMessage);
+                $scope.chatList[0].userMessage = "";
                 //startBlockUI('wait..', 3);
                 $http({
                     url: url,
