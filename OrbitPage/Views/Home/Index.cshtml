@@ -826,7 +826,7 @@ div.middle-div-mobile {
                             <span class="close">×</span> <span class="user-status is-online"></span>
                             <span ng-bind="chatList[0].toUser"></span>
                         </a>
-                        <ul class="conversation-messages ps-scrollbar ps-scroll-down ps-container ps-active-y">
+                        <ul class="conversation-messages ps-scrollbar ps-container ps-active-y" style="overflow: auto;">
                             @*<li ng-show="isTimeBlock" class="time" ng-repeat="chatMessage in chatList[0].messages"><span ng-bind="Message"></span></li>*@
                             <li ng-show="!chatListUserRegisteredOnline" style="background-color: rgb(247, 192, 178);">
                                 <div class="message-entry"> <p> Something is wrong you status is offline. Please refresh to page.</p> </div>
