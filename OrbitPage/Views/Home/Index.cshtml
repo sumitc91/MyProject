@@ -821,7 +821,7 @@ div.middle-div-mobile {
                     <a class="chat-user" href="#">
                         <span class="user-status is-online"></span>
                         <span ng-bind="chatList[0].toUser"></span>
-                    </a> <span class="badge badge-purple">4</span> <div class="conversation-window">
+                    </a> <span class="badge badge-purple" ng-show="chatList[0].unreadCount>0" ng-bind="chatList[0].unreadCount"></span> <div class="conversation-window">
                         <a class="chat-user" href="#">
                             <span class="close">×</span> <span class="user-status is-online"></span>
                             <span ng-bind="chatList[0].toUser"></span>

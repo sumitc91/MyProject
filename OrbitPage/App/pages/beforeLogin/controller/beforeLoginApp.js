@@ -763,27 +763,28 @@ define([appLocation.preLogin], function (app) {
         $scope.chatList = [
         {
             toUser: "Orbit Page",
+            unreadCount:0,
             messages: [
                 //{
                 //    isTimeBlock: true,                    
                 //    Message: "Saturday 14, May '16"
                 //},
-                {
-                    isTimeBlock: false,
-                    Message: "Hello John, how are you?",
-                    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
-                    DisplayName: "Orbit Page",
-                    VertexId: "1540312"
+                //{
+                //    isTimeBlock: false,
+                //    Message: "Hello John, how are you?",
+                //    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
+                //    DisplayName: "Orbit Page",
+                //    VertexId: "1540312"
 
-                },
-                {
-                    isTimeBlock: false,
-                    Message: "Hello John, how are you?",
-                    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
-                    DisplayName: "Orbit Page",
-                    VertexId: "741440"
+                //},
+                //{
+                //    isTimeBlock: false,
+                //    Message: "Hello John, how are you?",
+                //    ProfilePic: "https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPageUsers/orbitpage_gmail_com_image.png",
+                //    DisplayName: "Orbit Page",
+                //    VertexId: "741440"
 
-                }
+                //}
             ]
         }
         ];
@@ -854,7 +855,7 @@ define([appLocation.preLogin], function (app) {
                 DisplayName: displayName,
                 VertexId: "123" //touservertex
             };
-
+            $scope.chatList[0].unreadCount = $scope.chatList[0].unreadCount + 1;
             $scope.chatList[0].messages.push(newChatMessage);
         };
 
