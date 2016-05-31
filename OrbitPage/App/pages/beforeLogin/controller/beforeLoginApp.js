@@ -805,7 +805,7 @@ define([appLocation.preLogin], function (app) {
                 Message: $scope.chatList[0].userMessage,
                 ProfilePic: $rootScope.clientDetailResponse.Profilepic,
                 DisplayName: $rootScope.clientDetailResponse.Firstname+' '+$rootScope.clientDetailResponse.LastName,
-                VertexId: "123" //touservertex
+                VertexId: $rootScope.clientDetailResponse.VertexId //Note currently whoever created touservertex
 
             };
 

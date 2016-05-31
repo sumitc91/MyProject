@@ -828,7 +828,7 @@ div.middle-div-mobile {
                         </a>
                         <ul class="conversation-messages ps-scrollbar ps-scroll-down ps-container ps-active-y">
                             @*<li ng-show="isTimeBlock" class="time" ng-repeat="chatMessage in chatList[0].messages"><span ng-bind="Message"></span></li>*@
-                            <li ng-show="!isTimeBlock" ng-class="{true:'me', false:''}[chatMessage.VertexId==clientDetailResponse.VertexId]" ng-repeat="chatMessage in chatList[0].messages">
+                            <li ng-class="{true:'me', false:''}[chatMessage.VertexId==clientDetailResponse.VertexId]" ng-repeat="chatMessage in chatList[0].messages">
                                 <div class="col-md-3">
                                     <a href="#"> <img width="30" height="30" alt="user-image" ng-src="{{chatMessage.ProfilePic}}"> </a>
                                 </div>
