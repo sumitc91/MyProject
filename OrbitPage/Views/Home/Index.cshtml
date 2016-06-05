@@ -829,7 +829,7 @@ div.middle-div-mobile {
                         <ul class="conversation-messages ps-scrollbar ps-container ps-active-y" style="overflow: auto;">
                             @*<li ng-show="isTimeBlock" class="time" ng-repeat="chatMessage in chatList[0].messages"><span ng-bind="Message"></span></li>*@
                             <li ng-show="!chatListUserRegisteredOnline" style="background-color: rgb(247, 192, 178);">
-                                <div class="message-entry"> <p> Something is wrong you status is offline. Please refresh to page.</p> </div>
+                                <div class="message-entry"> <p> Something is wrong you status is offline. Please refresh the page.</p> </div>
                             </li>
                             <li ng-class="{true:'me', false:''}[chatMessage.VertexId==clientDetailResponse.VertexId]" ng-repeat="chatMessage in chatList[0].messages">
                                 <div class="col-md-3">
