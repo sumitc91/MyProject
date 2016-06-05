@@ -3,8 +3,8 @@ define([appLocation.preLogin], function (app) {
 
     app.controller('beforeLoginPostYourNotice', function ($scope,$location, $http, $rootScope, CookieUtil) {
         $('title').html("index-1"); //TODO: change the title so cann't be tracked in log
-        
-        
+
+
         $scope.postYourNoticeFormData = {
             constants: {
                 employmentStatusSelectList: [
@@ -12,15 +12,24 @@ define([appLocation.preLogin], function (app) {
                     { id: 'PART_TIME', name: 'Part-time' },
                     { id: 'CONTRACT', name: 'Contract' },
                     { id: 'INTERN', name: 'Intern' },
-                    { id: 'FREELANCE', name: 'Freelance' }                    
-                ]
+                    { id: 'FREELANCE', name: 'Freelance' }
+                ],
+                currencySelectList: [
+                    { id: 'INR', name: 'Indian Rupees' },
+                    { id: 'USD',name: 'US Dollar' }                    
+                ],
             },
+            
             companyReview: {
                 employerStatus: 'current',
                 lastYearAtEmployer: '',
                 employmentStatusSelect: 'REGULAR',
                 reviewTitle: '',
                 reviewDescription:''
+            },
+            companySalary: {
+                amount: '',
+                currency: 'INR'
             }
 
         };

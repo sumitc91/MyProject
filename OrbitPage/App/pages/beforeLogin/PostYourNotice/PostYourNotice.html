@@ -11,11 +11,11 @@
         <div class="row step">
             <div id="div1" class="col-md-2 activestep" onclick="javascript: resetActive(event, 0, 'step-1');">
                 <span class="fa fa-cloud-download"></span>
-                <p>Download Application</p>
+                <p>Company Review</p>
             </div>
             <div class="col-md-2" onclick="javascript: resetActive(event, 20, 'step-2');">
                 <span class="fa fa-pencil"></span>
-                <p>Fill out</p>
+                <p>Add a Salary</p>
             </div>
             <div class="col-md-2" onclick="javascript: resetActive(event, 40, 'step-3');">
                 <span class="fa fa-refresh"></span>
@@ -92,16 +92,58 @@
     </div>
     <div class="row setup-content step hiddenStepInfo" id="step-2">
         <div class="col-xs-12">
-            <div class="col-md-12 well text-center">
-                <h1>Company Review</h1>
-                <h3 class="underline">Review the company you have worked in</h3>
+            <div class="col-md-12 well text-center">                
+                <h3 class="underline">Add Salary of the company you have worked in</h3>
                 <hr />
                 Employer's Status :
                 <div class="btn-group">
-                    <input type="radio" name="answer" value="currentCompany" ng-model="PostYourNoticeFormData.CompanyReview.CurrentCompany" /> Current Company
-                    <input type="radio" name="answer" value="formerCompany" ng-model="PostYourNoticeFormData.CompanyReview.FormerCompany" /> Former Company
+                    <input type="radio" name="answer" value="current" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Current
+                    <input type="radio" name="answer" value="former" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Former
+                </div>
+                <div class="btn-group" ng-show="postYourNoticeFormData.companyReview.employerStatus=='former'">
+                    <input type="text" class="form-control" placeholder="Last Year At Employer (YYYY)" autofocus="" ng-model="postYourNoticeFormData.companyReview.lastYearAtEmployer">
                 </div>
                 <hr />
+                Employer's Name :
+                <div class="btn-group">
+                    <div angucomplete-alt
+                         id="companyName"
+                         placeholder="Enter Company Name"
+                         pause="500"
+                         selected-object="selectedCompany"
+                         remote-url="{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
+                         remote-url-request-formatter="remoteUrlRequestFn"
+                         remote-url-data-field="Payload"
+                         title-field="companyname"
+                         minlength="2"
+                         input-class="form-control form-control-small"
+                         ng-model="companyName"
+                         image-field="logourl"
+                         match-class="highlight" ng-keypress="myFunct($event)" />
+                </div>
+                <hr />
+                Salary Details :
+                <div>
+                    <input type="text" class="form-control" placeholder="Salary Amount" autofocus="" ng-model="postYourNoticeFormData.companySalary.amount">
+                </div>
+                <hr />
+                Currency :
+                <div class="btn-group">
+                    <select name="employmentCurrencySelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companySalary.currency">
+                        <option ng-repeat="option in postYourNoticeFormData.constants.currencySelectList" value="{{option.id}}">{{option.name}}</option>
+                    </select>
+                </div>
+                <hr />
+                Employment Status :
+                <div class="btn-group">
+                    <select name="employmentStatusSelect" id="employmentStatusSelect" ng-model="postYourNoticeFormData.companyReview.employmentStatusSelect">
+                        <option ng-repeat="option in postYourNoticeFormData.constants.employmentStatusSelectList" value="{{option.id}}">{{option.name}}</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companySalary.preview()">Preview</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companySalary.submit()">Submit</button>
+                </div>
 
             </div>
         </div>
