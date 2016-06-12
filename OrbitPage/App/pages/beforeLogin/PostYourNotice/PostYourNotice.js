@@ -108,7 +108,7 @@ define([appLocation.preLogin], function (app) {
                 employmentStatusSelect: 'REGULAR',
                 reviewTitle: '',
                 reviewDescription: '',
-                lookingForChange:true
+                lookingForChange:'Yes'
             },
             companySalary: {
                 amount: '',
