@@ -32,6 +32,11 @@ define([appLocation.preLogin], function (app) {
                     { id: 'INR', name: 'Indian Rupees' },
                     { id: 'USD',name: 'US Dollar' }                    
                 ],
+                salaryFrequencyList: [
+                    { id: 'ANNUAL', name: 'Annual' },
+                    { id: 'PERMONTH', name: 'Per Month' },
+                    { id: 'HOURLY', name: 'Hourly' }
+                ],
                 companyGoodPointList: [
                     { isSelected: false, id: 'APPRECIATED', img: 'https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/images/reason_to_stay_Appreciated.png' },
                     { isSelected: false, id: 'CHALLENGED', img: 'https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/images/reason_to_stay_Challenged.png' },
@@ -61,15 +66,36 @@ define([appLocation.preLogin], function (app) {
                         rate : 0,
                         max : 5,
                         isReadonly: false,
-                        RatingText: "Work Culture",
-                        RatingID:"WORKCULTURERATING"
+                        RatingText: "Salary",
+                        RatingID:"SALARYRATING"
                     },
                     {
                         rate: 0,
                         max: 5,
                         isReadonly: false,
-                        RatingText: "Employee Development / Training",
-                        RatingID: "EMPLOYEEDEVELOPMENTRATING"
+                        RatingText: "Work Life",
+                        RatingID: "WORKLIFERATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Culture",
+                        RatingID: "CULTURERATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Growth",
+                        RatingID: "GROWTHRATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Company Infrastructure",
+                        RatingID: "COMPANYINFRASTRUCTURERATING"
                     },
                     {
                         rate: 0,
@@ -77,13 +103,6 @@ define([appLocation.preLogin], function (app) {
                         isReadonly: false,
                         RatingText: "Appraisal Process",
                         RatingID: "APPRAISALPROCESSRATING"
-                    },
-                    {
-                        rate: 0,
-                        max: 5,
-                        isReadonly: false,
-                        RatingText: "Senior Management",
-                        RatingID: "SENIORMANAGEMENTRATING"
                     },
                     {
                         rate: 0,
@@ -104,6 +123,8 @@ define([appLocation.preLogin], function (app) {
             
             companyReview: {
                 employerStatus: 'current',
+                employerName: '',
+                employerVertexId:'',
                 lastYearAtEmployer: '',
                 employmentStatusSelect: 'REGULAR',
                 reviewTitle: '',
@@ -112,7 +133,8 @@ define([appLocation.preLogin], function (app) {
             },
             companySalary: {
                 amount: '',
-                currency: 'INR'
+                currency: 'INR',
+                salaryFrequency: 'ANNUAL'
             }
 
         };
@@ -140,11 +162,21 @@ define([appLocation.preLogin], function (app) {
             }
         };
 
-        $scope.selectCompany = function (selected) {
+        $scope.selectedCompany = function (selected) {
             console.log(selected);
             $scope.postYourNoticeFormData.companyReview.employerName = selected.originalObject.companyname;
             $scope.postYourNoticeFormData.companyReview.employerVertexId = selected.originalObject.guid;
+            $scope.postYourNoticeFormData.companyReview.employerLogoImage = selected.originalObject.logourl;
             //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
+        };
+
+        $scope.selectedDesignation = function (selected) {
+            //console.log(selected);
+            $scope.postYourNoticeFormData.companyReview.designation = selected.description.designation;
+            $scope.postYourNoticeFormData.companyReview.designationVertexId = selected.description.vertexId;
+            //console.log($scope.PostStoryModel);
+            //location.href = "/#companydetails/" + selected.originalObject.companyname.replace(/ /g, "_").replace(/\//g, "_OR_") + "/" + selected.originalObject.guid;
+
         };
 
         $scope.selectedProject = function (selected) {

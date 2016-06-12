@@ -96,20 +96,20 @@
                 <h3 class="underline">Add Notice Period Info</h3>
                 
                 <div class="row">
-                    Employer's Status :
-                    <div class="btn-group">
+                    <div class="col-md-4">Employer's Status :</div>
+                    <div class="col-md-4">
                         <input type="radio" name="answer" value="current" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Current
                         <input type="radio" name="answer" value="former" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Former
                     </div>
-                    <div class="btn-group" ng-show="postYourNoticeFormData.companyReview.employerStatus=='former'">
+                    <div class="col-md-4" ng-show="postYourNoticeFormData.companyReview.employerStatus=='former'">
                         <input type="text" class="form-control" placeholder="Last Year At Employer" autofocus="" ng-model="postYourNoticeFormData.companyReview.lastYearAtEmployer">
-                    </div>
+                    </div>                    
                 </div>
                 
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Employer's Name :</div>
-                    <div class="btn-group">
+                    <div class="col-md-4">Employer's Name :</div>
+                    <div class="col-md-4">
                         <div angucomplete-alt
                              id="companyName"
                              placeholder="Enter Company Name"
@@ -125,20 +125,25 @@
                              image-field="logourl"
                              match-class="highlight" ng-keypress="myFunct($event)" />
                     </div>
-                </div>
-                
+                    <div class="col-md-4">
+                        <img ng-show="postYourNoticeFormData.companyReview.employerLogoImage" ng-src="{{postYourNoticeFormData.companyReview.employerLogoImage}}" style="max-height:50px" />
+                    </div>                    
+                </div>                
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Location : </div>
-                    <div class="btn-group">
-                        <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details" />
+                    <div class="col-md-4">Location : </div>
+                    <div class="col-md-4">
+                        <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="postYourNoticeFormData.companyReview.location" />
+                    </div>
+                    <div class="col-md-4">
+                        <span ng-bind="postYourNoticeFormData.companyReview.location.formatted_address"></span>
                     </div>
                 </div>
                 
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Designation : </div>
-                    <div class="btn-group">
+                    <div class="col-md-4">Designation : </div>
+                    <div class="col-md-4">
                         <div angucomplete-alt
                              id="ex5"
                              placeholder="Designation"
@@ -151,57 +156,69 @@
                              minlength="2"
                              ng-model="PostStoryModel.designation"
                              input-class="form-control form-control-small"
-                             match-class="highlight">
-                        </div>
+                             match-class="highlight"/>
                     </div>
+                    <div class="col-md-4">
+                        <span ng-bind="postYourNoticeFormData.companyReview.designation" style="font-size: 18px;"></span>
+                    </div>
+                    
                 </div>
                 
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Salary Details : </div>
-                    <div class="btn-group">
+                    <div class="col-md-4">Salary Details : </div>
+                    <div class="col-md-2">
                         <select name="employmentCurrencySelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companySalary.currency">
                             <option ng-repeat="option in postYourNoticeFormData.constants.currencySelectList" value="{{option.id}}">{{option.name}}</option>
                         </select>
                     </div>
-                    <div class="btn-group">
+                    <div class="col-md-4">
                         <input type="text" class="form-control" placeholder="Salary Amount" autofocus="" ng-model="postYourNoticeFormData.companySalary.amount">
+                    </div>
+                    <div class="col-md-2">
+                        <select name="employmentSalaryFrequencyTypeSelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companySalary.salaryFrequency">
+                            <option ng-repeat="option in postYourNoticeFormData.constants.salaryFrequencyList" value="{{option.id}}">{{option.name}}</option>
+                        </select>
                     </div>
                 </div>
                 
 
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Employment Status :</div>
-                    <div class="btn-group">
+                    <div class="col-md-4">Employment Status :</div>
+                    <div class="col-md-4">
                         <select name="employmentStatusSelect" id="employmentStatusSelect" ng-model="postYourNoticeFormData.companyReview.employmentStatusSelect">
                             <option ng-repeat="option in postYourNoticeFormData.constants.employmentStatusSelectList" value="{{option.id}}">{{option.name}}</option>
                         </select>
                     </div>
+                    <div class="col-md-4"></div>
                 </div>
                 
                 <hr />
                 <div class="row">
-                    <div class="btn-group">Notice Period :</div>
-                    <div>
+                    <div class="col-md-4">Notice Period :</div>
+                    <div class="col-md-4">
                         <article>
                             Min Days:
                             <input type="number" ng-model="minRangeSlider.minValue" />
                             <br />Max Days:
                             <input type="number" ng-model="minRangeSlider.maxValue" />
-                            <br />
-                            <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
+                            
                         </article>
+                    </div>
+                    <div class="col-md-4">
+                        <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
                     </div>
                 </div>
                 
                 <hr />
                 <div class="row">
-                    Buyout Option Available :
-                    <div class="btn-group">
+                    <div class="col-md-4">Buyout Option Available :</div>                    
+                    <div class="col-md-4">
                         <input type="radio" name="buyoutOption" value="Yes" ng-model="postYourNoticeFormData.companyReview.buyoutOption" /> Yes
                         <input type="radio" name="buyoutOption" value="No" ng-model="postYourNoticeFormData.companyReview.buyoutOption" /> No
                     </div>
+                    <div class="col-md-4"></div>
                 </div>
                 
                 <hr />                
