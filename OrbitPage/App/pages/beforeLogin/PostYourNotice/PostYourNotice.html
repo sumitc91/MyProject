@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-2" onclick="javascript: resetActive(event, 60, 'step-4');">
                 <span class="fa fa-dollar"></span>
-                <p>Pay Fee</p>
+                <p>Ratings</p>
             </div>
             <div class="col-md-2" onclick="javascript: resetActive(event, 80, 'step-5');">
                 <span class="fa fa-cloud-upload"></span>
@@ -318,11 +318,63 @@
     </div>
     <div class="row setup-content step hiddenStepInfo" id="step-4">
         <div class="col-xs-12">
-            <div class="col-md-12 well text-center">
-                <h1>STEP 4</h1>
-                <h3 class="underline">Instructions</h3>
-                Pay the application fee.
-                This can be done either by entering your card details, or by using Paypal.
+            <div class="col-md-12 well text-center">                
+                <h3 class="underline">Ratings</h3>
+                <div class="row">
+                    <div class="btn-group">Employer's Name :</div>
+                    <div class="btn-group">
+                        <span> Employer Name</span>
+                    </div>
+                    <hr />
+                    <div class="btn-group">Location : </div>
+                    <div class="btn-group">
+                        <span> Location</span>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row">
+                    <div class="row">
+                        <div class="btn-group">Designation : </div>
+                        <div class="btn-group">
+                            <span>Designation</span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div ng-repeat="companyRating in postYourNoticeFormData.constants.companyRatingList">
+                        <div class="btn-group" ng-bind="companyRating.RatingText">Work Culture :</div>
+                        <div class="btn-group">
+                            <uib-rating ng-model="companyRating.rate" max="companyRating.max" read-only="companyRating.isReadonly" on-hover="hoveringOver($index, value)" on-leave="companyRating.overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+                            <span class="label" ng-class="{'label-warning': companyRating.percent<30, 'label-info': companyRating.percent>=30 && companyRating.percent<70, 'label-success': companyRating.percent>=70}" ng-show="companyRating.overStar && !companyRating.isReadonly">{{companyRating.percent}}%</span>
+
+                            <pre style="margin:15px 0;">Rate: <b>{{companyRating.rate}}</b> - Readonly is: <i>{{companyRating.isReadonly}}</i> - Hovering over: <b>{{companyRating.overStar || "none"}}</b></pre>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <hr />
+                <div class="row">
+                    Suggestion to your Boss :
+                    <div>
+                        <input type="text" class="form-control" placeholder="Suggestion To Boss" autofocus="" ng-model="postYourNoticeFormData.companyRating.suggestionToBoss">
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    Suggestion to Company :
+                    <div>
+                        <input type="text" class="form-control" placeholder="Suggestion To Company" autofocus="" ng-model="postYourNoticeFormData.companyRating.suggestionToCompany">
+                    </div>
+
+                </div>
+                <hr />
+                <div class="row">
+                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyRating.preview()">Preview</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyRating.submit()">Submit</button>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,10 @@ define([appLocation.preLogin], function (app) {
             }
         };
 
+        
+
+        
+
         $scope.postYourNoticeFormData = {
             constants: {
                 employmentStatusSelectList: [
@@ -52,6 +56,50 @@ define([appLocation.preLogin], function (app) {
                     { isSelected: false, id: 'COMPENSATION', img: 'https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/images/reason_to_leave__Compensation.jpg' },
                     { isSelected: false, id: 'IMMEDIATEBOSS', img: 'https://s3-ap-southeast-1.amazonaws.com/urnotice/OrbitPage/images/reason_to_leave_immediate_boss.jpg' }
                 ],
+                companyRatingList: [
+                    {
+                        rate : 0,
+                        max : 5,
+                        isReadonly: false,
+                        RatingText: "Work Culture",
+                        RatingID:"WORKCULTURERATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Employee Development / Training",
+                        RatingID: "EMPLOYEEDEVELOPMENTRATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Appraisal Process",
+                        RatingID: "APPRAISALPROCESSRATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Senior Management",
+                        RatingID: "SENIORMANAGEMENTRATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "HR Policies",
+                        RatingID: "HRPOLICIESRATING"
+                    },
+                    {
+                        rate: 0,
+                        max: 5,
+                        isReadonly: false,
+                        RatingText: "Your Boss/ Manager",
+                        RatingID: "YOURBOSSRATING"
+                    }
+                ],
             },
             
             companyReview: {
@@ -67,6 +115,12 @@ define([appLocation.preLogin], function (app) {
             }
 
         };
+
+        $scope.hoveringOver = function (index, value) {
+            $scope.postYourNoticeFormData.constants.companyRatingList[index].overStar = value;
+            $scope.postYourNoticeFormData.constants.companyRatingList[index].percent = 100 * (value / $scope.max);
+        };
+
         $scope.postYourNoticeFormData.companyReview.toggleCompanyGoodPoint = function(index) {
             console.log($scope.postYourNoticeFormData.constants.companyGoodPointList[index].isSelected);
             $scope.postYourNoticeFormData.constants.companyGoodPointList[index].isSelected = $scope.postYourNoticeFormData.constants.companyGoodPointList[index].isSelected?false:true;
