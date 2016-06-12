@@ -83,6 +83,9 @@ appRequire = require
             ng_infinite_scroll: {
                 deps: ["jquery", "angular"]
             },
+            rzslider: {
+                deps: ["jquery", "angular"]
+            },
             prettify: { //used 
                 deps: ["jquery"]
             },
@@ -195,7 +198,7 @@ appRequire = require
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "bootstrap_ui", "ngtimeago"]
             },
             beforeLoginPostYourNotice: {
-                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "rzslider"]
             },
         },
         paths: {
@@ -238,6 +241,7 @@ appRequire = require
             motionCaptcha: "../../App/js/jquery.motionCaptcha.0.2",
             //jquery_particleground: "../../App/js/jquery.particleground",
             ngtimeago: "../../App/js/angular/ngtimeago",
+            rzslider: "../../App/js/angular/rzslider",
             ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
             bootstrap_wysihtml5: "../../App/third-Party/wysihtml5/lib/js/bootstrap3-wysihtml5.all.min",
@@ -291,7 +295,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
     "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog", "beforeLoginAllBlogs",
-    "beforeLoginSingleWorkgraphy", "jquery_totemticker", "beforeLoginOrbitFeed"
+    "beforeLoginSingleWorkgraphy", "jquery_totemticker", "beforeLoginOrbitFeed", "rzslider"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });

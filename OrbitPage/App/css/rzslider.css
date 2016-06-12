@@ -1,0 +1,206 @@
+
+.rzslider {
+    -moz-user-select: none;
+    display: inline-block;
+    height: 4px;
+    margin: 35px 0 15px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+}
+.rzslider.with-legend {
+    margin-bottom: 40px;
+}
+.rzslider[disabled] {
+    cursor: not-allowed;
+}
+.rzslider[disabled] .rz-pointer {
+    background-color: #d8e0f3;
+    cursor: not-allowed;
+}
+.rzslider span {
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+}
+.rzslider .rz-base {
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+.rzslider .rz-bar-wrapper {
+    box-sizing: border-box;
+    height: 32px;
+    left: 0;
+    margin-top: -16px;
+    padding-top: 16px;
+    width: 100%;
+    z-index: 1;
+}
+.rzslider .rz-bar-wrapper.rz-draggable {
+    cursor: move;
+}
+.rzslider .rz-bar {
+    background: #d8e0f3 none repeat scroll 0 0;
+    border-radius: 2px;
+    height: 4px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+.rzslider .rz-bar.rz-selection {
+    background: #0db9f0 none repeat scroll 0 0;
+    border-radius: 2px;
+    z-index: 2;
+}
+.rzslider .rz-pointer {
+    background-color: #0db9f0;
+    border-radius: 16px;
+    cursor: pointer;
+    height: 32px;
+    top: -14px;
+    width: 32px;
+    z-index: 3;
+}
+.rzslider .rz-pointer::after {
+    background: #ffffff none repeat scroll 0 0;
+    border-radius: 4px;
+    content: "";
+    height: 8px;
+    left: 12px;
+    position: absolute;
+    top: 12px;
+    width: 8px;
+}
+.rzslider .rz-pointer:hover::after {
+    background-color: #ffffff;
+}
+.rzslider .rz-pointer.rz-active {
+    z-index: 4;
+}
+.rzslider .rz-pointer.rz-active::after {
+    background-color: #451aff;
+}
+.rzslider .rz-bubble {
+    bottom: 16px;
+    color: #55637d;
+    cursor: default;
+    padding: 1px 3px;
+}
+.rzslider .rz-bubble.rz-selection {
+    top: 16px;
+}
+.rzslider .rz-bubble.rz-limit {
+    color: #55637d;
+}
+.rzslider .rz-ticks {
+    box-sizing: border-box;
+    display: flex;
+    height: 0;
+    justify-content: space-between;
+    left: 0;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0 11px;
+    position: absolute;
+    top: -3px;
+    width: 100%;
+    z-index: 1;
+}
+.rzslider .rz-ticks .rz-tick {
+    background: #d8e0f3 none repeat scroll 0 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 10px;
+    text-align: center;
+    width: 10px;
+}
+.rzslider .rz-ticks .rz-tick.rz-selected {
+    background: #0db9f0 none repeat scroll 0 0;
+}
+.rzslider .rz-ticks .rz-tick .rz-tick-value {
+    position: absolute;
+    top: -30px;
+    transform: translate(-50%, 0px);
+}
+.rzslider .rz-ticks .rz-tick .rz-tick-legend {
+    max-width: 50px;
+    position: absolute;
+    top: 24px;
+    transform: translate(-50%, 0px);
+    white-space: normal;
+}
+.rzslider .rz-ticks.rz-ticks-values-under .rz-tick-value {
+    bottom: -40px;
+    top: initial;
+}
+.rzslider.rz-vertical {
+    height: 100%;
+    margin: 0 20px;
+    padding: 0;
+    position: relative;
+    vertical-align: baseline;
+    width: 4px;
+}
+.rzslider.rz-vertical .rz-base {
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+.rzslider.rz-vertical .rz-bar-wrapper {
+    height: 100%;
+    left: 0;
+    margin: 0 0 0 -16px;
+    padding: 0 0 0 16px;
+    top: auto;
+    width: 32px;
+}
+.rzslider.rz-vertical .rz-bar {
+    bottom: 0;
+    height: 100%;
+    left: auto;
+    width: 4px;
+}
+.rzslider.rz-vertical .rz-pointer {
+    bottom: 0;
+    left: -14px !important;
+    top: auto;
+}
+.rzslider.rz-vertical .rz-bubble {
+    bottom: 0;
+    left: 16px !important;
+    margin-left: 3px;
+}
+.rzslider.rz-vertical .rz-bubble.rz-selection {
+    left: 16px !important;
+    top: auto;
+}
+.rzslider.rz-vertical .rz-ticks {
+    flex-direction: column-reverse;
+    height: 100%;
+    left: -3px;
+    padding: 11px 0;
+    top: 0;
+    width: 0;
+    z-index: 1;
+}
+.rzslider.rz-vertical .rz-ticks .rz-tick {
+    vertical-align: middle;
+}
+.rzslider.rz-vertical .rz-ticks .rz-tick .rz-tick-value {
+    left: 22px;
+    top: initial;
+    transform: translate(0px, -28%);
+}
+.rzslider.rz-vertical .rz-ticks .rz-tick .rz-tick-legend {
+    max-width: none;
+    right: 24px;
+    top: initial;
+    transform: translate(0px, -28%);
+    white-space: nowrap;
+}
+.rzslider.rz-vertical .rz-ticks.rz-ticks-values-under .rz-tick-value {
+    bottom: initial;
+    left: initial;
+    right: 12px;
+}

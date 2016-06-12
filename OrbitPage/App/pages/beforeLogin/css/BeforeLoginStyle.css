@@ -7487,3 +7487,30 @@ border-bottom: 1px solid #ddd;
 		}
 	}
 
+
+    .wrapper {
+    background: #fff;
+    padding: 40px;
+}
+article {
+    margin-bottom: 10px;
+}
+.tab-pane {
+    padding-top: 10px;
+}
+.field-title {
+    width: 100px;
+}
+.vertical-sliders {
+    margin: 0;
+}
+.vertical-sliders > div {
+    height: 250px;
+}
+
+.check
+{
+    opacity:0.5;
+	color:#996;
+	
+}
