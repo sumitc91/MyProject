@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginUserProfile', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope,$q, $sce, mentioUtil, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         $rootScope.userOrbitFeedList.show = true;
@@ -1241,9 +1241,173 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+
+
+
+        $scope.tinyMceOptions = {
+            init_instance_callback: function (editor) {
+                $scope.iframeElement = editor.iframeElement;
+            }
+        };
+
+        $scope.macros = {
+            'brb': 'Be right back',
+            'omw': 'On my way',
+            '(smile)': '<img src="http://a248.e.akamai.net/assets.github.com/images/icons/emoji/smile.png"' +
+                ' height="20" width="20">'
+        };
+
+        // shows the use of dynamic values in mentio-id and mentio-for to link elements
+        $scope.myIndexValue = "5";
+
+        $scope.searchPeople = function (term) {
+            var peopleList = [];
+            if (isNullOrEmpty(term)) {
+                term = "*";
+            }
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=Users&q='+term).then(function (response) {
+                //angular.forEach(response.data, function (item) {
+                //    if (item.name.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
+                //        peopleList.push(item);
+                //    }
+                //});
+                peopleList = response.data.Payload;
+                $scope.people = peopleList;
+                return $q.when(peopleList);
+            });
+
+            //var peopleList = [
+            //    {
+            //        "name": "Iqbal",
+            //        "bio": "I think therefore I am",
+            //        "imageUrl": "https://avatars0.githubusercontent.com/u/3493285?s=460"
+            //    },
+            //    {
+            //        "name": "Frank",
+            //        "bio": "Long walks in the park",
+            //        "imageUrl": "https://avatars0.githubusercontent.com/u/207585?s=460"
+            //    },
+            //    {
+            //        "name": "Suzie",
+            //        "bio": "Icecream eater",
+            //        "imageUrl": "http://educationalsoftware.wikispaces.com/file/view/manga_suzie.jpg/38030142/178x177/manga_suzie.jpg"
+            //    },
+            //    {
+            //        "name": "Godzilla",
+            //        "bio": "Roar!",
+            //        "imageUrl": "http://www.badassoftheweek.com/godzilla.jpg"
+            //    }
+            //];
+
+            //$scope.people = peopleList;
+            //return $q.when(peopleList);
+        };
+
+        $scope.getProductText = function (item) {
+            return '[~<strong>' + item.sku + '</strong>]';
+        };
+
+        $scope.getProductTextRaw = function (item) {
+            var deferred = $q.defer();
+            /* the select() function can also return a Promise which ment.io will handle
+            propertly during replacement */
+            // simulated async promise              
+            $timeout(function () {
+                deferred.resolve('#' + item.sku);
+            }, 500);
+            return deferred.promise;
+        };
+
+        $scope.getPeopleText = function (item) {
+            // note item.label is sent when the typedText wasn't found
+            return '[~<i>' + (item.name || item.label) + '</i>]';
+        };
+
+        $scope.getPeopleTextRaw = function (item) {
+            return '@' + item.name;
+        };
+
+        $scope.resetDemo = function () {
+            // finally enter content that will raise a menu after everything is set up
+            $timeout(function () {
+                var html = "Try me @ or add a macro like brb, omw, (smile)";
+                var htmlContent = document.querySelector('#htmlContent');
+                if (htmlContent) {
+                    var ngHtmlContent = angular.element(htmlContent);
+                    ngHtmlContent.html(html);
+                    ngHtmlContent.scope().htmlContent = html;
+                    // select right after the @
+                    mentioUtil.selectElement(null, htmlContent, [0], 8);
+                    ngHtmlContent.scope().$apply();
+                }
+            }, 0);
+        };
+
+        $rootScope.$on('$routeChangeSuccess', function (event, current) {
+            $scope.resetDemo();
+        });
+
+        $scope.theTextArea = 'Type an # and some text';
+        $scope.theTextArea2 = 'Type an @';
+       
+        $scope.resetDemo();
+
+        
     });
 
-    
+    app.directive('contenteditable', [
+        '$sce', function($sce) {
+            return {
+                restrict: 'A', // only activate on element attribute
+                require: '?ngModel', // get a hold of NgModelController
+                link: function(scope, element, attrs, ngModel) {
+
+                    function read() {
+                        var html = element.html();
+                        // When we clear the content editable the browser leaves a <br> behind
+                        // If strip-br attribute is provided then we strip this out
+                        if (attrs.stripBr && html === '<br>') {
+                            html = '';
+                        }
+                        ngModel.$setViewValue(html);
+                    }
+
+                    if (!ngModel) return; // do nothing if no ng-model
+
+                    // Specify how UI should be updated
+                    ngModel.$render = function() {
+                        if (ngModel.$viewValue !== element.html()) {
+                            element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+                        }
+                    };
+
+                    // Listen for change events to enable binding
+                    element.on('blur keyup change', function() {
+                        scope.$apply(read);
+                    });
+                    read(); // initialize
+                }
+            };
+        }
+    ]);
+
+    app.filter('words', function () {
+        return function (input, words) {
+            if (isNaN(words)) {
+                return input;
+            }
+            if (words <= 0) {
+                return '';
+            }
+            if (input) {
+                var inputWords = input.split(/\s+/);
+                if (inputWords.length > words) {
+                    input = inputWords.slice(0, words).join(' ') + '\u2026';
+                }
+            }
+            return input;
+        };
+    });
    
 });
 

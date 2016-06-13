@@ -86,6 +86,9 @@ appRequire = require
             rzslider: {
                 deps: ["jquery", "angular"]
             },
+            mentio: {
+                deps: ["jquery", "angular"]
+            },
             prettify: { //used 
                 deps: ["jquery"]
             },
@@ -171,7 +174,7 @@ appRequire = require
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui"]
             },
             beforeLoginUserProfile: {
-                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker"]
+                deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker", "mentio"]
             },
             beforeLoginOrbitFeed: {
                 deps: ["jquery", "beforeLoginApp", "angular", "restangular", "configureBlockUI", "toastMessage", "angular_input_stars", "bootstrap_ui", "AngularFileUploadController", "ngtimeago", "ng_infinite_scroll", "jquery_totemticker"]
@@ -242,6 +245,7 @@ appRequire = require
             //jquery_particleground: "../../App/js/jquery.particleground",
             ngtimeago: "../../App/js/angular/ngtimeago",
             rzslider: "../../App/js/angular/rzslider",
+            mentio: "../../App/js/angular/mentio",
             ng_infinite_scroll: "../../App/js/angular/ng-infinite-scroll.min",
             wysihtml5: "../../App/third-Party/wysihtml5/lib/js/wysihtml5-0.3.0",
             bootstrap_wysihtml5: "../../App/third-Party/wysihtml5/lib/js/bootstrap3-wysihtml5.all.min",
@@ -295,7 +299,7 @@ appRequire(["jquery", "angular", "jquery_toastmessage", "toastMessage","sanitize
     "angularjs_fileUpload_shim", "angularjs_fileUpload", "AngularFileUploadController", "motionCaptcha", "ngtimeago",
     "beforeLoginViewPostDetail", "ng_infinite_scroll", "filedrop", "fileDropScript", "beforeLoginPostStory", "beforeLoginWorkgraphy",
     "beforeLoginSingleBlog", "beforeLoginUrnotice", "beforeLoginPostYourNotice", "beforeLoginPostBlog", "beforeLoginAllBlogs",
-    "beforeLoginSingleWorkgraphy", "jquery_totemticker", "beforeLoginOrbitFeed", "rzslider"
+    "beforeLoginSingleWorkgraphy", "jquery_totemticker", "beforeLoginOrbitFeed", "rzslider", "mentio"
 ], function() {
     angular.bootstrap(document.getElementById("main"), ["beforeLoginApp"]);
 });
