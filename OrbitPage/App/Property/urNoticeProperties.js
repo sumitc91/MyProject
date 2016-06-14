@@ -344,3 +344,7 @@ function initializeHoverCard() {
 function isNullOrEmpty(str) {
     return (str == null || str == "");
 };
+
+function replaceAll(originalString, find, replace) {
+    return originalString.replace(new RegExp(find, 'g'), replace);
+};

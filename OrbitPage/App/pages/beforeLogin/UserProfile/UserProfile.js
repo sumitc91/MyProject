@@ -1325,11 +1325,11 @@ define([appLocation.preLogin], function (app) {
 
         $scope.getPeopleTextRaw = function (item) {
             //return '@' + item.name;
-            return '@[tag:'+item.name+'|'+item.vertexId+'|'+item.type+']';
+            return '@[tag:'+replaceAll(item.name,' ','_')+'|'+item.vertexId+'|'+item.type+']';
         };
 
         $scope.updateUserPostMessageHtml = function () {
-            var re = /\@\[tag:.\w+.\w+\|+.\d+\|\d]/gm;
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
             // /\@\[tag:.*]/gm;
             //var res = new RegExp("\@\[tag:.*]", "gi");
             //console.log(res);
@@ -1356,11 +1356,11 @@ define([appLocation.preLogin], function (app) {
             }
             $scope.UserPostMessageHtml = $scope.UserPostMessage;
             for (var i = 0; i < toReplace.length; i++) {
-                //console.log("toReplace : " + toReplace[i]);
-                //console.log("replacedWith : " + replacedWith[i]);
+                console.log("toReplace : " + toReplace[i]);
+                console.log("replacedWith : " + replacedWith[i]);
                 $scope.UserPostMessageHtml = $scope.UserPostMessageHtml.replace(toReplace[i], replacedWith[i]);
             }
-            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
+            console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
         };
 
         $scope.resetDemo = function () {
