@@ -128,27 +128,30 @@
             </form>-->
             <div class="form-group">
                 
-                <textarea class="form-control input-lg p-text-area" rows="2" 
+                <textarea class="form-control input-lg p-text-area" rows="2"
                           mentio
                           mentio-search="searchPeople(term)"
                           mentio-select="getPeopleTextRaw(item)"
                           mentio-template-url="/people-mentions.tpl"
                           mentio-items="people"
                           ng-model="UserPostMessage"
-                          placeholder="Whats in your mind today?" ></textarea>
-
+                          ng-change="updateUserPostMessageHtml()"
+                          placeholder="Whats in your mind today?"></textarea>
+                Preview:
+                <hr />
+                <div ng-bind-html="UserPostMessageHtml"></div>
+                
                 <script type="text/ng-template" id="/people-mentions.tpl">
-                    <ul class="list-group user-search">
-                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
-                            <img ng-src=" {{person.icon}}" class="user-photo" style="max-height: 50px;">
+                        <ul class="list-group user-search">
+                            <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
+                                <img ng-src=" {{person.icon}}" class="user-photo" style="max-height: 50px;">
                                 <span class="text-primary"
                                       ng-bind-html="person.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
-                            <em class="text-muted" ng-bind="person.vertexId | words:5"></em>
-                                </li>
-                    </ul>
-                </script>
+                                <em class="text-muted" ng-bind="person.type"></em>
+                            </li>
+                        </ul>
+                    </script>
 
-                <span class="caption small">Mentioned: {{typedTerm2}}</span>
             </div>
             
             <footer class="panel-footer">

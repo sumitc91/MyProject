@@ -7511,10 +7511,11 @@ article {
 .check
 {
     opacity:0.5;
-	color:#996;
-	
+	color:#996;	
 }
-
+.label-info {
+    background-color: #5bc0de;
+}
 .menu-highlighted {
     font-weight: bold;
 }

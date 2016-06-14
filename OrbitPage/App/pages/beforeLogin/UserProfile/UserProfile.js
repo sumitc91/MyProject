@@ -1265,7 +1265,7 @@ define([appLocation.preLogin], function (app) {
             if (isNullOrEmpty(term)) {
                 term = "*";
             }
-            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=Users&q='+term).then(function (response) {
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q='+term).then(function (response) {
                 //angular.forEach(response.data, function (item) {
                 //    if (item.name.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
                 //        peopleList.push(item);
@@ -1324,7 +1324,43 @@ define([appLocation.preLogin], function (app) {
         };
 
         $scope.getPeopleTextRaw = function (item) {
-            return '@' + item.name;
+            //return '@' + item.name;
+            return '@[tag:'+item.name+'|'+item.vertexId+'|'+item.type+']';
+        };
+
+        $scope.updateUserPostMessageHtml = function () {
+            var re = /\@\[tag:.\w+.\w+\|+.\d+\|\d]/gm;
+            // /\@\[tag:.*]/gm;
+            //var res = new RegExp("\@\[tag:.*]", "gi");
+            //console.log(res);
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            while (match = re.exec($scope.UserPostMessage)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']','');
+                if (userInfo[2]=='1')
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                else if(userInfo[2] == '2')
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ','_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                //if (match != null && match[0]!=null) {
+                //    var splitMatch = match[0].split('@');
+                //    for (var i = 0; i < splitMatch.length; i++) {
+                //        console.log(splitMatch[i]);
+                //    };
+                //}
+                //console.log(match[1]);
+            }
+            $scope.UserPostMessageHtml = $scope.UserPostMessage;
+            for (var i = 0; i < toReplace.length; i++) {
+                //console.log("toReplace : " + toReplace[i]);
+                //console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostMessageHtml = $scope.UserPostMessageHtml.replace(toReplace[i], replacedWith[i]);
+            }
+            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
         };
 
         $scope.resetDemo = function () {
