@@ -267,6 +267,8 @@ define([appLocation.preLogin], function (app) {
 
             var userPostData = {
                 Message: $scope.UserPostMessage,
+                MessageHtml: $scope.UserPostMessageHtml,
+                TaggedVertexId:$scope.taggedVertexId,
                 Image: $scope.NewPostImageUrl.link_m,                
                 VertexId: $scope.visitedUserVertexId
             };
@@ -724,7 +726,7 @@ define([appLocation.preLogin], function (app) {
                     "PostImage": $scope.UserPostList[postIndex].postInfo.newCommentImage,
                     "PostedByUser": $rootScope.clientDetailResponse.Email,
                     "PostedTime": new Date($.now()),
-                    "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
+                    "PostMessage": replaceTextWithLinks($scope.UserPostList[postIndex].postInfo.postUserComment),
                     "_id": "",
                     "_type": null
                 },
@@ -953,7 +955,9 @@ define([appLocation.preLogin], function (app) {
                         for (var i = 0; i < data.results.length; i++) {
 
                             data.results[i].postInfo.editableMode = false;
+                            data.results[i].postInfo.PostMessage = replaceTextWithLinks(data.results[i].postInfo.PostMessage);
                             if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
+                                
                                 data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);                                
                             }
 
@@ -1016,6 +1020,13 @@ define([appLocation.preLogin], function (app) {
                     newList[i].isLoggedInUserWall = false;
                 }
 
+                //console.log(newList[i]);
+                if (newList.length > 0) {
+                    //console.log("before : newList.PostMessage : " + newList[i].commentInfo.PostMessage);
+                    newList[i].commentInfo.PostMessage = replaceTextWithLinks(newList[i].commentInfo.PostMessage);
+                    //console.log("newList.PostMessage : " + newList[i].commentInfo.PostMessage);
+                }
+                
                 reversedList.push(newList[i]);                
             }
             return reversedList;
@@ -1262,8 +1273,8 @@ define([appLocation.preLogin], function (app) {
 
         $scope.searchPeople = function (term) {
             var peopleList = [];
-            if (isNullOrEmpty(term)) {
-                term = "*";
+            if (term.length<2) {
+                return $q.when(peopleList);
             }
             return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q='+term).then(function (response) {
                 //angular.forEach(response.data, function (item) {
@@ -1325,42 +1336,73 @@ define([appLocation.preLogin], function (app) {
 
         $scope.getPeopleTextRaw = function (item) {
             //return '@' + item.name;
-            return '@[tag:'+replaceAll(item.name,' ','_')+'|'+item.vertexId+'|'+item.type+']';
+            return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name,',','_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
         };
 
         $scope.updateUserPostMessageHtml = function () {
             var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
-            // /\@\[tag:.*]/gm;
-            //var res = new RegExp("\@\[tag:.*]", "gi");
-            //console.log(res);
+           
             var match;
             var toReplace = [];
             var replacedWith = [];
+            $scope.taggedVertexId = [];
             while (match = re.exec($scope.UserPostMessage)) {
                 // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
                 //console.log(match[0]);
                 toReplace.push(match[0]);
                 var userInfo = match[0].replace('@[tag:', '').split('|');
                 userInfo[2] = userInfo[2].replace(']','');
-                if (userInfo[2]=='1')
+                if (userInfo[2] == '1') {
                     replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
-                else if(userInfo[2] == '2')
-                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ','_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
-                //if (match != null && match[0]!=null) {
-                //    var splitMatch = match[0].split('@');
-                //    for (var i = 0; i < splitMatch.length; i++) {
-                //        console.log(splitMatch[i]);
-                //    };
-                //}
-                //console.log(match[1]);
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }                    
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+                    
             }
             $scope.UserPostMessageHtml = $scope.UserPostMessage;
             for (var i = 0; i < toReplace.length; i++) {
                 console.log("toReplace : " + toReplace[i]);
                 console.log("replacedWith : " + replacedWith[i]);
-                $scope.UserPostMessageHtml = $scope.UserPostMessageHtml.replace(toReplace[i], replacedWith[i]);
+                $scope.UserPostMessageHtml = $scope.UserPostMessageHtml.replace(toReplace[i], replacedWith[i]);               
             }
+             
             console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
+        };
+
+        $scope.updateUserCommentMessageHtml = function (postIndex) {
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            $scope.taggedVertexId = [];
+            while (match = re.exec($scope.UserPostList[postIndex].postInfo.postUserComment)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']', '');
+                if (userInfo[2] == '1') {
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+
+            }
+            $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserComment;
+            for (var i = 0; i < toReplace.length; i++) {
+                console.log("toReplace : " + toReplace[i]);
+                console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserCommentHtml.replace(toReplace[i], replacedWith[i]);
+            }
+
+            console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
         };
 
         $scope.resetDemo = function () {

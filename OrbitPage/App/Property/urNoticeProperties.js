@@ -348,3 +348,35 @@ function isNullOrEmpty(str) {
 function replaceAll(originalString, find, replace) {
     return originalString.replace(new RegExp(find, 'g'), replace);
 };
+
+function replaceTextWithLinks( message ) {
+        var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+        
+        var match;
+        var toReplace = [];
+        var replacedWith = [];
+        
+        while (match = re.exec(message)) {
+            // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+            //console.log(match[0]);
+            toReplace.push(match[0]);
+            var userInfo = match[0].replace('@[tag:', '').split('|');
+            userInfo[2] = userInfo[2].replace(']', '');
+            if (userInfo[2] == '1') {
+                replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
+            }
+            else if (userInfo[2] == '2') {
+                replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
+            }
+
+        }
+        var messageHtml = message;
+        for (var i = 0; i < toReplace.length; i++) {
+            //console.log("toReplace : " + toReplace[i]);
+            //console.log("replacedWith : " + replacedWith[i]);
+            messageHtml = messageHtml.replace(toReplace[i], replacedWith[i]);
+        }
+
+    return messageHtml;
+    //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
+};

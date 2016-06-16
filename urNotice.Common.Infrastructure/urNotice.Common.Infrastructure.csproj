@@ -318,6 +318,7 @@
     <Compile Include="Model\urNoticeModel\Solr\UnWorkgraphySolr.cs" />
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerApiCommonDetail.cs" />
     <Compile Include="Model\urNoticeModel\Swagger\SwaggerAuth.cs" />
+    <Compile Include="Model\urNoticeModel\User\TaggedVertexIdModel.cs" />
     <Compile Include="Model\urNoticeModel\User\UserNewPostRequest.cs" />
     <Compile Include="Model\urNoticeModel\User\UserNotificationGraphModel.cs" />
     <Compile Include="Model\urNoticeModel\User\UserPushNotificationListWrapper.cs" />

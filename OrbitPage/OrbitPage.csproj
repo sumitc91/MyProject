@@ -183,6 +183,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App\css\all.css" />
+    <Content Include="App\css\rzslider.css" />
     <Content Include="App\css\bannerscollection_zoominout.css" />
     <Content Include="App\css\jquery.motionCaptcha.0.2.css" />
     <Content Include="App\css\skins\generous\bottomNavBg.png" />
@@ -291,6 +292,8 @@
     <Content Include="App\js\angular.js" />
     <Content Include="App\js\angular.min.js" />
     <Content Include="App\js\angular\angucomplete-alt.min.js" />
+    <Content Include="App\js\angular\mentio.js" />
+    <Content Include="App\js\angular\rzslider.js" />
     <Content Include="App\js\angular\ngSanitize\filter\linky.js" />
     <Content Include="App\js\angular\ngSanitize\sanitize.js" />
     <Content Include="App\js\angular\ngtimeago.js" />
@@ -894,6 +897,8 @@
     <Content Include="EmailTemplate\CreateAccountEmail.html" />
     <Content Include="EmailTemplate\ForgetPasswordEmail.html" />
     <Content Include="Global.asax" />
+    <Content Include="App\data\peopledata.json" />
+    <Content Include="App\data\simplepeopledata.json" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
