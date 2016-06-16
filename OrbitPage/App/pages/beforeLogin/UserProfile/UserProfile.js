@@ -1277,41 +1277,27 @@ define([appLocation.preLogin], function (app) {
                 return $q.when(peopleList);
             }
             return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q='+term).then(function (response) {
-                //angular.forEach(response.data, function (item) {
-                //    if (item.name.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
-                //        peopleList.push(item);
-                //    }
-                //});
+                
                 peopleList = response.data.Payload;
                 $scope.people = peopleList;
                 return $q.when(peopleList);
             });
 
-            //var peopleList = [
-            //    {
-            //        "name": "Iqbal",
-            //        "bio": "I think therefore I am",
-            //        "imageUrl": "https://avatars0.githubusercontent.com/u/3493285?s=460"
-            //    },
-            //    {
-            //        "name": "Frank",
-            //        "bio": "Long walks in the park",
-            //        "imageUrl": "https://avatars0.githubusercontent.com/u/207585?s=460"
-            //    },
-            //    {
-            //        "name": "Suzie",
-            //        "bio": "Icecream eater",
-            //        "imageUrl": "http://educationalsoftware.wikispaces.com/file/view/manga_suzie.jpg/38030142/178x177/manga_suzie.jpg"
-            //    },
-            //    {
-            //        "name": "Godzilla",
-            //        "bio": "Roar!",
-            //        "imageUrl": "http://www.badassoftheweek.com/godzilla.jpg"
-            //    }
-            //];
+        };
 
-            //$scope.people = peopleList;
-            //return $q.when(peopleList);
+        $scope.searchCommentPeople = function (postIndex,term) {
+            var peopleList = [];
+            if (term.length < 2) {
+                return $q.when(peopleList);
+            }
+            $scope.UserPostList[postIndex].postInfo.startedSearch = true;
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q=' + term).then(function (response) {
+
+                peopleList = response.data.Payload;
+                $scope.people = peopleList;
+                return $q.when(peopleList);
+            });
+
         };
 
         $scope.getProductText = function (item) {
@@ -1337,6 +1323,16 @@ define([appLocation.preLogin], function (app) {
         $scope.getPeopleTextRaw = function (item) {
             //return '@' + item.name;
             return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name,',','_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
+        };
+
+        $scope.getPeopleCommentTextRaw = function (postIndex,item) {
+            //return '@' + item.name;
+
+            $timeout(function () {
+                $scope.UserPostList[postIndex].postInfo.startedSearch = false;
+            }, 250);
+            
+            return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name, ',', '_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
         };
 
         $scope.updateUserPostMessageHtml = function () {
@@ -1377,7 +1373,7 @@ define([appLocation.preLogin], function (app) {
 
             var match;
             var toReplace = [];
-            var replacedWith = [];
+            var replacedWith = [];            
             $scope.taggedVertexId = [];
             while (match = re.exec($scope.UserPostList[postIndex].postInfo.postUserComment)) {
                 // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
@@ -1397,12 +1393,12 @@ define([appLocation.preLogin], function (app) {
             }
             $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserComment;
             for (var i = 0; i < toReplace.length; i++) {
-                console.log("toReplace : " + toReplace[i]);
-                console.log("replacedWith : " + replacedWith[i]);
+                //console.log("toReplace : " + toReplace[i]);
+                //console.log("replacedWith : " + replacedWith[i]);
                 $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserCommentHtml.replace(toReplace[i], replacedWith[i]);
             }
 
-            console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
+            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
         };
 
         $scope.resetDemo = function () {

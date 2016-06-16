@@ -287,16 +287,16 @@
                                         
                                         <input class="form-control"
                                                mentio
-                                               mentio-search="searchPeople(term)"
-                                               mentio-select="getPeopleTextRaw(item)"
+                                               mentio-search="searchCommentPeople($index,term)"
+                                               mentio-select="getPeopleCommentTextRaw($index,item)"
                                                mentio-template-url="/people-mentions.tpl"
                                                mentio-items="people"
                                                ng-model="post.postInfo.postUserComment"
                                                ng-change="updateUserCommentMessageHtml($index)"
-                                               ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)"
+                                               ng-keyup="post.postInfo.startedSearch == false && $event.keyCode == 13 && commentOnUserPost($index)"
                                                placeholder="Add a comment"
                                                type="text"
-                                               ng-disabled="post.commentsInfo[$index].disableInputBox"> 
+                                               ng-disabled="post.commentsInfo[0].disableInputBox"> 
 
                                         <span class="input-group-addon">
                                             <a ng-click="uploadImageOncomment($index)"><i class="fa fa-camera"></i></a>                                       
@@ -306,6 +306,7 @@
                                         </span>
                                     </div>
                                     <div class="row">
+                                        <span ng-bind="post.postInfo.startedSearch"></span>
                                         &nbsp;&nbsp; <div ng-bind-html="post.postInfo.postUserCommentHtml"></div>
                                     </div>
                                 </div>
