@@ -726,7 +726,9 @@ define([appLocation.preLogin], function (app) {
                     "PostImage": $scope.UserPostList[postIndex].postInfo.newCommentImage,
                     "PostedByUser": $rootScope.clientDetailResponse.Email,
                     "PostedTime": new Date($.now()),
-                    "PostMessage": replaceTextWithLinks($scope.UserPostList[postIndex].postInfo.postUserComment),
+                    //"PostMessage": replaceTextWithLinks($scope.UserPostList[postIndex].postInfo.postUserComment),
+                    "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
+                    "PostMessageHtml": replaceTextWithLinks($scope.UserPostList[postIndex].postInfo.postUserComment),
                     "_id": "",
                     "_type": null
                 },
@@ -955,7 +957,7 @@ define([appLocation.preLogin], function (app) {
                         for (var i = 0; i < data.results.length; i++) {
 
                             data.results[i].postInfo.editableMode = false;
-                            data.results[i].postInfo.PostMessage = replaceTextWithLinks(data.results[i].postInfo.PostMessage);
+                            data.results[i].postInfo.PostMessageHtml = replaceTextWithLinks(data.results[i].postInfo.PostMessage);
                             if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
                                 
                                 data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);                                
@@ -1023,7 +1025,7 @@ define([appLocation.preLogin], function (app) {
                 //console.log(newList[i]);
                 if (newList.length > 0) {
                     //console.log("before : newList.PostMessage : " + newList[i].commentInfo.PostMessage);
-                    newList[i].commentInfo.PostMessage = replaceTextWithLinks(newList[i].commentInfo.PostMessage);
+                    newList[i].commentInfo.PostMessageHtml = replaceTextWithLinks(newList[i].commentInfo.PostMessage);
                     //console.log("newList.PostMessage : " + newList[i].commentInfo.PostMessage);
                 }
                 
@@ -1300,20 +1302,7 @@ define([appLocation.preLogin], function (app) {
 
         };
 
-        $scope.getProductText = function (item) {
-            return '[~<strong>' + item.sku + '</strong>]';
-        };
-
-        $scope.getProductTextRaw = function (item) {
-            var deferred = $q.defer();
-            /* the select() function can also return a Promise which ment.io will handle
-            propertly during replacement */
-            // simulated async promise              
-            $timeout(function () {
-                deferred.resolve('#' + item.sku);
-            }, 500);
-            return deferred.promise;
-        };
+        
 
         $scope.getPeopleText = function (item) {
             // note item.label is sent when the typedText wasn't found

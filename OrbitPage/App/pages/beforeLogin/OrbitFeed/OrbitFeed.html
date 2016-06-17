@@ -96,7 +96,28 @@
         
         <section class="panel profile-info">
             <form>
-                <textarea class="form-control input-lg p-text-area" rows="2" ng-model="UserPostMessage" placeholder="Whats in your mind today?"></textarea>
+                <textarea class="form-control input-lg p-text-area" rows="2"
+                          mentio
+                          mentio-search="searchPeople(term)"
+                          mentio-select="getPeopleTextRaw(item)"
+                          mentio-template-url="/people-mentions.tpl"
+                          mentio-items="people"
+                          ng-model="UserPostMessage"
+                          ng-change="updateUserPostMessageHtml()"
+                          placeholder="Whats in your mind today?"></textarea>
+                Preview:
+                <hr />
+                <div ng-bind-html="UserPostMessageHtml"></div>
+                <script type="text/ng-template" id="/people-mentions.tpl">
+                    <ul class="list-group user-search">
+                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
+                            <img ng-src=" {{person.icon}}" class="user-photo" style="max-height: 50px;">
+                            <span class="text-primary"
+                                  ng-bind-html="person.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+                            <em class="text-muted" ng-bind="person.type"></em>
+                        </li>
+                    </ul>
+                </script>
             </form>
             <footer class="panel-footer">
                 <button class="btn btn-danger pull-right" ng-click="createNewUserPost()">Post</button>
@@ -165,7 +186,7 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <p class="fb-user-status" ng-bind="post.postInfo.PostMessage" ng-show="!post.postInfo.editableMode">
+                    <p class="fb-user-status" ng-bind-html="post.postInfo.PostMessageHtml" ng-show="!post.postInfo.editableMode">
                     </p>
                     <img ng-show="post.postInfo.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
                     <!--<textarea rows="4" cols="50" ng-bind="post.postInfo.PostMessage" ng-show="post.postInfo.editableMode"></textarea>-->
@@ -204,7 +225,7 @@
                                 </a>
                                 <div class="cmt-details">
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
-                                    <span ng-bind="comment.commentInfo.PostMessage" ng-show="!comment.editableMode"></span>
+                                    <span ng-bind-html="comment.commentInfo.PostMessageHtml" ng-show="!comment.editableMode"></span>
                                     <div ng-show="comment.editableMode">
                                         <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">
                                         <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
@@ -238,13 +259,29 @@
                                 </a>
                                 <div class="cmt-form">
                                     <div class="input-group">
-                                        <input class="form-control" ng-model="post.postInfo.postUserComment" ng-keyup="$event.keyCode == 13 && commentOnUserPost($index)" placeholder="Add a comment" type="text" ng-disabled="post.commentsInfo[0].disableInputBox">
+                                        <input class="form-control"
+                                               mentio
+                                               mentio-search="searchCommentPeople($index,term)"
+                                               mentio-select="getPeopleCommentTextRaw($index,item)"
+                                               mentio-template-url="/people-mentions.tpl"
+                                               mentio-items="people"
+                                               ng-model="post.postInfo.postUserComment"
+                                               ng-change="updateUserCommentMessageHtml($index)"
+                                               ng-keyup="post.postInfo.startedSearch == false && $event.keyCode == 13 && commentOnUserPost($index)"
+                                               placeholder="Add a comment"
+                                               type="text"
+                                               ng-disabled="post.commentsInfo[0].disableInputBox">
                                         <span class="input-group-addon">
                                             <a ng-click="uploadImageOncomment($index)"><i class="fa fa-camera"></i></a>
                                             <a ng-click="commentOnUserPost($index)">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </span>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        
+                                        &nbsp;&nbsp; <div ng-bind-html="post.postInfo.postUserCommentHtml"></div>
                                     </div>
                                 </div>
                                 <div>

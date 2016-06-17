@@ -1,7 +1,7 @@
 'use strict';
 define([appLocation.preLogin], function (app) {
 
-    app.controller('beforeLoginViewPostDetail', function ($scope, $http, $upload, $timeout,$location, $routeParams, $rootScope, CookieUtil) {
+    app.controller('beforeLoginViewPostDetail', function ($scope, $http, $upload, $timeout, $location, $routeParams, $rootScope, $q, $sce, mentioUtil, CookieUtil) {
         $('title').html("edit page"); //TODO: change the title so cann't be tracked in log
 
         $rootScope.userOrbitFeedList.show = true;
@@ -478,6 +478,7 @@ define([appLocation.preLogin], function (app) {
                     "PostedByUser": $rootScope.clientDetailResponse.Email,
                     "PostedTime": new Date($.now()),
                     "PostMessage": $scope.UserPostList[postIndex].postInfo.postUserComment,
+                    "PostMessageHtml": replaceTextWithLinks($scope.UserPostList[postIndex].postInfo.postUserComment),
                     "_id": "",
                     "_type": null
                 },
@@ -678,6 +679,9 @@ define([appLocation.preLogin], function (app) {
                     if ($scope.UserPostList != null && data.results.length>0) {
                         var absoluteIndex = 0; // only 1 post available.
                         $scope.visitedUserVertexId = data.results[absoluteIndex].postedToUser[0]._id;
+                        //console.log(data.results[absoluteIndex].postInfo.PostMessage);
+                        data.results[absoluteIndex].postInfo.PostMessageHtml = replaceTextWithLinks(data.results[absoluteIndex].postInfo.PostMessage);
+                        //console.log(data.results[absoluteIndex].postInfo.PostMessageHtml);
                         if (data.results[absoluteIndex].commentsInfo != null && data.results[absoluteIndex].commentsInfo.length > 0) {
                             data.results[absoluteIndex].commentsInfo = reverseCommentsInfoList(data.results[absoluteIndex].commentsInfo);
                         }
@@ -733,6 +737,12 @@ define([appLocation.preLogin], function (app) {
                     newList[i].isLoggedInUserWall = true;
                 } else {
                     newList[i].isLoggedInUserWall = false;
+                }
+                //console.log(newList[i]);
+                if (newList.length > 0) {
+                    //console.log("before : newList.PostMessage : " + newList[i].commentInfo.PostMessage);
+                    newList[i].commentInfo.PostMessageHtml = replaceTextWithLinks(newList[i].commentInfo.PostMessage);
+                    //console.log("newList.PostMessage : " + newList[i].commentInfo.PostMessage);
                 }
 
                 reversedList.push(newList[i]);
@@ -942,6 +952,123 @@ define([appLocation.preLogin], function (app) {
             });
 
 
+        };
+
+        $scope.searchPeople = function (term) {
+            var peopleList = [];
+            if (term.length < 2) {
+                return $q.when(peopleList);
+            }
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q=' + term).then(function (response) {
+
+                peopleList = response.data.Payload;
+                $scope.people = peopleList;
+                return $q.when(peopleList);
+            });
+
+        };
+
+        $scope.searchCommentPeople = function (postIndex, term) {
+            var peopleList = [];
+            if (term.length < 2) {
+                return $q.when(peopleList);
+            }
+            $scope.UserPostList[postIndex].postInfo.startedSearch = true;
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q=' + term).then(function (response) {
+
+                peopleList = response.data.Payload;
+                $scope.people = peopleList;
+                return $q.when(peopleList);
+            });
+
+        };
+
+
+
+        $scope.getPeopleText = function (item) {
+            // note item.label is sent when the typedText wasn't found
+            return '[~<i>' + (item.name || item.label) + '</i>]';
+        };
+
+        $scope.getPeopleTextRaw = function (item) {
+            //return '@' + item.name;
+            return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name, ',', '_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
+        };
+
+        $scope.getPeopleCommentTextRaw = function (postIndex, item) {
+            //return '@' + item.name;
+
+            $timeout(function () {
+                $scope.UserPostList[postIndex].postInfo.startedSearch = false;
+            }, 250);
+
+            return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name, ',', '_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
+        };
+
+        $scope.updateUserPostMessageHtml = function () {
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            $scope.taggedVertexId = [];
+            while (match = re.exec($scope.UserPostMessage)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']', '');
+                if (userInfo[2] == '1') {
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+
+            }
+            $scope.UserPostMessageHtml = $scope.UserPostMessage;
+            for (var i = 0; i < toReplace.length; i++) {
+                console.log("toReplace : " + toReplace[i]);
+                console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostMessageHtml = $scope.UserPostMessageHtml.replace(toReplace[i], replacedWith[i]);
+            }
+
+            console.log("$scope.UserPostMessageHtml : " + $scope.UserPostMessageHtml);
+        };
+
+        $scope.updateUserCommentMessageHtml = function (postIndex) {
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            $scope.taggedVertexId = [];
+            while (match = re.exec($scope.UserPostList[postIndex].postInfo.postUserComment)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']', '');
+                if (userInfo[2] == '1') {
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+
+            }
+            $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserComment;
+            for (var i = 0; i < toReplace.length; i++) {
+                //console.log("toReplace : " + toReplace[i]);
+                //console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserCommentHtml.replace(toReplace[i], replacedWith[i]);
+            }
+
+            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
         };
     });
 
