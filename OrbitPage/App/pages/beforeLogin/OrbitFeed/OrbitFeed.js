@@ -1079,6 +1079,7 @@ define([appLocation.preLogin], function (app) {
         $scope.enableEditOnUserPost = function (postIndex) {
             $scope.UserPostList[postIndex].postInfo.editableMode = true;
             $scope.UserPostList[postIndex].postInfo.OriginalPostMessage = $scope.UserPostList[postIndex].postInfo.PostMessage;
+            $scope.UserPostList[postIndex].postInfo.OriginalPostImage = $scope.UserPostList[postIndex].postInfo.PostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }

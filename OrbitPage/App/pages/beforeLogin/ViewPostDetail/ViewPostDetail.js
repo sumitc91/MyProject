@@ -797,6 +797,7 @@ define([appLocation.preLogin], function (app) {
         $scope.enableEditOnUserPost = function (postIndex) {
             $scope.UserPostList[postIndex].postInfo.editableMode = true;
             $scope.UserPostList[postIndex].postInfo.OriginalPostMessage = $scope.UserPostList[postIndex].postInfo.PostMessage;
+            $scope.UserPostList[postIndex].postInfo.OriginalPostImage = $scope.UserPostList[postIndex].postInfo.PostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }
@@ -805,6 +806,7 @@ define([appLocation.preLogin], function (app) {
         $scope.cancelEditOnUserPost = function (postIndex) {
             $scope.UserPostList[postIndex].postInfo.editableMode = false;
             $scope.UserPostList[postIndex].postInfo.PostMessage = $scope.UserPostList[postIndex].postInfo.OriginalPostMessage;
+            $scope.UserPostList[postIndex].postInfo.PostImage = $scope.UserPostList[postIndex].postInfo.OriginalPostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }
