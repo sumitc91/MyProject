@@ -363,10 +363,10 @@ function replaceTextWithLinks( message ) {
             var userInfo = match[0].replace('@[tag:', '').split('|');
             userInfo[2] = userInfo[2].replace(']', '');
             if (userInfo[2] == '1') {
-                replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
+                replacedWith.push("@<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
             }
             else if (userInfo[2] == '2') {
-                replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
+                replacedWith.push("@<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");                
             }
 
         }

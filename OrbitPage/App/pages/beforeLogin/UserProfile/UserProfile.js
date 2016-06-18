@@ -1361,11 +1361,11 @@ define([appLocation.preLogin], function (app) {
                 var userInfo = match[0].replace('@[tag:', '').split('|');
                 userInfo[2] = userInfo[2].replace(']','');
                 if (userInfo[2] == '1') {
-                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
                 }                    
                 else if (userInfo[2] == '2') {
-                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
                 }
                     
@@ -1394,11 +1394,11 @@ define([appLocation.preLogin], function (app) {
                 var userInfo = match[0].replace('@[tag:', '').split('|');
                 userInfo[2] = userInfo[2].replace(']', '');
                 if (userInfo[2] == '1') {
-                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
                 }
                 else if (userInfo[2] == '2') {
-                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
                 }
 
@@ -1427,11 +1427,11 @@ define([appLocation.preLogin], function (app) {
                 var userInfo = match[0].replace('@[tag:', '').split('|');
                 userInfo[2] = userInfo[2].replace(']', '');
                 if (userInfo[2] == '1') {
-                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
                 }
                 else if (userInfo[2] == '2') {
-                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
                 }
 
@@ -1460,11 +1460,11 @@ define([appLocation.preLogin], function (app) {
                 var userInfo = match[0].replace('@[tag:', '').split('|');
                 userInfo[2] = userInfo[2].replace(']', '');
                 if (userInfo[2] == '1') {
-                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
                 }
                 else if (userInfo[2] == '2') {
-                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    replacedWith.push("@<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
                     $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
                 }
 
