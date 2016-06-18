@@ -21,6 +21,8 @@ namespace urNotice.Services.GraphDb
         {
             string url = TitanGraphConfig.Server;
             var response = CreateVertex(graphName, properties, url);
+            if (!response.ContainsKey(TitanGraphConstants.Id))
+                return null;
             var orbitPageVertexDetail = new OrbitPageVertexDetail
             {
                 url = url,

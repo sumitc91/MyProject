@@ -53,6 +53,9 @@ namespace OrbitPage.Controllers
                     message = String.Empty;
                 }
 
+                if (string.IsNullOrEmpty(userWallVertexId))
+                    userWallVertexId = session.UserVertexId;
+
                 HashSet<string> sendNotificationHashSetResponse = null;
                 IPerson clientModel = new Consumer();
                 var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId,userPostData.TaggedVertexId, out sendNotificationHashSetResponse);

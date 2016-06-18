@@ -65,25 +65,28 @@ namespace urNotice.Services.Management.NotificationManagement
                 
                 usersToBeIgnored.Add(session.UserVertexId);
 
-                foreach (var userIds in taggedVertexId)
+                if (taggedVertexId != null)
                 {
-
-                    if (usersToBeIgnored.Contains(userIds.VertexId))
-                        continue;
-
-                    userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    notificationModel = new UserNotificationGraphModel
+                    foreach (var userIds in taggedVertexId)
                     {
-                        _outV = userIds.VertexId,
-                        _inV = postVertexId,
-                        _label = EdgeLabelEnum.Notification.ToString(),
-                        NotificationInitiatedByVertexId = session.UserVertexId,
-                        Type = EdgeLabelEnum.PostTagNotification.ToString(),
-                        UserName = session.UserName,
-                        parentPostId = postVertexId
-                    };
-                    userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
-                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds.VertexId);
+
+                        if (usersToBeIgnored.Contains(userIds.VertexId))
+                            continue;
+
+                        userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
+                        notificationModel = new UserNotificationGraphModel
+                        {
+                            _outV = userIds.VertexId,
+                            _inV = postVertexId,
+                            _label = EdgeLabelEnum.Notification.ToString(),
+                            NotificationInitiatedByVertexId = session.UserVertexId,
+                            Type = EdgeLabelEnum.PostTagNotification.ToString(),
+                            UserName = session.UserName,
+                            parentPostId = postVertexId
+                        };
+                        userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
+                        userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds.VertexId);
+                    }
                 }
 
             }
@@ -194,6 +197,8 @@ namespace urNotice.Services.Management.NotificationManagement
                 IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
                 IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, canEdit, canDelete, sendNotificationToUsers);
 
+                if (addVertexResponse == null)
+                    return;
 
                 properties[EdgePropertyEnum._outV.ToString()] = userNotificationGraphModel.NotificationInitiatedByVertexId;// who created notification
                 properties[EdgePropertyEnum._inV.ToString()] = addVertexResponse[TitanGraphConstants.Id]; // to created notification vertex
