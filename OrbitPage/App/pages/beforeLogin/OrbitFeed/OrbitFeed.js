@@ -1278,7 +1278,20 @@ define([appLocation.preLogin], function (app) {
 
         };
 
+        $scope.searchPostCommentPeople = function (postIndex, commentIndex, term) {
+            var peopleList = [];
+            if (term.length < 2) {
+                return $q.when(peopleList);
+            }
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].startedSearch = true;
+            return $http.get($rootScope.sitehosturl + '/search/SearchAll?type=All&q=' + term).then(function (response) {
 
+                peopleList = response.data.Payload;
+                $scope.people = peopleList;
+                return $q.when(peopleList);
+            });
+
+        };
 
         $scope.getPeopleText = function (item) {
             // note item.label is sent when the typedText wasn't found
@@ -1300,7 +1313,17 @@ define([appLocation.preLogin], function (app) {
             return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name, ',', '_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
         };
 
-        $scope.updateUserPostMessageHtml = function () {
+        $scope.getPeoplePostCommentTextRaw = function (postIndex, commentIndex, item) {
+            //return '@' + item.name;
+
+            $timeout(function () {
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].startedSearch = false;
+            }, 250);
+
+            return '@[tag:' + replaceAll(replaceAll(replaceAll(item.name, ',', '_'), '-', '_'), ' ', '_') + '|' + item.vertexId + '|' + item.type + ']';
+        };
+
+        $scope.updateUserNewPostMessageHtml = function () {
             var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
 
             var match;
@@ -1361,6 +1384,72 @@ define([appLocation.preLogin], function (app) {
                 //console.log("toReplace : " + toReplace[i]);
                 //console.log("replacedWith : " + replacedWith[i]);
                 $scope.UserPostList[postIndex].postInfo.postUserCommentHtml = $scope.UserPostList[postIndex].postInfo.postUserCommentHtml.replace(toReplace[i], replacedWith[i]);
+            }
+
+            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
+        };
+
+        $scope.updateUserPostCommentMessageHtml = function (postIndex, commentIndex) {
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            $scope.taggedVertexId = [];
+            while (match = re.exec($scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']', '');
+                if (userInfo[2] == '1') {
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+
+            }
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessageHtml = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage;
+            for (var i = 0; i < toReplace.length; i++) {
+                //console.log("toReplace : " + toReplace[i]);
+                //console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessageHtml = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessageHtml.replace(toReplace[i], replacedWith[i]);
+            }
+
+            //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);
+        };
+
+        $scope.updateUserPostMessageHtml = function (postIndex) {
+            var re = /\@\[tag:.\w+\|+.\d+\|\d]/gm;
+
+            var match;
+            var toReplace = [];
+            var replacedWith = [];
+            $scope.taggedVertexId = [];
+            while (match = re.exec($scope.UserPostList[postIndex].postInfo.PostMessage)) {
+                // full match is in match[0], whereas captured groups are in ...[1], ...[2], etc.
+                //console.log(match[0]);
+                toReplace.push(match[0]);
+                var userInfo = match[0].replace('@[tag:', '').split('|');
+                userInfo[2] = userInfo[2].replace(']', '');
+                if (userInfo[2] == '1') {
+                    replacedWith.push("<a href='/#/userprofile/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 1, VertexId: userInfo[1] });
+                }
+                else if (userInfo[2] == '2') {
+                    replacedWith.push("<a href='/#companydetails/" + userInfo[0].replace(' ', '_') + "/" + userInfo[1] + "'>" + userInfo[0] + "</a>");
+                    $scope.taggedVertexId.push({ Type: 2, VertexId: userInfo[1] });
+                }
+
+            }
+            $scope.UserPostList[postIndex].postInfo.PostMessageHtml = $scope.UserPostList[postIndex].postInfo.PostMessage;
+            for (var i = 0; i < toReplace.length; i++) {
+                //console.log("toReplace : " + toReplace[i]);
+                //console.log("replacedWith : " + replacedWith[i]);
+                $scope.UserPostList[postIndex].postInfo.PostMessageHtml = $scope.UserPostList[postIndex].postInfo.PostMessageHtml.replace(toReplace[i], replacedWith[i]);
             }
 
             //console.log("$scope.UserPostMessageHtml : " + $scope.UserPostList[postIndex].postInfo.postUserCommentHtml);

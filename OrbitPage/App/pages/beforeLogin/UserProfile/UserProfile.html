@@ -135,7 +135,7 @@
                           mentio-template-url="/people-mentions.tpl"
                           mentio-items="people"
                           ng-model="UserPostMessage"
-                          ng-change="updateUserPostMessageHtml()"
+                          ng-change="updateUserNewPostMessageHtml()"
                           placeholder="Whats in your mind today?"></textarea>
                 Preview:
                 <hr />
@@ -215,7 +215,20 @@
                     </p>
                     <img ng-show="post.postInfo.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
                     <!--<textarea rows="4" cols="50" ng-bind="post.postInfo.PostMessage" ng-show="post.postInfo.editableMode"></textarea>-->
-                    <input ng-show="post.postInfo.editableMode" ng-model="post.postInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit Post" type="text">
+                    <!--<input ng-show="post.postInfo.editableMode" ng-model="post.postInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit Post" type="text">-->
+                    <input class="form-control"
+                           mentio
+                           mentio-search="searchCommentPeople($index,term)"
+                           mentio-select="getPeopleCommentTextRaw($index,item)"
+                           mentio-template-url="/people-mentions.tpl"
+                           mentio-items="people"
+                           ng-show="post.postInfo.editableMode"
+                           ng-model="post.postInfo.PostMessage"
+                           ng-change="updateUserPostMessageHtml($index)"
+                           ng-keyup="post.postInfo.startedSearch == false && $event.keyCode == 13 && editCommentOnUserPost($index)"
+                           placeholder="Edit comment"
+                           type="text">
+                    
                     <div class="post-image" ng-show="!post.postInfo.editableMode && post.postInfo.PostImage">
                         <a class="fancybox" rel="group" href="{{post.postInfo.PostImage}}"><img class="image show-in-modal" ng-src="{{post.postInfo.PostImage}}" alt="" style="max-height:400px" /></a>
                     </div>
@@ -225,6 +238,9 @@
                         <input type="file" ng-file-select="onEditFileSelectLogoUrl($files,$index)">
                     </div>
                     <div class="editable-buttons" ng-show="post.postInfo.editableMode"><button type="button" ng-click="submitEditOnUserPost($index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditOnUserPost($index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
+                    <div class="row" ng-show="post.postInfo.editableMode">
+                        Preview : &nbsp;&nbsp; <span ng-bind-html="post.postInfo.PostMessageHtml"></span>
+                    </div>
                     <div class="fb-status-container fb-border">
                         <div class="fb-time-action">
                             <a title="Like this" ng-show="!post.alreadyLiked" ng-click="reactionOnUserPost($index)">Like</a>
@@ -252,8 +268,26 @@
                                     <span class="comment-user-name hover_div"><a href="#/userprofile/{{comment.commentedBy[0]._id}}" user_name="{{comment.commentedBy[0].Username}}" class="comment-user-name show_hovercard" name="{{comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName}}" profile_pic="{{comment.commentedBy[0].ImageUrl}}" cover_pic="{{comment.commentedBy[0].CoverImageUrl}}" ng-bind="comment.commentedBy[0].FirstName +' ' + comment.commentedBy[0].LastName"></a></span>
                                     <span ng-bind-html="comment.commentInfo.PostMessageHtml" ng-show="!comment.editableMode"></span>
                                     <div ng-show="comment.editableMode">
-                                        <input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">
-                                        <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
+                                        <!--<input ng-model="comment.commentInfo.PostMessage" ng-keyup="$event.keyCode == 13 && editCommentOnUserPost($index)" placeholder="Edit comment" type="text">-->
+                                        <div class="row">
+                                            <input class="form-control"
+                                                   mentio
+                                                   mentio-search="searchPostCommentPeople($parent.$index,$index,term)"
+                                                   mentio-select="getPeoplePostCommentTextRaw($parent.$index,$index,item)"
+                                                   mentio-template-url="/people-mentions.tpl"
+                                                   mentio-items="people"
+                                                   ng-model="comment.commentInfo.PostMessage"
+                                                   ng-change="updateUserPostCommentMessageHtml($parent.$index,$index)"
+                                                   ng-keyup="comment.commentInfo.startedSearch == false && $event.keyCode == 13 && submitEditcommentOnUserPost($parent.$index,$index)"
+                                                   placeholder="Edit comment"
+                                                   type="text">
+                                            <div class="editable-buttons"><button type="button" ng-click="submitEditcommentOnUserPost($parent.$index,$index)" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-ok"></i></button><button type="button" ng-click="cancelEditcommentOnUserPost($parent.$index,$index)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></button></div>
+
+                                        </div>
+                                        
+                                        <div class="row">
+                                            Preview : &nbsp;&nbsp; <span ng-bind-html="comment.commentInfo.PostMessageHtml"></span>
+                                        </div>
                                     </div>
                                     <img ng-show="comment.loadingIcon" src="../../App/img/loading/loading123.gif" style="height: 20px; float: right; margin: 10px 0px 0px;" />
                                     <div class="post-image" ng-show="comment.commentInfo.PostImage && !comment.editableMode">
@@ -307,7 +341,7 @@
                                     </div>
                                     <div class="row">
                                         
-                                        &nbsp;&nbsp; <div ng-bind-html="post.postInfo.postUserCommentHtml"></div>
+                                        Preview :&nbsp;&nbsp; <span ng-bind-html="post.postInfo.postUserCommentHtml"></span>
                                     </div>
                                 </div>
                                 <div>
