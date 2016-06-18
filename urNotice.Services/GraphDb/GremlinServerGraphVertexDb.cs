@@ -153,6 +153,7 @@ namespace urNotice.Services.GraphDb
         {
             var uri = new StringBuilder("/?gremlin=");
             //graph.addVertex(label, "person", "name", "marko", "age", 29);
+            var response = new Dictionary<String, String>();
 
             string graphProperties = string.Empty;
 
@@ -160,6 +161,11 @@ namespace urNotice.Services.GraphDb
             {
                 if (property.Key == VertexPropertyEnum.Type.ToString())
                 {
+                    if (string.IsNullOrEmpty(property.Value))
+                    {
+                        response["status"] = "404";
+                        return response;
+                    }
                     graphProperties += "label, '" + property.Value + "' ,";
                 }
                 else
@@ -192,7 +198,7 @@ namespace urNotice.Services.GraphDb
             var content = res.Content; // raw content as string 
 
             dynamic jsonResponse = JsonConvert.DeserializeObject(content);
-            var response = new Dictionary<String, String>();
+            
             response["status"] = "200";
             response[TitanGraphConstants.Id] = jsonResponse.result.data[0].id;
             response[TitanGraphConstants.RexsterUri] = url;

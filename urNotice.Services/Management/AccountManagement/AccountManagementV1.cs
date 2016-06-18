@@ -512,7 +512,7 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').select('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').by().by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost')).by(__.in('Like').fold()).by(__.in('Like').has('Username','" + userEmail + "').fold()).by(__.in('Comment').count()).by(__.in('Comment').fold())";
             string gremlinQuery = string.Empty;
 
-            gremlinQuery += "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery += "g.V(" + userVertexId + ").in('WallPost','Tag').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
             gremlinQuery +="__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
             gremlinQuery +="__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
@@ -546,7 +546,7 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').select('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').by().by(__.in('Like')).by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost'))";
             string gremlinQuery = string.Empty;
 
-            gremlinQuery += "g.V(" + userVertexId + ").out('Follow').in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery += "g.V(" + userVertexId + ").out('Follow').in('WallPost','Tag').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
             gremlinQuery += "__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
             gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";            

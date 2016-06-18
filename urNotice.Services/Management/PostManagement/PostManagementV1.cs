@@ -109,7 +109,6 @@ namespace urNotice.Services.Management.PostManagement
                 properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
             }
 
-
             properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.WallPost.ToString();
             properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
             properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
@@ -117,8 +116,38 @@ namespace urNotice.Services.Management.PostManagement
 
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
+            foreach (var userIds in taggedVertexId)
+            {
+                if (userWallVertexId != null && ( userWallVertexId == userIds.VertexId))
+                    continue;
+
+                properties[EdgePropertyEnum._outV.ToString()] = addVertexResponse[TitanGraphConstants.Id];
+                properties[EdgePropertyEnum._inV.ToString()] = userIds.VertexId;
+                properties[EdgePropertyEnum.PostedBy.ToString()] = session.UserVertexId;
+
+                properties[EdgePropertyEnum._label.ToString()] = EdgeLabelEnum.Tag.ToString();
+                properties[EdgePropertyEnum.PostedDate.ToString()] = DateTimeUtil.GetUtcTimeString();
+                properties[EdgePropertyEnum.PostedDateLong.ToString()] = OrbitPageUtil.GetCurrentTimeStampForGraphDbFromGremlinServer();
+
+                addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);
+            }
+
             INotificationManagement notificationManagement = new NotificationManagement.NotificationManagementV1();
             sendNotificationResponse = notificationManagement.SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString(), taggedVertexId);
+
+            var taggedHashSet = notificationManagement.SendNotificationToUser(session, userWallVertexId,
+                    addVertexResponse[TitanGraphConstants.Id], addVertexResponse[TitanGraphConstants.Id], null,
+                    EdgeLabelEnum.PostTagNotification.ToString(), taggedVertexId);
+            
+            if (sendNotificationResponse != null)
+            {
+                sendNotificationResponse.UnionWith(taggedHashSet);
+            }
+            else if (taggedHashSet != null)
+            {
+                sendNotificationResponse = taggedHashSet;
+            }
+
 
             var userPostVertexModel = new UserPostVertexModel();
             userPostVertexModel.postInfo = new WallPostVertexModel()

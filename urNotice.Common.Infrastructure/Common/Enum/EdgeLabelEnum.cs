@@ -9,7 +9,9 @@ namespace urNotice.Common.Infrastructure.Common.Enum
     public enum EdgeLabelEnum
     {
         WallPost,
+        Tag,
         WallPostNotification,
+        PostTagNotification,
         Created,
         CommentedOnPost,
         CommentedOnPostNotification,

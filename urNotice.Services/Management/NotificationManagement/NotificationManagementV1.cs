@@ -38,15 +38,7 @@ namespace urNotice.Services.Management.NotificationManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                //if (userWallVertexId == session.UserVertexId)
-                //{
-                //    usersToBeIgnored.Add(userWallVertexId);
-                //}
-
-                //if (usersToBeNotified.Contains(session.UserVertexId))
-                //{
-                //    usersToBeIgnored.Add(session.UserVertexId);
-                //}
+                
                 usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
@@ -68,6 +60,33 @@ namespace urNotice.Services.Management.NotificationManagement
                 }
 
             }
+            else if (notificationType.Equals(EdgeLabelEnum.PostTagNotification.ToString()))
+            {
+                
+                usersToBeIgnored.Add(session.UserVertexId);
+
+                foreach (var userIds in taggedVertexId)
+                {
+
+                    if (usersToBeIgnored.Contains(userIds.VertexId))
+                        continue;
+
+                    userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
+                    notificationModel = new UserNotificationGraphModel
+                    {
+                        _outV = userIds.VertexId,
+                        _inV = postVertexId,
+                        _label = EdgeLabelEnum.Notification.ToString(),
+                        NotificationInitiatedByVertexId = session.UserVertexId,
+                        Type = EdgeLabelEnum.PostTagNotification.ToString(),
+                        UserName = session.UserName,
+                        parentPostId = postVertexId
+                    };
+                    userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
+                    userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds.VertexId);
+                }
+
+            }
             else if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
             {
                 orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
@@ -76,21 +95,7 @@ namespace urNotice.Services.Management.NotificationManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                //if (userWallVertexId == session.UserVertexId)
-                //{
-                //    usersToBeIgnored.Add(userWallVertexId);
-                //}
-
-                //if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
-                //{
-                //    usersToBeIgnored.Add(userWallVertexId);
-                //}
-
-                //if (usersToBeNotified.Contains(session.UserVertexId))
-                //{
-                //    usersToBeIgnored.Add(session.UserVertexId);
-                //}
-
+                
                 usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
@@ -119,21 +124,7 @@ namespace urNotice.Services.Management.NotificationManagement
                     usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
 
                 finalSendNotificationsToUser = usersToBeNotified;
-                //if (userWallVertexId == session.UserVertexId)
-                //{
-                //    usersToBeIgnored.Add(userWallVertexId);
-                //}
-
-                //if (userWallVertexId == postPostedByVertexId || session.UserVertexId == postPostedByVertexId)
-                //{
-                //    usersToBeIgnored.Add(userWallVertexId);
-                //}
-
-                //if (usersToBeNotified.Contains(session.UserVertexId))
-                //{
-                //    usersToBeIgnored.Add(session.UserVertexId);
-                //}
-
+                
                 usersToBeIgnored.Add(session.UserVertexId);
 
                 finalSendNotificationsToUser.ExceptWith(usersToBeIgnored);
