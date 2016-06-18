@@ -14,6 +14,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.ResponseWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.Solr;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.GraphDb;
 using urNotice.Services.GraphDb.GraphDbContract;
@@ -68,14 +69,14 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,
+        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,List<TaggedVertexIdModel> taggedVertexId,
             out HashSet<string> sendNotificationResponse)
         {
             throw new NotImplementedException();
         }
 
         public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId,
-            string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
+            string userWallVertexId, string postPostedByVertexId,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             throw new NotImplementedException();
         }
@@ -85,7 +86,7 @@ namespace urNotice.Services.Person
             throw new NotImplementedException();
         }
 
-        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest,
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest,List<TaggedVertexIdModel> taggedVertexId,
             out HashSet<string> sendNotificationResponse)
         {
             throw new NotImplementedException();
@@ -107,7 +108,7 @@ namespace urNotice.Services.Person
         }
 
         public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId,string commentVertexId,
-            string postPostedByVertexId, string notificationType)
+            string postPostedByVertexId, string notificationType, List<TaggedVertexIdModel> taggedVertexId)
         {
             throw new NotImplementedException();
         }

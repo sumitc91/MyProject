@@ -55,7 +55,7 @@ namespace OrbitPage.Controllers
 
                 HashSet<string> sendNotificationHashSetResponse = null;
                 IPerson clientModel = new Consumer();
-                var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId, out sendNotificationHashSetResponse);
+                var newUserPostResponse = clientModel.CreateNewUserPost(session, message, image, userWallVertexId,userPostData.TaggedVertexId, out sendNotificationHashSetResponse);
                 if (sendNotificationHashSetResponse.Count > 0)
                 {
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);                    
@@ -149,6 +149,7 @@ namespace OrbitPage.Controllers
 
             var userWallVertexId = userNewCommentOnPostRequest.WallVertexId;
             var postPostedByVertexId = userNewCommentOnPostRequest.PostPostedByVertexId;
+            List<TaggedVertexIdModel> taggedVertexId = new List<TaggedVertexIdModel>();
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
@@ -163,7 +164,7 @@ namespace OrbitPage.Controllers
                 HashSet<string> sendNotificationHashSetResponse = null;
 
                 IPerson clientModel = new Consumer();
-                var newUserPostCommentResponse = clientModel.CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId, out sendNotificationHashSetResponse);
+                var newUserPostCommentResponse = clientModel.CreateNewCommentOnUserPost(session, message, image, postVertexId, userWallVertexId, postPostedByVertexId,taggedVertexId, out sendNotificationHashSetResponse);
                 
                 if (sendNotificationHashSetResponse.Count>0)
                 {
@@ -195,13 +196,14 @@ namespace OrbitPage.Controllers
 
             var headers = new HeaderManager(Request);
             urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+            List<TaggedVertexIdModel> taggedVertexId = new List<TaggedVertexIdModel>();
 
             var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
             if (isValidToken)
             {                
                 HashSet<string> sendNotificationHashSetResponse = null;
                 IPerson clientModel = new Consumer();
-                var newUserPostCommentResponse = clientModel.CreateNewReactionOnUserPost(session, userNewReactionRequest, out sendNotificationHashSetResponse);
+                var newUserPostCommentResponse = clientModel.CreateNewReactionOnUserPost(session, userNewReactionRequest,taggedVertexId, out sendNotificationHashSetResponse);
                 if (sendNotificationHashSetResponse.Count>0)
                 {                    
                     new SignalRNotification().SendNewPostNotification(sendNotificationHashSetResponse);

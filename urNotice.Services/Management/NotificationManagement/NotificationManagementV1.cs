@@ -17,7 +17,7 @@ namespace urNotice.Services.Management.NotificationManagement
 {
     public class NotificationManagementV1:INotificationManagement
     {
-        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType)
+        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType, List<TaggedVertexIdModel> taggedVertexId)
         {
             var userPushNotificationListWrapper = new UserPushNotificationListWrapper();
             userPushNotificationListWrapper.UserNotificationGraphModelList = new List<UserNotificationGraphModel>();

@@ -55,7 +55,7 @@ namespace urNotice.Services.Management.PostManagement
 
             return response;
         }
-        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostVertexModel>();
             var properties = new Dictionary<string, string>();
@@ -120,7 +120,7 @@ namespace urNotice.Services.Management.PostManagement
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             INotificationManagement notificationManagement = new NotificationManagement.NotificationManagement();
-            sendNotificationResponse = notificationManagement.SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString());
+            sendNotificationResponse = notificationManagement.SendNotificationToUser(session, userWallVertexId, addVertexResponse[TitanGraphConstants.Id], addVertexResponse[TitanGraphConstants.Id], null, EdgeLabelEnum.WallPostNotification.ToString(), taggedVertexId);
             
             var userPostVertexModel = new UserPostVertexModel();
             userPostVertexModel.postInfo = new WallPostVertexModel()
@@ -147,7 +147,7 @@ namespace urNotice.Services.Management.PostManagement
             
             return response;
         }
-        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserPostCommentModel>();
             response.Payload = new UserPostCommentModel();
@@ -203,7 +203,7 @@ namespace urNotice.Services.Management.PostManagement
             IDictionary<string, string> addEdgeResponse = graphEdgeDbModel.AddEdge(session.UserName, TitanGraphConfig.Graph, properties);//new GraphEdgeOperations().AddEdge(session, TitanGraphConfig.Server, edgeId, TitanGraphConfig.Graph, properties, accessKey, secretKey);
 
             IPerson consumerModel = new Consumer();
-            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId, addVertexResponse[TitanGraphConstants.Id], postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString());
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId, addVertexResponse[TitanGraphConstants.Id], postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString(), taggedVertexId);
 
             var userPostCommentModel = new UserPostCommentModel();
             userPostCommentModel.commentedBy = new List<UserVertexModel>();
@@ -255,7 +255,7 @@ namespace urNotice.Services.Management.PostManagement
 
             return response;
         }
-        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             var response = new ResponseModel<UserVertexModel>();
             var reaction = userNewReactionRequest.Reaction;
@@ -285,7 +285,7 @@ namespace urNotice.Services.Management.PostManagement
                 vertexId = userNewReactionRequest.ParentVertexId;
 
             IPerson consumerModel = new Consumer();
-            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId, userNewReactionRequest.VertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString());
+            sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, vertexId, userNewReactionRequest.VertexId, postPostedByVertexId, EdgeLabelEnum.UserReaction.ToString(), taggedVertexId);
 
             var userLikeInfo = new UserVertexModel()
             {

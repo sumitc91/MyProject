@@ -143,32 +143,32 @@ namespace urNotice.Services.Person
             IPostManagement postManagementModel = new PostManagementV1();
             return postManagementModel.EditMessageDetails(session,messageReq);
         }
-        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserPostVertexModel> CreateNewUserPost(urNoticeSession session, string message, string image, string userWallVertexId, List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             IPostManagement postManagementModel = new PostManagementV1();
-            return postManagementModel.CreateNewUserPost(session,message,image,userWallVertexId,out sendNotificationResponse);  
+            return postManagementModel.CreateNewUserPost(session,message,image,userWallVertexId,taggedVertexId,out sendNotificationResponse);  
         }
 
 
-        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType)
+        public HashSet<string> SendNotificationToUser(urNoticeSession session, string userWallVertexId, string postVertexId, string commentVertexId, string postPostedByVertexId, string notificationType, List<TaggedVertexIdModel> taggedVertexId)
         {
             INotificationManagement notificationManagement = new NotificationManagementV1();
-            return notificationManagement.SendNotificationToUser(session, userWallVertexId, postVertexId, commentVertexId, postPostedByVertexId, notificationType);
+            return notificationManagement.SendNotificationToUser(session, userWallVertexId, postVertexId, commentVertexId, postPostedByVertexId, notificationType, taggedVertexId);
         }
-        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserPostCommentModel> CreateNewCommentOnUserPost(urNoticeSession session, string message, string image, string postVertexId, string userWallVertexId, string postPostedByVertexId,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             IPostManagement postManagementModel = new PostManagementV1();
-            return postManagementModel.CreateNewCommentOnUserPost(session,message,image,postVertexId,userWallVertexId,postPostedByVertexId,out sendNotificationResponse);
+            return postManagementModel.CreateNewCommentOnUserPost(session,message,image,postVertexId,userWallVertexId,postPostedByVertexId, taggedVertexId,out sendNotificationResponse);
         }
         public ResponseModel<String> DeleteCommentOnPost(urNoticeSession session, string vertexId)
         {
             IPostManagement postManagementModel = new PostManagementV1();
             return postManagementModel.DeleteCommentOnPost(session,vertexId);
         }
-        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest, out HashSet<string> sendNotificationResponse)
+        public ResponseModel<UserVertexModel> CreateNewReactionOnUserPost(urNoticeSession session, UserNewReactionRequest userNewReactionRequest,List<TaggedVertexIdModel> taggedVertexId, out HashSet<string> sendNotificationResponse)
         {
             IPostManagement postManagementModel = new PostManagementV1();
-            return postManagementModel.CreateNewReactionOnUserPost(session,userNewReactionRequest,out sendNotificationResponse);
+            return postManagementModel.CreateNewReactionOnUserPost(session,userNewReactionRequest,taggedVertexId,out sendNotificationResponse);
         }
         public ResponseModel<String> RemoveReactionOnUserPost(urNoticeSession session, string vertexId)
         {
