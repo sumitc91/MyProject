@@ -1166,6 +1166,7 @@ define([appLocation.preLogin], function (app) {
         $scope.enableEditcommentOnUserPost = function(postIndex, commentIndex) {           
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].editableMode = true;
             $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostMessage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostMessage;
+            $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.OriginalPostImage = $scope.UserPostList[postIndex].commentsInfo[commentIndex].commentInfo.PostImage;
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }           
