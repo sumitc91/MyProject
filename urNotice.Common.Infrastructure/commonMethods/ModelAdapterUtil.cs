@@ -76,6 +76,7 @@ namespace urNotice.Common.Infrastructure.commonMethods
                 var userPostVertexModel = new UserPostVertexModel();
                 userPostVertexModel.postInfo = ParsePostInfo(userPost.wallpostinfo);
                 userPostVertexModel.postedOn = ParseUserListVertex(userPost.postedOn);
+                userPostVertexModel.edgeInfo = userPost.edgeInfo;
                 userPostVertexModel.userInfo = ParseUserListVertex(userPost.userInfo);                
                 userPostVertexModel.isLiked = ParseUserListVertex(userPost.isLiked);
                 userPostVertexModel.likeInfo = ParseUserListVertex(userPost.likeInfo);

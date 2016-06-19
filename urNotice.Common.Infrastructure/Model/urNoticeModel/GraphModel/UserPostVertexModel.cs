@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1;
 
 namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
 {
@@ -14,6 +15,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel
         public List<UserPostCommentModel> commentsInfo { get; set; }
         public List<UserVertexModel> userInfo { get; set; }
         public List<UserVertexModel> postedOn { get; set; }
+        public List<EdgeModelV1> edgeInfo { get; set; }
         public List<UserVertexModel> likeInfo { get; set; }
         public String likeInfoCount { get; set; }
         public String commentsCount { get; set; }

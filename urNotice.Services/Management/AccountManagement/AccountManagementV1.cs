@@ -512,10 +512,11 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').select('wallpostinfo','likeInfoCount','userInfo','postedOn','likeInfo','isLiked','commentsCount','commentsInfo').by().by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost')).by(__.in('Like').fold()).by(__.in('Like').has('Username','" + userEmail + "').fold()).by(__.in('Comment').count()).by(__.in('Comment').fold())";
             string gremlinQuery = string.Empty;
 
-            gremlinQuery += "g.V(" + userVertexId + ").in('WallPost','Tag').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery += "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
             gremlinQuery +="__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
             gremlinQuery +="__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').outE('Tag').fold().as('edgeInfo'),";
             gremlinQuery +="__.as('wallpostinfo').in('Like').fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
             gremlinQuery +="__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
@@ -524,7 +525,7 @@ namespace urNotice.Services.Management.AccountManagement
             gremlinQuery +="__.as('commentData').in('Like').count().as('likeCount'),";
             gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
             gremlinQuery += ").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
-            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo','edgeInfo')";
 
             
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
@@ -546,10 +547,11 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.V(" + userVertexId + ").in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').select('wallpostinfo','likeInfo','likeInfoCount','userInfo','postedOn').by().by(__.in('Like')).by(__.in('Like').values('Username').count()).by(__.in('Created')).by(__.out('WallPost'))";
             string gremlinQuery = string.Empty;
 
-            gremlinQuery += "g.V(" + userVertexId + ").out('Follow').in('WallPost','Tag').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
+            gremlinQuery += "g.V(" + userVertexId + ").out('Follow').in('WallPost').order().by('PostedTimeLong', decr).range(" + from + "," + to + ").as('wallpostinfo').match(";
             gremlinQuery += "__.as('wallpostinfo').in('Like').values('Username').count().as('likeInfoCount'),";
             gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
-            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";            
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').outE('Tag').fold().as('edgeInfo'),";            
             gremlinQuery += "__.as('wallpostinfo').in('Like').fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').has('Username','" + userEmail + "').fold().as('isLiked'),";
             gremlinQuery += "__.as('wallpostinfo').in('Comment').count().as('commentsCount'),";
@@ -558,7 +560,7 @@ namespace urNotice.Services.Management.AccountManagement
             gremlinQuery += "__.as('commentData').in('Like').count().as('likeCount'),";
             gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
             gremlinQuery += ").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
-            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo','edgeInfo')";
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);
 
@@ -604,7 +606,8 @@ namespace urNotice.Services.Management.AccountManagement
             //string gremlinQuery = "g.v(" + vertexId + ").transform{ [postInfo : it,postedToUser:it.out('WallPost'),likeInfo:it.in('Like')[0..1],likeInfoCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "'), commentsInfo: it.in('Comment').sort{ a, b -> b.PostedTime <=> a.PostedTime }._()[" + messageStartIndex + ".." + messageEndIndex + "].transform{[commentInfo:it, commentedBy: it.in('Created'),likeCount:it.in('Like').count(),isLiked:it.in('Like').has('Username','" + userEmail + "')]},userInfo:it.in('Created')] }";
             string gremlinQuery = string.Empty;
             gremlinQuery += "g.V(" + vertexId + ").as('wallpostinfo').match(";
-            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";            
+            gremlinQuery += "__.as('wallpostinfo').out('WallPost').fold().as('postedOn'),";
+            gremlinQuery += "__.as('wallpostinfo').outE('Tag').fold().as('edgeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').range(0,2).fold().as('likeInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Created').as('userInfo'),";
             gremlinQuery += "__.as('wallpostinfo').in('Like').count().as('likeInfoCount'),";
@@ -615,7 +618,7 @@ namespace urNotice.Services.Management.AccountManagement
             gremlinQuery += "__.as('commentData').in('Like').count().as('likeCount'),";
             gremlinQuery += "__.as('commentData').in('Like').has('Username','" + userEmail + "').fold().as('isCommentLiked'),";
             gremlinQuery +=").select('commentData','commentedBy','likeCount','isCommentLiked').fold().as('commentsInfo'),";
-            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo')";
+            gremlinQuery += ").select('wallpostinfo','userInfo','postedOn','likeInfo','likeInfoCount','isLiked','commentsCount','commentsInfo','edgeInfo')";
 
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             string response = graphVertexDb.ExecuteGremlinQuery(gremlinQuery);//new GraphVertexOperations().GetVertexDetail(url, gremlinQuery, vertexId, graphName, null);

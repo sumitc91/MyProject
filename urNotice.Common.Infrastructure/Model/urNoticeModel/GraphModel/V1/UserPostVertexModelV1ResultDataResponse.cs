@@ -14,6 +14,7 @@ namespace urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1
         
         public List<VertexModelV1> likeInfo { get; set; }
         public List<VertexModelV1> isLiked { get; set; }
+        public List<EdgeModelV1> edgeInfo { get; set; }
 
         public long likeInfoCount { get; set; }
         public long commentsCount { get; set; }
