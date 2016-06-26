@@ -268,7 +268,7 @@ div.middle-div-mobile {
                                                         <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentedOnPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Commented on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">post</a>.
                                                             <br />
-                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            " <span ng-bind-html="notification.postInfo[0].PostMessageHtml" style="color: olive;"> </span> "
                                                             <br />
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
@@ -277,7 +277,16 @@ div.middle-div-mobile {
                                                         <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='WallPostNotification'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Created a <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a> on your Wall.
                                                             <br />
-                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            " <span ng-bind-html="notification.postInfo[0].PostMessageHtml" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='PostTagNotification'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Tagged you in a  <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a> .
+                                                            <br />
+                                                            " <span ng-bind-html="notification.postInfo[0].PostMessageHtml" style="color: olive;"> </span> "
                                                             <br />
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
@@ -286,7 +295,7 @@ div.middle-div-mobile {
                                                         <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='UserReaction'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a>.
                                                             <br />
-                                                            " <span ng-bind="notification.postInfo[0].PostMessage" style="color: olive;"> </span> "
+                                                            " <span ng-bind-html="notification.postInfo[0].PostMessageHtml" style="color: olive;"> </span> "
                                                             <br />
                                                             <span class="line small time">
                                                                 {{notification.notificationInfo.PostedDate | timeago}}

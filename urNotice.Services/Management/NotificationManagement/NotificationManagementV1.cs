@@ -32,11 +32,11 @@ namespace urNotice.Services.Management.NotificationManagement
 
             if (notificationType.Equals(EdgeLabelEnum.WallPostNotification.ToString()))
             {
-                orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
-                if (orbitPageCompanyUserWorkgraphyTable != null &&
-                    orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList != null)
-                    usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
-
+                //orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
+                //if (orbitPageCompanyUserWorkgraphyTable != null &&
+                //    orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList != null)
+                //    usersToBeNotified = orbitPageCompanyUserWorkgraphyTable.SendNotificationToUserList;
+                usersToBeNotified.Add(userWallVertexId);
                 finalSendNotificationsToUser = usersToBeNotified;
                 
                 usersToBeIgnored.Add(session.UserVertexId);
@@ -73,7 +73,6 @@ namespace urNotice.Services.Management.NotificationManagement
                         if (usersToBeIgnored.Contains(userIds.VertexId))
                             continue;
 
-                        userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
                         notificationModel = new UserNotificationGraphModel
                         {
                             _outV = userIds.VertexId,

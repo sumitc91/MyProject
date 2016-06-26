@@ -570,7 +570,7 @@ define([appLocation.preLogin], function (app) {
         };
 
         function loadClientNotificationDetails(from, to, isFromPushNotification) {
-            var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from='+from+'&to='+to;
+            var url = ServerContextPath.userServer + '/User/GetNotificationDetails?from=' + from + '&to=' + to;
             //var url = ServerContextPath.userServer + '/User/GetDetails?userType=user';
             //console.log("loadClientNotificationDetails : "+from+" -- "+to);
             var headers = {
@@ -609,6 +609,9 @@ define([appLocation.preLogin], function (app) {
                         if ((from + i) < data.unread) {
                             data.results[i].class = "unread_notification";                            
                         }
+                        
+                        data.results[i].postInfo[0].PostMessageHtml = replaceTextWithLinks(data.results[i].postInfo[0].PostMessage);
+                        //console.log(data.results[i].postInfo[0].PostMessageHtml);
                         $rootScope.clientNotificationDetailResponse.push(data.results[i]);                        
                     }
                 }                   
