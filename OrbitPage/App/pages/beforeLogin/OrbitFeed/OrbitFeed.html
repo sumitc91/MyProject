@@ -152,15 +152,20 @@
             <input type="file" style="display:none" id="my_comment_file" ng-file-select="onCommentImageFileUpload($files,currentUploadingPostIndex)">
 
             <section class="panel" ng-repeat="post in UserPostList">
-                <div class="fb-status-container fb-border fb-gray-bg" ng-show="post.userInfo[0]._id != post.postedOn[0]._id">
+                <div class="fb-status-container fb-border fb-gray-bg">
                     <div class="fb-time-action">
 
                         <img ng-src="{{post.userInfo[0].ImageUrl}}" alt="" style="height:40px">
                         <a title="Posted By" href="#/userprofile/{{post.userInfo[0]._id}}" ng-bind="post.userInfo[0].FirstName+' '+post.userInfo[0].LastName+' '"></a>
                         Posted on
-
-                        <img ng-src="{{post.postedOn[0].ImageUrl}}" alt="" style="height:40px">
-                        <a title="Posted To" href="#/userprofile/{{post.postedOn[0]._id}}" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName"></a>'s Wall
+                        
+                        <img ng-src="{{post.postedOn[0].ImageUrl}}" alt="" style="height:40px" ng-show="post.userInfo[0]._id != post.postedOn[0]._id">
+                        <a title="Posted To" href="#/userprofile/{{post.postedOn[0]._id}}" ng-show="post.userInfo[0]._id == post.postedOn[0]._id">Own's Wall</a>
+                        <a title="Posted To" href="#/userprofile/{{post.postedOn[0]._id}}" ng-bind="post.postedOn[0].FirstName+' '+post.postedOn[0].LastName+'\'s Wall'" ng-show="post.userInfo[0]._id != post.postedOn[0]._id"></a>
+                        
+                        <span ng-show="post.tagInfoCount>0">
+                            and tagged <span ng-bind="post.tagInfoCount"></span>items
+                        </span>
                     </div>
                 </div>
                 <div class="fb-status-container fb-border fb-lightgray-bg">

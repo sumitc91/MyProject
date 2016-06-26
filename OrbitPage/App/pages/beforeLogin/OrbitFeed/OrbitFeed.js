@@ -955,6 +955,7 @@ define([appLocation.preLogin], function (app) {
                         for (var i = 0; i < data.results.length; i++) {
 
                             data.results[i].postInfo.editableMode = false;
+                            data.results[i].tagInfoCount = data.results[i].edgeInfo.length;
                             data.results[i].postInfo.PostMessageHtml = replaceTextWithLinks(data.results[i].postInfo.PostMessage);
                             if (data.results[i].commentsInfo != null && data.results[i].commentsInfo.length > 0) {
                                 data.results[i].commentsInfo = reverseCommentsInfoList(data.results[i].commentsInfo);                                
