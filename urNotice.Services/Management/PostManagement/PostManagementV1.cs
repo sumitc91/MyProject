@@ -209,6 +209,13 @@ namespace urNotice.Services.Management.PostManagement
             var sendNotificationToUsers = new HashSet<String>();
             sendNotificationToUsers.Add(session.UserVertexId);
             sendNotificationToUsers.Add(userWallVertexId);
+            if (taggedVertexId != null)
+            {
+                foreach (var taggedVertex in taggedVertexId)
+                {
+                    sendNotificationToUsers.Add(taggedVertex.VertexId);
+                }
+            }
 
             IGraphVertexDb graphVertexDb = new GremlinServerGraphVertexDb();
             IDictionary<string, string> addVertexResponse = graphVertexDb.AddVertex(session.UserName, TitanGraphConfig.Graph, properties, canEdit, canDelete, sendNotificationToUsers);//new GraphVertexOperations().AddVertex(session.UserName, TitanGraphConfig.Server, postVertexId, TitanGraphConfig.Graph, properties, accessKey, secretKey);

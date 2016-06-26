@@ -13,83 +13,29 @@
                 <span class="fa fa-cloud-download"></span>
                 <p>Company Review</p>
             </div>-->
-            <div class="col-md-2 activestep" onclick="javascript: resetActive(event, 20, 'step-2');">
+            <div class="col-md-2 activestep" id="button-step-2" onclick="javascript: resetActive(event, 20, 'step-2');">
                 <span class="fa fa-pencil"></span>
                 <p>Add Notice Period Info</p>
             </div>
-            <div class="col-md-2" onclick="javascript: resetActive(event, 40, 'step-3');">
+            <div class="col-md-2" id="button-step-3" onclick="javascript: resetActive(event, 40, 'step-3');">
                 <span class="fa fa-refresh"></span>
                 <p>Looking for a change?</p>
             </div>
-            <div class="col-md-2" onclick="javascript: resetActive(event, 60, 'step-4');">
+            <div class="col-md-2" id="button-step-4" onclick="javascript: resetActive(event, 60, 'step-4');">
                 <span class="fa fa-dollar"></span>
                 <p>Ratings</p>
             </div>
-            <div class="col-md-2" onclick="javascript: resetActive(event, 80, 'step-5');">
+            <div class="col-md-2" id="button-step-5" onclick="javascript: resetActive(event, 80, 'step-5');">
                 <span class="fa fa-cloud-upload"></span>
                 <p>Submit Application</p>
             </div>
-            <div id="last" class="col-md-2" onclick="javascript: resetActive(event, 100, 'step-6');">
+            <div id="last" class="col-md-2" id="button-step-6" onclick="javascript: resetActive(event, 100, 'step-6');">
                 <span class="fa fa-star"></span>
                 <p>Send Feedback</p>
             </div>
         </div>
     </div>
-    <!--<div class="row setup-content step hiddenStepInfo" id="step-1">
-        <div class="col-xs-12">
-            <div class="col-md-12 well text-center">
-                <h3 class="underline">Review the company you have worked in</h3>
-                <hr />
-                Employer's Status :
-                <div class="btn-group">
-                    <input type="radio" name="answer" value="current" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Current
-                    <input type="radio" name="answer" value="former" ng-model="postYourNoticeFormData.companyReview.employerStatus" /> Former
-                </div>
-                <div class="btn-group" ng-show="postYourNoticeFormData.companyReview.employerStatus=='former'">
-                    <input type="text" class="form-control" placeholder="Last Year At Employer (YYYY)" autofocus="" ng-model="postYourNoticeFormData.companyReview.lastYearAtEmployer">
-                </div>
-                <hr />
-                Employer's Name :
-                <div class="btn-group">
-                    <div angucomplete-alt
-                         id="companyName"
-                         placeholder="Enter Company Name"
-                         pause="500"
-                         selected-object="selectedCompany"
-                         remote-url="{{sitehosturl}}/Search/GetCompanyDetailsAutocomplete?q="
-                         remote-url-request-formatter="remoteUrlRequestFn"
-                         remote-url-data-field="Payload"
-                         title-field="companyname"
-                         minlength="2"
-                         input-class="form-control form-control-small"
-                         ng-model="companyName"
-                         image-field="logourl"
-                         match-class="highlight" ng-keypress="myFunct($event)" />
-                </div>
-                <hr />
-                Employment Status :
-                <div class="btn-group">
-                    <select name="employmentStatusSelect" id="employmentStatusSelect" ng-model="postYourNoticeFormData.companyReview.employmentStatusSelect">
-                        <option ng-repeat="option in postYourNoticeFormData.constants.employmentStatusSelectList" value="{{option.id}}">{{option.name}}</option>
-                    </select>
-                </div>
-                <hr />
-                Review Title :
-                <div>
-                    <input type="text" class="form-control" placeholder="Review Title" autofocus="" ng-model="postYourNoticeFormData.companyReview.reviewTitle">
-                </div>
-                <hr />
-                Description :
-                <div>
-                    <textarea class="textarea" placeholder="Enter reivew description ..." style="width: 100%; height: 450px" id="postYourNoticeFormData.companyReview.reviewDescription"></textarea>
-                </div>
-                <div class="row">
-                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyReview.preview()">Preview</button>
-                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyReview.submit()">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    
     <div class="row setup-content step activeStepInfo" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12 well text-center">
@@ -168,15 +114,15 @@
                 <div class="row">
                     <div class="col-md-4">Salary Details : </div>
                     <div class="col-md-2">
-                        <select name="employmentCurrencySelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companySalary.currency">
+                        <select name="employmentCurrencySelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companyReview.currency">
                             <option ng-repeat="option in postYourNoticeFormData.constants.currencySelectList" value="{{option.id}}">{{option.name}}</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Salary Amount" autofocus="" ng-model="postYourNoticeFormData.companySalary.amount">
+                        <input type="text" class="form-control" placeholder="Salary Amount" autofocus="" ng-model="postYourNoticeFormData.companyReview.amount">
                     </div>
                     <div class="col-md-2">
-                        <select name="employmentSalaryFrequencyTypeSelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companySalary.salaryFrequency">
+                        <select name="employmentSalaryFrequencyTypeSelect" id="employmentCurrencySelect" ng-model="postYourNoticeFormData.companyReview.salaryFrequency">
                             <option ng-repeat="option in postYourNoticeFormData.constants.salaryFrequencyList" value="{{option.id}}">{{option.name}}</option>
                         </select>
                     </div>
@@ -223,8 +169,8 @@
                 
                 <hr />                
                 <div class="row">
-                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companySalary.preview()">Preview</button>
-                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companySalary.submit()">Submit</button>
+                    <button class="btn btn-warning btn-flat"  disabled>Prev</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('3')">Next</button>
                 </div>
 
             </div>
@@ -234,92 +180,82 @@
         <div class="col-xs-12">
             <div class="col-md-12 well text-center">
                 <h3 class="underline">looking for a change?</h3>                
-                
+                  
                 <div class="row">
-                    <div class="btn-group">Employer's Name :</div>
-                    <div class="btn-group">
-                        <span> Employer Name</span>
+                    <div class="col-md-4">
+                        Employer :
                     </div>
-                    <hr />
-                    <div class="btn-group">Location : </div>
-                    <div class="btn-group">
-                        <span> Location</span>
+                    <div class="col-md-8">
+                        <img ng-show="postYourNoticeFormData.companyReview.employerLogoImage" ng-src="{{postYourNoticeFormData.companyReview.employerLogoImage}}" style="max-height:50px" />
                     </div>
-                </div>                
+                </div>             
                 <hr />
-
                 <div class="row">
-                    <div class="row">
-                        <div class="btn-group">Designation : </div>
-                        <div class="btn-group">
-                            <span>Designation</span>
-                        </div>
+                    <div class="col-md-4">
+                        Location :
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind="postYourNoticeFormData.companyReview.location.formatted_address"></span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        Designation :
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind="postYourNoticeFormData.companyReview.designation" style="font-size: 18px;"></span>
                     </div>
                 </div>
                 <hr />
 
                 <div class="row">
-                    Are You looking for a change? :
-                    <div class="btn-group">
+                    <div class="col-md-4">
+                        Are You looking for a change? :
+                    </div>
+                    <div class="col-md-8">
                         <input type="radio" name="lookingForChange" value="Yes" ng-model="postYourNoticeFormData.companyReview.lookingForChange" /> Yes
                         <input type="radio" name="lookingForChange" value="No" ng-model="postYourNoticeFormData.companyReview.lookingForChange" /> No
                     </div>
-                    <div ng-show="postYourNoticeFormData.companyReview.lookingForChange=='Yes'">
+                </div>
+                <hr />
+                <div class="row" ng-show="postYourNoticeFormData.companyReview.lookingForChange=='Yes'">
+                    <div class="col-md-4">
+                        Expected CTC :
+                    </div>
+                    <div class="col-md-8">
                         <input type="text" class="form-control" placeholder="Expected CTC" ng-model="postYourNoticeFormData.companyReview.expectedCtc">
-                        <br />
-                        Bad points of your company :
-                        <br />                        
-                        <div class="form-group">
-                            <div class="col-md-3" ng-repeat="companyBadPoint in postYourNoticeFormData.constants.companyBadPointList">
-                                <label ng-class="{true:'btn btn-primary', false:'btn'}[companyBadPoint.isSelected]">
-                                    <img ng-click="postYourNoticeFormData.companyReview.toggleCompanyBadPoint($index)" ng-src="{{companyBadPoint.img}}" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="{{companyBadPoint.id}}" id="{{companyBadPoint.id}}" value="{{companyBadPoint.id}}" class="hidden" autocomplete="off">
-                                </label>
-                            </div>
-                        </div>
                     </div>
-                    <div ng-show="postYourNoticeFormData.companyReview.lookingForChange=='No'">
-                        Good points of your company :
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3" ng-repeat="companyGoodPoint in postYourNoticeFormData.constants.companyGoodPointList">
-                                <label ng-class="{true:'btn btn-primary', false:'btn'}[companyGoodPoint.isSelected]">
-                                    <img ng-click="postYourNoticeFormData.companyReview.toggleCompanyGoodPoint($index)" ng-src="{{companyGoodPoint.img}}" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="{{companyGoodPoint.id}}" id="{{companyGoodPoint.id}}" value="{{companyGoodPoint.id}}" class="hidden" autocomplete="off">
-                                </label>
-                            </div>
+                </div>
+                <div class="row" ng-show="postYourNoticeFormData.companyReview.lookingForChange=='Yes'">
+                    
+                    Bad points of your company :
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-3" ng-repeat="companyBadPoint in postYourNoticeFormData.constants.companyBadPointList">
+                            <label ng-class="{true:'btn btn-primary', false:'btn'}[companyBadPoint.isSelected]">
+                                <img ng-click="postYourNoticeFormData.companyReview.toggleCompanyBadPoint($index)" ng-src="{{companyBadPoint.img}}" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="{{companyBadPoint.id}}" id="{{companyBadPoint.id}}" value="{{companyBadPoint.id}}" class="hidden" autocomplete="off">
+                            </label>
                         </div>
                     </div>
                 </div>
-                <hr />
-
-                <div class="row">
-                    <div class="btn-group">Employment Status :</div>
-                    <div class="btn-group">
-                        <select name="employmentStatusSelect" id="employmentStatusSelect" ng-model="postYourNoticeFormData.companyReview.employmentStatusSelect">
-                            <option ng-repeat="option in postYourNoticeFormData.constants.employmentStatusSelectList" value="{{option.id}}">{{option.name}}</option>
-                        </select>
+                <div class="row" ng-show="postYourNoticeFormData.companyReview.lookingForChange=='No'">
+                    Good points of your company :
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-3" ng-repeat="companyGoodPoint in postYourNoticeFormData.constants.companyGoodPointList">
+                            <label ng-class="{true:'btn btn-primary', false:'btn'}[companyGoodPoint.isSelected]">
+                                <img ng-click="postYourNoticeFormData.companyReview.toggleCompanyGoodPoint($index)" ng-src="{{companyGoodPoint.img}}" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="{{companyGoodPoint.id}}" id="{{companyGoodPoint.id}}" value="{{companyGoodPoint.id}}" class="hidden" autocomplete="off">
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <hr />
-
-                <div class="row">
-                    <div class="btn-group">Notice Period :</div>
-                    <div>
-                        <article>
-                            Min Days:
-                            <input type="number" ng-model="minRangeSlider.minValue" />
-                            <br />Max Days:
-                            <input type="number" ng-model="minRangeSlider.maxValue" />
-                            <br />
-                            <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
-                        </article>
-                    </div> 
                 </div>
                 
                 <hr />
 
                 <div class="row">
-                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companySalary.preview()">Preview</button>
-                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companySalary.submit()">Submit</button>
+                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('2')">Prev</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('4')">Next</button>
                 </div>
 
             </div>
@@ -381,8 +317,8 @@
                 </div>
                 <hr />
                 <div class="row">
-                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyRating.preview()">Preview</button>
-                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyRating.submit()">Submit</button>
+                    <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('3')">Prev</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('5')">Next</button>
                 </div>
             </div>
         </div>

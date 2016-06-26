@@ -129,13 +129,16 @@ define([appLocation.preLogin], function (app) {
                 employmentStatusSelect: 'REGULAR',
                 reviewTitle: '',
                 reviewDescription: '',
-                lookingForChange:'Yes'
-            },
-            companySalary: {
+                lookingForChange: 'Yes',
                 amount: '',
                 currency: 'INR',
-                salaryFrequency: 'ANNUAL'
-            }
+                salaryFrequency: 'ANNUAL',
+                openPage: function (page) {
+                    $('#button-step-'+page).click();
+                    //console.log($scope.postYourNoticeFormData.companyReview);
+                }
+            },
+            
 
         };
 
