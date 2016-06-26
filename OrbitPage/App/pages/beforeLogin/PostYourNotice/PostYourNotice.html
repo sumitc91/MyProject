@@ -313,7 +313,7 @@
                 <div class="row">
                     <div class="col-md-4"> Suggestion to your Boss :</div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" placeholder="Suggestion To Boss" autofocus="" ng-model="postYourNoticeFormData.companyRating.suggestionToBoss"> 
+                        <input type="text" class="form-control" placeholder="Suggestion To Boss" autofocus="" ng-model="postYourNoticeFormData.companyReview.suggestionToBoss"> 
                     </div>
                     
                 </div>
@@ -321,7 +321,7 @@
                 <div class="row">
                     <div class="col-md-4"> Suggestion to Company :</div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" placeholder="Suggestion To Company" autofocus="" ng-model="postYourNoticeFormData.companyRating.suggestionToCompany"> 
+                        <input type="text" class="form-control" placeholder="Suggestion To Company" autofocus="" ng-model="postYourNoticeFormData.companyReview.suggestionToCompany"> 
                     </div>
                     
                 </div>
@@ -343,7 +343,7 @@
                 
                 <div class="row">
                     <button class="btn btn-warning btn-flat" ng-click="postYourNoticeFormData.companyReview.openPage('4')">Prev</button>
-                    <button class="btn btn-success  btn-flat" disabled>Next</button>
+                    <button class="btn btn-success  btn-flat" ng-click="postYourNoticeFormData.companyReview.submit()">Submit</button>
                 </div>
             </div>
         </div>

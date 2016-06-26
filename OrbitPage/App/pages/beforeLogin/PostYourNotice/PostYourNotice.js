@@ -124,6 +124,7 @@ define([appLocation.preLogin], function (app) {
             companyReview: {
                 employerStatus: 'current',
                 employerName: '',
+                expectedCtc:'',
                 employerVertexId:'',
                 lastYearAtEmployer: '',
                 employmentStatusSelect: 'REGULAR',
@@ -133,9 +134,14 @@ define([appLocation.preLogin], function (app) {
                 amount: '',
                 currency: 'INR',
                 salaryFrequency: 'ANNUAL',
+                suggestionToBoss: '',
+                suggestionToCompany:'',
                 openPage: function (page) {
                     $('#button-step-'+page).click();
                     //console.log($scope.postYourNoticeFormData.companyReview);
+                },
+                submit: function (page) {                    
+                    console.log($scope.postYourNoticeFormData.companyReview);
                 }
             },
             
