@@ -140,11 +140,63 @@ define([appLocation.preLogin], function (app) {
                     $('#button-step-'+page).click();
                     //console.log($scope.postYourNoticeFormData.companyReview);
                 },
-                submit: function (page) {                    
+                submit: function () {                    
                     console.log($scope.postYourNoticeFormData.companyReview);
+                    submitNewNoticeForm();
                 }
             },
             
+
+        };
+
+        function submitNewNoticeForm() {
+
+            var newNoticeData = {
+                companyReview: $scope.postYourNoticeFormData.companyReview,
+                companyGoodPointList: $scope.postYourNoticeFormData.constants.companyGoodPointList,
+                companyBadPointList: $scope.postYourNoticeFormData.constants.companyBadPointList,
+                companyRatingList: $scope.postYourNoticeFormData.constants.companyRatingList,
+            };
+
+            var url = ServerContextPath.empty + '/User/UserNewReviewPost';
+            var headers = {
+                'Content-Type': 'application/json',
+                'UTMZT': $.cookie('utmzt'),
+                'UTMZK': $.cookie('utmzk'),
+                'UTMZV': $.cookie('utmzv'),
+            };
+
+            
+
+            if (isNullOrEmpty(newNoticeData.companyReview.employerName)) {
+                showToastMessage("Warning", "You cannot submit Empty Post.");
+                return;
+            }
+
+            if ($rootScope.isUserLoggedIn) {
+                startBlockUI('wait..', 3);
+
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: newNoticeData,
+                    headers: headers
+                }).success(function (data, status, headers, config) {
+                    //$scope.persons = data; // assign  $scope.persons here as promise is resolved here
+                    stopBlockUI();
+                    $scope.UserPostList = [];
+                    $timeout(function () {
+                        $scope.NewPostImageUrl = {};
+                    });
+
+                    
+
+                }).error(function (data, status, headers, config) {
+
+                });
+            } else {
+                showToastMessage("Warning", "Please Login to create a post.");
+            }
 
         };
 

@@ -300,8 +300,7 @@
                         <span ng-bind="companyRating.RatingText"></span>
                     </div>
                     <div class="col-md-3">
-                        <uib-rating ng-model="companyRating.rate" max="companyRating.max" read-only="companyRating.isReadonly" on-hover="hoveringOver($index, value)" on-leave="companyRating.overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-                        <span class="label" ng-class="{'label-warning': companyRating.percent<30, 'label-info': companyRating.percent>=30 && companyRating.percent<70, 'label-success': companyRating.percent>=70}" ng-show="companyRating.overStar && !companyRating.isReadonly">{{companyRating.percent}}%</span>
+                        <uib-rating ng-model="companyRating.rate" max="companyRating.max" read-only="companyRating.isReadonly" on-hover="hoveringOver($index, value)" on-leave="companyRating.overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>                        
 
                     </div>
                     <div class="col-md-6">
