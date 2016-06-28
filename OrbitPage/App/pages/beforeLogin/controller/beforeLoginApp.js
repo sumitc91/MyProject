@@ -624,6 +624,10 @@ define([appLocation.preLogin], function (app) {
                         mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Commented on one of your related post.";
                     } else if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "UserReaction") {
                         mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Reacted on one of your related post.";
+                    } else if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "PostTagNotification") {
+                        mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Tagged you in a post.";
+                    } else if ($rootScope.clientNotificationDetailResponse[0].notificationInfo.Type == "CommentTagOnPostNotification") {
+                        mssg = $rootScope.clientNotificationDetailResponse[0].notificationByUser.FirstName + " " + $rootScope.clientNotificationDetailResponse[0].notificationByUser.LastName + "  Tagged you in a comment in a post.";
                     }
                     showToastMessage("Success", mssg);
                 }

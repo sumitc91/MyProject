@@ -18,6 +18,7 @@ using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.GraphModel.V1;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.EditProfile;
+using urNotice.Common.Infrastructure.Model.urNoticeModel.RequestWrapper.NoticePeriod;
 using urNotice.Common.Infrastructure.Model.urNoticeModel.User;
 using urNotice.Common.Infrastructure.Session;
 using urNotice.Services.Person;
@@ -143,6 +144,32 @@ namespace OrbitPage.Controllers
                 
             }
         }
+
+       
+        [System.Web.Mvc.HttpPost]
+        public JsonResult UserNewReviewPost(NoticePeriodUserInputRequest noticePeriodUserInputRequestData)
+        {
+           
+            var headers = new HeaderManager(Request);
+            urNoticeSession session = new SessionService().CheckAndValidateSession(headers, authKey, accessKey, secretKey);
+
+            var isValidToken = TokenManager.IsValidSession(headers.AuthToken);
+            if (isValidToken)
+            {
+               
+
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var response = new ResponseModel<string>();
+                response.Status = 401;
+                response.Message = "Unauthorized";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         [System.Web.Mvc.HttpPost]
         public JsonResult UserCommentOnPost(UserNewCommentOnPostRequest userNewCommentOnPostRequest)
         {

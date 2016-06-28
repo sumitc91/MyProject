@@ -292,6 +292,15 @@ div.middle-div-mobile {
                                                                 {{notification.notificationInfo.PostedDate | timeago}}
                                                             </span>
                                                         </div>
+                                                        <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='CommentTagOnPostNotification'">
+                                                            <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Tagged you in a Comment on <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">post</a>.
+                                                            <br />
+                                                            " <span ng-bind-html="notification.postInfo[0].PostMessageHtml" style="color: olive;"> </span> "
+                                                            <br />
+                                                            <span class="line small time">
+                                                                {{notification.notificationInfo.PostedDate | timeago}}
+                                                            </span>
+                                                        </div>
                                                         <div class="col-sm-7 col-md-7" ng-show="notification.notificationInfo.Type=='UserReaction'">
                                                             <a href="#/userprofile/{{notification.notificationByUser._id}}"> <span ng-bind="notification.notificationByUser.FirstName"></span> &nbsp;<span ng-bind="notification.notificationByUser.LastName"></span></a> &nbsp; Reacted on your related <a href="#/viewpostdetail/{{notification.notificationInfo.ParentPostId}}">Post</a>.
                                                             <br />

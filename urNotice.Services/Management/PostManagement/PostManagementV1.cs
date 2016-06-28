@@ -250,7 +250,18 @@ namespace urNotice.Services.Management.PostManagement
 
             IPerson consumerModel = new Consumer();
             sendNotificationResponse = consumerModel.SendNotificationToUser(session, userWallVertexId, postVertexId, addVertexResponse[TitanGraphConstants.Id], postPostedByVertexId, EdgeLabelEnum.CommentedOnPostNotification.ToString(), taggedVertexId);
+            var taggedHashSet = consumerModel.SendNotificationToUser(session, userWallVertexId,
+                    addVertexResponse[TitanGraphConstants.Id], addVertexResponse[TitanGraphConstants.Id], null,
+                    EdgeLabelEnum.CommentTagOnPostNotification.ToString(), taggedVertexId);
 
+            if (sendNotificationResponse != null)
+            {
+                sendNotificationResponse.UnionWith(taggedHashSet);
+            }
+            else if (taggedHashSet != null)
+            {
+                sendNotificationResponse = taggedHashSet;
+            }
             var userPostCommentModel = new UserPostCommentModel();
             userPostCommentModel.commentedBy = new List<UserVertexModel>();
 

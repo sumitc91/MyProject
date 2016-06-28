@@ -153,10 +153,13 @@ define([appLocation.preLogin], function (app) {
 
             var newNoticeData = {
                 companyReview: $scope.postYourNoticeFormData.companyReview,
+                location: $scope.postYourNoticeFormData.companyReview.location.address_components,
                 companyGoodPointList: $scope.postYourNoticeFormData.constants.companyGoodPointList,
                 companyBadPointList: $scope.postYourNoticeFormData.constants.companyBadPointList,
                 companyRatingList: $scope.postYourNoticeFormData.constants.companyRatingList,
+                formatted_address: $scope.postYourNoticeFormData.companyReview.location.formatted_address,
             };
+            newNoticeData.companyReview.location = "";
 
             var url = ServerContextPath.empty + '/User/UserNewReviewPost';
             var headers = {

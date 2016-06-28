@@ -283,6 +283,10 @@
     <Compile Include="Model\urNoticeModel\RequestWrapper\LoginRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\NewCompanyRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\NewDesignationRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\NoticePeriod\CompanyReviewInputPointsMapping.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\NoticePeriod\NoticePeriodUserInputRatingListRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\NoticePeriod\NoticePeriodUserInputRequest.cs" />
+    <Compile Include="Model\urNoticeModel\RequestWrapper\NoticePeriod\NoticePeriodUserInputReviewRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\RegisterationRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\ResetPasswordRequest.cs" />
     <Compile Include="Model\urNoticeModel\RequestWrapper\UpdateCompanyRequest.cs" />

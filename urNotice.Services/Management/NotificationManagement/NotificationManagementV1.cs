@@ -89,6 +89,35 @@ namespace urNotice.Services.Management.NotificationManagement
                 }
 
             }
+            else if (notificationType.Equals(EdgeLabelEnum.CommentTagOnPostNotification.ToString()))
+            {
+
+                usersToBeIgnored.Add(session.UserVertexId);
+
+                if (taggedVertexId != null)
+                {
+                    foreach (var userIds in taggedVertexId)
+                    {
+
+                        if (usersToBeIgnored.Contains(userIds.VertexId))
+                            continue;
+
+                        notificationModel = new UserNotificationGraphModel
+                        {
+                            _outV = userIds.VertexId,
+                            _inV = postVertexId,
+                            _label = EdgeLabelEnum.Notification.ToString(),
+                            NotificationInitiatedByVertexId = session.UserVertexId,
+                            Type = EdgeLabelEnum.CommentTagOnPostNotification.ToString(),
+                            UserName = session.UserName,
+                            parentPostId = postVertexId
+                        };
+                        userPushNotificationListWrapper.UserNotificationGraphModelList.Add(notificationModel);
+                        userPushNotificationListWrapper.SignalRNotificationIds.Add(userIds.VertexId);
+                    }
+                }
+
+            }
             else if (notificationType.Equals(EdgeLabelEnum.CommentedOnPostNotification.ToString()))
             {
                 orbitPageCompanyUserWorkgraphyTable = GetUsersToBeNotifiedForVertex(postVertexId);
