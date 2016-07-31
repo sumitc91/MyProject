@@ -8,8 +8,8 @@ namespace urNotice.Common.Infrastructure.Common.Config
 {
     public class AwsConfig
     {
-        public const string _awsAccessKey = "AKIAIIUOBG6TQFINXYSQ";
-        public const string _awsSecretKey = "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";
+        public const string _awsAccessKey = "AKIAIIUOBAWSG6TQFINXYSQ";
+        public const string _awsSecretKey = "yURPCRxsx39TEYvgAWS1VzcIpySL+psUEWOb/pwvjcT";
         public const string _bucketName = "urnotice";
         public const string _amazonS3PublicUrl = "https://s3-ap-southeast-1.amazonaws.com";
 
